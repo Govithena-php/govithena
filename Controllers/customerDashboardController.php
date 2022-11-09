@@ -1,6 +1,16 @@
 <?php
-class customerDashboardController extends Controller{
-    function myorders(){
+class customerDashboardController extends Controller
+{
+
+    public function __construct()
+    {
+        if (!Session::isLoggedIn()) {
+            $this->redirect('/signin');
+        }
+    }
+
+    function myorders()
+    {
         require(ROOT . 'Models/customer_dashboard.php');
         $customer = new customer_dashboard();
         $d['customer'] = $customer->get_order_details();
@@ -8,7 +18,8 @@ class customerDashboardController extends Controller{
         $this->render("myorders");
     }
 
-    function dashboard(){
+    function dashboard()
+    {
         // require(ROOT . 'Models/customer_dashboard.php');
         // $customer = new customer_dashboard();
         // $d['customer'] = $customer->get_order_details();
@@ -16,6 +27,3 @@ class customerDashboardController extends Controller{
         $this->render("dashboard");
     }
 }
-
-
-?>
