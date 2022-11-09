@@ -8,7 +8,6 @@ class Model
         $req->execute(['id' => $id]);
         return $req->fetch();
     }
-
     public function findOne($table, $key, $value)
     {
         $sql = "SELECT * FROM $table WHERE $key = :value";
@@ -16,7 +15,6 @@ class Model
         $req->execute(['value' => $value]);
         return $req->fetch();
     }
-
     public function findAll($table)
     {
         $sql = "SELECT * FROM $table";
@@ -24,7 +22,6 @@ class Model
         $req->execute();
         return $req->fetchAll();
     }
-
     // public function create($table, $data)
     // {
     //     $sql = "INSERT INTO $table (";
