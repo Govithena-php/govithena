@@ -2,13 +2,19 @@
 
 class signupController extends Controller
 {
-
-    public function index()
+    public function __construct()
     {
-        $this->render('index');
+        if (Session::isLoggedIn()) {
+            $this->redirect('/');
+        }
     }
 
-    public function test()
+    // public function index()
+    // {
+    //     $this->render('index');
+    // }
+
+    public function index()
     {
         require(ROOT . 'Models/user.php');
 
@@ -30,11 +36,10 @@ class signupController extends Controller
                     'username' => $username,
                     'password' => $password
                 ]);
-                // $this->redirect('/signin');
+                $this->redirect('/signin');
             }
         }
-
-        $this->render('signin');
+        $this->render('index');
     }
 
     public function a()

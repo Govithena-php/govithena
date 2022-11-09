@@ -11,7 +11,7 @@
 
 <body>
     <div class="container">
-        <form class="form" action="<?php echo URLROOT; ?>/signup/test" method="post">
+        <form class="form" action="<?php echo URLROOT; ?>/signup" method="post">
             <input type="text" name="name" class="text_input" placeholder="Name" autocomplete="off">
             <input type="email" name="username" class="text_input" placeholder="Email Address" autocomplete="off">
             <input type="password" name="password" class="form-control" placeholder="Password">

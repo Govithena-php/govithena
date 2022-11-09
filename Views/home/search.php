@@ -1,7 +1,12 @@
 <section id="search" class="ff-poppins search">
+    <?php
+    echo Session::get('uid');
+    ?>
+
     <div class="container flex flex-column flex-c-c">
         <form class="w-50 flex flex-column flex-c-c">
             <div class="w-full flex">
+
                 <input type="text" name="search" class="w-full search__box" placeholder="search anything..." />
                 <input type="submit" value="search" class="search__btn" />
             </div>

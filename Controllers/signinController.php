@@ -2,6 +2,14 @@
 
 class signinController extends Controller
 {
+
+    public function __construct()
+    {
+        if (Session::isLoggedIn()) {
+            $this->redirect('/');
+        }
+    }
+
     public function index()
     {
         $this->render('index');
@@ -20,9 +28,11 @@ class signinController extends Controller
             // print_r($res);
             if (!empty($res)) {
                 if (password_verify($password, $res['password'])) {
-                    session_start();
-                    $_SESSION['uid'] = $res['uid'];
-                    $_SESSION['username'] = $res['username'];
+
+                    Session::set([
+                        'uid' => $res['uid'],
+                        'username' => $res['username']
+                    ]);
                     $this->redirect('/');
                 } else {
                     $this->redirect('/signin/a/wrong-password');

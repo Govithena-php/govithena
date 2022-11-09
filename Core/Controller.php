@@ -23,6 +23,7 @@ class Controller
             require(ROOT . "Views/Layout/" . $this->layout . '.php');
         }
     }
+
     function redirect($url)
     {
         header('Location: ' . URLROOT . $url);
