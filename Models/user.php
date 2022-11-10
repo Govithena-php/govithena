@@ -5,7 +5,10 @@ class User extends Model
 
     public function findByEmail($username)
     {
-        return $this->findOne('usercredentials', 'username', $username);
+        $sql = "SELECT * FROM usercredentials WHERE username = :value";
+        $req = Database::getBdd()->prepare($sql);
+        $req->execute(['value' => $username]);
+        return $req->fetch();
     }
 
     public function create($data)
