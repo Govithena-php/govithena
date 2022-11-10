@@ -22,7 +22,11 @@
         <div class="content">
 
             <?php
-            if (isset($msg)) print_R($msg);
+            if (isset($msg)) ?>
+            <div class="alert">
+                <p><?php echo $msg ?></p>
+            </div>
+            <?php
             // echo $request->params;
             ?>
 
