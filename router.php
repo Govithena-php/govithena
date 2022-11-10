@@ -19,7 +19,9 @@ class Router
             if (empty($explode_url[1])) $request->action = "index";
             else $request->action = $explode_url[1];
 
-            $request->params = array_slice($explode_url, 2);
+            $p = array_slice($explode_url, 2);
+            // print_r($p);
+            $request->params = $p;
         }
     }
 }
