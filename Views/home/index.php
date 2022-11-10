@@ -9,13 +9,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
     <!-- <link rel="stylesheet" href=""> -->
     <link rel="stylesheet" href="Webroot/css/home.css">
+    <link rel="stylesheet" href="Webroot/css/navbar.css">
     <link rel="stylesheet" href="Webroot/css/ui.css">
 
 </head>
 
 <body>
 
-    <?php include 'navbar.php'; ?>
+    <?php include COMPONENTS . 'navbar.php'; ?>
     <?php include 'hero.php'; ?>
     <?php include 'search.php'; ?>
 

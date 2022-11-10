@@ -3,7 +3,8 @@
 /* variables */
 :root {
     --clr-dark: #1e1e1e;
-    --clr-light: #ededed;
+    --clr-gray: #ededed;
+    --clr-light: #ffffff;
     --clr-primary: #1d9a5f;
     --clr-primary-light: #22ac6b;
     --clr-secondary: #01058a;
@@ -128,6 +129,10 @@ select {
     background-color: var(--clr-dark);
 }
 
+.bg-gray {
+    background-color: var(--clr-gray);
+}
+
 .bg-light {
     background-color: var(--clr-light);
 }
@@ -142,6 +147,10 @@ select {
 
 .text-dark {
     color: var(--clr-dark);
+}
+
+.text-gray {
+    color: var(--clr-gray);
 }
 
 .text-light {

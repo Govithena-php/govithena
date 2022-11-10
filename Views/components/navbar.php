@@ -4,11 +4,11 @@
         <div class="flex flex-c-c">
             <div class="flex flex-c-c nav__brand">
                 <i class="fa fa-plant-wilt"></i>
-                <p class="uppercase fs-5">govithena</p>
+                <a href="<?php echo URLROOT ?>" class="uppercase fs-5 text-light text-dec-none">govithena</a>
             </div>
             <ul class="flex flex-c-c nav__menu">
                 <li class="nav__menu_item"><a href="#store" class="text-light">Store</a></li>
-                <li class="nav__menu_item"><a href="#about" class="text-light">About</a></li>
+                <li class="nav__menu_item"><a href="./customerDashboard/" class="text-light">Customer Dashboard</a></li>
                 <li class="nav__menu_item"><a href="#services" class="text-light">Services</a></li>
                 <li class="nav__menu_item"><a href="#contact" class="text-light">Contact</a></li>
             </ul>
