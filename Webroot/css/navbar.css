@@ -64,5 +64,14 @@
     border-radius: 50%;
 }
 
+.signout__icon{
+    text-decoration: none;
+    color: white;
+}
+
+.signout__icon> i {
+    color: white;
+}
+
 
 /* =================================================================================== */

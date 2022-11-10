@@ -15,7 +15,7 @@
 
 <body class="bg-gray">
     <?php include COMPONENTS . 'dashboard/header.php'; ?>
-    <?php include COMPONENTS . 'dashboard/sidebar.php'; ?>
+    <?php include 'sidebar.php'; ?>
 
     <div class="container mt-4">
     </div>
