@@ -8,9 +8,9 @@
     <title>Govithena | Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
     <!-- <link rel="stylesheet" href=""> -->
-    <link rel="stylesheet" href="Webroot/css/home.css">
-    <link rel="stylesheet" href="Webroot/css/navbar.css">
-    <link rel="stylesheet" href="Webroot/css/ui.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/home.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/navbar.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
 
 </head>
 
@@ -30,23 +30,23 @@
             <div class="h-devider-100"></div>
             <div class="flex flex-c-c mb-3">
                 <button onclick="handleActiveTab('investor')" class="text-dec-none actor__link">
-                    <img src="Webroot/images/icons/investor.png" alt="" />
+                    <img src="<?php echo IMAGES ?>/icons/investor.png" alt="" />
                     <p>Investor</p>
                 </button>
                 <button onclick="handleActiveTab('farmer')" class="text-dec-none actor__link">
-                    <img src="Webroot/images/icons/farmer.png" alt="" />
+                    <img src="<?php echo IMAGES ?>/icons/farmer.png" alt="" />
                     <p>Farmer</p>
                 </button>
                 <button onclick="handleActiveTab('customer')" class="text-dec-none actor__link">
-                    <img src="Webroot/images/icons/customer.png" alt="" />
+                    <img src="<?php echo IMAGES ?>/icons/customer.png" alt="" />
                     <p>Customer</p>
                 </button>
                 <button onclick="handleActiveTab('agrologist')" class="text-dec-none actor__link">
-                    <img src="Webroot/images/icons/agrologist.png" alt="" />
+                    <img src="<?php echo IMAGES ?>/icons/agrologist.png" alt="" />
                     <p>Agrologist</p>
                 </button>
                 <button onclick="handleActiveTab('techAssistant')" class="text-dec-none actor__link">
-                    <img src="Webroot/images/icons/techAssistant.png" alt="" />
+                    <img src="<?php echo IMAGES ?>/icons/techAssistant.png" alt="" />
                     <p>Tech Assistant</p>
                 </button>
             </div>
@@ -67,7 +67,7 @@
                     </div>
 
                     <div class="actor__img">
-                        <img src="Webroot/images/temp/11.jpg" alt="about" />
+                        <img src="<?php echo IMAGES ?>/temp/11.jpg" alt="about" />
                     </div>
                 </div>
 
@@ -81,7 +81,7 @@
                     </div>
 
                     <div class="actor__img">
-                        <img src="Webroot/images/temp/16.jpg" alt="about" />
+                        <img src="<?php echo IMAGES ?>/temp/16.jpg" alt="about" />
                     </div>
                 </div>
 
@@ -95,7 +95,7 @@
                     </div>
 
                     <div class="actor__img">
-                        <img src="Webroot/images/temp/14.jpg" alt="about" />
+                        <img src="<?php echo IMAGES ?>/temp/14.jpg" alt="about" />
                     </div>
                 </div>
 
@@ -109,7 +109,7 @@
                     </div>
 
                     <div class="actor__img">
-                        <img src="Webroot/images/temp/1.jpg" alt="about" />
+                        <img src="<?php echo IMAGES ?>/temp/1.jpg" alt="about" />
                     </div>
                 </div>
                 <div id="techAssistant" class="actor__content_item send_back">
@@ -122,7 +122,7 @@
                     </div>
 
                     <div class="actor__img">
-                        <img src="Webroot/images/temp/13.jpg" alt="about" />
+                        <img src="<?php echo IMAGES ?>/temp/13.jpg" alt="about" />
                     </div>
                 </div>
             </div>
@@ -140,7 +140,7 @@
     </div>
 
     <div style="height: 100vh;"></div>
-    <script src="Webroot/js/app.js"></script>
+    <script src="<?php echo JS ?>/app.js"></script>
 </body>
 
 </html>

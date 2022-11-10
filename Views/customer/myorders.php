@@ -1,4 +1,4 @@
-<?php include 'dashboard.php'; ?>
+<?php include 'index.php'; ?>
 <div class="content">
     <div class="search-container ff-poppins">
         <form action="">
