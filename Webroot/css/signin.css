@@ -147,6 +147,14 @@ a {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 1rem;
+    width: 100%;
     background-color: rgba(236, 75, 75, 0.797);
+    border-radius: 10px;
+    color: var(--clr-light);
+    margin-bottom: 1rem;
+}
+
+.alert>p {
+    padding: 0.5rem 1rem;
+    margin: 0;
 }

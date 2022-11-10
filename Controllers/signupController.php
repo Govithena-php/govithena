@@ -9,11 +9,6 @@ class signupController extends Controller
         }
     }
 
-    // public function index()
-    // {
-    //     $this->render('index');
-    // }
-
     public function index()
     {
         require(ROOT . 'Models/user.php');
@@ -30,7 +25,7 @@ class signupController extends Controller
 
             if (!empty($res)) {
                 echo "User already exists";
-                $this->redirect('/signup/a/email-already-exists');
+                $this->redirect('/signup/error/user-already-exists');
             } else {
                 $res = $user->create([
                     'username' => $username,
@@ -42,8 +37,9 @@ class signupController extends Controller
         $this->render('index');
     }
 
-    public function a()
+    public function error($msg)
     {
-        $this->render('stest');
+        $this->set(['msg' => $msg]);
+        $this->render('index');
     }
 }
