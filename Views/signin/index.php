@@ -21,16 +21,18 @@
         </div>
         <div class="content">
 
-            <?php
-            if (isset($msg)) ?>
-            <div class="alert">
-                <p><?php echo $msg ?></p>
-            </div>
-            <?php
-            // echo $request->params;
-            ?>
+
 
             <div class="card">
+                <?php
+                if (isset($msg)) { ?>
+                    <div class="alert">
+                        <p><?php echo $msg ?></p>
+                    </div>
+                <?php
+                }
+                // echo $request->params;
+                ?>
                 <div class="card_header">
                     <h1>Sign In</h1>
                     <small>Welcome back!</small>
