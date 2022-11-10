@@ -141,3 +141,12 @@ a {
     justify-content: center;
     align-items: center;
 }
+
+.alert {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
+    background-color: rgba(236, 75, 75, 0.797);
+}
