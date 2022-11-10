@@ -3,6 +3,10 @@
 define('WEBROOT', str_replace("Webroot/index.php", "", $_SERVER["SCRIPT_NAME"]));
 define('ROOT', str_replace("Webroot/index.php", "", $_SERVER["SCRIPT_FILENAME"]));
 
+define('URLROOT', 'http://localhost/govithena');
+
+define('COMPONENTS', ROOT . 'Views/components/');
+
 require(ROOT . 'Config/core.php');
 
 require(ROOT . 'dispatcher.php');
@@ -12,5 +16,3 @@ require(ROOT . 'request.php');
 
 $dispatch = new Dispatcher();
 $dispatch->dispatch();
-
-?>
