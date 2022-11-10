@@ -22,7 +22,11 @@
         <div class="content">
 
             <?php
-            if (isset($msg)) print_R($msg);
+            if (isset($msg)) ?>
+            <div class="alert">
+                <p><?php echo $msg ?></p>
+            </div>
+            <?php
             // echo $request->params;
             ?>
 
@@ -44,7 +48,7 @@
                         <a href="#">Forgot Password?</a>
                     </div>
                     <input class="btn" type="submit" signy value="Sign In" name="login_btn">
-                    <p>Not a member? <a href="./signup">Signup now</a></p>
+                    <p>Not a member? <a href="<?php echo URLROOT ?>/signup">Signup now</a></p>
                 </form>
             </div>
         </div>
