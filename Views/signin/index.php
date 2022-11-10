@@ -5,20 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="Webroot/css/signin.css">
+    <link rel="stylesheet" href="<?php echo URLROOT ?>/Webroot/css/ui.css">
+    <link rel="stylesheet" href="<?php echo URLROOT ?>/Webroot/css/signin.css">
 
     <title>Govithena | Sign In</title>
 </head>
 
 <body>
-    <div class="container">
+    <!-- <?php require COMPONENTS . 'modal.php' ?> -->
+    <div class="login__container">
+
+
         <div class="banner">
-            <img src="Webroot/images/bg.jpg" alt="banner" />
+            <img src="<?php echo URLROOT ?>/Webroot/images/bg.jpg" alt="banner" />
         </div>
         <div class="content">
 
             <?php
-            // if (isset($signin)) print_R($signin);
+            if (isset($msg)) print_R($msg);
+            // echo $request->params;
             ?>
 
             <div class="card">
@@ -27,7 +32,7 @@
                     <small>Welcome back!</small>
                 </div>
 
-                <form class="card_body" action="<?php echo URLROOT ?>/signin/test" method="POST">
+                <form class="card_body" action="<?php echo URLROOT ?>/signin/login" method="POST">
 
                     <input class="text_input" type="text" name="username" id="email" placeholder="Email or Phone Number">
                     <input class="text_input" type="password" name="password" id="password" placeholder="Password">

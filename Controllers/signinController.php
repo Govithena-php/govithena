@@ -15,7 +15,7 @@ class signinController extends Controller
         $this->render('index');
     }
 
-    public function test()
+    public function login()
     {
         require(ROOT . 'Models/user.php');
 
@@ -35,12 +35,18 @@ class signinController extends Controller
                     ]);
                     $this->redirect('/');
                 } else {
-                    $this->redirect('/signin/a/wrong-password');
+                    $this->redirect('/signin/error/invalied-username-or-password');
                 }
             } else {
-                $this->redirect('/signin/a/user-not-found');
+                $this->redirect('/signin/error/invalied-username-or-password');
             }
         }
         // $this->render('home');
+    }
+
+    public function error($msg)
+    {
+        $this->set(['msg' => $msg]);
+        $this->render('index');
     }
 }

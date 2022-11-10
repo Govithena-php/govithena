@@ -1,0 +1,6 @@
+.footer {
+    min-height: 3rem;
+    display: grid;
+    place-items: center;
+    width: 100%;
+}

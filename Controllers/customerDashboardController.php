@@ -18,7 +18,7 @@ class customerDashboardController extends Controller
         $this->render("myorders");
     }
 
-    function dashboard()
+    function index()
     {
         // require(ROOT . 'Models/customer_dashboard.php');
         // $customer = new customer_dashboard();
