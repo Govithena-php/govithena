@@ -10,6 +10,7 @@
 }
 
 .nav__container {
+    position: relative;
     height: 4rem
 }
 
@@ -56,21 +57,47 @@
     width: 0.7rem;
     height: 0.7rem;
     border-radius: 50%;
+    cursor: pointer;
 }
 
 .nav__profile>img {
     width: 1.75rem;
     border: 0.2rem solid #fff;
     border-radius: 50%;
+    cursor: pointer;
+
 }
 
-.signout__icon{
+
+.profile__menu {
+    position: absolute;
+    display: none;
+    top: 3rem;
+    right: 0;
+    background-color: #fff;
+    padding: 0.5rem;
+    border-radius: 0.625rem;
+    box-shadow: 0 0 10px 2px hsla(0, 0%, 0%, 0.367);
+    z-index: 1003;
+}
+
+.profile__menu>ul>li:hover>a {
+    color: rgb(176, 29, 29);
+}
+
+.profile__menu>ul {
+    margin: 0;
+    padding: 0.3rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+}
+
+.profile__menu>ul>li>a {
     text-decoration: none;
-    color: white;
-}
-
-.signout__icon> i {
-    color: white;
+    color: var(--clr-dark);
+    font-size: var(--fs-3);
 }
 
 

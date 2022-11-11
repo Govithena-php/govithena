@@ -1,6 +1,15 @@
 <nav class="bg-dark text-light ff-poppins fixed nav">
     <div class="container flex flex-sb-c nav__container">
+        <div id="profile_menu" class="profile__menu">
+            <ul>
+                <li>
+                    <a onclick="document.getElementById('profile_menu').style.display = 'none'" href="<?php echo URLROOT ?>/signout">
+                        <p>Sign out</p>
+                    </a>
+                </li>
 
+            </ul>
+        </div>
         <div class="flex flex-c-c">
             <div class="flex flex-c-c nav__brand">
                 <i class="fa fa-plant-wilt"></i>
@@ -20,17 +29,15 @@
             <!-- ====================user======================== -->
             <div class="flex flex-c-c gap-2">
                 <div class="flex flex-c-c gap-2">
-                    <a class="signout__icon" href="./signout">
-                        <i class="fa fa-arrow-right-from-bracket "></i>
-                    </a>
+
                     <i class="fa fa-bell navbar__i"></i>
                     <i class="fa fa-bag-shopping navbar__i"></i>
                 </div>
                 <p class="divider">|</p>
-                <div class="flex flex-c-c relative nav__profile">
+                <a onclick="document.getElementById('profile_menu').style.display = 'block'" class="flex flex-c-c relative nav__profile">
                     <span class="absolute bg-primary"></span>
                     <img src="https://xsgames.co/randomusers/avatar.php?g=male" alt="profile">
-                </div>
+                </a>
             </div>
         <?php
         } else {
