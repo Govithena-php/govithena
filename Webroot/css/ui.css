@@ -66,7 +66,7 @@ p {
 body {
     font-family: var(--ff-Poppins);
     font-size: var(--fs-4);
-    min-height: 100vh;
+    /* min-height: 100vh; */
     line-height: 1.5;
 
 }
@@ -1023,4 +1023,9 @@ select {
     background-color: rgba(0, 0, 0, 0.307);
     ;
     margin: 1rem auto;
+}
+
+.dashboard__container{
+    margin-top: 4rem;
+    margin-left: 250px;
 }
