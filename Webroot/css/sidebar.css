@@ -1,7 +1,7 @@
 .sidebar {
     margin: 0;
     padding: 1rem 0;
-    min-width: 200px;
+    min-width: 225px;
     background-color: rgba(255, 255, 255, 0.642);
     position: fixed;
     height: 100%;
