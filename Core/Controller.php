@@ -1,7 +1,9 @@
 <?php
+require 'Constants.php';
 
 class Controller
 {
+
     var $vars = [];
     var $layout = false;
 
