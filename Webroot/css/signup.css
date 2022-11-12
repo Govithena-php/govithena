@@ -1,28 +1,9 @@
-*,
-*::after,
-*::before {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-
 body {
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #333;
-    background-color: #fff;
+    font-family: 'Poppins', sans-serif;
+    background-color: #fbfbfb;
+    font-weight: 300;
 }
 
-.container {
-    margin: 0 auto;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
 
 .form {
     width: 100%;
@@ -34,6 +15,8 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #fff;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
 }
 
 .form h1 {
@@ -43,10 +26,11 @@ body {
 
 .form input {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
+
 }
 
 .form input:focus {
@@ -90,4 +74,32 @@ h5 a {
 .alert>p {
     padding: 0.5rem 1rem;
     margin: 0;
+}
+
+.brand {
+    /* width: 100%; */
+    height: 4rem;
+    padding-inline: 4rem;
+}
+
+.brand svg {
+    height: 4rem;
+}
+
+.terms_and_conditions {
+    display: flex;
+    justify-content: flex-start;
+    margin: 1rem 0;
+}
+
+.terms_and_conditions input {
+    width: 30px;
+    height: 30px;
+    margin: 0;
+    margin-right: 0.5rem;
+}
+
+.terms_and_conditions label {
+    margin: 0;
+    font-size: var(--fs-2);
 }

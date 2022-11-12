@@ -19,7 +19,8 @@
 
 }
 
-.nav__brand>i {
+.nav__brand>img {
+    width:10rem;
     margin-right: 0.625rem;
 }
 
