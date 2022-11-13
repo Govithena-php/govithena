@@ -41,7 +41,7 @@
 
                 <form class="card_body" action="<?php echo URLROOT ?>/signin/login" method="POST">
 
-                    <input class="text_input" type="text" name="username" id="email" placeholder="Email or Phone Number">
+                    <input class="text_input" type="email" name="email" id="email" placeholder="Email or Phone Number">
                     <input class="text_input" type="password" name="password" id="password" placeholder="Password">
                     <div class="remember_me">
                         <div>
