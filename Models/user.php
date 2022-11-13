@@ -9,7 +9,7 @@ class User extends Model
             $sql = "SELECT * FROM login_credential WHERE username = :value";
             $req = Database::getBdd()->prepare($sql);
             $req->execute(['value' => $username]);
-            return $req->rowCount();
+            return $req->fetch();
         } catch (PDOException $e) {
             return null;
         }

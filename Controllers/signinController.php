@@ -20,14 +20,19 @@ class signinController extends Controller
         require(ROOT . 'Models/user.php');
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $username = $_POST['username'];
-            $password = $_POST['password'];
+
+            $email = new Input($_POST['email']);
+            $password = new Input($_POST['password']);
+
+            $email->sanatizeEmail();
+            $password->sanatizePassword();
 
             $user = new User();
-            $res = $user->findByEmail($username);
+            $res = $user->findByEmail($email->get());
 
             if (!empty($res)) {
-                if (password_verify($password, $res['password'])) {
+                echo "in";
+                if (password_verify($password->get(), $res['password'])) {
 
                     Session::set([
                         'uid' => $res['uid'],
@@ -35,18 +40,19 @@ class signinController extends Controller
                     ]);
                     $this->redirect('/');
                 } else {
-                    $this->redirect('/signin/error/invalied-username-or-password');
+                    $this->redirect('/signin/error');
                 }
             } else {
-                $this->redirect('/signin/error/invalied-username-or-password');
+                $this->redirect('/signin/error');
             }
         }
         // $this->render('home');
     }
 
-    public function error($msg)
+    public function error()
     {
-        $this->set(['msg' => $msg]);
+
+        $this->set(['msg' => "Invalied email or password"]);
         $this->render('index');
     }
 }
