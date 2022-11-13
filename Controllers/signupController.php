@@ -49,7 +49,7 @@ class signupController extends Controller
                         'lName' => $lName,
                     ]);
 
-                    $this->redirect('/login');
+                    $this->redirect('/signin');
                 } else {
                     $this->redirect('/signup/error/unknown');
                 }

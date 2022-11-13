@@ -5,7 +5,7 @@ class User extends Model
 
     public function findByEmail($username)
     {
-        $sql = "SELECT * FROM usercredentials WHERE username = :value";
+        $sql = "SELECT * FROM login_credential WHERE username = :value";
         $req = Database::getBdd()->prepare($sql);
         $req->execute(['value' => $username]);
         return $req->fetch();
@@ -14,7 +14,7 @@ class User extends Model
     public function create($data)
     {
         try {
-            $sql = "INSERT INTO usercredentials (uid, username, password) VALUES (:uid, :username, :password)";
+            $sql = "INSERT INTO login_credential (uid, username, password) VALUES (:uid, :username, :password)";
             $req = Database::getBdd()->prepare($sql);
             $req->execute([
                 'uid' => $data['uid'],
@@ -30,7 +30,7 @@ class User extends Model
     public function createUser($data)
     {
         try {
-            $sql = "INSERT INTO users (uid, fName, lName) VALUES (:uid, :fName, :lName)";
+            $sql = "INSERT INTO user (uid, fName, lName) VALUES (:uid, :fName, :lName)";
             $req = Database::getBdd()->prepare($sql);
             $req->execute([
                 'uid' => $data['uid'],
