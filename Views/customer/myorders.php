@@ -27,7 +27,7 @@
             echo "<td>" . $row['productId'] . "</td>";
             echo "<td>" . $row['farmerId'] . "</td>";
             echo "<td>" . $row['orderDate'] . "</td>";
-            echo "<td>" . $row['qty'] . "</td>";
+            echo "<td>" . $row['quantity'] . "</td>";
             echo "<td>" . $row['price'] . "</td>";
             echo "</tr>";
         }
