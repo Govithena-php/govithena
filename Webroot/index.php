@@ -11,7 +11,6 @@ define('CSS', URLROOT . '/Webroot/css');
 define('JS', URLROOT . '/Webroot/js');
 
 require(ROOT . 'Config/core.php');
-
 require(ROOT . 'dispatcher.php');
 require(ROOT . 'router.php');
 require(ROOT . 'request.php');
