@@ -54,7 +54,7 @@ class signupController extends Controller
                 return;
             }
 
-            if ($res > 0) {
+            if (!empty($res)) {
                 $this->redirect('/signup/error/1'); //username already exists
             } else {
                 $uid = uniqid();
