@@ -3,7 +3,7 @@ class Customer extends Model
 {
     public function get_order_details()
     {
-        $sql = "SELECT * FROM orders";
+        $sql = "SELECT * FROM `order`";
         $req = Database::getBdd()->prepare($sql);
         $req->execute();
         return $req->fetchAll();
@@ -11,7 +11,7 @@ class Customer extends Model
 
     public function create_new_order($data)
     {
-        $sql = "INSERT INTO orders (qty, price, farmerId, customerId, productId) VALUES (:qty, :price, :farmerId, :customerId, :productId)";
+        $sql = "INSERT INTO orders (quantity, price, farmerId, customerId, productId) VALUES (:qty, :price, :farmerId, :customerId, :productId)";
         $req = Database::getBdd()->prepare($sql);
         $req->execute($data);
         return $req->fetch();
