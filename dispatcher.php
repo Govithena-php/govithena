@@ -20,7 +20,7 @@ class Dispatcher
 
         if (!file_exists($file)) {
             $name = 'errorController';
-            $file = ROOT . 'Controllers/error.php';
+            $file = ROOT . 'Controllers/errorController.php';
         }
         require($file);
         $controller = new $name();

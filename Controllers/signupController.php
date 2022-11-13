@@ -15,45 +15,72 @@ class signupController extends Controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+            $firstName = new Input($_POST['firstName']);
+            $lastName = new Input($_POST['lastName']);
+            $email = new Input($_POST['email']);
+            $password = new Input($_POST['password']);
+            $confirmPassword = new Input($_POST['confirmPassword']);
 
+            $firstName->sanatizeText();
+            $lastName->sanatizeText();
+            $email->sanatizeEmail();
+            $password->sanatizePassword();
+            $confirmPassword->sanatizePassword();
 
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $fName = $_POST['fName'];
-            $lName = $_POST['lName'];
+            if ($firstName->isEmpty() || $lastName->isEmpty() || $email->isEmpty() || $password->isEmpty() || $confirmPassword->isEmpty()) {
+                $this->redirect('/signup/error/2'); //all fields are required
+                return;
+            }
 
+            if (!$password->isValidPassword() || !$confirmPassword->isValidPassword()) {
+                $this->redirect('/signup/error/3'); //password must be 8 characters long and contain at least one number and one special character
+                return;
+            }
 
-            $password = password_hash($password, PASSWORD_DEFAULT);
+            if ($password->get() != $confirmPassword->get()) {
+                $this->redirect('/signup/error/4'); //passwords do not match
+                return;
+            }
 
+            $password = password_hash($password->get(), PASSWORD_DEFAULT);
 
             $user = new User();
-            $res = $user->findByEmail($username);
 
-            if (!empty($res)) {
-                echo "User already exists";
-                $this->redirect('/signup/error/user-already-exists');
+            $res = $user->findByEmail($email->get());
+            echo $email->get();
+
+            if (!isset($res)) {
+                $this->redirect('/servererror');
+                return;
+            }
+
+            if ($res > 0) {
+                $this->redirect('/signup/error/1'); //username already exists
             } else {
                 $uid = uniqid();
-                // secho $uid;
                 $res = $user->create([
                     'uid' => $uid,
-                    'username' => $username,
+                    'username' => $email->get(),
                     'password' => $password,
 
                 ]);
-                if ($res) {
-
-                    $res = $user->createUser([
-                        'uid' => $uid,
-                        'fName' => $fName,
-                        'lName' => $lName,
-                    ]);
-
-                    $this->redirect('/signin');
-                } else {
-                    $this->redirect('/signup/error/unknown');
+                if (!isset($res)) {
+                    $this->redirect('/servererror');
+                    return;
                 }
-                // $this->redirect('/signin');
+
+                $res = $user->createUser([
+                    'uid' => $uid,
+                    'firstName' => $firstName->get(),
+                    'lastName' => $lastName->get(),
+                ]);
+
+                if (!isset($res)) {
+                    $this->redirect('/servererror');
+                    return;
+                }
+
+                $this->redirect('/signin');
             }
         }
         $this->render('index');
@@ -61,6 +88,24 @@ class signupController extends Controller
 
     public function error($msg)
     {
+
+        switch ($msg) {
+            case 1:
+                $msg = "Email already exists";
+                break;
+            case 2:
+                $msg = "All fields are required";
+                break;
+            case 3:
+                $msg = "Password must be 8 characters long and contain at least one number and one special character";
+                break;
+            case 4:
+                $msg = "Passwords do not match";
+                break;
+            default:
+                $msg = "Unknown error";
+                break;
+        }
         $this->set(['msg' => $msg]);
         $this->render('index');
     }
