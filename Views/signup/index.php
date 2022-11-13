@@ -46,11 +46,11 @@
             <?php
             }
             ?>
-            <input type="text" name="fName" class="" placeholder="First Name" autocomplete="off">
-            <input type="text" name="lName" class="" placeholder="Last Name" autocomplete="off">
-            <input type="email" name="username" class="" placeholder="Email Address" autocomplete="off">
+            <input type="text" name="firstName" class="" placeholder="First Name" autocomplete="off">
+            <input type="text" name="lastName" class="" placeholder="Last Name" autocomplete="off">
+            <input type="email" name="email" class="" placeholder="Email Address" autocomplete="off">
             <input type="password" name="password" class="" placeholder="Password">
-            <input type="password" name="confirm_password" class="" placeholder="Confirm Password">
+            <input type="password" name="confirmPassword" class="" placeholder="Confirm Password">
             <div class="terms_and_conditions">
                 <input type="checkbox" id="terms_condtions" name="terms_condtions" value="accepted">
                 <label for="terms_condtions">
