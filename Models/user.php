@@ -5,10 +5,14 @@ class User extends Model
 
     public function findByEmail($username)
     {
-        $sql = "SELECT * FROM login_credential WHERE username = :value";
-        $req = Database::getBdd()->prepare($sql);
-        $req->execute(['value' => $username]);
-        return $req->fetch();
+        try {
+            $sql = "SELECT * FROM login_credential WHERE username = :value";
+            $req = Database::getBdd()->prepare($sql);
+            $req->execute(['value' => $username]);
+            return $req->rowCount();
+        } catch (PDOException $e) {
+            return null;
+        }
     }
 
     public function create($data)
@@ -23,23 +27,23 @@ class User extends Model
             ]);
             return $req->rowCount();
         } catch (PDOException $e) {
-            echo $e->getMessage();
+            return null;
         }
     }
 
     public function createUser($data)
     {
         try {
-            $sql = "INSERT INTO user (uid, fName, lName) VALUES (:uid, :fName, :lName)";
+            $sql = "INSERT INTO user (uid, firstName, lastName) VALUES (:uid, :firstName, :lastName)";
             $req = Database::getBdd()->prepare($sql);
             $req->execute([
                 'uid' => $data['uid'],
-                'fName' => $data['fName'],
-                'lName' => $data['lName'],
+                'firstName' => $data['firstName'],
+                'lastName' => $data['lastName'],
             ]);
             return $req->rowCount();
         } catch (PDOException $e) {
-            echo $e->getMessage();
+            return null;
         }
     }
 }

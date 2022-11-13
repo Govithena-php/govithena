@@ -25,7 +25,7 @@ class signinController extends Controller
 
             $user = new User();
             $res = $user->findByEmail($username);
-            // print_r($res);
+
             if (!empty($res)) {
                 if (password_verify($password, $res['password'])) {
 
