@@ -1,5 +1,5 @@
 <?php include 'index.php'; ?>
-<div class="content">
+<div class="content" style="margin-left: 250px">
     <div class="search-container ff-poppins">
         <form action="">
             <input type="text" placeholder="Search.." name="search">
@@ -21,11 +21,11 @@
             <th>Price</th>
         </tr>
         <?php
-
+        
         foreach ($customer as $row) {
             echo "<tr>";
-            echo "<td>" . $row['productId'] . "</td>";
-            echo "<td>" . $row['farmerId'] . "</td>";
+            echo "<td>" . $row['title'] . "</td>";
+            echo "<td>" . $row['firstName'] . "</td>";
             echo "<td>" . $row['orderDate'] . "</td>";
             echo "<td>" . $row['quantity'] . "</td>";
             echo "<td>" . $row['price'] . "</td>";

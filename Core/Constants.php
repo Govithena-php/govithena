@@ -1,5 +1,5 @@
 <?php
-
+/*
 enum STATES
 {
     case PENDING;
@@ -17,3 +17,5 @@ enum USERTYPES
     case TECHASSISTANT;
     case GUEST;
 }
+
+*/
