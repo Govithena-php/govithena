@@ -16,4 +16,12 @@ class paramsExampleController extends Controller
         print_r($params);
         $this->render('index');
     }
+
+    function b($params)
+    {
+        $props['data'] = $params;
+        $props['name'] = "Janith Madarasinghe";
+        $this->set($props);
+        $this->render('index');
+    }
 }
