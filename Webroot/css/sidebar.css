@@ -40,6 +40,15 @@
     color: var(--clr-light);
 }
 
+.active  {
+    color: var(--clr-light);
+    background-color: var(--clr-primary);
+}
+
+.active    {
+    color: var(--clr-light);
+} 
+
 .sidebar_link {
     display: flex;
     align-items: center;
