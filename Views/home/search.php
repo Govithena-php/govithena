@@ -4,10 +4,9 @@
     ?>
 
     <div class="container flex flex-column flex-c-c">
-        <form class="w-50 flex flex-column flex-c-c">
+        <form class="w-50 flex flex-column flex-c-c" action="<?php echo URLROOT . "/search/" ?>" method="post">
             <div class="w-full flex">
-
-                <input type="text" name="search" class="w-full search__box" placeholder="search anything..." />
+                <input type="text" name="search_text" class="w-full search__box" placeholder="search anything..." />
                 <input type="submit" value="search" class="search__btn" />
             </div>
             <div class="w-full mt-1 flex flex-s-c">
@@ -17,19 +16,20 @@
 
                 <select name="location" value="location" class="search__filter_location">
                     <option value="">Location</option>
-                    <option value="location1">Location 1</option>
-                    <option value="location2">Location 2</option>
-                    <option value="location3">Location 3</option>
+                    <option value="ambalanthota">Ambalanthota</option>
+                    <option value="kandy">Kandy</option>
+                    <option value="matara">Matara</option>
                 </select>
 
                 <select name="category" value="category" class="search__filter_category">
                     <option value="">Category</option>
-                    <option value="category1">Category 1</option>
-                    <option value="category2">Category 2</option>
-                    <option value="category3">Category 3</option>
+                    <option value="fruit">Fruit</option>
+                    <option value="rice">Rice</option>
+                    <option value="spices">Spices</option>
+                    <option value="vegetable">Vegetable</option>
                 </select>
 
-                <select name="price_range" value="price" class="search__filter_price">
+                <select disabled name="price_range" value="price" class="search__filter_price">
                     <option value="">Price Range</option>
                     <option value="price1">1000 - 1500</option>
                     <option value="price2">1500 - 2000</option>

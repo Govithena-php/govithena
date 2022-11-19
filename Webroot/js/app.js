@@ -10,3 +10,12 @@ window.addEventListener('scroll', () => {
             else child.style.opacity = 0;
         })
     }
+
+
+const closeProfileMenu = () => {
+    document.getElementById('profile_menu').style.display = 'none'   
+}
+
+const openProfileMenu = () => {
+    document.getElementById('profile_menu').style.display = 'block'   
+}

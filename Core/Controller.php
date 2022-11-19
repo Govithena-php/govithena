@@ -27,5 +27,8 @@ class Controller
     function redirect($url)
     {
         header('Location: ' . URLROOT . $url);
+
+        // header('location: http://localhost/govithena/signin/error.php');
+
     }
 }
