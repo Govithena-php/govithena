@@ -3,7 +3,7 @@ class Customer extends Model
 {
     public function get_order_details()
     {
-        $sql = "SELECT * FROM `order`";
+        $sql = "SELECT o.productId, o.quantity, o.price, o.orderDate, u.firstName, p.title FROM `order` AS o LEFT JOIN user AS u ON o.farmerId = u.uid LEFT JOIN product AS p ON o.productId = p.productId";
         $req = Database::getBdd()->prepare($sql);
         $req->execute();
         return $req->fetchAll();
