@@ -16,7 +16,7 @@ class Dispatcher
     public function loadController()
     {
         $name = $this->request->controller . "Controller";
-        $file = ROOT . 'Controllers/' . $name . '.php';
+        $file = ROOT . 'Controllers/' . $name . '.php'; 
 
         if (!file_exists($file)) {
             $name = 'errorController';
