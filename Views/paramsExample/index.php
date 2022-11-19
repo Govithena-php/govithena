@@ -1,3 +1,4 @@
-<h1>gig<br>
-
-</h1>
+<h1><br>
+    <?php
+    print_r($data);
+    print_r($name);
