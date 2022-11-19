@@ -1,0 +1,18 @@
+.search__result_box {
+    display: grid;
+    grid-template-columns: 3fr 16fr;
+}
+
+.filters {
+    background-color: red;
+}
+
+.results {
+    background-color: blue;
+}
+
+
+.search__form {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr 0.5fr;
+}

@@ -8,11 +8,14 @@
 .hero {
     width: 100%;
     height: 100vh;
+    overflow: hidden;
 }
 
 .hero__img {
     width: 100%;
     height: 100%;
+    overflow: hidden;
+
 }
 
 .hero__img>img {
@@ -137,16 +140,16 @@
 /* search */
 
 .search {
-    border-top: 10px solid rgba(229, 25, 25, 0.626);
+    /* border-top: 10px solid rgba(229, 25, 25, 0.626); */
     background-color: #ededed;
     padding: 2rem 0;
 }
 
-.search__grid {
+/* .search__grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
     grid-gap: 1.25rem;
-}
+} */
 
 .search__box {
     padding: 0.5rem 1.5rem;
