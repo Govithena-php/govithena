@@ -39,6 +39,7 @@ class searchController extends Controller
     function a()
     {
         print_r($_GET);
-        header("location:javascript://history.go(-1)");
+
+        echo "<button type='button' onclick='window.history.go(-1)'>Back</button>";
     }
 }
