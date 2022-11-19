@@ -1,3 +1,5 @@
+
+
 window.addEventListener('scroll', () => {
     document.getElementById('imgt').style.top = 0.2 * window.scrollY + 'px';
 })

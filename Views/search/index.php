@@ -68,7 +68,7 @@
                 ?>
                                 <div class='result'>
                                     <div class='result__content'>
-                                        <a href='<?php echo URLROOT ?>/search/a/?id=<?php echo $s['gigId'] ?>' class='result__content__title'><?php echo $s['title'] ?></a>
+                                        <a href='<?php echo URLROOT ?>/gig/a/<?php echo $s['gigId'] ?>' class='result__content__title'><?php echo $s['title'] ?></a>
                                         <p class='result__content__description'><?php echo $s['description'] ?></p>
                                         <p class='result__content__location'><?php echo $s['location'] ?></p>
                                     </div>
