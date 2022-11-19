@@ -17,13 +17,8 @@
 <body class="bg-gray">
     <?php include COMPONENTS . 'dashboard/header.php'; ?>
     <?php include 'sidebar.php'; ?>
+    <script src="<?php echo JS ?>/app.js"></script>
 
-    <div class="container mt-4">
-    </div>
-
-
-
-    <!-- <script src="https://kit.fontawesome.com/b8084a92f1.js" crossorigin="anonymous"></script> -->
 </body>
 
 </html>

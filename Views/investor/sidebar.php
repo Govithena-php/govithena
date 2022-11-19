@@ -1,4 +1,4 @@
-<div class="sidebar bg-light ff-poppins fs-3">
+<aside class="sidebar bg-light ff-poppins fs-3 pt-5">
     <div class="sidebar__link_items">
 
         <a href="./" class="sidebar_link">
@@ -37,4 +37,4 @@
             <span>Settings</span>
         </a>
     </div>
-</div>
+</aside>

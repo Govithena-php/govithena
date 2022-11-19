@@ -1,4 +1,4 @@
-<div class="sidebar bg-light ff-poppins fs-3">
+<div class="sidebar bg-light ff-poppins fs-3 pt-5">
     <div class="sidebar__link_items">
 
         <a href="./" class="active sidebar_link " id="sidebar_link">

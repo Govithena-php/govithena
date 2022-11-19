@@ -13,14 +13,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 
-<body class="bg-gray">
+<body class="bg-gray h-screen">
     <?php include COMPONENTS . 'dashboard/header.php'; ?>
-    <?php include 'sidebar.php'; ?>
 
-    <div class="dashboard__container">
+    <?php include 'sidebar.php'; ?>
+    <div class="dashboard__container h-screen">
         <h1>my Investment</h1>
     </div>
+
+
     <?php require COMPONENTS . "dashboard/footer.php"; ?>
+    <script src="<?php echo JS ?>/app.js"></script>
+
 </body>
 
 </html>
