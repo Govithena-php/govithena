@@ -5,7 +5,7 @@ class User extends Model
 
     public function findByEmail($username)
     {
-        try {
+        try {            
             $sql = "SELECT * FROM login_credential WHERE username = :value";
             $req = Database::getBdd()->prepare($sql);
             $req->execute(['value' => $username]);
