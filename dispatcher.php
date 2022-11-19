@@ -10,13 +10,13 @@ class Dispatcher
         Router::parse($this->request->url, $this->request);
 
         $controller = $this->loadController();
-        call_user_func_array([$controller, $this->request->action], $this->request->params);
+        call_user_func_array([$controller, $this->request->action], array($this->request->params));
     }
 
     public function loadController()
     {
         $name = $this->request->controller . "Controller";
-        $file = ROOT . 'Controllers/' . $name . '.php'; 
+        $file = ROOT . 'Controllers/' . $name . '.php';
 
         if (!file_exists($file)) {
             $name = 'errorController';
