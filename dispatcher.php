@@ -16,11 +16,11 @@ class Dispatcher
     public function loadController()
     {
         $name = $this->request->controller . "Controller";
-        $file = ROOT . 'Controllers/' . $name . '.php';
+        $file = ROOT . 'Controllers/' . $name . '.php'; 
 
         if (!file_exists($file)) {
             $name = 'errorController';
-            $file = ROOT . 'Controllers/error.php';
+            $file = ROOT . 'Controllers/errorController.php';
         }
         require($file);
         $controller = new $name();
