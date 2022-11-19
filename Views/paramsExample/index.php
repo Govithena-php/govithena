@@ -1,4 +1,6 @@
 <h1><br>
     <?php
-    print_r($data);
-    print_r($name);
+    foreach ($data as $key => $value) {
+        echo $key . " : " . $value . "<br>";
+    }
+    echo $name;
