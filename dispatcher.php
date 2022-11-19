@@ -10,6 +10,12 @@ class Dispatcher
         Router::parse($this->request->url, $this->request);
 
         $controller = $this->loadController();
+
+        if (!method_exists($controller, $this->request->action)) {
+            array_unshift($this->request->params, $this->request->action);
+            $this->request->action = "index";
+        }
+
         call_user_func_array([$controller, $this->request->action], array($this->request->params));
     }
 
