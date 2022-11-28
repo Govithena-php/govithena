@@ -1,5 +1,5 @@
 <div class="sidebar bg-light ff-poppins fs-3">
-    <div class="sidebar__link_items">
+    <div class="sidebar__link_items" onclick="activeSidebar()">
 
         <a href="./" class="active sidebar_link " id="sidebar_link">
             <i class="active fa-solid fa-gauge fs-5 mx-1"></i>
