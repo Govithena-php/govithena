@@ -25,6 +25,15 @@ class customerController extends Controller
         //===========
     }
 
+    function productList()
+    {
+        require(ROOT . 'Models/customer.php');
+        $customer = new Customer();
+        //$d['customer'] = $customer->get_product_list();
+        //$this->set($d);
+        $this->render("productList");
+    }
+
     function index()
     {
         $this->render("index");
