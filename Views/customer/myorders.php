@@ -9,7 +9,7 @@
     </div>
     <div class="content-navbar">
         <a class="active" href="#">All</a>
-        <a href="#">Current</a>
+        <a href="./myordersCurrent">Current</a>
         <a href="#">Completed</a>
     </div>
     <table class="tb">
