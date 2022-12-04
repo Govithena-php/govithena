@@ -1,0 +1,10 @@
+.myrequests__container {
+    width: 50%;
+}
+
+.myrequests__card {
+    padding: 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}

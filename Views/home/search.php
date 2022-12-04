@@ -1,4 +1,4 @@
-<section id="search" class="ff-poppins search">
+<section id="search" class=" search">
     <?php
     echo Session::get('uid');
     ?>
@@ -7,7 +7,7 @@
         <form class="w-50 flex flex-column flex-c-c" action="<?php echo URLROOT . "/search/" ?>" method="post">
             <div class="w-full flex">
                 <input type="text" name="search_text" class="w-full search__box" placeholder="search anything..." />
-                <input type="submit" value="search" class="search__btn" />
+                <input type="submit" name="search" value="search" class="search__btn" />
             </div>
             <div class="w-full mt-1 flex flex-s-c">
                 <p>Filter by: </p>
@@ -42,9 +42,10 @@
                     <option value="time2">2 Month</option>
                     <option value="time3">3 Month</option>
                 </select>
-
             </div>
         </form>
+
+        
 
         <div class=" related__serach">
             <a href="#">Fertilizer</a>

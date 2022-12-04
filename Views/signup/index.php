@@ -35,7 +35,7 @@
         </svg>
 
     </div>
-    <div class="container grid gird-center ff-poppins">
+    <div class="container grid gird-center">
         <h1>Sign up and start investing today.</h1>
         <form class="form" action="<?php echo URLROOT; ?>/signup" method="post">
             <?php
