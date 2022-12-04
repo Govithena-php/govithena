@@ -1,17 +1,19 @@
 /* navbar */
 .nav {
-    box-shadow: 0 0 1rem 0.2rem #0f0f0fe2;
-    /* box-shadow: 0 0 1rem 0.2rem #cc0000cf; */
+    box-shadow: 1px 0 10px 1px rgba(0, 0, 0, 0.574);
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1001;
-
+}
+.nav-back{
+    height: 4rem;
 }
 
 .nav__container {
     position: relative;
-    height: 4rem
+    margin: 0 2rem;
+    height: 4rem;
 }
 
 .nav__brand {

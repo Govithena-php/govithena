@@ -28,7 +28,7 @@
     Close to the simplicity of manual farming and yet a luxury in the city, Taman Riset is what all new generation
     should dream of. -->
 
-    <div id="actor" class="ff-poppins py-2 actor">
+    <div id="actor" class=" py-2 actor">
         <div class="container">
             <h1 class="text-center flex-c-c fs-7">How It Works</h1>
             <div class="h-devider-100"></div>
@@ -133,7 +133,7 @@
         </div>
     </div>
 
-    <div class="ff-poppins invest">
+    <div class=" invest">
         <div class="container">
             <div class="flex flex-column">
                 <div>

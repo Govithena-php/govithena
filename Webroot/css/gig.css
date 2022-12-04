@@ -1,0 +1,23 @@
+.result__grid {
+    display: grid;
+    grid-template-columns: 4fr 3fr;
+    gap: 2rem;
+    height: 500px;
+
+}
+
+.result__images {
+    height: 100%;
+    overflow: hidden;
+}
+
+.result__images img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.result__content {
+    height: 100%;
+    /* background-color: blue; */
+}

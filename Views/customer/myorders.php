@@ -1,6 +1,6 @@
 <?php include 'index.php'; ?>
 <div class="content" style="margin-left: 250px">
-    <div class="search-container ff-poppins">
+    <div class="search-container ">
         <form action="">
             <input type="text" placeholder="Search.." name="search">
             <button type="submit"><i class="search__icon fa fa-search"></i></button>
