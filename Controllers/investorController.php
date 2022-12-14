@@ -32,7 +32,7 @@ class investorController extends Controller
         $requests = $r->getRequestsByInvestor(Session::get('uid'));
 
         if (isset($requests)) {
-            $this->set(['requests' => $requests]);
+            $this->set(['pr' => $requests]);
         } else {
             $this->set(['error' => "no requests found"]);
         }

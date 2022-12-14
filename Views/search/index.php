@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../Webroot/css/ui.css">
     <link rel="stylesheet" href="../Webroot/css/navbar.css">
     <link rel="stylesheet" href="../Webroot/css/search.css">
-    <link rel="stylesheet" href="../Webroot/css/dashFooter.css">
+    <link rel="stylesheet" href="../Webroot/css/footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <script>
         if (window.history.replaceState) {
@@ -25,8 +25,7 @@
     include COMPONENTS . 'navbar.php';
     ?>
 
-    <div class="[ container h-screen ]">
-
+    <div class="[ container mt-5 ]">
 
         <div class="[ fs-3 breadcrumbs ]">
             <a href="<?php echo URLROOT ?>">Govithena</a>
@@ -37,8 +36,8 @@
             <input class="" type="text" name="search_text" placeholder="search here...">
             <button class="[ btn btn-primary ] [ search_button ]" type="submit" name="search">search</button>
         </form>
-
         <p class="[ fs-6 fw-700 my-1 ]">Search results for "<?php echo $_POST["search_text"] ?>"</p>
+        <hr>
 
         <!-- <div class="[ my-0.5 fs-3 ] [ filters ]">
             <select name="location" class="search__filter_location">
@@ -84,7 +83,7 @@
             </form>
         </div> -->
 
-        <div class="[ mt-2 ] [ result__grid ]">
+        <div class="[ my-2 ] [ result__grid ]">
             <?php
 
             if (isset($searchResult)) {
@@ -94,7 +93,10 @@
 
                     <div class="[ result__card ]">
                         <div class="[ card__img ]">
-                            <img src="<?php echo IMAGES ?>/temp/17.jpg" alt="test">
+
+                            <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($result['image']); ?>" alt="test" />
+
+                            <!-- <img src="<?php echo IMAGES ?>/temp/17.jpg" alt="test"> -->
                             <div class="[ farmer__name ]">
                                 <p><?php echo $result['firstName'] ?></p>
                                 <p><?php echo $result['lastName'] ?></p>
@@ -112,13 +114,9 @@
                             </div>
                         </div>
                     </div>
-
             <?php
                 }
             }
-
-
-
             ?>
         </div>
 
@@ -126,7 +124,7 @@
 
 
     <?php
-    // require COMPONENTS . "dashboard/footer.php"; 
+    require COMPONENTS . "footer.php";
     ?>
 
     <script src=" <?php echo JS ?>/app.js"></script>

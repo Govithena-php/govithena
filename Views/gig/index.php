@@ -55,7 +55,7 @@
     ?>
 
 
-    <div class="[ container pt-4 h-screen ]">
+    <div class="[ container mt-5 ]">
 
         <div class="[ fs-3 breadcrumbs ]">
             <a href="<?php echo URLROOT ?>">Govithena</a>
@@ -67,33 +67,134 @@
 
         <div class="[ mt-2 ][ result__grid ]">
             <div class="[ result__images ]">
-                <img src="<?php echo IMAGES ?>/temp/1.jpg" alt="">
+                <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($gig['image']); ?>" />
+                <!-- <img src="<?php echo IMAGES ?>/temp/1.jpg" alt=""> -->
             </div>
             <div class="[ result__content ]">
-                <h1><?php echo $gig['title'] ?></h1>
-                <p><?php echo $gig['description'] ?></p>
-                <p><?php echo $gig['capital'] ?></p>
-                <p><?php echo $gig['timePeriod'] ?></p>
+                <h1 class="[ mb-1 ]"><?php echo $gig['title'] ?></h1>
+                <p><?php echo $gig['description'] ?> Cupidatat eu adipisicing in esse tempor ipsum eiusmod velit. In aute Lorem irure mollit ullamco consequat sit proident quis.</p>
+                <p class="[ my-1 ]"><?php echo $gig['location'] ?></p>
+                <div class="[ flex flex-sb-c fs-5 fw-7 ]">
+                    <p class="[ my-1 ]">LKR <?php echo $gig['capital'] ?></p>
+                    <p><?php echo $gig['timePeriod'] ?></p>
+                </div>
                 <p><?php echo $gig['landArea'] ?> Arces</p>
-                <p><?php echo $gig['location'] ?></p>
                 <hr />
-                <br>
-                <h2>Farmer</h2>
-                <p><?php echo $farmer['firstName'] . " " . $farmer['lastName'] ?></p>
-                <?php
-                if (isset($state) && $state == 'success') {
-                ?>
-                    <button class="[ mt-1 btn btn-primary ]">cancel request</button>
-                <?php
-                } else {
-                ?>
-                    <button class="[ mt-1 btn btn-primary ]" onclick="openModal()">send request</button>
-                <?php
-                }
-                ?>
+
+                <div class="[  ]">
+                    <h2>Farmer</h2>
+                    <p><?php echo $farmer['firstName'] . " " . $farmer['lastName'] ?></p>
+                    <?php
+                    if (isset($state) && $state == 'success') {
+                    ?>
+                        <button class="[ mt-1 btn btn-primary ]">cancel request</button>
+                    <?php
+                    } else {
+                    ?>
+                        <button class="[ mt-1 btn btn-primary ]" onclick="openModal()">send request</button>
+                    <?php
+                    }
+                    ?>
+                </div>
             </div>
         </div>
+
+        <div class="[ rating__grid ]">
+            <div class="[ rating__number ]">
+                <h1>0.0</h1>
+                <div class="[ stars ]">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+                <p>0 reviews</p>
+            </div>
+            <div class="[ rating__bars ]">
+                <div class="[ bar ]">
+                    <label for="5">5</label>
+                    <progress id="5" value="1" max="100"></progress>
+                </div>
+                <div class="[ bar ]">
+                    <label for="4">4</label>
+                    <progress id="4" value="1" max="100"></progress>
+                </div>
+                <div class="[ bar ]">
+                    <label for="3">3</label>
+                    <progress id="3" value="1" max="100"></progress>
+                </div>
+                <div class="[ bar ]">
+                    <label for="2">2</label>
+                    <progress id="2" value="1" max="100"></progress>
+                </div>
+                <div class="[ bar ]">
+                    <label for="1">1</label>
+                    <progress id="1" value="1" max="100"></progress>
+                </div>
+            </div>
+        </div>
+
+        <div class="[ description ]">
+            <h1><?php echo $gig['title'] ?></h1>
+            <pre><?php echo $gig['description'] ?></pre>
+        </div>
+
+
+        <div class="[ reviews ]">
+            <h1>Reviews</h1>
+            <hr>
+            <div class="[ reviews__wrapper ]">
+
+                <div class="[ review ]">
+                    <div class="[ review__header ]">
+                        <img src="https://xsgames.co/randomusers/avatar.php?g=male" alt="profile">
+                        <h3>Reviewer name</h3>
+                    </div>
+                    <p>
+                        Occaecat occaecat et laborum exercitation eiusmod minim. Adipisicing consequat minim nostrud aliqua eu eu laborum officia. Deserunt ex qui consectetur Lorem excepteur culpa cillum culpa aute commodo velit est ex ut.
+                    </p>
+                    <div class="[ review__footer ]">
+                        <p>12/12/2022</p>
+                        <div class="[ stars ]">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="[ review ]">
+                    <div class="[ review__header ]">
+                        <img src="https://xsgames.co/randomusers/avatar.php?g=male" alt="profile">
+                        <h3>Reviewer name</h3>
+                    </div>
+                    <p>
+                        Occaecat occaecat et laborum exercitation eiusmod minim. Adipisicing consequat minim nostrud aliqua eu eu laborum officia. Deserunt ex qui consectetur Lorem excepteur culpa cillum culpa aute commodo velit est ex ut.
+                    </p>
+                    <div class="[ review__footer ]">
+                        <p>12/12/2022</p>
+                        <div class="[ stars ]">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
     </div>
+
+    <?php
+    include COMPONENTS . 'dashboard/footer.php';
+    ?>
 
     </div>
 
@@ -130,6 +231,7 @@
             </div>
         </div>
     </dialog>
+
 
 
     <script src=" <?php echo JS ?>/app.js"></script>

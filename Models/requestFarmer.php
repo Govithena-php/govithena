@@ -6,7 +6,7 @@ class RequestFarmer extends Model
     public function getRequestsByInvestor($id)
     {
         try {
-            $sql = "SELECT * FROM farmer_request WHERE investorId = :id";
+            $sql = "SELECT * FROM farmer_request INNER JOIN gig ON farmer_request.gigId = gig.gigId INNER JOIN user ON farmer_request.farmerId = user.uid WHERE investorId = :id ORDER BY requestedDate DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
