@@ -70,4 +70,3 @@
         ?>
     </div>
 </nav>
-<div class="[ nav-back ]"></div>

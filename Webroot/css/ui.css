@@ -1,38 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&family=Roboto:wght@300;400;500;700;900&display=swap');
-
+@import 'variables.css';
 /* variables */
-:root {
-    --clr-dark: #1e1e1e;
-    --clr-gray: #ededed;
-    --clr-light: #ffffff;
-    --clr-primary: #1d9a5f;
-    --clr-primary-light: #22ac6b;
-    --clr-secondary: #01058a;
-    --clr-secondary-light: #0c12ae;
 
-
-    --fs-10: 9.375rem;
-    --fs-9: 6.25rem;
-    --fs-8: 3.5rem;
-    --fs-7: 2rem;
-    --fs-6: 1.5rem;
-    --fs-5: 1.25rem;
-    --fs-4: 1rem;
-    --fs-3: 0.875rem;
-    --fs-2: 0.75rem;
-
-    --fw-4: 400;
-    --fw-5: 500;
-    --fw-6: 600;
-    --fw-7: 700;
-
-    --ff-serif: 'Merriweather', serif;
-    --ff-sans-cond: 'Montserrat', sans-serif;
-    --ff-sand-normal: 'Roboto Mono', monospace;
-    --ff-poppins: 'Poppins', sans-serif;
-    --ff-roboto: 'Roboto', sans-serif;
-
-}
 
 /* ----------------------------------------------- */
 
@@ -131,7 +100,8 @@ select {
 
 .container {
     /* padding-inline: 1rem; */
-    margin-inline: 4rem;
+    margin-inline: 6rem;
+    min-height:100vh;
 }
 
 /* Color */
@@ -840,7 +810,7 @@ select {
 
 
 .h-screen {
-    height: 100vh;
+   height: 100vh;
 }
 
 .h-90vh {
@@ -1038,6 +1008,12 @@ select {
 
 /* deviders */
 
+.heading-underline {
+    border-bottom:1px solid rgb(60, 60, 60);
+}
+
+
+
 .h-devider-100 {
     width: 100px;
     height: 1px;
@@ -1075,7 +1051,7 @@ select {
 .dashboard-container {
     margin-top: 5rem;
     margin-left: 250px;
-    margin-right: 1rem;
+    margin-right: 3rem;
     min-height: calc(100vh - 8rem);
 }
 

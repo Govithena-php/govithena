@@ -21,8 +21,80 @@
 <body>
 
     <?php include COMPONENTS . 'navbar.php'; ?>
-    <?php include 'hero.php'; ?>
-    <?php include 'search.php'; ?>
+
+    <section class="[ hero ]">
+        <div class="[ relative ][ hero__img ]">
+            <img class="" src="Webroot/images/bg.jpg" alt="hero" />
+        </div>
+        <div class="[ scroll__indicator ]"></div>
+        <div class="[ hero__content_layer ]">
+            <div class="[ container ] [ h-full ]">
+                <div class="[ text-light ] [ hero__content ]">
+                    <p class="[ fs-4 ]">Invest on farmers and their community,</p>
+                    <h1 class="[ fs-9 ]">Earn <span>18%</span> interest per year.</h1>
+
+                    <form class="[ search__bar ]" action="<?php echo URLROOT . "/search/" ?>" method="post">
+                        <input type="text" name="search_text" class="" placeholder="search anything..." />
+                        <button type="submit" name="search" value="search" class="">search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- <section class="[ container ]">
+        <h1 class="[ fs-7 ]">Popular Gigs</h1>
+
+        <div class="[ popular__wrapper ]">
+
+            <div class="[ popular__content_item ]">
+                <div class="[ popular__content_item_img ]">
+                    <img src="<?php echo IMAGES ?>/temp/1.jpg" alt="popular" />
+                </div>
+                <div class="[ popular__content_item_text ]">
+                    <p class="[ fs-8 ]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+                    <a href="#">Read More</a>
+                </div>
+            </div>
+
+        </div>
+
+    </section> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!-- Invest in a farmer and their community, earn 18% interest per year.
     Close to the simplicity of manual farming and yet a luxury in the city, Taman Riset is what all new generation
@@ -133,7 +205,7 @@
         </div>
     </div>
 
-    <div class=" invest">
+    <!-- <div class=" invest">
         <div class="container">
             <div class="flex flex-column">
                 <div>
@@ -141,7 +213,14 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
+
+
+
+
+
+
+
 
     <div style="height: 100vh;"></div>
     <script src="<?php echo JS ?>/app.js"></script>
