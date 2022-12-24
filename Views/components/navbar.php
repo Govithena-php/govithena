@@ -1,13 +1,13 @@
-<nav class="bg-dark text-light ff-poppins fixed nav">
-    <div class="container flex flex-sb-c nav__container">
-        <div id="profile_menu" class="profile__menu">
+<nav class="[ bg-dark text-light fixed ] [ nav ]">
+    <div class="[ flex flex-sb-c ] [ nav__container ]">
+        <div id="profile_menu" class="[ profile__menu ]">
             <ul>
-                <li><a onclick="closeProfileMenu()" href="./investor/" class="text-light">Dashboard</a></li>
+                <li><a onclick="closeProfileMenu()" href="<?php echo URLROOT ?>/investor/">Dashboard</a></li>
                 <li><a onclick="closeProfileMenu()" href="<?php echo URLROOT ?>/signout">Sign out</a></li>
             </ul>
         </div>
-        <div class="flex flex-c-c">
-            <a href="<?php echo URLROOT ?>" class="flex flex-c-c nav__brand">
+        <div class="[ flex flex-c-c ]">
+            <a href="<?php echo URLROOT ?>" class="[ flex flex-c-c ] [ nav__brand ]">
                 <svg width="140" height="4rem" viewBox="0 0 1220 289" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g filter="url(#filter0_d_709_3441)">
                         <path d="M163.444 40C145.644 77.0748 88.9185 169 163.443 169C237.786 169 181.973 78.0905 163.444 40Z" fill="#1DB352" />
@@ -32,11 +32,11 @@
 
 
             </a>
-            <ul class="flex flex-c-c nav__menu">
-                <li class="nav__menu_item"><a href="./search/" class="text-light">Search</a></li>
-                <li class="nav__menu_item"><a href="./customer/" class="text-light">About</a></li>
-                <li class="nav__menu_item"><a href="#services" class="text-light">Services</a></li>
-                <li class="nav__menu_item"><a href="#contact" class="text-light">Contact</a></li>
+            <ul class="[ flex flex-c-c ] [ nav__menu ]">
+                <li class="[ nav__menu_item ]"><a href="./store/" class="[ text-light ]">Store</a></li>
+                <li class="[ nav__menu_item ]"><a href="./customer/" class="[ text-light ]">About</a></li>
+                <li class="[ nav__menu_item ]"><a href="#services" class="[ text-light ]">Services</a></li>
+                <li class="[ nav__menu_item ]"><a href="#contact" class="[ text-light ]">Contact</a></li>
             </ul>
         </div>
 
@@ -44,25 +44,25 @@
         if (isset($_SESSION['uid'])) {
         ?>
             <!-- ====================user======================== -->
-            <div class="flex flex-c-c gap-2">
-                <div class="flex flex-c-c gap-2">
+            <div class="[ flex flex-c-c gap-2 ]">
+                <div class="[ flex flex-c-c gap-2 ]">
 
-                    <i class="fa fa-bell navbar__i"></i>
-                    <i class="fa fa-bag-shopping navbar__i"></i>
+                    <i class="[ fa fa-bell ] [ navbar__i ]"></i>
+                    <i class="[ fa fa-bag-shopping ] [ navbar__i ]"></i>
                 </div>
-                <p class="divider">|</p>
-                <a onclick="openProfileMenu()" class="flex flex-c-c relative nav__profile">
-                    <span class="absolute bg-primary"></span>
-                    <img src="https://xsgames.co/randomusers/avatar.php?g=male" alt="profile">
+                <p class="[ divider ]">|</p>
+                <a onclick="openProfileMenu()" class="[ flex flex-c-c relative ] [ nav__profile ]">
+                    <span class="[ absolute bg-primary ]"></span>
+                    <img src="<?php echo IMAGES ?>/21.jpg" alt="profile">
                 </a>
             </div>
         <?php
         } else {
         ?>
             <!-- ====================guest======================== -->
-            <div class="flex flex-c-c ">
-                <a href="./signin" class="btn uppercase fs-3 btn-light btn__sign_in">Sign in</a>
-                <a href="./signup" class="btn uppercase fs-3 btn-primary btn__sign_up">Sign up</a>
+            <div class="[ flex flex-c-c ]">
+                <a href="./signin" class="[ btn uppercase fs-3 btn-light ] [ btn__sign_in ]">Sign in</a>
+                <a href="./signup" class="[ btn uppercase fs-3 btn-primary ] [ btn__sign_up ]">Sign up</a>
             </div>
 
         <?php

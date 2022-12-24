@@ -21,7 +21,6 @@
         <h1>my Investment</h1>
     </div>
 
-
     <?php require COMPONENTS . "dashboard/footer.php"; ?>
     <script src="<?php echo JS ?>/app.js"></script>
 

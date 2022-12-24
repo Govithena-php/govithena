@@ -4,3 +4,7 @@
     place-items: center;
     width: 100%;
 }
+
+.footer > p {
+    padding-left: 250px;
+}

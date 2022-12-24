@@ -1,38 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&family=Roboto:wght@300;400;500;700;900&display=swap');
-
+@import 'variables.css';
 /* variables */
-:root {
-    --clr-dark: #1e1e1e;
-    --clr-gray: #ededed;
-    --clr-light: #ffffff;
-    --clr-primary: #1d9a5f;
-    --clr-primary-light: #22ac6b;
-    --clr-secondary: #01058a;
-    --clr-secondary-light: #0c12ae;
 
-
-    --fs-10: 9.375rem;
-    --fs-9: 6.25rem;
-    --fs-8: 3.5rem;
-    --fs-7: 2rem;
-    --fs-6: 1.5rem;
-    --fs-5: 1.25rem;
-    --fs-4: 1rem;
-    --fs-3: 0.875rem;
-    --fs-2: 0.75rem;
-
-    --fw-4: 400;
-    --fw-5: 500;
-    --fw-6: 600;
-    --fw-7: 700;
-
-    --ff-serif: 'Merriweather', serif;
-    --ff-sans-cond: 'Montserrat', sans-serif;
-    --ff-sand-normal: 'Roboto Mono', monospace;
-    --ff-poppins: 'Poppins', sans-serif;
-    --ff-roboto: 'Roboto', sans-serif;
-
-}
 
 /* ----------------------------------------------- */
 
@@ -57,6 +26,12 @@ figure {
 }
 
 
+a,
+button,
+select {
+    cursor: pointer;
+}
+
 h1,
 h2,
 h3,
@@ -69,7 +44,7 @@ p {
 
 
 body {
-    font-family: var(--ff-Poppins);
+    font-family: var(--ff-poppins);
     font-size: var(--fs-4);
     /* min-height: 100vh; */
     line-height: 1.5;
@@ -125,7 +100,8 @@ select {
 
 .container {
     /* padding-inline: 1rem; */
-    margin-inline: 2rem;
+    margin-inline: 6rem;
+    min-height:100vh;
 }
 
 /* Color */
@@ -232,7 +208,15 @@ select {
 }
 
 
-.fw-700 {
+.fw-5 {
+    font-weight: 500;
+}
+
+.fw-6 {
+    font-weight: 600;
+}
+
+.fw-7 {
     font-weight: 700;
 }
 
@@ -479,6 +463,18 @@ select {
 
 .my-0 {
     margin-block: 0;
+}
+
+.my-025 {
+    margin-block: 0.25rem;
+}
+
+.my-05 {
+    margin-block: 0.5rem;
+}
+
+.my-075 {
+    margin-block: 0.75rem;
 }
 
 .my-1 {
@@ -814,7 +810,7 @@ select {
 
 
 .h-screen {
-    height: 100vh;
+   height: 100vh;
 }
 
 .h-90vh {
@@ -940,6 +936,13 @@ select {
     width: 10vw;
 }
 
+
+.b-none {
+    border: none;
+}
+
+
+
 .border-b {
     padding-bottom: 2rem;
     border-bottom: 1px solid #767676;
@@ -1005,6 +1008,12 @@ select {
 
 /* deviders */
 
+.heading-underline {
+    border-bottom:1px solid rgb(60, 60, 60);
+}
+
+
+
 .h-devider-100 {
     width: 100px;
     height: 1px;
@@ -1039,9 +1048,65 @@ select {
 
 /* dashboard container */
 
-.dashboard__container {
-    margin-top: 4rem;
+.dashboard-container {
+    margin-top: 5rem;
     margin-left: 250px;
+    margin-right: 3rem;
+    min-height: calc(100vh - 8rem);
+}
+
+/* page heading */
+
+.page-heading-1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 1rem 0;
+    padding: 1rem 0;
+    text-transform: capitalize;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+
+/* alert */
+
+
+.alert {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.2rem;
+    border-radius: 0.2rem;
+    position: absolute;
+    top: 5rem;
+    right: 2rem;
+}
+
+.alert>i {
+    margin-right: 1.5rem;
+}
+
+.alert>div {
+    display: flex;
+    flex-direction: column;
+}
+
+.alert>div>h4 {
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.alert>div>p {
+    padding-top: 0.3rem;
+}
+
+.alert-success {
+    background-color: rgb(14, 175, 108);
+    color: var(--clr-light);
+}
+
+.alert-error {
+    background-color: rgba(223, 48, 48, 0.905);
+    color: var(--clr-light);
 }
 
 
@@ -1050,7 +1115,7 @@ select {
 
 .breadcrumbs {
     display: flex;
-    padding: 1.5rem 0;
+    padding: 0.75rem 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
@@ -1070,7 +1135,48 @@ select {
     font-weight: var(--fw-5);
 }
 
-.breadcrumbs>*:hover {
+.breadcrumbs>a:hover {
     color: var(--clr-primary);
     cursor: pointer;
+}
+
+
+/* .modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1002;
+    justify-content: center;
+    align-items: flex-start;
+    display:none;
+
+}
+
+.msgbox {
+    margin-top: 4rem;
+    background-color: var(--clr-light);
+    width: 450px;
+    border-radius: 0.8rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.211);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+
+.form__control {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 2rem;
+
+}
+
+.form__control>label {
+    color: rgb(44, 44, 44);
+    margin-bottom: 0.3rem;
+    font-size: 0.7rem;
 }
