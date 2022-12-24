@@ -13,6 +13,7 @@ class RequestFarmer extends Model
             return $row;
         } catch (PDOException $e) {
             echo $e->getMessage();
+            die();
             return null;
         }
     }
@@ -47,6 +48,7 @@ class RequestFarmer extends Model
             return true;
         } catch (PDOException $e) {
             echo $e->getMessage();
+            die();
             return false;
         }
     }

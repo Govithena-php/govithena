@@ -72,7 +72,7 @@
                     ?>
                         <div class="[ request__card ]">
                             <div class="[ request__img ]">
-                                <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($request['image']); ?>" />
+                                <img src="<?php echo UPLOADS . $request['image'] ?>" />
                             </div>
                             <div class="[ request__content ]">
                                 <div class="[ request__content_header ]">

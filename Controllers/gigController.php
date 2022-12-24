@@ -2,6 +2,12 @@
 
 class gigController extends Controller
 {
+    public function __construct()
+    {
+        if (!Session::isLoggedIn()) {
+            $this->redirect('/signin');
+        }
+    }
 
     function index($gigId, $state = "")
     {

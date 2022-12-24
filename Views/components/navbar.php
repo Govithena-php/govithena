@@ -33,7 +33,7 @@
 
             </a>
             <ul class="[ flex flex-c-c ] [ nav__menu ]">
-                <li class="[ nav__menu_item ]"><a href="./search/" class="[ text-light ]">Search</a></li>
+                <li class="[ nav__menu_item ]"><a href="./store/" class="[ text-light ]">Store</a></li>
                 <li class="[ nav__menu_item ]"><a href="./customer/" class="[ text-light ]">About</a></li>
                 <li class="[ nav__menu_item ]"><a href="#services" class="[ text-light ]">Services</a></li>
                 <li class="[ nav__menu_item ]"><a href="#contact" class="[ text-light ]">Contact</a></li>
