@@ -14,7 +14,7 @@
 
         <a href="./myfarmers" class="[ sidebar_link ]">
             <i class="[ fa-solid fa-tractor fs-5 mx-1 ]"></i>
-            <span>My Farmers</span>
+            <span>Farmers</span>
         </a>
 
         <a href="./myrequests" class="[ sidebar_link ]">

@@ -33,7 +33,7 @@
         </div>
 
         <form class="[ fs-3 ][ search__form ]" action="<?php echo URLROOT . "/search/" ?>" method="post">
-            <input class="" type="text" name="search_text" placeholder="search here...">
+            <input class="" type="text" name="search_text" placeholder="search by: name / category / location">
             <button class="[ btn btn-primary ] [ search_button ]" type="submit" name="search">search</button>
         </form>
         <p class="[ fs-6 fw-700 my-1 ]">Search results for "<?php echo $_POST["search_text"] ?>"</p>
@@ -89,12 +89,17 @@
             if (isset($searchResult)) {
                 // print_r($searchResult);
                 foreach ($searchResult as $result) {
+                    $imageURL = UPLOADS . $result["image"];
+
+                    // echo $imageURL;
+                    // die();
+
             ?>
 
                     <div class="[ result__card ]">
                         <div class="[ card__img ]">
 
-                            <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($result['image']); ?>" alt="test" />
+                            <img src="<?php echo $imageURL ?>" alt="test" />
 
                             <!-- <img src="<?php echo IMAGES ?>/temp/17.jpg" alt="test"> -->
                             <div class="[ farmer__name ]">

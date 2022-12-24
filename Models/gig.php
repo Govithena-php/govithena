@@ -12,6 +12,7 @@ class Gig extends Model
             return $gig;
         } catch (PDOException $e) {
             echo $e->getMessage();
+            die();
             return null;
         }
     }

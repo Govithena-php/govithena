@@ -26,6 +26,8 @@ class User extends Model
             $req->execute(['value' => $username]);
             return $req->fetch();
         } catch (PDOException $e) {
+            $e->getMessage();
+            die();
             return null;
         }
     }
@@ -42,6 +44,8 @@ class User extends Model
             ]);
             return $req->rowCount();
         } catch (PDOException $e) {
+            $e->getMessage();
+            die();
             return null;
         }
     }
@@ -58,6 +62,8 @@ class User extends Model
             ]);
             return $req->rowCount();
         } catch (PDOException $e) {
+            $e->getMessage();
+            die();
             return null;
         }
     }

@@ -67,12 +67,12 @@
 
         <div class="[ mt-2 ][ result__grid ]">
             <div class="[ result__images ]">
-                <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($gig['image']); ?>" />
+                <img src="<?php echo UPLOADS . $gig['image']; ?>" />
                 <!-- <img src="<?php echo IMAGES ?>/temp/1.jpg" alt=""> -->
             </div>
             <div class="[ result__content ]">
                 <h1 class="[ mb-1 ]"><?php echo $gig['title'] ?></h1>
-                <p><?php echo $gig['description'] ?> Cupidatat eu adipisicing in esse tempor ipsum eiusmod velit. In aute Lorem irure mollit ullamco consequat sit proident quis.</p>
+                <p><?php echo $gig['description'] ?>.</p>
                 <p class="[ my-1 ]"><?php echo $gig['location'] ?></p>
                 <div class="[ flex flex-sb-c fs-5 fw-7 ]">
                     <p class="[ my-1 ]">LKR <?php echo $gig['capital'] ?></p>
