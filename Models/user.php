@@ -3,14 +3,31 @@
 class User extends Model
 {
 
+
+    function viewFarmer($id)
+    {
+        try {
+            $sql = "SELECT * FROM user WHERE uid = :id";
+            $stmt =  Database::getBdd()->prepare($sql);
+            $stmt->execute(['id' => $id]);
+            $farmer = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $farmer;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return null;
+        }
+    }
+
     public function findByEmail($username)
     {
-        try {            
+        try {
             $sql = "SELECT * FROM login_credential WHERE username = :value";
             $req = Database::getBdd()->prepare($sql);
             $req->execute(['value' => $username]);
             return $req->fetch();
         } catch (PDOException $e) {
+            $e->getMessage();
+            die();
             return null;
         }
     }
@@ -27,6 +44,8 @@ class User extends Model
             ]);
             return $req->rowCount();
         } catch (PDOException $e) {
+            $e->getMessage();
+            die();
             return null;
         }
     }
@@ -43,6 +62,8 @@ class User extends Model
             ]);
             return $req->rowCount();
         } catch (PDOException $e) {
+            $e->getMessage();
+            die();
             return null;
         }
     }

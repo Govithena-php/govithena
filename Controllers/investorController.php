@@ -23,4 +23,21 @@ class investorController extends Controller
     {
         $this->render('myinvestments');
     }
+
+    public function myrequests()
+    {
+        require(ROOT . 'Models/requestFarmer.php');
+        $r = new RequestFarmer();
+
+        $requests = $r->getRequestsByInvestor(Session::get('uid'));
+
+        if (isset($requests)) {
+            $this->set(['pr' => $requests]);
+        } else {
+            $this->set(['error' => "no requests found"]);
+        }
+
+
+        $this->render('myrequests');
+    }
 }

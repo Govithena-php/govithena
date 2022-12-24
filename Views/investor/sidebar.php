@@ -1,39 +1,44 @@
-<aside class="sidebar bg-light ff-poppins fs-3 pt-5">
-    <div class="sidebar__link_items">
+<aside class="[ bg-light fs-3 pt-5 ] [ sidebar ]">
+    <div class="[ sidebar__link_items ]">
 
-        <a href="./" class="sidebar_link">
-            <i class="fa-solid fa-gauge fs-5 mx-1"></i>
+        <a href="./" class="[ sidebar_link ]">
+            <i class="[ fa-solid fa-gauge fs-5 mx-1 ]"></i>
             <span>Dashboard</span>
         </a>
 
-        <a href="./myinvestments" class="sidebar_link">
+        <a href="./myinvestments" class="[ sidebar_link ]">
 
-            <i class="fa-solid fa-sack-dollar fs-5 mx-1"></i>
+            <i class="[ fa-solid fa-sack-dollar fs-5 mx-1 ]"></i>
             <span>My Investments</span>
         </a>
 
-        <a href="./myfarmers" class="sidebar_link">
-            <i class="fa-solid fa-tractor fs-5 mx-1"></i>
-            <span>My Farmers</span>
+        <a href="./myfarmers" class="[ sidebar_link ]">
+            <i class="[ fa-solid fa-tractor fs-5 mx-1 ]"></i>
+            <span>Farmers</span>
         </a>
 
-        <hr class="mx-1 my-1">
+        <a href="./myrequests" class="[ sidebar_link ]">
+            <i class="[ fa-solid fa-tractor fs-5 mx-1 ]"></i>
+            <span>My Request</span>
+        </a>
+
+        <hr class="[ mx-1 my-1 ]">
 
     </div>
-    <div class="sidebar__link_items">
+    <div class="[ sidebar__link_items ]">
 
-        <a class="sidebar_link">
-            <i class="fa-solid fa-user-tie fs-5 mx-1"></i>
+        <a class="[ sidebar_link ]">
+            <i class="[ fa-solid fa-user-tie fs-5 mx-1 ]"></i>
             <span>My Account</span>
         </a>
 
-        <a class="sidebar_link">
-            <i class="fa-solid fa-circle-question fs-5 mx-1"></i>
+        <a class="[ sidebar_link ]">
+            <i class="[ fa-solid fa-circle-question fs-5 mx-1 ]"></i>
             <span>Help</span>
         </a>
 
-        <a class="sidebar_link">
-            <i class="fa-solid fa-gear fs-5 mx-1"></i>
+        <a class="[ sidebar_link ]">
+            <i class="[ fa-solid fa-gear fs-5 mx-1 ]"></i>
             <span>Settings</span>
         </a>
     </div>

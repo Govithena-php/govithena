@@ -2,34 +2,50 @@
 
 class searchController extends Controller
 {
-
+    public function __construct()
+    {
+        if (!Session::isLoggedIn()) {
+            $this->redirect('/signin');
+        }
+    }
     function index()
     {
+
+        if (!isset($_POST['search_text'])) {
+            $this->redirect('/');
+        }
         require(ROOT . 'Models/search.php');
-        $s = new Search();
-        if (isset($_POST['search_text'])) {
-            $key = $_POST['search_text'];
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['search'])) {
 
-            $terms = array(
-                'key' => '%' . $key . '%'
-            );
 
-            if (isset($_POST['location']) && $_POST['location'] != "") {
-                $terms['location'] = $_POST['location'];
-            }
+            $s = new Search();
 
-            if (isset($_POST['category']) && $_POST['category'] != "") {
-                $terms['category'] = $_POST['category'];
-            }
+            // $key = "rice";
 
-            if (isset($_POST['price_range']) && $_POST['price_range'] != "") {
-                $terms['price_range'] = $_POST['price_range'];
-            }
+            if (isset($_POST['search_text'])) {
+                $key = $_POST['search_text'];
 
-            $res = $s->search($terms);
-            if (isset($res)) {
-                $data['search'] = $res;
-                $this->set($data);
+                $terms = array(
+                    'key' => '%' . $key . '%'
+                );
+
+                if (isset($_POST['locatio   n']) && $_POST['location'] != "") {
+                    $terms['location'] = $_POST['location'];
+                }
+
+                if (isset($_POST['category']) && $_POST['category'] != "") {
+                    $terms['category'] = $_POST['category'];
+                }
+
+                if (isset($_POST['price_range']) && $_POST['price_range'] != "") {
+                    $terms['price_range'] = $_POST['price_range'];
+                }
+
+                $res = $s->searchGigs($terms);
+                if (isset($res)) {
+                    $data['searchResult'] = $res;
+                    $this->set($data);
+                }
             }
         }
         $this->render('index');
