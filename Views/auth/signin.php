@@ -35,11 +35,11 @@
                 // echo $request->params;
                 ?>
                 <div class="card_header">
-                    <h1>Sign In</h1>
+                    <h1>Sign In 2</h1>
                     <small>Welcome back!</small>
                 </div>
 
-                <form class="card_body" action="<?php echo URLROOT ?>/signin/login" method="POST">
+                <form class="card_body" action="" method="POST">
 
                     <input class="text_input" type="email" name="email" id="email" placeholder="Email or Phone Number">
                     <input class="text_input" type="password" name="password" id="password" placeholder="Password">
@@ -51,7 +51,7 @@
                         <a href="#">Forgot Password?</a>
                     </div>
                     <input class="btn" type="submit" signy value="Sign In" name="login_btn">
-                    <p>Not a member? <a href="<?php echo URLROOT ?>/signup">Signup now</a></p>
+                    <p>Not a member? <a href="<?php echo URLROOT ?>/auth/signup">Signup now</a></p>
                 </form>
             </div>
         </div>
