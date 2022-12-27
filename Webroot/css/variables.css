@@ -29,4 +29,10 @@
     --ff-poppins: 'Poppins', sans-serif;
     --ff-roboto: 'Roboto', sans-serif;
 
+
+    --default-container-width: 90vw;
+    --default-navbar-height: 70px;
+
+
+
 }
