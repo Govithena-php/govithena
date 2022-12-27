@@ -91,9 +91,9 @@
 
         <?php if (Session::isLoggedIn()) { ?>
             ?>
-            <!-- <div class="[ text-center ]">
-                <h1 class="[ fs-7 ]">Welcome <?php echo $_SESSION['uid'] ?></h1>
-            </div> -->
+            <div class="[ text-center ]">
+                <h1 class="[ fs-4 ]">Welcome <?php echo $_SESSION['uid'] ?></h1>
+            </div>
         <?php
 
         } ?>
