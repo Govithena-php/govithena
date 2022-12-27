@@ -98,11 +98,11 @@ select {
 
 /* utils */
 
-.container {
-    /* padding-inline: 1rem; */
-    margin-inline: 6rem;
+/* .container {
+    padding-inline: 1rem;
+    margin-inline: 10rem;
     min-height:100vh;
-}
+} */
 
 /* Color */
 .bg-dark {

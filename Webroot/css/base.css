@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&family=Roboto:wght@300;400;500;700;900&display=swap');
+@import 'variables.css';
+@import 'grid.css';
+
+*,
+*::before *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+li,
+picture,
+figure {
+    margin: 0;
+}
+
+
+
+a,
+button,
+select {
+    cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    font-weight: 400;
+}
+
+
+
+body {
+    font-family: var(--ff-poppins);
+    font-size: var(--fs-4);
+    line-height: 1.5;
+
+}
+
+img,
+picture {
+    max-width: 100%;
+    height: block;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.fixed {
+    position: fixed;
+}
+
+.header{
+    margin-bottom: 1.5rem;
+}
+
+.content{
+    padding: 1rem 0;
+}
+
+.container {
+    margin-inline: 8rem;
+}
+
+.container[continer-type="navbar"] {
+    padding: 0;
+}
+
+.container[continer-type="section"] {
+    padding-block: 2rem;
+}
+
+@media (prefers-reduced-motion:reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+@media (max-width: 75rem) {
+    .container {
+        margin-inline: 6rem;
+    }
+    .container[continer-type="section"] {
+        padding-block: 1rem;
+    }
+}
+
+@media (max-width: 64rem) {
+    .container {
+        margin-inline: 2rem;
+    }
+    .container[continer-type="section"] {
+        padding-block: 0.75rem;
+    }
+}
+@media (max-width: 48rem) {
+    .container {
+        margin-inline: 1rem;
+    }
+}
+
+@media (max-width: 36rem) {
+    .container {
+        margin-inline: 0.5rem;
+    }
+}
+
+
+
+
+
+
+
+

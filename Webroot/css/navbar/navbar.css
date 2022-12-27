@@ -28,10 +28,8 @@ button {
 nav>.navbar {
     position: relative;
     height: 100%;
-    max-width: 90vw;
-    margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 0.5fr 2fr 1fr;
     gap: 1rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 
@@ -324,7 +322,7 @@ nav>.navbar {
 @media screen and (max-width: 768px) {
 
     .navbar>.menu,
-    .navbar .signin_btn {
+    .navbar .signin__join {
         display: none;
     }
 
@@ -338,5 +336,9 @@ nav>.navbar {
 
     .mobile__sidebar {
         display: flex;
+    }
+
+    nav>.navbar{
+        grid-template-columns: 1fr 1fr 1fr;
     }
 }
