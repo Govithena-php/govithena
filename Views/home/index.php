@@ -89,14 +89,14 @@
 
     <section class="[ container ]">
 
-        <?php if (Session::isLoggedIn()) { ?>
-            ?>
+        <?php if (Session::isLoggedIn()) {
+        ?>
             <div class="[ text-center ]">
-                <h1 class="[ fs-4 ]">Welcome <?php echo $_SESSION['uid'] ?></h1>
+                <h1 class="[ fs-4 ]">Welcome <?php echo $_SESSION['username'] ?></h1>
             </div>
         <?php
-
-        } ?>
+        }
+        ?>
     </section>
 
 
