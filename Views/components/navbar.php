@@ -59,15 +59,15 @@
                                 <i class="[ fa-solid fa-gear ]"></i>Settings</a>
                         </li>
                     </ul>
-                    <a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/signout">
+                    <a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/auth/signout">
                         <i class="fa-solid fa-right-from-bracket"></i>Sign Out</a>
                 </div>
 
             <?php } else { ?>
                 <div class="[ signin__join ]">
                     <ul>
-                        <li><a class="[ signin_btn ]" href="<?php echo URLROOT ?>/signin">Sign In</a></li>
-                        <li><a class="[ join_btn ]" href="<?php echo URLROOT ?>/signup">Sign Up</a></li>
+                        <li><a class="[ signin_btn ]" href="<?php echo URLROOT ?>/auth/signin">Sign In</a></li>
+                        <li><a class="[ join_btn ]" href="<?php echo URLROOT ?>/auth/signup">Sign Up</a></li>
                     </ul>
                 </div>
             <?php } ?>
@@ -92,13 +92,13 @@
     <div class="[ profile ]">
         <?php if (Session::isLoggedIn()) { ?>
             <ul>
-                <li><a class="[ join_btn ]" href="<?php echo URLROOT ?>/signout">Sign Out</a></li>
+                <li><a class="[ join_btn ]" href="<?php echo URLROOT ?>/auth/signout">Sign Out</a></li>
             </ul>
         <?php } else { ?>
             <div class="[ signin__join ]">
                 <ul>
-                    <li><a class="[ signin_btn ]" href="<?php echo URLROOT ?>/signin">Sign In</a></li>
-                    <li><a class="[ join_btn ]" href="<?php echo URLROOT ?>/signup">Join</a></li>
+                    <li><a class="[ signin_btn ]" href="<?php echo URLROOT ?>/auth/signin">Sign In</a></li>
+                    <li><a class="[ join_btn ]" href="<?php echo URLROOT ?>/auth/signup">Join</a></li>
                 </ul>
             </div>
         <?php } ?>

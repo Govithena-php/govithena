@@ -1,6 +1,6 @@
 <?php
 
-class signupController extends Controller
+class authController extends Controller
 {
     public function __construct()
     {
@@ -10,6 +10,45 @@ class signupController extends Controller
     }
 
     public function index()
+    {
+        $this->signin();
+    }
+
+    public function signin()
+    {
+        require(ROOT . 'Models/user.php');
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $email = new Input($_POST['email']);
+            $password = new Input($_POST['password']);
+
+            $email->sanatizeEmail();
+            $password->sanatizePassword();
+
+            $user = new User();
+            $res = $user->findByEmail($email->get());
+
+            if (!empty($res)) {
+                echo "in";
+                if (password_verify($password->get(), $res['password'])) {
+
+                    Session::set([
+                        'uid' => $res['uid'],
+                        'username' => $res['username']
+                    ]);
+                    $this->redirect('/');
+                } else {
+                    $this->redirect('/signin/error');
+                }
+            } else {
+                $this->redirect('/signin/error');
+            }
+        }
+        $this->render('signin');
+    }
+
+    public function signup()
     {
         require(ROOT . 'Models/user.php');
 
@@ -55,7 +94,7 @@ class signupController extends Controller
             }
 
             if (!empty($res)) {
-                $this->redirect('/signup/error/1'); //username already exists
+                $this->redirect('auth/signup/error/1'); //username already exists
             } else {
                 $uid = uniqid();
                 $res = $user->create([
@@ -80,33 +119,17 @@ class signupController extends Controller
                     return;
                 }
 
-                $this->redirect('/signin');
+                $this->redirect('/auth/signin');
             }
         }
-        $this->render('index');
+        $this->render('signup');
     }
 
-    public function error($msg)
-    {
 
-        switch ($msg) {
-            case 1:
-                $msg = "Email already exists";
-                break;
-            case 2:
-                $msg = "All fields are required";
-                break;
-            case 3:
-                $msg = "Password must be 8 characters long and contain at least one number and one special character";
-                break;
-            case 4:
-                $msg = "Passwords do not match";
-                break;
-            default:
-                $msg = "Unknown error";
-                break;
-        }
-        $this->set(['msg' => $msg]);
-        $this->render('index');
+    public function signout()
+    {
+        Session::unset(['uid', 'username']);
+        Session::destroy();
+        $this->redirect('/');
     }
 }

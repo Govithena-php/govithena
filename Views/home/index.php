@@ -53,8 +53,8 @@
             } else {
             ?>
                 <div class="[ search ]">
-                    <a class="sigin__btn" href="<?php echo URLROOT . "/signin" ?>">Sign In</a>
-                    <a class="signup__btn" href="<?php echo URLROOT . "/signup" ?>">Sign Up</a>
+                    <a class="sigin__btn" href="<?php echo URLROOT . "/auth/signin" ?>">Sign In</a>
+                    <a class="signup__btn" href="<?php echo URLROOT . "/auth/signup" ?>">Sign Up</a>
                 </div>
             <?php
             }
