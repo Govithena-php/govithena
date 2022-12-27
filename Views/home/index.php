@@ -12,10 +12,9 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 
-    <link rel="stylesheet" href="<?php echo CSS ?>home/home.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/base.css">
     <link rel="stylesheet" href="<?php echo CSS ?>home/hero.css">
-    <link rel="stylesheet" href="<?php echo CSS ?>/variables.css">
-    <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>home/home.css">
 
 </head>
 
@@ -23,7 +22,7 @@
 
     <?php require_once(COMPONENTS . 'navbar.php'); ?>
 
-    <section class="[ hero ]">
+    <section id="hero" class="[ hero ]">
 
         <div class="[ scroll__indicator ]"></div>
 
@@ -36,8 +35,8 @@
             <img id="5" show="false" src="Webroot/images/bg5.jpg" alt="bg" />
         </div>
 
-        <div class="[ content ]">
-            <div class="[ header ]">
+        <div class="[ container content ]" continer-type="section">
+            <div class="[ heading ]">
                 <p>Invest on farmers and their community,</p>
                 <h1>Earn <span>12%</span> interest per year.</h1>
             </div>
@@ -59,44 +58,182 @@
             <?php
             }
             ?>
-
-
-
-
-
         </div>
-
-
-
-
-
-
-
-        <!-- <div class="[ hero__content_layer ]">
-            <div class="[ container ] [ h-full ]">
-                <div class="[ text-light ] [ hero__content ]">
-                    <p class="[ fs-4 ]">Invest on farmers and their community,</p>
-                    <h1 class="[ fs-9 ]">Earn <span>12%</span> interest per year.</h1>
-
-                    <form class="[ search__bar ]" action="<?php echo URLROOT . "/search/" ?>" method="post">
-                        <input type="text" name="search_text" class="" placeholder="search by: name / category / location" />
-                        <button type="submit" name="search" value="search" class="">search</button>
-                    </form>
-                </div>
-            </div>
-        </div> -->
     </section>
 
-    <section class="[ container ]">
 
-        <?php if (Session::isLoggedIn()) {
-        ?>
+    <?php if (Session::isLoggedIn()) {
+    ?>
+        <section class="[ container ]" continer-type="section">
             <div class="[ text-center ]">
                 <h1 class="[ fs-4 ]">Welcome <?php echo $_SESSION['username'] ?></h1>
             </div>
-        <?php
-        }
-        ?>
+        </section>
+    <?php
+    }
+    ?>
+
+    <section id="description" class="[ container ][ description ]" continer-type="section">
+        <div class="[ header ]">
+            <h3>A whole world of freelance talent at your fingertips</h3>
+        </div>
+        <div class="[ grid ]" lg="2">
+            <div class="box">
+                <ul>
+                    <li>
+                        <h4>The best for every budget</h4>
+                        <p>Find high-quality services at every price point. No hourly rates, just project-based pricing.</p>
+                    </li>
+                    <li>
+                        <h4>The best for every budget</h4>
+                        <p>Find high-quality services at every price point. No hourly rates, just project-based pricing.</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="box">
+                <ul>
+                    <li>
+                        <h4>The best for every budget</h4>
+                        <p>Find high-quality services at every price point. No hourly rates, just project-based pricing.</p>
+                    </li>
+                    <li>
+                        <h4>The best for every budget</h4>
+                        <p>Find high-quality services at every price point. No hourly rates, just project-based pricing.</p>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+
+
+    <section id="categories" class="[ container ][ categories ]" continer-type="section">
+        <div class="[ header ]">
+            <h2>Popular Categories</h2>
+        </div>
+        <div class="[ grid ]" gap="2" xs="1" md="2" lg="3">
+
+            <div class="[ relative ][ card ]">
+                <div class="[ absolute ][ image ]">
+                    <img src="<?php echo IMAGES ?>/temp/5.jpg" alt="category" />
+                </div>
+                <div class="[ content ]">
+                    <h3>Category 1</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+                </div>
+            </div>
+
+            <div class="[ relative ][ card ]">
+                <div class="[ absolute ][ image ]">
+                    <img src="<?php echo IMAGES ?>/temp/5.jpg" alt="category" />
+                </div>
+                <div class="[ content ]">
+                    <h3>Category 1</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+                </div>
+            </div>
+
+            <div class="[ relative ][ card ]">
+                <div class="[ absolute ][ image ]">
+                    <img src="<?php echo IMAGES ?>/temp/5.jpg" alt="category" />
+                </div>
+                <div class="[ content ]">
+                    <h3>Category 1</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+                </div>
+            </div>
+
+            <div class="[ relative ][ card ]">
+                <div class="[ absolute ][ image ]">
+                    <img src="<?php echo IMAGES ?>/temp/5.jpg" alt="category" />
+                </div>
+                <div class="[ content ]">
+                    <h3>Category 1</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+                </div>
+            </div>
+
+            <div class="[ relative ][ card ]">
+                <div class="[ absolute ][ image ]">
+                    <img src="<?php echo IMAGES ?>/temp/5.jpg" alt="category" />
+                </div>
+                <div class="[ content ]">
+                    <h3>Category 1</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+                </div>
+            </div>
+
+            <div class="[ relative ][ card ]">
+                <div class="[ absolute ][ image ]">
+                    <img src="<?php echo IMAGES ?>/temp/5.jpg" alt="category" />
+                </div>
+                <div class="[ content ]">
+                    <h3>Category 1</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <section id="categories" class="[ container categories]">
+        <div class="[ header ]">
+            <h2>Popular Categories</h2>
+        </div>
+        <div class="[ contnent ]">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
     </section>
 
 

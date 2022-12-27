@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="<?php echo CSS ?>/navbar/navbar.css">
 
 <nav>
-    <div class="[ navbar ]">
+    <div class="[ container navbar ]" continer-type="navbar">
         <div class="[ toggle__icon ]">
             <button onclick="openSidebar()">
                 <i class="fas fa-bars"></i>

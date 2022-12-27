@@ -34,5 +34,16 @@
     --default-navbar-height: 70px;
 
 
+    /* breakpoints */
+
+    --breakpoint-xxl: 1440px;
+    --breakpoint-xl: 1200px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-md: 768px;
+    --breakpoint-sm: 576px;
+    --breakpoint-xs: 0px;
+
+
+
 
 }
