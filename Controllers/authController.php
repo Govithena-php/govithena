@@ -20,8 +20,8 @@ class authController extends Controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $email = new Input($_POST['email']);
-            $password = new Input($_POST['password']);
+            $email = new Input(POST, 'email');
+            $password = new Input(POST, 'password');
 
             $email->sanatizeEmail();
             $password->sanatizePassword();
@@ -30,7 +30,7 @@ class authController extends Controller
             $res = $user->findByEmail($email->get());
 
             if (!empty($res)) {
-                echo "in";
+
                 if (password_verify($password->get(), $res['password'])) {
 
                     Session::set([
@@ -54,14 +54,12 @@ class authController extends Controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $firstName = new Input($_POST['firstName']);
-            $lastName = new Input($_POST['lastName']);
-            $email = new Input($_POST['email']);
-            $password = new Input($_POST['password']);
-            $confirmPassword = new Input($_POST['confirmPassword']);
+            $firstName = new Input(POST, 'firstName');
+            $lastName = new Input(POST, 'lastName');
+            $email = new Input(POST, 'email');
+            $password = new Input(POST, 'password');
+            $confirmPassword = new Input(POST, 'confirmPassword');
 
-            $firstName->sanatizeText();
-            $lastName->sanatizeText();
             $email->sanatizeEmail();
             $password->sanatizePassword();
             $confirmPassword->sanatizePassword();
