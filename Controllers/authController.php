@@ -20,8 +20,10 @@ class authController extends Controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $email = new Input(POST, 'email');
-            $password = new Input(POST, 'password');
+            // $email = new Input(GET, 'email'); // this is how GET is used
+
+            $email = new Input('email');
+            $password = new Input('password');
 
             $email->sanatizeEmail();
             $password->sanatizePassword();
@@ -56,11 +58,11 @@ class authController extends Controller
             require(ROOT . 'Models/user.php');
             $uid = (new UID(USER, INVESTOR))->get();
 
-            $firstName = new Input(POST, 'firstName');
-            $lastName = new Input(POST, 'lastName');
-            $email = new Input(POST, 'email');
-            $password = new Input(POST, 'password');
-            $confirmPassword = new Input(POST, 'confirmPassword');
+            $firstName = new Input('firstName');
+            $lastName = new Input('lastName');
+            $email = new Input('email');
+            $password = new Input('password');
+            $confirmPassword = new Input('confirmPassword');
 
             $email->sanatizeEmail();
             $password->sanatizePassword();
