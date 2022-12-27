@@ -14,6 +14,7 @@ class User extends Model
             return $farmer;
         } catch (PDOException $e) {
             echo $e->getMessage();
+            die();
             return null;
         }
     }
