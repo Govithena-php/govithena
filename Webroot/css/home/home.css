@@ -25,8 +25,42 @@
     object-fit: cover;
 }
 
-.box {
+.description {
+    margin-block: 2rem;
+}
+
+.description>.header {
+    margin-bottom: 1.25rem;
+}
+
+.description>.header h1 {
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 3rem;
+}
+
+.description .box {
     width: 100%;
-    /* min-height: 200px; */
-    /* background-color: red; */
+}
+
+.description .box ul {
+    list-style: none;
+    padding: 0;
+    padding-right: 2rem;
+}
+
+.description .box ul li {
+    margin-bottom: 1.25rem;
+}
+
+.description .box ul h4 {
+    font-size: 1.25em;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.description .box ul h4>i {
+    font-size: 1.25em;
+    font-weight: 600;
+    margin-right: 0.5rem;
 }

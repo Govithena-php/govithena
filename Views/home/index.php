@@ -22,7 +22,7 @@
 
     <?php require_once(COMPONENTS . 'navbar.php'); ?>
 
-    <section id="hero" class="[ hero ]">
+    <section class="[ hero ]">
 
         <div class="[ scroll__indicator ]"></div>
 
@@ -73,33 +73,33 @@
     }
     ?>
 
-    <section id="description" class="[ container ][ description ]" continer-type="section">
+    <section class="[ container ][ description ]" continer-type="section">
         <div class="[ header ]">
-            <h3>A whole world of freelance talent at your fingertips</h3>
+            <h1>Lorem ipsum dolor sit amet con sectetur<br> adipisicing elit.</h1>
         </div>
         <div class="[ grid ]" lg="2">
-            <div class="box">
+            <div class="[ box ]">
                 <ul>
                     <li>
-                        <h4>The best for every budget</h4>
-                        <p>Find high-quality services at every price point. No hourly rates, just project-based pricing.</p>
+                        <h4><i class="fa-regular fa-circle-check"></i>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h4>
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, natus libero sed ab, voluptates pariatur unde minima dolorum praesentium explicabo nemo nihil corrupti, odit saepe suscipit. Commodi fugit et ipsum.</p>
                     </li>
                     <li>
-                        <h4>The best for every budget</h4>
-                        <p>Find high-quality services at every price point. No hourly rates, just project-based pricing.</p>
+                        <h4><i class="fa-regular fa-circle-check"></i>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h4>
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, natus libero sed ab, voluptates pariatur unde minima dolorum praesentium explicabo nemo nihil corrupti, odit saepe suscipit. Commodi fugit et ipsum.</p>
                     </li>
                 </ul>
             </div>
 
-            <div class="box">
+            <div class="[ box ]">
                 <ul>
                     <li>
-                        <h4>The best for every budget</h4>
-                        <p>Find high-quality services at every price point. No hourly rates, just project-based pricing.</p>
+                        <h4><i class="fa-regular fa-circle-check"></i>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h4>
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, natus libero sed ab, voluptates pariatur unde minima dolorum praesentium explicabo nemo nihil corrupti, odit saepe suscipit. Commodi fugit et ipsum.</p>
                     </li>
                     <li>
-                        <h4>The best for every budget</h4>
-                        <p>Find high-quality services at every price point. No hourly rates, just project-based pricing.</p>
+                        <h4><i class="fa-regular fa-circle-check"></i>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h4>
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, natus libero sed ab, voluptates pariatur unde minima dolorum praesentium explicabo nemo nihil corrupti, odit saepe suscipit. Commodi fugit et ipsum.</p>
                     </li>
                 </ul>
             </div>
@@ -109,11 +109,11 @@
 
 
 
-    <section id="categories" class="[ container ][ categories ]" continer-type="section">
+    <section class="[ container ][ categories ]" continer-type="section">
         <div class="[ header ]">
             <h2>Popular Categories</h2>
         </div>
-        <div class="[ grid ]" gap="2" xs="1" md="2" lg="3">
+        <div class="[ grid ]" gap="2" md="2" lg="3">
 
             <div class="[ relative ][ card ]">
                 <div class="[ absolute ][ image ]">
