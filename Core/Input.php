@@ -4,9 +4,10 @@ class Input
 {
     private $value;
 
-    function __construct($val)
+    function __construct($method, $val)
     {
-        $this->value = $val;
+        $this->value = $method[$val];
+        $this->sanatizeText();
     }
 
     function get()
@@ -34,13 +35,11 @@ class Input
 
     function sanatizeEmail()
     {
-        $this->sanatizeText();
         $this->value = filter_var($this->value, FILTER_SANITIZE_EMAIL);
     }
 
     function sanatizePassword()
     {
-        $this->sanatizeText();
         $this->value = filter_var($this->value, FILTER_SANITIZE_STRING);
     }
 
