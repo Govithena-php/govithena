@@ -1,31 +1,44 @@
 <?php
 
+use function PHPSTORM_META\type;
+
 class Input
 {
-    private $value;
+    private $value = "";
+    private $method = POST;
 
-    function __construct($method, $val)
+    public function __construct($val)
     {
-        $this->value = $method[$val];
-        $this->sanatizeText();
+        $parms = func_get_args();
+        $numOfParms = func_num_args();
+
+        if ($numOfParms == 1) {
+            $this->value = $this->method[$parms[0]];
+        } else if ($numOfParms > 1) {
+            $this->method = $parms[0];
+            $this->value = $this->method[$parms[1]];
+        } else {
+            $this->value = "";
+            die('ERROR: Invalid number of parameters');
+        }
     }
 
-    function get()
+    public function get()
     {
         return $this->value;
     }
 
-    function set($val)
+    public function set($val)
     {
         $this->value = $val;
     }
 
-    function isEmpty()
+    public function isEmpty()
     {
         return empty($this->value);
     }
 
-    function sanatizeText()
+    public function sanatizeText()
     {
         $temp = trim($this->value);
         $temp = stripslashes($temp);
@@ -33,17 +46,17 @@ class Input
         $this->value = $temp;
     }
 
-    function sanatizeEmail()
+    public function sanatizeEmail()
     {
         $this->value = filter_var($this->value, FILTER_SANITIZE_EMAIL);
     }
 
-    function sanatizePassword()
+    public function sanatizePassword()
     {
         $this->value = filter_var($this->value, FILTER_SANITIZE_STRING);
     }
 
-    function isValidPassword()
+    public function isValidPassword()
     {
         $uppercase = preg_match('@[A-Z]@', $this->value);
         $lowercase = preg_match('@[a-z]@', $this->value);
