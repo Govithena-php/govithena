@@ -36,8 +36,8 @@
 
     </div>
     <div class="container grid gird-center">
-        <h1>Sign up and start investing today.</h1>
-        <form class="form" action="<?php echo URLROOT; ?>/signup" method="post">
+        <h1>222 Sign up and start investing today.</h1>
+        <form class="form" action="" method="post">
             <?php
             if (isset($msg)) { ?>
                 <div class="alert">
@@ -60,7 +60,7 @@
             </div>
             <button type="submit" name="register_btn" class="btn uppercase">Sign up</button>
         </form>
-        <h5>Already Have an Account? <a class="register" href="<?php echo URLROOT ?>/signin">Login</a></h5>
+        <h5>Already Have an Account? <a class="register" href="<?php echo URLROOT ?>/auth/signin">Login</a></h5>
     </div>
 </body>
 
