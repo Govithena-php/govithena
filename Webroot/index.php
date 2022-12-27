@@ -10,6 +10,9 @@ define('UPLOADS', URLROOT . '/Webroot/uploads/'); // http://localhost/govithena/
 define('CSS', URLROOT . '/Webroot/css/'); // http://localhost/govithena/Webroot/css/
 define('JS', URLROOT . '/Webroot/js/'); // http://localhost/govithena/Webroot/js/
 
+define('POST', $_POST);
+define('GET', $_GET);
+
 require(ROOT . 'Config/core.php');
 require(ROOT . 'dispatcher.php');
 require(ROOT . 'router.php');
