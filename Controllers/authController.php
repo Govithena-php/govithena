@@ -41,20 +41,22 @@ class authController extends Controller
                     ]);
                     $this->redirect('/');
                 } else {
-                    $this->redirect('/signin/error');
+                    $this->redirect('/signin/error/1');
                 }
             } else {
-                $this->redirect('/signin/error');
+                $this->redirect('/signin/error/2');
             }
         }
         $this->render('signin');
     }
 
+
     public function signup()
     {
-        require(ROOT . 'Models/user.php');
-
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            require(ROOT . 'Models/user.php');
+            $uid = (new UID(USER, INVESTOR))->get();
 
             $firstName = new Input('firstName');
             $lastName = new Input('lastName');
@@ -86,17 +88,14 @@ class authController extends Controller
             $user = new User();
 
             $res = $user->findByEmail($email->get());
-            echo $email->get();
 
             if (!isset($res)) {
                 $this->redirect('/servererror');
                 return;
             }
-
             if (!empty($res)) {
                 $this->redirect('auth/signup/error/1'); //username already exists
             } else {
-                $uid = uniqid();
                 $res = $user->create([
                     'uid' => $uid,
                     'username' => $email->get(),
@@ -107,21 +106,20 @@ class authController extends Controller
                     $this->redirect('/servererror');
                     return;
                 }
-
                 $res = $user->createUser([
                     'uid' => $uid,
                     'firstName' => $firstName->get(),
                     'lastName' => $lastName->get(),
                 ]);
-
                 if (!isset($res)) {
+
                     $this->redirect('/servererror');
                     return;
                 }
-
                 $this->redirect('/auth/signin');
             }
         }
+
         $this->render('signup');
     }
 
