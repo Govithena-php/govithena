@@ -1,0 +1,235 @@
+.hero {
+    width: 100%;
+    height: 80vh;
+    /* overflow: hidden; */
+    position: relative;
+}
+
+.hero>.image__wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.hero>.image__wrapper>img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.hero>.image__wrapper>img[show="true"] {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+
+}
+
+.hero>.image__wrapper>img[show="false"] {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.hero>.image__wrapper .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    background: linear-gradient(90deg, rgba(11, 11, 11, 0.5) 0%, rgba(0, 0, 0, 0.4) 100%);
+}
+
+.hero>.content {
+    max-width: var(--default-container-width, 100%);
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hero>.content .header {
+    color: var(--clr-light, white);
+    line-height: 1;
+    font-size: var(--fs-p, 1.5rem);
+    font-weight: 200;
+    max-width: 600px;
+    text-shadow: 0px 0px 10px solid #000;
+}
+
+.hero>.content .header p {
+    margin-bottom: 1.2rem;
+}
+
+.hero>.content .header h1 {
+    font-size: var(--fs-h1, 4rem);
+    font-weight: 500;
+    margin-bottom: 2rem;
+}
+
+.hero>.content .header h1>span {
+    color: var(--clr-primary, rgb(4, 270, 154));
+}
+
+.hero>.content .search {
+    display: flex;
+    align-items: center;
+    margin: 2rem 0;
+    width: 100%;
+}
+
+.hero>.content .search>input {
+    padding: 0.7rem 1rem;
+    border: none;
+    width: min(400px, 100%);
+}
+
+.hero>.content .search>button {
+    display: flex;
+    padding: 0.7rem 1rem;
+    background-color: var(--clr-primary, rgb(4, 270, 154));
+    color: var(--text-light, white);
+}
+
+.hero>.content .search>a {
+    text-decoration: none;
+    color: var(--text-light, white);
+    margin-left: 1rem;
+    padding: 0.7rem 1.5rem;
+    font-size:1.2rem;
+    border-radius:5px;
+    font-weight:600;
+}
+
+ .sigin__btn{
+    border: 2px solid var(--clr-light, white);
+}
+.signup__btn {
+    border: 2px solid var(--clr-primary, rgb(4, 270, 154));
+    background-color: var(--clr-primary, rgb(4, 270, 154));
+}
+
+
+
+
+.scroll__indicator {
+    position: absolute;
+    bottom: 10%;
+    right: 50%;
+    width: 2rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.scroll__indicator::before {
+    content: "";
+    position: absolute;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: none;
+    border-right: 2px solid rgb(255, 255, 255);
+    border-bottom: 2px solid rgb(255, 255, 255);
+    transform: rotate(45deg);
+    top: -6px;
+    margin-top: 10px;
+    opacity: 0;
+    animation: animate__indicator 1.8s infinite;
+}
+
+.scroll__indicator::after {
+    content: "";
+    position: absolute;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: none;
+    border-right: 2px solid rgb(255, 255, 255);
+    border-bottom: 2px solid rgb(255, 255, 255);
+    transform: rotate(45deg);
+    top: -6px;
+    margin-top: 10px;
+    opacity: 0;
+    animation: animate__indicator ease-in-out 1.8s infinite;
+    animation-delay: 0.8s;
+}
+
+
+
+
+@media (max-width: 768px) {
+    .hero>.content {
+        align-items: center;
+        padding-inline: 1rem;
+    }
+
+    .hero>.content .header {
+        text-align: center;
+        --fs-p: 1rem;
+        --fs-h1: 3rem;
+    }
+
+    .hero>.content .search {
+        justify-content: center;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.hero__content>a {
+    padding: 0.5rem 1.5rem;
+    border: none;
+    text-decoration: none;
+    background-color: var(--clr-primary);
+    color: var(--text-light);
+    border-radius: 0 0.2rem 0.2rem 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.hero__content>a:hover {
+    background-color: var(--clr-primary-light);
+
+}
+
+
+
+@keyframes animate__indicator {
+    0% {
+        opacity: 0;
+        margin-top: 10px;
+    }
+
+    50% {
+        opacity: 1;
+        margin-top: 25px;
+    }
+
+    100% {
+        opacity: 0;
+        margin-top: 50px;
+    }
+}
