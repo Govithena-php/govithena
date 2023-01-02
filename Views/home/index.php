@@ -22,7 +22,7 @@
 
     <?php require_once(COMPONENTS . 'navbar.php'); ?>
 
-    <section class="[ hero ]">
+    <div class="[ hero ]">
 
         <div class="[ scroll__indicator ]"></div>
 
@@ -59,65 +59,109 @@
             }
             ?>
         </div>
-    </section>
+    </div>
 
 
     <?php if (Session::isLoggedIn()) {
     ?>
-        <section class="[ container ]" continer-type="section">
+        <!-- <div class="[ container ]" continer-type="section">
             <div class="[ text-center ]">
                 <h1 class="[ fs-4 ]">Welcome <?php echo $_SESSION['username'] ?></h1>
             </div>
-        </section>
+        </div> -->
     <?php
     }
     ?>
+    <?php
+    $numberOfGigs = 400;
+    $numberOfCategories = 20;
+    ?>
+    <div class="[ container ][ title ]" continer-type="section">
+        <h4><span><?php echo $numberOfGigs; ?>+</span> gigs in <span><?php echo $numberOfCategories; ?>+</span> categories.</h4>
+        <h1>Invest in the agreculture of Sri Lanka.</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facere atque accusantium laborum<br>eligendi at voluptatibus accusamus.</p>
+    </div>
 
-    <section class="[ container ][ description ]" continer-type="section">
-        <div class="[ header ]">
-            <h1>Lorem ipsum dolor sit amet con sectetur<br> adipisicing elit.</h1>
-        </div>
-        <div class="[ grid ]" lg="2">
-            <div class="[ box ]">
-                <ul>
+
+    <div class="[ backdrop_gray ]">
+        <div class="[ container ][ description ]" continer-type="section">
+            <div class="[ header ]">
+                <h1>Lorem ipsum dolor sit amet con sectetur<br> adipisicing elit.</h1>
+            </div>
+            <div class="[ content ][ box ]">
+                <ul class="[ grid ]" gap="3" lg="2">
                     <li>
-                        <h4><i class="fa-regular fa-circle-check"></i>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h4>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, natus libero sed ab, voluptates pariatur unde minima dolorum praesentium explicabo nemo nihil corrupti, odit saepe suscipit. Commodi fugit et ipsum.</p>
+                        <H3><i class="fa-regular fa-circle-check"></i>INVESTOR</H3>
+                        <p>1Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, natus libero sed ab, voluptates pariatur unde minima dolorum praesentium explicabo nemo nihil corrupti, odit saepe suscipit. Commodi fugit et ipsum.</p>
                     </li>
                     <li>
-                        <h4><i class="fa-regular fa-circle-check"></i>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h4>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, natus libero sed ab, voluptates pariatur unde minima dolorum praesentium explicabo nemo nihil corrupti, odit saepe suscipit. Commodi fugit et ipsum.</p>
+                        <H3><i class="fa-regular fa-circle-check"></i>FARMER</H3>
+                        <p>2Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, natus libero sed ab, voluptates pariatur unde minima dolorum praesentium explicabo nemo nihil corrupti, odit saepe suscipit. Commodi fugit et ipsum.</p>
+                    </li>
+                    <li>
+                        <H3><i class="fa-regular fa-circle-check"></i>AGROLOGIST</H3>
+                        <p>3Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, natus libero sed ab, voluptates pariatur unde minima dolorum praesentium explicabo nemo nihil corrupti, odit saepe suscipit. Commodi fugit et ipsum.</p>
+                    </li>
+                    <li>
+                        <H3><i class="fa-regular fa-circle-check"></i>TECHNICAL ASSISTANT</H3>
+                        <p>4Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, natus libero sed ab, voluptates pariatur unde minima dolorum praesentium explicabo nemo nihil corrupti, odit saepe suscipit. Commodi fugit et ipsum.</p>
                     </li>
                 </ul>
             </div>
-
-            <div class="[ box ]">
-                <ul>
-                    <li>
-                        <h4><i class="fa-regular fa-circle-check"></i>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h4>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, natus libero sed ab, voluptates pariatur unde minima dolorum praesentium explicabo nemo nihil corrupti, odit saepe suscipit. Commodi fugit et ipsum.</p>
-                    </li>
-                    <li>
-                        <h4><i class="fa-regular fa-circle-check"></i>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h4>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, natus libero sed ab, voluptates pariatur unde minima dolorum praesentium explicabo nemo nihil corrupti, odit saepe suscipit. Commodi fugit et ipsum.</p>
-                    </li>
-                </ul>
-            </div>
-
         </div>
-    </section>
+    </div>
 
 
 
-    <section class="[ container ][ categories ]" continer-type="section">
+    <div class="[ container ][ categories ]" continer-type="section">
         <div class="[ header ]">
             <h2>Popular Categories</h2>
         </div>
         <div class="[ grid ]" gap="2" md="2" lg="3">
 
-            <div class="[ relative ][ card ]">
+            <div class="[ relative ][ card ]" order="2">
                 <div class="[ absolute ][ image ]">
-                    <img src="<?php echo IMAGES ?>/temp/5.jpg" alt="category" />
+                    <img src="<?php echo IMAGES ?>/temp/17.jpg" alt="category" />
+                </div>
+                <div class="[ content ]">
+                    <h3>Vegetables</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+                </div>
+            </div>
+
+            <div class="[ relative ][ card ]" order="1">
+                <div class="[ absolute ][ image ]">
+                    <img src="<?php echo IMAGES ?>/temp/18.jpg" alt="category" />
+                </div>
+                <div class="[ content ]">
+                    <h3>Fruits</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+                </div>
+            </div>
+
+            <div class="[ relative ][ card ]" order="3">
+                <div class="[ absolute ][ image ]">
+                    <img src="<?php echo IMAGES ?>/temp/cinnamon.jpg" alt="category" />
+                </div>
+                <div class="[ content ]">
+                    <h3>Spices</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+                </div>
+            </div>
+
+            <div class="[ relative ][ card ]" order="4">
+                <div class="[ absolute ][ image ]">
+                    <img src="<?php echo IMAGES ?>/temp/red rice.jpg" alt="category" />
+                </div>
+                <div class="[ content ]">
+                    <h3>Grains</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+                </div>
+            </div>
+
+            <div class="[ relative ][ card ]" order="5">
+                <div class="[ absolute ][ image ]">
+                    <img src="<?php echo IMAGES ?>/temp/15.jpg" alt="category" />
                 </div>
                 <div class="[ content ]">
                     <h3>Category 1</h3>
@@ -125,49 +169,9 @@
                 </div>
             </div>
 
-            <div class="[ relative ][ card ]">
+            <div class="[ relative ][ card ]" order="6">
                 <div class="[ absolute ][ image ]">
-                    <img src="<?php echo IMAGES ?>/temp/5.jpg" alt="category" />
-                </div>
-                <div class="[ content ]">
-                    <h3>Category 1</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
-                </div>
-            </div>
-
-            <div class="[ relative ][ card ]">
-                <div class="[ absolute ][ image ]">
-                    <img src="<?php echo IMAGES ?>/temp/5.jpg" alt="category" />
-                </div>
-                <div class="[ content ]">
-                    <h3>Category 1</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
-                </div>
-            </div>
-
-            <div class="[ relative ][ card ]">
-                <div class="[ absolute ][ image ]">
-                    <img src="<?php echo IMAGES ?>/temp/5.jpg" alt="category" />
-                </div>
-                <div class="[ content ]">
-                    <h3>Category 1</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
-                </div>
-            </div>
-
-            <div class="[ relative ][ card ]">
-                <div class="[ absolute ][ image ]">
-                    <img src="<?php echo IMAGES ?>/temp/5.jpg" alt="category" />
-                </div>
-                <div class="[ content ]">
-                    <h3>Category 1</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
-                </div>
-            </div>
-
-            <div class="[ relative ][ card ]">
-                <div class="[ absolute ][ image ]">
-                    <img src="<?php echo IMAGES ?>/temp/5.jpg" alt="category" />
+                    <img src="<?php echo IMAGES ?>/temp/15.jpg" alt="category" />
                 </div>
                 <div class="[ content ]">
                     <h3>Category 1</h3>
@@ -176,65 +180,139 @@
             </div>
 
         </div>
-    </section>
+    </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <section id="categories" class="[ container categories]">
+    <div class="[ container ][ services ]" container-type="section">
         <div class="[ header ]">
-            <h2>Popular Categories</h2>
+            <h2>Why Us?</h2>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi, facere! Maiores sapiente<br>aliquid eius tenetur numquam id mollitia<br>voluptate ducimus facilis atque ab blanditiis aperiam, ipsa maxime amet, nemo alias.</p>
         </div>
-        <div class="[ contnent ]">
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
+
+        <div class="[ grid ]" gap="2" md="2" lg="3">
+            <div class="[ box ]">
+                <i class="fa-solid fa-headset"></i>
+
+                <div class="[ content ]">
+                    <h3>Service 1</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+                </div>
+            </div>
+            <div class="[ box ]">
+                <i class="fa-solid fa-headset"></i>
+
+                <div class="[ content ]">
+                    <h3>Service 1</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+                </div>
+            </div>
+            <div class="[ box ]">
+                <i class="fa-solid fa-headset"></i>
+
+                <div class="[ content ]">
+                    <h3>Service 1</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+                </div>
+            </div>
+            <div class="[ box ]">
+                <i class="fa-solid fa-headset"></i>
+
+                <div class="[ content ]">
+                    <h3>Service 1</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+                </div>
+            </div>
+            <div class="[ box ]">
+                <i class="fa-solid fa-headset"></i>
+
+                <div class="[ content ]">
+                    <h3>Service 1</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+                </div>
+            </div>
+            <div class="[ box ]">
+                <i class="fa-solid fa-headset"></i>
+
+                <div class="[ content ]">
+                    <h3>Service 1</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+                </div>
+            </div>
         </div>
-    </section>
+
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <div class="[ container ][ services ]" container-type="section">
+        <div class="[ header ]">
+            <h2>Our Services</h2>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi, facere! Maiores sapiente aliquid eius tenetur numquam id mollitia voluptate ducimus facilis atque ab blanditiis aperiam, ipsa maxime amet, nemo alias.</p>
+        </div>
+
+        <div class="[  ]">
+
+        </div>
+
+    </div> -->
+
+    <!-- <div class="[ container ][ services ]" container-type="section">
+        <div class="[ header ]">
+            <h2>Our Services</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+        </div>
+
+        <div class="[ content grid ]" gap="1" lg="2">
+            <div class="[ content ]">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+                <ul>
+                    <li>
+                        <h4><i class="fa-regular fa-circle-check"></i>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h4>
+                        <p>2Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, natus libero sed ab, voluptates pariatur.</p>
+                    </li>
+                    <li>
+                        <h4><i class="fa-regular fa-circle-check"></i>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h4>
+                        <p>2Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, natus libero sed ab, voluptates pariatur.</p>
+                    </li>
+                    <li>
+                        <h4><i class="fa-regular fa-circle-check"></i>Protected payments, every time</h4>
+                        <p>Always know what you'll pay upfront. Your payment isn't released without your consent.</p>
+                    </li>
+                    <li>
+                        <h4><i class="fa-regular fa-circle-check"></i>24/7 support</h4>
+                        <p>Questions? Our round-the-clock support team is available to help anytime, anywhere.</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="[ image ]">
+                <img src="<?php echo IMAGES ?>/temp/11.jpg" alt="category" />
+            </div>
+        </div>
+    </div> -->
+
+    <!-- <div class="[ backdrop_gray ]">
+        <div class="[ container ][  ]" container-type="section">
+            <div class="[ header ]">
+                <h2>Trust and Safety</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+            </div>
+            <div class="[ content ]">
+
+            </div>
+        </div>
+
+    </div> -->
+
+    <?php require_once(COMPONENTS . 'footer.php'); ?>
+
 
 
     <script src="<?php echo JS ?>/navbar/navbar.js"></script>
