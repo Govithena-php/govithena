@@ -1,45 +1,81 @@
-<aside class="[ bg-light fs-3 pt-5 ] [ sidebar ]">
-    <div class="[ sidebar__link_items ]">
+<link rel="stylesheet" href="<?php echo CSS ?>/dashboardNav/dashboardNav.css" type="text/css">
 
-        <a href="./" class="[ sidebar_link ]">
-            <i class="[ fa-solid fa-gauge fs-5 mx-1 ]"></i>
-            <span>Dashboard</span>
-        </a>
+<!-- <?php if (isset($active)) echo $active; ?> -->
+<nav class="[ nav ]">
+    <div class="[ container ]" container-type="dashboard-section">
+        <div class="[ open__btn ]">
+            <button onclick="openSidebar()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
 
-        <a href="./myinvestments" class="[ sidebar_link ]">
-
-            <i class="[ fa-solid fa-sack-dollar fs-5 mx-1 ]"></i>
-            <span>My Investments</span>
-        </a>
-
-        <a href="./myfarmers" class="[ sidebar_link ]">
-            <i class="[ fa-solid fa-tractor fs-5 mx-1 ]"></i>
-            <span>Farmers</span>
-        </a>
-
-        <a href="./myrequests" class="[ sidebar_link ]">
-            <i class="[ fa-solid fa-tractor fs-5 mx-1 ]"></i>
-            <span>My Request</span>
-        </a>
-
-        <hr class="[ mx-1 my-1 ]">
-
+        <button onclick="toggleProfileMenu()">
+            <div class="[ image ]">
+                <img src="<?php echo IMAGES ?>/21.jpg" alt="profile">
+            </div>
+        </button>
     </div>
-    <div class="[ sidebar__link_items ]">
+</nav>
 
-        <a class="[ sidebar_link ]">
-            <i class="[ fa-solid fa-user-tie fs-5 mx-1 ]"></i>
-            <span>My Account</span>
-        </a>
+<aside class="[ sidebar ]">
 
-        <a class="[ sidebar_link ]">
-            <i class="[ fa-solid fa-circle-question fs-5 mx-1 ]"></i>
-            <span>Help</span>
-        </a>
 
-        <a class="[ sidebar_link ]">
-            <i class="[ fa-solid fa-gear fs-5 mx-1 ]"></i>
-            <span>Settings</span>
-        </a>
+    <a class="[ logo ]" href="<?php echo URLROOT ?>">
+        <img src="<?php echo IMAGES ?>/logo.svg" alt="logo">
+        <!-- <p>Govithena</p> -->
+        <div class="[ action__btn ]">
+            <button onclick="closeSidebar()">&times;</button>
+        </div>
+    </a>
+
+    <div class="[ links ]">
+        <ul>
+            <li>
+                <a href="./" class="[ link ]">
+                    <i class="fa-solid fa-gauge"></i>
+                    <p>Dashboard</p>
+                </a>
+            </li>
+            <li>
+                <a href="./myinvestments" class="[ link ]">
+                    <i class="[ fa-solid fa-sack-dollar ]"></i>
+                    <p>My Investments</p>
+                </a>
+            </li>
+            <li>
+                <a href="./myfarmers" class="[ link ]">
+                    <i class="[ fa-solid fa-tractor ]"></i>
+                    <p>Farmers</p>
+                </a>
+            </li>
+            <li>
+                <a href="./myrequests" class="[ link ]">
+                    <i class="[ fa-solid fa-tractor ]"></i>
+                    <p>My Request</p>
+                </a>
+            </li>
+        </ul>
+        <div class="[ grow ]"></div>
+        <ul>
+            <li>
+                <a href="./" class="[ link ]">
+                    <i class="[ fa-solid fa-user-tie ]"></i>
+                    <p>My Account</p>
+                </a>
+            </li>
+            <li>
+                <a href="./myinvestments" class="[ link ]">
+                    <i class="[ fa-solid fa-circle-question ]"></i>
+                    <p>Help</p>
+                </a>
+            </li>
+            <li>
+                <a href="./myfarmers" class="[ link ]">
+                    <i class="[ fa-solid fa-gear ]"></i>
+                    <p>Settings</p>
+                </a>
+            </li>
+        </ul>
+
     </div>
 </aside>
