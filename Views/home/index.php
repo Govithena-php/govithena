@@ -35,7 +35,7 @@
             <img id="5" show="false" src="Webroot/images/bg5.jpg" alt="bg" />
         </div>
 
-        <div class="[ container content ]" continer-type="section">
+        <div class="[ container content ]" container-type="section">
             <div class="[ heading ]">
                 <p>Invest on farmers and their community,</p>
                 <h1>Earn <span>12%</span> interest per year.</h1>
@@ -64,7 +64,7 @@
 
     <?php if (Session::isLoggedIn()) {
     ?>
-        <!-- <div class="[ container ]" continer-type="section">
+        <!-- <div class="[ container ]" container-type="section">
             <div class="[ text-center ]">
                 <h1 class="[ fs-4 ]">Welcome <?php echo $_SESSION['username'] ?></h1>
             </div>
@@ -76,7 +76,7 @@
     $numberOfGigs = 400;
     $numberOfCategories = 20;
     ?>
-    <div class="[ container ][ title ]" continer-type="section">
+    <div class="[ container ][ title ]" container-type="section">
         <h4><span><?php echo $numberOfGigs; ?>+</span> gigs in <span><?php echo $numberOfCategories; ?>+</span> categories.</h4>
         <h1>Invest in the agreculture of Sri Lanka.</h1>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facere atque accusantium laborum<br>eligendi at voluptatibus accusamus.</p>
@@ -84,7 +84,7 @@
 
 
     <div class="[ backdrop_gray ]">
-        <div class="[ container ][ description ]" continer-type="section">
+        <div class="[ container ][ description ]" container-type="section">
             <div class="[ header ]">
                 <h1>Lorem ipsum dolor sit amet con sectetur<br> adipisicing elit.</h1>
             </div>
@@ -113,7 +113,7 @@
 
 
 
-    <div class="[ container ][ categories ]" continer-type="section">
+    <div class="[ container ][ categories ]" container-type="section">
         <div class="[ header ]">
             <h2>Popular Categories</h2>
         </div>
