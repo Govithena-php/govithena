@@ -75,6 +75,10 @@ select {
     font: inherit;
 }
 
+.grow{
+    flex-grow: 1;
+}
+
 .relative {
     position: relative;
 }
@@ -87,11 +91,11 @@ select {
     position: fixed;
 }
 
-.header{
+.header {
     margin-bottom: 1.5rem;
 }
 
-.content{
+.content {
     padding: 1rem 0;
 }
 
@@ -99,17 +103,23 @@ select {
     margin-inline: 8rem;
 }
 
-.container[continer-type="navbar"] {
+.container[container-type="navbar"] {
     padding: 0;
 }
 
-.container[continer-type="footer"] {
+.container[container-type="footer"] {
     padding: 0;
 }
 
-.container[continer-type="section"] {
+.container[container-type="section"] {
     padding-block: 2rem;
 }
+
+.container[container-type="dashboard-section"] {
+    margin: 4rem 2rem 0 280px;
+    padding-block: 2rem;
+}
+
 
 @media (prefers-reduced-motion:reduce) {
 
@@ -140,9 +150,11 @@ select {
     .container {
         margin-inline: 1rem;
     }
-    .container[continer-type="section"] {
+
+    .container[container-type="section"] {
         padding-block: 0.75rem;
     }
+
     .content {
         text-align: center;
     }
@@ -158,12 +170,15 @@ select {
     .container {
         margin-inline: 1.2rem;
     }
-    .container[continer-type="section"] {
+
+    .container[container-type="section"] {
         padding-block: 0.85rem;
     }
+
     .content {
         text-align: center;
     }
+
     .header {
         text-align: center;
     }
@@ -174,12 +189,15 @@ select {
     .container {
         margin-inline: 2rem;
     }
-    .container[continer-type="section"] {
+
+    .container[container-type="section"] {
         padding-block: 1rem;
     }
+
     .content {
         text-align: left;
     }
+
     .header {
         text-align: left;
     }
@@ -189,28 +207,34 @@ select {
     .container {
         margin-inline: 6rem;
     }
-    .container[continer-type="section"] {
+
+    .container[container-type="section"] {
         padding-block: 1.25rem;
     }
+
     .content {
         text-align: left;
     }
+
     .header {
         text-align: left;
     }
-    
+
 }
 
 @media screen and (min-width: 1200px) {
     .container {
         margin-inline: 8rem;
     }
-    .container[continer-type="section"] {
+
+    .container[container-type="section"] {
         padding-block: 1.5rem;
     }
+
     .content {
         text-align: left;
     }
+
     .header {
         text-align: left;
     }
@@ -220,12 +244,15 @@ select {
     .container {
         margin-inline: 10rem;
     }
-    .container[continer-type="section"] {
+
+    .container[container-type="section"] {
         padding-block: 1.75rem;
     }
+
     .content {
         text-align: left;
     }
+
     .header {
         text-align: left;
     }

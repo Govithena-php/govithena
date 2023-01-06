@@ -11,7 +11,9 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    box-shadow: 1px 0 10px 1px rgba(0, 0, 0, 0.081);
+    /* box-shadow: 1px 0 10px 1px rgba(0, 0, 0, 0.081); */
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+
 }
 
 
