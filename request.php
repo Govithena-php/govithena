@@ -21,24 +21,7 @@ class Request
                 $val = explode('&', $segment);
                 foreach ($val as $v) {
                     $v = explode('=', $v);
-
-                    if (str_contains($v[1], '%20')) {
-                        $v[1] = str_replace('%20', ' ', $v[1]);
-                    }
-                    if (str_contains($v[1], '+')) {
-                        $v[1] = str_replace('+', ' ', $v[1]);
-                    }
-                    if (str_contains($v[1], '%25')) {
-                        $v[1] = str_replace('%25', '%', $v[1]);
-                    }
-                    if (str_contains($v[1], '%40')) {
-                        $v[1] = str_replace('%40', '@', $v[1]);
-                    }
-                    if (str_contains($v[1], '%2F')) {
-                        $v[1] = str_replace('%2F', '/', $v[1]);
-                    }
-                    // $param[$v[0]] = $v[1];
-                    $_GET[$v[0]] = $v[1];
+                    $_GET[$v[0]] = urldecode($v[1]);
                 }
                 unset($param[$key]);
             }

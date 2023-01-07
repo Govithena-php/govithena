@@ -1,10 +1,7 @@
-.result__grid {
-    display: grid;
-    grid-template-columns: 4fr 3fr;
-    gap: 2rem;
-    height: 600px;
-
+nav {
+    background-color: var(--clr-dark, #000);
 }
+
 
 .result__images {
     height: 100%;
