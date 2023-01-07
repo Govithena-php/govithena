@@ -16,9 +16,9 @@
 
         <div class="[ menu ]">
             <ul>
-                <li><a href="<?php echo URLROOT ?>/investor/">About Us</a></li>
-                <li><a href="<?php echo URLROOT ?>/investor/">Services</a></li>
-                <li><a href="<?php echo URLROOT ?>/investor/">Contact Us</a></li>
+                <li><a href="<?php echo URLROOT ?>/dashboard/">About Us</a></li>
+                <li><a href="<?php echo URLROOT ?>/dashboard/">Services</a></li>
+                <li><a href="<?php echo URLROOT ?>/dashboard/">Contact Us</a></li>
             </ul>
         </div>
 
@@ -50,7 +50,7 @@
 
                 <div id="profile_menu" open="false" class="[ menu ]">
                     <ul>
-                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/investor/">
+                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/">
                                 <i class="[ fa-solid fa-gauge ]"></i>Dashboard
                             </a></li>
                         <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/signout">
@@ -84,9 +84,9 @@
     </div>
     <div class="[ menu ]">
         <ul>
-            <li><a href="<?php echo URLROOT ?>/investor/">About Us</a></li>
-            <li><a href="<?php echo URLROOT ?>/investor/">Services</a></li>
-            <li><a href="<?php echo URLROOT ?>/investor/">Contact Us</a></li>
+            <li><a href="<?php echo URLROOT ?>/dashboard/">About Us</a></li>
+            <li><a href="<?php echo URLROOT ?>/dashboard/">Services</a></li>
+            <li><a href="<?php echo URLROOT ?>/dashboard/">Contact Us</a></li>
         </ul>
     </div>
     <div class="[ profile ]">

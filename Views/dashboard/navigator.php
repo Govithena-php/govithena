@@ -1,3 +1,19 @@
+<?php
+
+function highlight($active, $link)
+{
+    if (isset($active)) {
+        if ($active == $link) {
+            echo "active";
+        } else {
+            echo "";
+        }
+    }
+}
+
+?>
+
+
 <link rel="stylesheet" href="<?php echo CSS ?>/dashboardNav/dashboardNav.css" type="text/css">
 
 <!-- <?php if (isset($active)) echo $active; ?> -->
@@ -19,37 +35,37 @@
 
 <aside class="[ sidebar ]">
 
-
-    <a class="[ logo ]" href="<?php echo URLROOT ?>">
-        <img src="<?php echo IMAGES ?>/logo.svg" alt="logo">
-        <!-- <p>Govithena</p> -->
+    <div class="[ logo ]">
+        <a href="<?php echo URLROOT ?>/">
+            <img src="<?php echo IMAGES ?>/logo.svg" alt="logo">
+        </a>
         <div class="[ action__btn ]">
             <button onclick="closeSidebar()">&times;</button>
         </div>
-    </a>
+    </div>
 
     <div class="[ links ]">
         <ul>
             <li>
-                <a href="./" class="[ link ]">
+                <a href="<?php echo URLROOT ?>/investor/" class="<?php highlight($active, "dashboard") ?>">
                     <i class="fa-solid fa-gauge"></i>
                     <p>Dashboard</p>
                 </a>
             </li>
             <li>
-                <a href="./myinvestments" class="[ link ]">
+                <a href="<?php echo URLROOT ?>/investor/myinvestments" class="<?php highlight($active, "myinvestments") ?>">
                     <i class="[ fa-solid fa-sack-dollar ]"></i>
                     <p>My Investments</p>
                 </a>
             </li>
             <li>
-                <a href="./myfarmers" class="[ link ]">
+                <a href="<?php echo URLROOT ?>/investor/myfarmers" class="<?php highlight($active, "myfarmers") ?>">
                     <i class="[ fa-solid fa-tractor ]"></i>
                     <p>Farmers</p>
                 </a>
             </li>
             <li>
-                <a href="./myrequests" class="[ link ]">
+                <a href="<?php echo URLROOT ?>/investor/myrequests" class="<?php highlight($active, "myrequests") ?>">
                     <i class="[ fa-solid fa-tractor ]"></i>
                     <p>My Request</p>
                 </a>
@@ -58,19 +74,19 @@
         <div class="[ grow ]"></div>
         <ul>
             <li>
-                <a href="./" class="[ link ]">
+                <a href="<?php echo URLROOT ?>/investor/myaccount" class="<?php highlight($active, "myaccount") ?>">
                     <i class="[ fa-solid fa-user-tie ]"></i>
                     <p>My Account</p>
                 </a>
             </li>
             <li>
-                <a href="./myinvestments" class="[ link ]">
+                <a href="<?php echo URLROOT ?>/investor/help" class="<?php highlight($active, "help") ?>">
                     <i class="[ fa-solid fa-circle-question ]"></i>
                     <p>Help</p>
                 </a>
             </li>
             <li>
-                <a href="./myfarmers" class="[ link ]">
+                <a href="<?php echo URLROOT ?>/investor/settings" class="<?php highlight($active, "settings") ?>">
                     <i class="[ fa-solid fa-gear ]"></i>
                     <p>Settings</p>
                 </a>
