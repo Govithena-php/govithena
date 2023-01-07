@@ -1,5 +1,4 @@
 <link rel="stylesheet" href="<?php echo CSS ?>/footer/footer.css">
-<link rel="stylesheet" href="<?php echo CSS ?>/grid.css">
 
 <footer>
     <div class="[ container ]" container-type="footer">

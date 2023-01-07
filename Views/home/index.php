@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 
     <link rel="stylesheet" href="<?php echo CSS ?>/base.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/grid.css">
     <link rel="stylesheet" href="<?php echo CSS ?>home/hero.css">
     <link rel="stylesheet" href="<?php echo CSS ?>home/home.css">
 
@@ -44,9 +45,9 @@
             <?php
             if (Session::isLoggedIn()) {
             ?>
-                <form class="[ search ]" id="searchForm" action="<?php echo URLROOT . "/search/" ?>" method="post">
-                    <input type="text" name="search_text" id="search_text" class="" placeholder="search by: name / category / location" />
-                    <button type="submit" name="search" value="search" class="">search</button>
+                <form class="[ search ]" id="searchForm" action="<?php echo URLROOT . "/search/" ?>" method="get">
+                    <input type="text" name="terms" id="terms" class="" placeholder="search by: name / category / location" />
+                    <button type="submit" class="">search</button>
                 </form>
                 <!-- <div class="search">
                     <input type="text" name="search_text" id="search_text" class="" placeholder="search by: name / category / location" />
