@@ -26,6 +26,7 @@
 
 .nav .open__btn button {
     display: none;
+    font-size: 1.2rem;
 }
 
 
@@ -49,7 +50,7 @@
     top: 0;
     left: 0;
     bottom: 0;
-    width: var(--sidebar-width, 200px);
+    width: var(--sidebar-width, 12rem);
     background-color: var(--clr-dark, #000);
     color: var(--clr-light, #fff);
     padding: 2rem 1rem;
@@ -90,7 +91,7 @@
 }
 
 .sidebar .logo img {
-    margin-left: 0.4rem;
+    margin-left: 0.3rem;
 }
 
 .sidebar .links {
@@ -105,21 +106,29 @@
 
 .sidebar .links ul {
     padding: 0;
-    margin: 0 auto;
-    margin-left: 1rem;
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 0.3rem;
 }
 
 .sidebar .links ul li {
-    height: 2.5rem;
     display: flex;
     align-items: center;
 }
 
+.sidebar .links ul li:hover a {
+    background-color: rgba(255, 255, 255, 0.075);
+
+}
+
 .sidebar .links ul li a {
+    width: 100%;
+    font-size: 0.8rem;
+    font-weight: 400;
+    padding: 0.5rem;
+    height: 1.5rem;
+    border-radius: 0.3rem;
     display: flex;
     gap: 1.5rem;
     align-items: center;
@@ -128,7 +137,7 @@
 }
 
 .sidebar .links ul li a i {
-    font-size: 1.3rem;
+    font-size: 1rem;
 }
 
 .container[container-type="dashboard-section"] {
@@ -153,11 +162,6 @@
         left: -250px;
     }
 
-    .container[container-type="dashboard-section"] {
-        margin-left: 2rem;
-        transition: all 0.3s ease-in-out;
-    }
-
     .nav .open__btn button {
         display: flex;
     }
@@ -170,4 +174,9 @@
 
 .sidebar__open {
     left: 0;
+}
+
+.active {
+    background-color: rgba(255, 255, 255, 0.075);
+
 }

@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&family=Roboto:wght@300;400;500;700;900&display=swap');
 @import 'variables.css';
-@import 'grid.css';
 
 *,
 *::before *::after {
@@ -75,7 +74,83 @@ select {
     font: inherit;
 }
 
-.grow{
+.w-full {
+    width: 100%;
+}
+
+.LKRBadge::after {
+    content: "LKR";
+    background-color: #dc6109;
+    color: #fff;
+    border-radius: 5px;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.6rem;
+    font-weight: 500;
+    display: inline-block;
+    margin: 0.5rem 0;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-row-space-between {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.flex-row-end {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.flex-row-start {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.flex-col-space-between {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.center-y {
+    align-items: center;
+}
+
+.center-x {
+    justify-content: center;
+}
+
+.center {
+    align-items: center;
+    justify-content: center;
+}
+
+.baseline {
+    align-items: baseline;
+}
+
+.gap-1 {
+    gap: 1rem;
+}
+
+.gap-2 {
+    gap: 2rem;
+}
+
+
+.grow {
     flex-grow: 1;
 }
 
@@ -116,8 +191,13 @@ select {
 }
 
 .container[container-type="dashboard-section"] {
-    margin: 4rem 2rem 0 280px;
-    padding-block: 2rem;
+    margin: 4rem 2rem 0 15rem;
+    padding-block: 1rem;
+}
+
+.container[container-type="dashboard-footer"] {
+    margin: 0 2rem 0 15rem;
+    padding-block: 1rem;
 }
 
 

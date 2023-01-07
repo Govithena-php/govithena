@@ -5,7 +5,7 @@ footer {
     color: var(--clr-light, #fff);
     border-top: 1rem solid var(--clr-primary, rgb(132, 249, 198));
     padding-inline: 0;
-    padding-top: 3rem;
+    padding-top: 1.5rem;
     padding-bottom: 1rem;
 }
 
@@ -14,7 +14,7 @@ footer .container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 3rem;
+    gap: 1rem;
 }
 
 footer .grid {
@@ -29,7 +29,7 @@ footer .box {
 }
 
 footer .box h3 {
-    font-size: 1.2em;
+    font-size: 1rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
 }
@@ -42,7 +42,7 @@ footer .box ul {
 }
 
 footer .box ul li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
 }
 
 footer .box ul a:hover {
@@ -52,6 +52,7 @@ footer .box ul a:hover {
 
 
 footer .box ul a {
+    font-size:0.8rem;
     text-decoration: none;
     font-weight: 300;
     color: rgb(210, 210, 210);
@@ -59,13 +60,16 @@ footer .box ul a {
 
 footer .branding {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 3rem;
     align-items: center;
     padding: 1rem 0;
+    padding-bottom: 0.4rem;
     border-top: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 footer .branding .header {
+    font-size: 0.8rem;
     display: flex;
     align-items: baseline;
     justify-content: center;
@@ -76,7 +80,7 @@ footer .branding .header {
 footer .branding .header a {
     text-decoration: none;
     color: #fff;
-    font-size: 1.5rem;
+    font-size: 1rem;
 }
 
 footer .branding .header p {
