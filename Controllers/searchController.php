@@ -14,10 +14,6 @@ class searchController extends Controller
         // if (!isset($_POST['search_text'])) {
         //     $this->redirect('/');
         // }
-        // var_dump($term);
-        // var_dump($page);
-
-        print_r($_POST);
         require(ROOT . 'Models/search.php');
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['search'])) {
 
