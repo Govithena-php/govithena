@@ -9,8 +9,10 @@ class gigController extends Controller
         }
     }
 
-    function index($gigId, $state = "")
+    function index($params)
     {
+        $gigId = $params[0];
+        isset($params[1]) ? $state = $params[1] : "";
 
         if (isset($state)) $props['state'] = $state;
 

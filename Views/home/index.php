@@ -44,10 +44,14 @@
             <?php
             if (Session::isLoggedIn()) {
             ?>
-                <form class="[ search ]" action="<?php echo URLROOT . "/search/" ?>" method="post">
-                    <input type="text" name="search_text" class="" placeholder="search by: name / category / location" />
+                <form class="[ search ]" id="searchForm" action="<?php echo URLROOT . "/search/" ?>" method="post">
+                    <input type="text" name="search_text" id="search_text" class="" placeholder="search by: name / category / location" />
                     <button type="submit" name="search" value="search" class="">search</button>
                 </form>
+                <!-- <div class="search">
+                    <input type="text" name="search_text" id="search_text" class="" placeholder="search by: name / category / location" />
+                    <button type="button" id="searchBtn" name="search" value="search" class="">search</button>
+                </div> -->
             <?php
             } else {
             ?>
@@ -315,6 +319,7 @@
 
 
 
+    <script src="<?php echo JS ?>/search.js"></script>
     <script src="<?php echo JS ?>/navbar/navbar.js"></script>
     <script src="<?php echo JS ?>/home/hero.js"></script>
 </body>
