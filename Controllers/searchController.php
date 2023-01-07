@@ -11,20 +11,23 @@ class searchController extends Controller
     function index()
     {
 
+
         // if (!isset($_POST['search_text'])) {
         //     $this->redirect('/');
         // }
         require(ROOT . 'Models/search.php');
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['search'])) {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+            $terms = new Input(GET, 'terms');
 
 
             $s = new Search();
 
             // $key = "rice";
 
-            if (isset($_POST['search_text'])) {
-                $key = $_POST['search_text'];
-                $data['search_text'] = $key;
+            if (isset($terms)) {
+                $key = $terms;
+                $data['terms'] = $key;
                 $terms = array(
                     'key' => '%' . $key . '%'
                 );

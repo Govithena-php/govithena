@@ -1,23 +1,9 @@
-.search__result_box {
-    display: grid;
-    grid-template-columns: 3fr 16fr;
+nav {
+    background-color: var(--clr-dark, #000);
 }
-
-/* .filters {
-    background-color: red;
-} */
-
-.results {
-    background-color: blue;
+.container[container-type="section"] {
+    margin-top: 4rem;
 }
-
-
-.search__form {
-    display: grid;
-    grid-template-columns: 3fr 1fr 1fr 1fr 0.5fr;
-}
-
-
 /* ============================================================================================ */
 
 

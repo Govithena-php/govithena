@@ -8,12 +8,12 @@
     <title>Govithena | Search</title>
     <link rel="icon" type="image/x-icon" href="<?php echo IMAGES ?>/favicon.png">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS ?>/sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
-    <link rel="stylesheet" href="<?php echo CSS ?>/dashHeader.css">
-    <link rel="stylesheet" href="<?php echo CSS ?>/dashFooter.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/base.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/grid.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/gig.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/modal.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 
 <body>
@@ -65,7 +65,7 @@
         </div>
 
 
-        <div class="[ mt-2 ][ result__grid ]">
+        <div class="[ mt-2 ][ grid ]" gap="1" md="2">
             <div class="[ result__images ]">
                 <img src="<?php echo UPLOADS . $gig['image']; ?>" />
                 <!-- <img src="<?php echo IMAGES ?>/temp/1.jpg" alt=""> -->
@@ -137,7 +137,7 @@
 
         <div class="[ description ]">
             <h1><?php echo $gig['title'] ?></h1>
-            <pre><?php echo $gig['description'] ?></pre>
+            <p><?php echo $gig['description'] ?></p>
         </div>
 
 
@@ -193,7 +193,7 @@
     </div>
 
     <?php
-    include COMPONENTS . 'dashboard/footer.php';
+    include COMPONENTS . 'footer.php';
     ?>
 
     </div>
@@ -233,6 +233,7 @@
     </dialog>
 
 
+    <script src=" <?php echo JS ?>/navbar/navbar.js"></script>
 
     <script src=" <?php echo JS ?>/app.js"></script>
     <script>
