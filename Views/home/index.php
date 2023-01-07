@@ -45,7 +45,6 @@
             if (Session::isLoggedIn()) {
             ?>
                 <form class="[ search ]" id="searchForm" action="<?php echo URLROOT . "/search/" ?>" method="post">
-                    <?php print_r($_POST); ?>
                     <input type="text" name="search_text" id="search_text" class="" placeholder="search by: name / category / location" />
                     <button type="submit" name="search" value="search" class="">search</button>
                 </form>
