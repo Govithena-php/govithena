@@ -18,22 +18,24 @@ class authController extends Controller
     {
         require(ROOT . 'Models/user.php');
 
+        // $email = new Input(GET, 'email'); // this is how GET is used
+        // echo $email; 
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            // $email = new Input(GET, 'email'); // this is how GET is used
 
-            $email = new Input('email');
-            $password = new Input('password');
+            $email = new Input(POST, 'email');
+            $password = new Input(POST, 'password');
 
             $email->sanatizeEmail();
             $password->sanatizePassword();
 
             $user = new User();
-            $res = $user->findByEmail($email->get());
+            $res = $user->findByEmail($email);
 
             if (!empty($res)) {
 
-                if (password_verify($password->get(), $res['password'])) {
+                if (password_verify($password, $res['password'])) {
 
                     Session::set([
                         'uid' => $res['uid'],
@@ -56,13 +58,13 @@ class authController extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             require(ROOT . 'Models/user.php');
-            $uid = (new UID(USER, INVESTOR))->get();
+            $uid = (new UID(USER, INVESTOR));
 
-            $firstName = new Input('firstName');
-            $lastName = new Input('lastName');
-            $email = new Input('email');
-            $password = new Input('password');
-            $confirmPassword = new Input('confirmPassword');
+            $firstName = new Input(POST, 'firstName');
+            $lastName = new Input(POST, 'lastName');
+            $email = new Input(POST, 'email');
+            $password = new Input(POST, 'password');
+            $confirmPassword = new Input(POST, 'confirmPassword');
 
             $email->sanatizeEmail();
             $password->sanatizePassword();
@@ -78,16 +80,16 @@ class authController extends Controller
                 return;
             }
 
-            if ($password->get() != $confirmPassword->get()) {
+            if ($password != $confirmPassword) {
                 $this->redirect('/signup/error/4'); //passwords do not match
                 return;
             }
 
-            $password = password_hash($password->get(), PASSWORD_DEFAULT);
+            $password = password_hash($password, PASSWORD_DEFAULT);
 
             $user = new User();
 
-            $res = $user->findByEmail($email->get());
+            $res = $user->findByEmail($email);
 
             if (!isset($res)) {
                 $this->redirect('/servererror');
@@ -98,7 +100,7 @@ class authController extends Controller
             } else {
                 $res = $user->create([
                     'uid' => $uid,
-                    'username' => $email->get(),
+                    'username' => $email,
                     'password' => $password,
 
                 ]);
@@ -108,8 +110,8 @@ class authController extends Controller
                 }
                 $res = $user->createUser([
                     'uid' => $uid,
-                    'firstName' => $firstName->get(),
-                    'lastName' => $lastName->get(),
+                    'firstName' => $firstName,
+                    'lastName' => $lastName,
                 ]);
                 if (!isset($res)) {
 

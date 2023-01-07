@@ -11,16 +11,31 @@ class Input
     {
         $parms = func_get_args();
         $numOfParms = func_num_args();
-
         if ($numOfParms == 1) {
-            $this->value = $this->method[$parms[0]];
+            $this->value = $parms[0];
         } else if ($numOfParms > 1) {
+
+            if ($parms[0] == POST) {
+                if (isset($parms[1])) {
+                    $this->value = $_POST[$parms[1]];
+                }
+            }
+            if ($parms[0] == GET) {
+                if (isset($parms[1])) {
+                    $this->value = $_GET[$parms[1]];
+                }
+            }
+            $this->sanatizeText();
             $this->method = $parms[0];
-            $this->value = $this->method[$parms[1]];
         } else {
             $this->value = "";
             die('ERROR: Invalid number of parameters');
         }
+    }
+
+    public function __toString()
+    {
+        return $this->value;
     }
 
     public function get()

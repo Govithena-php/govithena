@@ -16,7 +16,9 @@ class Dispatcher
             $this->request->action = "index";
         }
 
-        call_user_func_array([$controller, $this->request->action], $this->request->params);
+        // $this->request->printR();
+
+        call_user_func_array([$controller, $this->request->action], array($this->request->params));
     }
 
     public function loadController()
