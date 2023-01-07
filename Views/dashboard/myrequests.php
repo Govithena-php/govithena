@@ -17,52 +17,15 @@
 <body>
 
     <?php
-    $active = "dashboard";
-    require_once("sidebar.php");
+    $active = "myrequests";
+    require_once("navigator.php");
     ?>
 
     <?php $name = "Janith"; ?>
 
     <div class="[ container ][ cards ]" container-type="dashboard-section">
         <div class="[ header ]">
-            <h1>Welcome Back, <?php echo $name; ?></h1>
-        </div>
-        <div class="[ grid ]" gap="2" md="2" lg="4">
-            <div class="[ card ]">
-                <h3>Profilt</h3>
-                <div class="[ flex ]">
-                    <h1>150000</h1>
-                    <h4>12% <i class="fa-solid fa-arrow-up"></i></h4>
-                </div>
-                <p>Compared to (LKR 21340 last month)</p>
-            </div>
-
-            <div class="[ card ]">
-                <h3>Profilt</h3>
-                <div class="[ flex ]">
-                    <h1>150000</h1>
-                    <h4>12% <i class="fa-solid fa-arrow-up"></i></h4>
-                </div>
-                <p>Compared to (LKR 21340 last month)</p>
-            </div>
-
-            <div class="[ card ]">
-                <h3>Profilt</h3>
-                <div class="[ flex ]">
-                    <h1>150000</h1>
-                    <h4>12% <i class="fa-solid fa-arrow-up"></i></h4>
-                </div>
-                <p>Compared to (LKR 21340 last month)</p>
-            </div>
-
-            <div class="[ card ]">
-                <h3>Profilt</h3>
-                <div class="[ flex ]">
-                    <h1>150000</h1>
-                    <h4>12% <i class="fa-solid fa-arrow-up"></i></h4>
-                </div>
-                <p>Compared to (LKR 21340 last month)</p>
-            </div>
+            <h1>myrequests</h1>
         </div>
         <br>
         <br>

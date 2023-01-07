@@ -1,0 +1,51 @@
+@import 'variables.css';
+
+
+table {
+    margin-top: 1rem;
+    width: 100%;
+    font-size: 0.8rem;
+    max-height: 200px;
+    overflow: hidden;
+
+}
+
+
+table thead {
+    background-color: var(--clr-primary);
+    color: var(--clr-light);
+    border: 2px solid red;
+}
+
+
+table thead tr th:first-child {
+    border-radius: 0.2rem 0 0 0.2rem;
+}
+
+table thead tr th:last-child {
+    border-radius: 0 0.2rem 0.2rem 0;
+}
+
+table thead tr th {
+    padding: 1rem;
+    text-align: left;
+    text-transform: capitalize;
+    font-weight: 600;
+}
+
+table tbody tr td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+
+table tbody tr:nth-child(2n) {
+    background-color: rgb(245, 245, 245);
+}
+
+table tbody tr:hover {
+    cursor: pointer;
+    background-color: rgb(230, 230, 230);
+
+}
