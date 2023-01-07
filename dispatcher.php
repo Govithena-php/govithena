@@ -16,6 +16,7 @@ class Dispatcher
             $this->request->action = "index";
         }
 
+        // print_r($_GET);
         // $this->request->printR();
 
         call_user_func_array([$controller, $this->request->action], array($this->request->params));
