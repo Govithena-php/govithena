@@ -60,7 +60,7 @@ class gigController extends Controller
                 'gigId' => $gigId,
                 'farmerId' => $farmerId,
                 'investorId' => Session::get('uid'),
-                'status' => 'pending',
+                'state' => 'PENDING',
                 'offer' => $offer,
                 'message' => $message
             ]);
