@@ -47,13 +47,48 @@
                     <?php
                     foreach ($ar as $request) {
                     ?>
-                        <div class="[ myrequests__card ]">
-                            <h3><?php echo $request['requestId'] ?></h3>
-                            <h4><?php echo $request['requestedDate'] ?></h4>
-                            <h1><?php echo $request['offer'] ?></h1>
-                            <p><?php echo $request['farmerId'] ?></p>
-                            <p><?php echo $request['gigId'] ?></p>
-                            <p><?php echo $request['message'] ?></p>
+                        <div class="[ request__card ]">
+                            <div class="[ request__img ]">
+                                <img src="<?php echo UPLOADS . $request['image'] ?>" />
+                            </div>
+                            <div class="[ request__content ]">
+                                <div class="[ request__content_header ]">
+                                    <div>
+                                        <h2><?php echo $request['title'] ?></h2>
+                                        <div class="[ flex mb-1 ]">
+                                            <p class="[ mr-1 ]">by</p>
+                                            <p><?php echo $request['firstName'] . " " . $request['lastName'] ?></p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4><?php echo $request['requestedDate'] ?></h4>
+                                        <div class="[ tag ]">
+                                            <p><?php echo $request['category'] ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="[ flex flex-sb-c ]">
+                                    <div class="[ flex gap-2 ]">
+                                        <div class="[ bottom_left ]">
+                                            <span>offer :</span>
+                                            <p><?php echo $request['offer'] ?></p>
+                                        </div>
+                                        <div class="[ bottom_left ]">
+                                            <span>Time Period :</span>
+                                            <p><?php echo $request['timePeriod'] ?></p>
+                                        </div>
+                                        <div class="[ bottom_left ]">
+                                            <span>Location :</span>
+                                            <p><?php echo $request['location'] ?></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="[ flex flex-c-c gap-1 ]">
+                                        <a href="<?php echo URLROOT ?>/checkout/<?php echo $request['requestId'] ?>" class="btn btn-primary">pay</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     <?php
                     }
@@ -122,12 +157,6 @@
                                         <button class="btn btn-primary">delete</button>
                                     </div>
                                 </div>
-
-
-
-
-
-
                             </div>
                         </div>
                     <?php
@@ -154,13 +183,48 @@
                     <?php
                     foreach ($rr as $request) {
                     ?>
-                        <div class="[ myrequests__card ]">
-                            <h3><?php echo $request['requestId'] ?></h3>
-                            <h4><?php echo $request['requestedDate'] ?></h4>
-                            <h1><?php echo $request['offer'] ?></h1>
-                            <p><?php echo $request['farmerId'] ?></p>
-                            <p><?php echo $request['gigId'] ?></p>
-                            <p><?php echo $request['message'] ?></p>
+                        <div class="[ request__card ]">
+                            <div class="[ request__img ]">
+                                <img src="<?php echo UPLOADS . $request['image'] ?>" />
+                            </div>
+                            <div class="[ request__content ]">
+                                <div class="[ request__content_header ]">
+                                    <div>
+                                        <h2><?php echo $request['title'] ?></h2>
+                                        <div class="[ flex mb-1 ]">
+                                            <p class="[ mr-1 ]">by</p>
+                                            <p><?php echo $request['firstName'] . " " . $request['lastName'] ?></p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4><?php echo $request['requestedDate'] ?></h4>
+                                        <div class="[ tag ]">
+                                            <p><?php echo $request['category'] ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="[ flex flex-sb-c ]">
+                                    <div class="[ flex gap-2 ]">
+                                        <div class="[ bottom_left ]">
+                                            <span>offer :</span>
+                                            <p><?php echo $request['offer'] ?></p>
+                                        </div>
+                                        <div class="[ bottom_left ]">
+                                            <span>Time Period :</span>
+                                            <p><?php echo $request['timePeriod'] ?></p>
+                                        </div>
+                                        <div class="[ bottom_left ]">
+                                            <span>Location :</span>
+                                            <p><?php echo $request['location'] ?></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="[ flex flex-c-c gap-1 ]">
+                                        <button class="btn btn-primary">resend</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     <?php
                     }

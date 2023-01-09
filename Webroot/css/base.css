@@ -124,6 +124,11 @@ select {
     flex-direction: column;
 }
 
+.flex-row-center{
+    display: flex;
+    justify-content: center;
+}
+
 .center-y {
     align-items: center;
 }
