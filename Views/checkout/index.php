@@ -88,12 +88,12 @@
                 <div class="[ flex-row-center ]">
                     <p>I have read and agree to the website terms and conditions.</p>
                 </div>
-                <div class="[ flex-row-center ]">
+                <!-- <div class="[ flex-row-center ]">
                     <button id="pay" name="pay" value="<?php echo $res['requestId'] ?>" class="[ btn ]">Pay</button>
-                </div>
-                <!-- <form class="[ flex-row-center ]" action="<?php echo URLROOT; ?>/checkout/pay" method="post">
+                </div> -->
+                <form class="[ flex-row-center ]" action="<?php echo URLROOT; ?>/checkout/pay" method="post">
                     <button type="submit" name="pay" value="<?php echo $res['requestId'] ?>" class="[ btn ]">Pay</button>
-                </form> -->
+                </form>
             </div>
         </div>
         <script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script>
