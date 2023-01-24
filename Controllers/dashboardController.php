@@ -1,6 +1,6 @@
 <?php
 
-class investorController extends Controller
+class dashboardController extends Controller
 {
     public function __construct()
     {
