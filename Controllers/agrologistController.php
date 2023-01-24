@@ -16,6 +16,14 @@ class agrologistController extends Controller
 
     public function farmers()
     {
+        require(ROOT . 'Models/agrologist.php');
+        $agr = new Agrologist();
+        $farmers = $agr->getFarmers();
+        if (isset($farmers)) {
+            $this->set(['ar' => $farmers]);
+        } else {
+            $this->set(['error' => "no requests found"]);
+        }
         $this->render('farmers');
     }
 
@@ -24,33 +32,37 @@ class agrologistController extends Controller
         $this->render('reviews');
     }
 
-    public function requests()
+    public function requests($params)
     {
-        require(ROOT . 'Models/agrologist.php');
-        $agr = new Agrologist();
-        $requests = $agr->farmerRequest();
-        
-        if (isset($requests)) {
-            $this->set(['ar' => $requests]);
-        } else {
-            $this->set(['error' => "no requests found"]);
+        if(!empty($params)){
+            //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>". $params[0]. "</h1>";
+            $this->requestdetails($params[0]);
         }
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if(isset($_POST['accept'])){  
-                echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>" . $_POST['requestId'] . "</h1>";
-                $agr->acceptRequest($_POST['requestId']);
-                $this->redirect("/agrologist/farmers");
-            }
-            else{
-                echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>nope</h1>";
-    
-            }
-        }
-       // echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>hi</h1>";
+        else{
+            require(ROOT . 'Models/agrologist.php');
+            $agr = new Agrologist();
+            $requests = $agr->farmerRequest();
 
-      
+            if (isset($requests)) {
+                $this->set(['ar' => $requests]);
+            } else {
+                $this->set(['error' => "no requests found"]);
+            }
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                if (isset($_POST['accept'])) {
+                    var_dump($_POST['accept']);
+                    //echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>" . $_POST['accept'] . "</h1>";
+                    $agr->acceptRequest($_POST['accept']);
+                    //$this->redirect("/agrologist/farmers");
+                } else {
+                    echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>nope</h1>";
+
+                }
+            }
+            $this->render('requests');
+        }
         
-        $this->render('requests');
+
     }
 
     public function myaccount()
@@ -59,7 +71,7 @@ class agrologistController extends Controller
         $agrologist = new Agrologist();
         $uid = $_SESSION['uid'];
         $d['agrologist'] = $agrologist->getAgrologistDetails();
-        
+
 
         if (isset($_POST['edit_details_btn'])) {
 
@@ -81,10 +93,15 @@ class agrologistController extends Controller
         $this->render('myaccount');
     }
 
-    public function requestdetails()
+    public function requestdetails($id)
     {
-        $this->render('requestdetails');
+        return $this->render('requestdetails');
     }
 
-    
+    public function farmerdetails($id)
+    {
+        return $this->render('farmerdetails');
+    }
+
+
 }
