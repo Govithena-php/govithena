@@ -1,22 +1,22 @@
 <aside class="[ bg-light fs-3 pt-5 ] [ sidebar ]">
     <div class="[ sidebar__link_items ]">
 
-        <a href="./" class="[ sidebar_link ]">
+        <a href="<?php URLROOT . './'?>" class="[ sidebar_link ]">
             <i class="[ fa-solid fa-gauge fs-5 mx-1 ]"></i>
             <span>Dashboard</span>
         </a>
 
-        <a href="./farmers" class="[ sidebar_link ]">
+        <a href="<?php echo URLROOT . "/agrologist/farmers" ?>" class="[ sidebar_link ]">
             <i class="[ fa-solid fa-tractor fs-5 mx-1 ]"></i>
             <span>Farmers</span>
         </a>
-
-        <a href="./requests" class="[ sidebar_link ]">
+        
+        <a href="<?php echo URLROOT . "/agrologist/requests" ?>" class="[ sidebar_link ]">
             <i class="[ fa-solid fa-tractor fs-5 mx-1 ]"></i>
             <span>Requests</span>
         </a>
-
-        <a href="./reviews" class="[ sidebar_link ]">
+        
+        <a href="<?php echo URLROOT . "/agrologist/reviews" ?>" class="[ sidebar_link ]">
             <i class="[ fa-solid fa-tractor fs-5 mx-1 ]"></i>
             <span>Reviews</span>
         </a>
@@ -26,7 +26,7 @@
     </div>
     <div class="[ sidebar__link_items ]">
 
-        <a href="./myaccount" class="[ sidebar_link ]">
+        <a href="<?php echo URLROOT . "/agrologist/myaccount" ?>" class="[ sidebar_link ]">
             <i class="[ fa-solid fa-user-tie fs-5 mx-1 ]"></i>
             <span>My Account</span>
         </a>

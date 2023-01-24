@@ -41,7 +41,7 @@
                             <div class="[ request__img ]">
                                 <img src="<?php echo IMAGES ?>/farmer.jpeg" alt="">
                             </div>
-                            <form action="<?php echo URLROOT . '/agrologist/requests/' . $request['requestId'] .'/' ?>" method="POST">
+                            <form action="<?php echo URLROOT . '/agrologist/requests' ?>" method="POST">
                                 <div class="flex flex-row " style="width: 600px">
                                     <div class="[ request__content ]">
 
@@ -61,7 +61,7 @@
 
                                     </div>
                                     <div class="flex flex-row flex-c-c">
-                                        <button class="btn btn-primary mr-2 mt-2" name="accept">Accept</button>
+                                        <button type="submit" value="<?php echo $request['requestId']?> " class="btn btn-primary mr-2 mt-2" name="accept">Accept</button>
                                         <button class="btn btn-danger mt-2" name="decline">Decline</button>
                                     </div>
                                 </div>
