@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&family=Roboto:wght@300;400;500;700;900&display=swap');
 @import 'variables.css';
-
+:root {
+    font-size: 14px;
+}
 *,
 *::before *::after {
     margin: 0;
@@ -50,6 +52,15 @@ h5,
 h6,
 p {
     font-weight: 400;
+}
+
+ul {
+    list-style: none;
+    padding:0;
+}
+
+ul li {
+    margin-bottom: 1rem;
 }
 
 
@@ -122,6 +133,11 @@ select {
 .flex-col {
     display: flex;
     flex-direction: column;
+}
+
+.flex-row-center{
+    display: flex;
+    justify-content: center;
 }
 
 .center-y {
@@ -227,6 +243,9 @@ select {
 
 
 @media screen and (min-width: 0px) {
+    body {
+    font-size: 10px;
+    }
     .container {
         margin-inline: 1rem;
     }
@@ -247,6 +266,9 @@ select {
 
 
 @media screen and (min-width: 576px) {
+    body {
+    font-size: 11px;
+    }
     .container {
         margin-inline: 1.2rem;
     }
@@ -266,6 +288,9 @@ select {
 }
 
 @media screen and (min-width:768px) {
+    body {
+    font-size: 11px;
+    }
     .container {
         margin-inline: 2rem;
     }
@@ -284,6 +309,9 @@ select {
 }
 
 @media screen and (min-width: 992px) {
+    body {
+    font-size: 12px;
+    }
     .container {
         margin-inline: 6rem;
     }
@@ -303,6 +331,9 @@ select {
 }
 
 @media screen and (min-width: 1200px) {
+    body {
+    font-size: 14px;
+    }
     .container {
         margin-inline: 8rem;
     }
@@ -321,6 +352,9 @@ select {
 }
 
 @media screen and (min-width: 1440px) {
+    body {
+    font-size: 16px;
+    }
     .container {
         margin-inline: 10rem;
     }
