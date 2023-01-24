@@ -1005,6 +1005,12 @@ select {
     --btn-border: none;
 }
 
+.btn-danger {
+    --btn-background: var(--clr-danger);
+    --btn-color: var(--clr-light);
+    --btn-border: none;
+}
+
 
 /* deviders */
 
