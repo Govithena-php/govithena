@@ -26,7 +26,8 @@ nav {
     position: relative;
     border-radius: 0 0 1rem 1rem;
     border: 1px solid #d9d9d9;
-    padding: 1.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
 }
 
 .profile__img {
@@ -94,6 +95,126 @@ nav {
 }
 
 
+
+.result__card {
+    min-height: 300px;
+    display: grid;
+    grid-template-rows: 1fr 0.5fr;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.card__img {
+    position: relative;
+    width: 100%;
+}
+
+.card__img>img {
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.5rem 0.5rem 0 0;
+}
+
+
+.rating__grid {
+    display: grid;
+    grid-template-columns: 4fr 5fr;
+    gap: 3rem;
+    margin: 4rem 0;
+    padding: 2rem 0;
+    /* background-color: var(--clr-gray); */
+    border: 1px solid rgb(0, 0, 0, 0.3);
+    border-radius: 0.8rem;
+}
+
+.rating__number {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.rating__number>h1 {
+    font-size: var(--fs-8);
+}
+
+.rating__bars {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.rating__bars>.bar {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.rating__bars>.bar>label {
+    display: block;
+    width: 0.3rem;
+    font-size: var(--fs-3);
+}
+
+.rating__bars>.bar>progress {
+    width: 80%;
+    height: 2rem;
+    font-size: var(--fs-6);
+}
+
+.description {
+    margin: 3rem 0;
+    padding: 2rem 1rem;
+}
+
+.description> :where(h1, pre) {
+    font-family: var(--ff-poppins);
+}
+
+.reviews {
+    margin: 3rem 0;
+}
+
+.review {
+    padding: 2rem 1rem;
+    border-radius: 0.8rem;
+    border: solid 1px rgba(0, 0, 0, 0.3);
+}
+
+.reviews__wrapper {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.review__header {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+
+.review__header>img {
+    width: 2rem;
+    aspect-ratio: 1;
+    border: 0.2rem solid #fff;
+    border-radius: 50%;
+    cursor: pointer;
+
+}
+
+.review__header>h3 {
+    font-weight: var(--fw-5);
+}
+
+
+
 @media screen and (max-width: 1024px) {
 
     .heading {
@@ -130,6 +251,26 @@ nav {
         justify-self: center;
         text-align: center;
         font-size:1.2rem;
+    }
+
+    .additional__details {
+        margin-top: 1rem;
+        padding: 1rem;
+        font-size: 1rem;
+    }
+
+    .additional__details h2 {
+        text-align: center;
+    }
+
+    .additional__details ul li {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .additional__details ul li p {
+       text-align: center;
     }
 
     .profile__back{
