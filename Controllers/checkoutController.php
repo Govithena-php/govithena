@@ -36,11 +36,20 @@ class checkoutController extends Controller
 
 
         // $sig1 = strtoupper(md5('1221583' + '30' + '2500' + 'LKR' + strtoupper(md5('MjU5NTkxMzU4OTQwODAxODI4MTYxMzE1NDg2NDYxMTk3Mzg1Mzk4OA=='))));
-        $temp = array('1221583', '30', '2500', 'LKR', strtoupper(md5('MjU5NTkxMzU4OTQwODAxODI4MTYxMzE1NDg2NDYxMTk3Mzg1Mzk4OA==')));
-        $str = implode('', $temp);
-        $sig2 = strtoupper(md5($str));
-        $data['hash'] = $sig2;
-        echo phpversion();
+        // $temp = array('1221583', '30', '2500', 'LKR', strtoupper(md5('MjU5NTkxMzU4OTQwODAxODI4MTYxMzE1NDg2NDYxMTk3Mzg1Mzk4OA==')));
+        // $str = implode('', $temp);
+        // $sig2 = strtoupper(md5($str));
+        // $data['hash'] = $sig2;
+        // echo phpversion();
+
+
+        $sig = '1221583';
+        $sig .= '30';
+        $sig .= number_format('3212', 2, '.', '');
+        $sig .= 'LKR';
+        $sig .= strtoupper(md5($this->payhere_secret));
+        $sig = strtoupper(md5($sig));
+        $data['hash'] = $sig;
 
         // print_r($data);
         echo json_encode($data);
