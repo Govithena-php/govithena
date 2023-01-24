@@ -32,16 +32,18 @@ class RequestFarmer extends Model
             return null;
         }
     }
+
+
     function createFarmerRequest($data)
     {
         try {
-            $sql = "INSERT INTO farmer_request (gigId, farmerId, investorId, status, offer, message) VALUES (:gigId, :farmerId, :investorId, :status, :offer, :message)";
+            $sql = "INSERT INTO farmer_request (gigId, farmerId, investorId, state, offer, message) VALUES (:gigId, :farmerId, :investorId, :state, :offer, :message)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
                 'gigId' => $data['gigId'],
                 'farmerId' => $data['farmerId'],
                 'investorId' => $data['investorId'],
-                'status' => $data['status'],
+                'state' => $data['state'],
                 'offer' => $data['offer'],
                 'message' => $data['message']
             ]);
@@ -50,6 +52,21 @@ class RequestFarmer extends Model
             echo $e->getMessage();
             die();
             return false;
+        }
+    }
+
+    public function getRequestById($id)
+    {
+        try {
+            $sql = "SELECT * FROM farmer_request INNER JOIN gig ON farmer_request.gigId = gig.gigId INNER JOIN user ON farmer_request.farmerId = user.uid WHERE farmer_request.requestId = :id";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['id' => $id]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $row;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
         }
     }
 }

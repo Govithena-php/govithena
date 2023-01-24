@@ -53,7 +53,7 @@
                         <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/">
                                 <i class="[ fa-solid fa-gauge ]"></i>Dashboard
                             </a></li>
-                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/signout">
+                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/profile">
                                 <i class="[ fa-solid fa-user-tie ]"></i>Profile</a></li>
                         <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/signout">
                                 <i class="[ fa-solid fa-gear ]"></i>Settings</a>
