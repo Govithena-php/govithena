@@ -1,11 +1,11 @@
 <?php
-enum userType: string
+enum userType
 {
-    case ADMIN = "ADMIN";
-    case INVESTOR = "INVESTOR";
-    case FARMER = "FARMER";
-    case AGROLOGIST = "AGROLOGIST";
-    case TECHNICALASSISTANT = "TECHNICALASSISTANT";
+    const ADMIN = "ADMIN";
+    const INVESTOR = "INVESTOR";
+    const FARMER = "FARMER";
+    const AGROLOGIST = "AGROLOGIST";
+    const TECHASSISTANT = "TECHASSISTANT";
 }
 class ActiveUser
 {
@@ -31,6 +31,31 @@ class ActiveUser
     public function hasAccess($currentUserType)
     {
         return Session::get('user')->getType() == $currentUserType;
+    }
+
+    public function isInvestor()
+    {
+        return $this->type == userType::INVESTOR;
+    }
+
+    public function isFarmer()
+    {
+        return $this->type == userType::FARMER;
+    }
+
+    public function isAgrologist()
+    {
+        return $this->type == userType::AGROLOGIST;
+    }
+
+    public function isTechAssistant()
+    {
+        return $this->type == userType::TECHASSISTANT;
+    }
+
+    public function isAdmin()
+    {
+        return $this->type == userType::ADMIN;
     }
 
     // getters and setters
