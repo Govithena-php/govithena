@@ -2,10 +2,18 @@
 
 class dashboardController extends Controller
 {
+    private $currentUser;
+
     public function __construct()
     {
+        $this->currentUser = Session::get('user');
+
         if (!Session::isLoggedIn()) {
-            $this->redirect('/signin');
+            $this->redirect('/auth/signin');
+        }
+
+        if (!$this->currentUser->hasAccess('INVESTOR')) {
+            $this->redirect('/error/dontHaveAccess');
         }
     }
 

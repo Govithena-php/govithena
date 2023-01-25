@@ -235,6 +235,7 @@
             ?>
         </div>
     </div>
+    <script src="<?php echo JS ?>/navbar/navbar.js"></script>
     <script src="<?php echo JS ?>/dashboard/dashboard.js"></script>
 </body>
 

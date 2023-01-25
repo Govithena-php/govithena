@@ -1,3 +1,6 @@
+<?php
+$currentUser = Session::get('user');
+?>
 <link rel="stylesheet" href="<?php echo CSS ?>/navbar/navbar.css">
 
 <nav>
@@ -23,7 +26,7 @@
         </div>
 
         <div class="[ profile ]">
-            <?php if (Session::isLoggedIn()) { ?>
+            <?php if (isset($currentUser)) { ?>
                 <div class="[ buttons ]">
                     <div class="[ notification ]">
                         <button>
@@ -90,7 +93,7 @@
         </ul>
     </div>
     <div class="[ profile ]">
-        <?php if (Session::isLoggedIn()) { ?>
+        <?php if (isset($currentUser)) { ?>
             <ul>
                 <li><a class="[ join_btn ]" href="<?php echo URLROOT ?>/auth/signout">Sign Out</a></li>
             </ul>
