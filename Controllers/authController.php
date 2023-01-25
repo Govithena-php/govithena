@@ -134,7 +134,7 @@ class authController extends Controller
 
     public function signout()
     {
-        Session::unset(['uid', 'username']);
+        Session::unset(['user']);
         Session::destroy();
         $this->redirect('/');
     }
