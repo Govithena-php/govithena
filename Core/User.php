@@ -17,17 +17,26 @@ class User
     private $firstName;
     private $lastName;
     private $type = User::GUE;
-    private $active = false;
+    private $logeddIn = false;
 
-    public function __construct($uid, $username, $firstName, $lastName, $type)
+    public function __construct($uid, $username, $firstName, $lastName, $type, $logeddIn)
     {
         $this->uid = $uid;
         $this->username = $username;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
-        $this->type = $type;
+        $this->logeddIn = $logeddIn;
     }
 
+
+    public function hasAccess()
+    {
+        $user = Session::get('user');
+        $currentUserType = $user->getType();
+        return $this->type == $currentUserType;
+    }
+
+    // getters and setters
     public function getUid()
     {
         return $this->uid;
@@ -53,9 +62,9 @@ class User
         return $this->type;
     }
 
-    public function isActive()
+    public function isLogeddIn()
     {
-        return $this->active;
+        return $this->logeddIn;
     }
 
     public function setUid($uid)
@@ -83,18 +92,19 @@ class User
         $this->type = $type;
     }
 
-    public function setActive($active)
+    public function setLogeddIn($logeddIn)
     {
-        $this->active = $active;
+        $this->logeddIn = $logeddIn;
     }
 
+    //toString
     public function __toString()
     {
-        return "User [uid=" . $this->uid . ", username=" . $this->username . ", firstName=" . $this->firstName . ", lastName=" . $this->lastName . ", type=" . $this->type . ", active=" . $this->active . "]";
+        return "User [uid=" . $this->uid . ", username=" . $this->username . ", firstName=" . $this->firstName . ", lastName=" . $this->lastName . ", type=" . $this->type . ", logeddIn=" . $this->logeddIn . "]";
     }
 
     public function __destruct()
     {
-        echo "User [uid=" . $this->uid . ", username=" . $this->username . ", firstName=" . $this->firstName . ", lastName=" . $this->lastName . ", type=" . $this->type . ", active=" . $this->active . "] destroyed";
+        echo "User [uid=" . $this->uid . ", username=" . $this->username . ", firstName=" . $this->firstName . ", lastName=" . $this->lastName . ", type=" . $this->type . ", logeddIn=" . $this->logeddIn . "] destroyed";
     }
 }
