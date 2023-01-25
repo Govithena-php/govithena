@@ -349,6 +349,7 @@
 
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="<?php echo JS ?>/navbar/navbar.js"></script>
     <!-- <script src="<?php echo JS ?>/chart/utils.js"></script> -->
     <script src="<?php echo JS ?>/dashboard/chart.js"></script>
     <script src="<?php echo JS ?>/dashboard/dashboard.js"></script>
