@@ -1,5 +1,4 @@
 <?php
-require 'Constants.php';
 
 class Controller
 {
