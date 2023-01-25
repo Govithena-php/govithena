@@ -1,5 +1,6 @@
 <?php
 require(ROOT . "Config/db.php");
+require(ROOT . "Core/Constants.php");
 require(ROOT . "Core/Sessions.php");
 require(ROOT . "Core/Input.php");
 require(ROOT . "Core/Uid.php");
