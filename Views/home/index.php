@@ -84,6 +84,35 @@
     $numberOfCategories = 20;
     ?>
     <div class="[ container ][ title ]" container-type="section">
+
+        <?php
+
+        if (isset($currentUser)) {
+            if ($currentUser->isInvestor()) {
+                echo " <h1>Investor</h1>";
+            }
+
+            if ($currentUser->isFarmer()) {
+                echo " <h1>Farmer</h1>";
+            }
+
+            if ($currentUser->isAdmin()) {
+                echo " <h1>Admin</h1>";
+            }
+
+            if ($currentUser->isAgrologist()) {
+                echo " <h1>Agrologist</h1>";
+            }
+
+            if ($currentUser->isTechAssistant()) {
+                echo " <h1>Tech Assistant</h1>";
+            }
+        }
+
+
+
+        ?>
+
         <h4><span><?php echo $numberOfGigs; ?>+</span> gigs in <span><?php echo $numberOfCategories; ?>+</span> categories.</h4>
         <h1>Invest in the agreculture of Sri Lanka.</h1>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facere atque accusantium laborum<br>eligendi at voluptatibus accusamus.</p>
