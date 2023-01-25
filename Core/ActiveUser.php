@@ -1,12 +1,5 @@
 <?php
-enum userType
-{
-    const ADMIN = "ADMIN";
-    const INVESTOR = "INVESTOR";
-    const FARMER = "FARMER";
-    const AGROLOGIST = "AGROLOGIST";
-    const TECHASSISTANT = "TECHASSISTANT";
-}
+
 class ActiveUser
 {
     private $uid;
