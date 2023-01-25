@@ -5,5 +5,6 @@ require(ROOT . "Core/Input.php");
 require(ROOT . "Core/Uid.php");
 require(ROOT . "Core/Model.php");
 require(ROOT . "Core/Controller.php");
+require(ROOT . "Core/ActiveUser.php");
 
 Session::init();

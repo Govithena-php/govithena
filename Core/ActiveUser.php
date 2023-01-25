@@ -1,22 +1,19 @@
 <?php
-
-enum User: string
+enum userType: string
 {
-    case GUE = "GUEST";
-    case ADM = "ADMIN";
-    case INV = "INVESTOR";
-    case FAR = "FARMER";
-    case AGR = "AGROLOGIST";
-    case TEC = "TECHNICALASSISTANT";
+    case ADMIN = "ADMIN";
+    case INVESTOR = "INVESTOR";
+    case FARMER = "FARMER";
+    case AGROLOGIST = "AGROLOGIST";
+    case TECHNICALASSISTANT = "TECHNICALASSISTANT";
 }
-
-class User
+class ActiveUser
 {
     private $uid;
     private $username;
     private $firstName;
     private $lastName;
-    private $type = User::GUE;
+    private $type;
     private $logeddIn = false;
 
     public function __construct($uid, $username, $firstName, $lastName, $type, $logeddIn)
@@ -25,15 +22,15 @@ class User
         $this->username = $username;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
+        $this->type = $type;
         $this->logeddIn = $logeddIn;
+
+        Session::set(['user' => $this]);
     }
 
-
-    public function hasAccess()
+    public function hasAccess($currentUserType)
     {
-        $user = Session::get('user');
-        $currentUserType = $user->getType();
-        return $this->type == $currentUserType;
+        return Session::get('user')->getType() == $currentUserType;
     }
 
     // getters and setters
@@ -101,10 +98,5 @@ class User
     public function __toString()
     {
         return "User [uid=" . $this->uid . ", username=" . $this->username . ", firstName=" . $this->firstName . ", lastName=" . $this->lastName . ", type=" . $this->type . ", logeddIn=" . $this->logeddIn . "]";
-    }
-
-    public function __destruct()
-    {
-        echo "User [uid=" . $this->uid . ", username=" . $this->username . ", firstName=" . $this->firstName . ", lastName=" . $this->lastName . ", type=" . $this->type . ", logeddIn=" . $this->logeddIn . "] destroyed";
     }
 }
