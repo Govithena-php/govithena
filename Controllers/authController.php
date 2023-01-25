@@ -2,6 +2,8 @@
 
 class authController extends Controller
 {
+    private $currentUser;
+
     public function __construct()
     {
         if (Session::isLoggedIn()) {
@@ -37,10 +39,14 @@ class authController extends Controller
 
                 if (password_verify($password, $res['password'])) {
 
-                    Session::set([
-                        'uid' => $res['uid'],
-                        'username' => $res['username']
-                    ]);
+                    $this->currentUser = new ActiveUser(
+                        $res['uid'],
+                        $res['username'],
+                        "first name",
+                        "last name",
+                        $res['userType'],
+                        true
+                    );
                     $this->redirect('/');
                 } else {
                     $this->redirect('/signin/error/1');
@@ -128,7 +134,7 @@ class authController extends Controller
 
     public function signout()
     {
-        Session::unset(['uid', 'username']);
+        Session::unset(['user']);
         Session::destroy();
         $this->redirect('/');
     }

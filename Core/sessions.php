@@ -33,7 +33,7 @@ class Session
 
     public static function isLoggedIn()
     {
-        if (self::get('uid') !== null) {
+        if (self::get('user') !== null) {
             return true;
         } else {
             return false;
