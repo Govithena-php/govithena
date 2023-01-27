@@ -1,49 +1,43 @@
 <?php
 
-enum userType
+enum KEYPREFFIX
+{
+    const GENERAL = '';
+    const USER = 'USER';
+    const GIG = 'GIG';
+    const PRODUCT = 'PRODUCT';
+    const REQUEST = 'REQEST';
+    const RATING = 'RATING';
+    const REVIEW = 'REVIEW';
+}
+
+enum PRODUCT
+{
+    const VEGETABLE = 'VEGETABLE';
+    const FRUIT = 'FRUIT';
+    const GRAIN = 'GRAIN';
+    const SPICE = 'SPICE';
+}
+
+enum USER
 {
     const ADMIN = "ADMIN";
     const INVESTOR = "INVESTOR";
     const FARMER = "FARMER";
     const AGROLOGIST = "AGROLOGIST";
-    const TECHASSISTANT = "TECHASSISTANT";
+    const TECH_ASSISTANT = "TECHASSISTANT";
+}
+
+enum STATUS
+{
+    const PENDING = "PENDING";
+    const ACTIVE = "ACTIVE";
+    const DELETED = "DELETED";
+    const COMPLETED = "COMPLETED";
+    const ACCEPTED = "ACCEPTED";
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Main
-// define("GENERAL", '');
-// define("USER", 'use');
-// define("GIG", 'gig');
-// define("REQUEST", 'req');
-// define("RATING", 'rat');
-// define("REVIEW", 'rev');
-
-
-// // Sub
-// define("INVESTOR", 'inve');
-// define("FARMER", 'farm');
-// define("AGROLOGIST", 'agro');
-// define("TECH_ASSISTANT", 'tech');
-// define("WEB_ADMIN", 'weba');
-// define("GUEST", 'gues');
-
-// define("VEGETABLE", 'vege');
-// define("FRUITS", 'frui');
-// define("GRAINS", 'grai');
-// define("SPICES", 'spic');
 
 // define("GIG_REQUEST", 'greq');
 // define("AGROLOGIST_REQUEST", 'areq');
