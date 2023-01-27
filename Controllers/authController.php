@@ -64,7 +64,7 @@ class authController extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             require(ROOT . 'Models/user.php');
-            $uid = (new UID(USER, INVESTOR));
+            $uid = (new UID(KEYPREFFIX::USER, USER::INVESTOR));
 
             $firstName = new Input(POST, 'firstName');
             $lastName = new Input(POST, 'lastName');
