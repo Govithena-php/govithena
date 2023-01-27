@@ -1,5 +1,7 @@
 <?php
 
+$currentUser = Session::get('user');
+
 function highlight($active, $link)
 {
     if (isset($active)) {
@@ -17,6 +19,8 @@ function highlight($active, $link)
 <link rel="stylesheet" href="<?php echo CSS ?>/dashboardNav/dashboardNav.css" type="text/css">
 
 <!-- <?php if (isset($active)) echo $active; ?> -->
+
+
 <nav class="[ nav ]">
     <div class="[ container ]" container-type="dashboard-section">
         <div class="[ open__btn ]">
@@ -25,11 +29,57 @@ function highlight($active, $link)
             </button>
         </div>
 
-        <button onclick="toggleProfileMenu()">
-            <div class="[ image ]">
-                <img src="<?php echo IMAGES ?>/21.jpg" alt="profile">
-            </div>
-        </button>
+        <div class="[ profile ]">
+            <?php if (isset($currentUser)) { ?>
+                <div class="[ buttons ]">
+                    <div class="[ notification ]">
+                        <button>
+                            <i class="[ fa-solid fa-bell ]"></i>
+                            <?php
+                            $notificationCount = 4;
+                            if (isset($notificationCount)) {
+                            ?>
+                                <span><?php echo $notificationCount ?></span>
+                            <?php
+                            }
+                            ?>
+                        </button>
+                    </div>
+
+                    <span></span>
+
+                    <button onclick="toggleProfileMenu()">
+                        <div class="[ image ]">
+                            <img src="<?php echo IMAGES ?>/21.jpg" alt="profile">
+                        </div>
+                    </button>
+                </div>
+
+                <div id="profile_menu" open="false" class="[ menu ]">
+                    <ul>
+                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/">
+                                <i class="[ fa-solid fa-gauge ]"></i>Dashboard
+                            </a></li>
+                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/profile">
+                                <i class="[ fa-solid fa-user-tie ]"></i>Profile</a></li>
+                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/signout">
+                                <i class="[ fa-solid fa-gear ]"></i>Settings</a>
+                        </li>
+                    </ul>
+                    <a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/auth/signout">
+                        <i class="fa-solid fa-right-from-bracket"></i>Sign Out</a>
+                </div>
+
+            <?php } else { ?>
+                <div class="[ signin__join ]">
+                    <ul>
+                        <li><a class="[ signin_btn ]" href="<?php echo URLROOT ?>/auth/signin">Sign In</a></li>
+                        <li><a class="[ join_btn ]" href="<?php echo URLROOT ?>/auth/signup">Sign Up</a></li>
+                    </ul>
+                </div>
+            <?php } ?>
+        </div>
+
     </div>
 </nav>
 
