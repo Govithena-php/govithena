@@ -10,6 +10,8 @@
 
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/table.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/investor/myrequests.css">
 
     <title>Dashboard | Investor</title>
@@ -235,7 +237,9 @@
             ?>
         </div>
     </div>
-    <script src="<?php echo JS ?>/navbar/navbar.js"></script>
+    <?php
+    require_once("footer.php");
+    ?>
     <script src="<?php echo JS ?>/dashboard/dashboard.js"></script>
 </body>
 
