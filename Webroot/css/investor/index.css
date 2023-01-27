@@ -295,16 +295,6 @@
 
 @media screen and (max-width: 1024px) {
 
-    .container[container-type="dashboard-section"] {
-        margin-inline: 2rem;
-        transition: all 0.3s ease-in-out;
-    }
-
-    .container[container-type="dashboard-footer"] {
-        margin-inline: 2rem;
-        transition: all 0.3s ease-in-out;
-    }
-
     .dashboard .balance {
         margin-right: 1.5rem;
     }
@@ -325,16 +315,6 @@
 }
 
 @media screen and (max-width: 768px) {
-
-    .container[container-type="dashboard-section"] {
-        margin-inline: 1rem;
-        transition: all 0.3s ease-in-out;
-    }
-
-    .container[container-type="dashboard-footer"] {
-        margin-inline: 1rem;
-        transition: all 0.3s ease-in-out;
-    }
 
     .dashboard .header {
         padding: 1rem 2rem;
@@ -369,16 +349,6 @@
 
 
 @media screen and (max-width: 576px) {
-
-    .container[container-type="dashboard-section"] {
-        margin-inline: 0.5rem;
-        transition: all 0.3s ease-in-out;
-    }
-
-    .container[container-type="dashboard-footer"] {
-        margin-inline: 0.5rem;
-        transition: all 0.3s ease-in-out;
-    }
 
     .block {
         padding: 0.25rem;

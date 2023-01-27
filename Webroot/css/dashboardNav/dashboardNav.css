@@ -2,9 +2,11 @@
     position: fixed;
     top: 0;
     left: 0;
-    height: 4.5rem;
+    height: var(--navbar-height);
     width: 100%;
-    background-color: var(--clr-light, rgb(255, 255, 255));
+    /* background-color: var(--clr-primary, rgb(0, 0, 0)); */
+    background-color: #1d599a;
+    z-index: 9997;
 }
 
 .nav .container {
@@ -141,7 +143,7 @@
 .profile .menu {
     position: absolute;
     top: 3.75rem;
-    right: 0;
+    right: 1rem;
     width: 150px;
     max-height: 200px;
     border-radius: 5px;
@@ -195,7 +197,7 @@
     top: 0;
     left: 0;
     bottom: 0;
-    width: var(--sidebar-width, 12rem);
+    width: var(--dashboard-sidebar-width);
     background-color: var(--clr-dark, #000);
     color: var(--clr-light, #fff);
     padding: 2rem 1rem;
@@ -205,6 +207,7 @@
     justify-content: flex-start;
     box-shadow: 0 0 0.7rem 0 rgba(0, 0, 0, 0.4);
     transition: all 0.3s ease-in-out;
+    z-index: 9998;
 }
 
 .sidebar .action__btn {
@@ -284,11 +287,6 @@
 .sidebar .links ul li a i {
     font-size: 1rem;
 }
-
-.container[container-type="dashboard-section"] {
-    transition: all 0.3s ease-in-out;
-}
-
 
 @media screen and (max-width: 1024px) {
     .nav {

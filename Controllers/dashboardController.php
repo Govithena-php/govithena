@@ -35,9 +35,10 @@ class dashboardController extends Controller
     public function myrequests()
     {
         require(ROOT . 'Models/requestFarmer.php');
+        $uid = Session::get('user')->getUid();
         $r = new RequestFarmer();
 
-        $requests = $r->getRequestsByInvestor(Session::get('uid'));
+        $requests = $r->getRequestsByInvestor($uid);
         $pendingRequests = [];
         $acceptedRequests = [];
         $rejectedRequests = [];
