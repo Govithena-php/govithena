@@ -16,7 +16,7 @@ function highlight($active, $link)
 ?>
 
 
-<link rel="stylesheet" href="<?php echo CSS ?>/dashboardNav/dashboardNav.css" type="text/css">
+<link rel="stylesheet" href="<?php echo CSS ?>/dashboard/navigator.css" type="text/css">
 
 <!-- <?php if (isset($active)) echo $active; ?> -->
 
