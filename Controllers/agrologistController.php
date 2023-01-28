@@ -100,11 +100,48 @@ class agrologistController extends Controller
 
     public function farmerdetails($id)
     {
+        require(ROOT . 'Models/agrologist.php');
+        $agrologist = new Agrologist();
+        $uid = $_SESSION['uid'];
+        //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $uid . "</h1>";
+
+        $d['fieldVisit'] = $agrologist->getFieldVisitDetails();
+        //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $uid . "</h1>";
+
+        if (isset($_POST['update_details_btn'])) {
+            $week = new Input(POST, 'week');
+            $date = new Input(POST, 'date');
+            // $update_file = new Input(POST, 'update_file');
+            $description = new Input(POST, 'description');
+            if(move_uploaded_file($_FILES['update_img']['tmp_name'], "Uploads/" . basename($_FILES['update_img']['name']))){
+                echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'> file uploaded  </h1>";
+                $agrologist->insertFieldVisit([
+                    'week' => $week->get(),
+                    'gigId' => '1',
+                    'agrologistId' => $uid,
+                    'farmerId' => '63972c295e756',
+                    'fieldVisitDetails' => $description->get(),
+                    'fieldVisitImage' => basename($_FILES['update_img']['name']),
+                    'visitDate' => $date->get(),
+                ]);
+               // echo "file uploaded";
+            }
+            else{
+                echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'> file not uploaded  </h1>";
+
+                //echo "file not uploaded";
+            }
+            
+            //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $Session::get('uid') . "</h1>";
+        }
+
+        $this->set($d);
         return $this->render('farmerdetails');
     }
 
     public function farmergigs($id)
     {
+        
         return $this->render('farmergigs');
     }
 

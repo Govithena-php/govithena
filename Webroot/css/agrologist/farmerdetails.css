@@ -20,6 +20,17 @@
     border-radius: 5px;
 }
 
+.details_img {
+    height: 100%;
+    width: 160px;
+    height: 160px;
+    border-radius: 12%;
+    overflow: hidden;
+    /* margin-left: 50px; */
+    /* margin: auto; */
+    display: block;
+  }
+
 /* .form input[type="file"] {
     display: none;
 } */
