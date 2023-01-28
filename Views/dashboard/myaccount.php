@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/table.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/investor/myrequests.css">
 
-    <title>Dashboard | Investor</title>
+    <title>Account | Investor</title>
     <!-- <style>
         *{
             outline: 1px solid limegreen;
@@ -25,15 +25,15 @@
 <body>
 
     <?php
-    $active = "myfarmers";
-    $title = "My Farmers";
+    $active = "myaccount";
+    $title = "My Account";
     require_once("navigator.php");
     ?>
 
     <?php $name = "Janith"; ?>
 
     <div class="[ container ][ ]" container-type="dashboard-section">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia quam laboriosam iste assumenda consequatur delectus est reiciendis amet obcaecati ad enim ducimus soluta temporibus ipsum cupiditate fuga exercitationem, maxime dolor!
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero quia, quidem maxime ducimus provident impedit. Corrupti, tempore eveniet, ut quos quod nostrum quam officiis nobis, natus reiciendis quia recusandae voluptatem?
     </div>
     <?php
     require_once("footer.php");

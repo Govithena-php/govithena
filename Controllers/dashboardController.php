@@ -29,6 +29,16 @@ class dashboardController extends Controller
 
     public function myinvestments()
     {
+        require(ROOT . 'Models/investment.php');
+        $uid = Session::get('user')->getUid();
+        $i = new Investment();
+
+        $investments = $i->fetchAllBy($uid);
+        if (isset($investments)) {
+            $this->set(['investments' => $investments]);
+        } else {
+            $this->set(['error' => "no investments found"]);
+        }
         $this->render('myinvestments');
     }
 
@@ -60,5 +70,15 @@ class dashboardController extends Controller
 
 
         $this->render('myrequests');
+    }
+
+    public function myaccount()
+    {
+        $this->render('myaccount');
+    }
+
+    public function settings()
+    {
+        $this->render('settings');
     }
 }
