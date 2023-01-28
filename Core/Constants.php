@@ -1,12 +1,12 @@
 <?php
 
-enum KEYPREFFIX
+enum PREFIX
 {
     const GENERAL = '';
     const USER = 'USER';
     const GIG = 'GIG';
     const PRODUCT = 'PRODUCT';
-    const REQUEST = 'REQEST';
+    const REQUEST = 'REQUEST';
     const RATING = 'RATING';
     const REVIEW = 'REVIEW';
 }
@@ -19,7 +19,7 @@ enum PRODUCT
     const SPICE = 'SPICE';
 }
 
-enum USER
+enum ACTOR
 {
     const ADMIN = "ADMIN";
     const INVESTOR = "INVESTOR";
@@ -39,7 +39,7 @@ enum STATUS
 
 
 
-// define("GIG_REQUEST", 'greq');
+// define("GIG_REQUEST"; 'greq');
 // define("AGROLOGIST_REQUEST", 'areq');
 // define("TECH_ASSISTANT_REQUEST", 'treq');
 
