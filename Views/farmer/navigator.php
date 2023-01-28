@@ -101,15 +101,15 @@ function highlight($active, $link)
     <div class="[ links ]">
         <ul>
             <li>
-                <a href="<?php echo URLROOT ?>/dashboard/" class="<?php highlight($active, "dashboard") ?>">
+                <a href="<?php echo URLROOT ?>/farmer/" class="<?php highlight($active, "dashboard") ?>">
                     <i class="fa-solid fa-gauge"></i>
-                    <p>Dashboard</p>
+                    <p>Gig</p>
                 </a>
             </li>
             <li>
-                <a href="<?php echo URLROOT ?>/dashboard/myinvestments" class="<?php highlight($active, "myinvestments") ?>">
+                <a href="<?php echo URLROOT ?>/farmer/createGig" class="<?php highlight($active, "gigs") ?>">
                     <i class="[ fa-solid fa-sack-dollar ]"></i>
-                    <p>My Investments</p>
+                    <p>Gigs</p>
                 </a>
             </li>
             <li>
