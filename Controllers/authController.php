@@ -33,9 +33,7 @@ class authController extends Controller
             $password->sanatizePassword();
 
             $user = new User();
-            echo "test";
             $res = $user->findByEmail($email);
-            var_dump($res);
             if (!empty($res)) {
 
                 if (password_verify($password, $res['password'])) {
