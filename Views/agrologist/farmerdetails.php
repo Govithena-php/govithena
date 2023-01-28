@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="../Webroot/css/sidebar.css">
     <link rel="stylesheet" href="../Webroot/css/ui.css">
     <link rel="stylesheet" href="../Webroot/css/agrologist/myaccount.css">
+    <link rel="stylesheet" href="../Webroot/css/agrologist/farmerdetails.css">
     <link rel="stylesheet" href="../Webroot/css/dashHeader.css">
     <link rel="stylesheet" href="../Webroot/css/dashFooter.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -31,8 +32,11 @@
             <div class="modal-content">
                 <span class="close close_modal1">&times;</span>
                 <h3>Edit Details</h3>
-                <form class="form pt-1" action="<?php echo URLROOT ?>/agrologist/myaccount" method="post">
-                    <input type='text' value='firstname'>
+                <form class="form pt-1" action="" method="post">
+                    <input type='text' value='Week'><br />
+                    <input type="date" id="date"><br />
+                    <input type='file'><br />
+                    <textarea value='Description'></textarea>
                     <!-- <input type="text" name="firstName" class="" placeholder=""
                         value="<?php echo $agrologist[0]['firstName'] ?>"><br>
                     <input type="text" name="lastName" class="" placeholder=""
