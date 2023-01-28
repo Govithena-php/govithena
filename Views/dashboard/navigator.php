@@ -18,9 +18,6 @@ function highlight($active, $link)
 
 <link rel="stylesheet" href="<?php echo CSS ?>/dashboard/navigator.css" type="text/css">
 
-<!-- <?php if (isset($active)) echo $active; ?> -->
-
-
 <nav class="[ nav ]">
     <div class="[ container ]" container-type="dashboard-section">
         <div class="[ open__btn ]">
@@ -28,6 +25,13 @@ function highlight($active, $link)
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
+        <?php
+        if (isset($title)) {
+        ?>
+            <p class="[ page__title ]"><?php echo $title; ?></p>
+        <?php
+        }
+        ?>
 
         <div class="[ profile ]">
             <?php if (isset($currentUser)) { ?>
@@ -109,6 +113,12 @@ function highlight($active, $link)
                 </a>
             </li>
             <li>
+                <a href="<?php echo URLROOT ?>/dashboard/withdraw" class="<?php highlight($active, "mywithdraw") ?>">
+                    <i class="[ fa-solid fa-sack-dollar ]"></i>
+                    <p>My Withdraw</p>
+                </a>
+            </li>
+            <li>
                 <a href="<?php echo URLROOT ?>/dashboard/myfarmers" class="<?php highlight($active, "myfarmers") ?>">
                     <i class="[ fa-solid fa-tractor ]"></i>
                     <p>Farmers</p>
@@ -130,7 +140,7 @@ function highlight($active, $link)
                 </a>
             </li>
             <li>
-                <a href="<?php echo URLROOT ?>/dashboard/help" class="<?php highlight($active, "help") ?>">
+                <a href="<?php echo URLROOT ?>/help" class="<?php highlight($active, "help") ?>">
                     <i class="[ fa-solid fa-circle-question ]"></i>
                     <p>Help</p>
                 </a>

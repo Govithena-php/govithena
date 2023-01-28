@@ -20,6 +20,7 @@
 
     <?php
     $active = "dashboard";
+    $title = "Dashboard";
     require_once("navigator.php");
     ?>
 
