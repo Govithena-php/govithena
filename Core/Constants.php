@@ -6,7 +6,7 @@ enum PREFIX
     const USER = 'USER';
     const GIG = 'GIG';
     const PRODUCT = 'PRODUCT';
-    const REQUEST = 'REQEST';
+    const REQUEST = 'REQUEST';
     const RATING = 'RATING';
     const REVIEW = 'REVIEW';
 }
