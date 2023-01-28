@@ -73,4 +73,39 @@ class Agrologist extends Model
         }
     }
 
+    public function insertFieldVisit($data){
+        try {
+            $sql = "INSERT INTO field_visit (week, gigId, agrologistId, farmerId, fieldVisitDetails, image, visitDate) VALUES (:week, :gigId, :agrologistId, :farmerId, :fieldVisitDetails, :fieldVisitImage, :visitDate)";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'week' => $data['week'],
+                'gigId' => $data['gigId'],
+                'farmerId' => $data['farmerId'],
+                'agrologistId' => $data['agrologistId'],
+                'fieldVisitDetails' => $data['fieldVisitDetails'],
+                'fieldVisitImage' => $data['fieldVisitImage'], 
+                'visitDate' => $data['visitDate'],
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return false;
+        }
+    }
+
+    public function getFieldVisitDetails(){
+        try {
+            $sql = "SELECT * FROM field_visit   WHERE agrologistId = :agrologistId ";
+            $stmt =  Database::getBdd()->prepare($sql);
+            $stmt->execute(['agrologistId' => Session::get('uid')]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+        }
+    }
+
 }

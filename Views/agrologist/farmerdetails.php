@@ -20,33 +20,69 @@
     <?php include COMPONENTS . 'dashboard/header.php'; ?>
 
     <?php include 'sidebar.php'; ?>
-    <div class="dashboard-container h-screen">
-        <h1>farmer details</h1>
-        <form action="">
-            <div class="flex flex-row flex-c-c" style="width: 200px;margin-top: 110px">
-                <a href="#" class="btn uppercase fs-4 btn-primary " id="edit_details">Edit Profile</a>
+    <div class="dashboard-container h-screen" style="margin-bottom: 900px">
+        <div class="flex flex-row flex-sb-c">
+            <h1>farmer details</h1>
+            <form action="">
+                <div class="" style="width: 200px;">
+                    <a href="#" class="btn uppercase fs-4 btn-primary " id="edit_details">Edit Profile</a>
+                </div>
+            </form>
+        </div>
+        <hr>
+
+        <!-- <?php print_r($fieldVisit) ?> -->
+        <?php
+        foreach ($fieldVisit as $week) {
+            ?>
+            <div class="content ff-poppins mt-1" style="background-color: white; ">
+                <!-- <?php print_r($week) ?> -->
+                <div class="p-2">
+                    <div class="fs-6">
+                        <?php echo "<div>" . ucwords($week['week']) . "</div>"; ?>
+                    </div>
+                    <hr>
+
+                    <div style="color: grey" class="pt-1">Date</div>
+                    <?php echo "<div>" . ucwords($week['visitDate']) . "</div>"; ?>
+                    <div style="color: grey" class="pt-1">Description</div>
+                    <?php echo "<div>" . ucwords($week['fieldVisitDetails']) . "</div>"; ?>
+                    <!-- <?php
+                    if (get_option($week['image']) != '') {
+                        ?> -->
+                        <div style="color: grey" class="pt-1">Images</div>
+
+                        <!-- <?php echo "<div>" . ucwords($week['fieldVisitDetails']) . "</div>"; ?> -->
+                        <div class="details_img">
+                            <img src="<?php echo UPLOADS . $week['image']; ?>" alt="Hi" />
+                        </div>
+                        <!-- <?php
+                    } else {
+                        echo 'no image';
+                    }
+                    ?> -->
+                </div>
             </div>
-        </form>
+
+            <?php
+        }
+        ?>
+
+
+
         <div id="field_visit" class="modal">
 
             <div class="modal-content">
                 <span class="close close_modal1">&times;</span>
                 <h3>Edit Details</h3>
-                <form class="form pt-1" action="" method="post">
-                    <input type='text' value='Week'><br />
-                    <input type="date" id="date"><br />
-                    <input type='file'><br />
-                    <textarea value='Description'></textarea>
-                    <!-- <input type="text" name="firstName" class="" placeholder=""
-                        value="<?php echo $agrologist[0]['firstName'] ?>"><br>
-                    <input type="text" name="lastName" class="" placeholder=""
-                        value="<?php echo $agrologist[0]['lastName'] ?>"><br>
-                    <input type="text" name="city" class="" placeholder=""
-                        value="<?php echo $agrologist[0]['city'] ?>"><br>
-                    <input type="text" name="phoneNumber" class="" placeholder=""
-                        value="<?php echo $agrologist[0]['phoneNumber'] ?>"><br> -->
-                    <button type="submit" name="edit_details_btn" class="btn uppercase"
-                        onclick="alert('Succesffully updated');">Edit details</button>
+                <form class="form pt-1" action="<?php echo URLROOT ?>/agrologist/farmerdetails" method="post"
+                    enctype="multipart/form-data">
+                    <input type='text' name="week" placeholder='Week 01'><br />
+                    <input type="date" name="date" id="date"><br />
+                    <input type='file' name="update_img"><br />
+                    <textarea name="description" value='Description'></textarea>
+                    <button type="submit" name="update_details_btn" class="btn uppercase"
+                        onclick="alert('Succesffully updated');">Add details</button>
                 </form>
             </div>
 
