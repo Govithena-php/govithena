@@ -33,6 +33,7 @@
 
 .request__img {
     height: 100%;
+    border-radius: 0.5rem 0 0 0.5rem;
     overflow: hidden;
 }
 
@@ -89,4 +90,26 @@
     border-radius: 1rem;
     color: white;
     font-size: var(--fs-3);
+}
+
+
+/* @media screen and (max-width: 1200px){
+
+}
+@media screen and (max-width: 1024px){
+
+}
+@media screen and (max-width: 768px){
+
+} */
+@media screen and (max-width: 576px) {
+
+    .request__card {
+        min-height: 22rem;
+        grid-template-columns: 1fr;
+    }
+
+    .request__img {
+        border-radius: 0.5rem 0.5rem 0 0;
+    }
 }

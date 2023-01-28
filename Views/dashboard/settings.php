@@ -12,45 +12,28 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/table.css">
-    <link rel="stylesheet" href="<?php echo CSS ?>/investor/myinvestments.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/investor/myrequests.css">
 
     <title>Dashboard | Investor</title>
+    <!-- <style>
+        *{
+            outline: 1px solid limegreen;
+        }
+    </style> -->
 </head>
 
 <body>
 
     <?php
-    $active = "myinvestments";
-    $title = "My Investments";
+    $active = "settings";
+    $title = "My Settings";
     require_once("navigator.php");
     ?>
 
     <?php $name = "Janith"; ?>
 
-    <div class="[ container ][ investments ]" container-type="dashboard-section">
-        <?php
-
-        if (isset($error)) {
-            require_once(COMPONENTS . "dashboard/noDataFound.php");
-        } else {
-            if (empty($investments)) {
-                require_once(COMPONENTS . "dashboard/noDataFound.php");
-            } else {
-
-                foreach ($investments as $investment) {
-        ?>
-                    <div>
-                        <h3><?php echo $investment['title'] ?></h3>
-                        <p><?php echo $investment['amount'] ?></p>
-                        <p><?php echo $investment['timestamp'] ?></p>
-                        <p><?php echo $investment['category'] ?></p>
-                    </div>
-        <?php
-                }
-            }
-        }
-        ?>
-
+    <div class="[ container ][ ]" container-type="dashboard-section">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint ullam, temporibus laudantium suscipit illum quo magni voluptatum nemo ad placeat vitae pariatur fugit nobis, id ipsum molestiae animi itaque officiis.
     </div>
     <?php
     require_once("footer.php");

@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <?php require_once(COMPONENTS . 'navbar.php'); ?>
+    <!-- <?php require_once(COMPONENTS . 'navbar.php'); ?> -->
     <div class="[ container ]" container-type="section">
         <div class="[ title ]">
             <h1>Checkout</h1>
