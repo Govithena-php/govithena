@@ -33,8 +33,9 @@ class authController extends Controller
             $password->sanatizePassword();
 
             $user = new User();
+            echo "test";
             $res = $user->findByEmail($email);
-
+            var_dump($res);
             if (!empty($res)) {
 
                 if (password_verify($password, $res['password'])) {
@@ -64,7 +65,7 @@ class authController extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             require(ROOT . 'Models/user.php');
-            $uid = (new UID(KEYPREFFIX::USER, USER::INVESTOR));
+            $uid = (new UID(PREFIX::USER, ACTOR::INVESTOR));
 
             $firstName = new Input(POST, 'firstName');
             $lastName = new Input(POST, 'lastName');
