@@ -192,118 +192,8 @@
     margin-block: 2rem;
 }
 
-.footer {
-    min-height: 150px;
-    background-color: var(--clr-dark, black);
-    color: var(--clr-light, #fff);
-}
-
-.footer .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 1rem;
-}
-
-.footer .grid {
-    height: 100%;
-    margin-top: 1rem;
-    justify-items: center;
-}
-
-.footer .box {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 1rem;
-}
-
-.footer .box h3 {
-    font-size: 1em;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-}
-
-.footer .box ul {
-    height: 100%;
-    list-style: disc;
-    padding: 0;
-    margin-left: 0.5rem;
-}
-
-.footer .box ul li {
-    margin-bottom: 0.25rem;
-}
-
-.footer .box ul a:hover {
-    color: var(--clr-primary, rgb(132, 249, 198));
-    ;
-}
-
-
-
-.footer .box ul a {
-    font-size: 0.8rem;
-    text-decoration: none;
-    font-weight: 300;
-    color: rgb(210, 210, 210);
-}
-
-.footer .branding {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    align-items: center;
-    padding: 1rem 0;
-    padding-bottom: 0.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.footer .branding .header {
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-    gap: 1rem;
-    margin: 0;
-}
-
-.footer .branding .header a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 1rem;
-}
-
-.footer .branding .header p {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-
-@media (max-width: 768px) {
-    .footer {
-        text-align: center;
-    }
-
-    .footer .grid {
-        gap: 3rem;
-    }
-
-    .footer .box ul {
-        list-style: none;
-    }
-}
-
 
 @media screen and (max-width: 1024px) {
-
-    .container[container-type="dashboard-section"] {
-        margin-inline: 2rem;
-        transition: all 0.3s ease-in-out;
-    }
-
-    .container[container-type="dashboard-footer"] {
-        margin-inline: 2rem;
-        transition: all 0.3s ease-in-out;
-    }
 
     .dashboard .balance {
         margin-right: 1.5rem;
@@ -325,16 +215,6 @@
 }
 
 @media screen and (max-width: 768px) {
-
-    .container[container-type="dashboard-section"] {
-        margin-inline: 1rem;
-        transition: all 0.3s ease-in-out;
-    }
-
-    .container[container-type="dashboard-footer"] {
-        margin-inline: 1rem;
-        transition: all 0.3s ease-in-out;
-    }
 
     .dashboard .header {
         padding: 1rem 2rem;
@@ -369,16 +249,6 @@
 
 
 @media screen and (max-width: 576px) {
-
-    .container[container-type="dashboard-section"] {
-        margin-inline: 0.5rem;
-        transition: all 0.3s ease-in-out;
-    }
-
-    .container[container-type="dashboard-footer"] {
-        margin-inline: 0.5rem;
-        transition: all 0.3s ease-in-out;
-    }
 
     .block {
         padding: 0.25rem;
