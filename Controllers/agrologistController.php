@@ -103,5 +103,10 @@ class agrologistController extends Controller
         return $this->render('farmerdetails');
     }
 
+    public function farmergigs($id)
+    {
+        return $this->render('farmergigs');
+    }
+
 
 }
