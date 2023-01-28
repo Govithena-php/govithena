@@ -48,7 +48,7 @@
     --navbar-height: 4.5rem;
 
     --sidebar-width: clamp(220px, 70%, 400px);
-    --dashboard-sidebar-width: clamp(180px, 50%, 200px);
+    --dashboard-sidebar-width: 15rem;
     --container-margin-left: calc(var(--dashboard-sidebar-width) + 3rem);
     --container-margin-right: 3rem;
 
