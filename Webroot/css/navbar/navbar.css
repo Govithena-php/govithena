@@ -216,7 +216,7 @@ nav>.navbar {
     top: 0;
     left: 0;
     bottom: 0;
-    width: 80%;
+    width: clamp(220px, 70%, 400px);
     height: 100vh;
     background-color: var(--clr-light, #fff);
     z-index: 9998;
@@ -224,6 +224,7 @@ nav>.navbar {
     display: none;
     padding: 1rem;
     flex-direction: column;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3);
 }
 
 

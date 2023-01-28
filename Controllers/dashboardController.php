@@ -12,7 +12,7 @@ class dashboardController extends Controller
             $this->redirect('/auth/signin');
         }
 
-        if (!$this->currentUser->hasAccess(userType::INVESTOR)) {
+        if (!$this->currentUser->hasAccess(USER::INVESTOR)) {
             $this->redirect('/error/dontHaveAccess');
         }
     }
@@ -35,9 +35,10 @@ class dashboardController extends Controller
     public function myrequests()
     {
         require(ROOT . 'Models/requestFarmer.php');
+        $uid = Session::get('user')->getUid();
         $r = new RequestFarmer();
 
-        $requests = $r->getRequestsByInvestor(Session::get('uid'));
+        $requests = $r->getRequestsByInvestor($uid);
         $pendingRequests = [];
         $acceptedRequests = [];
         $rejectedRequests = [];
