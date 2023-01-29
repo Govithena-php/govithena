@@ -16,7 +16,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
 }
 
 .nav button {
@@ -29,6 +28,13 @@
 .nav .open__btn button {
     display: none;
     font-size: 1.2rem;
+}
+
+.nav .page__title {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--clr-light, white);
+    margin-left: 0rem;
 }
 
 
@@ -272,7 +278,7 @@
 
 .sidebar .links ul li a {
     width: 100%;
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: 400;
     padding: 0.5rem;
     height: 1.5rem;
@@ -288,7 +294,23 @@
     font-size: 1rem;
 }
 
+@media screen and (max-width: 1200px) {
+    :root {
+        --dashboard-sidebar-width: 14rem;
+    }
+}
+
 @media screen and (max-width: 1024px) {
+    :root {
+        --dashboard-sidebar-width: 13rem;
+    }
+}
+
+@media screen and (max-width: 786px) {
+    :root {
+        --dashboard-sidebar-width: 60%;
+    }
+
     .nav {
         background-color: var(--clr-dark, #000);
     }
@@ -297,12 +319,16 @@
         color: var(--clr-light, white);
     }
 
+    .nav .page__title {
+        margin-left: 2rem;
+    }
+
     .nav .image {
         border: 3px solid var(--clr-light, #fff);
     }
 
     .sidebar {
-        left: -250px;
+        left: calc(-1 * (var(--dashboard-sidebar-width) + 2rem));
     }
 
     .nav .open__btn button {

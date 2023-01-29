@@ -1,0 +1,25 @@
+.no__data {
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.no__data img {
+    width: 200px;
+}
+
+.no__data h3 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.no__data p {
+    font-weight: 400;
+    margin-top: 0.8rem;
+    text-align: center;
+    color: #666;
+}
