@@ -28,6 +28,21 @@
     <?php $name = "Janith"; ?>
 
     <div class="[ container ][ investments ]" container-type="dashboard-section">
+
+        <div class="[ investments__heading ]">
+            <div class="[ investments__search ]">
+                <h4>Filter</h4>
+                <input type="text" placeholder="Search">
+                <button type="button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <div class="[ investments__add ]">
+                <a href="<?php echo URLROOT ?>/dashboard/addinvestment">
+                    Invest
+                </a>
+            </div>
+        </div>
         <?php
 
         if (isset($error)) {
@@ -36,17 +51,28 @@
             if (empty($investments)) {
                 require_once(COMPONENTS . "dashboard/noDataFound.php");
             } else {
-
-                foreach ($investments as $investment) {
         ?>
-                    <div>
-                        <h3><?php echo $investment['title'] ?></h3>
-                        <p><?php echo $investment['amount'] ?></p>
-                        <p><?php echo $investment['timestamp'] ?></p>
-                        <p><?php echo $investment['category'] ?></p>
+                <div class="[ investments__container ]">
+                    <div class="[ investment__heading ]">
+                        <h3>Title</h3>
+                        <h3>Amount</h3>
+                        <h3>Timestamp</h3>
+                        <h3>Category</h3>
                     </div>
+                    <?php
+                    foreach ($investments as $investment) {
+                    ?>
+                        <div class="[ investment ]">
+                            <h3><?php echo $investment['title'] ?></h3>
+                            <p><?php echo $investment['amount'] ?></p>
+                            <p><?php echo $investment['timestamp'] ?></p>
+                            <p><?php echo $investment['category'] ?></p>
+                        </div>
+                    <?php
+                    }
+                    ?>
+                </div>
         <?php
-                }
             }
         }
         ?>
