@@ -87,7 +87,7 @@ select {
     font: inherit;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
     width: 12px;
 }
 
@@ -102,7 +102,7 @@ select {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--clr-primary-light);
-}
+} */
 
 .w-full {
     width: 100%;
@@ -269,9 +269,6 @@ select {
 */
 
 @media screen and (max-width: 1440px) {
-    body {
-        font-size: 16px;
-    }
 
     .container {
         margin-inline: 10rem;
@@ -291,9 +288,6 @@ select {
 }
 
 @media screen and (max-width: 1200px) {
-    body {
-        font-size: 14px;
-    }
 
     .container {
         margin-inline: 8rem;
@@ -313,11 +307,6 @@ select {
 }
 
 @media screen and (max-width: 1024px) {
-
-    :root {
-        --container-margin-left: 2rem !important;
-        --container-margin-right: 2rem !important;
-    }
 
     .container {
         margin-inline: 6rem;

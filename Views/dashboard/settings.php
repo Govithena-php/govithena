@@ -25,15 +25,15 @@
 <body>
 
     <?php
-    $active = "myfarmers";
-    $title = "My Farmers";
+    $active = "settings";
+    $title = "My Settings";
     require_once("navigator.php");
     ?>
 
     <?php $name = "Janith"; ?>
 
     <div class="[ container ][ ]" container-type="dashboard-section">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia quam laboriosam iste assumenda consequatur delectus est reiciendis amet obcaecati ad enim ducimus soluta temporibus ipsum cupiditate fuga exercitationem, maxime dolor!
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint ullam, temporibus laudantium suscipit illum quo magni voluptatum nemo ad placeat vitae pariatur fugit nobis, id ipsum molestiae animi itaque officiis.
     </div>
     <?php
     require_once("footer.php");
