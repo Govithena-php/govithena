@@ -87,7 +87,7 @@ select {
     font: inherit;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
     width: 12px;
 }
 
@@ -102,7 +102,7 @@ select {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--clr-primary-light);
-}
+} */
 
 .w-full {
     width: 100%;
