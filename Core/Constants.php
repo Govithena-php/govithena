@@ -1,17 +1,17 @@
 <?php
 
-enum KEYPREFFIX
+class PREFIX
 {
     const GENERAL = '';
     const USER = 'USER';
     const GIG = 'GIG';
     const PRODUCT = 'PRODUCT';
-    const REQUEST = 'REQEST';
+    const REQUEST = 'REQUEST';
     const RATING = 'RATING';
     const REVIEW = 'REVIEW';
 }
 
-enum PRODUCT
+class PRODUCT
 {
     const VEGETABLE = 'VEGETABLE';
     const FRUIT = 'FRUIT';
@@ -19,7 +19,7 @@ enum PRODUCT
     const SPICE = 'SPICE';
 }
 
-enum USER
+class ACTOR
 {
     const ADMIN = "ADMIN";
     const INVESTOR = "INVESTOR";
@@ -28,7 +28,7 @@ enum USER
     const TECH_ASSISTANT = "TECHASSISTANT";
 }
 
-enum STATUS
+class STATUS
 {
     const PENDING = "PENDING";
     const ACTIVE = "ACTIVE";
@@ -39,7 +39,7 @@ enum STATUS
 
 
 
-// define("GIG_REQUEST", 'greq');
+// define("GIG_REQUEST"; 'greq');
 // define("AGROLOGIST_REQUEST", 'areq');
 // define("TECH_ASSISTANT_REQUEST", 'treq');
 
