@@ -7,25 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agrologist | Dashboard</title>
     <link rel="icon" type="image/x-icon" href="<?php echo IMAGES ?>/favicon.png">
-    <link rel="stylesheet" type="text/css" href="../Webroot/css/sidebar.css">
-    <link rel="stylesheet" href="../Webroot/css/ui.css">
-    <link rel="stylesheet" href="../Webroot/css/agrologist/myaccount.css">
-    <link rel="stylesheet" href="../Webroot/css/agrologist/farmerdetails.css">
-    <link rel="stylesheet" href="../Webroot/css/dashHeader.css">
-    <link rel="stylesheet" href="../Webroot/css/dashFooter.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/agrologist/myaccount.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/agrologist/farmerdetails.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 
 <body class="bg-gray h-screen">
-    <?php include COMPONENTS . 'dashboard/header.php'; ?>
-
-    <?php include 'sidebar.php'; ?>
-    <div class="dashboard-container h-screen" style="margin-bottom: 900px">
+    <?php
+    $active = "farmers";
+    require_once("navigator.php");
+    ?>
+    <div class="[ container ][ dashboard ]" container-type="dashboard-section">
         <div class="flex flex-row flex-sb-c">
             <h1>farmer details</h1>
-            <form action="">
+            <form action="<?php echo URLROOT ?>/agrologist/farmer/ . <?php $fid ?> . / .  <?php $gid ?>" method="post">
                 <div class="" style="width: 200px;">
-                    <a href="#" class="btn uppercase fs-4 btn-primary " id="edit_details">Edit Profile</a>
+                    <a href="#" class="btn uppercase fs-4 btn-primary " id="edit_details">Update Field Visit</a>
                 </div>
             </form>
         </div>
@@ -35,33 +34,32 @@
         <?php
         foreach ($fieldVisit as $week) {
             ?>
-            <div class="content ff-poppins mt-1" style="background-color: white; ">
+            <div class="content ff-poppins " >
                 <!-- <?php print_r($week) ?> -->
-                <div class="p-2">
-                    <div class="fs-6">
-                        <?php echo "<div>" . ucwords($week['week']) . "</div>"; ?>
-                    </div>
-                    <hr>
-
-                    <div style="color: grey" class="pt-1">Date</div>
-                    <?php echo "<div>" . ucwords($week['visitDate']) . "</div>"; ?>
-                    <div style="color: grey" class="pt-1">Description</div>
-                    <?php echo "<div>" . ucwords($week['fieldVisitDetails']) . "</div>"; ?>
-                    <!-- <?php
-                    if (get_option($week['image']) != '') {
-                        ?> -->
-                        <div style="color: grey" class="pt-1">Images</div>
-
-                        <!-- <?php echo "<div>" . ucwords($week['fieldVisitDetails']) . "</div>"; ?> -->
-                        <div class="details_img">
-                            <img src="<?php echo UPLOADS . $week['image']; ?>" alt="Hi" />
+                <!-- <div class="content" > -->
+                    <div class="accordian p-2">
+                        <div class="accordian-heading fs-6">
+                            <?php echo "<div>" . ucwords($week['week']) . "</div>"; ?>
                         </div>
-                        <!-- <?php
-                    } else {
-                        echo 'no image';
-                    }
-                    ?> -->
-                </div>
+                        <hr>
+                        <div class="accordian-details">
+
+                            <div style="color: grey" class="pt-1">Date</div>
+                            <?php echo "<div>" . ucwords($week['visitDate']) . "</div>"; ?>
+                            <div style="color: grey" class="pt-1">Description</div>
+                            <?php echo "<div>" . ucwords($week['fieldVisitDetails']) . "</div>"; ?>
+
+
+                            <div style="color: grey" class="pt-1">Images</div>
+
+                            <!-- <?php echo "<div>" . ucwords($week['fieldVisitDetails']) . "</div>"; ?> -->
+                            <div class="details_img">
+                                <img src="<?php echo UPLOADS . $week['image']; ?>" alt="Hi" />
+                            </div>
+                        </div>
+
+                    </div>
+                <!-- </div> -->
             </div>
 
             <?php
@@ -75,12 +73,12 @@
             <div class="modal-content">
                 <span class="close close_modal1">&times;</span>
                 <h3>Edit Details</h3>
-                <form class="form pt-1" action="<?php echo URLROOT ?>/agrologist/farmerdetails" method="post"
+                <form class="form pt-1" action="<?php echo URLROOT . '/agrologist/farmers/' .  $fid  . '/' .  $gid ?>" method="post"
                     enctype="multipart/form-data">
                     <input type='text' name="week" placeholder='Week 01'><br />
                     <input type="date" name="date" id="date"><br />
                     <input type='file' name="update_img"><br />
-                    <textarea name="description" value='Description'></textarea>
+                    <textarea name="description" value='Description' placeholder='Description'></textarea>
                     <button type="submit" name="update_details_btn" class="btn uppercase"
                         onclick="alert('Succesffully updated');">Add details</button>
                 </form>
@@ -91,7 +89,7 @@
             //var modal = document.getElementById("myModal");
             var field_visit = document.getElementById("field_visit");
 
-            //var edit_details_btn = document.getElementById("edit_details");
+            var edit_details = document.getElementById("edit_details");
 
             var span1 = document.getElementsByClassName("close_modal1")[0];
 
@@ -103,19 +101,19 @@
                 field_visit.style.display = "none";
             }
 
-            // window.onclick = function (event) {
-            //     if (event.target == modal) {
-            //         field_visit.style.display = "none";
-            //     }
-            // }
+            window.onclick = function (event) {
+                if (event.target == field_visit) {
+                    field_visit.style.display = "none";
+                }
+            }
 
         </script>
 
 
     </div>
 
-    <?php require COMPONENTS . "dashboard/footer.php"; ?>
-    <script src="<?php echo JS ?>/app.js"></script>
+    <?php require "footer.php"; ?>
+    <script src="<?php echo JS ?>/agrologist/app.js"></script>
 
 </body>
 
