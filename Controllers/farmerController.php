@@ -1,11 +1,18 @@
 <?php
 class farmerController extends Controller
 {
+    private $currentUser;
 
     public function __construct()
     {
+        $this->currentUser = Session::get('user');
+
         if (!Session::isLoggedIn()) {
-            $this->redirect('/');
+            $this->redirect('/auth/signin');
+        }
+
+        if (!$this->currentUser->hasAccess(ACTOR::FARMER)) {
+            $this->redirect('/error/dontHaveAccess');
         }
     }
     function createGig()
