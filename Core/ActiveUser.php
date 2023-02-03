@@ -28,27 +28,27 @@ class ActiveUser
 
     public function isInvestor()
     {
-        return $this->type == USER::INVESTOR;
+        return $this->type == ACTOR::INVESTOR;
     }
 
     public function isFarmer()
     {
-        return $this->type == USER::FARMER;
+        return $this->type == ACTOR::FARMER;
     }
 
     public function isAgrologist()
     {
-        return $this->type == USER::AGROLOGIST;
+        return $this->type == ACTOR::AGROLOGIST;
     }
 
     public function isTechAssistant()
     {
-        return $this->type == USER::TECH_ASSISTANT;
+        return $this->type == ACTOR::TECH_ASSISTANT;
     }
 
     public function isAdmin()
     {
-        return $this->type == USER::ADMIN;
+        return $this->type == ACTOR::ADMIN;
     }
 
     // getters and setters
