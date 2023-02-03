@@ -5,7 +5,7 @@
     height: var(--navbar-height);
     width: 100%;
     /* background-color: var(--clr-primary, rgb(0, 0, 0)); */
-    background-color: #1d599a;
+    background-color: var(--clr-primary);
     z-index: 9997;
 }
 

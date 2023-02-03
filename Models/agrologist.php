@@ -61,7 +61,7 @@ class Agrologist extends Model
 
     public function getFarmers(){
         try {
-            $sql = "SELECT CONCAT(u.firstName, ' ', u.lastName) AS fullName, u.city, a.requestId FROM agrologist_request a LEFT JOIN user u ON u.uid = a.farmerId WHERE (a.agrologistId = :agrologistId AND a.status='Accepted')";
+            $sql = "SELECT CONCAT(u.firstName, ' ', u.lastName) AS fullName, u.city, a.requestId, a.farmerId FROM agrologist_request a LEFT JOIN user u ON u.uid = a.farmerId WHERE (a.agrologistId = :agrologistId AND a.status='Accepted')";
             $stmt =  Database::getBdd()->prepare($sql);
             $stmt->execute(['agrologistId' => Session::get('uid')]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -94,11 +94,32 @@ class Agrologist extends Model
         }
     }
 
-    public function getFieldVisitDetails(){
+    public function getFieldVisitDetails($fid, $gid){
         try {
-            $sql = "SELECT * FROM field_visit   WHERE agrologistId = :agrologistId ";
+            $sql = "SELECT * FROM field_visit  WHERE agrologistId = :agrologistId AND farmerId= :farmerId AND gigId = :gigId ORDER BY visitDate DESC";
             $stmt =  Database::getBdd()->prepare($sql);
-            $stmt->execute(['agrologistId' => Session::get('uid')]);
+            $stmt->execute([
+                'agrologistId' => Session::get('uid'),
+                'farmerId' => $fid,
+                'gigId' => $gid
+            ]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+        }
+    }
+
+    public function getFarmerGigs($data){
+        try {
+            $sql = "SELECT * FROM gig g LEFT JOIN agrologist_request a ON g.farmerId=a.farmerId LEFT JOIN user u ON u.uid=g.farmerId WHERE g.farmerId = :farmerId AND a.agrologistId = :agrologistId";
+            $stmt =  Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'agrologistId' => Session::get('uid'),
+                'farmerId' => $data['farmerId']
+            ]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $req;
         } catch (PDOException $e) {
