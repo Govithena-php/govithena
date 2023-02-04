@@ -28,38 +28,86 @@
     
 
     <div class="container" container-type="dashboard-section">
-            <p>Progress</p><hr>
+            <div class="itemlistfirst">  
+                <p style="font-size: 20px;"> Progress of cabbage</p>
+                <button  class="btn" type="button">Add</button>
+            </div>
+            <hr> 
 
-        <!-- <div class="cardpad"> -->
             <div class="cardprogress">
+                <br>
                 <div class="itemlist">
-                    <div class="imgrow">
-                        <p style="color: #666362;">Item : </p>
-                        <p>&nbsp; Paddy</p>
-                    </div>
-                    <div class="imgrow">
+                        <div class="left">
+                            <p style="color: #666362;">Investor : </p>
+                            <p>&nbsp; Punsara Deshan</p>
+                        </div>
+                       <div class="left">
+                          <p style="color: #666362;">Item : </p>
+                          <p>&nbsp; Cabbage</p>
+                       </div>
+                </div>    
+                <div class="itemlist">
+                    <div class="left">
                         <p style="color: #666362;">Date : </p>
-                        <p>&nbsp; 2022/01/26</p>
+                        <p>&nbsp; 2022/11/30</p>
                     </div>
-                    <div class="imgrow">
+                    <div class="left">
+                        &emsp;&emsp;&emsp;&emsp;
                         <p style="color: #666362;">Time : </p>
                         <p>&nbsp; 10.30 am</p>
                     </div>
                 </div>
-                                <!-- <p style="color: #666362;">Description</p>
-                <p class="imgrow">The next day was the harvesting day.
-                    There was bustle and activity on all sides. 
-                    The farmers with sickles and scythes in their hands set out to reap the ripe crop. 
-                    They sang and danced to the beating of drums. They were mad with joy.They sat in a line at one end of the field. 
-                    They reaped and reaped till it was noon. The drummers went on beating the drums. At noon they stopped. 
-                    They rested for a while and had their lunch.
-                    It consisted of chapaties with glassfuls of clarified butter and country-sugar.</p> -->
+
                 <div class="imgrow">
                     <img class="progressimg" src="<?php echo IMAGES ?>/grow/grow1.jpg" alt="profile">
                     <img class="progressimg" src="<?php echo IMAGES ?>/grow/grow2.jpg" alt="profile">
                     <img class="progressimg" src="<?php echo IMAGES ?>/grow/grow3.jpg" alt="profile">
                     <img class="progressimg" src="<?php echo IMAGES ?>/grow/grow4.jpg" alt="profile">
                 </div>
+                <div class="descript">
+
+                    <p style="color: #666362;">Description</p>
+                    <p class="imgrow">The next day was the harvesting day.
+                        There was bustle and activity on all sides. 
+                        The farmers with sickles and scythes in their hands set out to reap the ripe crop. 
+                        They sang and danced to the beating of drums. They were mad with joy.They sat in a line at one end of the field. 
+                        They reaped and reaped till it was noon. The drummers went on beating the drums. At noon they stopped. 
+                        They rested for a while and had their lunch.
+                        It consisted of chapaties with glassfuls of clarified butter and country-sugar.</p> 
+                </div>
+                <br><hr> <br>
+
+        
+
+                <div class="itemlist">
+                        <div class="left">
+                            <p style="color: #666362;">Investor : </p>
+                            <p>&nbsp; Punsara Deshan</p>
+                        </div>
+                       <div class="left">
+                          <p style="color: #666362;">Item : </p>
+                          <p>&nbsp; Cabbage</p>
+                       </div>
+                </div>    
+                <div class="itemlist">
+                    <div class="left">
+                        <p style="color: #666362;">Date : </p>
+                        <p>&nbsp; 2023/01/26</p>
+                    </div>
+                    <div class="left">
+                        &emsp;&emsp;&emsp;&emsp;
+                        <p style="color: #666362;">Time : </p>
+                        <p>&nbsp; 11.40 am</p>
+                    </div>
+                </div>
+
+                <div class="imgrow">
+                    <img class="progressimg" src="<?php echo IMAGES ?>/grow/grow5.webp" alt="profile">
+                    <img class="progressimg" src="<?php echo IMAGES ?>/grow/grow6.png" alt="profile">
+                    <img class="progressimg" src="<?php echo IMAGES ?>/grow/grow7.jpg" alt="profile">
+                    <img class="progressimg" src="<?php echo IMAGES ?>/grow/grow8.jpg" alt="profile">
+                </div>
+                <div class="descript">
 
                 <p style="color: #666362;">Description</p>
                 <p class="imgrow">The next day was the harvesting day.
@@ -68,75 +116,14 @@
                     They sang and danced to the beating of drums. They were mad with joy.They sat in a line at one end of the field. 
                     They reaped and reaped till it was noon. The drummers went on beating the drums. At noon they stopped. 
                     They rested for a while and had their lunch.
-                    It consisted of chapaties with glassfuls of clarified butter and country-sugar.</p> <hr>
+                    It consisted of chapaties with glassfuls of clarified butter and country-sugar.</p>
+                </div> 
+                <br> <hr>
 
-                <!-- <p style="color: #666362;">Description</p>
-                <p>dummy bauggaihjdjqjbsxj bsha gsgsg gsgsg gs gsg wggxja hhihsuhhx</p> -->
 
-                
 
             </div>
 
-
-
-
-
-
-
-
-            <div class="cardprogress">
-                <div class="itemlist">
-                    <div class="imgrow">
-                        <p style="color: #666362;">Item : </p>
-                        <p>&nbsp; Paddy</p>
-                    </div>
-                    <div class="imgrow">
-                        <p style="color: #666362;">Date : </p>
-                        <p>&nbsp; 2022/01/26</p>
-                    </div>
-                    <div class="imgrow">
-                        <p style="color: #666362;">Time : </p>
-                        <p>&nbsp; 10.30 am</p>
-                    </div>
-                </div>
-                                <!-- <p style="color: #666362;">Description</p>
-                <p class="imgrow">The next day was the harvesting day.
-                    There was bustle and activity on all sides. 
-                    The farmers with sickles and scythes in their hands set out to reap the ripe crop. 
-                    They sang and danced to the beating of drums. They were mad with joy.They sat in a line at one end of the field. 
-                    They reaped and reaped till it was noon. The drummers went on beating the drums. At noon they stopped. 
-                    They rested for a while and had their lunch.
-                    It consisted of chapaties with glassfuls of clarified butter and country-sugar.</p> -->
-                <div class="imgrow">
-                    <img class="progressimg" src="<?php echo IMAGES ?>/grow/grow1.jpg" alt="profile">
-                    <img class="progressimg" src="<?php echo IMAGES ?>/grow/grow2.jpg" alt="profile">
-                    <img class="progressimg" src="<?php echo IMAGES ?>/grow/grow3.jpg" alt="profile">
-                    <img class="progressimg" src="<?php echo IMAGES ?>/grow/grow4.jpg" alt="profile">
-                </div>
-
-                <p style="color: #666362;">Description</p>
-                <p class="imgrow">The next day was the harvesting day.
-                    There was bustle and activity on all sides. 
-                    The farmers with sickles and scythes in their hands set out to reap the ripe crop. 
-                    They sang and danced to the beating of drums. They were mad with joy.They sat in a line at one end of the field. 
-                    They reaped and reaped till it was noon. The drummers went on beating the drums. At noon they stopped. 
-                    They rested for a while and had their lunch.
-                    It consisted of chapaties with glassfuls of clarified butter and country-sugar.</p> <hr>
-
-                <!-- <p style="color: #666362;">Description</p>
-                <p>dummy bauggaihjdjqjbsxj bsha gsgsg gsgsg gs gsg wggxja hhihsuhhx</p> -->
-
-                
-
-            </div>
-
-            
-        <!-- </div> -->
-
-
-
-
-    
     </div>
    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
