@@ -13,7 +13,7 @@ window.addEventListener('scroll', function() {
 const mobile_sidebar = document.querySelector('.mobile__sidebar');
 
 const openSidebar = () => {
-    console.log("open");
+    console.log("opened");
     mobile_sidebar.setAttribute('open', 'true');
 }
 
