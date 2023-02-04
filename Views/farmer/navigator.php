@@ -115,11 +115,11 @@ function highlight($active, $link)
             <li>
                 <a href="<?php echo URLROOT ?>/dashboard/withdraw" class="<?php highlight($active, "mywithdraw") ?>">
                     <i class="[ fa-solid fa-sack-dollar ]"></i>
-                    <p>My Withdraw</p>
+                    <p>Agrologist</p>
                 </a>
             </li>
             <li>
-                <a href="<?php echo URLROOT ?>/dashboard/myfarmers" class="<?php highlight($active, "myfarmers") ?>">
+                <a href="<?php echo URLROOT ?>/farmer/techassistantfirst" class="<?php highlight($active, "techassistantfirst") ?>">
                     <i class="[ fa-solid fa-tractor ]"></i>
                     <p>Technical Assistant</p>
                 </a>
@@ -128,6 +128,12 @@ function highlight($active, $link)
                 <a href="<?php echo URLROOT ?>/farmer/investors" class="<?php highlight($active, "investors") ?>">
                     <i class="[ fa-solid fa-tractor ]"></i>
                     <p>Investors</p>
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo URLROOT ?>/farmer/progress" class="<?php highlight($active, "progress") ?>">
+                    <i class="[ fa-solid fa-tractor ]"></i>
+                    <p>Progress</p>
                 </a>
             </li>
         </ul>

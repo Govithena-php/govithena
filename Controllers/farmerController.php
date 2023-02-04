@@ -110,5 +110,9 @@ class farmerController extends Controller
         $this->render('techassistantfirst');
     }
 
+    function progress(){
+        $this->render('progress');
+    }
+
 
 }
