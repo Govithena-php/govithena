@@ -1,8 +1,10 @@
 .cardprogress  {
     border: 1px solid rgb(186, 178, 178);
-    height: 600px;
+    height: 1000px;
     background-color: white;
     padding: 10px;
+    margin: 10px 10px;
+    border-radius: 10px;
     /* border-radius: 5px; */
   
     /* width: 350px; */
@@ -39,9 +41,33 @@
     padding: 10px 10px;
   }
 
+
   .itemlist{
     display: flex;
     flex-direction: row;
+    padding: 8px 10px;
+    justify-content: flex-start;
+    margin: 0px 20px;
+  }
+  .left{
+    flex-grow: 1;
+
+    display: flex;
+  }
+
+  .itemlistfirst{
+    display: flex;
+    flex-direction: row;
     /* padding: 10px 10px; */
-    justify-content: space-around;
+    justify-content: space-between;
+    margin: 0px 10px;
+  }
+  .btn{
+    background-color:  #1d9a5f;
+    padding: 0px 30px;
+
+  }
+
+  .descript{
+    margin: 0px 20px;
   }

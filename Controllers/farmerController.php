@@ -114,5 +114,9 @@ class farmerController extends Controller
         $this->render('progress');
     }
 
+    function progressform(){
+        $this->render('progressform');
+    }
+
 
 }
