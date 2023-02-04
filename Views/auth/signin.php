@@ -6,14 +6,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="<?php echo IMAGES ?>/favicon.png">
 
-    <link rel="stylesheet" href="<?php echo URLROOT ?>/Webroot/css/ui.css">
-    <link rel="stylesheet" href="<?php echo URLROOT ?>/Webroot/css/signin.css">
+    <!-- <link rel="stylesheet" href="<?php echo URLROOT ?>/Webroot/css/ui.css"> -->
+    <!-- <link rel="stylesheet" href="<?php echo URLROOT ?>/Webroot/css/signin.css"> -->
+
+    <link rel="stylesheet" href="<?php echo CSS ?>base.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>auth/signin.css">
 
     <title>Govithena | Sign In</title>
 </head>
 
+
 <body>
-    <!-- <?php require COMPONENTS . 'modal.php' ?> -->
+    <div class="[ login ]">
+        <div class="[ banner ]">
+            <img src="<?php echo URLROOT ?>/Webroot/images/bg.jpg" alt="banner" />
+            <div class="[ banner__content ]">
+                <h1>Invest in the agreculture of Sri Lanka.</h1>
+            </div>
+        </div>
+        <div class="[ content ]">
+            <div class="[ logo ]">
+                <img src="<?php echo IMAGES ?>/logo.svg" alt="logo" />
+                <h2>Govithena</h2>
+            </div>
+
+            <div class="[ card ]">
+                <div class="[ header ]">
+                    <h1>Welcome back!</h1>
+                    <small>Sign In</small>
+                </div>
+                <form class="[ form ]" action="" method="POST">
+                    <input type="email" name="email" id="email" placeholder="Email or Phone Number">
+                    <input type="password" name="password" id="password" placeholder="Password">
+                    <div class="[ remember__me ]">
+                        <div>
+                            <input type="checkbox" name="remember_me" id="remember_me">
+                            <label for="remember__me">Remember me</label>
+                        </div>
+                        <a href="#">Forgot Password?</a>
+                    </div>
+                    <input type="submit" signy value="Sign In" name="login_btn">
+                </form>
+            </div>
+            <p>Not a member? <a href="<?php echo URLROOT ?>/auth/signup">Signup now</a></p>
+        </div>
+    </div>
+</body>
+
+
+
+
+
+
+<!-- 
+<body>
     <div class="login__container">
 
 
@@ -22,7 +68,10 @@
         </div>
         <div class="content">
 
-
+            <div class="logo">
+                <img src="<?php echo IMAGES ?>/logo.svg" alt="logo" />
+                <h2>Govithena</h2>
+            </div>
 
             <div class="card">
                 <?php
@@ -35,7 +84,7 @@
                 // echo $request->params;
                 ?>
                 <div class="card_header">
-                    <h1>Sign In 2</h1>
+                    <h1>Sign In</h1>
                     <small>Welcome back!</small>
                 </div>
 
@@ -59,6 +108,6 @@
 
 
 
-</body>
+</body> -->
 
 </html>
