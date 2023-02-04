@@ -29,20 +29,6 @@
 
     <div class="[ container ][ investments ]" container-type="dashboard-section">
 
-        <div class="[ investments__heading ]">
-            <div class="[ investments__search ]">
-                <h4>Filter</h4>
-                <input type="text" placeholder="Search">
-                <button type="button">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
-            <div class="[ investments__add ]">
-                <a href="<?php echo URLROOT ?>/dashboard/addinvestment">
-                    Invest
-                </a>
-            </div>
-        </div>
         <?php
 
         if (isset($error)) {
