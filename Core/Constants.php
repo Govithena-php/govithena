@@ -1,7 +1,7 @@
 <?php
 
 class PREFIX
-{
+
     const GENERAL = '';
     const USER = 'USER';
     const GIG = 'GIG';
@@ -20,7 +20,6 @@ class PRODUCT
 }
 
 class ACTOR
-{
     const ADMIN = "ADMIN";
     const INVESTOR = "INVESTOR";
     const FARMER = "FARMER";

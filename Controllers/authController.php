@@ -34,7 +34,6 @@ class authController extends Controller
 
             $user = new User();
             $res = $user->findByEmail($email);
-
             if (!empty($res)) {
 
                 if (password_verify($password, $res['password'])) {
