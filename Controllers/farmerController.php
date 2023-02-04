@@ -1,24 +1,20 @@
 <?php
 class farmerController extends Controller
 {
+    private $currentUser;
 
     public function __construct()
     {
+        $this->currentUser = Session::get('user');
+
         if (!Session::isLoggedIn()) {
-            $this->redirect('/');
+            $this->redirect('/auth/signin');
+        }
+
+        if (!$this->currentUser->hasAccess(ACTOR::FARMER)) {
+            $this->redirect('/error/dontHaveAccess');
         }
     }
-
-    //     function myorders()
-    //     {
-    //         require(ROOT . 'Models/customer.php');
-    //         $customer = new Customer();
-    //         $d['customer'] = $customer->get_order_details();
-    //         $this->set($d);
-    //         $this->render("myorders");
-    //     }
-
-    // // ------------------------------------------
     function createGig()
     {
         if (isset($_POST['createGig'])) {
@@ -57,7 +53,7 @@ class farmerController extends Controller
 
 
             $description = $_POST['description'];
-            $farmerId = Session::get('uid');
+            $farmerId = Session::get('user')->getUid();
 
             $data = [
                 'gigId' => $gigId,
@@ -91,7 +87,7 @@ class farmerController extends Controller
         require(ROOT . 'Models/gig.php');
 
         $gig = new Gig();
-        $id = Session::get('uid');
+        $id = Session::get('user')->getUid();
 
         $products = $gig->All($id);
 

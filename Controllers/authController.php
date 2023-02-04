@@ -21,7 +21,7 @@ class authController extends Controller
         require(ROOT . 'Models/user.php');
 
         // $email = new Input(GET, 'email'); // this is how GET is used
-        // echo $email; 
+        // echo $email;
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -34,7 +34,6 @@ class authController extends Controller
 
             $user = new User();
             $res = $user->findByEmail($email);
-
             if (!empty($res)) {
 
                 if (password_verify($password, $res['password'])) {
@@ -64,7 +63,7 @@ class authController extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             require(ROOT . 'Models/user.php');
-            $uid = (new UID("USER", "INVESTOR"));
+            $uid = (new UID(PREFIX::USER, ACTOR::INVESTOR));
 
             $firstName = new Input(POST, 'firstName');
             $lastName = new Input(POST, 'lastName');
