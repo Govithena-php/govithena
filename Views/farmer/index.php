@@ -12,7 +12,8 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/table.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
-    <link rel="stylesheet" href="<?php echo CSS ?>/gigs.css">
+    
+    <link rel="stylesheet" href="<?php echo CSS ?>/farmer/gigs.css">
 
     <title>Dashboard | Investor</title>
 </head>
