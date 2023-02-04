@@ -12,7 +12,8 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/table.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
-    <link rel="stylesheet" href="<?php echo CSS ?>/gigs.css">
+    
+    <link rel="stylesheet" href="<?php echo CSS ?>/farmer/gigs.css">
 
     <title>Dashboard | Investor</title>
 </head>
@@ -24,8 +25,6 @@
     $title = "Gigs";
     require_once("navigator.php");
     ?>
-
-    <?php $name = "Janith"; ?>
 
     <div class="[ container ][ gigs ]" container-type="dashboard-section">
         <div class="content">
