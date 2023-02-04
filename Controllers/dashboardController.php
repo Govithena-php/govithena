@@ -12,7 +12,7 @@ class dashboardController extends Controller
             $this->redirect('/auth/signin');
         }
 
-        if (!$this->currentUser->hasAccess(USER::INVESTOR)) {
+        if (!$this->currentUser->hasAccess("INVESTOR")) {
             $this->redirect('/error/dontHaveAccess');
         }
     }
