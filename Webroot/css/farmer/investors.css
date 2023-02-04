@@ -1,0 +1,58 @@
+/* div {
+    width: 300px;
+    border: 15px solid green;
+    padding: 50px;
+    margin: 20px;
+  } */
+
+.card  {
+    border: 1px solid black;
+    height: 300px;
+    background-color: white;
+  }
+
+  .img {
+    border-radius: 50%;
+    float:left;
+    clear:right;
+    margin-left:5px;
+  }
+
+  .btn_accept {
+    background-color: #419944; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    /* display: inline-block; */
+    font-size: 16px;
+    border-radius: 30px;
+
+    padding: 0.5rem 1rem;
+    place-items: center;
+  }
+
+  .btn_decline {
+    background-color: #989898; /* Green */
+    border: none;
+    color: rgb(18, 1, 1);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    /* display: inline-block; */
+    font-size: 16px;
+    border-radius: 30px;
+
+    padding: 0.5rem 1rem;
+    place-items: center;
+  }
+
+  .flex-c-c {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; 
+    align-items: center;
+    padding: 1rem 0.05rem;
+}
+

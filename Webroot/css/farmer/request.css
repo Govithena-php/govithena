@@ -1,0 +1,64 @@
+.requests__continer {
+    margin-bottom: 30px;
+    /* -------- */
+}
+
+.requests__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+    /* ------------ */
+}
+
+.request__card {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+    height: 150px;
+    /* ---------------- */
+}
+
+.request__img {
+    height: 100%;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-left: 50px;
+    margin: auto;
+    display: block;
+    /* -------------------- */
+}
+
+.request__img>img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.request__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2.5rem 3.5rem;
+    width: 100%;
+    /* -------------- */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -103,7 +103,7 @@ function highlight($active, $link)
             <li>
                 <a href="<?php echo URLROOT ?>/farmer/" class="<?php highlight($active, "dashboard") ?>">
                     <i class="fa-solid fa-gauge"></i>
-                    <p>Gig</p>
+                    <p>Dashboard</p>
                 </a>
             </li>
             <li>
@@ -121,13 +121,13 @@ function highlight($active, $link)
             <li>
                 <a href="<?php echo URLROOT ?>/dashboard/myfarmers" class="<?php highlight($active, "myfarmers") ?>">
                     <i class="[ fa-solid fa-tractor ]"></i>
-                    <p>Farmers</p>
+                    <p>Technical Assistant</p>
                 </a>
             </li>
             <li>
-                <a href="<?php echo URLROOT ?>/dashboard/myrequests" class="<?php highlight($active, "myrequests") ?>">
+                <a href="<?php echo URLROOT ?>/farmer/investors" class="<?php highlight($active, "investors") ?>">
                     <i class="[ fa-solid fa-tractor ]"></i>
-                    <p>My Request</p>
+                    <p>Investors</p>
                 </a>
             </li>
         </ul>
