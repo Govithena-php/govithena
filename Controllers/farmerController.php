@@ -96,4 +96,19 @@ class farmerController extends Controller
         $this->set($d);
         $this->render("index");
     }
+
+
+    function investors (){
+        $this->render('investors');
+    }
+
+    function techassistant(){
+        $this->render('techassistant');
+    }
+
+    function techassistantfirst(){
+        $this->render('techassistantfirst');
+    }
+
+
 }
