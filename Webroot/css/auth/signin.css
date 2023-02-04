@@ -1,0 +1,182 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--clr-light, #fff);
+}
+
+.login {
+    display: grid;
+    grid-template-columns: 5fr 4fr;
+    height: 100dvh;
+}
+
+.login a {
+    text-decoration: none;
+    color: var(--clr-primary, #1dfe45);
+}
+
+.login .banner {
+    height: 100%;
+    position: relative;
+}
+
+.login .banner img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.login .banner__content {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(11, 11, 11, 0.8) 0%, rgba(0, 0, 0, 0.7) 100%);
+    color: var(--clr-light, #fff);
+    display: flex;
+    padding: 5rem;
+    flex-direction: column;
+    justify-content: center;
+    font-size: clamp(1rem, 2vw, 1.75rem);
+    align-items: center;
+    text-align: center;
+}
+
+.login .content {
+    padding: 2rem;
+    padding-inline: clamp(4rem, 1.5vw, 5rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.login .content .logo {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.login .logo h2 {
+    font-weight: 700;
+}
+
+
+
+.login .card {
+    max-width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.login .card .header h1 {
+    font-weight: 600;
+}
+
+.login .card .header small {
+    color: #4c4c4c;
+}
+
+.login .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.login .form input {
+    padding: 1rem;
+    border: 1px solid var(--clr-primary, #1dfe45);
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.login .form input:focus {
+    outline: none;
+}
+
+.login .form input[type=submit] {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--clr-primary, #1dfe45);
+    color: var(--clr-light, #fff);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.remember__me {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-block: 1rem;
+}
+
+
+
+@media screen and (max-width: 1200px) {
+    .login .card {
+        max-width: 90%;
+    }
+
+}
+
+@media screen and (max-width: 1024px) {
+    .login {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .login .content {
+        padding-inline: clamp(3rem, 1.5vw, 4rem);
+    }
+
+    .login .card {
+        max-width: 100%;
+    }
+
+    .login .content>p {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .login {
+        grid-template-columns: 1fr;
+    }
+
+    .login .banner {
+        display: none;
+    }
+
+
+    .login .content {
+        padding-inline: clamp(2rem, 1.5vw, 3rem);
+    }
+
+    .login .card {
+        max-width: 100%;
+    }
+
+    .login .banner__content {
+        padding: 3rem;
+    }
+}
+
+
+@media screen and (max-width: 576px) {
+    .login .content {
+        padding-inline: clamp(1.5rem, 1.5vw, 2rem);
+    }
+
+    .login .content a,
+    .login .content p {
+        font-size: clamp(0.8rem, 1.5vw, 1rem);
+    }
+
+}
+
+@media screen and (max-width: 425px) {
+
+    .login .content {
+        padding-inline: 1.5rem;
+    }
+
+}
