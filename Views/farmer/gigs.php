@@ -18,7 +18,7 @@
     <title>Dashboard | Investor</title>
 </head>
 
-<body>
+<body class="bg-gray h-screen">
 
     <?php
     $active = "gigs";

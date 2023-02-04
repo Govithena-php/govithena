@@ -48,7 +48,7 @@
                         <div class="[ request__card bg-light ]">
                            
                            <div class="[ request__img ]">
-                                <img class="img" src="<?php echo IMAGES ?>/investor.jfif" alt="profile">
+                                <img class="img" src="<?php echo IMAGES ?>/techassistant/techassistant1.jpg" alt="profile">
                             </div>
 
                             <form action="<?php echo URLROOT . '/agrologist/requests' ?>" >

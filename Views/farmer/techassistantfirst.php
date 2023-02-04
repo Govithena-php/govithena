@@ -46,6 +46,8 @@
              </select>
         </div>
         <div class="cardspace">
+        <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/farmer/techassistant/" ?>">
+
 
         <div class="cardpad">
 
@@ -68,8 +70,10 @@
            
         </div>
         </div>
-  
-  
+        </a>
+
+        <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/farmer/techassistant/" ?>">
+
         <div class="cardpad">
 
         <div class="cardtechfst">
@@ -86,14 +90,18 @@
              <p> LKR 50,000 - 75,000</p>
              <p>This is gig tittle</p>
             </div>
-        </div>              
+        </div>         
+        </a>     
     
         </div>
 
 
 
 
+
         <div class="cardspace">
+        <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/farmer/techassistant/" ?>">
+
 
             <div class="cardpad">
 
@@ -114,9 +122,11 @@
 
             
             
-            </div>
-            </div>
+                 </div>
+              </div>
+             </a>
 
+             <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/farmer/techassistant/" ?>">
 
             <div class="cardpad">
 
@@ -134,7 +144,8 @@
                 <p> LKR 50,000 - 75,000</p>
                 <p>This is gig tittle</p>
                 </div>
-            </div>              
+            </div>      
+             </a>        
         </div>
 
 

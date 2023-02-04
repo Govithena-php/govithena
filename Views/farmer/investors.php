@@ -22,7 +22,7 @@
 <body class="bg-gray h-screen">
 
     <?php
-    $active = "investor";
+    $active = "investors";
     $title = "Investor";
     require_once("navigator.php");
     ?>
