@@ -1,3 +1,4 @@
+
 const openSidebar = () => {
     console.log('open sidebar');
     const sidebar = document.querySelector('.sidebar');
@@ -7,6 +8,11 @@ const openSidebar = () => {
 const closeSidebar = () => {
     const sidebar = document.querySelector('.sidebar');
     sidebar.classList.remove('sidebar__open');
+}
+
+const toggleSidebar = () => {
+    const sidebar = document.querySelector('.sidebar');
+    sidebar.classList.toggle('sidebar__open');
 }
 
 const toggleProfileMenu = () => {

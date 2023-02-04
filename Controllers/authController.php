@@ -21,7 +21,7 @@ class authController extends Controller
         require(ROOT . 'Models/user.php');
 
         // $email = new Input(GET, 'email'); // this is how GET is used
-        // echo $email; 
+        // echo $email;
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -46,7 +46,9 @@ class authController extends Controller
                         $res['userType'],
                         true
                     );
-                    $this->redirect('/');
+                    $this->goto($res['userType']);
+                    // $this->redirect('/');
+
                 } else {
                     $this->redirect('/signin/error/1');
                 }

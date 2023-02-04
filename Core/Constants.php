@@ -1,6 +1,5 @@
 <?php
-
-enum PREFIX
+class PREFIX
 {
     const GENERAL = '';
     const USER = 'USER';
@@ -11,7 +10,7 @@ enum PREFIX
     const REVIEW = 'REVIEW';
 }
 
-enum PRODUCT
+class PRODUCT
 {
     const VEGETABLE = 'VEGETABLE';
     const FRUIT = 'FRUIT';
@@ -19,8 +18,7 @@ enum PRODUCT
     const SPICE = 'SPICE';
 }
 
-enum ACTOR
-{
+class ACTOR{
     const ADMIN = "ADMIN";
     const INVESTOR = "INVESTOR";
     const FARMER = "FARMER";
@@ -28,7 +26,7 @@ enum ACTOR
     const TECH_ASSISTANT = "TECHASSISTANT";
 }
 
-enum STATUS
+class STATUS
 {
     const PENDING = "PENDING";
     const ACTIVE = "ACTIVE";
