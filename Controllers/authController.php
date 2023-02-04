@@ -46,7 +46,9 @@ class authController extends Controller
                         $res['userType'],
                         true
                     );
-                    $this->redirect('/');
+                    $this->goto($res['userType']);
+                    // $this->redirect('/');
+
                 } else {
                     $this->redirect('/signin/error/1');
                 }

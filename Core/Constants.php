@@ -1,6 +1,6 @@
 <?php
-
-class PREFIX{
+class PREFIX
+{
     const GENERAL = '';
     const USER = 'USER';
     const GIG = 'GIG';
