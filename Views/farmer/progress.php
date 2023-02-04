@@ -29,8 +29,12 @@
 
     <div class="container" container-type="dashboard-section">
             <div class="itemlistfirst">  
-                <p style="font-size: 20px;"> Progress of cabbage</p>
-                <button  class="btn" type="button">Add</button>
+                <p style="font-size: 24px;"> Progress of cabbage</p> 
+
+                <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/farmer/progressform/" ?>"> 
+                   <button  class="btn" type="button">Add</button>
+                </a>
+
             </div>
             <hr> 
 

@@ -42,7 +42,7 @@
              </select>
 
              <select name="type" id="type">
-                    <option value="location">LOcation</option>                 
+                    <option value="location">Location</option>                 
              </select>
         </div>
         <div class="cardspace">
