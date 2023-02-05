@@ -107,7 +107,7 @@ function highlight($active, $link)
                 </a>
             </li>
             <li>
-                <a href="<?php echo URLROOT ?>/farmer/createGig" class="<?php highlight($active, "gigs") ?>">
+                <a href="<?php echo URLROOT ?>/farmer/" class="<?php highlight($active, "gigs") ?>">
                     <i class="[ fa-solid fa-sack-dollar ]"></i>
                     <p>Gigs</p>
                 </a>
