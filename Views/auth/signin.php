@@ -15,7 +15,6 @@
     <title>Govithena | Sign In</title>
 </head>
 
-
 <body>
     <div class="[ login ]">
         <div class="[ banner ]">
@@ -36,8 +35,11 @@
                     <small>Sign In</small>
                 </div>
                 <form class="[ form ]" action="" method="POST">
-                    <input type="email" name="email" id="email" placeholder="Email or Phone Number">
-                    <input type="password" name="password" id="password" placeholder="Password">
+                    <div class="[ alert ] <?php if ($error) echo "show"; ?>">
+                        <p>Invalied email or password</p>
+                    </div>
+                    <input class="<?php if ($error) echo "error"; ?>" type="email" name="email" id="email" placeholder="Email or Phone Number" required>
+                    <input class="<?php if ($error) echo "error"; ?>" type="password" name="password" id="password" placeholder="Password" required>
                     <div class="[ remember__me ]">
                         <div>
                             <input type="checkbox" name="remember_me" id="remember_me">

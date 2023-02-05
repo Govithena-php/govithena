@@ -16,12 +16,22 @@ class authController extends Controller
         $this->signin();
     }
 
-    public function signin()
+    public function signin($params = null)
     {
+        $props = ['error' => false];
+        
+        if (isset($params[0])) {
+            if ($params[0] == 'error') {
+                $props['error'] = true;
+            }
+        }
+
         require(ROOT . 'Models/user.php');
 
         // $email = new Input(GET, 'email'); // this is how GET is used
         // echo $email;
+
+
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -47,15 +57,15 @@ class authController extends Controller
                         true
                     );
                     $this->goto($res['userType']);
-                    // $this->redirect('/');
-
                 } else {
-                    $this->redirect('/signin/error/1');
+                    $this->redirect('/auth/signin/error');
                 }
             } else {
-                $this->redirect('/signin/error/2');
+                $this->redirect('/auth/signin/error');
             }
         }
+
+        $this->set($props);
         $this->render('signin');
     }
 
