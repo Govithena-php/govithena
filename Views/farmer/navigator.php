@@ -113,7 +113,7 @@ function highlight($active, $link)
                 </a>
             </li>
             <li>
-                <a href="<?php echo URLROOT ?>/dashboard/withdraw" class="<?php highlight($active, "mywithdraw") ?>">
+                <a href="<?php echo URLROOT ?>/farmer/agrologist" class="<?php highlight($active, "agrologist") ?>">
                     <i class="[ fa-solid fa-sack-dollar ]"></i>
                     <p>Agrologist</p>
                 </a>

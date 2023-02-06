@@ -118,5 +118,9 @@ class farmerController extends Controller
         $this->render('progressform');
     }
 
+    function agrologist(){
+        $this->render('agrologist');
+    }
+
 
 }
