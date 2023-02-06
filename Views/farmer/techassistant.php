@@ -58,7 +58,7 @@
                                         
                                             <!-- <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/agrologist/requests/" ?>"> -->
                                                 
-                                                <h1><p><b>Amal Perera</b></p></h1> 
+                                                <h1><p><b>Avishka Prabath</b></p></h1> 
                                             <!-- </a> -->
                                           
                                             
@@ -107,8 +107,8 @@
                 <p style="color: #666362;">Last Name </p>
            </div>
             <div class="flex-c-c1 name">
-                <p>Sanduni </p> 
-                <p>Aaloka </p>
+                <p>Avishka </p> 
+                <p>Prabath </p>
             </div>
             <hr>
             <p style="color: #666362;">Prices</p>
@@ -131,17 +131,17 @@
             </table>
             <hr>
 
-            <p>Email <br> <u>sanduniaaloka@gmail.com</u></p> <br>
+            <p>Email <br> <u>avishkaprabath@gmail.com</u></p> <br>
             <p>Mobile Number <br> 070 1234567</p> <br> <br>
              <p><h2>Address</h2></p>
              <hr>
 
              <p>No 34,</p>
              <p>Meldor place,</p>
-             <P>Nugegoda</P>
+             <P>Rambewa.</P>
              <div class="space">
-             <p>District:   Colombo</p>
-             <p>PostalCode:   10250</p>
+             <p>District:   Anuradhapura</p>
+             <p>PostalCode:   50000</p>
              </div>
         
            
