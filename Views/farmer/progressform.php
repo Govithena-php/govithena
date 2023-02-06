@@ -26,7 +26,7 @@
     ?>
 
     
-
+  
     <div class="container" container-type="dashboard-section">
         <h1>Add Progress</h1><hr>
         <div class="cardform">
@@ -36,11 +36,11 @@
             <div class="row" >
                 <div class="name1">
                     <label class="labeltext" for="item">Item :</label>
-                    <input placeholder="Item" class="box" type="text" id="fname" name="fname"><br><br>
+                    <input placeholder="Item" class="box1" type="text" id="fname" name="fname"><br><br>
                 </div>
 
                 <div class="name2">
-                    <label class="labeltext" for="fname">Investor :</label>
+                    <label class="labeltext" for="investor">Investor :</label>
                     <div class="investorbox">
                         <select name="investors" id="investors">
                             <option value="investor1">Devin Yapa</option>
@@ -68,18 +68,20 @@
             </div>
 
                
-            <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/farmer/progress/" ?>">
+            
                 <input class="subbtn" type="submit" value="Submit"> 
-            </a>
+            
         </form>
+        <!-- <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
         </div>
 
 
-
     </div>
+   
     <?php
-    require_once("footer.php");
+        require_once("footer.php");
     ?>
+
    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="<?php echo JS ?>/dashboard/chart.js"></script>
