@@ -54,7 +54,7 @@
              
         
              <form class="[ fs-3 ][ search__form ]" action="<?php echo URLROOT . "/search/" ?>" method="get">
-                <input class="" type="text" name="terms" placeholder="search by: name / location">
+                <input class="" type="text" name="terms" placeholder="Search by: name / location">
                 <button class="[ btn btn-primary ] [ search_button ]" type="submit">search</button>
             </form>
 
@@ -216,7 +216,9 @@
 
     
     </div>
-   
+    <?php
+    require_once("footer.php");
+    ?>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="<?php echo JS ?>/dashboard/chart.js"></script>
     <script src="<?php echo JS ?>/dashboard/dashboard.js"></script>
