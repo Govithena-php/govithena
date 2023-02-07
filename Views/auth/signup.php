@@ -67,7 +67,7 @@
                     <button type="submit" name="signup" class="btn uppercase">Sign up</button>
                 </form>
             </div>
-            <p>Already Have an Account? <a class="register" href="<?php echo URLROOT ?>/auth/signin">Login</a></p>
+            <p>Already Have an Account? <a class="register" href="<?php echo URLROOT ?>/auth/signin">Sign In</a></p>
         </div>
     </div>
 </body>

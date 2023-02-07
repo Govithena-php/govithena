@@ -50,7 +50,7 @@
                     <input type="submit" signy value="Sign In" name="login_btn">
                 </form>
             </div>
-            <p>Not a member? <a href="<?php echo URLROOT ?>/auth/signup">Signup now</a></p>
+            <p>Not a member? <a href="<?php echo URLROOT ?>/auth/signup">Sign up</a></p>
         </div>
     </div>
 </body>
