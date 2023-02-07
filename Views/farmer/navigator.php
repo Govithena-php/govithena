@@ -19,12 +19,20 @@ function highlight($active, $link)
 <link rel="stylesheet" href="<?php echo CSS ?>/dashboard/navigator.css" type="text/css">
 
 <nav class="[ nav ]">
-    <div class="[ container ]" container-type="dashboard-section">
+    <div class="[ container ]" container-type="dashboard-navbar">
+
+        <div class="[ logo ]">
+            <a href="<?php echo URLROOT ?>/farmer/">
+                <img src="<?php echo IMAGES ?>/logo.svg" alt="logo">
+            </a>
+        </div>
+
         <div class="[ open__btn ]">
-            <button onclick="openSidebar()">
+            <button onclick="toggleSidebar()">
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
+
         <?php
         if (isset($title)) {
         ?>
@@ -91,11 +99,9 @@ function highlight($active, $link)
 
     <div class="[ logo ]">
         <a href="<?php echo URLROOT ?>/">
+            <h2>Govithena</h2>
             <img src="<?php echo IMAGES ?>/logo.svg" alt="logo">
         </a>
-        <div class="[ action__btn ]">
-            <button onclick="closeSidebar()">&times;</button>
-        </div>
     </div>
 
     <div class="[ links ]">
