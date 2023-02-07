@@ -2,6 +2,54 @@ body {
     background: var(--clr-light, #fff);
 }
 
+.actors {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+
+}
+
+.actors .actor {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.25rem;
+    border: 1px solid var(--clr-primary, #1dfe45);
+    border-radius: 5px;
+    background: var(--clr-light, #fff);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: 1.5rem;
+    transition: all 0.1s ease-in-out;
+    margin: 0;
+    cursor: pointer;
+}
+
+.actors input {
+    display: none;
+}
+
+.actors .actor h4 {
+    color: var(--clr-primary, #1dfe45);
+}
+
+.actors .actor p {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: #4c4c4c;
+}
+
+.actors .actor:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background: var(--clr-primary, #1dfe45);
+    color: var(--clr-light, #fff);
+}
+
+.actors .actor:hover h4,
+.actors .actor:hover p {
+    color: var(--clr-light, #fff);
+}
+
+
 .signup {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -134,8 +182,8 @@ body {
     gap: 1rem;
 }
 
-.terms_condtions{
-    margin:0;
+.terms_condtions {
+    margin: 0;
 }
 
 .signup .alert {
@@ -178,7 +226,7 @@ body {
 
     .signup .form .name {
         flex-direction: column;
-        gap:0;
+        gap: 0;
     }
 
     .signup .content>p {
@@ -205,18 +253,29 @@ body {
         max-width: 100%;
     }
 
+    .signup .card .header {
+        text-align: center;
+    }
+
     .signup .banner__content {
         padding: 3rem;
     }
 
     .signup .form .name {
         flex-direction: row;
-        gap:1rem;
+        gap: 1rem;
     }
+
 }
 
 
 @media screen and (max-width: 576px) {
+
+    .actors {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+
     .signup .form .name {
         flex-direction: column;
         gap: 0;
@@ -225,7 +284,7 @@ body {
     .signup .form label {
         text-align: left;
     }
-    
+
     .signup .content {
         padding-inline: clamp(1.5rem, 1.5vw, 2rem);
     }
