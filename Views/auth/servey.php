@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="<?php echo CSS ?>base.css">
     <link rel="stylesheet" href="<?php echo CSS ?>auth/signup.css">
 
-    <title>Govithena | Sign Up</title>
+    <title>Govithena | Servey</title>
 </head>
 
 
@@ -28,33 +28,11 @@
             </div>
 
             <div class="[ card ]">
-                <!-- <div class="[ header ]">
-                    <h1>Hi!</h1>
+                <div class="[ header ]">
+                    <h3>Hi!</h3>
                     <small>Sign Up with Govithena</small>
-                </div> -->
+                </div>
                 <form class="form" action="<?php echo URLROOT ?>/auth/signup" method="post">
-                    <?php
-                    if (isset($msg)) { ?>
-                        <div class="alert">
-                            <p><?php echo $msg ?></p>
-                        </div>
-                    <?php
-                    }
-                    ?>
-                    <div class="[ name ]">
-                        <div class="[ form__control ]">
-                            <label for="firstName">First Name</label>
-                            <input type="text" name="firstName" class="" placeholder="First Name" autocomplete="off">
-                        </div>
-                        <div class="[ form__control ]">
-                            <label for="lastName">Last Name</label>
-                            <input type="text" name="lastName" class="" placeholder="Last Name" autocomplete="off">
-                        </div>
-                    </div>
-                    <label for="email">Email Address</label>
-                    <input type="email" name="email" class="" placeholder="Email Address" autocomplete="off">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" class="" placeholder="Password">
                     <label for="confirmPassword">Confirm Password</label>
                     <input type="password" name="confirmPassword" class="" placeholder="Confirm Password">
                     <div class="terms_and_conditions">
@@ -67,7 +45,7 @@
                     <button type="submit" name="signup" class="btn uppercase">Sign up</button>
                 </form>
             </div>
-            <p>Already Have an Account? <a class="register" href="<?php echo URLROOT ?>/auth/signin">Sign In</a></p>
+            <p>Already Have an Account? <a class="register" href="<?php echo URLROOT ?>/auth/signin">Login</a></p>
         </div>
     </div>
 </body>

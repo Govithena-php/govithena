@@ -1,17 +1,16 @@
 <?php
-
-enum PREFIX
+class PREFIX
 {
     const GENERAL = '';
-    const USER = 'USER';
+    const USER = 'USR';
     const GIG = 'GIG';
-    const PRODUCT = 'PRODUCT';
-    const REQUEST = 'REQUEST';
-    const RATING = 'RATING';
-    const REVIEW = 'REVIEW';
+    const PRODUCT = 'PRO';
+    const REQUEST = 'REQ';
+    const RATING = 'RAT';
+    const REVIEW = 'REV';
 }
 
-enum PRODUCT
+class PRODUCT
 {
     const VEGETABLE = 'VEGETABLE';
     const FRUIT = 'FRUIT';
@@ -19,16 +18,21 @@ enum PRODUCT
     const SPICE = 'SPICE';
 }
 
-enum ACTOR
+class ACTOR
 {
     const ADMIN = "ADMIN";
     const INVESTOR = "INVESTOR";
     const FARMER = "FARMER";
     const AGROLOGIST = "AGROLOGIST";
     const TECH_ASSISTANT = "TECHASSISTANT";
+
+    public static function get($key)
+    {
+        return constant("ACTOR::$key");
+    }
 }
 
-enum STATUS
+class STATUS
 {
     const PENDING = "PENDING";
     const ACTIVE = "ACTIVE";
