@@ -24,6 +24,7 @@ function highlight($active, $link)
         <div class="[ logo ]">
             <a href="<?php echo URLROOT ?>/">
                 <img src="<?php echo IMAGES ?>/logo.svg" alt="logo">
+                <p>Govithena</p>
             </a>
         </div>
 
