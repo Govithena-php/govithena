@@ -22,8 +22,9 @@ function highlight($active, $link)
     <div class="[ container ]" container-type="dashboard-navbar">
 
         <div class="[ logo ]">
-            <a href="<?php echo URLROOT ?>/farmer/">
+            <a href="<?php echo URLROOT ?>/">
                 <img src="<?php echo IMAGES ?>/logo.svg" alt="logo">
+                <p>Govithena</p>
             </a>
         </div>
 
@@ -105,7 +106,7 @@ function highlight($active, $link)
     </div>
 
     <div class="[ links ]">
-        <ul>
+    <ul>
             <li>
                 <a href="<?php echo URLROOT ?>/farmer/" class="<?php highlight($active, "dashboard") ?>">
                     <i class="fa-solid fa-gauge"></i>
