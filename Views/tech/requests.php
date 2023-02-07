@@ -39,7 +39,7 @@
                 </div>
                 
                 <div class="btn_group">
-                    <a href="" class="view_btn">Accept</a>
+                    <a href="" class="accept_btn">Accept</a>
                     <a href="" class="ignore_btn">Ignore</a>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                 
                 <div class="btn_group">
                     <a href="" class="accept_btn">Accept</a>
-                    <a href="" class="ignore_btn">Ignore</a></div>
+                    <a href="" class="ignore_btn">Ignore</a>
                 </div>
             </div>
 

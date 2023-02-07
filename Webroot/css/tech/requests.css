@@ -51,7 +51,7 @@
 
 .accept_btn {
     text-decoration: none;
-    color: #079c20;
+    color: #fff;
     background-color: var(--clr-primary);
     padding:10px 30px;
     border-radius: 5px;
@@ -59,8 +59,8 @@
 
 .ignore_btn {
     text-decoration: none;
-    color: rgb(198, 3, 3);
-    background-color: var(--clr-primary);
+    color: #fff;
+    background-color: #d40707;
     padding:10px 30px;
     border-radius: 5px;
 }
