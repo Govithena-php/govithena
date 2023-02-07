@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&family=Roboto:wght@300;400;500;700;900&display=swap');
 @import 'variables.css';
+
 :root {
     font-size: 14px;
 }
+
 *,
 *::before *::after {
     margin: 0;
@@ -54,12 +56,22 @@ p {
     font-weight: 400;
 }
 
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 1rem;
+}
+
 
 
 body {
     font-family: var(--ff-poppins);
     font-size: var(--fs-4);
     line-height: 1.5;
+    background-color: var(--clr-gray);
 
 }
 
@@ -75,6 +87,23 @@ textarea,
 select {
     font: inherit;
 }
+
+/* ::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #c0c0c0;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background: var(--clr-primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--clr-primary-light);
+} */
 
 .w-full {
     width: 100%;
@@ -126,7 +155,7 @@ select {
     flex-direction: column;
 }
 
-.flex-row-center{
+.flex-row-center {
     display: flex;
     justify-content: center;
 }
@@ -197,14 +226,27 @@ select {
     padding-block: 2rem;
 }
 
+.container[container-type="dashboard-navbar"] {
+    margin-left: 1rem;
+    margin-right: 2rem;
+}
+
 .container[container-type="dashboard-section"] {
-    margin: 4rem 2rem 0 15rem;
+    margin-right: var(--container-margin-right);
+    margin-left: var(--container-margin-left);
+    margin-top: var(--navbar-height);
+    margin-bottom: 0;
     padding-block: 1rem;
+    transition: all 0.3s ease-in-out;
 }
 
 .container[container-type="dashboard-footer"] {
-    margin: 0 2rem 0 15rem;
+    margin-right: var(--container-margin-right);
+    margin-left: var(--container-margin-left);
+    margin-top: 0;
+    margin-bottom: 0;
     padding-block: 1rem;
+    transition: all 0.3s ease-in-out;
 }
 
 
@@ -232,53 +274,34 @@ select {
 --breakpoint-xs: 0px; 
 */
 
+@media screen and (max-width: 1440px) {
 
-@media screen and (min-width: 0px) {
     .container {
-        margin-inline: 1rem;
+        margin-inline: 10rem;
     }
 
     .container[container-type="section"] {
-        padding-block: 0.75rem;
+        padding-block: 1.75rem;
     }
 
+
     .content {
-        text-align: center;
+        text-align: left;
     }
 
     .header {
-        text-align: center;
+        text-align: left;
     }
-
 }
 
+@media screen and (max-width: 1200px) {
 
-@media screen and (min-width: 576px) {
     .container {
-        margin-inline: 1.2rem;
+        margin-inline: 8rem;
     }
 
     .container[container-type="section"] {
-        padding-block: 0.85rem;
-    }
-
-    .content {
-        text-align: center;
-    }
-
-    .header {
-        text-align: center;
-    }
-
-}
-
-@media screen and (min-width:768px) {
-    .container {
-        margin-inline: 2rem;
-    }
-
-    .container[container-type="section"] {
-        padding-block: 1rem;
+        padding-block: 1.5rem;
     }
 
     .content {
@@ -290,7 +313,8 @@ select {
     }
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (max-width: 1024px) {
+
     .container {
         margin-inline: 6rem;
     }
@@ -309,13 +333,23 @@ select {
 
 }
 
-@media screen and (min-width: 1200px) {
+
+@media screen and (max-width:768px) {
+    :root {
+        --container-margin-left: 1rem !important;
+        --container-margin-right: 1rem !important;
+    }
+
     .container {
-        margin-inline: 8rem;
+        margin-inline: 2rem;
     }
 
     .container[container-type="section"] {
-        padding-block: 1.5rem;
+        padding-block: 1rem;
+    }
+
+    .container[container-type="dashboard-navbar"] {
+        margin-inline: 1rem;
     }
 
     .content {
@@ -327,20 +361,54 @@ select {
     }
 }
 
-@media screen and (min-width: 1440px) {
+@media screen and (max-width: 576px) {
+    :root {
+        --container-margin-left: 0.5rem !important;
+        --container-margin-right: 0.5rem !important;
+    }
+
     .container {
-        margin-inline: 10rem;
+        margin-inline: 1.2rem;
     }
 
     .container[container-type="section"] {
-        padding-block: 1.75rem;
+        padding-block: 0.85rem;
     }
 
+    .container[container-type="dashboard-navbar"] {
+        margin-inline: 0.5rem;
+    }
+
+
     .content {
-        text-align: left;
+        text-align: center;
     }
 
     .header {
-        text-align: left;
+        text-align: center;
     }
+
 }
+
+
+/* @media screen and (max-width: 0px) {
+    :root {
+        --container-margin-left: 0.5rem !important;
+    }
+    .container {
+        margin-inline: 1rem;
+    }
+
+    .container[container-type="section"] {
+        padding-block: 0.75rem;
+    }
+
+    .content {
+        text-align: center;
+    }
+
+    .header {
+        text-align: center;
+    }
+
+} */

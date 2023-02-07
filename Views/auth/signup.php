@@ -6,12 +6,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="<?php echo IMAGES ?>/favicon.png">
 
-    <link rel="stylesheet" href="<?php echo URLROOT ?>/Webroot/css/ui.css">
-    <link rel="stylesheet" href="<?php echo URLROOT ?>/Webroot/css/signup.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>base.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>auth/signup.css">
+
     <title>Govithena | Sign Up</title>
 </head>
 
+
 <body>
+    <div class="[ signup ]">
+        <div class="[ banner ]">
+            <img src="<?php echo URLROOT ?>/Webroot/images/bg.jpg" alt="banner" />
+            <div class="[ banner__content ]">
+                <h1>Invest in the agreculture of Sri Lanka.</h1>
+            </div>
+        </div>
+        <div class="[ content ]">
+            <div class="[ logo ]">
+                <img src="<?php echo IMAGES ?>/logo.svg" alt="logo" />
+                <h2>Govithena</h2>
+            </div>
+
+            <div class="[ card ]">
+                <!-- <div class="[ header ]">
+                    <h1>Hi!</h1>
+                    <small>Sign Up with Govithena</small>
+                </div> -->
+                <form class="form" action="<?php echo URLROOT ?>/auth/signup" method="post">
+                    <?php
+                    if (isset($msg)) { ?>
+                        <div class="alert">
+                            <p><?php echo $msg ?></p>
+                        </div>
+                    <?php
+                    }
+                    ?>
+                    <div class="[ name ]">
+                        <div class="[ form__control ]">
+                            <label for="firstName">First Name</label>
+                            <input type="text" name="firstName" class="" placeholder="First Name" autocomplete="off">
+                        </div>
+                        <div class="[ form__control ]">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" name="lastName" class="" placeholder="Last Name" autocomplete="off">
+                        </div>
+                    </div>
+                    <label for="email">Email Address</label>
+                    <input type="email" name="email" class="" placeholder="Email Address" autocomplete="off">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" class="" placeholder="Password">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" name="confirmPassword" class="" placeholder="Confirm Password">
+                    <div class="terms_and_conditions">
+                        <input type="checkbox" id="terms_condtions" name="terms_condtions" value="accepted">
+                        <label class="terms_condtions" for="terms_condtions">
+                            Yes, I understand and agree to the Govithena
+                            <a href="">Terms of Service</a>, including the <a href="">User Agreement and Privacy Policy</a>.
+                        </label>
+                    </div>
+                    <button type="submit" name="signup" class="btn uppercase">Sign up</button>
+                </form>
+            </div>
+            <p>Already Have an Account? <a class="register" href="<?php echo URLROOT ?>/auth/signin">Sign In</a></p>
+        </div>
+    </div>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <body>
     <div class="brand">
         <svg width="140" height="289" viewBox="0 0 1220 289" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_d_709_3441)">
@@ -62,6 +134,6 @@
         </form>
         <h5>Already Have an Account? <a class="register" href="<?php echo URLROOT ?>/auth/signin">Login</a></h5>
     </div>
-</body>
+</body> -->
 
 </html>

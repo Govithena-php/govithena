@@ -18,9 +18,24 @@ class Session
         }
     }
 
+    public static function has($key)
+    {
+        return isset($_SESSION[$key]);
+    }
+
     public static function get($key)
     {
         if (isset($_SESSION[$key])) return $_SESSION[$key];
+        return null;
+    }
+
+    public static function pop($key)
+    {
+        if (isset($_SESSION[$key])) {
+            $value = $_SESSION[$key];
+            unset($_SESSION[$key]);
+            return $value;
+        }
         return null;
     }
 
@@ -33,7 +48,7 @@ class Session
 
     public static function isLoggedIn()
     {
-        if (self::get('uid') !== null) {
+        if (self::get('user') !== null) {
             return true;
         } else {
             return false;

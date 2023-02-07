@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Govithena | Home</title>
-    
+
     <link rel="icon" type="image/x-icon" href="<?php echo IMAGES ?>/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
     <link rel="stylesheet" href="<?php echo CSS ?>/base.css">
@@ -41,7 +41,7 @@
             </div>
 
             <?php
-            if (Session::isLoggedIn()) {
+            if (isset($currentUser)) {
             ?>
                 <form class="[ search ]" id="searchForm" action="<?php echo URLROOT . "/search/" ?>" method="get">
                     <input type="text" name="terms" id="terms" class="" placeholder="search by: name / category / location" />
@@ -65,8 +65,12 @@
     </div>
 
 
-    <?php if (Session::isLoggedIn()) {
+    <?php if (isset($currentUser)) {
     ?>
+        <?php
+        // var_dump($_SESSION['user']);
+        // die();
+        ?>
         <!-- <div class="[ container ]" container-type="section">
             <div class="[ text-center ]">
                 <h1 class="[ fs-4 ]">Welcome <?php echo $_SESSION['username'] ?></h1>
@@ -80,6 +84,35 @@
     $numberOfCategories = 20;
     ?>
     <div class="[ container ][ title ]" container-type="section">
+
+        <?php
+
+        // if (isset($currentUser)) {
+        //     if ($currentUser->isInvestor()) {
+        //         echo " <h1>Investor</h1>";
+        //     }
+
+        //     if ($currentUser->isFarmer()) {
+        //         echo " <h1>Farmer</h1>";
+        //     }
+
+        //     if ($currentUser->isAdmin()) {
+        //         echo " <h1>Admin</h1>";
+        //     }
+
+        //     if ($currentUser->isAgrologist()) {
+        //         echo " <h1>Agrologist</h1>";
+        //     }
+
+        //     if ($currentUser->isTechAssistant()) {
+        //         echo " <h1>Tech Assistant</h1>";
+        //     }
+        // }
+
+
+
+        ?>
+
         <h4><span><?php echo $numberOfGigs; ?>+</span> gigs in <span><?php echo $numberOfCategories; ?>+</span> categories.</h4>
         <h1>Invest in the agreculture of Sri Lanka.</h1>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facere atque accusantium laborum<br>eligendi at voluptatibus accusamus.</p>

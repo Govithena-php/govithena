@@ -1,5 +1,4 @@
 <?php
-require 'Constants.php';
 
 class Controller
 {
@@ -7,12 +6,12 @@ class Controller
     var $vars = [];
     var $layout = false;
 
-    function set($d)
+    public function set($d)
     {
         $this->vars = array_merge($this->vars, $d);
     }
 
-    function render($filename)
+    public function render($filename)
     {
         extract($this->vars);
         ob_start();
@@ -26,11 +25,32 @@ class Controller
         }
     }
 
-    function redirect($url)
+    public function redirect($url)
     {
         header('Location: ' . URLROOT . $url);
 
         // header('location: http://localhost/govithena/signin/error.php');
 
+    }
+
+    public function goto($type)
+    {
+        switch ($type) {
+            case ACTOR::INVESTOR:
+                $this->redirect('/');
+                break;
+            case ACTOR::FARMER:
+                $this->redirect('/farmer');
+                break;
+            case ACTOR::ADMIN:
+                $this->redirect('/admin');
+                break;
+            case ACTOR::AGROLOGIST:
+                $this->redirect('/agrologist');
+                break;
+            case ACTOR::TECH_ASSISTANT:
+                $this->redirect('/tech');
+                break;
+        }
     }
 }

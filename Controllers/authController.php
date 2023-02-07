@@ -2,6 +2,8 @@
 
 class authController extends Controller
 {
+    private $currentUser;
+
     public function __construct()
     {
         if (Session::isLoggedIn()) {
@@ -14,12 +16,17 @@ class authController extends Controller
         $this->signin();
     }
 
-    public function signin()
+    public function signin($params = null)
     {
-        require(ROOT . 'Models/user.php');
+        $props = ['error' => false];
 
-        // $email = new Input(GET, 'email'); // this is how GET is used
-        // echo $email; 
+        if (isset($params[0])) {
+            if ($params[0] == 'error') {
+                $props['error'] = true;
+            }
+        }
+
+        require(ROOT . 'Models/user.php');
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -31,104 +38,123 @@ class authController extends Controller
             $password->sanatizePassword();
 
             $user = new User();
-            $res = $user->findByEmail($email);
+            $response = $user->fetchByEmail($email);
 
-            if (!empty($res)) {
+            if ($response['status'] == false) {
+                $this->redirect('/auth/signin/error/server-error');
+                return;
+            }
 
-                if (password_verify($password, $res['password'])) {
+            if ($response['data'] == false) {
+                $this->redirect('/auth/signin/error/user-does-not-exist');
+                return;
+            }
 
-                    Session::set([
-                        'uid' => $res['uid'],
-                        'username' => $res['username']
-                    ]);
-                    $this->redirect('/');
-                } else {
-                    $this->redirect('/signin/error/1');
-                }
+            $data = $response['data'];
+
+            if (password_verify($password, $data['password'])) {
+
+                $this->currentUser = new ActiveUser(
+                    $data['uid'],
+                    $data['username'],
+                    $data['firstName'],
+                    $data['lastName'],
+                    $data['userType'],
+                    true
+                );
+
+                $this->goto($data['userType']);
             } else {
-                $this->redirect('/signin/error/2');
+                $this->redirect('/auth/signin/error/password-mismatch');
             }
         }
+
+        $this->set($props);
         $this->render('signin');
     }
 
+    public function servey()
+    {
+        $this->render('servey');
+    }
 
     public function signup()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            require(ROOT . 'Models/user.php');
-            $uid = (new UID(USER, INVESTOR));
-
-            $firstName = new Input(POST, 'firstName');
-            $lastName = new Input(POST, 'lastName');
-            $email = new Input(POST, 'email');
-            $password = new Input(POST, 'password');
-            $confirmPassword = new Input(POST, 'confirmPassword');
-
-            $email->sanatizeEmail();
-            $password->sanatizePassword();
-            $confirmPassword->sanatizePassword();
-
-            if ($firstName->isEmpty() || $lastName->isEmpty() || $email->isEmpty() || $password->isEmpty() || $confirmPassword->isEmpty()) {
-                $this->redirect('/signup/error/2'); //all fields are required
-                return;
+            $actor = "";
+            if (isset($_POST['actor'])) {
+                $actor = new Input(POST, 'actor');
+                Session::set(['actor' => $actor]);
+                $this->render('signup');
             }
 
-            if (!$password->isValidPassword() || !$confirmPassword->isValidPassword()) {
-                $this->redirect('/signup/error/3'); //password must be 8 characters long and contain at least one number and one special character
-                return;
-            }
+            if (isset($_POST['signup'])) {
+                require(ROOT . 'Models/user.php');
 
-            if ($password != $confirmPassword) {
-                $this->redirect('/signup/error/4'); //passwords do not match
-                return;
-            }
+                $uid = new UID(PREFIX::USER);
+                $firstName = new input(POST, 'firstName');
+                $lastName = new input(POST, 'lastName');
+                $email = new input(POST, 'email');
+                $password = new input(POST, 'password');
+                $confirmPassword = new input(POST, 'confirmPassword');
+                $actor = Session::pop('actor');
 
-            $password = password_hash($password, PASSWORD_DEFAULT);
+                $email->sanatizeEmail();
+                $password->sanatizePassword();
+                $confirmPassword->sanatizePassword();
 
-            $user = new User();
+                if ($firstName->isEmpty() || $lastName->isEmpty() || $email->isEmpty() || $password->isEmpty() || $confirmPassword->isEmpty()) {
+                    $this->redirect('/signup/error/all fields are required'); //all fields are required
+                    return;
+                }
 
-            $res = $user->findByEmail($email);
+                if (!$password->isValidPassword() || !$confirmPassword->isValidPassword()) {
+                    $this->redirect('/signup/error/password must be 8 characters long and contain at least one number and one special character'); //password must be 8 characters long and contain at least one number and one special character
+                    return;
+                }
 
-            if (!isset($res)) {
-                $this->redirect('/servererror');
-                return;
-            }
-            if (!empty($res)) {
-                $this->redirect('auth/signup/error/1'); //username already exists
-            } else {
-                $res = $user->create([
-                    'uid' => $uid,
-                    'username' => $email,
-                    'password' => $password,
+                if ($password != $confirmPassword) {
+                    $this->redirect('/signup/error/passwords do not match'); //passwords do not match
+                    return;
+                }
 
-                ]);
-                if (!isset($res)) {
+                $password = password_hash($password, PASSWORD_DEFAULT);
+                $user = new User();
+
+                $response = $user->checkByEmail($email);
+
+                if ($response['status'] == false || $response['data'] == true) {
                     $this->redirect('/servererror');
                     return;
                 }
-                $res = $user->createUser([
+
+                $response = $user->createUser([
                     'uid' => $uid,
                     'firstName' => $firstName,
                     'lastName' => $lastName,
+                    'username' => $email,
+                    'password' => $password,
+                    'userType' => ACTOR::get($actor),
                 ]);
-                if (!isset($res)) {
 
+                if ($response['status'] == false || $response['data'] == false) {
                     $this->redirect('/servererror');
                     return;
                 }
-                $this->redirect('/auth/signin');
+                if ($response['data']) {
+                    $this->redirect('/auth/signin/ok');
+                }
+
+                $this->render('signup');
             }
+        } else {
+            $this->render('actor');
         }
-
-        $this->render('signup');
     }
-
 
     public function signout()
     {
-        Session::unset(['uid', 'username']);
+        Session::unset(['user']);
         Session::destroy();
         $this->redirect('/');
     }

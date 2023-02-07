@@ -1,3 +1,6 @@
+<?php
+$currentUser = Session::get('user');
+?>
 <link rel="stylesheet" href="<?php echo CSS ?>/navbar/navbar.css">
 
 <nav>
@@ -23,7 +26,7 @@
         </div>
 
         <div class="[ profile ]">
-            <?php if (Session::isLoggedIn()) { ?>
+            <?php if (isset($currentUser)) { ?>
                 <div class="[ buttons ]">
                     <div class="[ notification ]">
                         <button>
@@ -53,7 +56,7 @@
                         <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/">
                                 <i class="[ fa-solid fa-gauge ]"></i>Dashboard
                             </a></li>
-                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/signout">
+                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/profile">
                                 <i class="[ fa-solid fa-user-tie ]"></i>Profile</a></li>
                         <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/signout">
                                 <i class="[ fa-solid fa-gear ]"></i>Settings</a>
@@ -90,7 +93,7 @@
         </ul>
     </div>
     <div class="[ profile ]">
-        <?php if (Session::isLoggedIn()) { ?>
+        <?php if (isset($currentUser)) { ?>
             <ul>
                 <li><a class="[ join_btn ]" href="<?php echo URLROOT ?>/auth/signout">Sign Out</a></li>
             </ul>

@@ -10,6 +10,9 @@
 
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/table.css">
+    
     <link rel="stylesheet" href="<?php echo CSS ?>/investor/myrequests.css">
 
     <title>Dashboard | Investor</title>
@@ -24,23 +27,19 @@
 
     <?php
     $active = "myrequests";
+    $title = "My Requests";
     require_once("navigator.php");
     ?>
 
     <?php $name = "Janith"; ?>
 
     <div class="[ container ][ ]" container-type="dashboard-section">
-        <h1 class="[ page-heading-1 ]">my requests</h1>
 
         <div class="[ requests__continer ]">
             <h2>Accepted Requests</h2>
             <?php
             if (!isset($ar) || empty($ar)) {
-            ?>
-                <div class="[ no_requests__card ]">
-                    <p class=''>No Requests</p>
-                </div>
-            <?php
+                require_once(COMPONENTS . "dashboard/noDataFound.php");
             } else {
             ?>
                 <div class="[ requests__wrapper ]">
@@ -104,11 +103,7 @@
             <h2>Pending Requests</h2>
             <?php
             if (!isset($pr) || empty($pr)) {
-            ?>
-                <div class="[ no_requests__card ]">
-                    <p class=''>No Requests</p>
-                </div>
-            <?php
+                require_once(COMPONENTS . "dashboard/noDataFound.php");
             } else {
             ?>
                 <div class="[ requests__wrapper ]">
@@ -172,11 +167,7 @@
             <h2>Rejected Requests</h2>
             <?php
             if (!isset($rr) || empty($rr)) {
-            ?>
-                <div class="[ no_requests__card ]">
-                    <p class=''>No Requests</p>
-                </div>
-            <?php
+                require_once(COMPONENTS . "dashboard/noDataFound.php");
             } else {
             ?>
                 <div class="[ requests__wrapper ]">
@@ -235,6 +226,9 @@
             ?>
         </div>
     </div>
+    <?php
+    require_once("footer.php");
+    ?>
     <script src="<?php echo JS ?>/dashboard/dashboard.js"></script>
 </body>
 

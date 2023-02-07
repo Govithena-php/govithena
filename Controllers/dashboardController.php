@@ -2,10 +2,18 @@
 
 class dashboardController extends Controller
 {
+    private $currentUser;
+
     public function __construct()
     {
+        $this->currentUser = Session::get('user');
+
         if (!Session::isLoggedIn()) {
-            $this->redirect('/signin');
+            $this->redirect('/auth/signin');
+        }
+
+        if (!$this->currentUser->hasAccess(ACTOR::INVESTOR)) {
+            $this->redirect('/error/dontHaveAccess');
         }
     }
 
@@ -21,15 +29,26 @@ class dashboardController extends Controller
 
     public function myinvestments()
     {
+        require(ROOT . 'Models/investment.php');
+        $uid = Session::get('user')->getUid();
+        $i = new Investment();
+
+        $investments = $i->fetchAllBy($uid);
+        if (isset($investments)) {
+            $this->set(['investments' => $investments]);
+        } else {
+            $this->set(['error' => "no investments found"]);
+        }
         $this->render('myinvestments');
     }
 
     public function myrequests()
     {
         require(ROOT . 'Models/requestFarmer.php');
+        $uid = Session::get('user')->getUid();
         $r = new RequestFarmer();
 
-        $requests = $r->getRequestsByInvestor(Session::get('uid'));
+        $requests = $r->getRequestsByInvestor($uid);
         $pendingRequests = [];
         $acceptedRequests = [];
         $rejectedRequests = [];
@@ -51,5 +70,15 @@ class dashboardController extends Controller
 
 
         $this->render('myrequests');
+    }
+
+    public function myaccount()
+    {
+        $this->render('myaccount');
+    }
+
+    public function settings()
+    {
+        $this->render('settings');
     }
 }
