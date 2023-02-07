@@ -18,9 +18,24 @@ class Session
         }
     }
 
+    public static function has($key)
+    {
+        return isset($_SESSION[$key]);
+    }
+
     public static function get($key)
     {
         if (isset($_SESSION[$key])) return $_SESSION[$key];
+        return null;
+    }
+
+    public static function pop($key)
+    {
+        if (isset($_SESSION[$key])) {
+            $value = $_SESSION[$key];
+            unset($_SESSION[$key]);
+            return $value;
+        }
         return null;
     }
 

@@ -87,27 +87,27 @@
 
         <?php
 
-        if (isset($currentUser)) {
-            if ($currentUser->isInvestor()) {
-                echo " <h1>Investor</h1>";
-            }
+        // if (isset($currentUser)) {
+        //     if ($currentUser->isInvestor()) {
+        //         echo " <h1>Investor</h1>";
+        //     }
 
-            if ($currentUser->isFarmer()) {
-                echo " <h1>Farmer</h1>";
-            }
+        //     if ($currentUser->isFarmer()) {
+        //         echo " <h1>Farmer</h1>";
+        //     }
 
-            if ($currentUser->isAdmin()) {
-                echo " <h1>Admin</h1>";
-            }
+        //     if ($currentUser->isAdmin()) {
+        //         echo " <h1>Admin</h1>";
+        //     }
 
-            if ($currentUser->isAgrologist()) {
-                echo " <h1>Agrologist</h1>";
-            }
+        //     if ($currentUser->isAgrologist()) {
+        //         echo " <h1>Agrologist</h1>";
+        //     }
 
-            if ($currentUser->isTechAssistant()) {
-                echo " <h1>Tech Assistant</h1>";
-            }
-        }
+        //     if ($currentUser->isTechAssistant()) {
+        //         echo " <h1>Tech Assistant</h1>";
+        //     }
+        // }
 
 
 

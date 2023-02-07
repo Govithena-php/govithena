@@ -4,9 +4,9 @@
     left: 0;
     height: var(--navbar-height);
     width: 100%;
-    /* background-color: var(--clr-primary, rgb(0, 0, 0)); */
-    background-color: #1d599a;
-    z-index: 9997;
+    background-color: var(--clr-dark, rgb(0, 0, 0));
+    /* background-color: #1d599a; */
+    z-index: 9999;
 }
 
 .nav .container {
@@ -16,6 +16,31 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.nav .logo {
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-block: 1rem;
+    margin-right: 2rem;
+    width: var(--dashboard-sidebar-width);
+}
+
+.nav .logo a {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: var(--clr-light, white);
+}
+
+.nav .logo img {
+    margin-left: 0.3rem;
 }
 
 .nav button {
@@ -34,7 +59,8 @@
     font-size: 1.2rem;
     font-weight: 500;
     color: var(--clr-light, white);
-    margin-left: 0rem;
+    margin-left: auto;
+    margin-right:2rem;
 }
 
 
@@ -74,8 +100,8 @@
 
 }
 
+
 .profile {
-    margin: auto;
     margin-right: 0;
 }
 
@@ -200,18 +226,19 @@
 
 .sidebar {
     position: fixed;
-    top: 0;
+    top: var(--navbar-height, 4rem);
     left: 0;
     bottom: 0;
     width: var(--dashboard-sidebar-width);
-    background-color: var(--clr-dark, #000);
-    color: var(--clr-light, #fff);
+    background-color: var(--clr-light, #fff);
+    color: var(--clr-dark, #000);
     padding: 2rem 1rem;
     padding-top: 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    box-shadow: 0 0 0.7rem 0 rgba(0, 0, 0, 0.4);
+    /* box-shadow: 0 0 0.7rem 0 rgba(0, 0, 0, 0.4); */
+    border-right: 1px solid #ccc;
     transition: all 0.3s ease-in-out;
     z-index: 9998;
 }
@@ -224,34 +251,39 @@
     margin-block: 1rem;
 }
 
+.sidebar>.logo {
+    border-bottom: 1px solid #ccc;
+    margin-top: 1.5rem;
+    padding-bottom: 1rem;
+    display: none;
+}
+
+.sidebar>.logo a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    text-decoration: none;
+    color: var(--clr-dark, #000);
+    font-weight: 700;
+}
+
+.sidebar>.logo h2 {
+    font-weight: 700;
+}
+
 .sidebar .action__btn button {
     background: none;
     border: none;
     outline: none;
     cursor: pointer;
     font-size: 2rem;
-    color: var(--clr-light, white);
-}
-
-
-
-.sidebar .logo {
-    height: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-block: 1rem;
-}
-
-.sidebar .logo img {
-    margin-left: 0.3rem;
+    color: var(--clr-dark, #000);
 }
 
 .sidebar .links {
     margin-top: 2rem;
     margin-bottom: 1rem;
-    color: var(--clr-light, white);
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -269,10 +301,12 @@
 .sidebar .links ul li {
     display: flex;
     align-items: center;
+    margin-bottom: 0.5rem;
 }
 
 .sidebar .links ul li:hover a {
-    background-color: rgba(255, 255, 255, 0.075);
+    background-color: var(--clr-primary, rgb(4, 120, 47));
+    color: var(--clr-light, #fff);
 
 }
 
@@ -287,7 +321,7 @@
     gap: 1.5rem;
     align-items: center;
     text-decoration: none;
-    color: var(--clr-light, white);
+    color: var(--clr-dark, #000);
 }
 
 .sidebar .links ul li a i {
@@ -296,13 +330,13 @@
 
 @media screen and (max-width: 1200px) {
     :root {
-        --dashboard-sidebar-width: 14rem;
+        --dashboard-sidebar-width: 13rem;
     }
 }
 
 @media screen and (max-width: 1024px) {
     :root {
-        --dashboard-sidebar-width: 13rem;
+        --dashboard-sidebar-width: 12rem;
     }
 }
 
@@ -315,12 +349,17 @@
         background-color: var(--clr-dark, #000);
     }
 
+    .nav .logo {
+        display: none;
+    }
+
     .nav .open__btn button i {
         color: var(--clr-light, white);
     }
 
     .nav .page__title {
         margin-left: 2rem;
+        margin-right: auto;
     }
 
     .nav .image {
@@ -329,6 +368,11 @@
 
     .sidebar {
         left: calc(-1 * (var(--dashboard-sidebar-width) + 2rem));
+        box-shadow: 0 0 10px 2px #00000080;
+    }
+
+    .sidebar .logo {
+        display: block;
     }
 
     .nav .open__btn button {
@@ -346,6 +390,11 @@
 }
 
 .active {
-    background-color: rgba(255, 255, 255, 0.075);
+    background-color: var(--clr-primary, rgb(4, 120, 47));
+}
+
+.active i,
+.active p {
+    color: var(--clr-light, #fff);
 
 }
