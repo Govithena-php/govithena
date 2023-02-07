@@ -33,11 +33,11 @@ class UID
         $numOfParams = func_num_args();
 
         if ($numOfParams == 0) {
-            $this->uid = $this->key;
+            $this->uid =  $this->key;
         } else {
 
             if ($numOfParams == 1) {
-                $this->prefix = $params[0];
+                $this->prefix = strtolower($params[0]);
             }
             if ($numOfParams == 2) {
                 $this->prefix = strrev($params[0]);
@@ -48,6 +48,11 @@ class UID
 
             $this->uid = substr($this->key, 0, 4) . $this->prefix . substr($this->key, 4, 4)  . $this->suffix_2 . substr($this->key, 8) . $this->suffix_1;
         }
+    }
+
+    public function __toString()
+    {
+        return $this->uid;
     }
 
     public function get()
