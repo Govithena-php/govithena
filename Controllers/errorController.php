@@ -6,4 +6,9 @@ class errorController extends Controller
     {
         $this->render('error');
     }
+
+    public function pageNotFound()
+    {
+        $this->render('pageNotFound');
+    }
 }
