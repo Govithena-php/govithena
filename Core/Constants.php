@@ -2,12 +2,12 @@
 class PREFIX
 {
     const GENERAL = '';
-    const USER = 'USER';
+    const USER = 'USR';
     const GIG = 'GIG';
-    const PRODUCT = 'PRODUCT';
-    const REQUEST = 'REQUEST';
-    const RATING = 'RATING';
-    const REVIEW = 'REVIEW';
+    const PRODUCT = 'PRO';
+    const REQUEST = 'REQ';
+    const RATING = 'RAT';
+    const REVIEW = 'REV';
 }
 
 class PRODUCT
@@ -18,12 +18,18 @@ class PRODUCT
     const SPICE = 'SPICE';
 }
 
-class ACTOR{
+class ACTOR
+{
     const ADMIN = "ADMIN";
     const INVESTOR = "INVESTOR";
     const FARMER = "FARMER";
     const AGROLOGIST = "AGROLOGIST";
     const TECH_ASSISTANT = "TECHASSISTANT";
+
+    public static function get($key)
+    {
+        return constant("ACTOR::$key");
+    }
 }
 
 class STATUS
