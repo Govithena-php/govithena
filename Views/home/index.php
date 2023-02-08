@@ -47,10 +47,6 @@
                     <input type="text" name="terms" id="terms" class="" placeholder="search by: name / category / location" />
                     <button type="submit" class="">search</button>
                 </form>
-                <!-- <div class="search">
-                    <input type="text" name="search_text" id="search_text" class="" placeholder="search by: name / category / location" />
-                    <button type="button" id="searchBtn" name="search" value="search" class="">search</button>
-                </div> -->
             <?php
             } else {
             ?>
@@ -64,90 +60,49 @@
         </div>
     </div>
 
-
-    <?php if (isset($currentUser)) {
-    ?>
-        <?php
-        // var_dump($_SESSION['user']);
-        // die();
-        ?>
-        <!-- <div class="[ container ]" container-type="section">
-            <div class="[ text-center ]">
-                <h1 class="[ fs-4 ]">Welcome <?php echo $_SESSION['username'] ?></h1>
-            </div>
-        </div> -->
-    <?php
-    }
-    ?>
     <?php
     $numberOfGigs = 400;
     $numberOfCategories = 20;
     ?>
     <div class="[ container ][ title ]" container-type="section">
-
-        <?php
-
-        // if (isset($currentUser)) {
-        //     if ($currentUser->isInvestor()) {
-        //         echo " <h1>Investor</h1>";
-        //     }
-
-        //     if ($currentUser->isFarmer()) {
-        //         echo " <h1>Farmer</h1>";
-        //     }
-
-        //     if ($currentUser->isAdmin()) {
-        //         echo " <h1>Admin</h1>";
-        //     }
-
-        //     if ($currentUser->isAgrologist()) {
-        //         echo " <h1>Agrologist</h1>";
-        //     }
-
-        //     if ($currentUser->isTechAssistant()) {
-        //         echo " <h1>Tech Assistant</h1>";
-        //     }
-        // }
-
-
-
-        ?>
-
         <h4><span><?php echo $numberOfGigs; ?>+</span> gigs in <span><?php echo $numberOfCategories; ?>+</span> categories.</h4>
         <h1>Invest in the agreculture of Sri Lanka.</h1>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facere atque accusantium laborum<br>eligendi at voluptatibus accusamus.</p>
     </div>
 
-
-    <div class="[ backdrop_gray ]">
-        <div class="[ container ][ description ]" container-type="section">
-            <div class="[ header ]">
-                <h1>Lorem ipsum dolor sit amet con sectetur<br> adipisicing elit.</h1>
-            </div>
-            <div class="[ content ][ box ]">
-                <ul class="[ grid ]" gap="3" lg="2">
-                    <li>
-                        <H3><i class="fa-regular fa-circle-check"></i>INVESTOR</H3>
-                        <p>1Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, natus libero sed ab, voluptates pariatur unde minima dolorum praesentium explicabo nemo nihil corrupti, odit saepe suscipit. Commodi fugit et ipsum.</p>
-                    </li>
-                    <li>
-                        <H3><i class="fa-regular fa-circle-check"></i>FARMER</H3>
-                        <p>2Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, natus libero sed ab, voluptates pariatur unde minima dolorum praesentium explicabo nemo nihil corrupti, odit saepe suscipit. Commodi fugit et ipsum.</p>
-                    </li>
-                    <li>
-                        <H3><i class="fa-regular fa-circle-check"></i>AGROLOGIST</H3>
-                        <p>3Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, natus libero sed ab, voluptates pariatur unde minima dolorum praesentium explicabo nemo nihil corrupti, odit saepe suscipit. Commodi fugit et ipsum.</p>
-                    </li>
-                    <li>
-                        <H3><i class="fa-regular fa-circle-check"></i>TECHNICAL ASSISTANT</H3>
-                        <p>4Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, natus libero sed ab, voluptates pariatur unde minima dolorum praesentium explicabo nemo nihil corrupti, odit saepe suscipit. Commodi fugit et ipsum.</p>
-                    </li>
-                </ul>
+    <?php
+    if (!isset($currentUser)) {
+    ?>
+        <div class="[ backdrop_gray ]">
+            <div class="[ container ][ description ]" container-type="section">
+                <div class="[ header ]">
+                    <h1>Lorem ipsum dolor sit amet con sectetur<br> adipisicing elit.</h1>
+                </div>
+                <div class="[ content ][ box ]">
+                    <ul class="[ grid ]" gap="3" lg="2">
+                        <li>
+                            <H3><i class="fa-regular fa-circle-check"></i>INVESTOR</H3>
+                            <p>1Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, natus libero sed ab, voluptates pariatur unde minima dolorum praesentium explicabo nemo nihil corrupti, odit saepe suscipit. Commodi fugit et ipsum.</p>
+                        </li>
+                        <li>
+                            <H3><i class="fa-regular fa-circle-check"></i>FARMER</H3>
+                            <p>2Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, natus libero sed ab, voluptates pariatur unde minima dolorum praesentium explicabo nemo nihil corrupti, odit saepe suscipit. Commodi fugit et ipsum.</p>
+                        </li>
+                        <li>
+                            <H3><i class="fa-regular fa-circle-check"></i>AGROLOGIST</H3>
+                            <p>3Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, natus libero sed ab, voluptates pariatur unde minima dolorum praesentium explicabo nemo nihil corrupti, odit saepe suscipit. Commodi fugit et ipsum.</p>
+                        </li>
+                        <li>
+                            <H3><i class="fa-regular fa-circle-check"></i>TECHNICAL ASSISTANT</H3>
+                            <p>4Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia, natus libero sed ab, voluptates pariatur unde minima dolorum praesentium explicabo nemo nihil corrupti, odit saepe suscipit. Commodi fugit et ipsum.</p>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-
-
+    <?php
+    }
+    ?>
 
     <div class="[ container ][ categories ]" container-type="section">
         <div class="[ header ]">
@@ -217,6 +172,52 @@
 
         </div>
     </div>
+
+
+    <?php
+    if (isset($currentUser)) {
+    ?>
+        <div class="[ container ][ popular__gig ]" container-type="section">
+            <div class="[ header ]">
+                <h1>Popular Gigs</h1>
+            </div>
+
+            <div class="[ grid ]" gap="1" sm="1" md="2" lg="4">
+                <?php
+                foreach ($gigs as $gig) {
+                    $imageURL = UPLOADS . $gig["image"];
+                ?>
+                    <div class="[ result__card ]">
+                        <div class="[ card__img ]">
+
+                            <img src="<?php echo $imageURL ?>" alt="test" />
+                            <div class="[ farmer__name ]">
+                                <p><?php echo $gig['firstName'] ?></p>
+                                <p><?php echo $gig['lastName'] ?></p>
+                            </div>
+                        </div>
+                        <div class="[ card__content ]">
+                            <a class="[ card__link text-dec-none mb-1 fs-5 text-dark fw-6 ]" href="<?php echo URLROOT . "/gig/" . $gig['gigId'] ?>">
+                                <?php echo $gig['title'] ?>
+                            </a>
+                            <p class="[ sub-heading ]"><?php echo $gig['capital'] ?></p>
+                            <p><?php echo $gig['location'] ?></p>
+                            <div class="[ mt-1 flex flex-sb-c ]">
+                                <p><?php echo $gig['category'] ?></p>
+                                <p><?php echo $gig['timePeriod'] ?></p>
+                            </div>
+                        </div>
+                    </div>
+
+                <?php
+                }
+
+                ?>
+            </div>
+        </div>
+    <?php
+    }
+    ?>ල්
 
     <div class="[ container ][ services ]" container-type="section">
         <div class="[ header ]">
