@@ -122,5 +122,9 @@ class farmerController extends Controller
         $this->render('agrologist');
     }
 
+    function agrologistprofile(){
+        $this->render('agrologistprofile');
+    }
+
 
 }

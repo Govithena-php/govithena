@@ -15,7 +15,7 @@
     <!-- css file eka -->
     <link rel="stylesheet" href="<?php echo CSS ?>/farmer/investors.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/farmer/farmerrequest.css">
-    <link rel="stylesheet" href="<?php echo CSS ?>/farmer/techassistant.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/farmer/agrologistprofile.css">
 
     <title>Dashboard | Investor</title>
 </head>
@@ -24,8 +24,8 @@
 <body class="bg-gray h-screen">
 
     <?php
-    $active = "techassistantfirst";
-    $title = "Technical Assistant";
+    $active = "agrologist";
+    $title = "Agrologist";
     require_once("navigator.php");
     ?>
 
@@ -78,16 +78,16 @@
 
                             <div class=" flex-c-c">
                             <!-- <form action="/action_page.php"> -->
-                               <label for="type">Type : </label> &ensp;
+                               <!-- <label for="type">Type : </label> &ensp;
                                 <select name="type" id="type">
-                                     <!-- <option value="volvo"></option> -->
                                      <option value="creategig">Create Gig</option>
                                      <option value="updateprogress">Update progress</option>
                                      
-                                </select>&emsp; &emsp;
+                                </select> -->
+                                &emsp; &emsp;
                                 
                                 <!-- <input type="submit" value="Submit"> -->
-                                <button type="button"   class="btn_accept3" name="accept">Add</button> 
+                                <button type="button"   class="btn_accept1" name="accept">Add</button> 
                             <!-- </form> -->
                                         
                                         

@@ -14,7 +14,7 @@
     
     <!-- css file eka -->
     <link rel="stylesheet" href="<?php echo CSS ?>/farmer/investors.css">
-    <link rel="stylesheet" href="<?php echo CSS ?>/farmer/request.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/farmer/farmerrequest.css">
 
     <title>Dashboard | Investor</title>
 </head>
@@ -38,21 +38,21 @@
            <button type="button" class="btn2">Decline</button>
         </div> -->
         <p><h1>My Investors</h1></p> <hr>
-        <div class="[ requests__continer ]">
+        <div class="[ requests__cn ]">
            
     
-           <div class="[ requests__wrapper ]">
+           <div class="[ requests__wrap ]">
               
 
-                   <div class="[ request__card bg-light ]">
+                   <div class="[ requestcard bg-light ]">
                       
-                      <div class="[ request__img ]">
+                      <div class="[ requestimg ]">
                            <img class="img" src="<?php echo IMAGES ?>/investor8.jpg" alt="profile">
                        </div>
 
                        <form action="<?php echo URLROOT . '/agrologist/requests' ?>" >
                            <div class="flex flex-row ">
-                               <div class="[ request__content ]">
+                               <div class="[ requestcont ]">
 
                                    
                                        <!-- <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/agrologist/requests/" ?>"> -->
@@ -87,21 +87,21 @@
             </div>
 
 
-            <div class="[ requests__continer ]">
+            <div class="[ requestscn ]">
            
     
-           <div class="[ requests__wrapper ]">
+           <div class="[ requests__wrap ]">
               
 
-                   <div class="[ request__card bg-light ]">
+                   <div class="[ requestcard bg-light ]">
                       
-                      <div class="[ request__img ]">
+                      <div class="[ requestimg ]">
                            <img class="img" src="<?php echo IMAGES ?>/investor7.jpg" alt="profile">
                        </div>
 
                        <form action="<?php echo URLROOT . '/agrologist/requests' ?>" >
                            <div class="flex flex-row ">
-                               <div class="[ request__content ]">
+                               <div class="[ requestcont ]">
 
                                    
                                        <!-- <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/agrologist/requests/" ?>"> -->
@@ -137,21 +137,21 @@
 
 
 
-                <div class="[ requests__continer ]">
+                <div class="[ requests__cn ]">
            
     
-           <div class="[ requests__wrapper ]">
+           <div class="[ requests__wrap ]">
               
 
-                   <div class="[ request__card bg-light ]">
+                   <div class="[ requestcard bg-light ]">
                       
-                      <div class="[ request__img ]">
+                      <div class="[ requestimg ]">
                            <img class="img" src="<?php echo IMAGES ?>/investor9.jpg" alt="profile">
                        </div>
 
                        <form action="<?php echo URLROOT . '/agrologist/requests' ?>" >
                            <div class="flex flex-row ">
-                               <div class="[ request__content ]">
+                               <div class="[ requestcont ]">
 
                                    
                                        <!-- <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/agrologist/requests/" ?>"> -->
@@ -195,21 +195,21 @@
 
 
 
-       <div class="[ requests__continer ]">
+       <div class="[ requests__cn ]">
            
     
-                <div class="[ requests__wrapper ]">
+                <div class="[ requests__wrap ]">
                    
 
-                        <div class="[ request__card bg-light ]">
+                        <div class="[ requestcard bg-light ]">
                            
-                           <div class="[ request__img ]">
+                           <div class="[ requestimg ]">
                                 <img class="img" src="<?php echo IMAGES ?>/investor.jfif" alt="profile">
                             </div>
 
                             <form action="<?php echo URLROOT . '/agrologist/requests' ?>" >
                                 <div class="flex flex-row ">
-                                    <div class="[ request__content ]">
+                                    <div class="[ requestcont ]">
 
                                         
                                             <!-- <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/agrologist/requests/" ?>"> -->
@@ -252,21 +252,21 @@
 
 
 
-        <div class="[ requests__continer ]">
+        <div class="[ requests__cn ]">
            
     
-           <div class="[ requests__wrapper ]">
+           <div class="[ requests__wrap ]">
               
 
-                   <div class="[ request__card bg-light ]">
+                   <div class="[ requestcard bg-light ]">
                       
-                      <div class="[ request__img ]">
+                      <div class="[ requestimg ]">
                            <img class="img" src="<?php echo IMAGES ?>/investor2.jpg" alt="profile">
                        </div>
 
                        <form action="<?php echo URLROOT . '/agrologist/requests' ?>" >
                            <div class="flex flex-row ">
-                               <div class="[ request__content ]">
+                               <div class="[ requestcont ]">
 
                                    
                                        <!-- <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/agrologist/requests/" ?>"> -->
@@ -306,21 +306,21 @@
 
 
 
-   <div class="[ requests__continer ]">
+   <div class="[ requests__cn ]">
            
     
-           <div class="[ requests__wrapper ]">
+           <div class="[ requests__wrap ]">
               
 
-                   <div class="[ request__card bg-light ]">
+                   <div class="[ requestcard bg-light ]">
                       
-                      <div class="[ request__img ]">
+                      <div class="[ requestimg ]">
                            <img class="img" src="<?php echo IMAGES ?>/investor3.jfif" alt="profile">
                        </div>
 
                        <form action="<?php echo URLROOT . '/agrologist/requests' ?>" >
                            <div class="flex flex-row ">
-                               <div class="[ request__content ]">
+                               <div class="[ requestcont ]">
 
                                    
                                        <!-- <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/agrologist/requests/" ?>"> -->
@@ -363,21 +363,21 @@
 
 
 
-   <div class="[ requests__continer ]">
+   <div class="[ requests__cn ]">
            
     
-           <div class="[ requests__wrapper ]">
+           <div class="[ requests__wrap ]">
               
 
-                   <div class="[ request__card bg-light ]">
+                   <div class="[ requestcard bg-light ]">
                       
-                      <div class="[ request__img ]">
+                      <div class="[ requestimg ]">
                            <img class="img" src="<?php echo IMAGES ?>/investor4.jfif" alt="profile">
                        </div>
 
                        <form action="<?php echo URLROOT . '/agrologist/requests' ?>" >
                            <div class="flex flex-row ">
-                               <div class="[ request__content ]">
+                               <div class="[ requestcont ]">
 
                                    
                                        <!-- <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/agrologist/requests/" ?>"> -->

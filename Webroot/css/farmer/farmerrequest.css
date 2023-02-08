@@ -1,9 +1,9 @@
-.requests__continer {
+.requests__cn {
     margin-bottom: 30px;
     /* -------- */
 }
 
-.requests__wrapper {
+.requests__wrap {
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -11,7 +11,7 @@
     /* ------------ */
 }
 
-.request__card {
+.requestcard {
     display: grid;
     grid-template-columns: 1fr 2fr 2fr;
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -20,7 +20,7 @@
     /* ---------------- */
 }
 
-.request__img {
+.requestimg {
     height: 100%;
     width: 130px;
     height: 130px;
@@ -32,13 +32,13 @@
     /* -------------------- */
 }
 
-.request__img>img {
+.requestimg>img {
     height: 100%;
     width: 100%;
     object-fit: cover;
 }
 
-.request__content {
+.requestcont {
     position: relative;
     display: flex;
     flex-direction: column;

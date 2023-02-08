@@ -61,7 +61,7 @@
         </div>
 
         <div class="cardspace">
-        <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/farmer/techassistant/" ?>">
+        <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/farmer/agrologistprofile/" ?>">
 
 
         <div class="cardpad">
@@ -87,7 +87,7 @@
         </div>
         </a>
 
-        <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/farmer/techassistant/" ?>">
+        <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/farmer/agrologistprofile/" ?>">
 
         <div class="cardpad">
 
@@ -111,7 +111,7 @@
 
 
 
-        <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/farmer/techassistant/" ?>">
+        <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/farmer/agrologistprofile/" ?>">
 
             <div class="cardpad">
 
@@ -139,7 +139,7 @@
 
 
         <div class="cardspace">
-        <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/farmer/techassistant/" ?>">
+        <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/farmer/agrologistprofile/" ?>">
 
 
             <div class="cardpad">
@@ -165,7 +165,7 @@
               </div>
              </a>
 
-             <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/farmer/techassistant/" ?>">
+             <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/farmer/agrologistprofile/" ?>">
 
             <div class="cardpad">
 
@@ -190,7 +190,7 @@
 
 
              <!-- ---------------------- -->
-             <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/farmer/techassistant/" ?>">
+             <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/farmer/agrologistprofile/" ?>">
 
                 <div class="cardpad">
 
