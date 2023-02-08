@@ -85,6 +85,13 @@
     gap: 2rem;
 }
 
+.chart-pie {
+    margin-block: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+}
+
 .charts .chart {
     /* min-height: 20rem; */
     padding: 2rem 1rem;
@@ -103,6 +110,7 @@
     width: 100%;
     height: clamp(20rem, 30vw, 30rem);
 }
+
 
 .block {
     border: 1px solid #e5e5e5;
