@@ -8,13 +8,13 @@ class techController extends Controller
     {
         $this->currentUser = Session::get('user');
 
-        if (!Session::isLoggedIn()) {
-            $this->redirect('/auth/signin');
-        }
+        // if (!Session::isLoggedIn()) {
+        //     $this->redirect('/auth/signin');
+        // }
 
-        if (!$this->currentUser->hasAccess(ACTOR::TECH_ASSISTANT)) {
-            $this->redirect('/error/dontHaveAccess');
-        }
+        // if (!$this->currentUser->hasAccess(ACTOR::TECH_ASSISTANT)) {
+        //     $this->redirect('/error/dontHaveAccess');
+        // }
     }
 
     public function index()
