@@ -92,11 +92,16 @@ class authController extends Controller
                 require(ROOT . 'Models/user.php');
 
                 $uid = new UID(PREFIX::USER);
+
                 $firstName = new input(POST, 'firstName');
                 $lastName = new input(POST, 'lastName');
                 $email = new input(POST, 'email');
                 $password = new input(POST, 'password');
                 $confirmPassword = new input(POST, 'confirmPassword');
+
+                echo Session::get('actor');
+                die();
+
                 $actor = Session::pop('actor');
 
                 $email->sanatizeEmail();

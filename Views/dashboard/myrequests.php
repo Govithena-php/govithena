@@ -12,7 +12,8 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/table.css">
-    
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/tabs.css">
+
     <link rel="stylesheet" href="<?php echo CSS ?>/investor/myrequests.css">
 
     <title>Dashboard | Investor</title>
@@ -37,8 +38,42 @@
 
         <div class="[ requests__continer ]">
             <h2>Accepted Requests</h2>
+
+            <div class="[ tabs ]" tab="3">
+                <div class="[ tab ]" tab="1">
+                    <p>Tab 1</p>
+                </div>
+                <div class="[ tab ]" tab="2">
+                    <p>Tab 2</p>
+                </div>
+                <div class="[ tab ]" tab="3">
+                    <p>Tab 3</p>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <?php
-            if (!isset($ar) || empty($ar)) {
+            if (empty($ar)) {
                 require_once(COMPONENTS . "dashboard/noDataFound.php");
             } else {
             ?>
@@ -102,8 +137,8 @@
         <div class="[ requests__continer ]">
             <h2>Pending Requests</h2>
             <?php
-            if (!isset($pr) || empty($pr)) {
-                require_once(COMPONENTS . "dashboard/noDataFound.php");
+            if (empty($pr)) {
+                require(COMPONENTS . "dashboard/noDataFound.php");
             } else {
             ?>
                 <div class="[ requests__wrapper ]">
@@ -166,8 +201,9 @@
         <div class="[ requests__continer ]">
             <h2>Rejected Requests</h2>
             <?php
-            if (!isset($rr) || empty($rr)) {
-                require_once(COMPONENTS . "dashboard/noDataFound.php");
+            if (empty($rr)) {
+                echo "test";
+                require(COMPONENTS . "dashboard/noDataFound.php");
             } else {
             ?>
                 <div class="[ requests__wrapper ]">
