@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agrologist | Dashboard</title>
+    <title>Tech | Dashboard</title>
     <link rel="icon" type="image/x-icon" href="<?php echo IMAGES ?>/favicon.png">
     <link rel="stylesheet" type="text/css" href="../Webroot/css/sidebar.css">
     <link rel="stylesheet" href="../Webroot/css/ui.css">
@@ -17,8 +17,12 @@
 
 <body class="bg-gray h-screen">
     <?php include COMPONENTS . 'dashboard/header.php'; ?>
-
-    <?php include 'sidebar.php'; ?>
+    <?php
+    $active = "myaccount";
+    $title = "My Account";
+    require_once("navigator.php");
+    ?>
+    <!-- <?php include 'sidebar.php'; ?> -->
     <div class="dashboard-container h-screen" style="margin-bottom: 200px">
         <div class="[ profile_continer ]">
 
@@ -29,15 +33,16 @@
                     <div class="[ profile_img ]">
                         <img src="<?php echo IMAGES ?>/farmer.jpeg" alt="">
                     </div>
-                    <form action="<?php echo URLROOT . '/tech/requests/' . $request['requestId'] . '/' ?>"
+                    <form action=""
                         method="POST">
                         <div class="flex flex-row " style="width: 800px">
                             <div class="[ profile_content ]">
 
+                                <h1>Savani Hasadara</h1>
+                                <!-- <?php echo "<h1>" . $techassistant[0]['firstName'] . " " . $techassistant[0]['lastName'] . "</h1>"; ?> -->
 
-                                <?php echo "<h1>" . $agrologist[0]['firstName'] . " " . $agrologist[0]['lastName'] . "</h1>"; ?>
-
-                                <?php echo "<h4>" . ucwords($agrologist[0]['userType']) . "</h4>"; ?>
+                                <!-- <?php echo "<h4>" . ucwords($techassistant[0]['userType']) . "</h4>"; ?> -->
+                                <h4>Technical Assistant</h4>
                                 <p class="flex flex-row">
                                     <span class="fa fa-star"></span>
                                     <span class="fa fa-star"></span>
@@ -66,17 +71,23 @@
                 <hr>
 
                 <div style="color: grey" class="pt-1">First Name</div>
-                <?php echo "<div>" . ucwords($agrologist[0]['firstName']) . "</div>"; ?>
+                <div>Savani</div>
+                <!-- <?php echo "<div>" . ucwords($techassistant[0]['firstName']) . "</div>"; ?> -->
                 <div style="color: grey" class="pt-1">Last Name</div>
-                <?php echo "<div>" . ucwords($agrologist[0]['lastName']) . "</div>"; ?>
+                <div>Hasadara</div>
+                <!-- <?php echo "<div>" . ucwords($techassistant[0]['lastName']) . "</div>"; ?> -->
                 <div style="color: grey" class="pt-1">Email</div>
-                <?php echo "<div>" . strtolower($agrologist[0]['username']) . "</div>"; ?>
+                <div>savani@gmail.com</div>
+                <!-- <?php echo "<div>" . strtolower($techassistant[0]['username']) . "</div>"; ?> -->
                 <div style="color: grey" class="pt-1">NIC</div>
-                <?php echo "<div>" . $agrologist[0]['NIC'] . "</div>"; ?>
+                <div>20008987678</div>
+                <!-- <?php echo "<div>" . $techassistant[0]['NIC'] . "</div>"; ?> -->
                 <div style="color: grey" class="pt-1">Mobile Number</div>
-                <?php echo "<div>" . $agrologist[0]['phoneNumber'] . "</div>"; ?>
+                <div>0712323675</div>
+                <!-- <?php echo "<div>" . $techassistant[0]['phoneNumber'] . "</div>"; ?> -->
                 <div style="color: grey" class="pt-1">City</div>
-                <?php echo "<div>" . ucwords($agrologist[0]['city']) . "</div>"; ?>
+                <div>Anuradhapura</div>
+                <!-- <?php echo "<div>" . ucwords($techassistant[0]['city']) . "</div>"; ?> -->
 
 
                 <div id="edit_detials_modal" class="modal">
@@ -84,18 +95,17 @@
                     <div class="modal-content">
                         <span class="close close_modal1">&times;</span>
                         <h3>Edit Details</h3>
-                        <form class="form pt-1" action="<?php echo URLROOT ?>/agrologist/myaccount" method="post">
+                        <form class="form pt-1" action="<?php echo URLROOT ?>/tech/myaccount" method="post">
 
                             <input type="text" name="firstName" class="" placeholder=""
-                                value="<?php echo $agrologist[0]['firstName'] ?>"><br>
+                                value=""><br>
                             <input type="text" name="lastName" class="" placeholder=""
-                                value="<?php echo $agrologist[0]['lastName'] ?>"><br>
+                                value=""><br>
                             <input type="text" name="city" class="" placeholder=""
-                                value="<?php echo $agrologist[0]['city'] ?>"><br>
+                                value=""><br>
                             <input type="text" name="phoneNumber" class="" placeholder=""
-                                value="<?php echo $agrologist[0]['phoneNumber'] ?>"><br>
-                            <button type="submit" name="edit_details_btn" class="btn uppercase"
-                                onclick="alert('Succesffully updated');">Edit details</button>
+                                 value=""><br>
+                            <button type="submit" name="edit_details_btn" class="btn uppercase">Edit details</button>
                         </form>
                     </div>
 

@@ -41,4 +41,9 @@ class techController extends Controller
     {
         $this->render('myaccount');
     }
+
+    public function dashboard()
+    {
+        $this->render('dashboard');
+    }
 }

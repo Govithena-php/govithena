@@ -36,7 +36,7 @@
                     <h4>Farmer Name</h4>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut nemo expedita.</p>
                 </div>
-                <a href="" class="view_btn">view</a>
+                <a href="<?php echo CSS; ?>/tech/farmerdetails" class="view_btn">view</a>
             </div>
             <div class="result_card">  
                 <div class="profile_img">
@@ -58,14 +58,11 @@
                 <div class="card_content">
                     <h4>Farmer Name</h4>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut nemo expedita.</p>
-                    <p>5:26 pm</p>
                 </div>
                 
                 <div class="btn_group">
-                    <a href="" class="view_btn">view</a>
-                    <!--<a href="" class="view_btn">view</a>-->
+                <a href="" class="view_btn">view</a>
                 </div>
-
             </div>
 
         </div>
