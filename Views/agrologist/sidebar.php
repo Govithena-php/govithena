@@ -1,7 +1,7 @@
 <aside class="[ bg-light fs-3 pt-5 ] [ sidebar ]">
     <div class="[ sidebar__link_items ]">
 
-        <a href="<?php URLROOT . './'?>" class="[ sidebar_link ]">
+        <a href="<?php echo URLROOT . "/agrologist/" ?>" class="[ sidebar_link ]">
             <i class="[ fa-solid fa-gauge fs-5 mx-1 ]"></i>
             <span>Dashboard</span>
         </a>
