@@ -23,6 +23,10 @@ class techController extends Controller
     public function myaccount(){
         $this->render('myaccount');
     }
+
+    public function dashboard(){
+        $this->render('dashboard');
+    }
   
 
 }
