@@ -36,7 +36,7 @@
                     <h4>Farmer Name</h4>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut nemo expedita.</p>
                 </div>
-                <a href="" class="view_btn">view</a>
+                <a href="<?php echo CSS; ?>/tech/farmerdetails" class="view_btn">view</a>
             </div>
             <div class="result_card">  
                 <div class="profile_img">
@@ -60,10 +60,9 @@
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut nemo expedita.</p>
                 </div>
                 
-                <!--<div class="btn_group">-->
+                <div class="btn_group">
                 <a href="" class="view_btn">view</a>
-                    <!--<a href="" class="view_btn">view</a>-->
-                <!--</div>-->
+                </div>
             </div>
 
         </div>

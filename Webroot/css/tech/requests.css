@@ -5,6 +5,7 @@
 
 .result_card {
     border: 1px solid #ccc;
+    background-color: #fff;
     min-height: 150px;
     display: flex;
     align-items: center;

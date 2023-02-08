@@ -1,10 +1,17 @@
 .farmer_result{
     flex-direction: column;
+    padding: 10px 10px;
 }
 
 .farmer_card{
     display: flex;
-    border-style: solid;
+    border: 1px solid #ccc;
+    align-items: center;
+    background-color: #fff;
+    min-height: 100px;
+    padding:20px 20px;
+    margin-bottom: 10px;
+   
 }
 
 .profile_img{
@@ -19,17 +26,33 @@
     height: 100%;
     object-fit: cover;
 }
+ 
 
-.farmer_name h4 {
+.farmer_name > h4 {
     font-size: 20px;
     font-weight: 600;
-   /* padding: 20px 50px;*/
-    margin-bottom: 15px;
+    padding: 50px 50px;
+}
+
+.updategig_btn {
+    text-decoration: none;
+    color: white;
+    background-color: #115dcf;/*var(--clr-primary);*/
+    padding:10px 30px;
+    border-radius: 5px;
+    margin-left:auto;
+    
+}
+.farmer_descrip{
+    border: 1px solid #ccc;
+    background-color: #fff;
+    padding:20px 20px;
+    min-height:120px;
 }
 
 .farmer_descrip p {
-    font-size: 10px;
-    font-weight: 300;
-    margin-bottom: 15px;
-    gap: 20px;
+    font-size: 15px;
+    font-weight:400;
+    /*margin-bottom: 15px;*/
+   /* gap: 20px;*/
 }
