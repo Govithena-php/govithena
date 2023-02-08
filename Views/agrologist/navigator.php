@@ -97,7 +97,7 @@ function highlight($active, $link)
     <div class="[ links ]">
         <ul>
             <li>
-                <a href="./" class="<?php highlight($active, "dashboard") ?>">
+                <a href="<?php echo URLROOT . "/agrologist" ?>" class="<?php highlight($active, "dashboard") ?>">
                     <i class="fa-solid fa-gauge"></i>
                     <p>Dashboard</p>
                 </a>
