@@ -39,7 +39,7 @@
     padding: 5px 0.5px;
 }
 
-.btn_accept3 {
+.btn_accept1 {
     background-color: #419944; /* Green */
     border: none;
     color: white;
@@ -50,6 +50,6 @@
     font-size: 16px;
     border-radius: 30px;
 
-
+    /* padding: 0.5rem 1rem; */
     place-items: center;
   }

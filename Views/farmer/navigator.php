@@ -125,12 +125,13 @@ function highlight($active, $link)
                     <p>Agrologist</p>
                 </a>
             </li>
+
             <li>
                 <a href="<?php echo URLROOT ?>/farmer/techassistantfirst" class="<?php highlight($active, "techassistantfirst") ?>">
                     <i class="[ fa-solid fa-tractor ]"></i>
                     <p>Technical Assistant</p>
                 </a>
-            </li>
+
             <li>
                 <a href="<?php echo URLROOT ?>/farmer/investors" class="<?php highlight($active, "investors") ?>">
                     <i class="[ fa-solid fa-tractor ]"></i>

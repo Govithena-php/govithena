@@ -61,7 +61,7 @@
                         </div>
                         <div>
                             <label>category : </label>
-                            <select id="select-list" name="category" class="item-list">
+                            <select id="select-list" name="category" class="itemlst">
                                 <option value=''>What are you growing?</option>
                                 <option value='vegetable'>Vegetable</option>
                                 <option value='fruits'>Fruits</option>
