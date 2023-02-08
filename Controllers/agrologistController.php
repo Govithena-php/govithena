@@ -16,41 +16,44 @@ class agrologistController extends Controller
 
     public function farmers($params)
     {
+        
         if (!empty($params)) {
             //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>". count($params) . "</h1>";
+            require(ROOT . 'Models/agrologist.php');
+            $agrologist = new Agrologist();
             if (count($params) == 1) {
-                $this->farmergigs($params[0]);
+                $this->farmergigs($agrologist, $params[0]);
             } else {
                 // require(ROOT . 'Models/agrologist.php');
                 // $agrologist = new Agrologist();
-                // $uid = $_SESSION['uid'];
-                // if (isset($_POST['update_details_btn'])) {
-                //     $week = new Input(POST, 'week');
-                //     $date = new Input(POST, 'date');
-                //     // $update_file = new Input(POST, 'update_file');
-                //     $description = new Input(POST, 'description');
-                //     if (move_uploaded_file($_FILES['update_img']['tmp_name'], "Uploads/" . basename($_FILES['update_img']['name']))) {
-                //         //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'> file uploaded  </h1>";
-                //         $agrologist->insertFieldVisit([
-                //             'week' => $week->get(),
-                //             'gigId' => $gid,
-                //             'agrologistId' => $uid,
-                //             'farmerId' => $fid,
-                //             'fieldVisitDetails' => $description->get(),
-                //             'fieldVisitImage' => basename($_FILES['update_img']['name']),
-                //             'visitDate' => $date->get(),
-                //         ]);
-                //         // echo "file uploaded";
-                //     } else {
-                //         //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'> file not uploaded  </h1>";
+                $uid = Session::get('user')->getUid();
+                if (isset($_POST['update_details_btn'])) {
+                    $week = new Input(POST, 'week');
+                    $date = new Input(POST, 'date');
+                    // $update_file = new Input(POST, 'update_file');
+                    $description = new Input(POST, 'description');
+                    if (move_uploaded_file($_FILES['update_img']['tmp_name'], "Uploads/" . basename($_FILES['update_img']['name']))) {
+                        //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'> file uploaded  </h1>";
+                        $agrologist->insertFieldVisit([
+                            'week' => $week->get(),
+                            'gigId' => $params[1],
+                            'agrologistId' => $uid,
+                            'farmerId' => $params[0],
+                            'fieldVisitDetails' => $description->get(),
+                            'fieldVisitImage' => basename($_FILES['update_img']['name']),
+                            'visitDate' => $date->get(),
+                        ]);
+                        // echo "file uploaded";
+                    } else {
+                        //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'> file not uploaded  </h1>";
 
-                //         //echo "file not uploaded";
-                //     }
+                        //echo "file not uploaded";
+                    }
 
-                //     //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $Session::get('uid') . "</h1>";
-                // }
+                    //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $Session::get('uid') . "</h1>";
+                }
 
-                $this->farmerdetails($params[0], $params[1]);
+                $this->farmerdetails($agrologist, $params[0], $params[1]);
                 //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $Session::get('uid') . "</h1>";
             }
 
@@ -110,9 +113,10 @@ class agrologistController extends Controller
     {
         require(ROOT . 'Models/agrologist.php');
         $agrologist = new Agrologist();
-        $uid = $_SESSION['uid'];
+        $uid = Session::get('user')->getUid();
         $d['agrologist'] = $agrologist->getAgrologistDetails();
-
+        var_dump($d['agrologist']);
+        // die();
 
         if (isset($_POST['edit_details_btn'])) {
 
@@ -136,17 +140,25 @@ class agrologistController extends Controller
 
     public function requestdetails($id)
     {
+        require(ROOT . 'Models/agrologist.php');
+        $agrologist = new Agrologist();   
+        $d['requestDetails'] = $agrologist->farmerRequest();
+        // echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $d['message'] . "</h1>";
+
+        $this->set($d);
         return $this->render('requestdetails');
     }
 
-    public function farmerdetails($fid, $gid)
+    public function farmerdetails($agrologist, $fid, $gid)
     {
-        require(ROOT . 'Models/agrologist.php');
-        $agrologist = new Agrologist();
-        $uid = $_SESSION['uid'];
+        // require(ROOT . 'Models/agrologist.php');
+        // $agrologist = new Agrologist();
+        $uid = Session::get('user')->getUid();
         //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $uid . "</h1>";
 
         $d['fieldVisit'] = $agrologist->getFieldVisitDetails($fid, $gid);
+        $d['fid'] = $fid;
+        $d['gid'] = $gid;
         //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $uid . "</h1>";
 
         if (isset($_POST['update_details_btn'])) {
@@ -179,11 +191,12 @@ class agrologistController extends Controller
         return $this->render('farmerdetails');
     }
 
-    public function farmergigs($id)
+    public function farmergigs($agrologist, $id)
     {
-        require(ROOT . 'Models/agrologist.php');
-        $agrologist = new Agrologist();
+        // require(ROOT . 'Models/agrologist.php');
+        // $agrologist = new Agrologist();
         $d['gigDetails'] = $agrologist->getFarmerGigs(['farmerId' => $id]);
+        
         $this->set($d);
         return $this->render('farmergigs');
     }
