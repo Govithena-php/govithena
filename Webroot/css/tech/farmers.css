@@ -5,6 +5,7 @@
 
 .result_card {
     border: 1px solid #ccc;
+    background-color: #fff;
     min-height: 150px;
     display: flex;
     align-items: center;
@@ -43,16 +44,16 @@
 }
 
 
-.btn_group {
-    display: flex; /*horizontally*/
+/*.btn_group {*/
+    /*display: flex; horizontally*/
     /* flex-direction: column; vertically */
-    gap: 20px;
-}
+    /*gap: 20px;*/
+/*}*/
 
 .view_btn {
     text-decoration: none;
     color: white;
-    background-color: var(--clr-primary);
+    background-color: #115dcf;/*var(--clr-primary);*/
     padding:10px 30px;
     border-radius: 5px;
 }

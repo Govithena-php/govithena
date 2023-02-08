@@ -34,12 +34,17 @@
                 <div class="farmer_name">
                     <h4>Farmer Name</h4>
                 </div>
+
+                <a href="" class="updategig_btn">Update Gig</a>
+
             </div>
 
             <div class="farmer_descrip">
-                <p>Location : Nuwara Eliya</P>
-                <p>Cultivation : Carrot</P>
-                <p>Description : hduddarorarqwqczdjdkseqionmxvdfyll</P>
+                <p><b>Location : </b>Nuwara Eliya</P>
+                <p><b>Cultivation : </b>Carrot</P>
+                <p><b>Start Date : </b>DD/MM/YYYY</P>
+                <p><b>Duration : </b>8 months</P>
+                <p><b>Description : </b>hduddarorarqwqczdjdkseqionmxvdfyll</P>
             </div> 
         </div>
     </div>

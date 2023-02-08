@@ -25,7 +25,7 @@
     ?>
 
     <div class="[ container ][ ]" container-type="dashboard-section">
-        
+        <h1>Dashboard</h1>
     </div>
     
     <?php
