@@ -68,7 +68,7 @@ class Agrologist extends Model
             return $req;
         } catch (PDOException $e) {
             echo $e->getMessage();
-            //die();
+            die();
             return null;
         }
     }
@@ -114,16 +114,13 @@ class Agrologist extends Model
 
     public function getFarmerGigs($data){
         try {
-            $sql = "SELECT g.image, g.location, g.title, g.category, g.timePeriod, u.firstName, u.lastName, g.farmerId, g.gigId FROM gig g LEFT JOIN agrologist_request a ON g.farmerId=a.farmerId LEFT JOIN user u ON u.uid=g.farmerId WHERE g.farmerId = :farmerId AND a.agrologistId = :agrologistId";
+            $sql = "SELECT * FROM gig g LEFT JOIN agrologist_request a ON g.farmerId=a.farmerId LEFT JOIN user u ON u.uid=g.farmerId WHERE g.farmerId = :farmerId AND a.agrologistId = :agrologistId";
             $stmt =  Database::getBdd()->prepare($sql);
             $stmt->execute([
                 'agrologistId' => Session::get('user')->getUid(),
                 'farmerId' => $data['farmerId']
             ]);
-            
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            // var_dump($req);
-            // die();
             return $req;
         } catch (PDOException $e) {
             echo $e->getMessage();

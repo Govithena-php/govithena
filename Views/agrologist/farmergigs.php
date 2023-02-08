@@ -30,7 +30,7 @@
             if (isset($gigDetails)) {
                 // print_r($searchResult);
                 foreach ($gigDetails as $gigDetail) {
-                    $imageURL = UPLOADS . $gigDetail['image'];
+                    $imageURL = UPLOADS . $gigDetail["image"];
             
                     // echo $imageURL;
                     // die();

@@ -102,7 +102,7 @@ class agrologistController extends Controller
             }
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if (isset($_POST['accept'])) {
-                    //var_dump($_POST['accept']);
+                    var_dump($_POST['accept']);
                     //echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>" . $_POST['accept'] . "</h1>";
                     $agr->acceptRequest($_POST['accept']);
                     //$this->redirect("/agrologist/farmers");
@@ -204,8 +204,7 @@ class agrologistController extends Controller
         // require(ROOT . 'Models/agrologist.php');
         // $agrologist = new Agrologist();
         $d['gigDetails'] = $agrologist->getFarmerGigs(['farmerId' => $id]);
-        // var_dump($d['gigDetails']);
-        // die();
+        
         $this->set($d);
         return $this->render('farmergigs');
     }
