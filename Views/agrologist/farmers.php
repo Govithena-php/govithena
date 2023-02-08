@@ -8,8 +8,8 @@
     <title>Agrologist | Dashboard</title>
     <link rel="icon" type="image/x-icon" href="<?php echo IMAGES ?>/favicon.png">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
-    
     <link rel="stylesheet" href="<?php echo CSS ?>/agrologist/requests.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>

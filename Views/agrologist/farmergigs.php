@@ -30,7 +30,7 @@
             if (isset($gigDetails)) {
                 // print_r($searchResult);
                 foreach ($gigDetails as $gigDetail) {
-                    //$imageURL = UPLOADS . $result["image"];
+                    $imageURL = UPLOADS . $gigDetail["image"];
             
                     // echo $imageURL;
                     // die();
@@ -39,7 +39,7 @@
                     <div class="[ result__card ]">
                         <div class="[ card__img ]">
 
-                            <!-- <img src="<?php echo $imageURL ?>" alt="test" /> -->
+                            <img src="<?php echo $imageURL ?>" alt="test" />
 
                             <!-- <img src="<?php echo IMAGES ?>/temp/17.jpg" alt="test"> -->
                             <div class="[ farmer__name ]">
