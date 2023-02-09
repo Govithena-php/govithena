@@ -53,15 +53,18 @@
                             <img width="100" alt="test" src="<?php echo $imageURL ?>" />
                         </div>
                         <div class="card_content">
-                            <h1><?php echo $p['title'] ?></h1>
-                            <h4><?php echo $p['category'] ?></h4>
+                            <h1><?php echo ucwords($p['title']) ?></h1>
+                            <h4><?php echo ucwords($p['category']) ?></h4>
+                            <div style="color: grey">Capital(LKR)</div>
                             <h2><?php echo $p['capital'] ?></h2>
-                            <p><?php echo $p['location'] ?></p>
+                            <div style="color: grey">Location</div>
+                            <p><?php echo ucwords($p['location']) ?></p>
+                            <div style="color: grey">Land Area(Hectare)</div>
                             <p><?php echo $p['landArea'] ?></p>
                             <p><?php echo $p['description'] ?></p>
                             <div class="actions">
                                 <a href="#" class="btn btn-primary">Edit</a>
-                                <a href="#" class="btn btn-danger">delete</a>
+                                <a href="#" class="btn btn-danger">Delete</a>
                             </div>
                         </div>
                     </div>
