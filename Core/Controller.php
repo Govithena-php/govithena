@@ -25,6 +25,12 @@ class Controller
         }
     }
 
+    public function model($model)
+    {
+        require_once(ROOT . 'Models/' . $model . '.php');
+        return new $model();
+    }
+
     public function redirect($url)
     {
         header('Location: ' . URLROOT . $url);
