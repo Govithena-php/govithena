@@ -2,8 +2,13 @@
 
 class searchController extends Controller
 {
+    private $searchModel;
+
     public function __construct()
     {
+
+        $this->searchModel = $this->model('search');
+
         if (!Session::isLoggedIn()) {
             $this->redirect('/signin');
         }
@@ -15,15 +20,9 @@ class searchController extends Controller
         // if (!isset($_POST['search_text'])) {
         //     $this->redirect('/');
         // }
-        require(ROOT . 'Models/search.php');
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
             $terms = new Input(GET, 'terms');
-
-
-            $s = new Search();
-
-            // $key = "rice";
 
             if (isset($terms)) {
                 $key = $terms;
@@ -32,7 +31,7 @@ class searchController extends Controller
                     'key' => '%' . $key . '%'
                 );
 
-                if (isset($_POST['locatio   n']) && $_POST['location'] != "") {
+                if (isset($_POST['location']) && $_POST['location'] != "") {
                     $terms['location'] = $_POST['location'];
                 }
 
@@ -44,7 +43,8 @@ class searchController extends Controller
                     $terms['price_range'] = $_POST['price_range'];
                 }
 
-                $res = $s->searchGigs($terms);
+                $res = $this->searchModel->searchGigs($terms);
+
                 if (isset($res)) {
                     $data['searchResult'] = $res;
                     $this->set($data);
