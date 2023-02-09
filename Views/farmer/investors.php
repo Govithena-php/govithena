@@ -47,7 +47,7 @@
                    <div class="[ requestcard bg-light ]">
                       
                       <div class="[ requestimg ]">
-                           <img class="img" src="<?php echo IMAGES ?>/investor8.jpg" alt="profile">
+                           <img class="imgpro" src="<?php echo IMAGES ?>/investor8.jpg" alt="profile">
                        </div>
 
                        <form action="<?php echo URLROOT . '/agrologist/requests' ?>" >
@@ -96,7 +96,7 @@
                    <div class="[ requestcard bg-light ]">
                       
                       <div class="[ requestimg ]">
-                           <img class="img" src="<?php echo IMAGES ?>/investor7.jpg" alt="profile">
+                           <img class="imgpro" src="<?php echo IMAGES ?>/investor7.jpg" alt="profile">
                        </div>
 
                        <form action="<?php echo URLROOT . '/agrologist/requests' ?>" >
@@ -146,7 +146,7 @@
                    <div class="[ requestcard bg-light ]">
                       
                       <div class="[ requestimg ]">
-                           <img class="img" src="<?php echo IMAGES ?>/investor9.jpg" alt="profile">
+                           <img class="imgpro" src="<?php echo IMAGES ?>/investor9.jpg" alt="profile">
                        </div>
 
                        <form action="<?php echo URLROOT . '/agrologist/requests' ?>" >
@@ -204,7 +204,7 @@
                         <div class="[ requestcard bg-light ]">
                            
                            <div class="[ requestimg ]">
-                                <img class="img" src="<?php echo IMAGES ?>/investor.jfif" alt="profile">
+                                <img class="imgpro" src="<?php echo IMAGES ?>/investor.jfif" alt="profile">
                             </div>
 
                             <form action="<?php echo URLROOT . '/agrologist/requests' ?>" >
@@ -261,7 +261,7 @@
                    <div class="[ requestcard bg-light ]">
                       
                       <div class="[ requestimg ]">
-                           <img class="img" src="<?php echo IMAGES ?>/investor2.jpg" alt="profile">
+                           <img class="imgpro" src="<?php echo IMAGES ?>/investor2.jpg" alt="profile">
                        </div>
 
                        <form action="<?php echo URLROOT . '/agrologist/requests' ?>" >
@@ -315,7 +315,7 @@
                    <div class="[ requestcard bg-light ]">
                       
                       <div class="[ requestimg ]">
-                           <img class="img" src="<?php echo IMAGES ?>/investor3.jfif" alt="profile">
+                           <img class="imgpro" src="<?php echo IMAGES ?>/investor3.jfif" alt="profile">
                        </div>
 
                        <form action="<?php echo URLROOT . '/agrologist/requests' ?>" >
@@ -372,7 +372,7 @@
                    <div class="[ requestcard bg-light ]">
                       
                       <div class="[ requestimg ]">
-                           <img class="img" src="<?php echo IMAGES ?>/investor4.jfif" alt="profile">
+                           <img class="imgpro" src="<?php echo IMAGES ?>/investor4.jfif" alt="profile">
                        </div>
 
                        <form action="<?php echo URLROOT . '/agrologist/requests' ?>" >
