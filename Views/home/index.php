@@ -222,7 +222,7 @@
                                 </div>
                                 <div>
                                     <small>Time Period :</small>
-                                    <p><?php echo $gig['timePeriod'] ?></p>
+                                    <p><?php echo $gig['timePeriod'] ?> Months</p>
                                 </div>
                             </div>
                         </div>
