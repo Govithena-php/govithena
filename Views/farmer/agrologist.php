@@ -28,7 +28,50 @@
     require_once("navigator.php");
     ?>
 
+    <?php
+    if (isset($message)) {
+        if ($message == 'ok') {
+    ?>
 
+            <div class="[ alert alert-success ]">
+                <i class="fas fa-check"></i>
+                <div>
+                    <h4>Success</h4>
+                    <p>Your request has been sent to the Agrologist</p>
+                </div>
+            </div>
+
+        <?php
+        }
+        if ($message == 'already') {
+        ?>
+
+            <div class="[ alert alert-error ]">
+                <i class="fas fa-times"></i>
+                <div>
+                    <h4>Error</h4>
+                    <p>Request alredy sent.</p>
+                </div>
+            </div>
+
+        <?php
+        }
+        if ($message == 'error') {
+        ?>
+
+            <div class="[ alert alert-error ]">
+                <i class="fas fa-times"></i>
+                <div>
+                    <h4>Error</h4>
+                    <p>Something went wrong.</p>
+                </div>
+            </div>
+
+    <?php
+        }
+    }
+
+    ?>
 
     <div class="container" container-type="dashboard-section">
         <!-- <form class="[ fs-3 ][ search__form ]" action="<?php echo URLROOT . "/search/" ?>" method="get">

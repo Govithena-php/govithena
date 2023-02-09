@@ -18,13 +18,14 @@ class Farmer extends Model
     public function sendRequest($data)
     {
         try {
-            $sql = "INSERT INTO agrologist_request (farmerId, agrologistId, message, status) VALUES (:farmerId, :agrologistId, :message, :status)";
+            $sql = "INSERT INTO agrologist_request (requestId, farmerId, agrologistId, message, status) VALUES (:requestId, :farmerId, :agrologistId, :message, :status)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
+                'requestId' => $data['requestId'],
                 'farmerId' => $data['farmerId'],
                 'agrologistId' => $data['agrologistId'],
                 'message' => $data['message'],
-                'status' => 'pending'
+                'status' => $data['status']
             ]);
             if ($stmt->rowCount() > 0) {
                 return ['status' => true, 'data' => true];
