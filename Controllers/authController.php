@@ -88,17 +88,18 @@ class authController extends Controller
                 $this->render('signup');
             }
 
-            if (isset($_POST['signup'])) {
-                require(ROOT . 'Models/user.php');
-
+            require(ROOT . 'Models/user.php');
+                
                 $uid = new UID(PREFIX::USER);
+
                 $firstName = new input(POST, 'firstName');
                 $lastName = new input(POST, 'lastName');
                 $email = new input(POST, 'email');
                 $password = new input(POST, 'password');
                 $confirmPassword = new input(POST, 'confirmPassword');
-                $actor = Session::pop('actor');
-
+                
+                $actor = Session::get('actor');
+            
                 $email->sanatizeEmail();
                 $password->sanatizePassword();
                 $confirmPassword->sanatizePassword();
@@ -147,7 +148,7 @@ class authController extends Controller
 
                 $this->render('signup');
             }
-        } else {
+         else {
             $this->render('actor');
         }
     }
