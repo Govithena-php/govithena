@@ -92,12 +92,12 @@
                                 <div class="[ flex flex-sb-c ]">
                                     <div class="[ flex gap-2 ]">
                                         <div class="[ bottom_left ]">
-                                            <span>offer :</span>
-                                            <p><?php echo $request['offer'] ?></p>
+                                            <span>Offer :</span>
+                                            <p>LKR <?php echo $request['offer'] ?></p>
                                         </div>
                                         <div class="[ bottom_left ]">
                                             <span>Time Period :</span>
-                                            <p><?php echo $request['timePeriod'] ?></p>
+                                            <p><?php echo $request['timePeriod'] ?> Months</p>
                                         </div>
                                         <div class="[ bottom_left ]">
                                             <span>Location :</span>
@@ -106,7 +106,7 @@
                                     </div>
 
                                     <div class="[ flex flex-c-c gap-1 ]">
-                                        <a href="<?php echo URLROOT ?>/checkout/<?php echo $request['requestId'] ?>" class="btn btn-primary">pay</a>
+                                        <a href="<?php echo URLROOT ?>/checkout/<?php echo $request['requestId'] ?>" class="btn btn-primary">Pay Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -156,12 +156,12 @@
                                 <div class="[ flex flex-sb-c ]">
                                     <div class="[ flex gap-2 ]">
                                         <div class="[ bottom_left ]">
-                                            <span>offer :</span>
-                                            <p><?php echo $request['offer'] ?></p>
+                                            <span>Offer :</span>
+                                            <p>LKR <?php echo $request['offer'] ?></p>
                                         </div>
                                         <div class="[ bottom_left ]">
                                             <span>Time Period :</span>
-                                            <p><?php echo $request['timePeriod'] ?></p>
+                                            <p><?php echo $request['timePeriod'] ?> Months</p>
                                         </div>
                                         <div class="[ bottom_left ]">
                                             <span>Location :</span>
@@ -170,8 +170,8 @@
                                     </div>
 
                                     <div class="[ flex flex-c-c gap-1 ]">
-                                        <button class="btn btn-primary">edit</button>
-                                        <button class="btn btn-primary">delete</button>
+                                        <button class="btn btn-primary">Edit</button>
+                                        <button class="btn btn-primary">Cancel</button>
                                     </div>
                                 </div>
                             </div>
@@ -220,12 +220,12 @@
                                 <div class="[ flex flex-sb-c ]">
                                     <div class="[ flex gap-2 ]">
                                         <div class="[ bottom_left ]">
-                                            <span>offer :</span>
-                                            <p><?php echo $request['offer'] ?></p>
+                                            <span>Offer :</span>
+                                            <p>LKR <?php echo $request['offer'] ?></p>
                                         </div>
                                         <div class="[ bottom_left ]">
                                             <span>Time Period :</span>
-                                            <p><?php echo $request['timePeriod'] ?></p>
+                                            <p><?php echo $request['timePeriod'] ?>Months</p>
                                         </div>
                                         <div class="[ bottom_left ]">
                                             <span>Location :</span>
@@ -234,7 +234,7 @@
                                     </div>
 
                                     <div class="[ flex flex-c-c gap-1 ]">
-                                        <button class="btn btn-primary">resend</button>
+                                        <button class="btn btn-primary">Resend</button>
                                     </div>
                                 </div>
                             </div>
