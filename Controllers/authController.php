@@ -60,6 +60,7 @@ class authController extends Controller
                     $data['firstName'],
                     $data['lastName'],
                     $data['userType'],
+                    $data['image'],
                     true
                 );
 

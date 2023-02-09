@@ -52,10 +52,10 @@
                                         </h1>
                                         <h4><?php echo ucwords($request['city']) ?></h4>
                                         <p class="flex flex-row">
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star rating_checked"></span>
+                                            <span class="fa fa-star rating_checked"></span>
+                                            <span class="fa fa-star rating_checked"></span>
+                                            <span class="fa fa-star rating_checked"></span>
                                             <span class="fa fa-star"></span>
                                         </p>
 
