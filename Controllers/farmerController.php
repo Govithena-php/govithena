@@ -99,9 +99,56 @@ class farmerController extends Controller
     }
 
 
-    function investors()
+    function investors($params = [])
     {
+        $props = [];
+        if (!empty($params)) {
+            $props['message'] = $params[0];
+        }
+
+        $investors = $this->farmerModel->investors([
+            'farmerId' => $this->currentUser->getUid(),
+            'state' => STATUS::PENDING
+        ]);
+        if ($investors['status']) {
+            $props['investors'] = $investors['data'];
+            $this->set($props);
+        }
+        $this->set($props);
         $this->render('investors');
+    }
+
+    public function acceptInvestor($params)
+    {
+        if (isset($params)) {
+            list($requestId) = $params;
+            $res = $this->farmerModel->acceptInvestor([
+                'requestId' => $requestId,
+                'state' => STATUS::ACCEPTED
+            ]);
+
+            if ($res['status']) {
+                $this->redirect('/farmer/investors');
+            } else {
+                $this->redirect('/farmer/investors/' . $res['message']);
+            }
+        }
+    }
+    public function declineInvestor($params)
+    {
+        if (isset($params)) {
+            list($requestId) = $params;
+            $res = $this->farmerModel->declineInvestor([
+                'requestId' => $requestId,
+                'state' => STATUS::REJECTED
+            ]);
+
+            if ($res['status']) {
+                $this->redirect('/farmer/investors');
+            } else {
+                $this->redirect('/farmer/investors/' . $res['message']);
+            }
+        }
     }
 
     function techassistant()
@@ -194,6 +241,23 @@ class farmerController extends Controller
         } else {
 
             $this->redirect('/farmer/techassistantfirst/error');
+        }
+    }
+
+
+    public function deleteGig($params)
+    {
+        if (isset($params)) {
+
+            list($gigId) = $params;
+
+            $res = $this->farmerModel->delete_Gig($gigId);
+
+            if ($res['status']) {
+                $this->redirect('/farmer/');
+            } else {
+                $this->redirect('/farmer/' . $res['message']);
+            }
         }
     }
 }

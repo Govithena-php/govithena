@@ -12,25 +12,37 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/table.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
-    
+
     <link rel="stylesheet" href="<?php echo CSS ?>/farmer/gigs.css">
 
     <title>Dashboard | Investor</title>
+
+    <style>
+        .submitbtn {
+            background-color: var(--clr-primary);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 10px;
+            width: fit-content;
+        }
+    </style>
+
 </head>
 
 <body class="bg-gray h-screen">
 
     <?php
     $active = "gigs";
-    $title = "Gigs";
+    $title = "Create New Gig";
     require_once("navigator.php");
     ?>
 
     <div class="[ container ][ gigs ]" container-type="dashboard-section">
         <div class="content">
-            <h1>Create Gig</h1>
-            <hr>
-
             <div class=" ff-poppins">
                 <form class="form" action="" method="post" enctype="multipart/form-data">
                     <div class="row1">
@@ -65,7 +77,7 @@
                                 <option value=''>What are you growing?</option>
                                 <option value='vegetable'>Vegetable</option>
                                 <option value='fruits'>Fruits</option>
-                                <option value='rice'>Rice</option>
+                                <option value='grains'>Grains</option>
                                 <option value='spices'>Spices</option>
                             </select>
                         </div>
@@ -79,7 +91,7 @@
                     <div>
                         <label>Description : </label>
                         <textarea id="w3review" name="description" rows="4" cols="72" placeholder="Description..." style="background-color: rgba(189, 189, 189, 0.16);"></textarea>
-                        <button name="createGig" class="submitbtn" type="submit"><i class="search__icon fa fa-submit">Submit</i></button>
+                        <button name="createGig" class="submitbtn" type="submit">Create</button>
 
                 </form>
             </div>

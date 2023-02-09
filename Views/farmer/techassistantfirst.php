@@ -24,7 +24,7 @@
 
     <?php
     $active = "techassistantfirst";
-    $title = "Technical Assistant";
+    $title = "Tech Assistants";
     require_once("navigator.php");
     ?>
 

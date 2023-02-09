@@ -59,8 +59,8 @@
     font-size: 1.2rem;
     font-weight: 500;
     color: var(--clr-light, white);
-    margin-left: auto;
-    margin-right:2rem;
+    margin-left: 0;
+    margin-right:auto;
 }
 
 
