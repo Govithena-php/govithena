@@ -2,10 +2,23 @@
 
 class gigController extends Controller
 {
+    private $currentUser;
+    private $gigModel;
+    private $requestModel;
+
     public function __construct()
     {
+        $this->currentUser = Session::get('user');
+
+        $this->gigModel = $this->model('gig');
+        $this->requestModel = $this->model('requestFarmer');
+
         if (!Session::isLoggedIn()) {
-            $this->redirect('/signin');
+            $this->redirect('/auth/signin');
+        }
+
+        if (!$this->currentUser->hasAccess(ACTOR::INVESTOR)) {
+            $this->redirect('/error/dontHaveAccess');
         }
     }
 
@@ -16,9 +29,8 @@ class gigController extends Controller
 
         if (isset($state)) $props['state'] = $state;
 
-        require(ROOT . 'Models/gig.php');
-        $g = new Gig();
-        $gig = $g->viewGig($gigId);
+
+        $gig = $this->gigModel->viewGig($gigId);
 
         if (isset($gig)) {
 
@@ -47,19 +59,20 @@ class gigController extends Controller
 
     function request()
     {
-        $farmerId = Session::get('farmerId');
-        $gigId = Session::get('gigId');
-        Session::unset(['farmerId', 'gigId']);
+        $farmerId = Session::pop('farmerId');
+        $gigId = Session::pop('gigId');
+
 
         if (isset($_POST['offerAmount']) && isset($_POST['message'])) {
-            $message = $_POST['message'];
-            $offer = $_POST['offerAmount'];
-            require(ROOT . 'Models/requestFarmer.php');
-            $r = new RequestFarmer();
-            $result = $r->createFarmerRequest([
+
+            $reqId = new UID(PREFIX::REQUEST);
+            $message = new Input(POST, 'message');
+            $offer = new Input(POST, 'offerAmount');
+
+            $result = $this->requestModel->createFarmerRequest([
                 'gigId' => $gigId,
                 'farmerId' => $farmerId,
-                'investorId' => Session::get('uid'),
+                'investorId' => $this->currentUser->getUid(),
                 'state' => 'PENDING',
                 'offer' => $offer,
                 'message' => $message
