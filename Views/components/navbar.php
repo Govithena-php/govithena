@@ -46,6 +46,8 @@ $currentUser = Session::get('user');
 
                     <button onclick="toggleProfileMenu()">
                         <div class="[ image ]">
+                            <?php
+                            ?>
                             <img src="<?php echo UPLOADS . '/' . Session::get('user')->getImage(); ?>" alt="profile">
                         </div>
                     </button>
