@@ -12,11 +12,24 @@
     <link rel="stylesheet" href="<?php echo CSS ?>base.css">
     <link rel="stylesheet" href="<?php echo CSS ?>grid.css">
     <link rel="stylesheet" href="<?php echo CSS ?>checkout/index.css">
-
+    <style>
+        .logo {
+            background-color: var(--clr-dark, #000);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5em;
+            color: var(--clr-light, #fff);
+            font-size: 0.8rem;
+        }
+    </style>
 </head>
 
 <body>
-    <!-- <?php require_once(COMPONENTS . 'navbar.php'); ?> -->
+    <div class="[ logo ]">
+        <img src="<?php echo IMAGES ?>/logo.svg" alt="logo" />
+        <h2>Govithena</h2>
+    </div>
     <div class="[ container ]" container-type="section">
         <div class="[ title ]">
             <h1>Checkout</h1>

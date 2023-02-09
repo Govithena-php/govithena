@@ -26,6 +26,11 @@
             padding-inline: 0.5rem;
             justify-content: space-between;
         }
+
+        .famer_page_btn {
+            text-decoration: none;
+            color: #fff;
+        }
     </style>
 </head>
 
@@ -204,7 +209,7 @@
 
                             <img src="<?php echo $imageURL ?>" alt="test" />
                             <div class="[ farmer__name ]">
-                                <p><?php echo $gig['firstName'] . " " . $gig['lastName'] ?></p>
+                                <a class="famer_page_btn" href="<?php echo URLROOT . "/profile/" . $gig['farmerId'] ?>"><?php echo $gig['firstName'] . " " . $gig['lastName'] ?></a>
                                 <p><?php echo $gig['category'] ?></p>
                             </div>
                         </div>
