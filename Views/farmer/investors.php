@@ -116,7 +116,7 @@
                                     <p><b>Amal Perera</b></p>
                                 </h1>
                                 <!-- </a> -->
-                                <p>send you a request to you</p>
+                                <p>Sent you a request</p>
 
 
 
@@ -175,7 +175,7 @@
                                     <p><b>Nimal Maduranga</b></p>
                                 </h1>
                                 <!-- </a> -->
-                                <p>send you a request to you</p>
+                                <p>Sent you a request</p>
 
 
 
@@ -231,7 +231,7 @@
                                     <p><b>Punsara Deshan</b></p>
                                 </h1>
                                 <!-- </a> -->
-                                <p>send you a request to you</p>
+                                <p>Sent you a request</p>
 
 
 
@@ -290,7 +290,7 @@
                                     <p><b>Yeshan Pasindu</b></p>
                                 </h1>
                                 <!-- </a> -->
-                                <p>send you a request to you</p>
+                                <p>Sent you a request</p>
 
 
 

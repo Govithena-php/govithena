@@ -50,7 +50,7 @@
                             <input type="text" name="capital" placeholder="Amount">
                         </div>
                         <div>
-                            <label>Time Period (days) : </label>
+                            <label>Time Period (Months) : </label>
                             <input type="text" name="timePeriod" placeholder="Time Period">
                         </div>
                     </div>
