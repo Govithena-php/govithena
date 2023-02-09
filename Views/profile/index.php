@@ -9,32 +9,40 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
     <link rel="stylesheet" href="<?php echo CSS ?>base.css">
     <link rel="stylesheet" href="<?php echo CSS ?>grid.css">
-    <link rel="stylesheet" href="<?php echo CSS ?>/profile/index.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>profile/index.css">
 </head>
 
-<body>
-    <?php require_once(COMPONENTS . "navbar.php") ?>
 
+<body>
+    <?php require_once(COMPONENTS . "navbar.php");
+    var_dump($user);
+    // die();
+    ?>
     <div class="[ container ][ heading ]" container-type="section">
 
         <div class="[ heading__content ]">
             <div class="[ cover__img ]">
-                <img src="<?php echo IMAGES; ?>temp/radish.jpg" alt="">
+                <img src="<?php echo IMAGES; ?>/placeholder.jpg" alt="">
             </div>
             <div class="[ cover__content ]">
                 <div class="[ profile__img ]">
-                    <img src="<?php echo IMAGES; ?>21.jpg" alt="">
+                    <img src="<?php echo UPLOADS . $user['image'] ?>" alt="">
                 </div>
-                <div class="[ grid ]" sm="3" gap="1">
+                <div class="[ grid ]" sm="4" gap="1">
                     <span class="[ profile__back ]"></span>
                     <div class="[ user__details ]">
-                        <h1>John Doe</h1>
-                        <p>Farmer</p>
-                        <p>vegetable</p>
-                        <ul class="[ flex-row ]">
-                            <li><i class="fa fa-phone"></i></li>
-                            <li><i class="fa fa-envelope"></i></li>
-                        </ul>
+                        <h1><?php echo $user['firstName'] . " " . $user['lastName'] ?></h1>
+                        <p class="type"><?php echo strtolower($user['userType']) ?></p>
+                        <div class="[ flex-row ]">
+                            <a>
+                                <i class="fa fa-phone"></i>
+                                <p><?php echo $user['phoneNumber'] ?></p>
+                            </a>
+                            <a>
+                                <i class="fa fa-envelope"></i>
+                                <p><?php echo $user['username'] ?></p>
+                            </a>
+                        </div>
                     </div>
                     <i class="fa fa-bookmark"></i>
                 </div>
@@ -52,21 +60,27 @@
                     <i class="fa fa-envelope"></i>
                     <div>
                         <p class="[ li__heading ]">Email</p>
-                        <p>janithpm@gmail.com</p>
+                        <p><?php echo $user['username'] ?></p>
                     </div>
                 </li>
                 <li>
                     <i class="fa fa-map-marker"></i>
                     <div>
                         <p class="[ li__heading ]">Address</p>
-                        <p>No 1, ABC road</p>
+                        <p>
+                            <?php
+                            echo $user['addressLine1'] .
+                                "<br>" . $user['addressLine2'] .
+                                "<br>" . $user['city'];
+                            ?>
+                        </p>
                     </div>
                 </li>
                 <li>
                     <i class="fa fa-building"></i>
                     <div>
-                        <p class="[ li__heading ]">City</p>
-                        <p>Matara</p>
+                        <p class="[ li__heading ]">District</p>
+                        <p><?php echo $user['district'] ?></p>
                     </div>
                 </li>
                 <li>
@@ -93,119 +107,54 @@
             </ul>
         </div>
     </div>
+    <?php
 
-    <div class="[ container ]" type="section">
-        <h2> Active Gigs</h2>
-        <div class="[ my-2 ] [ grid ]" gap="1" md="2" lg="4">
+    if (!empty($gigs)) {
+    ?>
+        <div class="[ container ]" type="section">
+            <h2> Active Gigs</h2>
+            <div class="[ my-2 ] [ grid ]" gap="1" md="2" lg="4">
+                <?php
+                foreach ($gigs as $gig) {
+                ?>
+                    <div class="[ result__card ]">
+                        <p class="category__tag"><?php echo $gig["category"] ?></p>
+                        <div class="[ card__img ]">
+                            <img src="<?php echo UPLOADS . $gig['image'] ?>" alt="test" />
+                        </div>
+                        <div class="[ card__content ]">
 
-            <div class="[ result__card ]">
-                <div class="[ card__img ]">
-                    <img src="<?php echo IMAGES ?>temp/carrots.jpg" alt="test" />
-                    <!-- <img src="<?php echo IMAGES ?>/temp/17.jpg" alt="test"> -->
-                    <div class="[ farmer__name ]">
-                        <p><?php echo "firstname" ?></p>
-                        <p><?php echo "lastname" ?></p>
-                    </div>
-                </div>
-                <div class="[ card__content ]">
-                    <a class="[ text-dec-none mb-1 fs-5 text-dark fw-6 ]" href="<?php echo URLROOT . "/gig/" . $result['gigId'] ?>">
-                        <?php echo "title" ?>
-                    </a>
-                    <p class="[ sub-heading ]"><?php echo "capital" ?></p>
-                    <p><?php echo "location" ?></p>
-                    <div class="[ mt-1 flex flex-sb-c ]">
-                        <p><?php echo "category" ?></p>
-                        <p><?php echo "timeperiod" ?></p>
-                    </div>
-                </div>
-            </div>
-            <div class="[ result__card ]">
-                <div class="[ card__img ]">
-                    <img src="<?php echo IMAGES ?>temp/banana.jpg" alt="test" />
-                    <!-- <img src="<?php echo IMAGES ?>/temp/17.jpg" alt="test"> -->
-                    <div class="[ farmer__name ]">
-                        <p><?php echo "firstname" ?></p>
-                        <p><?php echo "lastname" ?></p>
-                    </div>
-                </div>
-                <div class="[ card__content ]">
-                    <a class="[ text-dec-none mb-1 fs-5 text-dark fw-6 ]" href="<?php echo URLROOT . "/gig/" . $result['gigId'] ?>">
-                        <?php echo "title" ?>
-                    </a>
-                    <p class="[ sub-heading ]"><?php echo "capital" ?></p>
-                    <p><?php echo "location" ?></p>
-                    <div class="[ mt-1 flex flex-sb-c ]">
-                        <p><?php echo "category" ?></p>
-                        <p><?php echo "timeperiod" ?></p>
-                    </div>
-                </div>
-            </div>
-            <div class="[ result__card ]">
-                <div class="[ card__img ]">
-                    <img src="<?php echo IMAGES ?>temp/radish.jpg" alt="test" />
-                    <!-- <img src="<?php echo IMAGES ?>/temp/17.jpg" alt="test"> -->
-                    <div class="[ farmer__name ]">
-                        <p><?php echo "firstname" ?></p>
-                        <p><?php echo "lastname" ?></p>
-                    </div>
-                </div>
-                <div class="[ card__content ]">
-                    <a class="[ text-dec-none mb-1 fs-5 text-dark fw-6 ]" href="<?php echo URLROOT . "/gig/" . $result['gigId'] ?>">
-                        <?php echo "title" ?>
-                    </a>
-                    <p class="[ sub-heading ]"><?php echo "capital" ?></p>
-                    <p><?php echo "location" ?></p>
-                    <div class="[ mt-1 flex flex-sb-c ]">
-                        <p><?php echo "category" ?></p>
-                        <p><?php echo "timeperiod" ?></p>
-                    </div>
-                </div>
-            </div>
-            <div class="[ result__card ]">
-                <div class="[ card__img ]">
-                    <img src="<?php echo IMAGES ?>temp/radish.jpg" alt="test" />
-                    <!-- <img src="<?php echo IMAGES ?>/temp/17.jpg" alt="test"> -->
-                    <div class="[ farmer__name ]">
-                        <p><?php echo "firstname" ?></p>
-                        <p><?php echo "lastname" ?></p>
-                    </div>
-                </div>
-                <div class="[ card__content ]">
-                    <a class="[ text-dec-none mb-1 fs-5 text-dark fw-6 ]" href="<?php echo URLROOT . "/gig/" . $result['gigId'] ?>">
-                        <?php echo "title" ?>
-                    </a>
-                    <p class="[ sub-heading ]"><?php echo "capital" ?></p>
-                    <p><?php echo "location" ?></p>
-                    <div class="[ mt-1 flex flex-sb-c ]">
-                        <p><?php echo "category" ?></p>
-                        <p><?php echo "timeperiod" ?></p>
-                    </div>
-                </div>
-            </div>
-            <div class="[ result__card ]">
-                <div class="[ card__img ]">
-                    <img src="<?php echo IMAGES ?>temp/radish.jpg" alt="test" />
-                    <!-- <img src="<?php echo IMAGES ?>/temp/17.jpg" alt="test"> -->
-                    <div class="[ farmer__name ]">
-                        <p><?php echo "firstname" ?></p>
-                        <p><?php echo "lastname" ?></p>
-                    </div>
-                </div>
-                <div class="[ card__content ]">
-                    <a class="[ text-dec-none mb-1 fs-5 text-dark fw-6 ]" href="<?php echo URLROOT . "/gig/" . $result['gigId'] ?>">
-                        <?php echo "title" ?>
-                    </a>
-                    <p class="[ sub-heading ]"><?php echo "capital" ?></p>
-                    <p><?php echo "location" ?></p>
-                    <div class="[ mt-1 flex flex-sb-c ]">
-                        <p><?php echo "category" ?></p>
-                        <p><?php echo "timeperiod" ?></p>
-                    </div>
-                </div>
-            </div>
+                            <div class="[ flex-row ]">
+                                <a class="[ card__link ]" href="<?php echo URLROOT . "/gig/" . $gig['gigId'] ?>">
+                                    <?php echo $gig['title'] ?>
+                                </a>
+                                <div>
+                                    <small>Capital :</small>
+                                    <p class="[ ]">LKR <?php echo $gig['capital'] ?></p>
+                                </div>
+                            </div>
+                            <div class="[ flex-row ]">
+                                <div>
+                                    <small>Location :</small>
+                                    <p><?php echo $gig['location'] ?></p>
+                                </div>
+                                <div>
 
+                                    <small>Time Period :</small>
+                                    <p><?php echo $gig["timePeriod"] ?> Months</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php
+                }
+                ?>
+
+            </div>
         </div>
-    </div>
+    <?php
+    }
+    ?>
 
     <div class="[ container ]" type="section">
         <div class="[ rating__grid ]">
