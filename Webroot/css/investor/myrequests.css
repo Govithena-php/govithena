@@ -1,5 +1,11 @@
 .requests__continer {
     margin-bottom: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #ccc;
+}
+
+.requests__continer:first-child {
+    border-top: none;
 }
 
 .no_requests__card {

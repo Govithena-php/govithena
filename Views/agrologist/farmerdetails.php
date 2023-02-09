@@ -69,7 +69,7 @@
 
 
 
-        <div id="field_visit" class="modal">
+        <div id="field_visit" class="modal pt-5">
 
             <div class="modal-content">
                 <span class="close close_modal1">&times;</span>

@@ -53,6 +53,7 @@
     flex-direction: column;
     justify-content: center;
     gap: 0.5rem;
+    background: var(--clr-light, #fff);
 }
 
 .cards .card h3 {
@@ -96,6 +97,7 @@
     /* min-height: 20rem; */
     padding: 2rem 1rem;
     border: 1px solid #e5e5e5;
+    background: var(--clr-light, #fff);
 }
 
 .charts .chart canvas {
@@ -116,6 +118,7 @@
     border: 1px solid #e5e5e5;
     padding: 1rem;
     border-radius: 0.5rem;
+    background: var(--clr-light, #fff);
 }
 
 .progress__inestments {
