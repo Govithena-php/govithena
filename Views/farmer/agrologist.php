@@ -74,33 +74,30 @@
     ?>
 
     <div class="container" container-type="dashboard-section">
-        <!-- <form class="[ fs-3 ][ search__form ]" action="<?php echo URLROOT . "/search/" ?>" method="get">
-                <input class="" type="text" name="terms" placeholder="search by: name / location">
-                <button class="[ btn btn-primary ] [ search_button ]" type="submit">search</button>
-            </form> -->
+        <h1 class="page__heading">Search Agrologist</h1>
 
         <div class="cardspace">
 
-            <select name="type" id="type">
+            <select name="type" id="type" disabled>
                 <option value="croptype">Crop Type</option>
             </select>
 
-            <select name="type" id="type">
+            <select name="type" id="type" disabled>
                 <option value="landarea">Land Area</option>
             </select>
 
-            <select name="type" id="type">
+            <select name="type" id="type" disabled>
                 <option value="budget">Budget</option>
             </select>
 
-            <select name="type" id="type">
+            <select name="type" id="type" disabled>
                 <option value="location">Location</option>
             </select>
 
 
             <form class="[ fs-3 ][ search__form ]" action="<?php echo URLROOT . "/search/" ?>" method="get">
-                <input class="" type="text" name="terms" placeholder="Search by: name / location">
-                <button class="[ btn btn-primary ] [ search_button ]" type="submit">search</button>
+                <input class="" type="text" name="terms" placeholder="Search by: name / location" disabled>
+                <button class="[ btn btn-primary ] [ search_button ]" type="submit" disabled>search</button>
             </form>
 
         </div>
@@ -155,9 +152,9 @@
     <script src="<?php echo JS ?>/dashboard/dashboard.js"></script>
 
     <script>
-        // const openModal = () => {
-        //     document.querySelector('.modal').showModal();
-        // }
+        setTimeout(() => {
+            document.querySelector(".alert").style.display = "none";
+        }, 5000);
     </script>
 
 
