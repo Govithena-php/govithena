@@ -39,37 +39,24 @@
         <div class="[ requests__continer ]">
             <h2>Accepted Requests</h2>
 
-            <div class="[ tabs ]" tab="3">
-                <div class="[ tab ]" tab="1">
-                    <p>Tab 1</p>
+            <!-- <div class="[ tabs ]" tab="3">
+                <div class="[ controls ]">
+                    <button class="[ control ]" tab="1">Tab 1</button>
+                    <button class="[ control ]" tab="2">Tab 2</button>
+                    <button class="[ control ]" tab="3">Tab 3</button>
                 </div>
-                <div class="[ tab ]" tab="2">
-                    <p>Tab 2</p>
+                <div class="[ content ]">
+                    <div class="[ tab ]" tab="1">
+                        <p>Tab 1</p>
+                    </div>
+                    <div class="[ tab ]" tab="2">
+                        <p>Tab 2</p>
+                    </div>
+                    <div class="[ tab ]" tab="3">
+                        <p>Tab 3</p>
+                    </div>
                 </div>
-                <div class="[ tab ]" tab="3">
-                    <p>Tab 3</p>
-                </div>
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            </div> -->
 
 
             <?php
