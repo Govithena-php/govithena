@@ -17,6 +17,32 @@ class Gig extends Model
         }
     }
 
+
+    public function fetchAll($order = "ASC", $limit = null)
+    {
+        try {
+            $sql = "SELECT * FROM gig INNER JOIN user ON gig.farmerId = user.uid";
+            if ($order == "ASC") {
+                $sql .= " ORDER BY createdAt ASC";
+            } else {
+                $sql .= " ORDER BY createdAt DESC";
+            }
+            if (isset($limit)) $sql .= " LIMIT $limit";
+
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute();
+            $gigs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if ($gigs) {
+                return ['status' => true, 'data' => $gigs];
+            } else {
+                return ['status' => true, 'data' => null];
+            }
+        } catch (PDOException $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+
     public function All($id)
     {
         try {

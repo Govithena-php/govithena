@@ -1,25 +1,101 @@
 .form input {
-    width: 100%;
-    padding: 0.5rem;
-    /* margin-bottom: 1rem;  */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-
+  width: 100%;
+  padding: 0.5rem;
+  /* margin-bottom: 1rem;  */
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 .form input:focus {
-    outline: none;
-    border-color: #707070;
+  outline: none;
+  border-color: #707070;
 }
 
 .form textarea {
-    width: 100%;
-    padding: 0.8rem;
-    /* margin-bottom: 1rem;  */
-    border: 1px solid #ccc;
-    border-radius: 5px;
+  width: 100%;
+  padding: 0.8rem;
+  /* margin-bottom: 1rem;  */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.details_img {
+  height: 100%;
+  width: 160px;
+  height: 160px;
+  border-radius: 12%;
+  overflow: hidden;
+  /* margin-left: 50px; */
+  /* margin: auto; */
+  display: block;
 }
 
 /* .form input[type="file"] {
     display: none;
 } */
+
+.accordian {
+  width: 95%;
+  /* margin: 90px auto; */
+  color: black;
+  background-color: white;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  /* margin: 0; */
+  /* padding: 45px 45px; */
+}
+
+.content {
+    padding-bottom: 5px;
+}
+/* 
+.accordian .container {
+    position: relative;
+    width: 1500px;
+    margin: 10px 10px;
+  } */
+
+.accordian .accordian-heading {
+  position: relative;
+  padding: 0 0;
+  font-size: 23px;
+  color: black;
+  cursor: pointer;
+}
+
+.accordian .accordian-heading::before {
+  content: "+";
+  color: black;
+  position: absolute;
+  top: 50%;
+  right: -5px;
+  font-size: 30px;
+  transform: translateY(-50%);
+}
+
+.accordian .accordian-details {
+  position: relative;
+  background: white;
+  height: 0;
+  font-size: 20px;
+  text-align: justify;
+  width: 780px;
+  overflow: hidden;
+  transition: 0.5s;
+}
+
+.accordian hr {
+  width: 100;
+  margin-left: 0;
+  border: 1px solid grey;
+}
+
+.content.active .accordian .accordian-details {
+  height: 350px;
+  /* display: block !important; */
+}
+
+.content.active .accordian .accordian-heading::before {
+  content: "-";
+  font-size: 23px;
+}
