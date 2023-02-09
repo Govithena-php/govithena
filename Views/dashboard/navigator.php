@@ -63,7 +63,7 @@ function highlight($active, $link)
 
                     <button onclick="toggleProfileMenu()">
                         <div class="[ image ]">
-                            <img src="<?php echo IMAGES ?>/21.jpg" alt="profile">
+                            <img src="<?php echo UPLOADS . '/' . Session::get('user')->getImage(); ?>" alt="profile">
                         </div>
                     </button>
                 </div>
