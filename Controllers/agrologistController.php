@@ -102,7 +102,7 @@ class agrologistController extends Controller
             }
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if (isset($_POST['accept'])) {
-                    var_dump($_POST['accept']);
+                    //var_dump($_POST['accept']);
                     //echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>" . $_POST['accept'] . "</h1>";
                     $agr->acceptRequest($_POST['accept']);
                     //$this->redirect("/agrologist/farmers");
@@ -123,7 +123,7 @@ class agrologistController extends Controller
         $agrologist = new Agrologist();
         $uid = Session::get('user')->getUid();
         $d['agrologist'] = $agrologist->getAgrologistDetails();
-        var_dump($d['agrologist']);
+        //var_dump($d['agrologist']);
         // die();
 
         if (isset($_POST['edit_details_btn'])) {
@@ -132,14 +132,36 @@ class agrologistController extends Controller
             $lastName = new Input(POST, 'lastName');
             $city = new Input(POST, 'city');
             $phoneNumber = new Input(POST, 'phoneNumber');
+            $nic = new Input(POST, 'NIC');
+            $addressLine1 = new Input(POST, 'addressLine1');
+            $addressLine2 = new Input(POST, 'addressLine2');
+            $district = new Input(POST, 'district');
+            $postalCode = new Input(POST, 'postalCode');
 
-            $agrologist->edit_user_details([
-                'uid' => $uid,
-                'firstName' => $firstName->get(),
-                'lastName' => $lastName->get(),
-                'city' => $city->get(),
-                'phoneNumber' => $phoneNumber->get(),
-            ]);
+            if (move_uploaded_file($_FILES['profile_img']['tmp_name'], "Uploads/" . basename($_FILES['profile_img']['name']))) {
+                //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'> file uploaded  </h1>";
+                Session::get('user')->setImage(basename($_FILES['profile_img']['name']));
+
+                $agrologist->edit_user_details([
+                    'uid' => $uid,
+                    'firstName' => $firstName->get(),
+                    'lastName' => $lastName->get(),
+                    'city' => $city->get(),
+                    'phoneNumber' => $phoneNumber->get(),
+                    'nic' => $nic->get(),
+                    'addressLine1' => $addressLine1->get(),
+                    'addressLine2' => $addressLine2->get(),
+                    'district' => $district->get(),
+                    'postalCode' => $postalCode->get(),
+                    'profileImage' => basename($_FILES['profile_img']['name'])
+                ]);
+                // echo "file uploaded";
+            } else {
+                //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'> file not uploaded  </h1>";
+
+                //echo "file not uploaded";
+            }
+            
         }
 
         $this->set($d);
