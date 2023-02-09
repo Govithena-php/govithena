@@ -1,3 +1,7 @@
+.requests {
+    min-height: 100dvh;
+}
+
 .result_grid {
     padding:30px;
 }
