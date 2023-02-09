@@ -2,10 +2,11 @@
 class farmerController extends Controller
 {
     private $currentUser;
-
+    private $farmerModel;
     public function __construct()
     {
         $this->currentUser = Session::get('user');
+        $this->farmerModel = $this->model('farmer');
 
         if (!Session::isLoggedIn()) {
             $this->redirect('/auth/signin');
@@ -98,33 +99,56 @@ class farmerController extends Controller
     }
 
 
-    function investors (){
+    function investors()
+    {
         $this->render('investors');
     }
 
-    function techassistant(){
+    function techassistant()
+    {
         $this->render('techassistant');
     }
 
-    function techassistantfirst(){
+    function techassistantfirst()
+    {
         $this->render('techassistantfirst');
     }
 
-    function progress(){
+    function progress()
+    {
         $this->render('progress');
     }
 
-    function progressform(){
+    function progressform()
+    {
         $this->render('progressform');
     }
 
-    function agrologist(){
+    function agrologist()
+    {
+
+        $agrologists = $this->farmerModel->agrologists();
+        if ($agrologists['status']) {
+            $props['agrologists'] = $agrologists['data'];
+            $this->set($props);
+        }
         $this->render('agrologist');
     }
 
-    function agrologistprofile(){
+    function agrologistprofile()
+    {
         $this->render('agrologistprofile');
     }
 
+    public function send($params)
+    {
 
+        list($agrologistId) = $params;
+        $response = $this->farmerModel->sendRequest($agrologistId);
+        if ($response['status']) {
+            if($response['data']) $this->redirect('/farmer/agrologist/ok');
+            else $this->redirect('/farmer/agrologist/already');
+        }
+
+    }
 }
