@@ -109,8 +109,19 @@ class farmerController extends Controller
         $this->render('techassistant');
     }
 
-    function techassistantfirst()
+    function techassistantfirst($params = [])
     {
+
+        if (!empty($params)) {
+            $props['message'] = $params[0];
+        }
+
+        $techAssistants = $this->farmerModel->techAssistants();
+        if ($techAssistants['status']) {
+            $props['techAssistants'] = $techAssistants['data'];
+            $this->set($props);
+        }
+        $this->set($props);
         $this->render('techassistantfirst');
     }
 
@@ -124,10 +135,12 @@ class farmerController extends Controller
         $this->render('progressform');
     }
 
-    function agrologist($params = null)
+    function agrologist($params = [])
     {
 
-        if (isset($params)) $props['message'] = $params[0];
+        if (!empty($params)) {
+            $props['message'] = $params[0];
+        }
 
         $agrologists = $this->farmerModel->agrologists();
         if ($agrologists['status']) {
@@ -154,12 +167,33 @@ class farmerController extends Controller
             'message' => 'This is test message',
             'status' => 'Pending'
         ];
-        $response = $this->farmerModel->sendRequest($data);
+        $response = $this->farmerModel->sendAgrologistRequest($data);
         if ($response['status']) {
             if ($response['data']) $this->redirect('/farmer/agrologist/ok');
             else $this->redirect('/farmer/agrologist/already');
         } else {
             $this->redirect('/farmer/agrologist/error');
+        }
+    }
+
+    public function request($params)
+    {
+
+        list($technicalAssistantId) = $params;
+        $data = [
+            'requestId' => new UID(PREFIX::REQUEST),
+            'technicalAssistantId' => $technicalAssistantId,
+            'farmerId' => $this->currentUser->getUid(),
+            'message' => 'This is test message',
+            'status' => 'Pending'
+        ];
+        $response = $this->farmerModel->sendTechRequest($data);
+        if ($response['status']) {
+            if ($response['data']) $this->redirect('/farmer/techassistantfirst/ok');
+            else $this->redirect('/farmer/techassistantfirst/already');
+        } else {
+
+            $this->redirect('/farmer/techassistantfirst/error');
         }
     }
 }
