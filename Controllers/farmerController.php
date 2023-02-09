@@ -124,14 +124,17 @@ class farmerController extends Controller
         $this->render('progressform');
     }
 
-    function agrologist()
+    function agrologist($params = null)
     {
+
+        if (isset($params)) $props['message'] = $params[0];
 
         $agrologists = $this->farmerModel->agrologists();
         if ($agrologists['status']) {
             $props['agrologists'] = $agrologists['data'];
             $this->set($props);
         }
+        $this->set($props);
         $this->render('agrologist');
     }
 
@@ -144,11 +147,19 @@ class farmerController extends Controller
     {
 
         list($agrologistId) = $params;
-        $response = $this->farmerModel->sendRequest($agrologistId);
+        $data = [
+            'requestId' => new UID(PREFIX::REQUEST),
+            'agrologistId' => $agrologistId,
+            'farmerId' => $this->currentUser->getUid(),
+            'message' => 'This is test message',
+            'status' => 'Pending'
+        ];
+        $response = $this->farmerModel->sendRequest($data);
         if ($response['status']) {
-            if($response['data']) $this->redirect('/farmer/agrologist/ok');
+            if ($response['data']) $this->redirect('/farmer/agrologist/ok');
             else $this->redirect('/farmer/agrologist/already');
+        } else {
+            $this->redirect('/farmer/agrologist/error');
         }
-
     }
 }
