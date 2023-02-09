@@ -99,3 +99,7 @@
   content: "-";
   font-size: 23px;
 }
+
+.dashboard {
+  min-height: 100vh;
+}
