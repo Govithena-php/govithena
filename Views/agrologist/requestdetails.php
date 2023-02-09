@@ -31,7 +31,7 @@
                         <img class="request_image" src="<?php echo IMAGES ?>/farmer.jpeg" alt="">
                     </div>
                     <div class="ml-2">
-                        <h1 class="mt-3">Punsara Deshan</h1>
+                        <h1 class="mt-3">Tharasara Darshaka</h1>
                         <p class="flex flex-row mt-1">
                             <span class="fa fa-star rating_checked"></span>
                             <span class="fa fa-star rating_checked"></span>
@@ -73,7 +73,7 @@
                     <div class="[ result__card ]">
                         <div class="[ card__img ]">
 
-                            <!-- <img src="<?php echo $imageURL ?>" alt="test" /> -->
+                            <img src="<?php echo UPLOADS . '/IMG-63e379c9560923.24047556.jpg' ?>" alt="test" />
 
                             <!-- <img src="<?php echo IMAGES ?>/temp/17.jpg" alt="test"> -->
                             <div class="[ farmer__name ]">
@@ -104,7 +104,7 @@
                     <div class="[ result__card ]">
                         <div class="[ card__img ]">
 
-                            <!-- <img src="<?php echo $imageURL ?>" alt="test" /> -->
+                            <img src="<?php echo UPLOADS . '/IMG-63e378c29e58a9.43869579.jpg' ?>" alt="test" />
 
                             <!-- <img src="<?php echo IMAGES ?>/temp/17.jpg" alt="test"> -->
                             <div class="[ farmer__name ]">
@@ -118,7 +118,7 @@
                         <div class="[ card__content ]">
                             <a class="[ text-dec-none mb-1 fs-5 text-dark fw-6 ]" href="">
                                 <!-- <?php echo ucwords($gigDetail['title']) ?> -->
-                                Pumpkin
+                                Beetroot
                             </a>
                             <div class="[ mt-1 flex flex-sb-c ]">
                                 <p>
