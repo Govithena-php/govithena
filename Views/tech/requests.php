@@ -25,7 +25,7 @@
     require_once("navigator.php");
     ?>
 
-    <div class="[ container ][ ]" container-type="dashboard-section">
+    <div class="[ container ][ requests ]" container-type="dashboard-section">
         <h1 class="[ page-heading-1 ]">requests</h1>
         <!-- <h1><?php echo Session::get('user')->getUid(); ?></h1> -->
         <div class="[ requests__continer ]">
