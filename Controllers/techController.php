@@ -8,13 +8,13 @@ class techController extends Controller
     {
         $this->currentUser = Session::get('user');
 
-        // if (!Session::isLoggedIn()) {
-        //     $this->redirect('/auth/signin');
-        // }
+        if (!Session::isLoggedIn()) {
+            $this->redirect('/auth/signin');
+        }
 
-        // if (!$this->currentUser->hasAccess(ACTOR::TECH_ASSISTANT)) {
-        //     $this->redirect('/error/dontHaveAccess');
-        // }
+        if (!$this->currentUser->hasAccess(ACTOR::TECH_ASSISTANT)) {
+            $this->redirect('/error/dontHaveAccess');
+        }
     }
 
     public function index()
@@ -27,28 +27,28 @@ class techController extends Controller
         $this->render('farmers');
     }
 
-    public function requests(){
+    public function requests()
+    {
         require(ROOT . 'Models/tech.php');
-            $tech = new Tech();
-            $requests = $tech->farmerRequest();
+        $tech = new Tech();
+        $requests = $tech->farmerRequest();
 
-            if (isset($requests)) {
-                $this->set(['ar' => $requests]);
+        if (isset($requests)) {
+            $this->set(['ar' => $requests]);
+        } else {
+            $this->set(['error' => "no requests found"]);
+        }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (isset($_POST['accept'])) {
+                var_dump($_POST['accept']);
+                //echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>" . $_POST['accept'] . "</h1>";
+                $tech->acceptRequest($_POST['accept']);
+                //$this->redirect("/agrologist/farmers");
             } else {
-                $this->set(['error' => "no requests found"]);
+                echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>nope</h1>";
             }
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                if (isset($_POST['accept'])) {
-                    var_dump($_POST['accept']);
-                    //echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>" . $_POST['accept'] . "</h1>";
-                    $tech->acceptRequest($_POST['accept']);
-                    //$this->redirect("/agrologist/farmers");
-                } else {
-                    echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>nope</h1>";
+        }
 
-                }
-            }
-           
         $this->render('requests');
     }
 
@@ -62,8 +62,4 @@ class techController extends Controller
         $this->render('myaccount');
     }
 
-    public function dashboard()
-    {
-        $this->render('dashboard');
-    }
 }
