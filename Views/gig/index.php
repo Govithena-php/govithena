@@ -21,6 +21,13 @@
             font-size: 1rem;
             margin-top: 0.5rem;
         }
+
+        .famer_page_btn {
+            text-decoration: none;
+            color: #000;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
     </style>
 
 </head>
@@ -104,7 +111,7 @@
 
                 <div class="[  ]">
                     <h2>Farmer</h2>
-                    <p><?php echo $farmer['firstName'] . " " . $farmer['lastName'] ?></p>
+                    <a class="famer_page_btn" href="<?php echo URLROOT . "/profile/" . $gig['farmerId'] ?>"><?php echo $farmer['firstName'] . " " . $farmer['lastName'] ?></a>
                     <?php
                     if (isset($state) && $state == 'success') {
                     ?>

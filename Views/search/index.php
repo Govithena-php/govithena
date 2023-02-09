@@ -30,6 +30,11 @@
             padding-inline: 0.5rem;
             justify-content: space-between;
         }
+
+        .famer_page_btn {
+            text-decoration: none;
+            color: #fff;
+        }
     </style>
 </head>
 
@@ -70,7 +75,7 @@
 
                             <img src="<?php echo $imageURL ?>" alt="test" />
                             <div class="[ farmer__name ]">
-                                <p><?php echo $result['firstName'] . " " . $result['lastName'] ?></p>
+                                <a class="famer_page_btn" href="<?php echo URLROOT . "/profile/" . $result['farmerId'] ?>"><?php echo $result['firstName'] . " " . $result['lastName'] ?></a>
                                 <p><?php echo $result['category'] ?></p>
                             </div>
                         </div>
