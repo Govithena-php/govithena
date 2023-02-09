@@ -2,7 +2,7 @@
 
 class Tech extends Model
 {
-  
+
     function farmerRequest()
     {
         try {
@@ -18,7 +18,7 @@ class Tech extends Model
         }
     }
 
-    
+
     function acceptRequest($requestId)
     {
         try {
@@ -33,7 +33,8 @@ class Tech extends Model
         }
     }
 
-    public function getFarmers(){
+    public function getFarmers()
+    {
         try {
             $sql = "SELECT CONCAT(u.firstName, ' ', u.lastName) AS fullName, u.city, a.requestId, a.farmerId FROM techassistant_request a LEFT JOIN user u ON u.uid = a.farmerId WHERE (a.technicalAssistantId = :techId AND a.status='Accepted')";
             $stmt =  Database::getBdd()->prepare($sql);

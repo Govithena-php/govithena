@@ -18,6 +18,19 @@
             window.history.replaceState(null, null, window.location.href);
         }
     </script>
+    <style>
+        .flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .farmer__name {
+            padding-inline: 0.5rem;
+            justify-content: space-between;
+        }
+    </style>
 </head>
 
 <body>
@@ -56,22 +69,27 @@
                         <div class="[ card__img ]">
 
                             <img src="<?php echo $imageURL ?>" alt="test" />
-
-                            <!-- <img src="<?php echo IMAGES ?>/temp/17.jpg" alt="test"> -->
                             <div class="[ farmer__name ]">
-                                <p><?php echo $result['firstName'] ?></p>
-                                <p><?php echo $result['lastName'] ?></p>
+                                <p><?php echo $result['firstName'] . " " . $result['lastName'] ?></p>
+                                <p><?php echo $result['category'] ?></p>
                             </div>
                         </div>
                         <div class="[ card__content ]">
-                            <a class="[ text-dec-none mb-1 fs-5 text-dark fw-6 ]" href="<?php echo URLROOT . "/gig/" . $result['gigId'] ?>">
-                                <?php echo $result['title'] ?>
-                            </a>
-                            <p class="[ sub-heading ]"><?php echo $result['capital'] ?></p>
-                            <p><?php echo $result['location'] ?></p>
-                            <div class="[ mt-1 flex flex-sb-c ]">
-                                <p><?php echo $result['category'] ?></p>
-                                <p><?php echo $result['timePeriod'] ?></p>
+                            <div class="[ flex ]">
+                                <a class="[ card__link text-dec-none mb-1 fs-5 text-dark fw-6 ]" href="<?php echo URLROOT . "/gig/" . $result['gigId'] ?>">
+                                    <?php echo $result['title'] ?>
+                                </a>
+                                <p class="[ sub-heading ]">LKR <?php echo $result['capital'] ?></p>
+                            </div>
+                            <div class="[ flex ]">
+                                <div>
+                                    <small>Location :</small>
+                                    <p><?php echo $result['location'] ?></p>
+                                </div>
+                                <div>
+                                    <small>Time Period :</small>
+                                    <p><?php echo $result['timePeriod'] ?> Months</p>
+                                </div>
                             </div>
                         </div>
                     </div>

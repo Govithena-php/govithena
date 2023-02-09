@@ -14,6 +14,11 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/investor/index.css">
 
     <title>Dashboard | Tech Assistant</title>
+    <style>
+        .dashboard {
+            min-height: 100dvh;
+        }
+    </style>
 </head>
 
 <body>
@@ -24,10 +29,10 @@
     require_once("navigator.php");
     ?>
 
-    <div class="[ container ][ ]" container-type="dashboard-section">
+    <div class="[ container ][ dashboard ]" container-type="dashboard-section">
         <h1>Dashboard</h1>
     </div>
-    
+
     <?php
     require_once("footer.php");
     ?>

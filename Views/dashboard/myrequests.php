@@ -189,7 +189,6 @@
             <h2>Rejected Requests</h2>
             <?php
             if (empty($rr)) {
-                echo "test";
                 require(COMPONENTS . "dashboard/noDataFound.php");
             } else {
             ?>
