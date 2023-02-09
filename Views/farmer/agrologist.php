@@ -24,7 +24,7 @@
 
     <?php
     $active = "agrologist";
-    $title = "Agrologist";
+    $title = "Agrologists";
     require_once("navigator.php");
     ?>
 

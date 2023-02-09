@@ -64,7 +64,7 @@
                             <p><?php echo $p['description'] ?></p>
                             <div class="actions">
                                 <a href="#" class="btn btn-primary">Edit</a>
-                                <a href="#" class="btn btn-danger">Delete</a>
+                                <a href="<?php echo URLROOT . "/farmer/deleteGig/" . $p['gigId'] ?>" class="btn btn-danger">Delete</a>
                             </div>
                         </div>
                     </div>

@@ -39,6 +39,7 @@ class STATUS
     const DELETED = "DELETED";
     const COMPLETED = "COMPLETED";
     const ACCEPTED = "ACCEPTED";
+    const REJECTED = "REJECTED";
 }
 
 
