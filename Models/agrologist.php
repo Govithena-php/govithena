@@ -47,6 +47,7 @@ class Agrologist extends Model
     }
 
     public function edit_user_details($data){
+
         $sql = "UPDATE user SET firstName=:firstName, lastName=:lastName, phoneNumber=:phoneNumber, city=:city, NIC=:nic, addressLine1=:addressLine1, addressLine2=:addressLine2, district=:district, postalCode=:postalCode, image=:profileImage WHERE uid=:uid";
         $req = Database::getBdd()->prepare($sql);
         $req->execute([
