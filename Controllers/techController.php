@@ -24,6 +24,14 @@ class techController extends Controller
 
     public function farmers()
     {
+        require(ROOT . 'Models/tech.php');
+        $tech = new Tech();
+        $farmers = $tech->getFarmers();
+        if (isset($farmers)) {
+            $this->set(['ar' => $farmers]);
+        } else {
+            $this->set(['error' => "no farmers"]);
+        }
         $this->render('farmers');
     }
 
