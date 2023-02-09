@@ -117,6 +117,16 @@
             font-size: 1.5rem;
             font-weight: 600;
         }
+
+        small {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .farmer {
+            margin-bottom: 1rem;
+        }
     </style>
 
 
@@ -156,7 +166,9 @@
                                 </div>
                             </div>
                             <div>
-                                <p><?php echo $investor['location'] ?></p>
+                                <small>Location :</small>
+                                <p class="farmer"><?php echo $investor['location'] ?></p>
+                                <small>Farmer :</small>
                                 <p class="card__farmer_name"><?php echo $investor['firstName'] . " " . $investor['lastName'] ?></p>
                             </div>
                             <div>

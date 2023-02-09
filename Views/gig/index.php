@@ -227,11 +227,18 @@
                 <!-- <button onclick="closeModal()">&times;</button> -->
             </div>
             <div class="[ modal__body ]">
-                <p class="[ fs-5 my-1 fw-5 ]"><?php echo $gig['title'] ?></p>
+                <p class="[ fs-6 my-1 fw-5 ]"><?php echo $gig['title'] ?></p>
+                <small>by</small>
                 <p><?php echo $farmer['firstName'] . " " . $farmer['lastName'] ?></p>
                 <div class="[ flex flex-sb-c my-05 ]">
-                    <p>LKR <?php echo $gig['capital'] ?></p>
-                    <p><?php echo $gig['timePeriod'] ?></p>
+                    <div>
+                        <small>Capital :</small>
+                        <p>LKR <?php echo $gig['capital'] ?></p>
+                    </div>
+                    <div>
+                        <small>Time Period :</small>
+                        <p><?php echo $gig['timePeriod'] ?> Months</p>
+                    </div>
                 </div>
                 <form class="[ modal__form ]" method="post" action="<?php echo URLROOT ?>/gig/request">
                     <h3>Your Offer</h3>

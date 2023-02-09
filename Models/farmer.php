@@ -5,7 +5,7 @@ class Farmer extends Model
     public function agrologists()
     {
         try {
-            $sql = "SELECT LG.uid, user.firstName, user.lastName FROM login_credential LG INNER JOIN user ON LG.uid = user.uid WHERE LG.userType = :userType";
+            $sql = "SELECT LG.uid, user.firstName, user.lastName, user.image FROM login_credential LG INNER JOIN user ON LG.uid = user.uid WHERE LG.userType = :userType";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['userType' => ACTOR::AGROLOGIST]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -19,7 +19,7 @@ class Farmer extends Model
     public function techAssistants()
     {
         try {
-            $sql = "SELECT LG.uid, user.firstName, user.lastName FROM login_credential LG INNER JOIN user ON LG.uid = user.uid WHERE LG.userType = :userType";
+            $sql = "SELECT LG.uid, user.firstName, user.lastName, user.image FROM login_credential LG INNER JOIN user ON LG.uid = user.uid WHERE LG.userType = :userType";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['userType' => ACTOR::TECH_ASSISTANT]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
