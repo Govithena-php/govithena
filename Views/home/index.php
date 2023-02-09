@@ -14,7 +14,19 @@
     <link rel="stylesheet" href="<?php echo CSS ?>/grid.css">
     <link rel="stylesheet" href="<?php echo CSS ?>home/hero.css">
     <link rel="stylesheet" href="<?php echo CSS ?>home/home.css">
+    <style>
+        .flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
 
+        .farmer__name {
+            padding-inline: 0.5rem;
+            justify-content: space-between;
+        }
+    </style>
 </head>
 
 <body>
@@ -192,19 +204,26 @@
 
                             <img src="<?php echo $imageURL ?>" alt="test" />
                             <div class="[ farmer__name ]">
-                                <p><?php echo $gig['firstName'] ?></p>
-                                <p><?php echo $gig['lastName'] ?></p>
+                                <p><?php echo $gig['firstName'] . " " . $gig['lastName'] ?></p>
+                                <p><?php echo $gig['category'] ?></p>
                             </div>
                         </div>
                         <div class="[ card__content ]">
-                            <a class="[ card__link text-dec-none mb-1 fs-5 text-dark fw-6 ]" href="<?php echo URLROOT . "/gig/" . $gig['gigId'] ?>">
-                                <?php echo $gig['title'] ?>
-                            </a>
-                            <p class="[ sub-heading ]"><?php echo $gig['capital'] ?></p>
-                            <p><?php echo $gig['location'] ?></p>
-                            <div class="[ mt-1 flex flex-sb-c ]">
-                                <p><?php echo $gig['category'] ?></p>
-                                <p><?php echo $gig['timePeriod'] ?></p>
+                            <div class="[ flex ]">
+                                <a class="[ card__link text-dec-none mb-1 fs-5 text-dark fw-6 ]" href="<?php echo URLROOT . "/gig/" . $gig['gigId'] ?>">
+                                    <?php echo $gig['title'] ?>
+                                </a>
+                                <p class="[ sub-heading ]">LKR <?php echo $gig['capital'] ?></p>
+                            </div>
+                            <div class="[ flex ]">
+                                <div>
+                                    <small>Location :</small>
+                                    <p><?php echo $gig['location'] ?></p>
+                                </div>
+                                <div>
+                                    <small>Time Period :</small>
+                                    <p><?php echo $gig['timePeriod'] ?></p>
+                                </div>
                             </div>
                         </div>
                     </div>
