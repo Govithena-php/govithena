@@ -10,7 +10,7 @@ class ActiveUser
     private $img;
     private $logeddIn = false;
 
-    public function __construct($uid, $username, $firstName, $lastName, $type, $logeddIn, $img)
+    public function __construct($uid, $username, $firstName, $lastName, $type, $img, $logeddIn)
     {
         $this->uid = $uid;
         $this->username = $username;
