@@ -23,8 +23,8 @@
 <body class="bg-gray h-screen">
 
     <?php
-    $active = "techassistantfirst";
-    $title = "Technical Assistant";
+    $active = "agrologist";
+    $title = "Agrologist";
     require_once("navigator.php");
     ?>
 
@@ -74,7 +74,7 @@
     ?>
 
     <div class="container" container-type="dashboard-section">
-        <h1 class="page__heading">Search Technical Assistant</h1>
+        <h1 class="page__heading">Search Agrologist</h1>
 
         <div class="cardspace">
 
@@ -104,8 +104,8 @@
 
         <div class="[ grid ]" gap="1" sm="1" md="2" lg="3">
             <?php
-            if (isset($techAssistants)) {
-                foreach ($techAssistants as $techAssistant) {
+            if (isset($agrologists)) {
+                foreach ($agrologists as $agrologist) {
             ?>
 
                     <div class="[ requestcard bg-light ]">
@@ -114,8 +114,8 @@
                         </div>
                         <div class="flex flex-row ">
                             <div class="[ requestcont ]">
-                                <a href="<?php echo URLROOT . "/profile/" . $techAssistant['uid'] ?>">
-                                    <p><b><?php echo $techAssistant['firstName'] . " " . $techAssistant['lastName']; ?></b></p>
+                                <a href="<?php echo URLROOT . "/profile/" . $agrologist['uid'] ?>">
+                                    <p><b><?php echo $agrologist['firstName'] . " " . $agrologist['lastName']; ?></b></p>
                                 </a>
                                 <p class="flex flex-row">
                                     <span class="fa fa-star"></span>
@@ -127,7 +127,7 @@
                             </div>
                         </div>
                         <div class=" flex-c-c">
-                            <a class="request__btn" href="<?php echo URLROOT . "/farmer/request/" . $techAssistant['uid'] ?>">Send Request</a>
+                            <a class="request__btn" href="<?php echo URLROOT . "/farmer/send/" . $agrologist['uid'] ?>">Send Request</a>
                         </div>
 
                     </div>
