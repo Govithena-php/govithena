@@ -14,6 +14,15 @@
     <link rel="stylesheet" href="<?php echo CSS ?>/grid.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/gig.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/modal.css">
+
+    <style>
+        small {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -72,13 +81,25 @@
             </div>
             <div class="[ result__content ]">
                 <h1 class="[ mb-1 ]"><?php echo $gig['title'] ?></h1>
-                <p><?php echo $gig['description'] ?>.</p>
-                <p class="[ my-1 ]"><?php echo $gig['location'] ?></p>
-                <div class="[ flex flex-sb-c fs-5 fw-7 ]">
-                    <p class="[ my-1 ]">LKR <?php echo $gig['capital'] ?></p>
-                    <p><?php echo $gig['timePeriod'] ?></p>
+                <p class="mb-1"><?php echo $gig['description'] ?>.</p>
+                <div>
+                    <small>Location :</small>
+                    <p class="[ mb-1 ]"><?php echo $gig['location'] ?></p>
                 </div>
-                <p><?php echo $gig['landArea'] ?> Arces</p>
+                <div class="[ flex flex-sb-c fs-5 fw-7 ]">
+                    <div>
+                        <small>Capital :</small>
+                        <p class="[ mb-1 ]">LKR <?php echo $gig['capital'] ?></p>
+                    </div>
+                    <div>
+                        <small>Time Period :</small>
+                        <p><?php echo $gig['timePeriod'] ?>months</p>
+                    </div>
+                </div>
+                <div>
+                    <small>Land Area :</small>
+                    <p><?php echo $gig['landArea'] ?> Arces</p>
+                </div>
                 <hr />
 
                 <div class="[  ]">

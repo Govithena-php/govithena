@@ -14,6 +14,12 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/tech/dashboard.css">
 
     <title>Dashboard | Tech</title>
+
+    <style>
+        .dashboard {
+            min-height: 100dvh;
+        }
+    </style>
 </head>
 
 <body>
