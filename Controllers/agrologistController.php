@@ -127,7 +127,7 @@ class agrologistController extends Controller
         // die();
 
         if (isset($_POST['edit_details_btn'])) {
-
+            
             $firstName = new Input(POST, 'firstName');
             $lastName = new Input(POST, 'lastName');
             $city = new Input(POST, 'city');
@@ -137,6 +137,7 @@ class agrologistController extends Controller
             $addressLine2 = new Input(POST, 'addressLine2');
             $district = new Input(POST, 'district');
             $postalCode = new Input(POST, 'postalCode');
+
 
             if (move_uploaded_file($_FILES['profile_img']['tmp_name'], "Uploads/" . basename($_FILES['profile_img']['name']))) {
                 //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'> file uploaded  </h1>";
@@ -157,6 +158,19 @@ class agrologistController extends Controller
                 ]);
                 // echo "file uploaded";
             } else {
+                $agrologist->edit_user_details([
+                    'uid' => $uid,
+                    'firstName' => $firstName->get(),
+                    'lastName' => $lastName->get(),
+                    'city' => $city->get(),
+                    'phoneNumber' => $phoneNumber->get(),
+                    'nic' => $nic->get(),
+                    'addressLine1' => $addressLine1->get(),
+                    'addressLine2' => $addressLine2->get(),
+                    'district' => $district->get(),
+                    'postalCode' => $postalCode->get(),
+                    'profileImage' => "null"
+                ]);
                 //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'> file not uploaded  </h1>";
 
                 //echo "file not uploaded";
