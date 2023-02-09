@@ -110,7 +110,7 @@
 
                     <div class="[ requestcard bg-light ]">
                         <div class="[ requestimg ]">
-                            <img class="img" src="<?php echo IMAGES ?>/investor8.jpg" alt="profile">
+                            <img class="img" src="<?php echo UPLOADS . $agrologist['image'] ?>" alt=" profile">
                         </div>
                         <div class="flex flex-row ">
                             <div class="[ requestcont ]">
