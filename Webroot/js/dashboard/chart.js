@@ -3,7 +3,7 @@ const data = {
   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
   datasets: [
     {
-        label: 'My First Dataset',
+        label: 'Investments',
         data: [65, 59, 80, 81, 56, 55, 40],
         fill: false,
         borderColor: 'rgb(255, 99, 132)',
@@ -12,7 +12,7 @@ const data = {
 
     },
     {
-        label: 'My Second Dataset',
+        label: 'Gain',
         data: [75, 20, 23, 31, 46, 95, 50],
         fill: false,
         borderColor: 'rgb(75, 192, 192)',
@@ -35,7 +35,7 @@ const config = {
       plugins: {
         title: {
           display: true,
-          text: 'Chart.js Line Chart - Multi Axis'
+          text: 'Investments VS Gain'
         }
       },
       scales: {
@@ -57,7 +57,7 @@ const config = {
   };
 
   const pieData = {
-    labels: ['Red', 'Orange', 'Yellow', 'Green', 'Blue'],
+    labels: ['Fruits', 'Grains', 'Other', 'Vegetable', 'Spices'],
     datasets: [
       {
         label: 'Dataset 1',
@@ -79,7 +79,7 @@ const config = {
         },
         title: {
           display: true,
-          text: 'Chart.js Pie Chart'
+          text: 'Profit vs Category'
         }
       }
     },
