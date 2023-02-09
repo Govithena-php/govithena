@@ -34,7 +34,7 @@ class Agrologist extends Model
     function getAgrologistDetails()
     {
         try {
-            $sql = "SELECT u.firstName, u.lastName, u.NIC, u.phoneNumber, u.city, c.userType, c.username FROM user u LEFT JOIN login_credential c ON u.uid = c.uid WHERE u.uid = :uid";
+            $sql = "SELECT u.firstName, u.lastName, u.NIC, u.phoneNumber, u.city, c.userType, c.username, u.addressLine1, u.addressLine2, u.district, u.postalCode, u.image FROM user u LEFT JOIN login_credential c ON u.uid = c.uid WHERE u.uid = :uid";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['uid' => Session::get('user')->getUid()]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -47,7 +47,7 @@ class Agrologist extends Model
     }
 
     public function edit_user_details($data){
-        $sql = "UPDATE user SET firstName=:firstName, lastName=:lastName, phoneNumber=:phoneNumber, city=:city WHERE uid=:uid";
+        $sql = "UPDATE user SET firstName=:firstName, lastName=:lastName, phoneNumber=:phoneNumber, city=:city, NIC=:nic, addressLine1=:addressLine1, addressLine2=:addressLine2, district=:district, postalCode=:postalCode, image=:profileImage WHERE uid=:uid";
         $req = Database::getBdd()->prepare($sql);
         $req->execute([
             'uid' => $data['uid'],
@@ -55,6 +55,12 @@ class Agrologist extends Model
             'lastName' => $data['lastName'],
             'city' => $data['city'],
             'phoneNumber' => $data['phoneNumber'],
+            'nic' => $data['nic'],
+            'addressLine1' => $data['addressLine1'],
+            'addressLine2' => $data['addressLine2'],
+            'district' => $data['district'],
+            'postalCode' => $data['postalCode'],
+            'profileImage' => $data['profileImage']
         ]);
         return $req->fetch();
     }

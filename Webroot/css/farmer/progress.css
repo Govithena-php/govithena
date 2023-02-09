@@ -1,0 +1,75 @@
+.cardprogress  {
+    border: 1px solid rgb(186, 178, 178);
+    height: 1000px;
+    background-color: white;
+    padding: 10px;
+    margin: 10px 10px;
+    border-radius: 10px;
+    /* border-radius: 5px; */
+  
+    /* width: 350px; */
+    /* border-radius: 5px; */
+  /* box-shadow: 0 0 10px 2px #01010179; */
+
+  }
+
+  /* .descriptionbox{
+      border: 1px solid rgb(186, 178, 178);
+      height: 50px;
+      background-color: white;
+      padding: 10px;
+      border-radius: 5px;  
+      width: 1000px;
+    box-shadow: 0 0 10px 2px #01010179-------------------------------------------------;
+  
+  } */
+
+  .cardpad{
+    padding: 10px;
+  }
+
+  .progressimg{
+    height: 160px;
+    width: 200px;
+    box-shadow: 0 0 2px 2px rgba(10, 6, 6, 0.481);
+    margin: 10px;
+    border-radius: 5px;
+
+  }
+
+  .imgrow{
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 10px;
+  }
+
+
+  .itemlist{
+    display: flex;
+    flex-direction: row;
+    padding: 8px 10px;
+    justify-content: flex-start;
+    margin: 0px 20px;
+  }
+  .left{
+    flex-grow: 1;
+
+    display: flex;
+  }
+
+  .itemlistfirst{
+    display: flex;
+    flex-direction: row;
+    /* padding: 10px 10px; */
+    justify-content: space-between;
+    margin: 0px 10px;
+  }
+  .btn{
+    background-color:  #1d9a5f;
+    padding: 6px 30px;
+
+  }
+
+  .descript{
+    margin: 0px 20px;
+  }

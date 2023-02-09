@@ -1,0 +1,55 @@
+.cardtech  {
+    border: 1px solid rgb(186, 178, 178);
+    height: 520px;
+    background-color: white;
+    padding: 5px   20px;
+    border-radius: 5px;
+  }
+
+  .flex-c-c1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    
+}
+
+.flex-c-c1 > p {
+    flex-grow: 1;
+}
+
+
+.flex-c-c2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+/* .flex-c-c2 > p {
+    flex-grow: 1;
+} */
+.pricetable{
+    text-align: left;
+
+}
+
+.space > p{
+    padding: 5px 0.5px;
+}
+
+.btn_accept1 {
+    background-color: #419944; /* Green */
+    border: none;
+    color: white;
+    padding: 8px 35px;
+    text-align: center;
+    text-decoration: none;
+    /* display: inline-block; */
+    font-size: 16px;
+    border-radius: 30px;
+
+    /* padding: 0.5rem 1rem; */
+    place-items: center;
+  }

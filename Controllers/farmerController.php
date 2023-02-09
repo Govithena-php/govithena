@@ -2,10 +2,11 @@
 class farmerController extends Controller
 {
     private $currentUser;
-
+    private $farmerModel;
     public function __construct()
     {
         $this->currentUser = Session::get('user');
+        $this->farmerModel = $this->model('farmer');
 
         if (!Session::isLoggedIn()) {
             $this->redirect('/auth/signin');
@@ -98,17 +99,101 @@ class farmerController extends Controller
     }
 
 
-    function investors (){
+    function investors()
+    {
         $this->render('investors');
     }
 
-    function techassistant(){
+    function techassistant()
+    {
         $this->render('techassistant');
     }
 
-    function techassistantfirst(){
+    function techassistantfirst($params = [])
+    {
+
+        if (!empty($params)) {
+            $props['message'] = $params[0];
+        }
+
+        $techAssistants = $this->farmerModel->techAssistants();
+        if ($techAssistants['status']) {
+            $props['techAssistants'] = $techAssistants['data'];
+            $this->set($props);
+        }
+        $this->set($props);
         $this->render('techassistantfirst');
     }
 
+    function progress()
+    {
+        $this->render('progress');
+    }
 
+    function progressform()
+    {
+        $this->render('progressform');
+    }
+
+    function agrologist($params = [])
+    {
+
+        if (!empty($params)) {
+            $props['message'] = $params[0];
+        }
+
+        $agrologists = $this->farmerModel->agrologists();
+        if ($agrologists['status']) {
+            $props['agrologists'] = $agrologists['data'];
+            $this->set($props);
+        }
+        $this->set($props);
+        $this->render('agrologist');
+    }
+
+    function agrologistprofile()
+    {
+        $this->render('agrologistprofile');
+    }
+
+    public function send($params)
+    {
+
+        list($agrologistId) = $params;
+        $data = [
+            'requestId' => new UID(PREFIX::REQUEST),
+            'agrologistId' => $agrologistId,
+            'farmerId' => $this->currentUser->getUid(),
+            'message' => 'This is test message',
+            'status' => 'Pending'
+        ];
+        $response = $this->farmerModel->sendAgrologistRequest($data);
+        if ($response['status']) {
+            if ($response['data']) $this->redirect('/farmer/agrologist/ok');
+            else $this->redirect('/farmer/agrologist/already');
+        } else {
+            $this->redirect('/farmer/agrologist/error');
+        }
+    }
+
+    public function request($params)
+    {
+
+        list($technicalAssistantId) = $params;
+        $data = [
+            'requestId' => new UID(PREFIX::REQUEST),
+            'technicalAssistantId' => $technicalAssistantId,
+            'farmerId' => $this->currentUser->getUid(),
+            'message' => 'This is test message',
+            'status' => 'Pending'
+        ];
+        $response = $this->farmerModel->sendTechRequest($data);
+        if ($response['status']) {
+            if ($response['data']) $this->redirect('/farmer/techassistantfirst/ok');
+            else $this->redirect('/farmer/techassistantfirst/already');
+        } else {
+
+            $this->redirect('/farmer/techassistantfirst/error');
+        }
+    }
 }

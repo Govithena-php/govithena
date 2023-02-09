@@ -11,10 +11,10 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/table.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
-    
+
     <!-- css file eka -->
     <link rel="stylesheet" href="<?php echo CSS ?>/farmer/investors.css">
-    <link rel="stylesheet" href="<?php echo CSS ?>/farmer/request.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/farmer/farmerrequest.css">
 
     <title>Dashboard | Investor</title>
 </head>
@@ -22,225 +22,125 @@
 <body class="bg-gray h-screen">
 
     <?php
-    $active = "investor";
+    $active = "investors";
     $title = "Investor";
     require_once("navigator.php");
     ?>
 
-    
+
 
     <div class="[ container ][ gigs ]" container-type="dashboard-section">
         <!-- <div class="card">
            <img float="left" class="img" src="<?php echo IMAGES ?>/21.jpg" alt="profile" > 
-           <h1><p><b>Amal Perera</b></p></h1>
+           <    h1><p><b>Amal Perera</b></p></>
            <p>send you a request to you</p>
            <button type="button" class="btn1">Accept</button>
            <button type="button" class="btn2">Decline</button>
         </div> -->
-        <p><h1>My Investors</h1></p> <hr>
-        <div class="[ requests__continer ]">
-           
-    
-           <div class="[ requests__wrapper ]">
-              
 
-                   <div class="[ request__card bg-light ]">
-                      
-                      <div class="[ request__img ]">
-                           <img class="img" src="<?php echo IMAGES ?>/investor8.jpg" alt="profile">
-                       </div>
 
-                       <form action="<?php echo URLROOT . '/agrologist/requests' ?>" >
-                           <div class="flex flex-row ">
-                               <div class="[ request__content ]">
+        <p>
+        <h1>My Investors</h1>
+        </p>
+        <hr>
 
-                                   
-                                       <!-- <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/agrologist/requests/" ?>"> -->
-                                           
-                                           <h1><p><b>Devin Yapa</b></p></h1> 
-                                       <!-- </a> -->
-                                           
-                                       
-                                   
-                                  
-                                   <p class="flex flex-row">
-                                       <span class="fa fa-star"></span>
-                                       <span class="fa fa-star"></span>
-                                       <span class="fa fa-star"></span>
-                                       <span class="fa fa-star"></span>
-                                       <span class="fa fa-star"></span>
-                                   </p>
 
-                               </div>
-                               
-                           </div>
-                       </form>
 
-                       <div class=" flex-c-c">
-                                   <button type="button"   class="btn_accept" name="accept">View Profile</button> &emsp;
-                                   
-                               </div>
-                                
-                            </div>
-
+        <div class="[ requests__cn ]">
+            <div class="[ requests__wrap ]">
+                <div class="[ requestcard bg-light ]">
+                    <div class="[ requestimg ]">
+                        <img class="img" src="<?php echo IMAGES ?>/investor8.jpg" alt="profile">
                     </div>
+                    <form action="<?php echo URLROOT . '/agrologist/requests' ?>">
+                        <div class="flex flex-row ">
+                            <div class="[ requestcont ]">
+                                <h1>
+                                    <p><b>Devin Yapa</b></p>
+                                </h1>
+                                <p class="flex flex-row">
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class=" flex-c-c">
+                        <button type="button" class="btn_accept" name="accept">View Profile</button> &emsp;
+                    </div>
+                </div>
             </div>
+        </div>
 
 
-            <div class="[ requests__continer ]">
-           
-    
-           <div class="[ requests__wrapper ]">
-              
+        
+        
+        <br>
+        <p>
+        <h1>Requests</h1>
+        </p>
+        <hr>
 
-                   <div class="[ request__card bg-light ]">
-                      
-                      <div class="[ request__img ]">
-                           <img class="img" src="<?php echo IMAGES ?>/investor7.jpg" alt="profile">
-                       </div>
 
-                       <form action="<?php echo URLROOT . '/agrologist/requests' ?>" >
-                           <div class="flex flex-row ">
-                               <div class="[ request__content ]">
 
-                                   
-                                       <!-- <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/agrologist/requests/" ?>"> -->
-                                           
-                                           <h1><p><b>Dasuni Dewani</b></p></h1> 
-                                       <!-- </a> -->
-                                            
-                                       
-                                   
-                                  
-                                   <p class="flex flex-row">
-                                       <span class="fa fa-star"></span>
-                                       <span class="fa fa-star"></span>
-                                       <span class="fa fa-star"></span>
-                                       <span class="fa fa-star"></span>
-                                       <span class="fa fa-star"></span>
-                                   </p>
 
-                               </div>
-                               
-                           </div>
-                       </form>
 
-                       <div class=" flex-c-c">
-                                   <button type="button"   class="btn_accept" name="accept">View Profile</button> &emsp;
-                                
-                               </div>
-                                    
-                                </div>
+
+
+
+
+        <div class="[ requests__cn ]">
+
+
+            <div class="[ requests__wrap ]">
+
+
+                <div class="[ requestcard bg-light ]">
+
+                    <div class="[ requestimg ]">
+                        <img class="img" src="<?php echo IMAGES ?>/investor.jfif" alt="profile">
+                    </div>
+
+                    <form action="<?php echo URLROOT . '/agrologist/requests' ?>">
+                        <div class="flex flex-row ">
+                            <div class="[ requestcont ]">
+
+
+                                <!-- <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/agrologist/requests/" ?>"> -->
+
+                                <h1>
+                                    <p><b>Amal Perera</b></p>
+                                </h1>
+                                <!-- </a> -->
+                                <p>send you a request to you</p>
+
+
+
+                                <p class="flex flex-row">
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                </p>
+
+                            </div>
 
                         </div>
-                </div>
+                    </form>
 
-
-
-                <div class="[ requests__continer ]">
-           
-    
-           <div class="[ requests__wrapper ]">
-              
-
-                   <div class="[ request__card bg-light ]">
-                      
-                      <div class="[ request__img ]">
-                           <img class="img" src="<?php echo IMAGES ?>/investor9.jpg" alt="profile">
-                       </div>
-
-                       <form action="<?php echo URLROOT . '/agrologist/requests' ?>" >
-                           <div class="flex flex-row ">
-                               <div class="[ request__content ]">
-
-                                   
-                                       <!-- <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/agrologist/requests/" ?>"> -->
-                                           
-                                           <h1><p><b>Sasindu Udayanga</b></p></h1> 
-                                       <!-- </a> -->
-                                           
-                                       
-                                   
-                                  
-                                   <p class="flex flex-row">
-                                       <span class="fa fa-star"></span>
-                                       <span class="fa fa-star"></span>
-                                       <span class="fa fa-star"></span>
-                                       <span class="fa fa-star"></span>
-                                       <span class="fa fa-star"></span>
-                                   </p>
-
-                               </div>
-                               
-                           </div>
-                       </form>
-
-                       <div class=" flex-c-c">
-                                   <button type="button"   class="btn_accept" name="accept">View Profile</button> &emsp;
-                              
-                               </div>
-                      
-                            </div>
-
+                    <div class=" flex-c-c">
+                        <button type="button" class="btn_accept" name="accept">Accept</button> &emsp;
+                        <button type="button" class="btn_decline" name="decline">Decline</button>
                     </div>
-            </div>
-            <br>
-            <p><h1>Requests</h1></p> <hr>
 
-
-
-
-
-
-
-
-
-       <div class="[ requests__continer ]">
-           
-    
-                <div class="[ requests__wrapper ]">
-                   
-
-                        <div class="[ request__card bg-light ]">
-                           
-                           <div class="[ request__img ]">
-                                <img class="img" src="<?php echo IMAGES ?>/investor.jfif" alt="profile">
-                            </div>
-
-                            <form action="<?php echo URLROOT . '/agrologist/requests' ?>" >
-                                <div class="flex flex-row ">
-                                    <div class="[ request__content ]">
-
-                                        
-                                            <!-- <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/agrologist/requests/" ?>"> -->
-                                                
-                                                <h1><p><b>Amal Perera</b></p></h1> 
-                                            <!-- </a> -->
-                                                 <p>send you a request to you</p>
-                                            
-                                        
-                                       
-                                        <p class="flex flex-row">
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                        </p>
-
-                                    </div>
-                                    
-                                </div>
-                            </form>
-
-                            <div class=" flex-c-c">
-                                        <button type="button"   class="btn_accept" name="accept">Accept</button> &emsp;
-                                        <button type="button" class="btn_decline" name="decline">Decline</button>
-                                    </div>
-                           
-                        </div>
-    
                 </div>
+
+            </div>
         </div>
 
 
@@ -252,107 +152,55 @@
 
 
 
-        <div class="[ requests__continer ]">
-           
-    
-           <div class="[ requests__wrapper ]">
-              
+        <div class="[ requests__cn ]">
 
-                   <div class="[ request__card bg-light ]">
-                      
-                      <div class="[ request__img ]">
-                           <img class="img" src="<?php echo IMAGES ?>/investor2.jpg" alt="profile">
-                       </div>
 
-                       <form action="<?php echo URLROOT . '/agrologist/requests' ?>" >
-                           <div class="flex flex-row ">
-                               <div class="[ request__content ]">
+            <div class="[ requests__wrap ]">
 
-                                   
-                                       <!-- <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/agrologist/requests/" ?>"> -->
-                                           
-                                           <h1><p><b>Nimal Maduranga</b></p></h1> 
-                                       <!-- </a> -->
-                                            <p>send you a request to you</p>
-                                       
-                                   
-                                  
-                                   <p class="flex flex-row">
-                                       <span class="fa fa-star"></span>
-                                       <span class="fa fa-star"></span>
-                                       <span class="fa fa-star"></span>
-                                       <span class="fa fa-star"></span>
-                                       <span class="fa fa-star"></span>
-                                   </p>
 
-                               </div>
-                               
-                           </div>
-                       </form>
+                <div class="[ requestcard bg-light ]">
 
-                       <div class=" flex-c-c">
-                                   <button type="button"   class="btn_accept" name="accept">Accept</button> &emsp;
-                                   <button type="button" class="btn_decline" name="decline">Decline</button>
-                               </div>
-                      
-                   </div>
+                    <div class="[ requestimg ]">
+                        <img class="img" src="<?php echo IMAGES ?>/investor2.jpg" alt="profile">
+                    </div>
 
-           </div>
-   </div>
+                    <form action="<?php echo URLROOT . '/agrologist/requests' ?>">
+                        <div class="flex flex-row ">
+                            <div class="[ requestcont ]">
+
+
+                                <!-- <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/agrologist/requests/" ?>"> -->
+
+                                <h1>
+                                    <p><b>Nimal Maduranga</b></p>
+                                </h1>
+                                <!-- </a> -->
+                                <p>send you a request to you</p>
 
 
 
+                                <p class="flex flex-row">
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                </p>
 
+                            </div>
 
+                        </div>
+                    </form>
 
+                    <div class=" flex-c-c">
+                        <button type="button" class="btn_accept" name="accept">Accept</button> &emsp;
+                        <button type="button" class="btn_decline" name="decline">Decline</button>
+                    </div>
 
-   <div class="[ requests__continer ]">
-           
-    
-           <div class="[ requests__wrapper ]">
-              
+                </div>
 
-                   <div class="[ request__card bg-light ]">
-                      
-                      <div class="[ request__img ]">
-                           <img class="img" src="<?php echo IMAGES ?>/investor3.jfif" alt="profile">
-                       </div>
-
-                       <form action="<?php echo URLROOT . '/agrologist/requests' ?>" >
-                           <div class="flex flex-row ">
-                               <div class="[ request__content ]">
-
-                                   
-                                       <!-- <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/agrologist/requests/" ?>"> -->
-                                           
-                                           <h1><p><b>Punsara Deshan</b></p></h1> 
-                                       <!-- </a> -->
-                                            <p>send you a request to you</p>
-                                       
-                                   
-                                  
-                                   <p class="flex flex-row">
-                                       <span class="fa fa-star"></span>
-                                       <span class="fa fa-star"></span>
-                                       <span class="fa fa-star"></span>
-                                       <span class="fa fa-star"></span>
-                                       <span class="fa fa-star"></span>
-                                   </p>
-
-                               </div>
-                               
-                           </div>
-                       </form>
-
-                       <div class=" flex-c-c">
-                                   <button type="button"   class="btn_accept" name="accept">Accept</button> &emsp;
-                                   <button type="button" class="btn_decline" name="decline">Decline</button>
-                               </div>
-                      
-                   </div>
-
-           </div>
-   </div>
+            </div>
+        </div>
 
 
 
@@ -360,60 +208,121 @@
 
 
 
+        <div class="[ requests__cn ]">
+
+
+            <div class="[ requests__wrap ]">
+
+
+                <div class="[ requestcard bg-light ]">
+
+                    <div class="[ requestimg ]">
+                        <img class="img" src="<?php echo IMAGES ?>/investor3.jfif" alt="profile">
+                    </div>
+
+                    <form action="<?php echo URLROOT . '/agrologist/requests' ?>">
+                        <div class="flex flex-row ">
+                            <div class="[ requestcont ]">
+
+
+                                <!-- <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/agrologist/requests/" ?>"> -->
+
+                                <h1>
+                                    <p><b>Punsara Deshan</b></p>
+                                </h1>
+                                <!-- </a> -->
+                                <p>send you a request to you</p>
 
 
 
-   <div class="[ requests__continer ]">
-           
-    
-           <div class="[ requests__wrapper ]">
-              
+                                <p class="flex flex-row">
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                </p>
 
-                   <div class="[ request__card bg-light ]">
-                      
-                      <div class="[ request__img ]">
-                           <img class="img" src="<?php echo IMAGES ?>/investor4.jfif" alt="profile">
-                       </div>
+                            </div>
 
-                       <form action="<?php echo URLROOT . '/agrologist/requests' ?>" >
-                           <div class="flex flex-row ">
-                               <div class="[ request__content ]">
+                        </div>
+                    </form>
 
-                                   
-                                       <!-- <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/agrologist/requests/" ?>"> -->
-                                           
-                                           <h1><p><b>Yeshan Pasindu</b></p></h1> 
-                                       <!-- </a> -->
-                                            <p>send you a request to you</p>
-                                       
-                                   
-                                  
-                                   <p class="flex flex-row">
-                                       <span class="fa fa-star"></span>
-                                       <span class="fa fa-star"></span>
-                                       <span class="fa fa-star"></span>
-                                       <span class="fa fa-star"></span>
-                                       <span class="fa fa-star"></span>
-                                   </p>
+                    <div class=" flex-c-c">
+                        <button type="button" class="btn_accept" name="accept">Accept</button> &emsp;
+                        <button type="button" class="btn_decline" name="decline">Decline</button>
+                    </div>
 
-                               </div>
-                               
-                           </div>
-                       </form>
+                </div>
 
-                       <div class=" flex-c-c">
-                                   <button type="button"   class="btn_accept" name="accept">Accept</button> &emsp;
-                                   <button type="button" class="btn_decline" name="decline">Decline</button>
-                               </div>
-                      
-                   </div>
+            </div>
+        </div>
 
-           </div>
-   </div>
 
-    
+
+
+
+
+
+
+
+
+        <div class="[ requests__cn ]">
+
+
+            <div class="[ requests__wrap ]">
+
+
+                <div class="[ requestcard bg-light ]">
+
+                    <div class="[ requestimg ]">
+                        <img class="img" src="<?php echo IMAGES ?>/investor4.jfif" alt="profile">
+                    </div>
+
+                    <form action="<?php echo URLROOT . '/agrologist/requests' ?>">
+                        <div class="flex flex-row ">
+                            <div class="[ requestcont ]">
+
+
+                                <!-- <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/agrologist/requests/" ?>"> -->
+
+                                <h1>
+                                    <p><b>Yeshan Pasindu</b></p>
+                                </h1>
+                                <!-- </a> -->
+                                <p>send you a request to you</p>
+
+
+
+                                <p class="flex flex-row">
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                </p>
+
+                            </div>
+
+                        </div>
+                    </form>
+
+                    <div class=" flex-c-c">
+                        <button type="button" class="btn_accept" name="accept">Accept</button> &emsp;
+                        <button type="button" class="btn_decline" name="decline">Decline</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
     </div>
-   
+    <?php
+    require_once("footer.php");
+    ?>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="<?php echo JS ?>/dashboard/chart.js"></script>
     <script src="<?php echo JS ?>/dashboard/dashboard.js"></script>

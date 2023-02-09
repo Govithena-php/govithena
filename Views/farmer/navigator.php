@@ -19,12 +19,21 @@ function highlight($active, $link)
 <link rel="stylesheet" href="<?php echo CSS ?>/dashboard/navigator.css" type="text/css">
 
 <nav class="[ nav ]">
-    <div class="[ container ]" container-type="dashboard-section">
+    <div class="[ container ]" container-type="dashboard-navbar">
+
+        <div class="[ logo ]">
+            <a href="<?php echo URLROOT ?>/">
+                <img src="<?php echo IMAGES ?>/logo.svg" alt="logo">
+                <p>Govithena</p>
+            </a>
+        </div>
+
         <div class="[ open__btn ]">
-            <button onclick="openSidebar()">
+            <button onclick="toggleSidebar()">
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
+
         <?php
         if (isset($title)) {
         ?>
@@ -91,15 +100,13 @@ function highlight($active, $link)
 
     <div class="[ logo ]">
         <a href="<?php echo URLROOT ?>/">
+            <h2>Govithena</h2>
             <img src="<?php echo IMAGES ?>/logo.svg" alt="logo">
         </a>
-        <div class="[ action__btn ]">
-            <button onclick="closeSidebar()">&times;</button>
-        </div>
     </div>
 
     <div class="[ links ]">
-        <ul>
+    <ul>
             <li>
                 <a href="<?php echo URLROOT ?>/farmer/" class="<?php highlight($active, "dashboard") ?>">
                     <i class="fa-solid fa-gauge"></i>
@@ -107,27 +114,34 @@ function highlight($active, $link)
                 </a>
             </li>
             <li>
-                <a href="<?php echo URLROOT ?>/farmer/createGig" class="<?php highlight($active, "gigs") ?>">
+                <a href="<?php echo URLROOT ?>/farmer/" class="<?php highlight($active, "gigs") ?>">
                     <i class="[ fa-solid fa-sack-dollar ]"></i>
                     <p>Gigs</p>
                 </a>
             </li>
             <li>
-                <a href="<?php echo URLROOT ?>/dashboard/withdraw" class="<?php highlight($active, "mywithdraw") ?>">
+                <a href="<?php echo URLROOT ?>/farmer/agrologist" class="<?php highlight($active, "agrologist") ?>">
                     <i class="[ fa-solid fa-sack-dollar ]"></i>
-                    <p>My Withdraw</p>
+                    <p>Agrologist</p>
                 </a>
             </li>
+
             <li>
-                <a href="<?php echo URLROOT ?>/dashboard/myfarmers" class="<?php highlight($active, "myfarmers") ?>">
+                <a href="<?php echo URLROOT ?>/farmer/techassistantfirst" class="<?php highlight($active, "techassistantfirst") ?>">
                     <i class="[ fa-solid fa-tractor ]"></i>
                     <p>Technical Assistant</p>
                 </a>
-            </li>
+
             <li>
                 <a href="<?php echo URLROOT ?>/farmer/investors" class="<?php highlight($active, "investors") ?>">
                     <i class="[ fa-solid fa-tractor ]"></i>
                     <p>Investors</p>
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo URLROOT ?>/farmer/progress" class="<?php highlight($active, "progress") ?>">
+                    <i class="[ fa-solid fa-tractor ]"></i>
+                    <p>Progress</p>
                 </a>
             </li>
         </ul>

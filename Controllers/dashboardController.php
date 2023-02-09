@@ -27,6 +27,16 @@ class dashboardController extends Controller
         $this->render('myfarmers');
     }
 
+    public function withdraw()
+    {
+        $this->render('withdraw');
+    }
+
+    public function activegigs()
+    {
+        $this->render('activegigs');
+    }
+
     public function myinvestments()
     {
         require(ROOT . 'Models/investment.php');
