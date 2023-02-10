@@ -83,7 +83,7 @@
     ?>
     <div class="[ container ][ title ]" container-type="section">
         <h4><span><?php echo $numberOfGigs; ?>+</span> gigs in <span><?php echo $numberOfCategories; ?>+</span> categories.</h4>
-        <h1>Invest in the agreculture of Sri Lanka.</h1>
+        <h1>Invest in the agriculture of Sri Lanka.</h1>
         <p>Investing in agriculture in Sri Lanka can be a lucrative opportunity due to its favorable climate conditions and fertile soil. <br>The country is known for its production of crops such as rice, tea, rubber, coconut, and spices. </p>
     </div>
 
