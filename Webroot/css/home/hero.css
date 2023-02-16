@@ -63,8 +63,7 @@
     line-height: 1;
     font-size: var(--fs-p, 1.5rem);
     font-weight: 200;
-    max-width: 600px;
-    text-shadow: 0px 0px 10px solid #000;
+    max-width: 700px;
 }
 
 .hero>.content .heading p {
@@ -106,14 +105,15 @@
     color: var(--text-light, white);
     margin-left: 1rem;
     padding: 0.7rem 1.5rem;
-    font-size:1.2rem;
-    border-radius:5px;
-    font-weight:600;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    font-weight: 600;
 }
 
- .sigin__btn{
+.sigin__btn {
     border: 2px solid var(--clr-light, white);
 }
+
 .signup__btn {
     border: 2px solid var(--clr-primary, rgb(4, 270, 154));
     background-color: var(--clr-primary, rgb(4, 270, 154));
