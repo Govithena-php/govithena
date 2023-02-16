@@ -31,6 +31,36 @@
             text-decoration: none;
             color: #fff;
         }
+
+        .fade-out {
+            animation: fade-out 1s;
+        }
+
+        .fade-in {
+            animation: fade-in 1s;
+        }
+
+
+
+        @keyframes fade-in {
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes fade-out {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 
@@ -381,11 +411,14 @@
         <script src="<?php echo JS ?>/home/hero.js"></script>
 
         <script>
-            const txt = ['Invest <span>with us</span> <br>for a reasonable profit.', "Grow your <span>wealth<span> sustainably."]
+            let i = 0
+            const txt = ['Invest <span>with us</span> for a reasonable profit.', "Grow your <span>wealth<span> sustainably."]
             const heading_hero = document.getElementById('heading-hero')
             setInterval(() => {
-                heading_hero.innerHTML = txt[Math.floor(Math.random() * txt.length)]
-            }, 5000);
+                console.log(i);
+                heading_hero.innerHTML = txt[i++]
+                if (i == txt.length) i = 0
+            }, 8000);
         </script>
 </body>
 
