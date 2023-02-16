@@ -7,6 +7,5 @@ require(ROOT . "Core/Uid.php");
 require(ROOT . "Core/Model.php");
 require(ROOT . "Core/Controller.php");
 require(ROOT . "Core/ActiveUser.php");
-require(ROOT . "Core/Rating.php");
 
 Session::init();
