@@ -44,17 +44,35 @@
 
         <div class="[ image__wrapper ]">
             <div class="[ overlay ]"></div>
-            <img id="1" show="true" src="Webroot/images/bg1.jpg" alt="bg" />
-            <img id="2" show="false" src="Webroot/images/bg2.jpg" alt="bg" />
-            <img id="3" show="false" src="Webroot/images/bg3.jpg" alt="bg" />
-            <img id="4" show="false" src="Webroot/images/bg4.jpg" alt="bg" />
-            <img id="5" show="false" src="Webroot/images/bg5.jpg" alt="bg" />
+            <div class="[ slide ]" id="1" show="true">
+                <h1>Text 1</h1>
+                <img src="<?php echo IMAGES ?>bg1.jpg" alt="bg" />
+            </div>
+
+            <div class="[ slide ]" id="2" show="false">
+                <h1>Text 2</h1>
+                <img id="2" src="<?php echo IMAGES ?>bg2.jpg" alt="bg" />
+            </div>
+
+            <div class="[ slide ]" id="3" show="false">
+                <h1>Text 3</h1>
+                <img id="3" src="<?php echo IMAGES ?>bg3.jpg" alt="bg" />
+            </div>
+
+            <div class="[ slide ]" id="4" show="false">
+                <h1>Text 4</h1>
+                <img id="4" src="<?php echo IMAGES ?>bg4.jpg" alt="bg" />
+            </div>
+
+            <div class="[ slide ]" id="5" show="false">
+                <h1>Text 5</h1>
+                <img id="5" src="<?php echo IMAGES ?>bg5.jpg" alt="bg" />
+            </div>
         </div>
 
         <div class="[ container content ]" container-type="section">
             <div class="[ heading ]">
                 <p>Invest on farmers and their community,</p>
-                <h1 id="heading-hero">Invest <span>with us</span> <br>for a reasonable profit.</h1>
             </div>
 
             <?php
@@ -381,11 +399,11 @@
         <script src="<?php echo JS ?>/home/hero.js"></script>
 
         <script>
-            const txt = ['Invest <span>with us</span> <br>for a reasonable profit.', "Grow your <span>wealth<span> sustainably."]
-            const heading_hero = document.getElementById('heading-hero')
-            setInterval(() => {
-                heading_hero.innerHTML = txt[Math.floor(Math.random() * txt.length)]
-            }, 5000);
+            // const txt = ['Invest <span>with us</span> <br>for a reasonable profit.', "Grow your <span>wealth<span> sustainably."]
+            // const heading_hero = document.getElementById('heading-hero')
+            // setInterval(() => {
+            //     heading_hero.innerHTML = txt[Math.floor(Math.random() * txt.length)]
+            // }, 1000);
         </script>
 </body>
 
