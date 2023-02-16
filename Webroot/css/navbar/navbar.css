@@ -28,7 +28,7 @@ nav>.navbar {
     position: relative;
     height: 100%;
     display: grid;
-    grid-template-columns: 0.5fr 2fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr;
     gap: 1rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 
@@ -193,6 +193,10 @@ nav>.navbar {
     gap: 0.5rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.navbar> .menu ul > li {
+    margin-bottom: 0;
 }
 
 .navbar>.profile .menu a {

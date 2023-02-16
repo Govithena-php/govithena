@@ -42,6 +42,23 @@ class STATUS
     const REJECTED = "REJECTED";
 }
 
+class RATE
+{
+    const GIG = 'gig';
+    const FARMER = 'farmer';
+    const AGROLOGIST = 'agrologist';
+    const TECH_ASSISTANT = 'techassistant';
+}
+
+class STAR
+{
+    const ONE = 1;
+    const TWO = 2;
+    const THREE = 3;
+    const FOUR = 4;
+    const FIVE = 5;
+}
+
 
 
 // define("GIG_REQUEST"; 'greq');
