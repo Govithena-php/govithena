@@ -19,7 +19,7 @@
     z-index: -1;
 }
 
-.hero>.image__wrapper>.slide {
+.hero>.image__wrapper>img {
     position: absolute;
     top: 0;
     left: 0;
@@ -30,19 +30,49 @@
     transition: opacity 0.5s ease-in-out;
 }
 
+.hero .slide>img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.hero .slide>.heading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(11, 11, 11, 0.5) 0%, rgba(0, 0, 0, 0.4) 100%);
+    color: var(--clr-light, #fff);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.hero .slide>.heading>h1,
+.hero .slide>.heading>p {
+    margin-left: 8rem;
+}
+
 .hero>.image__wrapper>.slide[show="true"] {
     opacity: 1;
     transition: opacity 0.5s ease-in-out;
 
 }
 
-.hero>.image__wrapper>.slide[show="false"] {
+.hero>.image__wrapper>img[show="false"] {
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
 }
 
 
-.hero>.image__wrapper .overlay {
+.hero>.overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -53,6 +83,7 @@
 }
 
 .hero>.content {
+    background-color: blue;
     padding-top: 10rem;
     display: flex;
     flex-direction: column;
@@ -106,15 +137,14 @@
     color: var(--text-light, white);
     margin-left: 1rem;
     padding: 0.7rem 1.5rem;
-    font-size: 1.2rem;
-    border-radius: 5px;
-    font-weight: 600;
+    font-size:1.2rem;
+    border-radius:5px;
+    font-weight:600;
 }
 
-.sigin__btn {
+ .sigin__btn{
     border: 2px solid var(--clr-light, white);
 }
-
 .signup__btn {
     border: 2px solid var(--clr-primary, rgb(4, 270, 154));
     background-color: var(--clr-primary, rgb(4, 270, 154));

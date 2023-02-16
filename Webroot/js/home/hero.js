@@ -1,6 +1,5 @@
 // hero
 const bgImgs = document.querySelectorAll('.image__wrapper>.slide')
-// console.log(bgImgs);
 const showImage = (id) => {
     bgImgs.forEach((img) => {
         if (parseInt(img.id) == id) {
@@ -10,16 +9,17 @@ const showImage = (id) => {
         }
     })
 }
-showImage(2)
+
+showImage(Math.floor(Math.random() * bgImgs.length + 1))
 
 setInterval(() => {
-    let active = document.querySelector('.image__wrapper .slide[show="true"]');
-    console.log(active);
+    let active = document.querySelector('.image__wrapper>img[show="true"]');
     let next = active.nextElementSibling;
     if (next === null) {
         next = bgImgs[0];
     }
     showImage(parseInt(next.id))
+
 
 }, 8000);
 
@@ -31,4 +31,5 @@ setInterval(() => {
     console.log(i);
     heading_hero.innerHTML = txt[i++]
     if (i == txt.length) i = 0
+
 }, 8000);
