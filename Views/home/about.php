@@ -18,8 +18,38 @@
     <?php require_once(COMPONENTS . 'navbar.php'); ?>
 
     <div class="[ container ][ title ]" container-type="section">
+        <h4>ABOUT US</h4>
         <h1>Invest in the agriculture of Sri Lanka.</h1>
-        <p>Investing in agriculture in Sri Lanka can be a lucrative opportunity due to its favorable climate conditions and fertile soil. <br>The country is known for its production of crops such as rice, tea, rubber, coconut, and spices. </p>
+        <h6>Investing in agriculture in Sri Lanka can be a lucrative opportunity due to its favorable climate conditions and fertile soil. <br>The country is known for its production of crops such as rice, tea, rubber, coconut, and spices. </h6>
+        <br>
+        <p>Building a Sustainable Future Agriculture is a vital industry that plays a crucial role in feeding the world and sustaining the global economy. By investing in this sector, you can not only help to secure a food-secure future, but also support the growth of a responsible and sustainable agricultural industry.</p>
+    </div>
+    <div class="[ container ][ counts ]" container-type="section">
+        <div class="[ cover ]">
+            <img src="<?php echo IMAGES ?>/temp/pineapples.jpg" />
+        </div>
+        <div class="[ grid ]" gap="2" md="2" lg="4">
+            <div class="[ card ]">
+                <h1>1450+</h1>
+                <h4>Active Users</h4>
+            </div>
+            <div class="[ card ]">
+                <h1>45+</h1>
+                <h4>Categroy</h4>
+            </div>
+            <div class="[ card ]">
+                <h1>1560+</h1>
+                <h4>Active Gigs</h4>
+            </div>
+            <div class="[ card ]">
+                <h1>1234</h1>
+                <h4>Active Users</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="[ container ][  ]" container-type="section">
+        <p>At Govithena, we are dedicated to providing our clients with innovative and profitable investment opportunities in the agriculture sector. Our team of experts leverages their deep knowledge of the industry and access to cutting-edge technologies to identify high-potential investment opportunities and help you make informed decisions. Whether you're looking to invest in farmland, agribusiness, or cutting-edge agriculture technologies, we have the expertise and resources to help you achieve your goals. Our portfolio of investments is diversified and balanced, ensuring that you are exposed to a range of opportunities across different stages of the agriculture value chain. Investing with Govithena, not only offers you the potential for strong financial returns, but also the satisfaction of knowing that you are contributing to the growth of a sustainable and responsible agriculture sector. We are committed to responsible investment practices and work closely with our partners to ensure that our investments promote sustainable agriculture practices, conserve natural resources, and benefit local communities. Join us today and help build a brighter future for agriculture and the world. Get in touch with our team to learn more about our agriculture investment opportunities and start building your portfolio.</p>
     </div>
 
     <?php require_once(COMPONENTS . 'footer.php'); ?>
