@@ -19,9 +19,9 @@ $currentUser = Session::get('user');
 
         <div class="[ menu ]">
             <ul>
-                <li><a href="<?php echo URLROOT ?>/">About Us</a></li>
-                <li><a href="<?php echo URLROOT ?>/">Services</a></li>
-                <li><a href="<?php echo URLROOT ?>/">Contact Us</a></li>
+                <li><a href="<?php echo URLROOT ?>/home/about">About Us</a></li>
+                <li><a href="<?php echo URLROOT ?>/home/services">Services</a></li>
+                <li><a href="<?php echo URLROOT ?>/home/contact">Contact Us</a></li>
             </ul>
         </div>
 
