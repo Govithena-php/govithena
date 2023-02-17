@@ -5,63 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Govithena | Home</title>
-
     <link rel="icon" type="image/x-icon" href="<?php echo IMAGES ?>/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
     <link rel="stylesheet" href="<?php echo CSS ?>/base.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/grid.css">
     <link rel="stylesheet" href="<?php echo CSS ?>home/hero.css">
     <link rel="stylesheet" href="<?php echo CSS ?>home/home.css">
-    <style>
-        .flex {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-        }
-
-        .farmer__name {
-            padding-inline: 0.5rem;
-            justify-content: space-between;
-        }
-
-        .famer_page_btn {
-            text-decoration: none;
-            color: #fff;
-        }
-
-        .fade-out {
-            animation: fade-out 1s;
-        }
-
-        .fade-in {
-            animation: fade-in 1s;
-        }
-
-
-
-        @keyframes fade-in {
-            0% {
-                opacity: 1;
-            }
-
-            100% {
-                opacity: 0;
-            }
-        }
-
-        @keyframes fade-out {
-            0% {
-                opacity: 0;
-            }
-
-            100% {
-                opacity: 1;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -113,7 +63,7 @@
     ?>
     <div class="[ container ][ title ]" container-type="section">
         <h4><span><?php echo $numberOfGigs; ?>+</span> gigs in <span><?php echo $numberOfCategories; ?>+</span> categories.</h4>
-        <h1>Invest in the agreculture of Sri Lanka.</h1>
+        <h1>Invest in the agriculture of Sri Lanka.</h1>
         <p>Investing in agriculture in Sri Lanka can be a lucrative opportunity due to its favorable climate conditions and fertile soil. <br>The country is known for its production of crops such as rice, tea, rubber, coconut, and spices. </p>
     </div>
 
@@ -404,22 +354,8 @@
 
         <?php require_once(COMPONENTS . 'footer.php'); ?>
 
-
-
-        <script src="<?php echo JS ?>/search.js"></script>
         <script src="<?php echo JS ?>/navbar/navbar.js"></script>
         <script src="<?php echo JS ?>/home/hero.js"></script>
-
-        <script>
-            let i = 0
-            const txt = ['Invest <span>with us</span> for a reasonable profit.', "Grow your <span>wealth<span> sustainably."]
-            const heading_hero = document.getElementById('heading-hero')
-            setInterval(() => {
-                console.log(i);
-                heading_hero.innerHTML = txt[i++]
-                if (i == txt.length) i = 0
-            }, 8000);
-        </script>
 </body>
 
 </html>
