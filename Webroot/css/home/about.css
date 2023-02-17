@@ -1,0 +1,7 @@
+nav {
+    background-color: var(--clr-dark, #000);
+}
+
+.title {
+    margin-top: var(--navbat-height, 5rem);
+}

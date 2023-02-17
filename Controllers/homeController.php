@@ -36,4 +36,8 @@ class homeController extends Controller
     {
         $this->render("contact");
     }
+    public function about()
+    {
+        $this->render("about");
+    }
 }
