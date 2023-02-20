@@ -60,7 +60,7 @@
     font-weight: 500;
     color: var(--clr-light, white);
     margin-left: 0;
-    margin-right:auto;
+    margin-right: auto;
 }
 
 
@@ -176,8 +176,8 @@
     position: absolute;
     top: 3.75rem;
     right: 1rem;
-    width: 150px;
-    max-height: 200px;
+    width: 180px;
+    max-height: 250px;
     border-radius: 5px;
     background-color: white;
     padding: 1rem;
@@ -195,6 +195,31 @@
 
 .profile [open="false"] {
     display: none;
+}
+
+.profile .menu .profile__name {
+    text-align: right;
+    width: 100%;
+    padding-bottom: 0.1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    margin-bottom: 0.2rem;
+}
+
+
+.profile .menu .profile__name a {
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #000000cc;
+    line-height: 1rem;
+}
+
+.profile .menu .profile__name small {
+    font-size: 0.6rem;
+    font-weight: 500;
+    color: #575757cc;
+    line-height: 1rem;
+
 }
 
 .profile .menu ul {
