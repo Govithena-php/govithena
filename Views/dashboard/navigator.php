@@ -70,8 +70,7 @@ function highlight($active, $link)
 
                 <div id="profile_menu" open="false" class="[ menu ]">
                     <div class="[ profile__name ]">
-                        <a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/"><?php echo $currentUser->getFirstName() ?></a>
-                        <br>
+                        <h3><?php echo $currentUser->getFirstName() ?></h3>
                         <small><?php echo $currentUser->getType() ?></small>
                     </div>
                     <ul>
