@@ -1,8 +1,126 @@
+body {
+    background-color: var(--clr-light, #fff)
+}
+
 nav {
     background-color: var(--clr-dark, #000);
 }
 
-.title {
+.contact {
     margin-top: 5rem;
 }
 
+.contact h1 {
+    font-size: 2rem;
+    text-align: center;
+    font-weight: 600;
+    color: var(--clr-primary, #fff);
+    margin-bottom: 1rem;
+}
+
+.contact p {
+    font-size: 1rem;
+    text-align: center;
+    font-weight: 400;
+    margin-bottom: 2rem;
+}
+
+.contact .help {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+}
+
+.contact .help img {
+    width: 80%;
+    display: none;
+}
+
+.contact .help p {
+    font-size: 1rem;
+    text-align: center;
+    font-weight: 600;
+    line-height: 1.5rem;
+    color: #4d4d4d;
+    margin-top: 2rem;
+}
+
+.contact .help p a {
+    text-decoration: none;
+    color: var(--clr-primary, #000);
+}
+
+.contact form {
+    display: grid;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.contact .row {
+    display: flex;
+    gap: 1rem;
+}
+
+.contact .form__group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+
+.contact .form__group label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    /* color: var(--clr-gray, #000); */
+}
+
+.contact .form__group input {
+    padding: 0.5rem;
+    border: 1px solid #6f6f6f76;
+    border-radius: 5px;
+    outline: none;
+}
+
+.contact .form__group textarea {
+    padding: 0.5rem;
+    border: 1px solid #6f6f6f76;
+    border-radius: 5px;
+    outline: none;
+    resize: none;
+}
+
+.contact .form__group input:focus {
+    border: 1px solid var(--clr-primary, #000);
+}
+
+.contact .form__group textarea:focus {
+    border: 1px solid var(--clr-primary, #000);
+}
+
+
+.contact .form__group button {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    background-color: var(--clr-primary, #000);
+    color: var(--clr-light, #fff);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+@media screen and (min-width: 1024px) {
+    .contact .help img {
+        display: block;
+    }
+
+    .contact form {
+        margin: 2rem 0;
+    }
+}
