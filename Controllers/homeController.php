@@ -31,4 +31,14 @@ class homeController extends Controller
         $this->set($props);
         $this->render("index");
     }
+
+    public function contact()
+    {
+        $this->render("contact");
+    }
+
+    public function about()
+    {
+        $this->render("about");
+    }
 }
