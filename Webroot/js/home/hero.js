@@ -1,6 +1,10 @@
 // hero
+<<<<<<< HEAD
+const bgImgs = document.querySelectorAll('.image__wrapper>.slide')
+=======
 const bgImgs = document.querySelectorAll('.image__wrapper>img');
 
+>>>>>>> parent of 5e7eddf (fix hero section)
 const showImage = (id) => {
     bgImgs.forEach((img) => {
         if (parseInt(img.id) == id) {
@@ -20,7 +24,10 @@ setInterval(() => {
         next = bgImgs[0];
     }
     showImage(parseInt(next.id))
+<<<<<<< HEAD
+=======
 
+>>>>>>> parent of 5e7eddf (fix hero section)
 }, 8000);
 
 
