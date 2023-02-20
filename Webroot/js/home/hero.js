@@ -22,3 +22,13 @@ setInterval(() => {
     showImage(parseInt(next.id))
 
 }, 8000);
+
+
+let i = 0
+const txt = ['Invest <span>with us</span> for a reasonable profit.', "Grow your <span>wealth<span> sustainably."]
+const heading_hero = document.getElementById('heading-hero')
+setInterval(() => {
+    console.log(i);
+    heading_hero.innerHTML = txt[i++]
+    if (i == txt.length) i = 0
+}, 8000);
