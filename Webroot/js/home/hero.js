@@ -20,7 +20,6 @@ setInterval(() => {
     }
     showImage(parseInt(next.id))
 
-
 }, 8000);
 
 

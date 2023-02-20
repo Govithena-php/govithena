@@ -83,7 +83,6 @@
 }
 
 .hero>.content {
-    background-color: blue;
     padding-top: 10rem;
     display: flex;
     flex-direction: column;
