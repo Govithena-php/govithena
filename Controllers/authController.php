@@ -90,6 +90,7 @@ class authController extends Controller
                 $actor = new Input(POST, 'actor');
                 Session::set(['actor' => $actor]);
                 $this->render('signup');
+                return;
             }
 
             require(ROOT . 'Models/user.php');
@@ -149,8 +150,6 @@ class authController extends Controller
             if ($response['data']) {
                 $this->redirect('/auth/signin/ok');
             }
-
-            $this->render('signup');
         } else {
             $this->render('actor');
         }

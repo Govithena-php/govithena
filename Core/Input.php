@@ -16,12 +16,12 @@ class Input
         } else if ($numOfParms > 1) {
 
             if ($parms[0] == POST) {
-                if (isset($parms[1])) {
+                if (isset($_POST[$parms[1]])) {
                     $this->value = $_POST[$parms[1]];
                 }
             }
             if ($parms[0] == GET) {
-                if (isset($parms[1])) {
+                if (isset($_GET[$parms[1]])) {
                     $this->value = $_GET[$parms[1]];
                 }
             }
