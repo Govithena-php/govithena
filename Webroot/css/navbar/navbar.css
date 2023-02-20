@@ -166,7 +166,7 @@ nav>.navbar {
 
 .navbar>.profile .menu {
     position: absolute;
-    top: 3.75rem;
+    top: 4rem;
     right: 0;
     width: 150px;
     max-height: 200px;
