@@ -1,7 +1,10 @@
+body {
+    background-color: var(--clr-light, #fff)
+}
+
 nav {
     background-color: var(--clr-dark, #000);
 }
-
 
 .title {
     margin-top: 6rem;
