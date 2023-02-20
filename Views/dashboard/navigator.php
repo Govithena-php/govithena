@@ -63,12 +63,16 @@ function highlight($active, $link)
 
                     <button onclick="toggleProfileMenu()">
                         <div class="[ image ]">
-                            <img src="<?php echo UPLOADS . '/' . Session::get('user')->getImage(); ?>" alt="profile">
+                            <img src="<?php echo UPLOADS . '/' . $currentUser->getImage(); ?>" alt="profile">
                         </div>
                     </button>
                 </div>
 
                 <div id="profile_menu" open="false" class="[ menu ]">
+                    <div class="[ profile__name ]">
+                        <h3><?php echo $currentUser->getFirstName() ?></h3>
+                        <small><?php echo $currentUser->getType() ?></small>
+                    </div>
                     <ul>
                         <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/">
                                 <i class="[ fa-solid fa-gauge ]"></i>Dashboard
@@ -80,7 +84,8 @@ function highlight($active, $link)
                         </li>
                     </ul>
                     <a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/auth/signout">
-                        <i class="fa-solid fa-right-from-bracket"></i>Sign Out</a>
+                        <i class="fa-solid fa-right-from-bracket"></i>Sign Out
+                    </a>
                 </div>
 
             <?php } else { ?>

@@ -54,6 +54,10 @@ $currentUser = Session::get('user');
                 </div>
 
                 <div id="profile_menu" open="false" class="[ menu ]">
+                    <div class="[ profile__name ]">
+                        <h3><?php echo $currentUser->getFirstName() ?></h3>
+                        <small><?php echo $currentUser->getType() ?></small>
+                    </div>
                     <ul>
                         <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/">
                                 <i class="[ fa-solid fa-gauge ]"></i>Dashboard
