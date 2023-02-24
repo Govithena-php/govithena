@@ -59,25 +59,25 @@
                                         --xl-cols:  1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.7fr;
                                         --lg-cols: 1.5fr 0.5fr 0.5fr 1fr 1fr;
                                         --md-cols: 1fr 0.5fr 0.5fr;
-                                        --sm-cols: 1fr 0.5fr;
+                                        --sm-cols: 2fr 1fr;
                                     ">
                                     <div class="[ head ]">
                                         <div class="[ data ]">
                                             <p>Gig</p>
                                         </div>
-                                        <div class="[ data ]">
+                                        <div class="[ data ]" hideIn="md">
                                             <p>Category</p>
                                         </div>
-                                        <div class="[ data ]">
+                                        <div class="[ data ]" hideIn="sm">
                                             <p>Offer</p>
                                         </div>
-                                        <div class="[ data ]">
+                                        <div class="[ data ]" hideIn="lg">
                                             <p>Time Period</p>
                                         </div>
-                                        <div class="[ data ]">
+                                        <div class="[ data ]" hideIn="lg">
                                             <p>Location</p>
                                         </div>
-                                        <div class="[ data ]">
+                                        <div class="[ data ]" hideIn="md">
                                             <p>Requested Date</p>
                                         </div>
                                     </div>
@@ -100,19 +100,19 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="[ data ]">
+                                                <div class="[ data ]" hideIn="md">
                                                     <p class="[ tag ]"><?php echo $request['category'] ?></p>
                                                 </div>
-                                                <div class="[ data ]">
+                                                <div class="[ data ]" hideIn="sm">
                                                     <h3>LKR <?php echo $request['offer'] ?></h3>
                                                 </div>
-                                                <div class="[ data ]">
+                                                <div class="[ data ]" hideIn="lg">
                                                     <h3><?php echo $request['timePeriod'] ?> Months</h3>
                                                 </div>
-                                                <div class="[ data ]">
+                                                <div class="[ data ]" hideIn="lg">
                                                     <h3><?php echo $request['location'] ?></h3>
                                                 </div>
-                                                <div class="[ data ]">
+                                                <div class="[ data ]" hideIn="md">
                                                     <p><?php echo $request['requestedDate'] ?></p>
                                                 </div>
                                                 <div class="[ data ]">
@@ -122,7 +122,27 @@
                                                     </div>
                                                 </div>
                                                 <div id="<?php echo $request['requestId'] ?>" class="[ expand ]">
-                                                    <div class="[ data ]">
+
+                                                    <div class="[ data ]" showIn="md">
+                                                        <p class="[ tag ]"><?php echo $request['category'] ?></p>
+                                                    </div>
+                                                    <div class="[ data ]" showIn="sm">
+                                                        <h4>Offer :</h4>
+                                                        <p>LKR <?php echo $request['offer'] ?></p>
+                                                    </div>
+                                                    <div class="[ data ]" showIn="lg">
+                                                        <h4>Time Periold :</h4>
+                                                        <p><?php echo $request['timePeriod'] ?> Months</p>
+                                                    </div>
+                                                    <div class="[ data ]" showIn="lg">
+                                                        <h4>Location</h4>
+                                                        <p><?php echo $request['location'] ?></p>
+                                                    </div>
+                                                    <div class="[ data ]" showIn="md">
+                                                        <p><?php echo $request['requestedDate'] ?></p>
+                                                    </div>
+
+                                                    <div class="[ data ]" always>
                                                         <h4>Your Message :</h4>
                                                         <p><?php echo $request['message'] ?></p>
                                                     </div>
@@ -251,7 +271,7 @@
                         ?>
                             <div class="[ requests__wrapper ]">
                                 <div class="[ grid__table ]" style="
-                                        --xl-cols:  1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.7fr;
+                                        --xl-cols: 1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.7fr;
                                         --lg-cols: 1.5fr 0.5fr 0.5fr 1fr 1fr;
                                         --md-cols: 1fr 0.5fr 0.5fr;
                                         --sm-cols: 1fr 0.5fr;
@@ -260,16 +280,16 @@
                                         <div class="[ data ]">
                                             <p>Gig</p>
                                         </div>
-                                        <div class="[ data ]">
+                                        <div class="[ data ]" remove="md">
                                             <p>Category</p>
                                         </div>
                                         <div class="[ data ]">
                                             <p>Offer</p>
                                         </div>
-                                        <div class="[ data ]">
+                                        <div class="[ data ]" remove="lg">
                                             <p>Time Period</p>
                                         </div>
-                                        <div class="[ data ]">
+                                        <div class="[ data ]" remove="lg">
                                             <p>Location</p>
                                         </div>
                                         <div class="[ data ]">

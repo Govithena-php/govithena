@@ -122,6 +122,7 @@
 }
 
 .tag {
+    width: fit-content;
     display: block;
     padding: 0.2rem 0.5rem;
     background-color: var(--clr-gray, #a2a2a2);
