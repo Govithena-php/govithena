@@ -1,0 +1,130 @@
+@import 'variables.css';
+
+:root {
+    --default-cols: repeat(auto-fit, 1fr);
+    --xl-cols: repeat(auto-fit, 1fr);
+    --lg-cols: repeat(auto-fit, 1fr);
+    --md-cols: repeat(auto-fit, 1fr);
+    --sm-cols: repeat(auto-fit, 1fr);
+}
+
+
+.grid__table {
+    margin-top: 1rem;
+}
+
+.grid__table>.head,
+.grid__table>.body>.row {
+    display: grid;
+    grid-template-columns: var(--xl-cols);
+}
+
+
+.grid__table>.head {
+    min-height: 3rem;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 0.5rem;
+
+}
+
+.grid__table>.head>.data {
+    padding-left: 0.5rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 0.25rem;
+    border-left: 1px solid #ccc;
+
+}
+
+.grid__table>.head>.data>p {
+    flex-grow: 1;
+    color: var(--clr-text-gray);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* .grid__table>.body {
+    margin-top: 1rem;
+} */
+
+.grid__table>.body>.row {
+    position: relative;
+    /* margin-block: 0.75rem; */
+    padding-block: 0.5rem;
+    min-height: 2rem;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.grid__table>.body>.row:hover {
+    background-color: #cde1d376;
+}
+
+
+.grid__table>.body>.row>.data {
+    text-transform: capitalize;
+    overflow: hidden;
+    padding-left: 0.5rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 0.25rem;
+    font-size: 0.8rem;
+}
+
+
+.grid__table>.body>.row>.data>h2 {
+    width: 90%;
+}
+
+.grid__table>.body>.row>.data>h3 {
+    font-weight: 500;
+}
+
+.grid__table>.body>.row>.expand {
+    grid-column: 1/-1;
+    display: flex;
+    flex-direction: column;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+}
+
+.grid__table>.body>.row>.expand[show] {
+    max-height: 500px;
+}
+
+@media screen and (max-width: 1200px) {
+
+    .grid__table>.head,
+    .grid__table>.body>.row {
+        grid-template-columns: var(--xl-cols, repeat(auto-fit, 1fr));
+        ;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+
+    .grid__table>.head,
+    .grid__table>.body>.row {
+        grid-template-columns: var(--lg-cols, repeat(auto-fit, 1fr));
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    .grid__table>.head,
+    .grid__table>.body>.row {
+        grid-template-columns: var(--md-cols, repeat(auto-fit, 1fr));
+    }
+}
+
+@media screen and (max-width: 576px) {
+
+    .grid__table>.head,
+    .grid__table>.body>.row {
+        grid-template-columns: var(--sm-cols, repeat(auto-fit, 1fr));
+    }
+}
