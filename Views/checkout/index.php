@@ -32,42 +32,46 @@
     </div>
     <div class="[ container ]" container-type="section">
         <div class="[ title ]">
-            <h1>Checkout</h1>
+            <h2>Checkout</h2>
+            <p>Ready to seal the deal? Click checkout!</p>
         </div>
         <div class="[ checkout ]">
             <div class="[ details ]">
-                <div class="[ grid ]" gap="1" md="2">
+                <h2>Bill Summary</h2>
+                <div class="[ grid ]" gap="2" md="2">
                     <div class="[ image ]">
                         <img src="<?php echo IMAGES ?>/temp/2.jpg" alt="">
                     </div>
                     <div class="[ content ]">
                         <h2><?php echo $res['title'] ?></h2>
-                        <h4>by<?php echo $res['firstName'] . ' ' . $res['lastName'] ?></h4>
+                        <!-- <h4>by<?php echo $res['firstName'] . ' ' . $res['lastName'] ?></h4> -->
                         <p><?php echo $res['description'] ?></p>
                         <div class="[ grid ]" md="3">
-                            <p>Offer: <br><?php echo $res['offer'] ?></p>
-                            <p>Time period: <br><?php echo $res['timePeriod'] ?></p>
-                            <p>Location: <br><?php echo $res['location'] ?></p>
+                            <p><small>Offer:</small><br>LKR <?php echo $res['offer'] ?></p>
+                            <p><small>Time period:</small><br><?php echo $res['timePeriod'] ?> Months</p>
+                            <p><small>Location:</small><br><?php echo $res['location'] ?></p>
                         </div>
+
                     </div>
+
                 </div>
                 <div class="[ grid ]" md="2">
                     <div class="[ farmer__details ]">
                         <h3>Farmer Details</h3>
                         <div class="[ grid ]" md="2">
-                            <p>First Name: <br><?php echo $res['firstName'] ?></p>
-                            <p>Last Name: <br><?php echo $res['lastName'] ?></p>
-                            <p>Location: <br><?php echo $res['location'] ?></p>
+                            <p><small>First Name:</small><br><?php echo $res['firstName'] ?></p>
+                            <p><small>Last Name:</small><br><?php echo $res['lastName'] ?></p>
+                            <p><small>Location:</small><br><?php echo $res['location'] ?></p>
                         </div>
                     </div>
-                    <div class="[ shipping__address ]">
+                    <!-- <div class="[ shipping__address ]">
                         <h3>Shipping Address</h3>
                         <div class="[ grid ]" md="2">
                             <p>First Name: <br><?php echo $res['firstName'] ?></p>
                             <p>Last Name: <br><?php echo $res['lastName'] ?></p>
                             <p>Location: <br><?php echo $res['location'] ?></p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="[ checkout__box ]">
@@ -82,11 +86,11 @@
                 </div>
                 <div class="[ flex-row-space-between ]">
                     <p>Ammount</p>
-                    <p><?php echo $res['capital'] ?></p>
+                    <p>LKR <?php echo $res['capital'] ?></p>
                 </div>
                 <div class="[ flex-row-space-between ]">
                     <p>Convention fee</p>
-                    <p>1000</p>
+                    <p>LKR 1000</p>
                 </div>
                 <div class="[ flex-row-space-between ]">
                     <p>Discount</p>
@@ -95,7 +99,7 @@
                 <hr>
                 <div class="[ flex-row-space-between ]">
                     <p>Total</p>
-                    <p><?php echo $res['capital'] ?></p>
+                    <p>LKR <?php echo $res['capital'] ?></p>
                 </div>
 
                 <div class="[ flex-row-center ]">

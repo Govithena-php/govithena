@@ -69,4 +69,17 @@ class RequestFarmer extends Model
             return null;
         }
     }
+
+    public function updateStatus($id, $status){
+        try {
+            $sql = "UPDATE farmer_request SET state = :status WHERE requestId = :id";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['id' => $id, 'status' => $status]);
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return false;
+        }
+    }
 }

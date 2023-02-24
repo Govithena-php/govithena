@@ -1,11 +1,11 @@
 <?php
 
-class Investment extends Model
+class investorGig
 {
-    public function fetchAllBy($id)
+    public function fetchAllByInvestor($id)
     {
         try {
-            $sql = "SELECT investment.id, investment.investorId, investment.gigId, investment.amount, DATE(investment.timestamp) as investedDate, gig.title, gig.image, gig.category, gig.timePeriod, gig.location FROM investment INNER JOIN gig ON investment.gigId = gig.gigId WHERE investorId = :id ORDER BY timestamp DESC";
+            $sql = "SELECT * FROM investor_gig INNER JOIN gig ON investor_gig.gigId = gig.gigId WHERE investorId = :id ORDER BY timestamp DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -20,7 +20,7 @@ class Investment extends Model
     public function add($data)
     {
         try {
-            $sql = "INSERT INTO investment (id, investorId, gigId, amount) VALUES (:id, :investorId, :gigId, :amount)";
+            $sql = "INSERT INTO investor_gig (investorId, gigId) VALUES (:investorId, :gigId)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
             return true;

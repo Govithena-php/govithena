@@ -54,6 +54,50 @@
                             require_once(COMPONENTS . "dashboard/noDataFound.php");
                         } else {
                         ?>
+                            <div class="[ filters ]">
+                                <div class="[ options ]">
+                                    <div class="[ input__control ]">
+                                        <label for="from">From :</label>
+                                        <input id="from" type="date">
+                                    </div>
+                                    <div class="[ input__control ]">
+                                        <label for="to">To :</label>
+                                        <input id="to" type="date">
+                                    </div>
+                                    <div class="[ input__control ]">
+                                        <label for="location">Location :</label>
+                                        <select id="location">
+                                            <option value="all">All</option>
+                                            <option value="colombo">Colombo</option>
+                                            <option value="galle">Galle</option>
+                                            <option value="kandy">Kandy</option>
+                                            <option value="matara">Matara</option>
+                                            <option value="nuwaraeliya">Nuwara Eliya</option>
+                                            <option value="trincomalee">Trincomalee</option>
+                                        </select>
+                                    </div>
+                                    <div class="[ input__control ]">
+                                        <label for="category">Category :</label>
+                                        <select id="category">
+                                            <option value="all">All</option>
+                                            <option value="vegetable">Vegetable</option>
+                                            <option value="fruit">Fruit</option>
+                                            <option value="grains">Grains</option>
+                                            <option value="spices">Spices</option>
+                                        </select>
+                                    </div>
+                                    <div class="[ input__control ]">
+                                        <button type="button">Apply</button>
+                                    </div>
+
+                                </div>
+                                <div class="[ search ]">
+                                    <input type="text" placeholder="Search">
+                                    <button type="button">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
                             <div class="[ requests__wrapper ]">
                                 <div class="[ grid__table ]" style="
                                         --xl-cols:  1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.7fr;
@@ -172,6 +216,50 @@
                             require(COMPONENTS . "dashboard/noDataFound.php");
                         } else {
                         ?>
+                            <div class="[ filters ]">
+                                <div class="[ options ]">
+                                    <div class="[ input__control ]">
+                                        <label for="from">From :</label>
+                                        <input id="from" type="date">
+                                    </div>
+                                    <div class="[ input__control ]">
+                                        <label for="to">To :</label>
+                                        <input id="to" type="date">
+                                    </div>
+                                    <div class="[ input__control ]">
+                                        <label for="location">Location :</label>
+                                        <select id="location">
+                                            <option value="all">All</option>
+                                            <option value="colombo">Colombo</option>
+                                            <option value="galle">Galle</option>
+                                            <option value="kandy">Kandy</option>
+                                            <option value="matara">Matara</option>
+                                            <option value="nuwaraeliya">Nuwara Eliya</option>
+                                            <option value="trincomalee">Trincomalee</option>
+                                        </select>
+                                    </div>
+                                    <div class="[ input__control ]">
+                                        <label for="category">Category :</label>
+                                        <select id="category">
+                                            <option value="all">All</option>
+                                            <option value="vegetable">Vegetable</option>
+                                            <option value="fruit">Fruit</option>
+                                            <option value="grains">Grains</option>
+                                            <option value="spices">Spices</option>
+                                        </select>
+                                    </div>
+                                    <div class="[ input__control ]">
+                                        <button type="button">Apply</button>
+                                    </div>
+
+                                </div>
+                                <div class="[ search ]">
+                                    <input type="text" placeholder="Search">
+                                    <button type="button">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
                             <div class="[ requests__wrapper ]">
                                 <div class="[ grid__table ]" style="
                                         --xl-cols:  1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.7fr;
@@ -291,6 +379,50 @@
                             require(COMPONENTS . "dashboard/noDataFound.php");
                         } else {
                         ?>
+                            <div class="[ filters ]">
+                                <div class="[ options ]">
+                                    <div class="[ input__control ]">
+                                        <label for="from">From :</label>
+                                        <input id="from" type="date">
+                                    </div>
+                                    <div class="[ input__control ]">
+                                        <label for="to">To :</label>
+                                        <input id="to" type="date">
+                                    </div>
+                                    <div class="[ input__control ]">
+                                        <label for="location">Location :</label>
+                                        <select id="location">
+                                            <option value="all">All</option>
+                                            <option value="colombo">Colombo</option>
+                                            <option value="galle">Galle</option>
+                                            <option value="kandy">Kandy</option>
+                                            <option value="matara">Matara</option>
+                                            <option value="nuwaraeliya">Nuwara Eliya</option>
+                                            <option value="trincomalee">Trincomalee</option>
+                                        </select>
+                                    </div>
+                                    <div class="[ input__control ]">
+                                        <label for="category">Category :</label>
+                                        <select id="category">
+                                            <option value="all">All</option>
+                                            <option value="vegetable">Vegetable</option>
+                                            <option value="fruit">Fruit</option>
+                                            <option value="grains">Grains</option>
+                                            <option value="spices">Spices</option>
+                                        </select>
+                                    </div>
+                                    <div class="[ input__control ]">
+                                        <button type="button">Apply</button>
+                                    </div>
+
+                                </div>
+                                <div class="[ search ]">
+                                    <input type="text" placeholder="Search">
+                                    <button type="button">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
                             <div class="[ requests__wrapper ]">
                                 <div class="[ grid__table ]" style="
                                         --xl-cols:  1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.7fr;

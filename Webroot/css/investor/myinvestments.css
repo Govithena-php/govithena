@@ -1,21 +1,134 @@
-body{
+/* body{
     background-color:var(--clr-gray, #fff);
+} */
+
+.caption {
+    /* width: 60%; */
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    margin-inline: 0;
 }
+
+.caption h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.caption p {
+    width: 60%;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--clr-text-gray, #535353);
+    margin-bottom: 0.5rem;
+}
+
+.tag {
+    width: fit-content;
+    display: block;
+    padding: 0.2rem 0.5rem;
+    background-color: var(--clr-gray, #a2a2a2);
+    border-radius: 1rem;
+    color: var(--clr-primary, #1d1d1d);
+}
+
+.item__card {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 1rem;
+}
+
+.item__card a {
+    text-decoration: none;
+    color: var(--clr-dark, #000);
+    margin-block: auto;
+}
+
+.item__card>.img {
+    overflow: hidden;
+}
+
+.item__card>.img>img {
+    border-radius: 0.5rem;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.item__card>.content a>h2 {
+    font-weight: 600;
+}
+
+.item__card>.content p {
+    font-weight: 500;
+}
+
+.item__card>.content small {
+    color: var(--clr-text-gray);
+    font-weight: 400;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+}
+
+.actions>button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.actions>button>i {
+    font-size: 1.3rem;
+    rotate: 0deg;
+    transition: all 0.2s ease-in-out;
+}
+
+.actions>button>i[show] {
+    rotate: 180deg;
+}
+
+.actions>button:hover>i {
+    color: var(--clr-primary, #1d1d1d);
+}
+
+
+.expand>.data {
+    padding: 1rem;
+}
+
+.expand>.data>h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.expand>.data>p {
+    width: 80%;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+}
+
 
 .investments {
     min-height: 100dvh;
 }
 
 .investments__heading {
-    margin-top: 1rem;
-    margin-bottom: 3rem;
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
     width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ccc;
 }
 
-investments__search {
+.investments__search {
     display: flex;
 }
 
@@ -28,7 +141,7 @@ investments__search {
 .investments__search input {
     padding: 0.5rem 1rem;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 5px 0 0 5px;
 }
 
 .investments__search input:focus {
@@ -37,8 +150,8 @@ investments__search {
 
 .investments__search button {
     padding: 0.5rem 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: 1px solid var(--clr-primary);
+    border-radius: 0 5px 5px 0;
     background-color: var(--clr-primary);
     color: var(--clr-light);
     cursor: pointer;
@@ -48,16 +161,46 @@ investments__search {
     outline: none;
 }
 
-.investments__add a {
-    padding: 0.5rem 1rem;
+.investments__add {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.input__control {
+    display: flex;
+    flex-direction: column;
+}
+
+.input__control label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.input__control input[type="date"] {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input__control select {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input__control button {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.75rem;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: var(--clr-primary);
     color: var(--clr-light);
     cursor: pointer;
-    text-decoration: none;
 }
-
 
 .investment__container {
     margin-top: 2rem;
