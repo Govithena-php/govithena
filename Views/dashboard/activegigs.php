@@ -279,7 +279,7 @@
                                                 </div>
                                                 <div class="[ data ]">
                                                     <div class="[ actions ]">
-                                                        <a href="<?php echo URLROOT ?>/prograss/<?php echo $gig['gigId'] ?>" class="btn btn-primary">View More</a>
+                                                        <a href="<?php echo URLROOT ?>/dashboard/progress/<?php echo $gig['gigId'] ?>" class="btn btn-primary">View More</a>
                                                     </div>
                                                 </div>
                                             </div>
