@@ -4,6 +4,9 @@ class dashboardController extends Controller
 {
     private $currentUser;
     private $investorGigModel;
+    private $gigModal;
+    private $userModal;
+    private $fieldVisitModel;
 
     public function __construct()
     {
@@ -18,21 +21,14 @@ class dashboardController extends Controller
         }
 
         $this->investorGigModel = $this->model('investorGig');
+        $this->gigModal = $this->model('gig');
+        $this->userModal = $this->model('user');
+        $this->fieldVisitModel = $this->model('fieldVisit');
     }
 
     public function index()
     {
         $this->render('index');
-    }
-
-    public function myfarmers()
-    {
-        $this->render('myfarmers');
-    }
-
-    public function withdraw()
-    {
-        $this->render('withdraw');
     }
 
     public function gigs()
@@ -41,6 +37,47 @@ class dashboardController extends Controller
         $gigs = $investorGig->fetchAllByInvestor($this->currentUser->getUid());
         $this->set(['gigs' => $gigs]);
         $this->render('gigs');
+    }
+
+    public function progress($params)
+    {
+        $props = [];
+        if (!isset($params[0]) || empty($params[0])) {
+            $this->redirect('/error/dontHaveAccess/1');
+        }
+        $gigId = $params[0];
+
+        $props['gig'] = $gig = $this->gigModal->fetchBy($gigId);
+        if (!$props['gig']) {
+            $this->redirect('/error/dontHaveAccess/2');
+        }
+
+        $props['farmer'] = $this->userModal->fetchBy($gig['farmerId']);
+        if (!$props['farmer']) {
+            $this->redirect('/error/dontHaveAccess/3');
+        }
+
+        $fieldVisits = $this->fieldVisitModel->fetchAllByGig($gigId);
+        if ($fieldVisits['success']) {
+            $props['fieldVisits'] = $fieldVisits['data'];
+        }
+
+        // accpted data
+        // gig
+        // farmer
+        // progress
+        // investment
+        // expreses
+        // profit
+        // agrologist reports
+        // messsages
+
+
+
+
+
+        $this->set($props);
+        $this->render('progress');
     }
 
     public function myinvestments()
@@ -57,6 +94,12 @@ class dashboardController extends Controller
         }
         $this->render('myinvestments');
     }
+
+    public function withdraw()
+    {
+        $this->render('withdraw');
+    }
+
 
     public function myrequests()
     {

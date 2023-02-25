@@ -72,4 +72,18 @@ class Gig extends Model
             return false;
         }
     }
+
+    public function fetchBy($gigId){
+        try {
+            $sql = "SELECT * FROM gig WHERE gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId]);
+            $gig = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $gig;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+        }
+    }
 }
