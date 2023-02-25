@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/tabs.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/gridTable.css">
-    <link rel="stylesheet" href="<?php echo CSS ?>/investor/activeGigs.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/investor/gigs.css">
 
     <title>Dashboard | Investor</title>
 </head>

@@ -35,12 +35,12 @@ class dashboardController extends Controller
         $this->render('withdraw');
     }
 
-    public function activegigs()
+    public function gigs()
     {
         $investorGig = new $this->investorGigModel();
         $gigs = $investorGig->fetchAllByInvestor($this->currentUser->getUid());
         $this->set(['gigs' => $gigs]);
-        $this->render('activegigs');
+        $this->render('gigs');
     }
 
     public function myinvestments()
