@@ -3,6 +3,7 @@
 class dashboardController extends Controller
 {
     private $currentUser;
+    private $investorGigModel;
 
     public function __construct()
     {
@@ -15,6 +16,8 @@ class dashboardController extends Controller
         if (!$this->currentUser->hasAccess(ACTOR::INVESTOR)) {
             $this->redirect('/error/dontHaveAccess');
         }
+
+        $this->investorGigModel = $this->model('investorGig');
     }
 
     public function index()
@@ -34,6 +37,9 @@ class dashboardController extends Controller
 
     public function activegigs()
     {
+        $investorGig = new $this->investorGigModel();
+        $gigs = $investorGig->fetchAllByInvestor($this->currentUser->getUid());
+        $this->set(['gigs' => $gigs]);
         $this->render('activegigs');
     }
 

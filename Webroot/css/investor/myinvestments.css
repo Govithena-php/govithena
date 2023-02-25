@@ -230,3 +230,41 @@
 .investment:nth-child(odd) {
     background-color: #dcdcdc;
 }
+
+
+@media screen and (max-width: 1200px) {
+    .caption p {
+        width: 65%;
+    }
+
+}
+
+@media screen and (max-width: 1024px) {
+    .caption p {
+        width: 75%;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+    .caption {
+        text-align: center;
+    }
+
+    .caption p {
+        width: 80%;
+        margin-inline: auto;
+    }
+
+}
+
+@media screen and (max-width: 576px) {
+
+    .caption {
+        text-align: center;
+    }
+
+    .caption p {
+        width: 100%;
+    }
+}
