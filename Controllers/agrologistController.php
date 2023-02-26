@@ -22,9 +22,9 @@ class agrologistController extends Controller
         require(ROOT . 'Models/agrologist.php');
         $agrologist = new Agrologist();
         $notifications = $agrologist->getnotifications();
-        echo json_encode($notifications);
+        // echo json_encode($notifications);
         //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>". $notifications . "</h1>";
-
+        $this->set(['notifications' => $notifications]);
         $this->render('index');
     }
 
