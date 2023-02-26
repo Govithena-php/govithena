@@ -136,4 +136,21 @@ class Agrologist extends Model
         }
     }
 
+
+    public function getnotifications(){
+        try {
+            $sql = "SELECT n.id, n.uid, n.title, n.message, n.link, n.saved_time, n.published_time FROM notification n WHERE n.uid = :uid ORDER BY n.saved_time DESC";
+            $stmt =  Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'uid' => Session::get('user')->getUid()
+            ]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+        }
+    }
+
 }
