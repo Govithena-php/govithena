@@ -31,6 +31,56 @@ class Agrologist extends Model
         }
     }
 
+    function declineRequest($requestId)
+    {
+        try {
+            $sql = "UPDATE agrologist_request SET status = 'Declined' WHERE requestId = :requestId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['requestId' => $requestId]);
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+        }
+    }
+
+    function declineNotificationFarmer($uid)
+    {
+        try {
+            $sql = "INSERT INTO notification(notified_to, notified_by, title, message, link, published_time) VALUES(:notified_to, :notified_by, :title, :message, :link, :published_time)";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'notified_to' => $uid,
+                'notified_by' => Session::get('user')->getUid(),
+                'title' => 'HI',
+                'message' => 'Hi',
+                'link' => 'agrologist/farmerRequest',
+                'published_time' => date('Y-m-d H:i:s')
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+        }
+    }
+
+    function getFarmerId($requestId)
+    {
+        try {
+            $sql = "SELECT farmerId FROM agrologist_request WHERE requestId = :requestId";
+            $stmt =  Database::getBdd()->prepare($sql);
+            $stmt->execute(['requestId' => $requestId]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+        }
+    }
+
     function getAgrologistDetails()
     {
         try {
@@ -139,10 +189,10 @@ class Agrologist extends Model
 
     public function getnotifications(){
         try {
-            $sql = "SELECT n.id, n.uid, n.title, n.message, n.link, n.saved_time, n.published_time FROM notification n WHERE n.uid = :uid ORDER BY n.saved_time DESC";
+            $sql = "SELECT n.id, n.notified_to, n.title, n.message, n.link, n.saved_time, n.published_time FROM notification n WHERE n.notified_to = :notified_to ORDER BY n.saved_time DESC";
             $stmt =  Database::getBdd()->prepare($sql);
             $stmt->execute([
-                'uid' => Session::get('user')->getUid()
+                'notified_to' => Session::get('user')->getUid()
             ]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $req;
