@@ -25,3 +25,15 @@ const toggleProfileMenu = () => {
         profileMenu.setAttribute('open', "true")
     }
 }
+
+const toggleNotificationMenu = () => {
+    const notificationMenu = document.getElementById('notification_menu')
+    let menu = notificationMenu.getAttribute('open')
+    console.log(menu);
+    if (menu === "true") {
+        notificationMenu.setAttribute('open', "false")
+    } else {
+        notificationMenu.setAttribute('open', "true")
+    }
+}
+
