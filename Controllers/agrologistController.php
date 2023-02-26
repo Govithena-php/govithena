@@ -15,6 +15,7 @@ class agrologistController extends Controller
         if (!$this->currentUser->hasAccess(ACTOR::AGROLOGIST)) {
             $this->redirect('/error/dontHaveAccess');
         }
+        
     }
 
     public function index()
@@ -112,7 +113,18 @@ class agrologistController extends Controller
                     //echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>" . $_POST['accept'] . "</h1>";
                     $agr->acceptRequest($_POST['accept']);
                     //$this->redirect("/agrologist/farmers");
-                } else {
+                } 
+                elseif (isset($_POST['decline'])) {
+                    //var_dump($_POST['accept']);
+                    //echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>" . $_POST['accept'] . "</h1>";
+                    $agr->declineRequest($_POST['decline']);
+                    $farmerId = $agr->getFarmerId($_POST['decline']);
+                    // echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $farmerId[0] . "</h1>";
+                    echo json_encode($farmerId[0]['farmerId']);
+                    $agr->declineNotificationFarmer($farmerId[0]['farmerId']);
+                    //$this->redirect("/agrologist/farmers");
+                }
+                else {
                     echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>nope</h1>";
 
                 }
