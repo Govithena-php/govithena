@@ -17,6 +17,7 @@
 
 <body class="bg-gray">
     <?php
+    $datadata = $notifications;
     $active = "dashboard";
     require_once("navigator.php");
     ?>
@@ -32,7 +33,7 @@
                 </h1>
                 <!-- <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p> -->
             </div>
-            <button onclick="sendData()">Send Data</button>
+            <!-- <button onclick="sendData()">Send Data</button> -->
             <div class="[ flex-col center-x ][ balance ]">
                 <h3>Balance</h3>
                 <div class="[ amount ]">
@@ -328,23 +329,24 @@
 
 
     <script src="<?php echo JS ?>/app.js"></script>
+    <script>
+        //function sendData() {
+        // Define the data to be sent
+        const datadata = { name: 'John', age: 30 };
+
+        // Send a POST request to the second PHP page
+        fetch("<?php echo URLROOT . '/agrologist/' ?>", {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(datadata)
+        })
+            .then((response) => response.json())
+            .then((datadata) => console.log(datadata));
+    //}
+    </script>
 
 </body>
 
-<script>
-//function sendData() {
-  // Define the data to be sent
-  const data = {name: 'John', age: 30};
 
-  // Send a POST request to the second PHP page
-  fetch('navigator.php', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(data)
-  })
-  .then((response) => response.json())
-  .then((data) => console.log(data));
-//}
-</script>
 
 </html>
