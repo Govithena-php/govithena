@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/table.css">
-    <link rel="stylesheet" href="../Webroot/css/ui.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/investor/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
@@ -32,6 +32,7 @@
                 </h1>
                 <!-- <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p> -->
             </div>
+            <button onclick="sendData()">Send Data</button>
             <div class="[ flex-col center-x ][ balance ]">
                 <h3>Balance</h3>
                 <div class="[ amount ]">
@@ -329,5 +330,21 @@
     <script src="<?php echo JS ?>/app.js"></script>
 
 </body>
+
+<script>
+//function sendData() {
+  // Define the data to be sent
+  const data = {name: 'John', age: 30};
+
+  // Send a POST request to the second PHP page
+  fetch('navigator.php', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(data)
+  })
+  .then((response) => response.json())
+  .then((data) => console.log(data));
+//}
+</script>
 
 </html>

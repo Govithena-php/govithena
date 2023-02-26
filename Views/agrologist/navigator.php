@@ -1,8 +1,18 @@
 <?php
 
 $currentUser = Session::get('user');
+$d = json_decode(file_get_contents('php://input'), true);
 
+if (empty(file_get_contents('php://input'))) {
+    echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>". 'no data found' . "</h1>";
+}
+$name = $d['name'];
+$n = $_POST['data'];
+$age = $d['age'];
+$greeting = "Hello, $n! You are $age years old.";
+//echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>". $name . "</h1>";
 
+//echo "<h1 style='color: white'>$name</h1>";
 
 function highlight($active, $link)
 {
@@ -29,7 +39,7 @@ function highlight($active, $link)
                 <p>Govithena</p>
             </a>
         </div>
-
+       // <?php echo "<h1 style='color: white'>$name</h1>"; ?>
         <div class="[ open__btn ]">
             <button onclick="toggleSidebar()">
                 <i class="fa-solid fa-bars"></i>
@@ -38,9 +48,11 @@ function highlight($active, $link)
 
         <?php
         if (isset($title)) {
-        ?>
-            <p class="[ page__title ]"><?php echo $title; ?></p>
-        <?php
+            ?>
+            <p class="[ page__title ]">
+                <?php echo $title; ?>
+            </p>
+            <?php
         }
         ?>
 
@@ -48,14 +60,16 @@ function highlight($active, $link)
             <?php if (isset($currentUser)) { ?>
                 <div class="[ buttons ]">
                     <div class="[ notification ]">
-                        <button>
+                        <button onclick="toggleNotificationMenu()">
                             <i class="[ fa-solid fa-bell ]"></i>
                             <?php
                             $notificationCount = 4;
                             if (isset($notificationCount)) {
-                            ?>
-                                <span><?php echo $notificationCount ?></span>
-                            <?php
+                                ?>
+                                <span>
+                                    <?php echo $notificationCount ?>
+                                </span>
+                                <?php
                             }
                             ?>
                         </button>
@@ -70,10 +84,42 @@ function highlight($active, $link)
                     </button>
                 </div>
 
+
+                <div id="notification_menu" open="false" class="[ menu ]">
+                    <div class="[ profile__name ]">
+                        <h3>
+                            <?php echo "<h1>$greeting</h1>"; ?>
+                        </h3>
+                        <small>
+                            <!-- <?php echo $currentUser->getType() ?> -->
+                        </small>
+                    </div>
+                    <!-- <ul>
+                        <li><a onclick="toggleNotificationMenu()" href="<?php echo URLROOT ?>/dashboard/">
+                                <i class="[ fa-solid fa-gauge ]"></i>Dashboard
+                            </a></li>
+                        <li><a onclick="toggleNotificationMenu()" href="<?php echo URLROOT ?>/profile">
+                                <i class="[ fa-solid fa-user-tie ]"></i>Profile</a></li>
+                        <li><a onclick="toggleNotificationMenu()" href="<?php echo URLROOT ?>/signout">
+                                <i class="[ fa-solid fa-gear ]"></i>Settings</a>
+                        </li>
+                    </ul> -->
+                    <!-- <a onclick="toggleNotificationMenu()" href="<?php echo URLROOT ?>/auth/signout">
+                        <i class="fa-solid fa-right-from-bracket"></i>Sign Out</a> -->
+                </div>
+
+
+
+
+
                 <div id="profile_menu" open="false" class="[ menu ]">
                     <div class="[ profile__name ]">
-                        <h3><?php echo $currentUser->getFirstName() ?></h3>
-                        <small><?php echo $currentUser->getType() ?></small>
+                        <h3>
+                            <?php echo $currentUser->getFirstName() ?>
+                        </h3>
+                        <small>
+                            <?php echo $currentUser->getType() ?>
+                        </small>
                     </div>
                     <ul>
                         <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/">
@@ -126,7 +172,8 @@ function highlight($active, $link)
                 </a>
             </li>
             <li>
-                <a href="<?php echo URLROOT . "/agrologist/requests" ?>" class="<?php highlight($active, "requests") ?>">
+                <a href="<?php echo URLROOT . "/agrologist/requests" ?>"
+                    class="<?php highlight($active, "requests") ?>">
                     <i class="[ fa-solid fa-tractor ]"></i>
                     <p>Requests</p>
                 </a>
@@ -141,7 +188,8 @@ function highlight($active, $link)
         <div class="[ grow ]"></div>
         <ul>
             <li>
-                <a href="<?php echo URLROOT . "/agrologist/myaccount" ?>" class="<?php highlight($active, "myaccount") ?>">
+                <a href="<?php echo URLROOT . "/agrologist/myaccount" ?>"
+                    class="<?php highlight($active, "myaccount") ?>">
                     <i class="[ fa-solid fa-user-tie ]"></i>
                     <p>My Account</p>
                 </a>
