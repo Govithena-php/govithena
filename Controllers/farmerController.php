@@ -86,6 +86,7 @@ class farmerController extends Controller
     function index()
     {
         require(ROOT . 'Models/gig.php');
+        //require(ROOT . 'Models/farmer.php');
 
         $gig = new Gig();
         $id = Session::get('user')->getUid();
@@ -95,6 +96,15 @@ class farmerController extends Controller
 
         $d['products'] = $products;
         $this->set($d);
+
+        
+        // $farmer = new Farmer();
+        $notifications = $this->farmerModel->getnotifications();
+        //echo json_encode($notifications);
+        $this->set(['notifications' => $notifications]);
+
+
+
         $this->render("index");
     }
 

@@ -134,4 +134,20 @@ class Farmer extends Model
             return ['status' => false, 'data' => $e->getMessage()];
         }
     }
+
+    public function getnotifications(){
+        try {
+            $sql = "SELECT n.id, n.notified_to, n.title, n.message, n.link, n.saved_time, n.published_time FROM notification n WHERE n.notified_to = :notified_to ORDER BY n.saved_time DESC";
+            $stmt =  Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'notified_to' => Session::get('user')->getUid()
+            ]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+        }
+    }
 }
