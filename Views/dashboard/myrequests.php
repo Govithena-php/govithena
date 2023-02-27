@@ -51,7 +51,7 @@
                         </div>
                         <?php
                         if (empty($ar)) {
-                            require_once(COMPONENTS . "dashboard/noDataFound.php");
+                            require(COMPONENTS . "dashboard/noDataFound.php");
                         } else {
                         ?>
                             <div class="[ filters ]">
