@@ -36,9 +36,11 @@ function highlight($active, $link)
 
         <?php
         if (isset($title)) {
-        ?>
-            <p class="[ page__title ]"><?php echo $title; ?></p>
-        <?php
+            ?>
+            <p class="[ page__title ]">
+                <?php echo $title; ?>
+            </p>
+            <?php
         }
         ?>
 
@@ -46,14 +48,16 @@ function highlight($active, $link)
             <?php if (isset($currentUser)) { ?>
                 <div class="[ buttons ]">
                     <div class="[ notification ]">
-                        <button>
+                        <button onclick="toggleNotificationMenu()">
                             <i class="[ fa-solid fa-bell ]"></i>
                             <?php
                             $notificationCount = 4;
                             if (isset($notificationCount)) {
-                            ?>
-                                <span><?php echo $notificationCount ?></span>
-                            <?php
+                                ?>
+                                <span>
+                                    <?php echo $notificationCount ?>
+                                </span>
+                                <?php
                             }
                             ?>
                         </button>
@@ -68,10 +72,49 @@ function highlight($active, $link)
                     </button>
                 </div>
 
+
+                <div id="notification_menu" open="false" class="menu notification_menu ">
+                    <div class="[ notification_message ]">
+                        <?php
+                        foreach ($notifications as $notification) {
+                            ?>
+                            <a>
+                                <?php echo $notification['message']; ?>
+
+                            </a>
+                            <hr>
+                            <?php
+                        }
+                        ?>
+                        <!-- <small>
+                                <?php echo $currentUser->getType() ?>
+                            </small> -->
+                    </div>
+                    <!-- <ul>
+                            <li><a onclick="toggleNotificationMenu()" href="<?php echo URLROOT ?>/dashboard/">
+                                    <i class="[ fa-solid fa-gauge ]"></i>Dashboard
+                                </a></li>
+                            <li><a onclick="toggleNotificationMenu()" href="<?php echo URLROOT ?>/profile">
+                                    <i class="[ fa-solid fa-user-tie ]"></i>Profile</a></li>
+                            <li><a onclick="toggleNotificationMenu()" href="<?php echo URLROOT ?>/signout">
+                                    <i class="[ fa-solid fa-gear ]"></i>Settings</a>
+                            </li>
+                        </ul> -->
+                    <!-- <a onclick="toggleNotificationMenu()" href="<?php echo URLROOT ?>/auth/signout">
+                            <i class="fa-solid fa-right-from-bracket"></i>Sign Out</a> -->
+                </div>
+
+
+
+
                 <div id="profile_menu" open="false" class="[ menu ]">
                     <div class="[ profile__name ]">
-                        <h3><?php echo $currentUser->getFirstName() ?></h3>
-                        <small><?php echo $currentUser->getType() ?></small>
+                        <h3>
+                            <?php echo $currentUser->getFirstName() ?>
+                        </h3>
+                        <small>
+                            <?php echo $currentUser->getType() ?>
+                        </small>
                     </div>
                     <ul>
                         <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/">
@@ -137,7 +180,8 @@ function highlight($active, $link)
             </li>
 
             <li>
-                <a href="<?php echo URLROOT ?>/farmer/techassistantfirst" class="<?php highlight($active, "techassistantfirst") ?>">
+                <a href="<?php echo URLROOT ?>/farmer/techassistantfirst"
+                    class="<?php highlight($active, "techassistantfirst") ?>">
                     <i class="[ fa-solid fa-tractor ]"></i>
                     <p>Tech Assistants</p>
                 </a>

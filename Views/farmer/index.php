@@ -21,6 +21,7 @@
 <body class="bg-gray h-screen">
 
     <?php
+    $datadata = $notifications;
     $active = "gigs";
     $title = "Gigs";
     require_once("navigator.php");

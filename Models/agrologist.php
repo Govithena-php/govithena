@@ -53,8 +53,8 @@ class Agrologist extends Model
             $stmt->execute([
                 'notified_to' => $uid,
                 'notified_by' => Session::get('user')->getUid(),
-                'title' => 'HI',
-                'message' => 'Hi',
+                'title' => 'Decline Farmer Request',
+                'message' => 'Decline Farmer Request',
                 'link' => 'agrologist/farmerRequest',
                 'published_time' => date('Y-m-d H:i:s')
             ]);
