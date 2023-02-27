@@ -42,7 +42,7 @@ class gigController extends Controller
 
             require(ROOT . 'Models/user.php');
             $f = new User();
-            $farmer = $f->viewFarmer($farmerId);
+            $farmer = $f->fetchBy($farmerId);
 
             if (isset($farmer)) {
                 $props['farmer'] = $farmer;
