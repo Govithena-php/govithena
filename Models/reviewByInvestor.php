@@ -35,4 +35,24 @@ class ReviewByInvestor extends Model
             return ['success' => false, 'data' => $e->getMessage()];
         }
     }
+
+    public function fetchAllByFarmer($farmerId)
+    {
+        try {
+            $sql = "SELECT rbi.q1, rbi.q2, rbi.q3, rbi.q4, rbi.q5, rbi.q6, rbi.q7, rbi.q8, rbi.q9, rbi.timestamp, user.firstName, user.lastName, user.image FROM review_by_investor as rbi INNER JOIN user ON rbi.investorId = user.uid WHERE rbi.farmerId = :farmerId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['farmerId' => $farmerId]);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            if ($result) {
+                return ['success' => true, 'data' => $result];
+            } else {
+                return ['success' => false, 'data' => 'no review found'];
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
 }

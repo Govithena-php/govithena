@@ -199,6 +199,7 @@ nav {
 }
 
 .review__header {
+    text-transform: capitalize;
     display: flex;
     gap: 1rem;
     margin-bottom: 1rem;
@@ -277,6 +278,23 @@ small {
     text-transform: capitalize;
     opacity: 0.8;
     backdrop-filter: blur(10px);
+}
+
+.fa-star {
+    color: gray;
+    margin-inline: 0.25rem;
+}
+
+.glow {
+    color: yellow;
+}
+
+.review__footer {
+    padding-top: 1rem;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
 }
 
 

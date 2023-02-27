@@ -5,12 +5,15 @@ class profileController extends Controller
     private $currentUser;
     private $userModel;
     private $gigModel;
+    private $reviewByInvestorModel;
 
     public function __construct()
     {
         $this->currentUser = Session::get('user');
         $this->userModel = $this->model('user');
         $this->gigModel = $this->model('gig');
+        $this->reviewByInvestorModel = $this->model('reviewByInvestor');
+
 
         if (!Session::isLoggedIn()) {
             $this->redirect('/auth/signin');
@@ -34,6 +37,39 @@ class profileController extends Controller
                 } else {
                     $props['gigs'] = [];
                 }
+
+
+                $reviews = $this->reviewByInvestorModel->fetchAllByFarmer($uid);
+
+                if ($reviews['success']) {
+                    $props['noOfReviews'] = count($reviews['data']);
+                    $props['reviews'] = $reviews['data'];
+
+                    $stars = [
+                        '1' => 0,
+                        '2' => 0,
+                        '3' => 0,
+                        '4' => 0,
+                        '5' => 0
+                    ];
+                    $farmerAvgStars = 0;
+                    $count = 0;
+
+                    foreach ($reviews['data'] as $review) {
+                        $farmerAvgStars += $review['q2'];
+                        $count++;
+                        $stars[$review['q2']]++;
+                    }
+
+                    foreach ($stars as $key => $value) {
+                        $stars[$key] = ($value / $count) * 100;
+                    }
+
+                    $props['stars'] = $stars;
+
+                    $props['farmerAvgStars'] = floatval($farmerAvgStars / $count);
+                }
+
 
                 $this->set($props);
                 $this->render('index');

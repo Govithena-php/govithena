@@ -1,5 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+
+function render_stars($stars, $outof)
+{
+    for ($i = 1; $i <= $outof; $i++) {
+        if ($i <= $stars) {
+            echo '<i class="fas fa-star glow"></i>';
+        } else {
+            echo '<i class="fas fa-star"></i>';
+        }
+    }
+}
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -15,8 +28,6 @@
 
 <body>
     <?php require_once(COMPONENTS . "navbar.php");
-    var_dump($user);
-    // die();
     ?>
     <div class="[ container ][ heading ]" container-type="section">
 
@@ -159,36 +170,32 @@
     <div class="[ container ]" type="section">
         <div class="[ rating__grid ]">
             <div class="[ rating__number ]">
-                <h1>0.0</h1>
+                <h1><?php echo $farmerAvgStars ?></h1>
                 <div class="[ stars ]">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
+                    <?php render_stars($farmerAvgStars, 5); ?>
                 </div>
-                <p>0 reviews</p>
+                <p><?php echo $noOfReviews ?> reviews</p>
             </div>
             <div class="[ rating__bars ]">
                 <div class="[ bar ]">
                     <label for="5">5</label>
-                    <progress id="5" value="1" max="100"></progress>
+                    <progress id="5" value="<?php echo $stars['5'] ?>" max="100"></progress>
                 </div>
                 <div class="[ bar ]">
                     <label for="4">4</label>
-                    <progress id="4" value="1" max="100"></progress>
+                    <progress id="4" value="<?php echo $stars['4'] ?>" max="100"></progress>
                 </div>
                 <div class="[ bar ]">
                     <label for="3">3</label>
-                    <progress id="3" value="1" max="100"></progress>
+                    <progress id="3" value="<?php echo $stars['3'] ?>" max="100"></progress>
                 </div>
                 <div class="[ bar ]">
                     <label for="2">2</label>
-                    <progress id="2" value="1" max="100"></progress>
+                    <progress id="2" value="<?php echo $stars['2'] ?>" max="100"></progress>
                 </div>
                 <div class="[ bar ]">
                     <label for="1">1</label>
-                    <progress id="1" value="1" max="100"></progress>
+                    <progress id="1" value="<?php echo $stars['1'] ?>" max="100"></progress>
                 </div>
             </div>
         </div>
@@ -197,46 +204,34 @@
             <h1>Reviews</h1>
             <hr>
             <div class="[ reviews__wrapper ]">
-
-                <div class="[ review ]">
-                    <div class="[ review__header ]">
-                        <img src="https://xsgames.co/randomusers/avatar.php?g=male" alt="profile">
-                        <h3>Reviewer name</h3>
-                    </div>
-                    <p>
-                        Occaecat occaecat et laborum exercitation eiusmod minim. Adipisicing consequat minim nostrud aliqua eu eu laborum officia. Deserunt ex qui consectetur Lorem excepteur culpa cillum culpa aute commodo velit est ex ut.
-                    </p>
-                    <div class="[ review__footer ]">
-                        <p>12/12/2022</p>
-                        <div class="[ stars ]">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
+                <?php
+                if (!isset($reviews) && empty($reviews)) {
+                    require(COMPONENTS . "dashboard/noDataFound.php");
+                } else {
+                    foreach ($reviews as $review) {
+                ?>
+                        <div class="[ review ]">
+                            <div class="[ review__header ]">
+                                <img src="<?php echo UPLOADS . $review['image'] ?>" alt="profile">
+                                <h3><?php echo $review['firstName'] . " " . $review['lastName'] ?></h3>
+                            </div>
+                            <p><?php echo $review['q9'] ?></p>
+                            <div class="[ review__footer ]">
+                                <p><?php echo $review['timestamp'] ?></p>
+                                <div class="[ stars ]">
+                                    <?php render_stars($review['q1'], 5); ?>
+                                    <!-- <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i> -->
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="[ review ]">
-                    <div class="[ review__header ]">
-                        <img src="https://xsgames.co/randomusers/avatar.php?g=male" alt="profile">
-                        <h3>Reviewer name</h3>
-                    </div>
-                    <p>
-                        Occaecat occaecat et laborum exercitation eiusmod minim. Adipisicing consequat minim nostrud aliqua eu eu laborum officia. Deserunt ex qui consectetur Lorem excepteur culpa cillum culpa aute commodo velit est ex ut.
-                    </p>
-                    <div class="[ review__footer ]">
-                        <p>12/12/2022</p>
-                        <div class="[ stars ]">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                    </div>
-                </div>
-
+                <?php
+                    }
+                }
+                ?>
             </div>
         </div>
     </div>
