@@ -51,7 +51,81 @@
                         </p>
                     </div>
                 </div>
+                <div class="chat outgoing">
+                    <div class="details">
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.
+                        </p>
+                    </div>
+                </div>
+                <div class="chat incoming">
+                    <div class="details">
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.
+                        </p>
+                    </div>
+                </div>
+                <div class="chat outgoing">
+                    <div class="details">
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.
+                        </p>
+                    </div>
+                </div>
+                <div class="chat incoming">
+                    <div class="details">
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.
+                        </p>
+                    </div>
+                </div>
+                <div class="chat outgoing">
+                    <div class="details">
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.
+                        </p>
+                    </div>
+                </div>
+                <div class="chat incoming">
+                    <div class="details">
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.
+                        </p>
+                    </div>
+                </div>
+                <div class="chat outgoing">
+                    <div class="details">
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.
+                        </p>
+                    </div>
+                </div>
+                <div class="chat incoming">
+                    <div class="details">
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.
+                        </p>
+                    </div>
+                </div>
+                <div class="chat outgoing">
+                    <div class="details">
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.
+                        </p>
+                    </div>
+                </div>
+                <div class="chat incoming">
+                    <div class="details">
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.
+                        </p>
+                    </div>
+                </div>
             </div>
+            <form action="#" class="typing-area">  
+                <input type="text" placeholder="Type a message here...">
+                <button><i class="fab fa-telegram-plane"></i></button>
+            </form>
         </section>
         <?php require "footer.php"; ?>
         <script src="<?php echo JS ?>/app.js"></script>

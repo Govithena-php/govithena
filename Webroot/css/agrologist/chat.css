@@ -79,3 +79,35 @@
     color: #333;
     border-radius: 18px 18px 18px 0;
   }
+
+  .typing-area{
+    padding: 18px 30px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .typing-area input{
+    height: 45px;
+    width: calc(100% - 58px);
+    font-size: 16px;
+    padding: 0 13px;
+    border: 1px solid #e6e6e6;
+    outline: none;
+    border-radius: 5px 0 0 5px;
+  }
+  .typing-area button{
+    color: #fff;
+    width: 55px;
+    border: none;
+    outline: none;
+    background: #333;
+    font-size: 19px;
+    cursor: pointer;
+    opacity: 0.7;
+    pointer-events: none;
+    border-radius: 0 5px 5px 0;
+    transition: all 0.3s ease;
+  }
+  .typing-area button.active{
+    opacity: 1;
+    pointer-events: auto;
+  }
