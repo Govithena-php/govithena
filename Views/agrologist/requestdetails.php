@@ -17,6 +17,7 @@
 
 <body class="bg-gray h-screen">
     <?php
+    $datadata = $notifications;
     $active = "requests";
     require_once("navigator.php");
     ?>
