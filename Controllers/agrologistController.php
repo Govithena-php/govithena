@@ -263,5 +263,10 @@ class agrologistController extends Controller
         return $this->render('farmergigs');
     }
 
+    public function chat()
+    {
+        return $this->render('chat');
+    }
+
 
 }
