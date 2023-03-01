@@ -4,7 +4,10 @@ use function PHPSTORM_META\type;
 
 class checkoutController extends Controller
 {
-
+    private $investorGigModel;
+    private $investmentModel;
+    private $requestFarmerModel;
+    private $currentUser;
 
     private $header = [
         'merchant_id' => '1221583',
@@ -14,8 +17,8 @@ class checkoutController extends Controller
         'currency' => 'LKR',
 
     ];
-    private $payhere_secret = 'MjU5NTkxMzU4OTQwODAxODI4MTYxMzE1NDg2NDYxMTk3Mzg1Mzk4OA==';
 
+    private $payhere_secret = 'MjU5NTkxMzU4OTQwODAxODI4MTYxMzE1NDg2NDYxMTk3Mzg1Mzk4OA==';
 
     public function __construct()
     {
@@ -24,6 +27,11 @@ class checkoutController extends Controller
             $this->redirect('/signin');
         }
         $this->header['email'] = Session::get('username');
+
+        $this->currentUser = Session::get('user');
+        $this->investorGigModel = $this->model('investorGig');
+        $this->investmentModel = $this->model('investment');
+        $this->requestFarmerModel = $this->model('requestFarmer');
     }
 
     private function payhere($d)
@@ -41,7 +49,31 @@ class checkoutController extends Controller
         // $sig2 = strtoupper(md5($str));
         // $data['hash'] = $sig2;
         // echo phpversion();
+        if (isset($_POST['pay'])) {
+            $id = $_POST['pay'];
 
+            require(ROOT . 'Models/requestFarmer.php');
+            $req = new RequestFarmer();
+            $res = $req->getRequestById($id);
+
+            if (isset($res)) {
+
+                $data = [
+                    'first_name' => 'achini',
+                    'last_name' => 'c',
+                    'email' => Session::get('username'),
+                    'phone' => '0771234567',
+                    'address' => 'No.1, Galle Road',
+                    'city' => 'Colombo',
+                    'order_id' => '30',
+                    'items' => $res['title'],
+                    'currency' => 'LKR',
+                    'amount' => '2500',
+                    'country' => 'Sri Lanka',
+                ];
+                $this->payhere($data);
+            }
+        }
 
         $sig = '1221583';
         $sig .= '30';
@@ -72,36 +104,33 @@ class checkoutController extends Controller
 
         if (isset($_POST['pay'])) {
             $id = $_POST['pay'];
+            $request = new $this->requestFarmerModel();
+            $res = $request->getRequestById($id);
+            $investment = new $this->investmentModel();
+            $response = $investment->add([
+                'id' =>  new UID(PREFIX::INVESTMENT),
+                'investorId' => $this->currentUser->getUid(),
+                'gigId' => $res['gigId'],
+                'amount' => $res['capital']
+            ]);
 
-            require(ROOT . 'Models/requestFarmer.php');
-            $req = new RequestFarmer();
-            $res = $req->getRequestById($id);
+            $investorGig = new $this->investorGigModel();
+            $response = $investorGig->add([
+                'investorId' => $this->currentUser->getUid(),
+                'gigId' => $res['gigId'],
+                'farmerId' => $res['farmerId'],
+            ]);
 
-            if (isset($res)) {
+            $request->updateStatus($id, 'PAID');
 
-                $data = [
-                    'first_name' => 'achini',
-                    'last_name' => 'c',
-                    'email' => Session::get('username'),
-                    'phone' => '0771234567',
-                    'address' => 'No.1, Galle Road',
-                    'city' => 'Colombo',
-                    'order_id' => '30',
-                    'items' => $res['title'],
-                    'currency' => 'LKR',
-                    'amount' => '2500',
-                    'country' => 'Sri Lanka',
-                ];
-                $this->payhere($data);
-            }
+            $this->redirect('/dashboard');
         }
     }
 
     public function index($params)
     {
         list($id) = $params;
-        require(ROOT . 'Models/requestFarmer.php');
-        $req = new RequestFarmer();
+        $req = new $this->requestFarmerModel();
         $res = $req->getRequestById($id);
         if (isset($res)) {
             $this->set(['res' => $res]);

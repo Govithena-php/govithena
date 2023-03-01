@@ -2,15 +2,23 @@ nav {
     background-color: var(--clr-dark, #000);
 }
 
-.container[container-type="section"] {
-    margin-top: 5rem;
-}
+.container[container-type="section"] {}
 
 .title {
-    font-size: 0.9rem;
     padding-bottom: 0.5rem;
-    margin-bottom: 2rem;
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 1rem;
+}
+
+.title h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.title p {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--clr-text-gray);
 }
 
 .checkout {
@@ -25,9 +33,66 @@ nav {
     border: 1px solid #e5e5e5;
 }
 
+.checkout .details>h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
 .checkout .details>* {
     margin-bottom: 1rem;
 }
+
+.checkout .details .image {
+    border-radius: 0.5rem;
+}
+
+.checkout .details .image>img {
+    border-radius: 0.5rem;
+}
+
+.checkout .details .content h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.checkout .details .content p {
+    font-size: 0.9rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.checkout .details .content .grid p {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.checkout .details .content .grid p Small {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--clr-text-gray);
+}
+
+
+.farmer__details h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.farmer__details p {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.farmer__details p Small {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--clr-text-gray);
+}
+
 
 .checkout .details>.grid>.farmer__details>*,
 .checkout .details>.grid>.shipping__address>* {

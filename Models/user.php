@@ -4,7 +4,7 @@ class User extends Model
 {
 
 
-    function viewFarmer($id)
+    function fetchBy($id)
     {
         try {
             $sql = "SELECT * FROM user WHERE uid = :id";

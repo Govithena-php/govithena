@@ -8,6 +8,7 @@ class PREFIX
     const REQUEST = 'REQ';
     const RATING = 'RAT';
     const REVIEW = 'REV';
+    const INVESTMENT = 'INV';
 }
 
 class PRODUCT

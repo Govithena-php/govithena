@@ -5,6 +5,7 @@ class gigController extends Controller
     private $currentUser;
     private $gigModel;
     private $requestModel;
+    private $reviewByInvestorModel;
 
     public function __construct()
     {
@@ -12,6 +13,7 @@ class gigController extends Controller
 
         $this->gigModel = $this->model('gig');
         $this->requestModel = $this->model('requestFarmer');
+        $this->reviewByInvestorModel = $this->model('reviewByInvestor');
 
         if (!Session::isLoggedIn()) {
             $this->redirect('/auth/signin');
@@ -42,11 +44,43 @@ class gigController extends Controller
 
             require(ROOT . 'Models/user.php');
             $f = new User();
-            $farmer = $f->viewFarmer($farmerId);
+            $farmer = $f->fetchBy($farmerId);
 
             if (isset($farmer)) {
                 $props['farmer'] = $farmer;
             }
+
+
+            $reviews = $this->reviewByInvestorModel->fetchAllByGig($gigId);
+            if ($reviews['success']) {
+                $props['noOfReviews'] = count($reviews['data']);
+                $props['reviews'] = $reviews['data'];
+
+                $stars = [
+                    '1' => 0,
+                    '2' => 0,
+                    '3' => 0,
+                    '4' => 0,
+                    '5' => 0
+                ];
+                $gigTotalStars = 0;
+                $count = 0;
+
+                foreach ($reviews['data'] as $review) {
+                    $gigTotalStars += $review['q1'];
+                    $count++;
+                    $stars[$review['q1']]++;
+                }
+
+                foreach ($stars as $key => $value) {
+                    $stars[$key] = ($value / $count) * 100;
+                }
+
+                $props['stars'] = $stars;
+
+                $props['gigAvgStars'] = floatval($gigTotalStars / $count);
+            }
+
 
             $props['gig'] = $gig;
         } else {
