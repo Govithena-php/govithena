@@ -193,10 +193,10 @@ function render_stars($stars, $outof)
         }
         ?>
 
-        <div class="[ description ]">
+        <!-- <div class="[ description ]">
             <h1><?php echo $gig['title'] ?></h1>
             <p><?php echo $gig['description'] ?></p>
-        </div>
+        </div> -->
 
 
         <div class="[ reviews ]">
