@@ -149,42 +149,49 @@ function render_stars($stars, $outof)
             </div>
         </div>
 
-        <div class="[ rating__grid ]">
-            <div class="[ rating__number ]">
-                <h1><?php echo $gigAvgStars ?></h1>
-                <div class="[ stars ]">
-                    <?php render_stars($gigAvgStars, 5); ?>
-                    <!-- <i class="fa fa-star"></i>
+        <?php
+        if (isset($gigAvgStars) || isset($stars) || isset($noOfReviews)) {
+        ?>
+
+            <div class="[ rating__grid ]">
+                <div class="[ rating__number ]">
+                    <h1><?php echo $gigAvgStars ?></h1>
+                    <div class="[ stars ]">
+                        <?php render_stars($gigAvgStars, 5); ?>
+                        <!-- <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i> -->
+                    </div>
+                    <p><?php echo $noOfReviews ?> reviews</p>
                 </div>
-                <p><?php echo $noOfReviews ?> reviews</p>
+                <div class="[ rating__bars ]">
+                    <div class="[ bar ]">
+                        <label for="5">5</label>
+                        <progress id="5" value="<?php echo $stars['5'] ?>" max="100"></progress>
+                    </div>
+                    <div class="[ bar ]">
+                        <label for="4">4</label>
+                        <progress id="4" value="<?php echo $stars['4'] ?>" max="100"></progress>
+                    </div>
+                    <div class="[ bar ]">
+                        <label for="3">3</label>
+                        <progress id="3" value="<?php echo $stars['3'] ?>" max="100"></progress>
+                    </div>
+                    <div class="[ bar ]">
+                        <label for="2">2</label>
+                        <progress id="2" value="<?php echo $stars['2'] ?>" max="100"></progress>
+                    </div>
+                    <div class="[ bar ]">
+                        <label for="1">1</label>
+                        <progress id="1" value="<?php echo $stars['1'] ?>" max="100"></progress>
+                    </div>
+                </div>
             </div>
-            <div class="[ rating__bars ]">
-                <div class="[ bar ]">
-                    <label for="5">5</label>
-                    <progress id="5" value="<?php echo $stars['5'] ?>" max="100"></progress>
-                </div>
-                <div class="[ bar ]">
-                    <label for="4">4</label>
-                    <progress id="4" value="<?php echo $stars['4'] ?>" max="100"></progress>
-                </div>
-                <div class="[ bar ]">
-                    <label for="3">3</label>
-                    <progress id="3" value="<?php echo $stars['3'] ?>" max="100"></progress>
-                </div>
-                <div class="[ bar ]">
-                    <label for="2">2</label>
-                    <progress id="2" value="<?php echo $stars['2'] ?>" max="100"></progress>
-                </div>
-                <div class="[ bar ]">
-                    <label for="1">1</label>
-                    <progress id="1" value="<?php echo $stars['1'] ?>" max="100"></progress>
-                </div>
-            </div>
-        </div>
+        <?php
+        }
+        ?>
 
         <div class="[ description ]">
             <h1><?php echo $gig['title'] ?></h1>
