@@ -60,10 +60,11 @@
                                         </p>
 
                                     </div>
-                                    <!-- <div class="flex flex-row flex-c-c">
-                                        <button type="submit" value="<?php echo $request['requestId']?> "class="btn btn-primary mr-2 mt-2" name="accept">Accept</button>
-                                        <button class="btn btn-danger mt-2" name="decline">Decline</button>
-                                    </div> -->
+                                    <div class="flex flex-row flex-c-c">
+                                        <button><i class="fab fa-telegram-plane"></i></button>
+                                        <!-- <button type="submit" value="<?php echo $request['requestId']?> "class="btn btn-primary mr-2 mt-2" name="accept">Accept</button>
+                                        <button class="btn btn-danger mt-2" name="decline">Decline</button> -->
+                                    </div>
                                 </div>
                             </form>
                         </div>

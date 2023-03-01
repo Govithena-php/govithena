@@ -10,13 +10,14 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/table.css">
-    <link rel="stylesheet" href="../Webroot/css/ui.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/investor/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 
 <body class="bg-gray">
     <?php
+    $datadata = $notifications;
     $active = "dashboard";
     require_once("navigator.php");
     ?>
@@ -32,6 +33,7 @@
                 </h1>
                 <!-- <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p> -->
             </div>
+            <!-- <button onclick="sendData()">Send Data</button> -->
             <div class="[ flex-col center-x ][ balance ]">
                 <h3>Balance</h3>
                 <div class="[ amount ]">
@@ -327,7 +329,24 @@
 
 
     <script src="<?php echo JS ?>/app.js"></script>
+    <script>
+        //function sendData() {
+        // Define the data to be sent
+        const datadata = { name: 'John', age: 30 };
+
+        // Send a POST request to the second PHP page
+        fetch("<?php echo URLROOT . '/agrologist/' ?>", {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(datadata)
+        })
+            .then((response) => response.json())
+            .then((datadata) => console.log(datadata));
+    //}
+    </script>
 
 </body>
+
+
 
 </html>
