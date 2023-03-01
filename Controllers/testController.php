@@ -13,9 +13,9 @@ class testController extends Controller
         $name = new Input(GET, 'name');
 
         echo "<h1>" . $name . "</h1>";
-        echo "<h2>" . $email . "</h2>";
-        echo "<h3>" . $param[1] . "</h3>";
-        echo "<h3>" . $param[2] . "</h3>";
+        // echo "<h2>" . $email . "</h2>";
+        // echo "<h3>" . $param[1] . "</h3>";
+        // echo "<h3>" . $param[2] . "</h3>";
         // echo "<h3>" . $param['name'] . "</h3>";
 
         $this->render('index');
