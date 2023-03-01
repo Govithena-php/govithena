@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/gridTable.css">
-    <link rel="stylesheet" href="<?php echo CSS ?>/farmer/progress.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/farmer/viewProgress.css">
 
     <title>Dashboard | Farmer</title>
 </head>
@@ -20,7 +20,7 @@
 
     <?php
     $active = "progress";
-    $title = "Progress";
+    $title = "view Progress";
     require_once("navigator.php");
     ?>
 
@@ -31,6 +31,150 @@
         <div class="[ caption ]">
             <h3>Track all of your ongoing gigs with investors.</h3>
             <p>Stay on top of your gigs and provide excellent service to your investors by regularly checking this page.</p>
+        </div>
+        <div class="[ gigs ]">
+
+            <div>
+                <div class="[ cards ]">
+                    <img src="<?php echo UPLOADS . $gig['image']; ?>" />
+                    <div class="[ gig__title ]">
+                        <div>
+                            <h3><?php echo $gig['title']; ?></h3>
+                            <p><?php echo $gig['location'] ?></p>
+                        </div>
+                        <div class="[ category__tag ]">
+                            <p><?php echo $gig['category']; ?></p>
+                        </div>
+                    </div>
+                    <div class="[ grid ]" sm="1" md="2" gap="1">
+                        <div class="[ card ]">
+                            <div class="[ icon ]">
+                                <i class="[ fa fa-bell ]"></i>
+                            </div>
+                            <div class="[ details ]">
+                                <h2><small>LKR</small><br>1,250,000.00</h2>
+                                <p>Total Investments</p>
+                            </div>
+                        </div>
+                        <div class="[ card ]">
+                            <div class="[ icon ]">
+                                <i class="[ fa fa-bell ]"></i>
+                            </div>
+                            <div class="[ details ]">
+                                <h2>12%</h2>
+                                <p>Expected profit</p>
+                            </div>
+                        </div>
+                        <div class="[ card ]">
+                            <div class="[ icon ]">
+                                <i class="[ fa fa-bell ]"></i>
+                            </div>
+                            <div class="[ details ]">
+                                <h2>100 Days</h2>
+                                <p>Left, out of 120 Days</p>
+                            </div>
+                        </div>
+                        <div class="[ card ]">
+                            <div class="[ icon ]">
+                                <i class="[ fa fa-bell ]"></i>
+                            </div>
+                            <div class="[ details ]">
+                                <h2>2 Hectare</h2>
+                                <p>Of Land</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="[ special__announcment ]">
+                    <div class="[ icon ]">
+                        <i class="[ fa fa-bell ]"></i>
+                    </div>
+                    <div class="[ details ]">
+                        <h3>Special Announcment</h3>
+                        <p>Our platform is currently undergoing maintenance. We will be back online shortly. Thank you for your patience.</p>
+                    </div>
+                </div>
+                <!-- <p class="[ freespace__text ]">Track your investment journey with ease by accessing all your active and completed gigs in one convenient location, where you can also generate detailed reports on your progress and achievements.</p> -->
+            </div>
+            <div>
+                <div class="[ farmer__profile ]">
+                    <div class="[ profile__image ]">
+                        <img src="<?php echo UPLOADS . $investor['image'] ?>" />
+                    </div>
+                    <div class="[ profile__details ]">
+                        <a href="<?php echo URLROOT . '/profile/' . $investor['uid'] ?>"><?php echo $investor['firstName'] . " " . $investor['lastName']; ?></a>
+                        <p><?php echo $investor['city']; ?></p>
+                    </div>
+                </div>
+                <div class="[ messages ]">
+                    <div class="[ title ]">
+                        <h3>Messages</h3>
+                    </div>
+
+                    <div class="[ activity ]">
+                        <div class="[ icon ]">
+                            <i class="[ fa fa-bell ]"></i>
+                        </div>
+                        <div class="[ details ]">
+                            <h5>Investment</h5>
+                            <p>You have invested <strong>LKR 100,000.00</strong> in <strong>gig title</strong></p>
+                            <div class="[ time ]">
+                                <p>2 hours ago</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="[ activity ]">
+                        <div class="[ icon ]">
+                            <i class="[ fa fa-bell ]"></i>
+                        </div>
+                        <div class="[ details ]">
+                            <h5>Investment</h5>
+                            <p>You have invested <strong>LKR 100,000.00</strong> in <strong>gig title</strong></p>
+                            <div class="[ time ]">
+                                <p>2 hours ago</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="[ activity ]">
+                        <div class="[ icon ]">
+                            <i class="[ fa fa-bell ]"></i>
+                        </div>
+                        <div class="[ details ]">
+                            <h5>Investment</h5>
+                            <p>You have invested <strong>LKR 100,000.00</strong> in <strong>gig title</strong></p>
+                            <div class="[ time ]">
+                                <p>2 hours ago</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="[ activity ]">
+                        <div class="[ icon ]">
+                            <i class="[ fa fa-bell ]"></i>
+                        </div>
+                        <div class="[ details ]">
+                            <h5>Investment</h5>
+                            <p>You have invested <strong>LKR 100,000.00</strong> in <strong>gig title</strong></p>
+                            <div class="[ time ]">
+                                <p>2 hours ago</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="[ activity ]">
+                        <div class="[ icon ]">
+                            <i class="[ fa fa-bell ]"></i>
+                        </div>
+                        <div class="[ details ]">
+                            <h5>Investment</h5>
+                            <p>You have invested <strong>LKR 100,000.00</strong> in <strong>gig title</strong></p>
+                            <div class="[ time ]">
+                                <p>2 hours ago</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
 
         <?php

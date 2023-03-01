@@ -236,6 +236,7 @@ select {
     margin-bottom: 0;
     padding-block: 1rem;
     transition: all 0.3s ease-in-out;
+    min-height: calc(100vh - var(--default-footer-height));
 }
 
 .container[container-type="dashboard-footer"] {

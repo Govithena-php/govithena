@@ -3,10 +3,15 @@ class farmerController extends Controller
 {
     private $currentUser;
     private $farmerModel;
+    private $investorGigModel;
+    private $gigModel;
+
     public function __construct()
     {
         $this->currentUser = Session::get('user');
         $this->farmerModel = $this->model('farmer');
+        $this->investorGigModel = $this->model('investorGig');
+        $this->gigModel = $this->model('gig');
 
         if (!Session::isLoggedIn()) {
             $this->redirect('/auth/signin');
@@ -19,7 +24,6 @@ class farmerController extends Controller
     function createGig()
     {
         if (isset($_POST['createGig'])) {
-            require(ROOT . 'Models/gig.php');
 
             $gigId = uniqid();
             $title = $_POST['title'];
@@ -70,7 +74,7 @@ class farmerController extends Controller
             ];
 
 
-            $gig = new Gig();
+            $gig = new $this->gigModel();
 
             $res = $gig->create($data);
 
@@ -85,9 +89,8 @@ class farmerController extends Controller
 
     function index()
     {
-        require(ROOT . 'Models/gig.php');
 
-        $gig = new Gig();
+        $gig = new $this->gigModel();
         $id = Session::get('user')->getUid();
 
         $products = $gig->All($id);
@@ -172,9 +175,35 @@ class farmerController extends Controller
         $this->render('techassistantfirst');
     }
 
-    function progress()
+    function progress($params)
     {
-        $this->render('progress');
+        $props = [];
+        if (isset($params[0]) && !empty($params[0])) {
+            $gigId = $params[0];
+
+            $gig = $this->gigModel->viewGig($gigId);
+            $props['gig'] = $gig;
+
+            $investor = $this->investorGigModel->fetchInvestorByGig($gigId);
+            if ($investor['success']) {
+                $props['investor'] = $investor['data'];
+            }
+            $this->set($props);
+            $this->render('viewProgress');
+        } else {
+
+            $gigs = $this->investorGigModel->fetchAllByFarmer($this->currentUser->getUid());
+            if ($gigs['success']) {
+                $props['gigs'] = $gigs['data'];
+            }
+            $this->set($props);
+            $this->render('progress');
+        }
+    }
+
+    function newprogress()
+    {
+        $this->render('newProgress');
     }
 
     function progressform()
