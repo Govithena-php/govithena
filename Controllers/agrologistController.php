@@ -263,8 +263,17 @@ class agrologistController extends Controller
         return $this->render('farmergigs');
     }
 
-    public function chat()
+    public function chat($userId)
     {
+        // echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $userId[0] . "</h1>";
+        // echo json_encode($userId);
+        require(ROOT . 'Models/agrologist.php');
+        $agrologist = new Agrologist();   
+        $d['messages'] = $agrologist->getmessages($userId[0]);
+        // echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $d['message'] . "</h1>";
+        
+        $this->set($d);
+        //echo json_encode($d['messages'] );
         return $this->render('chat');
     }
 
