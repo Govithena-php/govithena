@@ -89,7 +89,7 @@ class farmerController extends Controller
 
     function index()
     {
-        require(ROOT . 'Models/gig.php');
+        // require(ROOT . 'Models/gig.php');
         //require(ROOT . 'Models/farmer.php');
 
         $gig = new $this->gigModel();
@@ -101,7 +101,7 @@ class farmerController extends Controller
         $d['products'] = $products;
         $this->set($d);
 
-        
+
         // $farmer = new Farmer();
         $notifications = $this->farmerModel->getnotifications();
         //echo json_encode($notifications);
@@ -214,6 +214,12 @@ class farmerController extends Controller
 
     function newprogress()
     {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            print_r($_POST);
+            var_dump($_FILES['image']);
+            die();
+        }
         $this->render('newProgress');
     }
 

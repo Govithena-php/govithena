@@ -37,18 +37,18 @@
             <form method="POST">
                 <div class="[ form__control ]">
                     <label>Subject</label>
-                    <input type="text" name="">
+                    <input type="text" name="subject">
                 </div>
                 <div class="[ form__control ]">
                     <label>Description</label>
-                    <textarea name=""></textarea>
+                    <textarea name="description"></textarea>
                 </div>
                 <div class="[ form__control ]">
                     <label>Upload Image</label>
-                    <input type="file" name="" multiple>
+                    <input type="file" name="image[]" multiple>
                 </div>
                 <div class="[ form__control ]">
-                    <button type="submit">Submit</button>
+                    <button type="submit" name="progress-save">Submit</button>
                 </div>
             </form>
         </div>
