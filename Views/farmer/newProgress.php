@@ -45,7 +45,7 @@
                 </div>
                 <div class="[ form__control ]">
                     <label>Upload Image</label>
-                    <input type="file" name="images[]" multiple>
+                    <input type="file" name="images[]" multiple required>
                 </div>
                 <div class="[ form__control ]">
                     <button type="submit" name="progress-save">Submit</button>
