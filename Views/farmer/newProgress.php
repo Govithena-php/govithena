@@ -34,7 +34,7 @@
         </div>
 
         <div class="[ form__wrapper ]">
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
                 <div class="[ form__control ]">
                     <label>Subject</label>
                     <input type="text" name="subject">
@@ -45,7 +45,7 @@
                 </div>
                 <div class="[ form__control ]">
                     <label>Upload Image</label>
-                    <input type="file" name="image[]" multiple>
+                    <input type="file" name="images[]" multiple>
                 </div>
                 <div class="[ form__control ]">
                     <button type="submit" name="progress-save">Submit</button>
