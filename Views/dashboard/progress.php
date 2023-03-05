@@ -1,5 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+
+// foreach ($progress as $p) {
+//     foreach ($p as $i) {
+//         var_dump($i);
+//         echo "<br>";
+//     }
+//     echo "<br>";
+// }
+
+// die();
+
+
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -213,7 +227,7 @@
                             <p>Experience the power of transparency with our farmer's progress updates - your go-to resource for tracking progress and staying informed.</p>
                         </div>
                         <?php
-                        if (empty($pr)) {
+                        if (!isset($progress) || empty($progress)) {
                             require(COMPONENTS . "dashboard/noDataFound.php");
                         } else {
                         ?>
@@ -263,7 +277,7 @@
                             </div>
                             <div class="[ requests__wrapper ]">
                                 <div class="[ grid__table ]" style="
-                                        --xl-cols:  1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.7fr;
+                                        --xl-cols:  1fr 1fr 2fr;
                                         --lg-cols: 1.5fr 0.5fr 0.5fr 1fr 1fr;
                                         --md-cols: 1fr 0.5fr 0.5fr;
                                         --sm-cols: 2fr 1fr;
@@ -278,22 +292,13 @@
                                         <div class="[ data ]" hideIn="sm">
                                             <p>Offer</p>
                                         </div>
-                                        <div class="[ data ]" hideIn="lg">
-                                            <p>Time Period</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="lg">
-                                            <p>Location</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="md">
-                                            <p>Requested Date</p>
-                                        </div>
                                     </div>
                                     <div class="[ body ]">
                                         <?php
-                                        foreach ($pr as $request) {
+                                        foreach ($progress as $pr) {
                                         ?>
                                             <div class="[ row ]">
-                                                <div class="[ data ]">
+                                                <!-- <div class="[ data ]">
                                                     <div class="[ item__card ]">
                                                         <div class="[ img ]">
                                                             <img width="50" src="<?php echo UPLOADS . $request['image'] ?>" />
@@ -306,14 +311,25 @@
 
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                                 <div class="[ data ]" hideIn="md">
-                                                    <p class="[ tag ]"><?php echo $request['category'] ?></p>
+                                                    <p class="[ tag ]"><?php echo $pr['subject'] ?></p>
                                                 </div>
                                                 <div class="[ data ]" hideIn="sm">
-                                                    <h3>LKR <?php echo $request['offer'] ?></h3>
+                                                    <h3>LKR <?php echo $pr['description'] ?></h3>
                                                 </div>
-                                                <div class="[ data ]" hideIn="lg">
+                                                <div class="[ data ]" hideIn="sm">
+                                                    <?php
+                                                    foreach ($pr['images'] as $img) {
+                                                    ?>
+                                                        <img width="50px" src="<?php echo UPLOADS3 . $img ?>">
+                                                    <?php
+                                                    }
+                                                    ?>
+
+
+                                                </div>
+                                                <!-- <div class="[ data ]" hideIn="lg">
                                                     <h3><?php echo $request['timePeriod'] ?> Months</h3>
                                                 </div>
                                                 <div class="[ data ]" hideIn="lg">
@@ -321,14 +337,14 @@
                                                 </div>
                                                 <div class="[ data ]" hideIn="md">
                                                     <p><?php echo $request['requestedDate'] ?></p>
-                                                </div>
-                                                <div class="[ data ]">
+                                                </div> -->
+                                                <!-- <div class="[ data ]">
                                                     <div class="[ actions ]">
                                                         <button for="<?php echo $request['requestId'] ?>"><i class="fa fa-chevron-circle-down"></i></button>
                                                         <a href="<?php echo URLROOT ?>/checkout/<?php echo $request['requestId'] ?>" class="btn btn-primary">Cancel Request</a>
                                                     </div>
-                                                </div>
-                                                <div id="<?php echo $request['requestId'] ?>" class="[ expand ]">
+                                                </div> -->
+                                                <!-- <div id="<?php echo $request['requestId'] ?>" class="[ expand ]">
 
                                                     <div class="[ data ]" showIn="md">
                                                         <p class="[ tag ]"><?php echo $request['category'] ?></p>
@@ -355,8 +371,9 @@
                                                         <p><?php echo $request['message'] ?></p>
                                                         <button class="btn btn-primary">Edit</button>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             </div>
+
                                         <?php
                                         }
                                         ?>
