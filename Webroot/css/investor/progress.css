@@ -314,6 +314,96 @@
 }
 
 
+.progress__more {}
+
+.progress__date_time {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: baseline;
+    align-items: center;
+    margin: 0.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #ccc;
+}
+
+.progress__date_time :is(.date, .time) {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+}
+
+.progress__date_time :is(.date, .time)>h4 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--clr-dark);
+    margin-bottom: 0.5rem;
+}
+
+.progress__date_time :is(.date, .time)>h3 {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--clr-dark);
+    margin-bottom: 0.5rem;
+}
+
+.progress__content {
+    margin: 0.5rem;
+}
+
+.progress__content h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--clr-dark);
+    margin-bottom: 0.5rem;
+}
+
+.progress__content p {
+    font-size: 0.9rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+}
+
+.progress__images {
+
+    border-top: 1px solid #ccc;
+    padding-top: 2rem;
+    margin: 2rem 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.progress__images .img {
+    height: 250px;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background-color: #ccc;
+}
+
+.progress__images .img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.progress__actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 1rem;
+}
+
+.progress__actions .feedback__btn {
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    background-color: var(--clr-primary);
+    color: var(--clr-light);
+    font-size: 0.8rem;
+    font-weight: 400;
+    cursor: pointer;
+    margin: 0 0.5rem;
+}
 
 .gigTabs {
     margin-block: 2rem;
@@ -536,35 +626,6 @@
     width: 60%;
 }
 
-
-.actions {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    align-items: center;
-}
-
-.actions>button {
-    border: none;
-    background: transparent;
-    cursor: pointer;
-}
-
-.actions>button>i {
-    font-size: 1.3rem;
-    rotate: 0deg;
-    transition: all 0.2s ease-in-out;
-}
-
-.actions>button>i[show] {
-    rotate: 180deg;
-}
-
-.actions>button:hover>i {
-    color: var(--clr-primary, #1d1d1d);
-}
-
-
 .progress__bar {
     flex-grow: 1;
     display: flex;
@@ -703,6 +764,11 @@
 
     .text__width {
         width: 90%;
+    }
+
+    .progress__date_time {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
 }
