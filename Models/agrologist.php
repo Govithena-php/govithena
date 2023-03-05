@@ -236,4 +236,34 @@ class Agrologist extends Model
         }
     }
 
+    public function save($data)
+    {
+        try {
+            $sql = "INSERT INTO review_by_agrologist (reviewId, agrologistId, farmerId, q1, q2, q3, q4, q5, q6, q7, q8, q9) VALUES(:reviewId, :agrologistId,:farmerId, :q1, :q2, :q3, :q4, :q5, :q6, :q7, :q8, :q9)";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute($data);
+            return ['success' => true, 'data' => true];
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function getFarmerName($farmerId){
+        try {
+            $sql = "SELECT CONCAT(u.firstName, ' ', u.lastName) AS fullName  FROM user u WHERE u.uid = :farmerId";
+            $stmt =  Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'farmerId' => $farmerId
+            ]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+        }
+    }
+
 }
