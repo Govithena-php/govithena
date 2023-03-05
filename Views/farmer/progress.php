@@ -9,15 +9,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
-    <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
-    
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/gridTable.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/farmer/progress.css">
 
-    <title>Dashboard | Technical Assistant</title>
+    <title>Dashboard | Farmer</title>
 </head>
 
 
-<body class="bg-gray h-screen">
+<body>
 
     <?php
     $active = "progress";
@@ -25,114 +24,157 @@
     require_once("navigator.php");
     ?>
 
-    
+
 
     <div class="container" container-type="dashboard-section">
-            <div class="itemlistfirst">  
-                <p style="font-size: 24px;"> Progress of cabbage</p> 
 
-                <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/farmer/progressform/" ?>"> 
-                   <button  class="btn" type="button">Add</button>
-                </a>
+        <div class="[ caption ]">
+            <h3>Track all of your ongoing gigs with investors.</h3>
+            <p>Stay on top of your gigs and provide excellent service to your investors by regularly checking this page.</p>
+        </div>
 
-            </div>
-            <hr> 
+        <?php
+        if (!isset($gigs) || empty($gigs)) {
+            require(COMPONENTS . "dashboard/noDataFound.php");
+        } else {
+        ?>
 
-            <div class="cardprogress">
-                <br>
-                <div class="itemlist">
-                        <div class="left">
-                            <p style="color: #666362;">Investor : </p>
-                            <p>&nbsp; Punsara Deshan</p>
+            <div class="[ ]">
+                <div class="[ grid ][ filters ]" md="1" lg="2" gap="2">
+                    <div class="[ grid ][ options ]" sm="1" md="6" lg="6" gap="1">
+                        <div class="[ input__control ]">
+                            <label for="from">Start Date :</label>
+                            <input id="from" type="date">
                         </div>
-                       <div class="left">
-                          <p style="color: #666362;">Item : </p>
-                          <p>&nbsp; Cabbage</p>
-                       </div>
-                </div>    
-                <div class="itemlist">
-                    <div class="left">
-                        <p style="color: #666362;">Date : </p>
-                        <p>&nbsp; 2022/11/30</p>
-                    </div>
-                    <div class="left">
-                        &emsp;&emsp;&emsp;&emsp;
-                        <p style="color: #666362;">Time : </p>
-                        <p>&nbsp; 10.30 am</p>
-                    </div>
-                </div>
-
-                <div class="imgrow">
-                    <img class="progressimg" src="<?php echo IMAGES ?>/grow/grow1.jpg" alt="profile">
-                    <img class="progressimg" src="<?php echo IMAGES ?>/grow/grow2.jpg" alt="profile">
-                    <img class="progressimg" src="<?php echo IMAGES ?>/grow/grow3.jpg" alt="profile">
-                    <img class="progressimg" src="<?php echo IMAGES ?>/grow/grow4.jpg" alt="profile">
-                </div>
-                <div class="descript">
-
-                    <p style="color: #666362;">Description</p>
-                    <p class="imgrow">The next day was the harvesting day.
-                        There was bustle and activity on all sides. 
-                        The farmers with sickles and scythes in their hands set out to reap the ripe crop. 
-                        They sang and danced to the beating of drums. They were mad with joy.They sat in a line at one end of the field. 
-                        They reaped and reaped till it was noon. The drummers went on beating the drums. At noon they stopped. 
-                        They rested for a while and had their lunch.
-                        It consisted of chapaties with glassfuls of clarified butter and country-sugar.</p> 
-                </div>
-                <br><hr> <br>
-
-        
-
-                <div class="itemlist">
-                        <div class="left">
-                            <p style="color: #666362;">Investor : </p>
-                            <p>&nbsp; Punsara Deshan</p>
+                        <div class="[ input__control ]">
+                            <label for="to">Entry Date :</label>
+                            <input id="to" type="date">
                         </div>
-                       <div class="left">
-                          <p style="color: #666362;">Item : </p>
-                          <p>&nbsp; Cabbage</p>
-                       </div>
-                </div>    
-                <div class="itemlist">
-                    <div class="left">
-                        <p style="color: #666362;">Date : </p>
-                        <p>&nbsp; 2023/01/26</p>
+                        <div class="[ input__control ]">
+                            <button type="button">Apply</button>
+                        </div>
+
                     </div>
-                    <div class="left">
-                        &emsp;&emsp;&emsp;&emsp;
-                        <p style="color: #666362;">Time : </p>
-                        <p>&nbsp; 11.40 am</p>
+                    <div class="[ search ]">
+                        <input type="text" placeholder="Search">
+                        <button type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
                     </div>
                 </div>
+                <div class="[ grid__table ]" style="
+                                        --xl-cols: 3fr 1.5fr 1fr 1fr 1fr 1fr;
+                                        --lg-cols: 1.75fr 1.25fr 1fr 0.75fr;
+                                        --md-cols: 2fr 1fr 1fr;
+                                        --sm-cols: 2fr 1fr;
+                                ">
+                    <div class="[ head ]">
+                        <div class="[ data ]">
+                            <p>Week</p>
+                        </div>
+                        <div class="[ data ]" hideIn="sm">
+                            <p>Investor</p>
+                        </div>
+                        <div class="[ data ]" hideIn="md">
+                            <p>Investments</p>
+                        </div>
+                        <div class="[ data ]" hideIn="lg">
+                            <p>Started Date</p>
+                        </div>
+                        <div class="[ data ]" hideIn="lg">
+                            <p>Days left</p>
+                        </div>
+                    </div>
+                    <div class="[ body ]">
+                        <?php
+                        foreach ($gigs as $gig) {
+                        ?>
+                            <div class="[ row ]">
+                                <div class="[ data ]">
+                                    <div class="[ item__card ]">
+                                        <div class="[ img ]">
+                                            <img width="50" src="<?php echo UPLOADS . $gig['gimage'] ?>" />
+                                        </div>
+                                        <div class="[ content ]">
+                                            <h2><?php echo $gig['title'] ?></h2>
+                                            <p><?php echo $gig['location'] ?></p>
+                                            <!-- <p><?php echo $gig['category'] ?></p> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="[ data ]" hideIn="sm">
+                                    <div class="[ profile__card ]">
+                                        <div class="[ img ]">
+                                            <img width="50" src="<?php echo UPLOADS . $gig['uimage'] ?>" />
+                                        </div>
+                                        <div class="[ content ]">
+                                            <a href="<?php echo URLROOT . '/profile/' . $gig['investorId']; ?>"><?php echo $gig['firstName'] . " " . $gig['lastName'] ?></a>
+                                            <p><?php echo $gig['city'] ?></p>
 
-                <div class="imgrow">
-                    <img class="progressimg" src="<?php echo IMAGES ?>/grow/grow5.webp" alt="profile">
-                    <img class="progressimg" src="<?php echo IMAGES ?>/grow/grow6.png" alt="profile">
-                    <img class="progressimg" src="<?php echo IMAGES ?>/grow/grow7.jpg" alt="profile">
-                    <img class="progressimg" src="<?php echo IMAGES ?>/grow/grow8.jpg" alt="profile">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="[ data ]" hideIn="md">
+                                    <p><?php echo $gig['category'] ?></p>
+                                </div>
+                                <div class="[ data ]" hideIn="lg">
+                                    <p><?php echo $gig['timestamp'] ?></p>
+                                </div>
+                                <div class="[ data ]" hideIn="lg">
+                                    <p><?php echo $gig['timestamp'] ?></p>
+                                </div>
+                                <div class="[ data ]">
+                                    <div class="[ actions ]">
+                                        <!-- <button for="<?php echo $gig['gigId'] ?>"><i class="fa fa-chevron-circle-down"></i></button> -->
+                                        <a href="<?php echo URLROOT ?>/farmer/progress/<?php echo $gig['gigId'] ?>" class="btn btn-primary">View More</a>
+                                    </div>
+                                </div>
+                                <!-- <div id="<?php echo $gig['gigId'] ?>" class="[ expand ]">
+                                    <div class="[ expand__card ]" showIn="sm">
+                                        <h4>Agrologist :</h4>
+                                        <div class="[ profile__card ]">
+                                            <div class="[ img ]">
+                                                <img width="50" src="<?php echo UPLOADS . $fieldVisit['uimage'] ?>" />
+                                            </div>
+                                            <div class="[ content ]">
+                                                <a href="<?php echo URLROOT . '/profile/' . $fieldVisit['agrologistId']; ?>"><?php echo $fieldVisit['firstName'] . " " . $fieldVisit['lastName'] ?></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="[ expand__card ]" showIn="md">
+                                        <h4>Visited Date :</h4>
+                                        <p><?php echo $fieldVisit['visitDate'] ?></p>
+                                    </div>
+                                    <div class="[ expand__card ]" showIn="lg">
+                                        <h4>Entry Date :</h4>
+                                        <p><?php echo $fieldVisit['entryDate'] ?></p>
+                                    </div>
+                                    <div class="[ expand__card ]" showIn="lg">
+                                        <h4>Entry Time :</h4>
+                                        <p><?php echo $fieldVisit['entryTime'] ?></p>
+                                    </div>
+                                    <div class="[ expand__card ]" always>
+                                        <h4>Agrologist Message :</h4>
+                                        <p class="[ text__width ]"><?php echo $fieldVisit['fieldVisitDetails'] ?></p>
+                                    </div>
+                                </div> -->
+                            </div>
+                        <?php
+                        }
+                        ?>
+                    </div>
                 </div>
-                <div class="descript">
-
-                <p style="color: #666362;">Description</p>
-                <p class="imgrow">The next day was the harvesting day.
-                    There was bustle and activity on all sides. 
-                    The farmers with sickles and scythes in their hands set out to reap the ripe crop. 
-                    They sang and danced to the beating of drums. They were mad with joy.They sat in a line at one end of the field. 
-                    They reaped and reaped till it was noon. The drummers went on beating the drums. At noon they stopped. 
-                    They rested for a while and had their lunch.
-                    It consisted of chapaties with glassfuls of clarified butter and country-sugar.</p>
-                </div> 
-                <br> <hr>
-
-
-
             </div>
+        <?php
+        }
+        ?>
+
 
     </div>
     <?php
     require_once("footer.php");
     ?>
-   
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="<?php echo JS ?>/dashboard/chart.js"></script>
     <script src="<?php echo JS ?>/dashboard/dashboard.js"></script>

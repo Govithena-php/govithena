@@ -70,7 +70,8 @@ class RequestFarmer extends Model
         }
     }
 
-    public function updateStatus($id, $status){
+    public function updateStatus($id, $status)
+    {
         try {
             $sql = "UPDATE farmer_request SET state = :status WHERE requestId = :id";
             $stmt = Database::getBdd()->prepare($sql);

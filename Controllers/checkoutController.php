@@ -106,7 +106,6 @@ class checkoutController extends Controller
             $id = $_POST['pay'];
             $request = new $this->requestFarmerModel();
             $res = $request->getRequestById($id);
-
             $investment = new $this->investmentModel();
             $response = $investment->add([
                 'id' =>  new UID(PREFIX::INVESTMENT),
@@ -118,7 +117,8 @@ class checkoutController extends Controller
             $investorGig = new $this->investorGigModel();
             $response = $investorGig->add([
                 'investorId' => $this->currentUser->getUid(),
-                'gigId' => $res['gigId']
+                'gigId' => $res['gigId'],
+                'farmerId' => $res['farmerId'],
             ]);
 
             $request->updateStatus($id, 'PAID');
