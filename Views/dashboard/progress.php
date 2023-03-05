@@ -36,7 +36,7 @@
 
     <?php
     $active = "gigs";
-    $title = "Progress";
+    $title = "Gig";
     require_once("navigator.php");
     ?>
 
