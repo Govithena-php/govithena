@@ -96,7 +96,9 @@ class Agrologist extends Model
         }
     }
 
-    public function edit_user_details($data){
+    public function edit_user_details($data)
+    
+    {
 
         $sql = "UPDATE user SET firstName=:firstName, lastName=:lastName, phoneNumber=:phoneNumber, city=:city, NIC=:nic, addressLine1=:addressLine1, addressLine2=:addressLine2, district=:district, postalCode=:postalCode, image=:profileImage WHERE uid=:uid";
         $req = Database::getBdd()->prepare($sql);
@@ -116,7 +118,9 @@ class Agrologist extends Model
         return $req->fetch();
     }
 
-    public function getFarmers(){
+    public function getFarmers()
+    
+    {
         try {
             $sql = "SELECT CONCAT(u.firstName, ' ', u.lastName) AS fullName, u.city, a.requestId, a.farmerId, u.image FROM agrologist_request a LEFT JOIN user u ON u.uid = a.farmerId WHERE (a.agrologistId = :agrologistId AND a.status='Accepted')";
             $stmt =  Database::getBdd()->prepare($sql);
@@ -130,7 +134,8 @@ class Agrologist extends Model
         }
     }
 
-    public function insertFieldVisit($data){
+    public function insertFieldVisit($data)
+    {
         try {
             $sql = "INSERT INTO field_visit (week, gigId, agrologistId, farmerId, fieldVisitDetails, image, visitDate) VALUES (:week, :gigId, :agrologistId, :farmerId, :fieldVisitDetails, :fieldVisitImage, :visitDate)";
             $stmt = Database::getBdd()->prepare($sql);
@@ -151,7 +156,8 @@ class Agrologist extends Model
         }
     }
 
-    public function getFieldVisitDetails($fid, $gid){
+    public function getFieldVisitDetails($fid, $gid)
+    {
         try {
             $sql = "SELECT * FROM field_visit  WHERE agrologistId = :agrologistId AND farmerId= :farmerId AND gigId = :gigId ORDER BY visitDate DESC";
             $stmt =  Database::getBdd()->prepare($sql);
@@ -169,7 +175,8 @@ class Agrologist extends Model
         }
     }
 
-    public function getFarmerGigs($data){
+    public function getFarmerGigs($data)
+    {
         try {
             $sql = "SELECT g.image, g.location, g.title, g.category, g.timePeriod, u.firstName, u.lastName, g.farmerId, g.gigId FROM gig g LEFT JOIN agrologist_request a ON g.farmerId=a.farmerId LEFT JOIN user u ON u.uid=g.farmerId WHERE g.farmerId = :farmerId AND a.agrologistId = :agrologistId";
             $stmt =  Database::getBdd()->prepare($sql);
@@ -187,7 +194,8 @@ class Agrologist extends Model
     }
 
 
-    public function getnotifications(){
+    public function getnotifications()
+    {
         try {
             $sql = "SELECT n.id, n.notified_to, n.title, n.message, n.link, n.saved_time, n.published_time FROM notification n WHERE n.notified_to = :notified_to ORDER BY n.saved_time DESC";
             $stmt =  Database::getBdd()->prepare($sql);
@@ -203,7 +211,8 @@ class Agrologist extends Model
         }
     }
 
-    public function getmessages($userId){
+    public function getmessages($userId)
+    {
         try {
             $sql = "SELECT CONCAT(u.firstName, ' ', u.lastName) AS fullName, u.image  FROM user u WHERE u.uid = :userId";
             $stmt =  Database::getBdd()->prepare($sql);
@@ -219,7 +228,8 @@ class Agrologist extends Model
         }
     }
 
-    public function insertMessages($data){
+    public function insertMessages($data)
+    {
         try {
             $sql = "INSERT INTO message(incomingMsgId, outgoingMsgId, msg) VALUES (:incomingMsgId, :outgoingMsgId, :msg)";
             $stmt = Database::getBdd()->prepare($sql);
@@ -250,7 +260,8 @@ class Agrologist extends Model
         }
     }
 
-    public function getFarmerName($farmerId){
+    public function getFarmerName($farmerId)
+    {
         try {
             $sql = "SELECT CONCAT(u.firstName, ' ', u.lastName) AS fullName  FROM user u WHERE u.uid = :farmerId";
             $stmt =  Database::getBdd()->prepare($sql);

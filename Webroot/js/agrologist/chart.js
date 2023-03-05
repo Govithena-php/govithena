@@ -147,14 +147,20 @@ const config = {
 
 const ctx = document.getElementById('myChart');
 const pieChart = document.getElementById('pieChart');
+
 const ctx1 = document.getElementById('myChart1');
 const pieChart1 = document.getElementById('pieChart1');
+
 const pieChart2 = document.getElementById('pieChart2');
+
 const pieChart3 = document.getElementById('pieChart3');
 
 new Chart(ctx, config);
+
 new Chart(pieChart, pieConfigProfitCrop);
 //new Chart(ctx1, config);
 new Chart(pieChart1, pieConfigCropSuccess);
+
 new Chart(pieChart2, pieConfigCropFailure);
+
 new Chart(pieChart3, pieConfig);

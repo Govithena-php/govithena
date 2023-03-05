@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/table.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/investor/index.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/agrologist/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 
