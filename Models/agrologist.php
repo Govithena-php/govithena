@@ -219,4 +219,21 @@ class Agrologist extends Model
         }
     }
 
+    public function insertMessages($data){
+        try {
+            $sql = "INSERT INTO message(incomingMsgId, outgoingMsgId, msg) VALUES (:incomingMsgId, :outgoingMsgId, :msg)";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'incomingMsgId' => $data['incomingMsgId'],
+                'outgoingMsgId' => $data['outgoingMsgId'],
+                'msg' => $data['msg']
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return false;
+        }
+    }
+
 }
