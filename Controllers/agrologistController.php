@@ -15,7 +15,7 @@ class agrologistController extends Controller
         if (!$this->currentUser->hasAccess(ACTOR::AGROLOGIST)) {
             $this->redirect('/error/dontHaveAccess');
         }
-        
+
     }
 
     public function index()
@@ -31,7 +31,7 @@ class agrologistController extends Controller
 
     public function farmers($params)
     {
-        
+
         if (!empty($params)) {
             //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>". count($params) . "</h1>";
             require(ROOT . 'Models/agrologist.php');
@@ -113,8 +113,7 @@ class agrologistController extends Controller
                     //echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>" . $_POST['accept'] . "</h1>";
                     $agr->acceptRequest($_POST['accept']);
                     //$this->redirect("/agrologist/farmers");
-                } 
-                elseif (isset($_POST['decline'])) {
+                } elseif (isset($_POST['decline'])) {
                     //var_dump($_POST['accept']);
                     //echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>" . $_POST['accept'] . "</h1>";
                     $agr->declineRequest($_POST['decline']);
@@ -123,8 +122,7 @@ class agrologistController extends Controller
                     echo json_encode($farmerId[0]['farmerId']);
                     $agr->declineNotificationFarmer($farmerId[0]['farmerId']);
                     //$this->redirect("/agrologist/farmers");
-                }
-                else {
+                } else {
                     echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>nope</h1>";
 
                 }
@@ -145,7 +143,7 @@ class agrologistController extends Controller
         // die();
 
         if (isset($_POST['edit_details_btn'])) {
-            
+
             $firstName = new Input(POST, 'firstName');
             $lastName = new Input(POST, 'lastName');
             $city = new Input(POST, 'city');
@@ -193,7 +191,7 @@ class agrologistController extends Controller
 
                 //echo "file not uploaded";
             }
-            
+
         }
 
         $this->set($d);
@@ -203,7 +201,7 @@ class agrologistController extends Controller
     public function requestdetails($id)
     {
         require(ROOT . 'Models/agrologist.php');
-        $agrologist = new Agrologist();   
+        $agrologist = new Agrologist();
         $d['requestDetails'] = $agrologist->farmerRequest();
         // echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $d['message'] . "</h1>";
 
@@ -258,13 +256,32 @@ class agrologistController extends Controller
         // require(ROOT . 'Models/agrologist.php');
         // $agrologist = new Agrologist();
         $d['gigDetails'] = $agrologist->getFarmerGigs(['farmerId' => $id]);
-        
+
         $this->set($d);
         return $this->render('farmergigs');
     }
 
-    public function chat()
+    public function chat($userId)
     {
+        // echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $userId[0] . "</h1>";
+        // echo json_encode($userId);
+        require(ROOT . 'Models/agrologist.php');
+        $agrologist = new Agrologist();
+        $d['messages'] = $agrologist->getmessages($userId[0]);
+        // echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $d['message'] . "</h1>";
+        if (isset($_POST['update_details_btn'])) {
+            $incomingMsgId = new Input(POST, 'incomingMsgId');
+            $outgoingMsgId = new Input(POST, 'outgoingMsgId');
+            $msg = new Input(POST, 'msg');
+            $agrologist->insertMessages([
+                'incomingMsgId' => $incomingMsgId->get(),
+                'outgoingMsgId' => $outgoingMsgId->get(),
+                'msg' => $msg->get()
+            ]);
+        }
+
+        $this->set($d);
+        //echo json_encode($d['messages'] );
         return $this->render('chat');
     }
 

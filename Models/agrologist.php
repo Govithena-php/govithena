@@ -5,7 +5,7 @@ class Agrologist extends Model
     function farmerRequest()
     {
         try {
-            $sql = "SELECT CONCAT(u.firstName, ' ', u.lastName) AS fullName, u.city, a.requestId, a.message FROM agrologist_request a LEFT JOIN user u ON u.uid = a.farmerId WHERE (a.agrologistId = :agrologistId AND a.status='Pending')";
+            $sql = "SELECT CONCAT(u.firstName, ' ', u.lastName) AS fullName, u.city, a.requestId, a.message, u.image FROM agrologist_request a LEFT JOIN user u ON u.uid = a.farmerId WHERE (a.agrologistId = :agrologistId AND a.status='Pending')";
             $stmt =  Database::getBdd()->prepare($sql);
             $stmt->execute(['agrologistId' => Session::get('user')->getUid()]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -118,7 +118,7 @@ class Agrologist extends Model
 
     public function getFarmers(){
         try {
-            $sql = "SELECT CONCAT(u.firstName, ' ', u.lastName) AS fullName, u.city, a.requestId, a.farmerId FROM agrologist_request a LEFT JOIN user u ON u.uid = a.farmerId WHERE (a.agrologistId = :agrologistId AND a.status='Accepted')";
+            $sql = "SELECT CONCAT(u.firstName, ' ', u.lastName) AS fullName, u.city, a.requestId, a.farmerId, u.image FROM agrologist_request a LEFT JOIN user u ON u.uid = a.farmerId WHERE (a.agrologistId = :agrologistId AND a.status='Accepted')";
             $stmt =  Database::getBdd()->prepare($sql);
             $stmt->execute(['agrologistId' => Session::get('user')->getUid()]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -200,6 +200,39 @@ class Agrologist extends Model
             echo $e->getMessage();
             die();
             return null;
+        }
+    }
+
+    public function getmessages($userId){
+        try {
+            $sql = "SELECT CONCAT(u.firstName, ' ', u.lastName) AS fullName, u.image  FROM user u WHERE u.uid = :userId";
+            $stmt =  Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'userId' => $userId
+            ]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+        }
+    }
+
+    public function insertMessages($data){
+        try {
+            $sql = "INSERT INTO message(incomingMsgId, outgoingMsgId, msg) VALUES (:incomingMsgId, :outgoingMsgId, :msg)";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'incomingMsgId' => $data['incomingMsgId'],
+                'outgoingMsgId' => $data['outgoingMsgId'],
+                'msg' => $data['msg']
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return false;
         }
     }
 
