@@ -265,7 +265,6 @@ class farmerController extends Controller
                     echo $e->getMessage();
                     die();
                 }
-                
             } else {
                 $this->redirect('/farmer/newprogress/' . $response['error']);
             }
