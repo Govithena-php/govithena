@@ -335,8 +335,8 @@ select {
 
 @media screen and (max-width:768px) {
     :root {
-        --container-margin-left: 1rem !important;
-        --container-margin-right: 1rem !important;
+        --container-margin-left: 1.5rem !important;
+        --container-margin-right: 1.5rem !important;
     }
 
     .container {
@@ -362,8 +362,8 @@ select {
 
 @media screen and (max-width: 576px) {
     :root {
-        --container-margin-left: 0.5rem !important;
-        --container-margin-right: 0.5rem !important;
+        --container-margin-left: 1rem !important;
+        --container-margin-right: 1rem !important;
     }
 
     .container {
