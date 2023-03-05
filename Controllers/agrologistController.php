@@ -87,10 +87,71 @@ class agrologistController extends Controller
         }
     }
 
-    public function reviews()
+    // public function reviews()
+    // {
+    //     $this->render('reviews');
+    // }
+
+
+    public function reviews($params)
     {
+        // $props = [];
+        // if (!isset($params[0]) || empty($params[0])) {
+        //     $this->redirect('/error/dontHaveAccess/1');
+        // }
+        // $gigId = $params[0];
+        // Session::set(['gigId' => $gigId]);
+
+        // $props['gig'] = $gig = $this->gigModal->fetchBy($gigId);
+        // if (!$props['gig']) {
+        //     $this->redirect('/error/dontHaveAccess/2');
+        // }
+
+        // $props['farmer'] = $this->userModal->fetchBy($gig['farmerId']);
+        // if (!$props['farmer']) {
+        //     $this->redirect('/error/dontHaveAccess/3');
+        // }
+
+
+        require(ROOT . 'Models/agrologist.php');
+        $agr = new Agrologist();
+
+        $farmerName = $agr->getFarmerName($params[0]);
+        // echo json_encode($params[0]);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (isset($_POST['submit_review'])) {
+                $data = [
+                    'reviewId' => new UID(PREFIX::REVIEW),
+                    'agrologistId' => $this->currentUser->getUid(),
+                    'farmerId' => $params[0],
+                    'q1' => new Input(POST, 'q1'),
+                    'q2' => new Input(POST, 'q2'),
+                    'q3' => new Input(POST, 'q3'),
+                    'q4' => new Input(POST, 'q4'),
+                    'q5' => new Input(POST, 'q5'),
+                    'q6' => new Input(POST, 'q6'),
+                    'q7' => new Input(POST, 'q7'),
+                    'q8' => new Input(POST, 'q8'),
+                    'q9' => new Input(POST, 'q9'),
+                ];
+
+                $agr->save($data);
+                
+                echo json_encode($farmerName);
+
+                //$response = $reviewByInvestor->save($data);
+                //if($response['success']){}
+            }
+        }
+
+
+
+        $this->set(['farmerName' => $farmerName]);
+        echo json_encode($farmerName);
         $this->render('reviews');
     }
+
+    
 
     public function requests($params)
     {
