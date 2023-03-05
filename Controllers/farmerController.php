@@ -2,16 +2,22 @@
 class farmerController extends Controller
 {
     private $currentUser;
+    private $imageHandler;
     private $farmerModel;
     private $investorGigModel;
     private $gigModel;
+    private $farmerProgressModel;
 
     public function __construct()
     {
         $this->currentUser = Session::get('user');
+        $this->imageHandler = new ImageHandler($folder = 'Uploads3');
+
         $this->farmerModel = $this->model('farmer');
         $this->investorGigModel = $this->model('investorGig');
         $this->gigModel = $this->model('gig');
+        $this->farmerProgressModel = $this->model('farmerProgress');
+
 
         if (!Session::isLoggedIn()) {
             $this->redirect('/auth/signin');
@@ -33,6 +39,9 @@ class farmerController extends Controller
             $location = $_POST['location'];
             $category = $_POST['category'];
 
+            var_dump($_POST);
+            var_dump($_FILES);
+            die();
 
             $file_name = $_FILES['image']['name'];
             $file_size = $_FILES['image']['size'];
@@ -89,7 +98,7 @@ class farmerController extends Controller
 
     function index()
     {
-        require(ROOT . 'Models/gig.php');
+        // require(ROOT . 'Models/gig.php');
         //require(ROOT . 'Models/farmer.php');
 
         $gig = new $this->gigModel();
@@ -101,7 +110,7 @@ class farmerController extends Controller
         $d['products'] = $products;
         $this->set($d);
 
-        
+
         // $farmer = new Farmer();
         $notifications = $this->farmerModel->getnotifications();
         //echo json_encode($notifications);
@@ -212,8 +221,55 @@ class farmerController extends Controller
         }
     }
 
-    function newprogress()
+    function newprogress($params)
     {
+
+        $props = [];
+        $gigId = "";
+        if (isset($params[0]) && !empty($params[0])) {
+            $gigId = $params[0];
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $progressId = new UID(PREFIX::PROGRESS);
+
+            $data = [
+                'progressId' => $progressId,
+                'gigId' => $gigId,
+                'subject' => new Input(POST, 'subject'),
+                'description' => new Input(POST, 'description'),
+                'farmerId' => $this->currentUser->getUid()
+            ];
+
+
+            $response = $this->farmerProgressModel->create($data);
+
+            if ($response['success']) {
+
+                try {
+                    $images = $this->imageHandler->upload('images');
+                    if (!empty($images)) {
+                        foreach ($images as $image) {
+                            $data = [
+                                'progressId' => $progressId,
+                                'imageName' => $image
+                            ];
+                            $res = $this->farmerProgressModel->saveProgressImage($data);
+                            if (!$res['success']) {
+                                $this->redirect('/farmer/newprogress/' . $res['error']);
+                            }
+                        }
+                    }
+                } catch (Exception $e) {
+                    echo $e->getMessage();
+                    die();
+                }
+            } else {
+                $this->redirect('/farmer/newprogress/' . $response['error']);
+            }
+        }
+
         $this->render('newProgress');
     }
 

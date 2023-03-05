@@ -51,7 +51,7 @@
 
     --sidebar-width: clamp(220px, 70%, 400px);
     --dashboard-sidebar-width: 15rem;
-    --container-margin-left: calc(var(--dashboard-sidebar-width) + 3rem);
+    --container-margin-left: calc(var(--dashboard-sidebar-width) + 4rem);
     --container-margin-right: 3rem;
     --topbar-margin: 3rem;
 

@@ -7,5 +7,7 @@ require(ROOT . "Core/Uid.php");
 require(ROOT . "Core/Model.php");
 require(ROOT . "Core/Controller.php");
 require(ROOT . "Core/ActiveUser.php");
+require(ROOT . "Core/Image.php");
+require(ROOT . "Core/ImageHandler.php");
 
 Session::init();
