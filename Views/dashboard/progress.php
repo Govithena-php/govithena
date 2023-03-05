@@ -53,14 +53,26 @@
 
             <div>
                 <div class="[ cards ]">
-                    <img src="<?php echo UPLOADS . $gig['image']; ?>" />
+                    <img class="[ card__img ]" src="<?php echo UPLOADS . $gig['image']; ?>" />
                     <div class="[ gig__title ]">
-                        <div>
-                            <h3><?php echo $gig['title']; ?></h3>
-                            <p><?php echo $gig['location'] ?></p>
+                        <div class="[ flex__title ]">
+                            <div>
+                                <h3><?php echo $gig['title']; ?></h3>
+                                <p><?php echo $gig['location'] ?></p>
+                            </div>
+                            <div class="[ category__tag ]">
+                                <p><?php echo $gig['category']; ?></p>
+                            </div>
                         </div>
-                        <div class="[ category__tag ]">
-                            <p><?php echo $gig['category']; ?></p>
+
+                        <div class="[ farmer__profile ]">
+                            <div class="[ profile__image ]">
+                                <img src="<?php echo UPLOADS . $farmer['image'] ?>" />
+                            </div>
+                            <div class="[ profile__details ]">
+                                <a href="<?php echo URLROOT . '/profile/' . $farmer['uid'] ?>"><?php echo $farmer['firstName'] . " " . $farmer['lastName']; ?></a>
+                                <p><?php echo $farmer['city']; ?></p>
+                            </div>
                         </div>
                     </div>
                     <div class="[ grid ]" sm="1" md="2" gap="1">
@@ -114,18 +126,9 @@
                 <!-- <p class="[ freespace__text ]">Track your investment journey with ease by accessing all your active and completed gigs in one convenient location, where you can also generate detailed reports on your progress and achievements.</p> -->
             </div>
             <div>
-                <div class="[ farmer__profile ]">
-                    <div class="[ profile__image ]">
-                        <img src="<?php echo UPLOADS . $farmer['image'] ?>" />
-                    </div>
-                    <div class="[ profile__details ]">
-                        <a href="<?php echo URLROOT . '/profile/' . $farmer['uid'] ?>"><?php echo $farmer['firstName'] . " " . $farmer['lastName']; ?></a>
-                        <p><?php echo $farmer['city']; ?></p>
-                    </div>
-                </div>
                 <div class="[ messages ]">
                     <div class="[ title ]">
-                        <h3>Messages</h3>
+                        <h3>Recent Activities</h3>
                     </div>
 
                     <div class="[ activity ]">
