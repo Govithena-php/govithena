@@ -196,4 +196,13 @@ class farmerController extends Controller
             $this->redirect('/farmer/techassistantfirst/error');
         }
     }
+
+    function techassistantfirstcopy()
+    {
+        $this->render('techassistantfirstcopy');
+    }
+    function settings()
+    {
+        $this->render('settings');
+    }
 }

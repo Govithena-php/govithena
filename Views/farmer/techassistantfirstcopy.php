@@ -21,7 +21,7 @@
 <body class="bg-gray h-screen">
 
     <?php
-    $active = "techassistantfirst";
+    $active = "techassistantfirstcopy";
     $title = "Technical Assistant";
     require_once("navigator.php");
     ?>
