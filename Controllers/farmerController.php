@@ -340,7 +340,15 @@ class farmerController extends Controller
         }
     }
 
-
+    function techassistantfirstcopy()
+    {
+        $this->render('techassistantfirstcopy');
+    }
+    function settings()
+    {
+        $this->render('settings');
+    }
+    
     public function deleteGig($params)
     {
         if (isset($params)) {

@@ -48,7 +48,7 @@
                         <div class="[ requestcard bg-light ]">
                            
                            <div class="[ requestimg ]">
-                                <img class="img" src="<?php echo IMAGES ?>/techassistant/techassistant1.jpg" alt="profile">
+                                <img class="img" src="<?php echo IMAGES ?>/agrologist/agrologist8.jpg" alt="profile">
                             </div>
 
                             <form action="<?php echo URLROOT . '/agrologist/requests' ?>" >
@@ -98,7 +98,7 @@
                 </div>
         </div>
 
-         <div class="cardtech">
+         <div class="cardagro">
          
            <h1><p>Personal Details</p></h1><hr>
            <div class="flex-c-c1 name">
@@ -108,25 +108,17 @@
            </div>
             <div class="flex-c-c1 name">
                 <p>Avishka </p> 
-                <p>Prabath </p>
+                &emsp;<p>Prabath </p>
             </div>
             <hr>
             <p style="color: #666362;">Prices</p>
     
  
-            <table style="width:100%" class="pricetable">
+            <table style="width:77%" class="pricetable">
+ 
                 <tr>
-                    <td></td>
-                    <td>Create Gig</td>
-                    <td>Update Progress</td>
-                    <td>Sell</td>
-                </tr>
-                <tr>
-                    <td>Price</td>
+                    <td>Price(per month)</td>
                     <td>$2000.00</td>
-                    <td>$3000.00</td>
-                    <td>$2500.00</td>
-
                 </tr>
             </table>
             <hr>
@@ -142,6 +134,37 @@
              <div class="space">
              <p>District:   Anuradhapura</p>
              <p>PostalCode:   50000</p>
+             </div>
+             <hr>
+
+             <div class="lineone">
+
+             <div class="cardgrow">
+                <div class="imgout">
+                   <img class="imggrow" src="<?php echo IMAGES ?>/growthings/carrot.jpg" alt="profile">
+                </div>
+                <hr>
+                <b><h2>Carrot</h2></b>
+                <p class="locationgrow"><i class="fa-solid fa-location-dot"></i>&ensp;Nuwara Eliya</p>
+             </div>
+             
+             <div class="cardgrow">
+                <div class="imgout">
+                   <img class="imggrow" src="<?php echo IMAGES ?>/growthings/beetroot.jpg" alt="profile">
+                </div>
+                <hr>
+                <b><h2>Beetroot</h2></b>
+                <p class="locationgrow"><i class="fa-solid fa-location-dot"></i>&ensp;Nuwara Eliya</p>
+             </div>
+
+             <div class="cardgrow">
+                <div class="imgout">
+                   <img class="imggrow" src="<?php echo IMAGES ?>/growthings/radish.jpg" alt="profile">
+                </div>
+                <hr>
+                <b><h2>Radish</h2></b>
+                <p class="locationgrow"><i class="fa-solid fa-location-dot"></i>&ensp;Nuwara Eliya</p>
+             </div>
              </div>
         
            
