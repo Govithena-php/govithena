@@ -36,9 +36,11 @@ function highlight($active, $link)
 
         <?php
         if (isset($title)) {
-        ?>
-            <p class="[ page__title ]"><?php echo $title; ?></p>
-        <?php
+            ?>
+            <p class="[ page__title ]">
+                <?php echo $title; ?>
+            </p>
+            <?php
         }
         ?>
 
@@ -46,14 +48,16 @@ function highlight($active, $link)
             <?php if (isset($currentUser)) { ?>
                 <div class="[ buttons ]">
                     <div class="[ notification ]">
-                        <button>
+                        <button onclick="toggleNotificationMenu()">
                             <i class="[ fa-solid fa-bell ]"></i>
                             <?php
                             $notificationCount = 4;
                             if (isset($notificationCount)) {
-                            ?>
-                                <span><?php echo $notificationCount ?></span>
-                            <?php
+                                ?>
+                                <span>
+                                    <?php echo $notificationCount ?>
+                                </span>
+                                <?php
                             }
                             ?>
                         </button>
@@ -63,12 +67,55 @@ function highlight($active, $link)
 
                     <button onclick="toggleProfileMenu()">
                         <div class="[ image ]">
-                            <img src="<?php echo IMAGES ?>/21.jpg" alt="profile">
+                            <img src="<?php echo UPLOADS . '/' . Session::get('user')->getImage(); ?>" alt="profile">
                         </div>
                     </button>
                 </div>
 
+
+                <div id="notification_menu" open="false" class="menu notification_menu ">
+                    <div class="[ notification_message ]">
+                        <?php
+                        foreach ($notifications as $notification) {
+                            ?>
+                            <a>
+                                <?php echo $notification['message']; ?>
+
+                            </a>
+                            <hr>
+                            <?php
+                        }
+                        ?>
+                        <!-- <small>
+                                <?php echo $currentUser->getType() ?>
+                            </small> -->
+                    </div>
+                    <!-- <ul>
+                            <li><a onclick="toggleNotificationMenu()" href="<?php echo URLROOT ?>/dashboard/">
+                                    <i class="[ fa-solid fa-gauge ]"></i>Dashboard
+                                </a></li>
+                            <li><a onclick="toggleNotificationMenu()" href="<?php echo URLROOT ?>/profile">
+                                    <i class="[ fa-solid fa-user-tie ]"></i>Profile</a></li>
+                            <li><a onclick="toggleNotificationMenu()" href="<?php echo URLROOT ?>/signout">
+                                    <i class="[ fa-solid fa-gear ]"></i>Settings</a>
+                            </li>
+                        </ul> -->
+                    <!-- <a onclick="toggleNotificationMenu()" href="<?php echo URLROOT ?>/auth/signout">
+                            <i class="fa-solid fa-right-from-bracket"></i>Sign Out</a> -->
+                </div>
+
+
+
+
                 <div id="profile_menu" open="false" class="[ menu ]">
+                    <div class="[ profile__name ]">
+                        <h3>
+                            <?php echo $currentUser->getFirstName() ?>
+                        </h3>
+                        <small>
+                            <?php echo $currentUser->getType() ?>
+                        </small>
+                    </div>
                     <ul>
                         <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/">
                                 <i class="[ fa-solid fa-gauge ]"></i>Dashboard
@@ -106,7 +153,7 @@ function highlight($active, $link)
     </div>
 
     <div class="[ links ]">
-    <ul>
+        <ul>
             <li>
                 <a href="<?php echo URLROOT ?>/farmer/" class="<?php highlight($active, "dashboard") ?>">
                     <i class="fa-solid fa-gauge"></i>
@@ -120,24 +167,24 @@ function highlight($active, $link)
                 </a>
             </li>
             <li>
-                <a href="<?php echo URLROOT ?>/farmer/agrologist" class="<?php highlight($active, "agrologist") ?>">
-                    <i class="[ fa-solid fa-sack-dollar ]"></i>
-                    <p>Agrologist</p>
-                </a>
-            </li>
-
-            <li>
-                <a href="<?php echo URLROOT ?>/farmer/techassistantfirst" class="<?php highlight($active, "techassistantfirst") ?>">
-                    <i class="[ fa-solid fa-tractor ]"></i>
-                    <p>Technical Assistant</p>
-                </a>
-
-            <li>
                 <a href="<?php echo URLROOT ?>/farmer/investors" class="<?php highlight($active, "investors") ?>">
                     <i class="[ fa-solid fa-tractor ]"></i>
-                    <p>Investors</p>
+                    <p>Investment Requests</p>
                 </a>
             </li>
+            <li>
+                <a href="<?php echo URLROOT ?>/farmer/agrologist" class="<?php highlight($active, "agrologist") ?>">
+                    <i class="[ fa-solid fa-sack-dollar ]"></i>
+                    <p>Agrologists</p>
+                </a>
+            </li>
+
+            <li>
+                <a href="<?php echo URLROOT ?>/farmer/techassistantfirst"
+                    class="<?php highlight($active, "techassistantfirst") ?>">
+                    <i class="[ fa-solid fa-tractor ]"></i>
+                    <p>Tech Assistants</p>
+                </a>
             <li>
                 <a href="<?php echo URLROOT ?>/farmer/progress" class="<?php highlight($active, "progress") ?>">
                     <i class="[ fa-solid fa-tractor ]"></i>

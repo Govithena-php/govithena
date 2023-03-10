@@ -19,6 +19,10 @@ nav ul {
     margin: 0;
 }
 
+nav ul li {
+    margin-bottom: 0;
+}
+
 button {
     border: none;
     background: transparent;
@@ -159,9 +163,10 @@ nav>.navbar {
     object-fit: cover;
 }
 
+
 .navbar>.profile .menu {
     position: absolute;
-    top: 3.75rem;
+    top: 4rem;
     right: 0;
     width: 150px;
     max-height: 200px;
@@ -183,6 +188,35 @@ nav>.navbar {
 .navbar>.profile [open="false"] {
     display: none;
 }
+
+
+.navbar>.profile .menu .profile__name {
+    text-align: right;
+    width: 100%;
+    padding-bottom: 0.1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    margin-bottom: 0.2rem;
+}
+
+
+.navbar>.profile .menu .profile__name h3 {
+    text-transform: capitalize;
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #000000cc;
+    line-height: 1rem;
+}
+
+.navbar>.profile .menu .profile__name small {
+    font-size: 0.6rem;
+    font-weight: 500;
+    color: #575757cc;
+    line-height: 1rem;
+
+}
+
+
 
 .navbar>.profile .menu ul {
     width: 100%;

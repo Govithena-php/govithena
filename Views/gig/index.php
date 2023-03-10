@@ -1,5 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+
+function render_stars($stars, $outof)
+{
+    for ($i = 1; $i <= $outof; $i++) {
+        if ($i <= $stars) {
+            echo '<i class="fas fa-star glow"></i>';
+        } else {
+            echo '<i class="fas fa-star"></i>';
+        }
+    }
+}
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -12,8 +25,34 @@
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/base.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/grid.css">
-    <link rel="stylesheet" href="<?php echo CSS ?>/gig.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/modal.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>gig/index.css">
+
+
+    <style>
+        small {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .famer_page_btn {
+            text-decoration: none;
+            color: #000;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .fa-star {
+            color: gray;
+            margin-inline: 0.25rem;
+        }
+
+        .glow {
+            color: yellow;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -54,7 +93,6 @@
 
     ?>
 
-
     <div class="[ container mt-5 ]">
 
         <div class="[ fs-3 breadcrumbs ]">
@@ -72,18 +110,30 @@
             </div>
             <div class="[ result__content ]">
                 <h1 class="[ mb-1 ]"><?php echo $gig['title'] ?></h1>
-                <p><?php echo $gig['description'] ?>.</p>
-                <p class="[ my-1 ]"><?php echo $gig['location'] ?></p>
-                <div class="[ flex flex-sb-c fs-5 fw-7 ]">
-                    <p class="[ my-1 ]">LKR <?php echo $gig['capital'] ?></p>
-                    <p><?php echo $gig['timePeriod'] ?></p>
+                <p class="mb-1"><?php echo $gig['description'] ?>.</p>
+                <div>
+                    <small>Location :</small>
+                    <p class="[ mb-1 ]"><?php echo $gig['location'] ?></p>
                 </div>
-                <p><?php echo $gig['landArea'] ?> Arces</p>
+                <div class="[ flex flex-sb-c fs-5 fw-7 ]">
+                    <div>
+                        <small>Capital :</small>
+                        <p class="[ mb-1 ]">LKR <?php echo $gig['capital'] ?></p>
+                    </div>
+                    <div>
+                        <small>Time Period :</small>
+                        <p><?php echo $gig['timePeriod'] ?>months</p>
+                    </div>
+                </div>
+                <div>
+                    <small>Land Area :</small>
+                    <p><?php echo $gig['landArea'] ?> Arces</p>
+                </div>
                 <hr />
 
                 <div class="[  ]">
                     <h2>Farmer</h2>
-                    <p><?php echo $farmer['firstName'] . " " . $farmer['lastName'] ?></p>
+                    <a class="famer_page_btn" href="<?php echo URLROOT . "/profile/" . $gig['farmerId'] ?>"><?php echo $farmer['firstName'] . " " . $farmer['lastName'] ?></a>
                     <?php
                     if (isset($state) && $state == 'success') {
                     ?>
@@ -99,92 +149,88 @@
             </div>
         </div>
 
-        <div class="[ rating__grid ]">
-            <div class="[ rating__number ]">
-                <h1>0.0</h1>
-                <div class="[ stars ]">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                </div>
-                <p>0 reviews</p>
-            </div>
-            <div class="[ rating__bars ]">
-                <div class="[ bar ]">
-                    <label for="5">5</label>
-                    <progress id="5" value="1" max="100"></progress>
-                </div>
-                <div class="[ bar ]">
-                    <label for="4">4</label>
-                    <progress id="4" value="1" max="100"></progress>
-                </div>
-                <div class="[ bar ]">
-                    <label for="3">3</label>
-                    <progress id="3" value="1" max="100"></progress>
-                </div>
-                <div class="[ bar ]">
-                    <label for="2">2</label>
-                    <progress id="2" value="1" max="100"></progress>
-                </div>
-                <div class="[ bar ]">
-                    <label for="1">1</label>
-                    <progress id="1" value="1" max="100"></progress>
-                </div>
-            </div>
-        </div>
+        <?php
+        if (isset($gigAvgStars) || isset($stars) || isset($noOfReviews)) {
+        ?>
 
-        <div class="[ description ]">
+            <div class="[ rating__grid ]">
+                <div class="[ rating__number ]">
+                    <h1><?php echo $gigAvgStars ?></h1>
+                    <div class="[ stars ]">
+                        <?php render_stars($gigAvgStars, 5); ?>
+                        <!-- <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i> -->
+                    </div>
+                    <p><?php echo $noOfReviews ?> reviews</p>
+                </div>
+                <div class="[ rating__bars ]">
+                    <div class="[ bar ]">
+                        <label for="5">5</label>
+                        <progress id="5" value="<?php echo $stars['5'] ?>" max="100"></progress>
+                    </div>
+                    <div class="[ bar ]">
+                        <label for="4">4</label>
+                        <progress id="4" value="<?php echo $stars['4'] ?>" max="100"></progress>
+                    </div>
+                    <div class="[ bar ]">
+                        <label for="3">3</label>
+                        <progress id="3" value="<?php echo $stars['3'] ?>" max="100"></progress>
+                    </div>
+                    <div class="[ bar ]">
+                        <label for="2">2</label>
+                        <progress id="2" value="<?php echo $stars['2'] ?>" max="100"></progress>
+                    </div>
+                    <div class="[ bar ]">
+                        <label for="1">1</label>
+                        <progress id="1" value="<?php echo $stars['1'] ?>" max="100"></progress>
+                    </div>
+                </div>
+            </div>
+        <?php
+        }
+        ?>
+
+        <!-- <div class="[ description ]">
             <h1><?php echo $gig['title'] ?></h1>
             <p><?php echo $gig['description'] ?></p>
-        </div>
+        </div> -->
 
 
         <div class="[ reviews ]">
             <h1>Reviews</h1>
             <hr>
             <div class="[ reviews__wrapper ]">
-
-                <div class="[ review ]">
-                    <div class="[ review__header ]">
-                        <img src="https://xsgames.co/randomusers/avatar.php?g=male" alt="profile">
-                        <h3>Reviewer name</h3>
-                    </div>
-                    <p>
-                        Occaecat occaecat et laborum exercitation eiusmod minim. Adipisicing consequat minim nostrud aliqua eu eu laborum officia. Deserunt ex qui consectetur Lorem excepteur culpa cillum culpa aute commodo velit est ex ut.
-                    </p>
-                    <div class="[ review__footer ]">
-                        <p>12/12/2022</p>
-                        <div class="[ stars ]">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
+                <?php
+                if (!isset($reviews) && empty($reviews)) {
+                    require(COMPONENTS . "dashboard/noDataFound.php");
+                } else {
+                    foreach ($reviews as $review) {
+                ?>
+                        <div class="[ review ]">
+                            <div class="[ review__header ]">
+                                <img src="<?php echo UPLOADS . $review['image'] ?>" alt="profile">
+                                <h3><?php echo $review['firstName'] . " " . $review['lastName'] ?></h3>
+                            </div>
+                            <p><?php echo $review['q8'] ?></p>
+                            <div class="[ review__footer ]">
+                                <p><?php echo $review['timestamp'] ?></p>
+                                <div class="[ stars ]">
+                                    <?php render_stars($review['q1'], 5); ?>
+                                    <!-- <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i> -->
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="[ review ]">
-                    <div class="[ review__header ]">
-                        <img src="https://xsgames.co/randomusers/avatar.php?g=male" alt="profile">
-                        <h3>Reviewer name</h3>
-                    </div>
-                    <p>
-                        Occaecat occaecat et laborum exercitation eiusmod minim. Adipisicing consequat minim nostrud aliqua eu eu laborum officia. Deserunt ex qui consectetur Lorem excepteur culpa cillum culpa aute commodo velit est ex ut.
-                    </p>
-                    <div class="[ review__footer ]">
-                        <p>12/12/2022</p>
-                        <div class="[ stars ]">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                    </div>
-                </div>
-
+                <?php
+                    }
+                }
+                ?>
             </div>
         </div>
 
@@ -206,11 +252,18 @@
                 <!-- <button onclick="closeModal()">&times;</button> -->
             </div>
             <div class="[ modal__body ]">
-                <p class="[ fs-5 my-1 fw-5 ]"><?php echo $gig['title'] ?></p>
+                <p class="[ fs-6 my-1 fw-5 ]"><?php echo $gig['title'] ?></p>
+                <small>by</small>
                 <p><?php echo $farmer['firstName'] . " " . $farmer['lastName'] ?></p>
                 <div class="[ flex flex-sb-c my-05 ]">
-                    <p>LKR <?php echo $gig['capital'] ?></p>
-                    <p><?php echo $gig['timePeriod'] ?></p>
+                    <div>
+                        <small>Capital :</small>
+                        <p>LKR <?php echo $gig['capital'] ?></p>
+                    </div>
+                    <div>
+                        <small>Time Period :</small>
+                        <p><?php echo $gig['timePeriod'] ?> Months</p>
+                    </div>
                 </div>
                 <form class="[ modal__form ]" method="post" action="<?php echo URLROOT ?>/gig/request">
                     <h3>Your Offer</h3>

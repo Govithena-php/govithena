@@ -63,12 +63,16 @@ function highlight($active, $link)
 
                     <button onclick="toggleProfileMenu()">
                         <div class="[ image ]">
-                            <img src="<?php echo IMAGES ?>/21.jpg" alt="profile">
+                            <img src="<?php echo UPLOADS . '/' . $currentUser->getImage(); ?>" alt="profile">
                         </div>
                     </button>
                 </div>
 
                 <div id="profile_menu" open="false" class="[ menu ]">
+                    <div class="[ profile__name ]">
+                        <h3><?php echo $currentUser->getFirstName() ?></h3>
+                        <small><?php echo $currentUser->getType() ?></small>
+                    </div>
                     <ul>
                         <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/">
                                 <i class="[ fa-solid fa-gauge ]"></i>Dashboard
@@ -80,7 +84,8 @@ function highlight($active, $link)
                         </li>
                     </ul>
                     <a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/auth/signout">
-                        <i class="fa-solid fa-right-from-bracket"></i>Sign Out</a>
+                        <i class="fa-solid fa-right-from-bracket"></i>Sign Out
+                    </a>
                 </div>
 
             <?php } else { ?>
@@ -114,6 +119,12 @@ function highlight($active, $link)
                 </a>
             </li>
             <li>
+                <a href="<?php echo URLROOT ?>/dashboard/gigs" class="<?php highlight($active, "gigs") ?>">
+                    <i class="[ fa-solid fa-tractor ]"></i>
+                    <p>Gigs</p>
+                </a>
+            </li>
+            <li>
                 <a href="<?php echo URLROOT ?>/dashboard/myinvestments" class="<?php highlight($active, "myinvestments") ?>">
                     <i class="[ fa-solid fa-sack-dollar ]"></i>
                     <p>My Investments</p>
@@ -123,12 +134,6 @@ function highlight($active, $link)
                 <a href="<?php echo URLROOT ?>/dashboard/withdraw" class="<?php highlight($active, "mywithdraw") ?>">
                     <i class="[ fa-solid fa-sack-dollar ]"></i>
                     <p>My Withdraw</p>
-                </a>
-            </li>
-            <li>
-                <a href="<?php echo URLROOT ?>/dashboard/myfarmers" class="<?php highlight($active, "myfarmers") ?>">
-                    <i class="[ fa-solid fa-tractor ]"></i>
-                    <p>Farmers</p>
                 </a>
             </li>
             <li>

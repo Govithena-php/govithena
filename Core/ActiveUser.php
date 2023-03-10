@@ -7,15 +7,17 @@ class ActiveUser
     private $firstName;
     private $lastName;
     private $type;
+    private $img;
     private $logeddIn = false;
 
-    public function __construct($uid, $username, $firstName, $lastName, $type, $logeddIn)
+    public function __construct($uid, $username, $firstName, $lastName, $type, $img, $logeddIn)
     {
         $this->uid = $uid;
         $this->username = $username;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->type = $type;
+        $this->img = $img;
         $this->logeddIn = $logeddIn;
 
         Session::set(['user' => $this]);
@@ -77,6 +79,11 @@ class ActiveUser
         return $this->type;
     }
 
+    public function getImage()
+    {
+        return $this->img;
+    }
+
     public function isLogeddIn()
     {
         return $this->logeddIn;
@@ -105,6 +112,11 @@ class ActiveUser
     public function setType($type)
     {
         $this->type = $type;
+    }
+
+    public function setImage($img)
+    {
+        $this->img = $img;
     }
 
     public function setLogeddIn($logeddIn)

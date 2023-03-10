@@ -7,19 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agrologist | Dashboard</title>
     <link rel="icon" type="image/x-icon" href="<?php echo IMAGES ?>/favicon.png">
-    <link rel="stylesheet" type="text/css" href="../Webroot/css/sidebar.css">
     <link rel="stylesheet" href="../Webroot/css/ui.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" href="../Webroot/css/agrologist/myaccount.css">
-    <link rel="stylesheet" href="../Webroot/css/dashHeader.css">
-    <link rel="stylesheet" href="../Webroot/css/dashFooter.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 
 <body class="bg-gray h-screen">
-    <?php include COMPONENTS . 'dashboard/header.php'; ?>
-
-    <?php include 'sidebar.php'; ?>
-    <div class="dashboard-container h-screen" style="margin-bottom: 200px">
+<?php
+    $datadata = $notifications;
+    $active = "myaccount";
+    require_once("navigator.php");
+    ?>
+    <div class="[ container ][ dashboard ]" container-type="dashboard-section">
         <div class="[ profile_continer ]">
 
             <div class="[ profile_wrapper ]">
@@ -27,7 +28,7 @@
 
                 <div class="[ profile_card bg-light ]">
                     <div class="[ profile_img ]">
-                        <img src="<?php echo IMAGES ?>/farmer.jpeg" alt="">
+                        <img src="<?php echo UPLOADS . '/' . $agrologist[0]['image'] ?>" alt="">
                     </div>
                     <form action="<?php echo URLROOT . '/agrologist/requests/' . $request['requestId'] . '/' ?>"
                         method="POST">
@@ -39,10 +40,10 @@
 
                                 <?php echo "<h4>" . ucwords($agrologist[0]['userType']) . "</h4>"; ?>
                                 <p class="flex flex-row">
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star rating_checked"></span>
+                                    <span class="fa fa-star rating_checked"></span>
+                                    <span class="fa fa-star rating_checked"></span>
+                                    <span class="fa fa-star rating_checked"></span>
                                     <span class="fa fa-star"></span>
                                 </p>
 
@@ -75,8 +76,18 @@
                 <?php echo "<div>" . $agrologist[0]['NIC'] . "</div>"; ?>
                 <div style="color: grey" class="pt-1">Mobile Number</div>
                 <?php echo "<div>" . $agrologist[0]['phoneNumber'] . "</div>"; ?>
+                <div style="color: grey" class="pt-1">NIC</div>
+                <?php echo "<div>" . ucwords($agrologist[0]['NIC']) . "</div>"; ?>
+                <div style="color: grey" class="pt-1">Address Line1</div>
+                <?php echo "<div>" . ucwords($agrologist[0]['addressLine1']) . "</div>"; ?>
+                <div style="color: grey" class="pt-1">Address Line2</div>
+                <?php echo "<div>" . ucwords($agrologist[0]['addressLine2']) . "</div>"; ?>
                 <div style="color: grey" class="pt-1">City</div>
                 <?php echo "<div>" . ucwords($agrologist[0]['city']) . "</div>"; ?>
+                <div style="color: grey" class="pt-1">District</div>
+                <?php echo "<div>" . ucwords($agrologist[0]['district']) . "</div>"; ?>
+                <div style="color: grey" class="pt-1">Postal Code</div>
+                <?php echo "<div>" . ucwords($agrologist[0]['postalCode']) . "</div>"; ?>
 
 
                 <div id="edit_detials_modal" class="modal">
@@ -84,16 +95,27 @@
                     <div class="modal-content">
                         <span class="close close_modal1">&times;</span>
                         <h3>Edit Details</h3>
-                        <form class="form pt-1" action="<?php echo URLROOT ?>/agrologist/myaccount" method="post">
+                        <form class="form pt-1" action="<?php echo URLROOT ?>/agrologist/myaccount" method="post" enctype="multipart/form-data">
 
-                            <input type="text" name="firstName" class="" placeholder=""
+                            <input type="text" name="firstName" class="" placeholder="First Name"
                                 value="<?php echo $agrologist[0]['firstName'] ?>"><br>
-                            <input type="text" name="lastName" class="" placeholder=""
+                            <input type="text" name="lastName" class="" placeholder="Last Name"
                                 value="<?php echo $agrologist[0]['lastName'] ?>"><br>
-                            <input type="text" name="city" class="" placeholder=""
-                                value="<?php echo $agrologist[0]['city'] ?>"><br>
-                            <input type="text" name="phoneNumber" class="" placeholder=""
+                            <input type="text" name="phoneNumber" class="" placeholder="Mobile"
                                 value="<?php echo $agrologist[0]['phoneNumber'] ?>"><br>
+                            <input type="text" name="NIC" class="" placeholder="NIC"
+                                value="<?php echo $agrologist[0]['NIC'] ?>"><br>
+                            <input type="text" name="addressLine1" class="" placeholder="Address Line1"
+                                value="<?php echo $agrologist[0]['addressLine1'] ?>"><br>
+                            <input type="text" name="addressLine2" class="" placeholder="Address Line2"
+                                value="<?php echo $agrologist[0]['addressLine2'] ?>"><br>
+                            <input type="text" name="city" class="" placeholder="City"
+                                value="<?php echo $agrologist[0]['city'] ?>"><br>
+                            <input type="text" name="district" class="" placeholder="District"
+                                value="<?php echo $agrologist[0]['district'] ?>"><br>
+                            <input type="text" name="postalCode" class="" placeholder="Postal Code"
+                                value="<?php echo $agrologist[0]['postalCode'] ?>"><br>
+                            <input type='file' name="profile_img"><br />
                             <button type="submit" name="edit_details_btn" class="btn uppercase"
                                 onclick="alert('Succesffully updated');">Edit details</button>
                         </form>
@@ -130,7 +152,7 @@
     </div>
 
 
-    <?php require COMPONENTS . "dashboard/footer.php"; ?>
+    <?php require "footer.php"; ?>
     <script src="<?php echo JS ?>/app.js"></script>
 
 </body>

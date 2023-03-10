@@ -4,7 +4,7 @@ class User extends Model
 {
 
 
-    function viewFarmer($id)
+    function fetchBy($id)
     {
         try {
             $sql = "SELECT * FROM user WHERE uid = :id";
@@ -100,6 +100,24 @@ class User extends Model
             $e->getMessage();
             die();
             return null;
+        }
+    }
+
+
+    public function getUserById($uid)
+    {
+        try {
+            $sql = "SELECT LG.uid, LG.username, LG.userType, user.firstName, user.lastName, user.phoneNumber, user.addressLine1, user.addressLine2, user.city, user.district, user.postalCode, user.image FROM login_credential LG INNER JOIN user ON LG.uid = user.uid WHERE user.uid = :uid";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['uid' => $uid]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($user) {
+                return ['status' => true, 'data' => $user];
+            } else {
+                return ['status' => true, 'data' => false];
+            }
+        } catch (PDOException $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
         }
     }
 }

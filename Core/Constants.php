@@ -8,6 +8,8 @@ class PREFIX
     const REQUEST = 'REQ';
     const RATING = 'RAT';
     const REVIEW = 'REV';
+    const INVESTMENT = 'INV';
+    const PROGRESS = 'PRG';
 }
 
 class PRODUCT
@@ -39,6 +41,13 @@ class STATUS
     const DELETED = "DELETED";
     const COMPLETED = "COMPLETED";
     const ACCEPTED = "ACCEPTED";
+    const REJECTED = "REJECTED";
+}
+
+
+class IMAGES
+{
+    const TYPES = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
 }
 
 

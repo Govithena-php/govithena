@@ -18,7 +18,7 @@
         <div class="[ banner ]">
             <img src="<?php echo URLROOT ?>/Webroot/images/bg.jpg" alt="banner" />
             <div class="[ banner__content ]">
-                <h1>Invest in the agreculture of Sri Lanka.</h1>
+                <h1>Grow your wealth, grow our food,<br>Invest in Agriculture Today.</h1>
             </div>
         </div>
         <div class="[ content ]">
@@ -30,7 +30,7 @@
             <div class="[ card ]">
                 <div class="[ header ]">
                     <h1>Who are you?</h1>
-                    <small>Select your user type</small>
+                    <small>Select your roll in agriculture.</small>
                 </div>
 
                 <form class="[ actors ]" method="post" action="<?php echo URLROOT; ?>/auth/signup">
@@ -41,20 +41,20 @@
 
                     <label for="investor" class="[ actor ]">
                         <h4>Investor</h4>
-                        <p>Lorem ipsum dolor sit amet amet consectetur adipisicing elit.</p>
+                        <p>Grow Your Wealth with Confidence - Invest in Agriculture with Us.</p>
 
                     </label>
                     <label for="farmer" class="[ actor ]">
                         <h4>Farmer</h4>
-                        <p>Lorem ipsum dolor sit amet amet consectetur adipisicing elit.</p>
+                        <p>Nourishing the world, one seed at a time - Be a hardworking farmer."</p>
                     </label>
                     <label for="agrologist" class="[ actor ]">
                         <h4>Agrologist</h4>
-                        <p>Lorem ipsum dolor sit amet amet consectetur adipisicing elit.</p>
+                        <p>Bridging the gap between nature and agriculture - Introducing the Agrologist.</p>
                     </label>
                     <label for="tech_assistant" class="[ actor ]">
                         <h4>Tech Assistant</h4>
-                        <p>Lorem ipsum dolor sit amet amet consectetur adipisicing elit.</p>
+                        <p>Empowering farmers through technology - Meet the Technical Assistant.</p>
                     </label>
                 </form>
 

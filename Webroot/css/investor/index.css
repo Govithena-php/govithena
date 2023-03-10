@@ -2,6 +2,11 @@
     outline: 2px solid limegreen;
 } */
 
+body{
+    background-color:var(--clr-gray, #fff);
+}
+
+
 .dashboard .header {
     min-height: 10rem;
     border: 1px solid #e5e5e5;
@@ -53,6 +58,7 @@
     flex-direction: column;
     justify-content: center;
     gap: 0.5rem;
+    background: var(--clr-light, #fff);
 }
 
 .cards .card h3 {
@@ -85,10 +91,18 @@
     gap: 2rem;
 }
 
+.chart-pie {
+    margin-block: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+}
+
 .charts .chart {
     /* min-height: 20rem; */
     padding: 2rem 1rem;
     border: 1px solid #e5e5e5;
+    background: var(--clr-light, #fff);
 }
 
 .charts .chart canvas {
@@ -104,10 +118,12 @@
     height: clamp(20rem, 30vw, 30rem);
 }
 
+
 .block {
     border: 1px solid #e5e5e5;
     padding: 1rem;
     border-radius: 0.5rem;
+    background: var(--clr-light, #fff);
 }
 
 .progress__inestments {

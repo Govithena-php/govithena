@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/table.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/gridTable.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/investor/myinvestments.css">
 
     <title>Dashboard | Investor</title>
@@ -28,19 +28,52 @@
     <?php $name = "Janith"; ?>
 
     <div class="[ container ][ investments ]" container-type="dashboard-section">
-
+        <div class="[ caption ]">
+            <h3>View all your investment activity in one place.</h3>
+            <p>Easily track your investments and see how your portfolio has grown over time.</p>
+        </div>
         <div class="[ investments__heading ]">
+            <div class="[ investments__add ]">
+                <div class="[ input__control ]">
+                    <label for="from">From :</label>
+                    <input id="from" type="date">
+                </div>
+                <div class="[ input__control ]">
+                    <label for="to">To :</label>
+                    <input id="to" type="date">
+                </div>
+                <div class="[ input__control ]">
+                    <label for="location">Location :</label>
+                    <select id="location">
+                        <option value="all">All</option>
+                        <option value="colombo">Colombo</option>
+                        <option value="galle">Galle</option>
+                        <option value="kandy">Kandy</option>
+                        <option value="matara">Matara</option>
+                        <option value="nuwaraeliya">Nuwara Eliya</option>
+                        <option value="trincomalee">Trincomalee</option>
+                    </select>
+                </div>
+                <div class="[ input__control ]">
+                    <label for="category">Category :</label>
+                    <select id="category">
+                        <option value="all">All</option>
+                        <option value="vegetable">Vegetable</option>
+                        <option value="fruit">Fruit</option>
+                        <option value="grains">Grains</option>
+                        <option value="spices">Spices</option>
+                    </select>
+                </div>
+                <div class="[ input__control ]">
+                    <button type="button">Apply</button>
+                </div>
+
+            </div>
             <div class="[ investments__search ]">
-                <h4>Filter</h4>
                 <input type="text" placeholder="Search">
                 <button type="button">
                     <i class="fas fa-search"></i>
                 </button>
-            </div>
-            <div class="[ investments__add ]">
-                <a href="<?php echo URLROOT ?>/dashboard/addinvestment">
-                    Invest
-                </a>
             </div>
         </div>
         <?php
@@ -52,25 +85,100 @@
                 require_once(COMPONENTS . "dashboard/noDataFound.php");
             } else {
         ?>
-                <div class="[ investments__container ]">
-                    <div class="[ investment__heading ]">
-                        <h3>Title</h3>
-                        <h3>Amount</h3>
-                        <h3>Timestamp</h3>
-                        <h3>Category</h3>
-                    </div>
-                    <?php
-                    foreach ($investments as $investment) {
-                    ?>
-                        <div class="[ investment ]">
-                            <h3><?php echo $investment['title'] ?></h3>
-                            <p><?php echo $investment['amount'] ?></p>
-                            <p><?php echo $investment['timestamp'] ?></p>
-                            <p><?php echo $investment['category'] ?></p>
+
+                <div class="[ requests__wrapper ]">
+                    <div class="[ grid__table ]" style="
+                                        --xl-cols:  1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.2fr;
+                                        --lg-cols: 1.5fr 0.5fr 0.5fr 1fr 1fr;
+                                        --md-cols: 1fr 0.5fr 0.5fr;
+                                        --sm-cols: 2fr 1fr;
+                                    ">
+                        <div class="[ head ]">
+                            <div class="[ data ]">
+                                <p>Gig</p>
+                            </div>
+                            <div class="[ data ]" hideIn="md">
+                                <p>Category</p>
+                            </div>
+                            <div class="[ data ]" hideIn="sm">
+                                <p>Amount</p>
+                            </div>
+                            <div class="[ data ]" hideIn="lg">
+                                <p>Time Period</p>
+                            </div>
+                            <div class="[ data ]" hideIn="lg">
+                                <p>Location</p>
+                            </div>
+                            <div class="[ data ]" hideIn="md">
+                                <p>Invested Date</p>
+                            </div>
                         </div>
-                    <?php
-                    }
-                    ?>
+                        <div class="[ body ]">
+                            <?php
+                            foreach ($investments as $investment) {
+                            ?>
+                                <div class="[ row ]">
+                                    <div class="[ data ]">
+                                        <div class="[ item__card ]">
+                                            <div class="[ img ]">
+                                                <img width="50" src="<?php echo UPLOADS . $investment['image'] ?>" />
+                                            </div>
+                                            <div class="[ content ]">
+                                                <a href="<?php echo URLROOT . "/gig/" . $investment['gigId'] ?>">
+                                                    <h2><?php echo $investment['title'] ?></h2>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="[ data ]" hideIn="md">
+                                        <p class="[ tag ]"><?php echo $investment['category'] ?></p>
+                                    </div>
+                                    <div class="[ data ]" hideIn="sm">
+                                        <h3>LKR <?php echo $investment['amount'] ?></h3>
+                                    </div>
+                                    <div class="[ data ]" hideIn="lg">
+                                        <h3><?php echo $investment['timePeriod'] ?> Months</h3>
+                                    </div>
+                                    <div class="[ data ]" hideIn="lg">
+                                        <h3><?php echo $investment['location'] ?></h3>
+                                    </div>
+                                    <div class="[ data ]" hideIn="md">
+                                        <p><?php echo $investment['investedDate'] ?></p>
+                                    </div>
+                                    <div class="[ data ]">
+                                        <div class=" [ actions ]">
+                                            <button for="<?php echo $investment['id'] ?>"><i class="fa fa-chevron-circle-down"></i></button>
+                                        </div>
+                                    </div>
+                                    <div id="<?php echo $investment['id'] ?>" class="[ expand ]">
+
+                                        <div class="[ data ]" showIn="md">
+                                            <p class="[ tag ]"><?php echo $investment['category'] ?></p>
+                                        </div>
+                                        <div class="[ data ]" showIn="sm">
+                                            <h4>Offer :</h4>
+                                            <p>LKR <?php echo $investment['offer'] ?></p>
+                                        </div>
+                                        <div class="[ data ]" showIn="lg">
+                                            <h4>Time Periold :</h4>
+                                            <p><?php echo $investment['timePeriod'] ?> Months</p>
+                                        </div>
+                                        <div class="[ data ]" showIn="lg">
+                                            <h4>Location</h4>
+                                            <p><?php echo $investment['location'] ?></p>
+                                        </div>
+                                        <div class="[ data ]" showIn="md">
+                                            <h4>Invested Date</h4>
+                                            <p><?php echo $investment['investedDate'] ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php
+                            }
+                            ?>
+
+                        </div>
+                    </div>
                 </div>
         <?php
             }
@@ -82,6 +190,32 @@
     require_once("footer.php");
     ?>
     <script src="<?php echo JS ?>/dashboard/dashboard.js"></script>
+    <script>
+        const expandBtns = document.querySelectorAll(".actions>button")
+        const expands = document.querySelectorAll(".expand")
+        const icons = document.querySelectorAll(".actions>button>i")
+        Array.from(expandBtns).forEach(expandBtn => {
+
+            expandBtn.addEventListener("click", () => {
+                let id = expandBtn.getAttribute("for")
+                Array.from(icons).forEach(icon => {
+                    icon.removeAttribute("show")
+                })
+
+                Array.from(expands).forEach(expand => {
+                    if (expand.id == id) {
+                        expand.toggleAttribute("show")
+                        if (expand.hasAttribute("show")) {
+                            expandBtn.children[0].setAttribute("show", null)
+                        }
+                    } else {
+                        expand.removeAttribute("show")
+                    }
+                })
+
+            })
+        })
+    </script>
 </body>
 
 </html>

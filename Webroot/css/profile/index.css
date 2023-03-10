@@ -1,3 +1,6 @@
+.container[container-type="section"]{
+    margin-block: 2rem;
+}
 nav {
     background-color: var(--clr-dark, #000);
 }
@@ -58,6 +61,7 @@ nav {
 
 .user__details {
     justify-self: flex-start;
+    grid-column: 2/4;
 }
 
 .additional__details {
@@ -97,6 +101,7 @@ nav {
 
 
 .result__card {
+    position: relative;
     min-height: 300px;
     display: grid;
     grid-template-rows: 1fr 0.5fr;
@@ -194,6 +199,7 @@ nav {
 }
 
 .review__header {
+    text-transform: capitalize;
     display: flex;
     gap: 1rem;
     margin-bottom: 1rem;
@@ -211,6 +217,84 @@ nav {
 
 .review__header>h3 {
     font-weight: var(--fw-5);
+}
+
+.card__content{
+    padding: 0 0.5rem;
+}
+
+small {
+    font-weight: 600;
+}
+
+
+.flex-row {
+    justify-content: space-between;
+    margin-top: 1rem;
+    gap: 2rem;
+}
+
+.flex-row a {
+    text-decoration: none;
+    color: #000;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+}
+
+.flex-row i {
+    color: var(--clr-primary);
+}
+
+.flex-row p {
+}
+
+.type {
+    text-transform: capitalize;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.card__link{
+    text-decoration: none;
+    color: #000;
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.category__tag {
+    position:absolute;
+    z-index: 10;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    background-color: var(--clr-primary);
+    color: #fff;
+    border-radius: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    opacity: 0.8;
+    backdrop-filter: blur(10px);
+}
+
+.fa-star {
+    color: gray;
+    margin-inline: 0.25rem;
+}
+
+.glow {
+    color: yellow;
+}
+
+.review__footer {
+    padding-top: 1rem;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
 }
 
 

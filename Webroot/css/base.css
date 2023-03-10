@@ -71,8 +71,6 @@ body {
     font-family: var(--ff-poppins);
     font-size: var(--fs-4);
     line-height: 1.5;
-    background-color: var(--clr-gray);
-
 }
 
 img,
@@ -238,6 +236,7 @@ select {
     margin-bottom: 0;
     padding-block: 1rem;
     transition: all 0.3s ease-in-out;
+    min-height: calc(100vh - var(--default-footer-height));
 }
 
 .container[container-type="dashboard-footer"] {
@@ -336,8 +335,8 @@ select {
 
 @media screen and (max-width:768px) {
     :root {
-        --container-margin-left: 1rem !important;
-        --container-margin-right: 1rem !important;
+        --container-margin-left: 1.5rem !important;
+        --container-margin-right: 1.5rem !important;
     }
 
     .container {
@@ -363,8 +362,8 @@ select {
 
 @media screen and (max-width: 576px) {
     :root {
-        --container-margin-left: 0.5rem !important;
-        --container-margin-right: 0.5rem !important;
+        --container-margin-left: 1rem !important;
+        --container-margin-right: 1rem !important;
     }
 
     .container {

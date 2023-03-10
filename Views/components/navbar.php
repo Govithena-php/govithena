@@ -19,9 +19,9 @@ $currentUser = Session::get('user');
 
         <div class="[ menu ]">
             <ul>
-                <li><a href="<?php echo URLROOT ?>/dashboard/">About Us</a></li>
-                <li><a href="<?php echo URLROOT ?>/dashboard/">Services</a></li>
-                <li><a href="<?php echo URLROOT ?>/dashboard/">Contact Us</a></li>
+                <li><a href="<?php echo URLROOT ?>/home/about">About Us</a></li>
+                <li><a href="<?php echo URLROOT ?>/home/services">Services</a></li>
+                <li><a href="<?php echo URLROOT ?>/home/contact">Contact Us</a></li>
             </ul>
         </div>
 
@@ -46,12 +46,18 @@ $currentUser = Session::get('user');
 
                     <button onclick="toggleProfileMenu()">
                         <div class="[ image ]">
-                            <img src="<?php echo IMAGES ?>/21.jpg" alt="profile">
+                            <?php
+                            ?>
+                            <img src="<?php echo UPLOADS . '/' . Session::get('user')->getImage(); ?>" alt="profile">
                         </div>
                     </button>
                 </div>
 
                 <div id="profile_menu" open="false" class="[ menu ]">
+                    <div class="[ profile__name ]">
+                        <h3><?php echo $currentUser->getFirstName() ?></h3>
+                        <small><?php echo $currentUser->getType() ?></small>
+                    </div>
                     <ul>
                         <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/">
                                 <i class="[ fa-solid fa-gauge ]"></i>Dashboard

@@ -31,13 +31,13 @@
             <div class="[ flex-col center-x ][ title ]">
                 <h3>Welcome Back,</h3>
                 <h1><?php echo $name; ?></h1>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+                <p>Welcome to the Agriculture Investment Dashboard.</p>
             </div>
             <div class="[ flex-col center-x ][ balance ]">
                 <h3>Balance</h3>
                 <div class="[ amount ]">
                     <span class="[ LKRBadge ]"></span>
-                    <h1>1500000.00</h1>
+                    <h1>191,500.00</h1>
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
                 <h3>Investments</h3>
                 <div class="[ amount ]">
                     <span class="[ LKRBadge ]"></span>
-                    <h1>1500000.00</h1>
+                    <h1>180,000.00</h1>
                     <h4>12% <i class="fa-solid fa-arrow-down"></i></h4>
                 </div>
                 <p>Compared to (LKR 21340 last month)</p>
@@ -57,7 +57,7 @@
                 <h3>Gain</h3>
                 <div class="[ amount ]">
                     <span class="[ LKRBadge ]"></span>
-                    <h1>1500000.00</h1>
+                    <h1>230,000.00</h1>
                     <h4>12% <i class="fa-solid fa-arrow-up"></i></h4>
                 </div>
                 <p>Compared to (LKR 21340 last month)</p>
@@ -67,7 +67,7 @@
                 <h3>Profilt</h3>
                 <div class="[ amount ]">
                     <span class="[ LKRBadge ]"></span>
-                    <h1>1500000.00</h1>
+                    <h1>50,000.00</h1>
                     <h4>12% <i class="fa-solid fa-arrow-down"></i></h4>
                 </div>
                 <p>Compared to (LKR 21340 last month)</p>
@@ -77,7 +77,7 @@
                 <h3>Widthdraw</h3>
                 <div class="[ amount ]">
                     <span class="[ LKRBadge ]"></span>
-                    <h1>15000.00</h1>
+                    <h1>38,500.00</h1>
                     <h4>12% <i class="fa-solid fa-arrow-up"></i></h4>
                 </div>
                 <p>Compared to (LKR 21340 last month)</p>

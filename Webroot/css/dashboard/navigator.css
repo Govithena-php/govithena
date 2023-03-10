@@ -59,8 +59,8 @@
     font-size: 1.2rem;
     font-weight: 500;
     color: var(--clr-light, white);
-    margin-left: auto;
-    margin-right:2rem;
+    margin-left: 0;
+    margin-right: auto;
 }
 
 
@@ -175,7 +175,7 @@
 .profile .menu {
     position: absolute;
     top: 3.75rem;
-    right: 1rem;
+    right: 2rem;
     width: 150px;
     max-height: 200px;
     border-radius: 5px;
@@ -197,6 +197,41 @@
     display: none;
 }
 
+.profile .menu .profile__name {
+    text-align: right;
+    width: 100%;
+    padding-bottom: 0.1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    margin-bottom: 0.2rem;
+}
+
+.profile .notification_menu .notification_message {
+    text-align: left;
+    width: 100%;
+    padding-bottom: 0.1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    margin-bottom: 0.2rem;
+    border-bottom: none;
+}
+
+
+.profile .menu .profile__name h3 {
+    text-transform: capitalize;
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #000000cc;
+    line-height: 1rem;
+}
+
+.profile .menu .profile__name small {
+    font-size: 0.6rem;
+    font-weight: 500;
+    color: #575757cc;
+    line-height: 1rem;
+
+}
+
 .profile .menu ul {
     width: 100%;
     display: flex;
@@ -206,6 +241,10 @@
     gap: 0.5rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.profile .menu ul li {
+    margin-bottom: 0;
 }
 
 .profile .menu a {

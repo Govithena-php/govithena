@@ -18,7 +18,7 @@
         <div class="[ banner ]">
             <img src="<?php echo URLROOT ?>/Webroot/images/bg.jpg" alt="banner" />
             <div class="[ banner__content ]">
-                <h1>Invest in the agreculture of Sri Lanka.</h1>
+                <h1>Harvesting profits and hope,<br>Invest in Farming for a Better Tomorrow.</h1>
             </div>
         </div>
         <div class="[ content ]">

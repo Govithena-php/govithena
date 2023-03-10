@@ -24,7 +24,7 @@
 
     <?php
     $active = "agrologist";
-    $title = "Agrologist";
+    $title = "Agrologists";
     require_once("navigator.php");
     ?>
 
@@ -97,7 +97,7 @@
 
             <form class="[ fs-3 ][ search__form ]" action="<?php echo URLROOT . "/search/" ?>" method="get">
                 <input class="" type="text" name="terms" placeholder="Search by: name / location" disabled>
-                <button class="[ btn btn-primary ] [ search_button ]" type="submit" disabled>search</button>
+                <button class="[ btn btn-primary ] [ search_button ]" type="submit" disabled>Search</button>
             </form>
 
         </div>
@@ -110,7 +110,7 @@
 
                     <div class="[ requestcard bg-light ]">
                         <div class="[ requestimg ]">
-                            <img class="img" src="<?php echo IMAGES ?>/investor8.jpg" alt="profile">
+                            <img class="img" src="<?php echo UPLOADS . $agrologist['image'] ?>" alt=" profile">
                         </div>
                         <div class="flex flex-row ">
                             <div class="[ requestcont ]">

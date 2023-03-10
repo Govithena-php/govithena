@@ -73,3 +73,239 @@
   .descript{
     margin: 0px 20px;
   }
+
+
+
+  //new css
+
+  .filters {
+    /* display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 100%; */
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ccc;
+    align-items: end;
+    justify-items: end;
+}
+
+.filters .search {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.filters .search h4 {
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+}
+
+.filters .search input {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+}
+
+.filters .search input:focus {
+    outline: none;
+}
+
+.filters .search button {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--clr-primary);
+    border-radius: 0 5px 5px 0;
+    background-color: var(--clr-primary);
+    color: var(--clr-light);
+    cursor: pointer;
+}
+
+.filters .search button:focus {
+    outline: none;
+}
+
+.options {
+    align-items: end;
+}
+
+.options .input__control {
+    display: flex;
+    flex-direction: column;
+}
+
+.options .input__control label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.options .input__control input[type="date"] {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.options .input__control select {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.options .input__control button {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: var(--clr-primary);
+    color: var(--clr-light);
+    cursor: pointer;
+}
+
+.caption {
+    /* width: 60%; */
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    margin-inline: 0;
+}
+
+.caption h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.caption p {
+    width: 60%;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--clr-text-gray, #535353);
+    margin-bottom: 0.5rem;
+}
+
+.freespace__text {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--clr-text-gray, #000);
+    margin-block: 2rem;
+    text-align: center;
+}
+
+
+
+.tag {
+  width: fit-content;
+  display: block;
+  padding: 0.2rem 0.5rem;
+  background-color: var(--clr-gray, #a2a2a2);
+  border-radius: 1rem;
+  color: var(--clr-primary, #1d1d1d);
+}
+
+.item__card {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  align-items: center;
+  gap: 1rem;
+}
+
+.item__card a {
+  text-decoration: none;
+  color: var(--clr-dark, #000);
+}
+
+.item__card>.img {
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+}
+
+.item__card>.img>img {
+  border-radius: 0.5rem;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.item__card>.content h2 {
+  font-weight: 600;
+}
+
+.item__card>.content p {
+  font-weight: 500;
+}
+
+.item__card>.content small {
+  color: var(--clr-text-gray);
+  font-weight: 400;
+}
+
+.profile__card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profile__card .img {
+  width: 25px;
+  height: 25px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.profile__card .img>img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.profile__card .content {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile__card .content a {
+  text-decoration: none;
+  color: var(--clr-dark, #000);
+  font-weight: 600;
+}
+
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+}
+
+.actions>button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.actions>button>i {
+  font-size: 1.3rem;
+  rotate: 0deg;
+  transition: all 0.2s ease-in-out;
+}
+
+.actions>button>i[show] {
+  rotate: 180deg;
+}
+
+.actions>button:hover>i {
+  color: var(--clr-primary, #1d1d1d);
+}
+
+
+.actions>a {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  background-color: var(--clr-primary, #1d1d1d);
+  color: var(--clr-light, #000);
+  font-weight: 600;
+}
