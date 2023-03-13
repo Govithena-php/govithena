@@ -47,7 +47,7 @@
                 <?php
             } else {
                 foreach ($products as $p) {
-                    $imageURL = UPLOADS . $p["image"];
+                    $imageURL = UPLOADS . "/gigThumbnails/" . $p["thumbnail"];
                 ?>
                     <div class="card">
                         <div class="img_wrapper">

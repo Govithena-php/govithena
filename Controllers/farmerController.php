@@ -3,6 +3,9 @@ class farmerController extends Controller
 {
     private $currentUser;
     private $imageHandler;
+    private $gigImagesHandler;
+    private $thumbnailHandler;
+
     private $farmerModel;
     private $investorGigModel;
     private $gigModel;
@@ -11,7 +14,10 @@ class farmerController extends Controller
     public function __construct()
     {
         $this->currentUser = Session::get('user');
+
         $this->imageHandler = new ImageHandler($folder = 'Uploads3');
+        $this->gigImagesHandler = new ImageHandler($folder = 'Uploads/gigImages');
+        $this->thumbnailHandler = new ImageHandler($folder = 'Uploads/gigThumbnails');
 
         $this->farmerModel = $this->model('farmer');
         $this->investorGigModel = $this->model('investorGig');
@@ -31,7 +37,8 @@ class farmerController extends Controller
     {
         if (isset($_POST['createGig'])) {
 
-            $gigId = uniqid();
+            $gigId = new UID(PREFIX::GIG);
+            // $gigId = uniqid();
             $title = $_POST['title'];
             $landArea = $_POST['landArea'];
             $capital = $_POST['capital'];
@@ -39,15 +46,11 @@ class farmerController extends Controller
             $location = $_POST['location'];
             $category = $_POST['category'];
 
-            var_dump($_POST);
-            var_dump($_FILES);
-            die();
-
-            $file_name = $_FILES['image']['name'];
-            $file_size = $_FILES['image']['size'];
-            $tmp_name = $_FILES['image']['tmp_name'];
-            $error = $_FILES['image']['error'];
-
+            $file_name = $_FILES['thumbnail']['name'];
+            $file_size = $_FILES['thumbnail']['size'];
+            $tmp_name = $_FILES['thumbnail']['tmp_name'];
+            $error = $_FILES['thumbnail']['error'];
+            $new_img_name = "";
             if ($error == 0) {
 
                 $fileType = pathinfo($file_name, PATHINFO_EXTENSION);
@@ -58,36 +61,52 @@ class farmerController extends Controller
                 if (in_array($fileType, $allowedFileTypes)) {
 
                     $new_img_name = uniqid("IMG-", true) . '.' . $fileType_lc;
-                    $img_upload_path = ROOT . 'Webroot/uploads/' . $new_img_name;
+                    $img_upload_path = ROOT . 'Webroot/Uploads/gigThumbnails/' . $new_img_name;
 
                     move_uploaded_file($tmp_name, $img_upload_path);
                 }
             }
 
-
-
             $description = $_POST['description'];
             $farmerId = Session::get('user')->getUid();
+            $profitRate = new Input(POST, 'profitRate');
 
             $data = [
                 'gigId' => $gigId,
                 'title' => $title,
                 'description' => $description,
                 'category' => $category,
-                'image' => $new_img_name,
+                'thumbnail' => $new_img_name,
                 'capital' => $capital,
                 'timePeriod' => $timePeriod,
                 'location' => $location,
                 'landArea' => $landArea,
-                'farmerId' => $farmerId
+                'farmerId' => $farmerId,
+                'profitRate' => $profitRate,
             ];
 
 
-            $gig = new $this->gigModel();
-
-            $res = $gig->create($data);
-
-            if (!$res) {
+            $res = $this->gigModel->create($data);
+            if ($res) {
+                try {
+                    $gigImages = $this->gigImagesHandler->upload('gigImages');
+                    if (!empty($gigImages)) {
+                        foreach ($gigImages as $gigImage) {
+                            $data = [
+                                'gigId' => $gigId,
+                                'imageName' => $gigImage
+                            ];
+                            $res = $this->gigModel->saveGigImage($data);
+                            if (!$res['success']) {
+                                $this->redirect('/farmer/createGig/' . $res['error']);
+                            }
+                        }
+                    }
+                } catch (Exception $e) {
+                    echo $e->getMessage();
+                    die();
+                }
+            } else {
                 $this->redirect('/farmer/createGig');
                 return;
             }

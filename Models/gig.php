@@ -62,7 +62,7 @@ class Gig extends Model
     public function create($data)
     {
         try {
-            $sql = "INSERT INTO `gig` (`gigId`, `title`, `description`, `category`, `image`, `capital`, `timePeriod`, `location`, `landArea`, `farmerId`) VALUES (:gigId, :title, :description, :category, :image, :capital, :timePeriod, :location, :landArea, :farmerId)";
+            $sql = "INSERT INTO `gig` (`gigId`, `title`, `description`, `category`, `thumbnail`, `profitRate`, `capital`, `timePeriod`, `location`, `landArea`, `farmerId`) VALUES (:gigId, :title, :description, :category, :thumbnail, :capital, :profitRate, :timePeriod, :location, :landArea, :farmerId)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
             return true;
@@ -73,7 +73,8 @@ class Gig extends Model
         }
     }
 
-    public function fetchBy($gigId){
+    public function fetchBy($gigId)
+    {
         try {
             $sql = "SELECT * FROM gig WHERE gigId = :gigId";
             $stmt = Database::getBdd()->prepare($sql);
@@ -84,6 +85,23 @@ class Gig extends Model
             echo $e->getMessage();
             die();
             return null;
+        }
+    }
+
+    public function saveGigImage($data)
+    {
+        try {
+            $sql = "INSERT INTO gig_image (imageName, gigId) VALUES (:imageName, :gigId)";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'imageName' => $data['imageName'],
+                'gigId' => $data['gigId']
+            ]);
+            return ['success' => true];
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return ['success' => false, 'error' => $e->getMessage()];
         }
     }
 }
