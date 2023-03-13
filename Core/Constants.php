@@ -24,7 +24,7 @@ class ACTOR
     const INVESTOR = "INVESTOR";
     const FARMER = "FARMER";
     const AGROLOGIST = "AGROLOGIST";
-    const TECH_ASSISTANT = "TECHASSISTANT";
+    const TECH = "TECHASSISTANT";
 
     public static function get($key)
     {

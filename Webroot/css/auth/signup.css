@@ -188,6 +188,9 @@ body {
 
 .signup .alert {
     color: #f00;
+    background-color: #f571717c;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
     font-size: 1rem;
     margin-block: 0.5rem;
     font-weight: 600;
