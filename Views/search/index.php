@@ -63,7 +63,7 @@
             if (isset($searchResult)) {
                 // print_r($searchResult);
                 foreach ($searchResult as $result) {
-                    $imageURL = UPLOADS . $result["image"];
+                    $imageURL = UPLOADS . $result["thumbnail"];
 
                     // echo $imageURL;
                     // die();
