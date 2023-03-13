@@ -81,77 +81,77 @@ class authController extends Controller
         $this->render('servey');
     }
 
-    public function signup2()
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $actor = "";
-            if (isset($_POST['actor'])) {
-                $actor = new Input(POST, 'actor');
-                Session::set(['actor' => $actor]);
-                $this->render('signup');
-                return;
-            }
+    // public function signup2()
+    // {
+    //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    //         $actor = "";
+    //         if (isset($_POST['actor'])) {
+    //             $actor = new Input(POST, 'actor');
+    //             Session::set(['actor' => $actor]);
+    //             $this->render('signup');
+    //             return;
+    //         }
 
-            require(ROOT . 'Models/user.php');
+    //         require(ROOT . 'Models/user.php');
 
-            $uid = new UID(PREFIX::USER);
-            $firstName = new input(POST, 'firstName');
-            $lastName = new input(POST, 'lastName');
-            $email = new input(POST, 'email');
-            $password = new input(POST, 'password');
-            $confirmPassword = new input(POST, 'confirmPassword');
+    //         $uid = new UID(PREFIX::USER);
+    //         $firstName = new input(POST, 'firstName');
+    //         $lastName = new input(POST, 'lastName');
+    //         $email = new input(POST, 'email');
+    //         $password = new input(POST, 'password');
+    //         $confirmPassword = new input(POST, 'confirmPassword');
 
-            $actor = Session::get('actor');
+    //         $actor = Session::get('actor');
 
-            $email->sanatizeEmail();
-            $password->sanatizePassword();
-            $confirmPassword->sanatizePassword();
+    //         $email->sanatizeEmail();
+    //         $password->sanatizePassword();
+    //         $confirmPassword->sanatizePassword();
 
-            if ($firstName->isEmpty() || $lastName->isEmpty() || $email->isEmpty() || $password->isEmpty() || $confirmPassword->isEmpty()) {
-                $this->redirect('/signup/error/all fields are required'); //all fields are required
-                return;
-            }
+    //         if ($firstName->isEmpty() || $lastName->isEmpty() || $email->isEmpty() || $password->isEmpty() || $confirmPassword->isEmpty()) {
+    //             $this->redirect('/signup/error/all fields are required'); //all fields are required
+    //             return;
+    //         }
 
-            if (!$password->isValidPassword() || !$confirmPassword->isValidPassword()) {
-                $this->redirect('/signup/error/password must be 8 characters long and contain at least one number and one special character'); //password must be 8 characters long and contain at least one number and one special character
-                return;
-            }
+    //         if (!$password->isValidPassword() || !$confirmPassword->isValidPassword()) {
+    //             $this->redirect('/signup/error/password must be 8 characters long and contain at least one number and one special character'); //password must be 8 characters long and contain at least one number and one special character
+    //             return;
+    //         }
 
-            if ($password != $confirmPassword) {
-                $this->redirect('/signup/error/passwords do not match'); //passwords do not match
-                return;
-            }
+    //         if ($password != $confirmPassword) {
+    //             $this->redirect('/signup/error/passwords do not match'); //passwords do not match
+    //             return;
+    //         }
 
-            $password = password_hash($password, PASSWORD_DEFAULT);
-            $user = new User();
+    //         $password = password_hash($password, PASSWORD_DEFAULT);
+    //         $user = new User();
 
-            $response = $user->checkByEmail($email);
+    //         $response = $user->checkByEmail($email);
 
-            if ($response['status'] == false || $response['data'] == true) {
-                $this->redirect('/servererror');
-                return;
-            }
+    //         if ($response['status'] == false || $response['data'] == true) {
+    //             $this->redirect('/servererror');
+    //             return;
+    //         }
 
-            $response = $user->createUser([
-                'uid' => $uid,
-                'firstName' => $firstName,
-                'lastName' => $lastName,
-                'username' => $email,
-                'password' => $password,
-                'userType' => ACTOR::get($actor),
-            ]);
+    //         $response = $user->createUser([
+    //             'uid' => $uid,
+    //             'firstName' => $firstName,
+    //             'lastName' => $lastName,
+    //             'username' => $email,
+    //             'password' => $password,
+    //             'userType' => ACTOR::get($actor),
+    //         ]);
 
-            if ($response['status'] == false || $response['data'] == false) {
-                $this->redirect('/servererror');
-                return;
-            }
-            if ($response['data']) {
-                $this->redirect('/auth/signin/ok');
-            }
-        } else {
-            $this->render('actor');
-        }
-    }
+    //         if ($response['status'] == false || $response['data'] == false) {
+    //             $this->redirect('/servererror');
+    //             return;
+    //         }
+    //         if ($response['data']) {
+    //             $this->redirect('/auth/signin/ok');
+    //         }
+    //     } else {
+    //         $this->render('actor');
+    //     }
+    // }
 
 
     public function signup($params = [])
