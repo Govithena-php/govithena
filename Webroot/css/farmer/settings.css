@@ -1,0 +1,38 @@
+.cardsettings {
+    border: 1px solid rgb(186, 178, 178);
+    height: 140px;
+    background-color: white;
+    padding: 20px   20px;
+    border-radius: 5px;
+  }
+
+
+  .imgprof {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-left: 30px; 
+    /* margin: auto; */
+    display: block;
+  
+}
+
+.imgprof>img {
+  
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.profline{
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-around; */
+  align-items: center;
+}
+
+.edit{
+  float: right;
+}
+

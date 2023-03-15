@@ -8,6 +8,9 @@ class farmerController extends Controller
     private $gigModel;
     private $farmerProgressModel;
 
+    // model ekat PRIVATE  variable ekak define kra
+    private $abcModel;
+
     public function __construct()
     {
         $this->currentUser = Session::get('user');
@@ -18,6 +21,8 @@ class farmerController extends Controller
         $this->gigModel = $this->model('gig');
         $this->farmerProgressModel = $this->model('farmerProgress');
 
+        $this->abcModel = $this->model('abc'); //model eka import krann ('abc' file eke name)
+
 
         if (!Session::isLoggedIn()) {
             $this->redirect('/auth/signin');
@@ -27,6 +32,7 @@ class farmerController extends Controller
             $this->redirect('/error/dontHaveAccess');
         }
     }
+    
     function createGig()
     {
         if (isset($_POST['createGig'])) {
@@ -100,13 +106,10 @@ class farmerController extends Controller
     {
         // require(ROOT . 'Models/gig.php');
         //require(ROOT . 'Models/farmer.php');
-
-        $gig = new $this->gigModel();
-        $id = Session::get('user')->getUid();
-
-        $products = $gig->All($id);
-
-
+        // $gig = new $this->gigModel();
+        
+        $id = Session::get('user')->getUid(); //session eken user id eka gannawa
+        $products = $this->gigModel->All($id);
         $d['products'] = $products;
         $this->set($d);
 
@@ -119,6 +122,60 @@ class farmerController extends Controller
 
 
         $this->render("index");
+    }
+
+
+    // view eke abc.php page eka
+    function abc($params = []){
+        
+        // url eke controller/action eken passe / ghala den values tika okkom $params kiyn array eke tyenne.
+        var_dump($params[0]);
+
+        //select==============================
+        $id = Session::get('user')->getUid(); //session eken data ganne mehema
+        $gigslist = $this->abcModel->getAllGigs($id); // model eke thiyana adala funciton eka call krla output eka
+        $props['gigs'] = $gigslist; //view ekata yawann one data tika props kiyal hri d kiyala hri passkrann one
+
+
+        //insert=======================
+
+        // forms adunragann vidiya
+
+        // if ($_SERVER['REQUEST_METHOD'] == 'POST'){ // submit button ekak click krlad kiyla --> POST method
+           
+        //     if(isset($_POST['form1'])){ // mona sumbit button eked click kale ---> mona form ekada
+        //         echo "form 1";
+        //     }
+
+        //     if(isset($_POST['form2'])){
+        //         echo "form 2";
+        //     }  
+        // }
+
+        //=====================
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){ 
+            if(isset($_POST['form1'])){
+             
+            $name = new Input(POST, 'uname'); // uname kiyla thiyana input filed eken value eka varibale ekata gannwa
+            $p = new Input(POST, 'pass'); // pass kiyl thiyana input field eken value eka variable ekata gannawa.
+            
+            // model ekata insert karann one values pass kranna data object eka hadagann one.
+             $data = [
+                    'x' => $name,
+                    'pass' => $p
+                ];
+
+            $this->abcModel->insertToTable($data);
+            }
+        }
+
+
+
+
+
+        $this->set($props); // view ekata set kranne
+        $this->render('abc');
     }
 
 
@@ -340,7 +397,15 @@ class farmerController extends Controller
         }
     }
 
-
+    function techassistantfirstcopy()
+    {
+        $this->render('techassistantfirstcopy');
+    }
+    function settings()
+    {
+        $this->render('settings');
+    }
+    
     public function deleteGig($params)
     {
         if (isset($params)) {
