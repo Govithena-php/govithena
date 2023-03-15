@@ -3,10 +3,13 @@
     border: none;
     border-radius: 0.5rem;
     box-shadow: 0 0 0.8rem 0.1rem rgba(0, 0, 0, 0.3);
+    transition: all 1s ease-in-out;
 }
 
 #modal::backdrop {
+    transition: all 1s ease-in-out;
     background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1px) grayscale(0.5);
 }
 
 

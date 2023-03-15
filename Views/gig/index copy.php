@@ -28,6 +28,31 @@ function render_stars($stars, $outof)
     <link rel="stylesheet" href="<?php echo CSS ?>/modal.css">
     <link rel="stylesheet" href="<?php echo CSS ?>gig/index.css">
 
+
+    <style>
+        small {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .famer_page_btn {
+            text-decoration: none;
+            color: #000;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .fa-star {
+            color: gray;
+            margin-inline: 0.25rem;
+        }
+
+        .glow {
+            color: yellow;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -76,104 +101,6 @@ function render_stars($stars, $outof)
             <p>Gig</p>
             <p><?php echo $gig['category'] ?></p>
         </div>
-
-
-        <div class="[ images__details ]" gap="2" md="2">
-            <div class="[ left ]">
-                <div class="[ gig__title ]">
-                    <h2 class="[ mb-1 ]"><?php echo $gig['title'] ?> Lorem ipsum dolor sit amet consectetur adipisicing elit.</h2>
-                </div>
-                <div class="[ farmer__image_name ]">
-                    <div class="[ farmer__name ]">
-                        <div class="[ farmer__image ]">
-                            <!-- <img src="<?php echo UPLOADS . $gig['']; ?>" /> -->
-                        </div>
-                        <h3><?php echo $farmer['firstName'] . " " . $farmer['lastName'] ?></h3>
-                    </div>
-                </div>
-                <div class="[ image__gallery ]">
-                    <div class="[ thumbnail ]">
-                        <img src="<?php echo UPLOADS . $gig['thumbnail']; ?>" />
-                    </div>
-                    <div class="[ slider ]">
-                        <div class="[ slide ]">
-                            <img src="<?php echo UPLOADS . $gig['thumbnail']; ?>" />
-                        </div>
-                        <div class="[ slide ]">
-                            <img src="<?php echo UPLOADS . $gig['thumbnail']; ?>" />
-                        </div>
-                        <div class="[ slide ]">
-                            <img src="<?php echo UPLOADS . $gig['thumbnail']; ?>" />
-                        </div>
-                        <div class="[ slide ]">
-                            <img src="<?php echo UPLOADS . $gig['thumbnail']; ?>" />
-                        </div>
-                        <!-- <div class="[ slide ]">
-                            <img src="<?php echo UPLOADS . $gig['thumbnail']; ?>" />
-                        </div> -->
-                    </div>
-                </div>
-            </div>
-            <div class="[ right ]">
-                <div class="[ result__content ]">
-                    <div>
-                        <small>Location :</small>
-                        <p class="[ mb-1 ]"><?php echo $gig['location'] ?></p>
-                    </div>
-                    <div class="[ flex flex-sb-c fs-5 fw-7 ]">
-                        <div>
-                            <small>Capital :</small>
-                            <p class="[ mb-1 ]">LKR <?php echo $gig['capital'] ?></p>
-                        </div>
-                        <div>
-                            <small>Time Period :</small>
-                            <p><?php echo $gig['timePeriod'] ?>months</p>
-                        </div>
-                    </div>
-                    <div>
-                        <small>Land Area :</small>
-                        <p><?php echo $gig['landArea'] ?> Arces</p>
-                    </div>
-                    <hr />
-
-                    <div class="[  ]">
-                        <h2>Farmer</h2>
-                        <a class="famer_page_btn" href="<?php echo URLROOT . "/profile/" . $gig['farmerId'] ?>"><?php echo $farmer['firstName'] . " " . $farmer['lastName'] ?></a>
-                        <?php
-                        if (isset($state) && $state == 'success') {
-                        ?>
-                            <button class="[ mt-1 btn btn-primary ]">cancel request</button>
-                        <?php
-                        } else {
-                        ?>
-                            <button class="[ mt-1 btn btn-primary ]" onclick="openModal()">send request</button>
-                        <?php
-                        }
-                        ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <p class="mb-1"><?php echo $gig['description'] ?>.</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         <div class="[ mt-2 ][ grid ]" gap="1" md="2">
