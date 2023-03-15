@@ -1,9 +1,9 @@
 <?php
 
-class Search extends Model
+class SearchGig extends Model
 {
 
-    function search($terms)
+    function search1($terms)
     {
         try {
             $sql = "SELECT * FROM gig WHERE (title LIKE :key OR description LIKE :key OR category LIKE :key) ";
@@ -35,10 +35,10 @@ class Search extends Model
     }
 
 
-    function searchGigs($terms)
+    function search($terms)
     {
         try {
-            $sql = "SELECT gig.gigId, gig.farmerId, gig.image, gig.title, gig.description, gig.category, gig.image, gig.capital, gig.location, gig.timePeriod, user.firstName, user.lastName FROM gig INNER JOIN user ON gig.farmerId = user.uid WHERE (title LIKE :key OR description LIKE :key OR category LIKE :key OR location LIKE :key ) ";
+            $sql = "SELECT gig.gigId, gig.farmerId, gig.title, gig.description, gig.category, gig.thumbnail, gig.capital, gig.location, gig.timePeriod, user.firstName, user.lastName FROM gig INNER JOIN user ON gig.farmerId = user.uid WHERE (title LIKE :key OR description LIKE :key OR category LIKE :key OR location LIKE :key ) ";
             // $sql = "SELECT * FROM gig INNER JOIN user ON gig.farmerId = user.uid WHERE (title LIKE :key OR description LIKE :key OR category LIKE :key OR location LIKE :key ) ";
 
             if (isset($terms['location'])) {
