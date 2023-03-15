@@ -198,8 +198,7 @@
             </div>
 
             <div class="[ right ]">
-                <p class="[ fs-6 fw-700 my-1 ]">Search results for "<?php echo $_GET["terms"] ?>"</p>
-                <hr>
+                <p class="[ right__heading ]">Search results for "<?php echo $_GET["terms"] ?>"</p>
                 <div class="[ grid ] [ search__results ]" gap="2" md="2" lg="3">
                     <?php
                     if (isset($searchResult)) {
