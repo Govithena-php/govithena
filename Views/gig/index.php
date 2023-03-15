@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-
 function render_stars($stars, $outof)
 {
     for ($i = 1; $i <= $outof; $i++) {
@@ -27,31 +26,6 @@ function render_stars($stars, $outof)
     <link rel="stylesheet" href="<?php echo CSS ?>/grid.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/modal.css">
     <link rel="stylesheet" href="<?php echo CSS ?>gig/index.css">
-
-
-    <style>
-        small {
-            font-weight: 600;
-            font-size: 1rem;
-            margin-top: 0.5rem;
-        }
-
-        .famer_page_btn {
-            text-decoration: none;
-            color: #000;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .fa-star {
-            color: gray;
-            margin-inline: 0.25rem;
-        }
-
-        .glow {
-            color: yellow;
-        }
-    </style>
 
 </head>
 
@@ -93,115 +67,202 @@ function render_stars($stars, $outof)
 
     ?>
 
-    <div class="[ container mt-5 ]">
+    <div class="[ container mt ]" container-type="section">
 
-        <div class="[ fs-3 breadcrumbs ]">
-            <a href="<?php echo URLROOT ?>">Govithena</a>
-            <a href="<?php echo URLROOT ?>/search/">Search</a>
-            <p>Gig</p>
-            <p><?php echo $gig['category'] ?></p>
-        </div>
+        <div class="[ images__details ]" gap="2" md="2">
+            <div class="[ left ]">
+                <div class="[ fs-3 breadcrumbs ]">
+                    <a href="<?php echo URLROOT ?>">Govithena</a>
+                    <a href="<?php echo URLROOT ?>/search/">Search</a>
+                    <p>Gig</p>
+                    <p><?php echo $gig['category'] ?></p>
+                </div>
+                <h2 class="[ gig__title ]"><?php echo $gig['title'] ?></h2>
 
-
-        <div class="[ mt-2 ][ grid ]" gap="1" md="2">
-            <div class="[ result__images ]">
-                <img src="<?php echo UPLOADS . $gig['image']; ?>" />
-                <!-- <img src="<?php echo IMAGES ?>/temp/1.jpg" alt=""> -->
+                <div class="[ image__gallery ]">
+                    <div class="[ thumbnail ]">
+                        <img src="<?php echo UPLOADS . $gig['thumbnail']; ?>" />
+                    </div>
+                    <div class="[ slider ]">
+                        <div class="[ slide ]">
+                            <img src="<?php echo UPLOADS . $gig['thumbnail']; ?>" />
+                        </div>
+                        <div class="[ slide ]">
+                            <img src="<?php echo UPLOADS . $gig['thumbnail']; ?>" />
+                        </div>
+                        <div class="[ slide ]">
+                            <img src="<?php echo UPLOADS . $gig['thumbnail']; ?>" />
+                        </div>
+                        <div class="[ slide ]">
+                            <img src="<?php echo UPLOADS . $gig['thumbnail']; ?>" />
+                        </div>
+                        <!-- <div class="[ slide ]">
+                            <img src="<?php echo UPLOADS . $gig['thumbnail']; ?>" />
+                        </div> -->
+                    </div>
+                </div>
             </div>
-            <div class="[ result__content ]">
-                <h1 class="[ mb-1 ]"><?php echo $gig['title'] ?></h1>
-                <p class="mb-1"><?php echo $gig['description'] ?>.</p>
-                <div>
-                    <small>Location :</small>
-                    <p class="[ mb-1 ]"><?php echo $gig['location'] ?></p>
-                </div>
-                <div class="[ flex flex-sb-c fs-5 fw-7 ]">
-                    <div>
-                        <small>Capital :</small>
-                        <p class="[ mb-1 ]">LKR <?php echo $gig['capital'] ?></p>
+            <div class="[ right ]">
+                <!-- <div class="[ result__content ]"> -->
+                <div class="[ card__top ]">
+                    <div class="[ category__subcategory ]">
+                        <p><?php echo $gig['category'] ?></p>
+                        <p>></p>
+                        <p><?php echo $gig['category'] ?></p>
                     </div>
-                    <div>
-                        <small>Time Period :</small>
-                        <p><?php echo $gig['timePeriod'] ?>months</p>
+                    <div class="[ active__batch ]">
+                        <p>Active</p>
                     </div>
                 </div>
-                <div>
-                    <small>Land Area :</small>
-                    <p><?php echo $gig['landArea'] ?> Arces</p>
+                <div class="[ capital__profitRate ]">
+                    <div>
+                        <small>Initial Investment</small>
+                        <p><span class="[ LKR ]">LKR </span><?php echo $gig['capital'] ?>.00</p>
+                    </div>
+                    <div>
+                        <small>Profit Margin</small>
+                        <p class="[ profit__precentage ]">12<span class="[ precentage ]">%</span></p>
+                    </div>
                 </div>
-                <hr />
+                <div class="[ flexsb ]">
+                    <div>
+                        <div class="[ content__item ]">
+                            <small>Land Area</small>
+                            <p><?php echo $gig['landArea'] ?><span class="[ arces ]"> Arces</span></p>
+                        </div>
+                        <div class="[ content__item ]">
+                            <small>Crop Cycle</small>
+                            <p><?php echo $gig['timePeriod'] ?><span class="[ days ]"> Days</span></p>
+                        </div>
+                        <div class="[ content__item ]">
+                            <small>Market Demand (pre 1 Unit)</small>
+                            <p><span class="[ LKR ]">LKR</span>500.00 - <span class="[ LKR ]">LKR</span>600.00</p>
+                        </div>
+                    </div>
+                    <div class="[ content__item ]">
+                        <small>Location</small>
+                        <p>Adress line 1,</p>
+                        <p>Adress line 2,</p>
+                        <p>City</p>
+                        <p><?php echo $gig['location'] ?></p>
+                    </div>
+                </div>
+                <div class="[ content__item ]">
 
-                <div class="[  ]">
-                    <h2>Farmer</h2>
-                    <a class="famer_page_btn" href="<?php echo URLROOT . "/profile/" . $gig['farmerId'] ?>"><?php echo $farmer['firstName'] . " " . $farmer['lastName'] ?></a>
+                    <small>Farmer</small>
+                    <div class="[ farmer__image_name ]">
+
+                        <div class="[ farmer__image ]">
+                            <img src="<?php echo UPLOADS . $farmer['image']; ?>" />
+                        </div>
+                        <a href="<?php echo URLROOT . "/profile/" .  $farmer['uid'] ?>" class="[ farmer__name ]">
+                            <h3><?php echo $farmer['firstName'] . " " . $farmer['lastName'] ?></h3>
+                            <h4><?php echo $farmer['city'] ?></h4>
+                        </a>
+                    </div>
+                </div>
+                <div class="[ btns ]">
                     <?php
                     if (isset($state) && $state == 'success') {
                     ?>
-                        <button class="[ mt-1 btn btn-primary ]">cancel request</button>
+                        <button class="[ button__primary ]">cancel request</button>
                     <?php
                     } else {
                     ?>
-                        <button class="[ mt-1 btn btn-primary ]" onclick="openModal()">send request</button>
+                        <button class="[ button__primary ]" onclick="openModal()">send request</button>
                     <?php
                     }
                     ?>
+                    <button class="[ button__primary-invert ]">Add To Wishlist</button>
+
                 </div>
+
+                <!-- </div> -->
             </div>
         </div>
 
-        <?php
-        if (isset($gigAvgStars) || isset($stars) || isset($noOfReviews)) {
-        ?>
 
-            <div class="[ rating__grid ]">
-                <div class="[ rating__number ]">
-                    <h1><?php echo $gigAvgStars ?></h1>
-                    <div class="[ stars ]">
-                        <?php render_stars($gigAvgStars, 5); ?>
-                        <!-- <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i> -->
-                    </div>
-                    <p><?php echo $noOfReviews ?> reviews</p>
-                </div>
-                <div class="[ rating__bars ]">
-                    <div class="[ bar ]">
-                        <label for="5">5</label>
-                        <progress id="5" value="<?php echo $stars['5'] ?>" max="100"></progress>
-                    </div>
-                    <div class="[ bar ]">
-                        <label for="4">4</label>
-                        <progress id="4" value="<?php echo $stars['4'] ?>" max="100"></progress>
-                    </div>
-                    <div class="[ bar ]">
-                        <label for="3">3</label>
-                        <progress id="3" value="<?php echo $stars['3'] ?>" max="100"></progress>
-                    </div>
-                    <div class="[ bar ]">
-                        <label for="2">2</label>
-                        <progress id="2" value="<?php echo $stars['2'] ?>" max="100"></progress>
-                    </div>
-                    <div class="[ bar ]">
-                        <label for="1">1</label>
-                        <progress id="1" value="<?php echo $stars['1'] ?>" max="100"></progress>
-                    </div>
-                </div>
+        <div class="[ gig__description ]">
+            <h3>About Gig</h3>
+            <p class="mb-1"><?php echo $gig['description'] ?>.</p>
+        </div>
+
+        <div class="[ grid chart__rating ]" gap="4" md="2">
+            <div>
+                <h3>ROI (Return on Investment) performance</h3>
+                <canvas id="myChart"></canvas>
             </div>
-        <?php
-        }
-        ?>
+            <div class="[ flexcolsb ]">
+                <div>
+                    <h3>Ratings</h3>
+                    <?php
+                    if (!isset($noOfReviews)) {
+                        $noOfReviews = 0;
+                    }
+                    ?>
+                    <p><?php echo $noOfReviews ?> reviews for this gig.</p>
+                </div>
+                <?php
+                if (isset($gigAvgStars) || isset($stars) || isset($noOfReviews)) {
+                ?>
+                    <div class="[ rating__grid ]">
 
-        <!-- <div class="[ description ]">
-            <h1><?php echo $gig['title'] ?></h1>
-            <p><?php echo $gig['description'] ?></p>
-        </div> -->
+                        <div class="[ rating__bars ]">
+                            <div class="[ bar ]">
+                                <label for="5">
+                                    <p>5</p> <i class="fa fa-star"></i>
+                                </label>
+                                <progress id="5" value="<?php echo $stars['5'] ?>" max="100"></progress>
+                            </div>
+                            <div class="[ bar ]">
+                                <label for="4">
+                                    <p>4</p> <i class="fa fa-star"></i>
+                                </label>
+                                <progress id="4" value="<?php echo $stars['4'] ?>" max="100"></progress>
+                            </div>
+                            <div class="[ bar ]">
+                                <label for="3">
+                                    <p>3</p> <i class="fa fa-star"></i>
+                                </label>
+                                <progress id="3" value="<?php echo $stars['3'] ?>" max="100"></progress>
+                            </div>
+                            <div class="[ bar ]">
+                                <label for="2">
+                                    <p>2</p> <i class="fa fa-star"></i>
+                                </label>
+                                <progress id="2" value="<?php echo $stars['2'] ?>" max="100"></progress>
+                            </div>
+                            <div class="[ bar ]">
+                                <label for="1">
+                                    <p>1</p> <i class="fa fa-star"></i>
+                                </label>
+                                <progress id="1" value="<?php echo $stars['1'] ?>" max="100"></progress>
+                            </div>
+                        </div>
 
+                        <div class="[ rating__number ]">
+                            <?php
+                            if (!isset($gigAvgStars)) {
+                                $gigAvgStars = 0;
+                            }
+                            ?>
+                            <h1><?php echo $gigAvgStars ?></h1>
+                            <div class="[ stars ]">
+                                <?php render_stars($gigAvgStars, 5); ?>
+                            </div>
+                            <p>overall score</p>
+                        </div>
+
+                    </div>
+                <?php
+                }
+                ?>
+                <p class="[ catch__phrase ]">See what others think - ratings range from 1 to 5 stars, with 5 stars being the best.</p>
+            </div>
+        </div>
 
         <div class="[ reviews ]">
-            <h1>Reviews</h1>
-            <hr>
+            <h3>Reviews</h3>
             <div class="[ reviews__wrapper ]">
                 <?php
                 if (!isset($reviews) && empty($reviews)) {
@@ -216,14 +277,12 @@ function render_stars($stars, $outof)
                             </div>
                             <p><?php echo $review['q8'] ?></p>
                             <div class="[ review__footer ]">
-                                <p><?php echo $review['timestamp'] ?></p>
+                                <div class="[ flexsb ]">
+                                    <p><?php echo $review['timestamp'] ?></p>
+                                    <p><?php echo $review['timestamp'] ?></p>
+                                </div>
                                 <div class="[ stars ]">
                                     <?php render_stars($review['q1'], 5); ?>
-                                    <!-- <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i> -->
                                 </div>
                             </div>
                         </div>
@@ -257,12 +316,12 @@ function render_stars($stars, $outof)
                 <p><?php echo $farmer['firstName'] . " " . $farmer['lastName'] ?></p>
                 <div class="[ flex flex-sb-c my-05 ]">
                     <div>
-                        <small>Capital :</small>
-                        <p>LKR <?php echo $gig['capital'] ?></p>
+                        <small>Initial Investment</small>
+                        <p><span class="[ LKR ]">LKR </span><?php echo $gig['capital'] ?>.00</p>
                     </div>
                     <div>
-                        <small>Time Period :</small>
-                        <p><?php echo $gig['timePeriod'] ?> Months</p>
+                        <small>Profit Margin</small>
+                        <p class="[ profit__precentage ]">12<span class="[ precentage ]">%</span></p>
                     </div>
                 </div>
                 <form class="[ modal__form ]" method="post" action="<?php echo URLROOT ?>/gig/request">
@@ -275,9 +334,9 @@ function render_stars($stars, $outof)
                         <label for="message">Message (Optional)</label>
                         <textarea name="message" id="message"></textarea>
                     </div>
-                    <div class="[ flex ]">
-                        <button type="submit" name="submit_request" class="btn btn-primary">Send</button>
-                        <button type="button" class="btn btn-primary" onclick="closeModal()">Cancel</button>
+                    <div class="[ flexsb ]">
+                        <button type="submit" name="submit_request" class="[ button__primary ]">Send</button>
+                        <button type="button" class="[ button__danger ] " onclick="closeModal()">Cancel</button>
                     </div>
                 </form>
 
@@ -303,6 +362,32 @@ function render_stars($stars, $outof)
             document.querySelector(".alert").style.display = "none";
         }, 5000);
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
 
 </body>
 
