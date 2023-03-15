@@ -8,6 +8,7 @@ class dashboardController extends Controller
     private $userModal;
     private $fieldVisitModel;
     private $reviewByInvestorModel;
+    private $farmerProgressModel;
 
     public function __construct()
     {
@@ -26,6 +27,7 @@ class dashboardController extends Controller
         $this->userModal = $this->model('user');
         $this->fieldVisitModel = $this->model('fieldVisit');
         $this->reviewByInvestorModel = $this->model('reviewByInvestor');
+        $this->farmerProgressModel = $this->model('farmerProgress');
     }
 
     public function index()
@@ -62,6 +64,20 @@ class dashboardController extends Controller
         $fieldVisits = $this->fieldVisitModel->fetchAllByGig($gigId);
         if ($fieldVisits['success']) {
             $props['fieldVisits'] = $fieldVisits['data'];
+        }
+
+        $progress = $this->farmerProgressModel->fetchAllByGig($gigId);
+        $props['progress'] = [];
+        if ($progress['success']) {
+            foreach ($progress['data'] as $pg) {
+                $progressImages = [];
+                $temp = $this->farmerProgressModel->fetchImagesByProgressId($pg['progressId']);
+                foreach ($temp['data'] as $key => $value) {
+                    $progressImages[$key] = $value['imageName'];
+                }
+                $pg['images'] = $progressImages;
+                $props['progress'][] = $pg;
+            }
         }
 
         // accpted data

@@ -1,5 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+
+// foreach ($progress as $p) {
+//     foreach ($p as $i) {
+//         var_dump($i);
+//         echo "<br>";
+//     }
+//     echo "<br>";
+// }
+
+// die();
+
+
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -22,7 +36,7 @@
 
     <?php
     $active = "gigs";
-    $title = "Progress";
+    $title = "Gig";
     require_once("navigator.php");
     ?>
 
@@ -39,14 +53,26 @@
 
             <div>
                 <div class="[ cards ]">
-                    <img src="<?php echo UPLOADS . $gig['image']; ?>" />
+                    <img class="[ card__img ]" src="<?php echo UPLOADS . $gig['image']; ?>" />
                     <div class="[ gig__title ]">
-                        <div>
-                            <h3><?php echo $gig['title']; ?></h3>
-                            <p><?php echo $gig['location'] ?></p>
+                        <div class="[ flex__title ]">
+                            <div>
+                                <h3><?php echo $gig['title']; ?></h3>
+                                <p><?php echo $gig['location'] ?></p>
+                            </div>
+                            <div class="[ category__tag ]">
+                                <p><?php echo $gig['category']; ?></p>
+                            </div>
                         </div>
-                        <div class="[ category__tag ]">
-                            <p><?php echo $gig['category']; ?></p>
+
+                        <div class="[ farmer__profile ]">
+                            <div class="[ profile__image ]">
+                                <img src="<?php echo UPLOADS . $farmer['image'] ?>" />
+                            </div>
+                            <div class="[ profile__details ]">
+                                <a href="<?php echo URLROOT . '/profile/' . $farmer['uid'] ?>"><?php echo $farmer['firstName'] . " " . $farmer['lastName']; ?></a>
+                                <p><?php echo $farmer['city']; ?></p>
+                            </div>
                         </div>
                     </div>
                     <div class="[ grid ]" sm="1" md="2" gap="1">
@@ -100,18 +126,9 @@
                 <!-- <p class="[ freespace__text ]">Track your investment journey with ease by accessing all your active and completed gigs in one convenient location, where you can also generate detailed reports on your progress and achievements.</p> -->
             </div>
             <div>
-                <div class="[ farmer__profile ]">
-                    <div class="[ profile__image ]">
-                        <img src="<?php echo UPLOADS . $farmer['image'] ?>" />
-                    </div>
-                    <div class="[ profile__details ]">
-                        <a href="<?php echo URLROOT . '/profile/' . $farmer['uid'] ?>"><?php echo $farmer['firstName'] . " " . $farmer['lastName']; ?></a>
-                        <p><?php echo $farmer['city']; ?></p>
-                    </div>
-                </div>
                 <div class="[ messages ]">
                     <div class="[ title ]">
-                        <h3>Messages</h3>
+                        <h3>Recent Activities</h3>
                     </div>
 
                     <div class="[ activity ]">
@@ -189,7 +206,7 @@
                 <button class="control" for="4">About Gig</button>
             </div>
             <div class="wrapper">
-                <div class="tab" id="1" active="true">
+                <div class="tab" id="1">
                     <div class="[ requests__continer ]">
                         <div class="[ caption ]">
                             <h2>Analysis</h2>
@@ -206,48 +223,26 @@
                     </div>
                 </div>
 
-                <div class="tab" id="2">
+                <div class="tab" id="2" active="true">
                     <div class="[ requests__continer ]">
                         <div class="[ caption ]">
                             <h2>Progress Updates</h2>
                             <p>Experience the power of transparency with our farmer's progress updates - your go-to resource for tracking progress and staying informed.</p>
                         </div>
                         <?php
-                        if (empty($pr)) {
+                        if (!isset($progress) || empty($progress)) {
                             require(COMPONENTS . "dashboard/noDataFound.php");
                         } else {
                         ?>
-                            <div class="[ filters ]">
-                                <div class="[ options ]">
+                            <div class="[ grid ][ filters ]" md="1" lg="2" gap="2">
+                                <div class="[ grid ][ options ]" sm="1" md="6" lg="6" gap="1">
                                     <div class="[ input__control ]">
-                                        <label for="from">From :</label>
+                                        <label for="from">Visit Date :</label>
                                         <input id="from" type="date">
                                     </div>
                                     <div class="[ input__control ]">
-                                        <label for="to">To :</label>
+                                        <label for="to">Entry Date :</label>
                                         <input id="to" type="date">
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <label for="location">Location :</label>
-                                        <select id="location">
-                                            <option value="all">All</option>
-                                            <option value="colombo">Colombo</option>
-                                            <option value="galle">Galle</option>
-                                            <option value="kandy">Kandy</option>
-                                            <option value="matara">Matara</option>
-                                            <option value="nuwaraeliya">Nuwara Eliya</option>
-                                            <option value="trincomalee">Trincomalee</option>
-                                        </select>
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <label for="category">Category :</label>
-                                        <select id="category">
-                                            <option value="all">All</option>
-                                            <option value="vegetable">Vegetable</option>
-                                            <option value="fruit">Fruit</option>
-                                            <option value="grains">Grains</option>
-                                            <option value="spices">Spices</option>
-                                        </select>
                                     </div>
                                     <div class="[ input__control ]">
                                         <button type="button">Apply</button>
@@ -263,100 +258,88 @@
                             </div>
                             <div class="[ requests__wrapper ]">
                                 <div class="[ grid__table ]" style="
-                                        --xl-cols:  1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.7fr;
-                                        --lg-cols: 1.5fr 0.5fr 0.5fr 1fr 1fr;
-                                        --md-cols: 1fr 0.5fr 0.5fr;
+                                        --xl-cols:  2fr 1fr 1fr 0.5fr;
+                                        --lg-cols: 1.5fr 0.75fr 0.75fr 0.3fr;
+                                        --md-cols: 2fr 0.5fr;
                                         --sm-cols: 2fr 1fr;
                                     ">
                                     <div class="[ head ]">
                                         <div class="[ data ]">
-                                            <p>Gig</p>
+                                            <p>Title</p>
                                         </div>
                                         <div class="[ data ]" hideIn="md">
-                                            <p>Category</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="sm">
-                                            <p>Offer</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="lg">
-                                            <p>Time Period</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="lg">
-                                            <p>Location</p>
+                                            <p>Updated Date</p>
                                         </div>
                                         <div class="[ data ]" hideIn="md">
-                                            <p>Requested Date</p>
+                                            <p>Updated Time</p>
                                         </div>
                                     </div>
                                     <div class="[ body ]">
                                         <?php
-                                        foreach ($pr as $request) {
+                                        foreach ($progress as $pr) {
                                         ?>
                                             <div class="[ row ]">
                                                 <div class="[ data ]">
                                                     <div class="[ item__card ]">
                                                         <div class="[ img ]">
-                                                            <img width="50" src="<?php echo UPLOADS . $request['image'] ?>" />
+                                                            <img width="50" src="<?php echo UPLOADS3 . $pr['images'][0]  ?>" />
                                                         </div>
                                                         <div class="[ content ]">
-                                                            <a href="<?php echo URLROOT . "/gig/" . $request['gigId'] ?>">
-                                                                <h2><?php echo $request['title'] ?></h2>
-                                                            </a>
-                                                            <p><small>by </small> <a href="<?php echo URLROOT . "/profile/" . $request['uid'] ?>"><?php echo $request['firstName'] . " " . $request['lastName'] ?></p></a>
+                                                            <p><?php echo $pr['subject'] ?></p>
 
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="[ data ]" hideIn="md">
-                                                    <p class="[ tag ]"><?php echo $request['category'] ?></p>
-                                                </div>
-                                                <div class="[ data ]" hideIn="sm">
-                                                    <h3>LKR <?php echo $request['offer'] ?></h3>
-                                                </div>
-                                                <div class="[ data ]" hideIn="lg">
-                                                    <h3><?php echo $request['timePeriod'] ?> Months</h3>
-                                                </div>
-                                                <div class="[ data ]" hideIn="lg">
-                                                    <h3><?php echo $request['location'] ?></h3>
+                                                    <h3><?php echo $pr['date'] ?></h3>
                                                 </div>
                                                 <div class="[ data ]" hideIn="md">
-                                                    <p><?php echo $request['requestedDate'] ?></p>
+                                                    <h3><?php echo $pr['time'] ?></h3>
                                                 </div>
-                                                <div class="[ data ]">
-                                                    <div class="[ actions ]">
-                                                        <button for="<?php echo $request['requestId'] ?>"><i class="fa fa-chevron-circle-down"></i></button>
-                                                        <a href="<?php echo URLROOT ?>/checkout/<?php echo $request['requestId'] ?>" class="btn btn-primary">Cancel Request</a>
-                                                    </div>
+                                                <div class="[ actions ]">
+                                                    <button for="<?php echo $pr['progressId'] ?>"><i class="fa fa-chevron-circle-down"></i></button>
+                                                    <!-- <a href="<?php echo URLROOT ?>/<?php echo $pr['progressId'] ?>" class="btn btn-primary">Cancel Request</a> -->
                                                 </div>
-                                                <div id="<?php echo $request['requestId'] ?>" class="[ expand ]">
+                                                <div id="<?php echo $pr['progressId'] ?>" class="[ expand progress__more ]">
 
                                                     <div class="[ data ]" showIn="md">
-                                                        <p class="[ tag ]"><?php echo $request['category'] ?></p>
-                                                    </div>
-                                                    <div class="[ data ]" showIn="sm">
-                                                        <h4>Offer :</h4>
-                                                        <p>LKR <?php echo $request['offer'] ?></p>
-                                                    </div>
-                                                    <div class="[ data ]" showIn="lg">
-                                                        <h4>Time Periold :</h4>
-                                                        <p><?php echo $request['timePeriod'] ?> Months</p>
-                                                    </div>
-                                                    <div class="[ data ]" showIn="lg">
-                                                        <h4>Location</h4>
-                                                        <p><?php echo $request['location'] ?></p>
-                                                    </div>
-                                                    <div class="[ data ]" showIn="md">
-                                                        <h4>Request Date</h4>
-                                                        <p><?php echo $request['requestedDate'] ?></p>
+                                                        <div class="[ progress__date_time ]">
+                                                            <div class="[ date ]">
+                                                                <h4>Updated Date :</h4>
+                                                                <h3><?php echo $pr['date'] ?></h3>
+                                                            </div>
+                                                            <div class="[ time ]">
+                                                                <h4>Updated Time :</h4>
+                                                                <h3><?php echo $pr['time'] ?></h3>
+                                                            </div>
+                                                        </div>
                                                     </div>
 
                                                     <div class="[ data ]" always>
-                                                        <h4>Your Message :</h4>
-                                                        <p><?php echo $request['message'] ?></p>
-                                                        <button class="btn btn-primary">Edit</button>
+                                                        <div class="[ progress__content ]">
+                                                            <h4>Description</h4>
+                                                            <p><?php echo $pr['description'] ?></p>
+                                                        </div>
+                                                        <div class="[ progress__images ]">
+                                                            <?php
+                                                            foreach ($pr['images'] as $img) {
+                                                            ?>
+                                                                <div class="[ img ]">
+                                                                    <img src="<?php echo UPLOADS3 . $img ?>">
+                                                                </div>
+                                                            <?php
+                                                            }
+                                                            ?>
+                                                        </div>
+                                                        <div class="[ progress__actions ]">
+                                                            <a href="<?php echo URLROOT ?>/<?php echo $pr['progressId'] ?>" class="[ feedback__btn ]">Give some feedback</a>
+                                                        </div>
+
                                                     </div>
+
                                                 </div>
                                             </div>
+
                                         <?php
                                         }
                                         ?>
@@ -462,10 +445,8 @@
                                                 <div class="[ data ]" hideIn="lg">
                                                     <p><?php echo $fieldVisit['entryTime'] ?></p>
                                                 </div>
-                                                <div class="[ data ]">
-                                                    <div class="[ actions ]">
-                                                        <button for="<?php echo $fieldVisit['visitId'] ?>"><i class="fa fa-chevron-circle-down"></i></button>
-                                                    </div>
+                                                <div class="[ actions ]">
+                                                    <button for="<?php echo $fieldVisit['visitId'] ?>"><i class="fa fa-chevron-circle-down"></i></button>
                                                 </div>
                                                 <div id="<?php echo $fieldVisit['visitId'] ?>" class="[ expand ]">
                                                     <div class="[ expand__card ]" showIn="sm">

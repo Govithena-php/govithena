@@ -53,7 +53,7 @@
 .grid__table>.body>.row {
     position: relative;
     /* margin-block: 0.75rem; */
-    padding-block: 0.5rem;
+    padding: 0.75rem;
     min-height: 2rem;
     border-bottom: 1px solid #ccc;
     border-radius: 0.5rem;
@@ -76,6 +76,39 @@
     font-size: 0.8rem;
 }
 
+.grid__table>.body>.row>.actions {
+    text-transform: capitalize;
+    overflow: hidden;
+    padding-left: 0.5rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 0.25rem;
+    font-size: 0.8rem;
+}
+
+.grid__table>.body>.row>.actions>button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.grid__table>.body>.row>.actions>button>i {
+    font-size: 1.3rem;
+    rotate: 0deg;
+    transition: all 0.2s ease-in-out;
+}
+
+.grid__table>.body>.row>.actions>button>i[show] {
+    rotate: 180deg;
+}
+
+.grid__table>.body>.row>.actions>button:hover>i {
+    color: var(--clr-primary, #1d1d1d);
+}
+
+
 
 .grid__table>.body>.row>.data>h2 {
     width: 90%;
@@ -95,7 +128,7 @@
 }
 
 .grid__table>.body>.row>.expand[show] {
-    max-height: 1000px;
+    max-height: 5000px;
 }
 
 .grid__table .expand>* {
