@@ -315,7 +315,7 @@ select {
 @media screen and (max-width: 1024px) {
 
     .container {
-        margin-inline: 6rem;
+        margin-inline: 4rem;
     }
 
     .container[container-type="section"] {
