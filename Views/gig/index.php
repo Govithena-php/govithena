@@ -80,22 +80,32 @@ function render_stars($stars, $outof)
                     </div>
                     <h2 class="[ gig__title ]"><?php echo $gig['title'] ?></h2>
                     <div class="[ image__gallery ]">
-                        <div class="[ thumbnail ]">
+                        <div class="[ thumbnail ]" id="0" show="true">
                             <img src="<?php echo UPLOADS . $gig['thumbnail']; ?>" />
                         </div>
+                        <div class="[ thumbnail ]" id="1" show="false">
+                            <img src="<?php echo UPLOADS . $gig['thumbnail']; ?>" />
+                        </div>
+                        <div class="[ thumbnail ]" id="2" show="false">
+                            <img src="<?php echo UPLOADS . $gig['thumbnail']; ?>" />
+                        </div>
+                        <div class="[ thumbnail ]" id="3" show="false">
+                            <img src="<?php echo UPLOADS . $gig['thumbnail']; ?>" />
+                        </div>
+
                         <div class="[ slider ]">
-                            <div class="[ slide ]">
+                            <button class="[ slide active ]" for="0">
                                 <img src="<?php echo UPLOADS . $gig['thumbnail']; ?>" />
-                            </div>
-                            <div class="[ slide ]">
+                            </button>
+                            <button class="[ slide ]" for="1">
                                 <img src="<?php echo UPLOADS . $gig['thumbnail']; ?>" />
-                            </div>
-                            <div class="[ slide ]">
+                            </button>
+                            <button class="[ slide ]" for="2">
                                 <img src="<?php echo UPLOADS . $gig['thumbnail']; ?>" />
-                            </div>
-                            <div class="[ slide ]">
+                            </button>
+                            <button class="[ slide ]" for="3">
                                 <img src="<?php echo UPLOADS . $gig['thumbnail']; ?>" />
-                            </div>
+                            </button>
                             <!-- <div class="[ slide ]">
                             <img src="<?php echo UPLOADS . $gig['thumbnail']; ?>" />
                         </div> -->
@@ -415,6 +425,35 @@ function render_stars($stars, $outof)
                     }
                 }
             }
+        });
+    </script>
+
+    <script>
+        const iconButtons = document.querySelectorAll(".slide");
+
+        const thumbnails = document.querySelectorAll(".thumbnail");
+
+        console.log(iconButtons);
+        iconButtons.forEach((iconButton) => {
+            iconButton.addEventListener("click", () => {
+                let buttonFor = iconButton.getAttribute("for");
+
+                iconButtons.forEach((ib) => {
+                    if (ib.getAttribute("for") != buttonFor)
+                        ib.classList.remove("active")
+                    else
+                        ib.classList.add("active")
+                });
+
+                thumbnails.forEach((thumbnail) => {
+                    if (thumbnail.id == buttonFor)
+                        thumbnail.setAttribute("show", true)
+                    else
+                        thumbnail.setAttribute("show", false)
+                });
+
+                console.log(buttonFor);
+            });
         });
     </script>
 
