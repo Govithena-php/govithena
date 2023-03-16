@@ -217,7 +217,9 @@
                                 <div class="[ card__content ]">
                                     <div class="[ flex ]">
                                         <a class="[ card__link text-dec-none mb-1 fs-5 text-dark fw-6 ]" href="<?php echo URLROOT . "/gig/" . $result['gigId'] ?>">
-                                            <?php echo $result['title'] ?>
+                                            <p class="limit-text-2">
+                                                <?php echo $result['title'] ?>
+                                            </p>
                                         </a>
                                         <p class="[ sub-heading ]">LKR <?php echo $result['capital'] ?></p>
                                     </div>
