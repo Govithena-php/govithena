@@ -282,7 +282,7 @@ function render_stars($stars, $outof)
                         </div>
                         <div>
                             <small>Profit Margin</small>
-                            <p class="[ profit__precentage ]">12<span class="[ precentage ]">%</span></p>
+                            <p class="[ profit__precentage ]"><?php echo $gig['profitMargin'] ?><span class="[ precentage ]">%</span></p>
                         </div>
                     </div>
                     <div class="[ flexsb ]">
@@ -293,19 +293,19 @@ function render_stars($stars, $outof)
                             </div>
                             <div class="[ content__item ]">
                                 <small>Crop Cycle</small>
-                                <p><?php echo $gig['timePeriod'] ?><span class="[ days ]"> Days</span></p>
+                                <p><?php echo $gig['cropCycle'] ?><span class="[ days ]"> Days</span></p>
                             </div>
                             <div class="[ content__item ]">
                                 <small>Market Demand (pre 1 Unit)</small>
                                 <p><span class="[ LKR ]">LKR</span>500.00 - <span class="[ LKR ]">LKR</span>600.00</p>
                             </div>
                         </div>
-                        <div class="[ content__item ]">
+                        <div class="[ content__item address ]">
                             <small>Location</small>
-                            <p>Adress line 1,</p>
-                            <p>Adress line 2,</p>
-                            <p>City</p>
-                            <p><?php echo $gig['location'] ?></p>
+                            <!-- <p><?php echo $gig['district'] ?></p>
+                            <p><?php echo $gig['district'] ?></p> -->
+                            <p><?php echo $gig['city'] ?>,</p>
+                            <p><?php echo $gig['district'] ?></p>
                         </div>
                     </div>
                     <div class="[ btns ]">

@@ -284,6 +284,16 @@ nav {
     color: var(--clr-text);
 }
 
+.address small{
+    margin-bottom: 1rem;
+}
+
+.address p {
+    font-size: 1rem;
+    margin: 0;
+    font-weight: 500;
+}
+
 .flexsb {
     margin-right: 1rem;
     display: flex;
