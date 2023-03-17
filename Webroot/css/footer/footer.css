@@ -1,9 +1,9 @@
 footer {
     background: var(--clr-dark, #000);
     color: var(--clr-light, #fff);
-    border-top: 1rem solid var(--clr-primary, rgb(132, 249, 198));
+    /* border-top: 1rem solid var(--clr-primary, rgb(132, 249, 198)); */
     padding-inline: 0;
-    padding-top: 1.5rem;
+    padding-top: 3rem;
     padding-bottom: 1rem;
 }
 

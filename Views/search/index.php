@@ -205,30 +205,35 @@
                         foreach ($searchResult as $result) {
                             $imageURL = UPLOADS . $result["thumbnail"];
                     ?>
-                            <div class="[ result__card ]">
-                                <div class="[ card__img ]">
 
-                                    <img src="<?php echo $imageURL ?>" alt="test" />
-                                    <div class="[ farmer__name ]">
-                                        <a class="famer_page_btn" href="<?php echo URLROOT . "/profile/" . $result['farmerId'] ?>"><?php echo $result['firstName'] . " " . $result['lastName'] ?></a>
+                            <div class="[ gig__card ]">
+                                <div class="[ top ]">
+                                    <a href="<?php echo URLROOT . "/gig/" . $result['gigId'] ?>">
+                                        <img src="<?php echo $imageURL ?>">
+                                    </a>
+                                    <div class="[ farmer__category ]">
+                                        <a href="<?php echo URLROOT . "/profile/" . $result['farmerId'] ?>"><?php echo $result['firstName'] . " " . $result['lastName'] ?></a>
                                         <p><?php echo $result['category'] ?></p>
                                     </div>
+                                    <div class="[ profit__margin ]">
+                                        <p><?php echo $result['profitMargin'] ?>%</p>
+                                        <small>Profit margin</small>
+                                    </div>
                                 </div>
-                                <div class="[ card__content ]">
-                                    <div class="[ flex ]">
-                                        <a class="[ card__link text-dec-none mb-1 fs-5 text-dark fw-6 ]" href="<?php echo URLROOT . "/gig/" . $result['gigId'] ?>">
+                                <div class="[ bottom ]">
+                                    <div class="[ gig__title ]">
+                                        <a class="[ gig__title_link limit-text-2 ]" href="<?php echo URLROOT . "/gig/" . $result['gigId'] ?>">
                                             <?php echo $result['title'] ?>
                                         </a>
-                                        <p class="[ sub-heading ]">LKR <?php echo $result['capital'] ?></p>
                                     </div>
-                                    <div class="[ flex ]">
-                                        <div>
-                                            <small>Location :</small>
-                                            <p><?php echo $result['location'] ?></p>
+                                    <div class="[ investmet__location ]">
+                                        <div class="[ item ]">
+                                            <small>Initial investment :</small>
+                                            <p class="[ LKR ]"><?php echo $result['capital'] ?>.00</p>
                                         </div>
-                                        <div>
-                                            <small>Time Period :</small>
-                                            <p><?php echo $result['timePeriod'] ?> Months</p>
+                                        <div class="[ item ]">
+                                            <small>Location :</small>
+                                            <p><?php echo $result['city'] ?></p>
                                         </div>
                                     </div>
                                 </div>

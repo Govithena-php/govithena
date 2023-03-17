@@ -38,7 +38,7 @@ class SearchGig extends Model
     function search($terms)
     {
         try {
-            $sql = "SELECT gig.gigId, gig.farmerId, gig.title, gig.description, gig.category, gig.thumbnail, gig.capital, gig.location, gig.timePeriod, user.firstName, user.lastName FROM gig INNER JOIN user ON gig.farmerId = user.uid WHERE (title LIKE :key OR description LIKE :key OR category LIKE :key OR location LIKE :key ) ";
+            $sql = "SELECT * FROM gig_search_view  WHERE (title LIKE :key OR category LIKE :key OR city LIKE :key ) ";
             // $sql = "SELECT * FROM gig INNER JOIN user ON gig.farmerId = user.uid WHERE (title LIKE :key OR description LIKE :key OR category LIKE :key OR location LIKE :key ) ";
 
             if (isset($terms['location'])) {
