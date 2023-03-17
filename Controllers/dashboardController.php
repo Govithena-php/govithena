@@ -9,6 +9,7 @@ class dashboardController extends Controller
     private $fieldVisitModel;
     private $reviewByInvestorModel;
     private $farmerProgressModel;
+    private $farmerRequestModel;
 
     public function __construct()
     {
@@ -28,6 +29,7 @@ class dashboardController extends Controller
         $this->fieldVisitModel = $this->model('fieldVisit');
         $this->reviewByInvestorModel = $this->model('reviewByInvestor');
         $this->farmerProgressModel = $this->model('farmerProgress');
+        $this->farmerRequestModel = $this->model('farmerRequest');
     }
 
     public function index()
@@ -170,11 +172,11 @@ class dashboardController extends Controller
 
     public function myrequests()
     {
-        require(ROOT . 'Models/requestFarmer.php');
-        $uid = Session::get('user')->getUid();
-        $r = new RequestFarmer();
 
-        $requests = $r->getRequestsByInvestor($uid);
+        $uid = Session::get('user')->getUid();
+
+
+        $requests = $this->farmerRequestModel->getRequestsByInvestor($uid);
         $pendingRequests = [];
         $acceptedRequests = [];
         $rejectedRequests = [];
@@ -208,9 +210,17 @@ class dashboardController extends Controller
         $this->render('settings');
     }
 
-    public function test()
+    public function myrequest_delete()
     {
-        var_dump($_POST);
-        die();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $requestId = new Input(POST, 'deleteRequest-confirm');
+            $response = $this->farmerRequestModel->delete($requestId);
+
+            if ($response['success']) {
+                $this->redirect('/dashboard/myrequests/ok');
+            } else {
+                $this->redirect('/dashboard/myrequests/error');
+            }
+        }
     }
 }

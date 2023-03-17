@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/gridTable.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/tabs.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/alertModal.css">
 
     <link rel="stylesheet" href="<?php echo CSS ?>/investor/myrequests.css">
 
@@ -24,7 +25,22 @@
     </style> -->
 </head>
 
+
 <body>
+
+    <dialog id="deleteModal" class="[ alertModal ]">
+        <div class="[ container ]">
+            <i class="fa fa-circle-xmark" aria-hidden="true"></i>
+            <div class="[ content ]">
+                <h2>Are you sure?</h2>
+                <p>Do you really want to delete these records? This process cannot be undone.</p>
+            </div>
+            <form id="deleteForm" action="<?php echo URLROOT ?>/dashboard/myrequest_delete" method="POST" class="[ buttons ]">
+                <button type="button" class="[ button__primary ]" onclick="closeDeleteAlert()" data-dismiss="modal">No, Cancel</button>
+                <button id="confirmDeleteBtn" name="deleteRequest-confirm" type="submit" class="[ button__danger ]">Yes, Delete</button>
+            </form>
+        </div>
+    </dialog>
 
     <?php
     $active = "myrequests";
@@ -65,7 +81,7 @@
                                         <input id="to" type="date">
                                     </div>
                                     <div class="[ input__control ]">
-                                        <label for="location">Location :</label>
+                                        <label for="location">City :</label>
                                         <select id="location">
                                             <option value="all">All</option>
                                             <option value="colombo">Colombo</option>
@@ -119,7 +135,7 @@
                                             <p>Time Period</p>
                                         </div>
                                         <div class="[ data ]" hideIn="lg">
-                                            <p>Location</p>
+                                            <p>City</p>
                                         </div>
                                         <div class="[ data ]" hideIn="md">
                                             <p>Requested Date</p>
@@ -133,11 +149,11 @@
                                                 <div class="[ data ]">
                                                     <div class="[ item__card ]">
                                                         <div class="[ img ]">
-                                                            <img width="50" src="<?php echo UPLOADS . $request['image'] ?>" />
+                                                            <img width="50" src="<?php echo UPLOADS . $request['thumbnail'] ?>" />
                                                         </div>
                                                         <div class="[ content ]">
                                                             <a href="<?php echo URLROOT . "/gig/" . $request['gigId'] ?>">
-                                                                <h2><?php echo $request['title'] ?></h2>
+                                                                <h2 class="[ limit-text-2 ]"><?php echo $request['title'] ?></h2>
                                                             </a>
                                                             <p><small>by </small> <a href="<?php echo URLROOT . "/profile/" . $request['uid'] ?>"><?php echo $request['firstName'] . " " . $request['lastName'] ?></p></a>
 
@@ -151,10 +167,10 @@
                                                     <h3>LKR <?php echo $request['offer'] ?></h3>
                                                 </div>
                                                 <div class="[ data ]" hideIn="lg">
-                                                    <h3><?php echo $request['timePeriod'] ?> Months</h3>
+                                                    <h3><?php echo $request['cropCycle'] ?> Days</h3>
                                                 </div>
                                                 <div class="[ data ]" hideIn="lg">
-                                                    <h3><?php echo $request['location'] ?></h3>
+                                                    <h3><?php echo $request['city'] ?></h3>
                                                 </div>
                                                 <div class="[ data ]" hideIn="md">
                                                     <p><?php echo $request['requestedDate'] ?></p>
@@ -162,7 +178,7 @@
                                                 <div class="[ data ]">
                                                     <div class="[ actions ]">
                                                         <button for="<?php echo $request['requestId'] ?>"><i class="fa fa-chevron-circle-down"></i></button>
-                                                        <a href="<?php echo URLROOT ?>/checkout/<?php echo $request['requestId'] ?>" class="btn btn-primary">Pay Now</a>
+                                                        <a href="<?php echo URLROOT ?>/checkout/<?php echo $request['requestId'] ?>" class="[ button__danger ]">Pay Now</a>
                                                     </div>
                                                 </div>
                                                 <div id="<?php echo $request['requestId'] ?>" class="[ expand ]">
@@ -176,11 +192,11 @@
                                                     </div>
                                                     <div class="[ data ]" showIn="lg">
                                                         <h4>Time Periold :</h4>
-                                                        <p><?php echo $request['timePeriod'] ?> Months</p>
+                                                        <p><?php echo $request['cropCycle'] ?> Months</p>
                                                     </div>
                                                     <div class="[ data ]" showIn="lg">
-                                                        <h4>Location</h4>
-                                                        <p><?php echo $request['location'] ?></p>
+                                                        <h4>City</h4>
+                                                        <p><?php echo $request['city'] ?></p>
                                                     </div>
                                                     <div class="[ data ]" showIn="md">
                                                         <h4>Request Date</h4>
@@ -227,7 +243,7 @@
                                         <input id="to" type="date">
                                     </div>
                                     <div class="[ input__control ]">
-                                        <label for="location">Location :</label>
+                                        <label for="location">City :</label>
                                         <select id="location">
                                             <option value="all">All</option>
                                             <option value="colombo">Colombo</option>
@@ -262,7 +278,7 @@
                             </div>
                             <div class="[ requests__wrapper ]">
                                 <div class="[ grid__table ]" style="
-                                        --xl-cols:  1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.7fr;
+                                        --xl-cols:  1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.1fr;
                                         --lg-cols: 1.5fr 0.5fr 0.5fr 1fr 1fr;
                                         --md-cols: 1fr 0.5fr 0.5fr;
                                         --sm-cols: 2fr 1fr;
@@ -281,7 +297,7 @@
                                             <p>Time Period</p>
                                         </div>
                                         <div class="[ data ]" hideIn="lg">
-                                            <p>Location</p>
+                                            <p>City</p>
                                         </div>
                                         <div class="[ data ]" hideIn="md">
                                             <p>Requested Date</p>
@@ -295,11 +311,11 @@
                                                 <div class="[ data ]">
                                                     <div class="[ item__card ]">
                                                         <div class="[ img ]">
-                                                            <img width="50" src="<?php echo UPLOADS . $request['image'] ?>" />
+                                                            <img width="50" src="<?php echo UPLOADS . $request['thumbnail'] ?>" />
                                                         </div>
                                                         <div class="[ content ]">
                                                             <a href="<?php echo URLROOT . "/gig/" . $request['gigId'] ?>">
-                                                                <h2><?php echo $request['title'] ?></h2>
+                                                                <h2 class="[ limit-text-2 ]"><?php echo $request['title'] ?></h2>
                                                             </a>
                                                             <p><small>by </small> <a href="<?php echo URLROOT . "/profile/" . $request['uid'] ?>"><?php echo $request['firstName'] . " " . $request['lastName'] ?></p></a>
 
@@ -313,10 +329,10 @@
                                                     <h3>LKR <?php echo $request['offer'] ?></h3>
                                                 </div>
                                                 <div class="[ data ]" hideIn="lg">
-                                                    <h3><?php echo $request['timePeriod'] ?> Months</h3>
+                                                    <h3><?php echo $request['cropCycle'] ?> Days</h3>
                                                 </div>
                                                 <div class="[ data ]" hideIn="lg">
-                                                    <h3><?php echo $request['location'] ?></h3>
+                                                    <h3><?php echo $request['city'] ?></h3>
                                                 </div>
                                                 <div class="[ data ]" hideIn="md">
                                                     <p><?php echo $request['requestedDate'] ?></p>
@@ -324,7 +340,6 @@
                                                 <div class="[ data ]">
                                                     <div class="[ actions ]">
                                                         <button for="<?php echo $request['requestId'] ?>"><i class="fa fa-chevron-circle-down"></i></button>
-                                                        <a href="<?php echo URLROOT ?>/checkout/<?php echo $request['requestId'] ?>" class="btn btn-primary">Cancel Request</a>
                                                     </div>
                                                 </div>
                                                 <div id="<?php echo $request['requestId'] ?>" class="[ expand ]">
@@ -338,11 +353,11 @@
                                                     </div>
                                                     <div class="[ data ]" showIn="lg">
                                                         <h4>Time Periold :</h4>
-                                                        <p><?php echo $request['timePeriod'] ?> Months</p>
+                                                        <p><?php echo $request['cropCycle'] ?> Months</p>
                                                     </div>
                                                     <div class="[ data ]" showIn="lg">
-                                                        <h4>Location</h4>
-                                                        <p><?php echo $request['location'] ?></p>
+                                                        <h4>City</h4>
+                                                        <p><?php echo $request['city'] ?></p>
                                                     </div>
                                                     <div class="[ data ]" showIn="md">
                                                         <h4>Request Date</h4>
@@ -352,7 +367,10 @@
                                                     <div class="[ data ]" always>
                                                         <h4>Your Message :</h4>
                                                         <p><?php echo $request['message'] ?></p>
-                                                        <button class="btn btn-primary">Edit</button>
+                                                        <div class="[ flex gap-1 mt-1 ]">
+                                                            <!-- <button class="button__primary">Edit Message</button> -->
+                                                            <button onclick="openDeleteAlert('<?php echo $request['requestId'] ?>')" class="[ button__danger ]">Cancel Request</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -390,7 +408,7 @@
                                         <input id="to" type="date">
                                     </div>
                                     <div class="[ input__control ]">
-                                        <label for="location">Location :</label>
+                                        <label for="location">City :</label>
                                         <select id="location">
                                             <option value="all">All</option>
                                             <option value="colombo">Colombo</option>
@@ -444,7 +462,7 @@
                                             <p>Time Period</p>
                                         </div>
                                         <div class="[ data ]" hideIn="lg">
-                                            <p>Location</p>
+                                            <p>City</p>
                                         </div>
                                         <div class="[ data ]" hideIn="md">
                                             <p>Requested Date</p>
@@ -458,11 +476,11 @@
                                                 <div class="[ data ]">
                                                     <div class="[ item__card ]">
                                                         <div class="[ img ]">
-                                                            <img width="50" src="<?php echo UPLOADS . $request['image'] ?>" />
+                                                            <img width="50" src="<?php echo UPLOADS . $request['thumbnail'] ?>" />
                                                         </div>
                                                         <div class="[ content ]">
                                                             <a href="<?php echo URLROOT . "/gig/" . $request['gigId'] ?>">
-                                                                <h2><?php echo $request['title'] ?></h2>
+                                                                <h2 class="[ limit-text-2 ]"><?php echo $request['title'] ?></h2>
                                                             </a>
                                                             <p><small>by </small> <a href="<?php echo URLROOT . "/profile/" . $request['uid'] ?>"><?php echo $request['firstName'] . " " . $request['lastName'] ?></p></a>
 
@@ -476,10 +494,10 @@
                                                     <h3>LKR <?php echo $request['offer'] ?></h3>
                                                 </div>
                                                 <div class="[ data ]" hideIn="lg">
-                                                    <h3><?php echo $request['timePeriod'] ?> Months</h3>
+                                                    <h3><?php echo $request['cropCycle'] ?> Days</h3>
                                                 </div>
                                                 <div class="[ data ]" hideIn="lg">
-                                                    <h3><?php echo $request['location'] ?></h3>
+                                                    <h3><?php echo $request['city'] ?></h3>
                                                 </div>
                                                 <div class="[ data ]" hideIn="md">
                                                     <p><?php echo $request['requestedDate'] ?></p>
@@ -487,7 +505,7 @@
                                                 <div class="[ data ]">
                                                     <div class="[ actions ]">
                                                         <button for="<?php echo $request['requestId'] ?>"><i class="fa fa-chevron-circle-down"></i></button>
-                                                        <a href="<?php echo URLROOT ?>/checkout/<?php echo $request['requestId'] ?>" class="btn btn-primary">Resend</a>
+                                                        <a href="<?php echo URLROOT ?>/checkout/<?php echo $request['requestId'] ?>" class="[ button__danger ]">Resend</a>
                                                     </div>
                                                 </div>
                                                 <div id="<?php echo $request['requestId'] ?>" class="[ expand ]">
@@ -501,11 +519,11 @@
                                                     </div>
                                                     <div class="[ data ]" showIn="lg">
                                                         <h4>Time Periold :</h4>
-                                                        <p><?php echo $request['timePeriod'] ?> Months</p>
+                                                        <p><?php echo $request['cropCycle'] ?> Months</p>
                                                     </div>
                                                     <div class="[ data ]" showIn="lg">
-                                                        <h4>Location</h4>
-                                                        <p><?php echo $request['location'] ?></p>
+                                                        <h4>City</h4>
+                                                        <p><?php echo $request['city'] ?></p>
                                                     </div>
                                                     <div class="[ data ]" showIn="md">
                                                         <h4>Request Date</h4>
@@ -582,6 +600,18 @@
 
             })
         })
+
+        function openDeleteAlert(id) {
+            const deleteModal = document.getElementById("deleteModal")
+            const confirmDeleteBtn = document.getElementById("confirmDeleteBtn")
+            confirmDeleteBtn.value = id
+            deleteModal.showModal()
+        }
+
+        function closeDeleteAlert() {
+            const deleteModal = document.getElementById("deleteModal")
+            deleteModal.close()
+        }
     </script>
 </body>
 

@@ -153,6 +153,7 @@
 }
 
 .item__card>.content a>h2 {
+    font-size: 1rem;
     font-weight: 600;
 }
 
