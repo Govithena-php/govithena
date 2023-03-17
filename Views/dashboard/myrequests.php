@@ -116,10 +116,10 @@
                             </div>
                             <div class="[ requests__wrapper ]">
                                 <div class="[ grid__table ]" style="
-                                        --xl-cols:  1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.7fr;
-                                        --lg-cols: 1.5fr 0.5fr 0.5fr 1fr 1fr;
-                                        --md-cols: 1fr 0.5fr 0.5fr;
-                                        --sm-cols: 2fr 1fr;
+                                        --xl-cols: 1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.3fr;
+                                        --lg-cols: 1.5fr 1fr 1fr 1fr 0.3fr;
+                                        --md-cols: 2fr 1fr 0.3fr;
+                                        --sm-cols: 3fr 0.3fr;
                                     ">
                                     <div class="[ head ]">
                                         <div class="[ data ]">
@@ -129,10 +129,10 @@
                                             <p>Category</p>
                                         </div>
                                         <div class="[ data ]" hideIn="sm">
-                                            <p>Offer</p>
+                                            <p>Investmet</p>
                                         </div>
                                         <div class="[ data ]" hideIn="lg">
-                                            <p>Time Period</p>
+                                            <p>Crop Cycle</p>
                                         </div>
                                         <div class="[ data ]" hideIn="lg">
                                             <p>City</p>
@@ -178,7 +178,6 @@
                                                 <div class="[ data ]">
                                                     <div class="[ actions ]">
                                                         <button for="<?php echo $request['requestId'] ?>"><i class="fa fa-chevron-circle-down"></i></button>
-                                                        <a href="<?php echo URLROOT ?>/checkout/<?php echo $request['requestId'] ?>" class="[ button__danger ]">Pay Now</a>
                                                     </div>
                                                 </div>
                                                 <div id="<?php echo $request['requestId'] ?>" class="[ expand ]">
@@ -187,11 +186,11 @@
                                                         <p class="[ tag ]"><?php echo $request['category'] ?></p>
                                                     </div>
                                                     <div class="[ data ]" showIn="sm">
-                                                        <h4>Offer :</h4>
+                                                        <h4>Investment :</h4>
                                                         <p>LKR <?php echo $request['offer'] ?></p>
                                                     </div>
                                                     <div class="[ data ]" showIn="lg">
-                                                        <h4>Time Periold :</h4>
+                                                        <h4>Crop Cycle :</h4>
                                                         <p><?php echo $request['cropCycle'] ?> Months</p>
                                                     </div>
                                                     <div class="[ data ]" showIn="lg">
@@ -206,6 +205,8 @@
                                                     <div class="[ data ]" always>
                                                         <h4>Your Message :</h4>
                                                         <p><?php echo $request['message'] ?></p>
+                                                        <br>
+                                                        <a href="<?php echo URLROOT ?>/checkout/<?php echo $request['requestId'] ?>" class="[ button__primary ]">Pay Now</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -278,10 +279,10 @@
                             </div>
                             <div class="[ requests__wrapper ]">
                                 <div class="[ grid__table ]" style="
-                                        --xl-cols:  1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.1fr;
-                                        --lg-cols: 1.5fr 0.5fr 0.5fr 1fr 1fr;
-                                        --md-cols: 1fr 0.5fr 0.5fr;
-                                        --sm-cols: 2fr 1fr;
+                                        --xl-cols: 1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.3fr;
+                                        --lg-cols: 1.5fr 1fr 1fr 1fr 0.3fr;
+                                        --md-cols: 2fr 1fr 0.3fr;
+                                        --sm-cols: 3fr 0.3fr;
                                     ">
                                     <div class="[ head ]">
                                         <div class="[ data ]">
@@ -291,10 +292,10 @@
                                             <p>Category</p>
                                         </div>
                                         <div class="[ data ]" hideIn="sm">
-                                            <p>Offer</p>
+                                            <p>Investment</p>
                                         </div>
                                         <div class="[ data ]" hideIn="lg">
-                                            <p>Time Period</p>
+                                            <p>Crop Cycle</p>
                                         </div>
                                         <div class="[ data ]" hideIn="lg">
                                             <p>City</p>
@@ -348,11 +349,11 @@
                                                         <p class="[ tag ]"><?php echo $request['category'] ?></p>
                                                     </div>
                                                     <div class="[ data ]" showIn="sm">
-                                                        <h4>Offer :</h4>
+                                                        <h4>Investment :</h4>
                                                         <p>LKR <?php echo $request['offer'] ?></p>
                                                     </div>
                                                     <div class="[ data ]" showIn="lg">
-                                                        <h4>Time Periold :</h4>
+                                                        <h4>Crop Cycle :</h4>
                                                         <p><?php echo $request['cropCycle'] ?> Months</p>
                                                     </div>
                                                     <div class="[ data ]" showIn="lg">
@@ -443,10 +444,10 @@
                             </div>
                             <div class="[ requests__wrapper ]">
                                 <div class="[ grid__table ]" style="
-                                        --xl-cols:  1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.7fr;
-                                        --lg-cols: 1.5fr 0.5fr 0.5fr 1fr 1fr;
-                                        --md-cols: 1fr 0.5fr 0.5fr;
-                                        --sm-cols: 2fr 1fr;
+                                        --xl-cols: 1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.3fr;
+                                        --lg-cols: 1.5fr 1fr 1fr 1fr 0.3fr;
+                                        --md-cols: 2fr 1fr 0.3fr;
+                                        --sm-cols: 3fr 0.3fr;
                                     ">
                                     <div class="[ head ]">
                                         <div class="[ data ]">
@@ -456,10 +457,10 @@
                                             <p>Category</p>
                                         </div>
                                         <div class="[ data ]" hideIn="sm">
-                                            <p>Offer</p>
+                                            <p>Investment</p>
                                         </div>
                                         <div class="[ data ]" hideIn="lg">
-                                            <p>Time Period</p>
+                                            <p>Crop Cycle</p>
                                         </div>
                                         <div class="[ data ]" hideIn="lg">
                                             <p>City</p>
@@ -505,7 +506,6 @@
                                                 <div class="[ data ]">
                                                     <div class="[ actions ]">
                                                         <button for="<?php echo $request['requestId'] ?>"><i class="fa fa-chevron-circle-down"></i></button>
-                                                        <a href="<?php echo URLROOT ?>/checkout/<?php echo $request['requestId'] ?>" class="[ button__danger ]">Resend</a>
                                                     </div>
                                                 </div>
                                                 <div id="<?php echo $request['requestId'] ?>" class="[ expand ]">
@@ -514,11 +514,11 @@
                                                         <p class="[ tag ]"><?php echo $request['category'] ?></p>
                                                     </div>
                                                     <div class="[ data ]" showIn="sm">
-                                                        <h4>Offer :</h4>
+                                                        <h4>Investment :</h4>
                                                         <p>LKR <?php echo $request['offer'] ?></p>
                                                     </div>
                                                     <div class="[ data ]" showIn="lg">
-                                                        <h4>Time Periold :</h4>
+                                                        <h4>Crop Cycle :</h4>
                                                         <p><?php echo $request['cropCycle'] ?> Months</p>
                                                     </div>
                                                     <div class="[ data ]" showIn="lg">
@@ -533,6 +533,8 @@
                                                     <div class="[ data ]" always>
                                                         <h4>Your Message :</h4>
                                                         <p><?php echo $request['message'] ?></p>
+                                                        <br>
+                                                        <a href="<?php echo URLROOT ?>/checkout/<?php echo $request['requestId'] ?>" class="[ button__primary ]">Resend Request</a>
                                                     </div>
                                                 </div>
                                             </div>

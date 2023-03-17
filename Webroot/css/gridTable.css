@@ -58,10 +58,11 @@
     border-bottom: 1px solid #ccc;
     border-radius: 0.5rem;
     transition: all 0.2s ease-in-out;
+    /* background-color: #eaeaea; */
 }
 
 .grid__table>.body>.row:hover {
-    background-color: #eaeaea;
+    /* background-color: #fff; */
 }
 
 

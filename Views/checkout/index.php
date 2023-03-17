@@ -40,7 +40,7 @@
                 <h2>Bill Summary</h2>
                 <div class="[ grid ]" gap="2" md="2">
                     <div class="[ image ]">
-                        <img src="<?php echo IMAGES ?>/temp/2.jpg" alt="">
+                        <img src="<?php echo UPLOADS . $res['thumbnail'] ?>" alt="">
                     </div>
                     <div class="[ content ]">
                         <h2><?php echo $res['title'] ?></h2>
@@ -109,7 +109,7 @@
                     <button id="pay" name="pay" value="<?php echo $res['requestId'] ?>" class="[ btn ]">Pay</button>
                 </div> -->
                 <form class="[ flex-row-center ]" action="<?php echo URLROOT; ?>/checkout/pay" method="post">
-                    <button type="submit" name="pay" value="<?php echo $res['requestId'] ?>" class="[ btn ]">Pay</button>
+                    <button type="submit" name="pay" value="<?php echo $res['requestId'] ?>" class="[ button__primary ]">Pay</button>
                 </form>
             </div>
         </div>

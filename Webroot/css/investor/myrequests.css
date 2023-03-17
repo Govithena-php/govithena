@@ -325,6 +325,10 @@
         margin-inline: auto;
     }
 
+    .item__card .content {
+        text-align: left;
+    }
+
 }
 
 @media screen and (max-width: 576px) {
