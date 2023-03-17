@@ -9,7 +9,7 @@ class dashboardController extends Controller
     private $fieldVisitModel;
     private $reviewByInvestorModel;
     private $farmerProgressModel;
-    private $farmerRequestModel;
+    private $requestFarmerModel;
 
     public function __construct()
     {
@@ -29,7 +29,7 @@ class dashboardController extends Controller
         $this->fieldVisitModel = $this->model('fieldVisit');
         $this->reviewByInvestorModel = $this->model('reviewByInvestor');
         $this->farmerProgressModel = $this->model('farmerProgress');
-        $this->farmerRequestModel = $this->model('farmerRequest');
+        $this->requestFarmerModel = $this->model('requestFarmer');
     }
 
     public function index()
@@ -176,7 +176,7 @@ class dashboardController extends Controller
         $uid = Session::get('user')->getUid();
 
 
-        $requests = $this->farmerRequestModel->getRequestsByInvestor($uid);
+        $requests = $this->requestFarmerModel->getRequestsByInvestor($uid);
         $pendingRequests = [];
         $acceptedRequests = [];
         $rejectedRequests = [];
@@ -214,7 +214,7 @@ class dashboardController extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $requestId = new Input(POST, 'deleteRequest-confirm');
-            $response = $this->farmerRequestModel->delete($requestId);
+            $response = $this->requestFarmerModel->delete($requestId);
 
             if ($response['success']) {
                 $this->redirect('/dashboard/myrequests/ok');

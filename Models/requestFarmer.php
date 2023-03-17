@@ -1,6 +1,6 @@
 <?php
 
-class farmerRequest extends Model
+class requestFarmer extends Model
 {
 
     public function getRequestsByInvestor($id)
@@ -92,9 +92,7 @@ class farmerRequest extends Model
             $stmt->execute(['id' => $id]);
             return ['success' => true];
         } catch (PDOException $e) {
-            echo $e->getMessage();
-
-            return ['success' => false, 'error' => 'Something went wrong'];
+            return ['success' => false, 'error' => $e->getMessage()];
         }
     }
 }

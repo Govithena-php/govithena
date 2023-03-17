@@ -48,8 +48,8 @@
                         <p><?php echo $res['description'] ?></p>
                         <div class="[ grid ]" md="3">
                             <p><small>Offer:</small><br>LKR <?php echo $res['offer'] ?></p>
-                            <p><small>Time period:</small><br><?php echo $res['timePeriod'] ?> Months</p>
-                            <p><small>Location:</small><br><?php echo $res['location'] ?></p>
+                            <p><small>Time period:</small><br><?php echo $res['cropCycle'] ?> Days</p>
+                            <p><small>Location:</small><br><?php echo $res['city'] ?></p>
                         </div>
 
                     </div>
@@ -61,7 +61,7 @@
                         <div class="[ grid ]" md="2">
                             <p><small>First Name:</small><br><?php echo $res['firstName'] ?></p>
                             <p><small>Last Name:</small><br><?php echo $res['lastName'] ?></p>
-                            <p><small>Location:</small><br><?php echo $res['location'] ?></p>
+                            <p><small>Location:</small><br><?php echo $res['city'] ?></p>
                         </div>
                     </div>
                     <!-- <div class="[ shipping__address ]">
@@ -69,7 +69,7 @@
                         <div class="[ grid ]" md="2">
                             <p>First Name: <br><?php echo $res['firstName'] ?></p>
                             <p>Last Name: <br><?php echo $res['lastName'] ?></p>
-                            <p>Location: <br><?php echo $res['location'] ?></p>
+                            <p>Location: <br><?php echo $res['city'] ?></p>
                         </div>
                     </div> -->
                 </div>

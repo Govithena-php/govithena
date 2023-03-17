@@ -73,7 +73,8 @@ class Gig extends Model
         }
     }
 
-    public function fetchBy($gigId){
+    public function fetchBy($gigId)
+    {
         try {
             $sql = "SELECT * FROM gig WHERE gigId = :gigId";
             $stmt = Database::getBdd()->prepare($sql);
@@ -84,6 +85,18 @@ class Gig extends Model
             echo $e->getMessage();
             die();
             return null;
+        }
+    }
+
+    public function updateGigStatusToReserved($id)
+    {
+        try {
+            $sql = "UPDATE gig SET status = 'RESERVED' WHERE gigId = :id";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['id' => $id]);
+            return ['success' => true];
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
         }
     }
 }
