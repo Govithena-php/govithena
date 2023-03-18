@@ -223,4 +223,27 @@ class dashboardController extends Controller
             }
         }
     }
+
+    public function resend_request()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $requestId = new Input(POST, 'request-resend');
+            $offer = new Input(POST, 'resendOffer');
+            $message = new Input(POST, 'resendMessage');
+
+            $data = [
+                'id' => $requestId,
+                'offer' => $offer,
+                'message' => $message
+            ];
+
+            $response = $this->requestFarmerModel->resend($data);
+
+            if ($response['success']) {
+                $this->redirect('/dashboard/myrequests/ok');
+            } else {
+                $this->redirect('/dashboard/myrequests/error');
+            }
+        }
+    }
 }

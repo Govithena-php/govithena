@@ -1,16 +1,7 @@
 .alertModal {
-    border: 1px solid #ccc;
-    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3);
-    border-radius: 0.25rem;
     min-height: 150px;
     max-width: 400px;
 }
-
-.alertModal::backdrop {
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(1px) grayscale(0.6);
-}
-
 .alertModal>.container {
     margin: 0;
     padding: 1rem;
@@ -38,11 +29,13 @@
 }
 
 .alertModal>.container>.content p {
-    font-size: 1.2em;
+    font-size: 0.8em;
     font-weight: 400;
     color: var(--clr-text-gray);
 }
-
+.alertModal>.container>.buttons{
+    margin-top: 0.5rem;
+}
 .alertModal>.container>.buttons button {
     margin-inline: 1rem;
 }

@@ -95,4 +95,21 @@ class requestFarmer extends Model
             return ['success' => false, 'error' => $e->getMessage()];
         }
     }
+
+
+    public function resend($data)
+    {
+        try {
+            $sql = "UPDATE farmer_request SET state = 'PENDING', offer = :offer, message = :message WHERE requestId = :id";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'id' => $data['id'],
+                'offer' => $data['offer'],
+                'message' => $data['message']
+            ]);
+            return ['success' => true];
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
 }

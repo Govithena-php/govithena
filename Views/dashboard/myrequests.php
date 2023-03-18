@@ -42,6 +42,27 @@
         </div>
     </dialog>
 
+    <dialog id="resendModal" class="[ resendModal ]">
+        <div class="[ container ]">
+            <div class="[ head ]">
+                <h3>Resend Request</h3>
+            </div>
+            <form action="<?php echo URLROOT ?>/dashboard/resend_request" method="POST" class="[ content ]">
+                <div class="[ input__control ]">
+                    <label class="LKR" for="resendOffer">New Offer :</label>
+                    <input name="resendOffer" id="resendOffer"></input>
+                </div>
+                <div class="[ input__control ]">
+                    <label for="resendMessage">New Message :</label>
+                    <textarea name="resendMessage" id="resendMessage"></textarea>
+                </div>
+                <div class="[ buttons ]">
+                    <button type="submit" id="requestResendBtn" name="request-resend" class="[ button__primary ]">Send</button>
+                    <button type="button" class="[ button__danger ]" onclick="closeResendModal()" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+    </dialog>
+
     <?php
     $active = "myrequests";
     $title = "My Requests";
@@ -129,7 +150,7 @@
                                             <p>Category</p>
                                         </div>
                                         <div class="[ data ]" hideIn="sm">
-                                            <p>Investmet</p>
+                                            <p>Offer</p>
                                         </div>
                                         <div class="[ data ]" hideIn="lg">
                                             <p>Crop Cycle</p>
@@ -186,7 +207,7 @@
                                                         <p class="[ tag ]"><?php echo $request['category'] ?></p>
                                                     </div>
                                                     <div class="[ data ]" showIn="sm">
-                                                        <h4>Investment :</h4>
+                                                        <h4>Offer :</h4>
                                                         <p>LKR <?php echo $request['offer'] ?></p>
                                                     </div>
                                                     <div class="[ data ]" showIn="lg">
@@ -292,7 +313,7 @@
                                             <p>Category</p>
                                         </div>
                                         <div class="[ data ]" hideIn="sm">
-                                            <p>Investment</p>
+                                            <p>Offer</p>
                                         </div>
                                         <div class="[ data ]" hideIn="lg">
                                             <p>Crop Cycle</p>
@@ -349,7 +370,7 @@
                                                         <p class="[ tag ]"><?php echo $request['category'] ?></p>
                                                     </div>
                                                     <div class="[ data ]" showIn="sm">
-                                                        <h4>Investment :</h4>
+                                                        <h4>Offer :</h4>
                                                         <p>LKR <?php echo $request['offer'] ?></p>
                                                     </div>
                                                     <div class="[ data ]" showIn="lg">
@@ -457,7 +478,7 @@
                                             <p>Category</p>
                                         </div>
                                         <div class="[ data ]" hideIn="sm">
-                                            <p>Investment</p>
+                                            <p>Offer</p>
                                         </div>
                                         <div class="[ data ]" hideIn="lg">
                                             <p>Crop Cycle</p>
@@ -514,7 +535,7 @@
                                                         <p class="[ tag ]"><?php echo $request['category'] ?></p>
                                                     </div>
                                                     <div class="[ data ]" showIn="sm">
-                                                        <h4>Investment :</h4>
+                                                        <h4>Offer :</h4>
                                                         <p>LKR <?php echo $request['offer'] ?></p>
                                                     </div>
                                                     <div class="[ data ]" showIn="lg">
@@ -534,7 +555,7 @@
                                                         <h4>Your Message :</h4>
                                                         <p><?php echo $request['message'] ?></p>
                                                         <br>
-                                                        <a href="<?php echo URLROOT ?>/checkout/<?php echo $request['requestId'] ?>" class="[ button__primary ]">Resend Request</a>
+                                                        <button onclick="openResendModal('<?php echo $request['requestId'] ?>')" class="[ button__primary-invert ]">Resend Request</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -553,7 +574,102 @@
             </div>
         </div>
     </div>
-
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <?php
     require_once("footer.php");
     ?>
@@ -613,6 +729,18 @@
         function closeDeleteAlert() {
             const deleteModal = document.getElementById("deleteModal")
             deleteModal.close()
+        }
+
+        function openResendModal(id) {
+            const resendModal = document.getElementById("resendModal")
+            const requestResendBtn = document.getElementById("requestResendBtn")
+            requestResendBtn.value = id
+            resendModal.showModal()
+        }
+
+        function closeResendModal() {
+            const resendModal = document.getElementById("resendModal")
+            resendModal.close()
         }
     </script>
 </body>
