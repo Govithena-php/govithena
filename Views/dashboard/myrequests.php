@@ -91,50 +91,6 @@
                             require(COMPONENTS . "dashboard/noDataFound.php");
                         } else {
                         ?>
-                            <div class="[ filters ]">
-                                <div class="[ options ]">
-                                    <div class="[ input__control ]">
-                                        <label for="from">From :</label>
-                                        <input id="from" type="date">
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <label for="to">To :</label>
-                                        <input id="to" type="date">
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <label for="location">City :</label>
-                                        <select id="location">
-                                            <option value="all">All</option>
-                                            <option value="colombo">Colombo</option>
-                                            <option value="galle">Galle</option>
-                                            <option value="kandy">Kandy</option>
-                                            <option value="matara">Matara</option>
-                                            <option value="nuwaraeliya">Nuwara Eliya</option>
-                                            <option value="trincomalee">Trincomalee</option>
-                                        </select>
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <label for="category">Category :</label>
-                                        <select id="category">
-                                            <option value="all">All</option>
-                                            <option value="vegetable">Vegetable</option>
-                                            <option value="fruit">Fruit</option>
-                                            <option value="grains">Grains</option>
-                                            <option value="spices">Spices</option>
-                                        </select>
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <button type="button">Apply</button>
-                                    </div>
-
-                                </div>
-                                <div class="[ search ]">
-                                    <input type="text" placeholder="Search">
-                                    <button type="button">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </div>
-                            </div>
                             <div class="[ requests__wrapper ]">
                                 <div class="[ grid__table ]" style="
                                         --xl-cols: 1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.3fr;
@@ -142,25 +98,72 @@
                                         --md-cols: 2fr 1fr 0.3fr;
                                         --sm-cols: 3fr 0.3fr;
                                     ">
-                                    <div class="[ head ]">
-                                        <div class="[ data ]">
-                                            <p>Gig</p>
+                                    <div class="[ head stick_to_top ]">
+                                        <div class="[ filters ]">
+                                            <div class="[ options ]">
+                                                <div class="[ input__control ]">
+                                                    <label for="from">From :</label>
+                                                    <input id="from" type="date">
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <label for="to">To :</label>
+                                                    <input id="to" type="date">
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <label for="location">City :</label>
+                                                    <select id="location">
+                                                        <option value="all">All</option>
+                                                        <option value="colombo">Colombo</option>
+                                                        <option value="galle">Galle</option>
+                                                        <option value="kandy">Kandy</option>
+                                                        <option value="matara">Matara</option>
+                                                        <option value="nuwaraeliya">Nuwara Eliya</option>
+                                                        <option value="trincomalee">Trincomalee</option>
+                                                    </select>
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <label for="category">Category :</label>
+                                                    <select id="category">
+                                                        <option value="all">All</option>
+                                                        <option value="vegetable">Vegetable</option>
+                                                        <option value="fruit">Fruit</option>
+                                                        <option value="grains">Grains</option>
+                                                        <option value="spices">Spices</option>
+                                                    </select>
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <button type="button">Apply</button>
+                                                </div>
+
+                                            </div>
+                                            <div class="[ search ]">
+                                                <input type="text" placeholder="Search">
+                                                <button type="button">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
                                         </div>
-                                        <div class="[ data ]" hideIn="md">
-                                            <p>Category</p>
+                                        <div class="[ row ]">
+                                            <div class="[ data ]">
+                                                <p>Gig</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="md">
+                                                <p>Category</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="sm">
+                                                <p>Offer</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="lg">
+                                                <p>Crop Cycle</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="lg">
+                                                <p>City</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="md">
+                                                <p>Requested Date</p>
+                                            </div>
                                         </div>
-                                        <div class="[ data ]" hideIn="sm">
-                                            <p>Offer</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="lg">
-                                            <p>Crop Cycle</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="lg">
-                                            <p>City</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="md">
-                                            <p>Requested Date</p>
-                                        </div>
+
                                     </div>
                                     <div class="[ body ]">
                                         <?php
@@ -254,77 +257,82 @@
                             require(COMPONENTS . "dashboard/noDataFound.php");
                         } else {
                         ?>
-                            <div class="[ filters ]">
-                                <div class="[ options ]">
-                                    <div class="[ input__control ]">
-                                        <label for="from">From :</label>
-                                        <input id="from" type="date">
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <label for="to">To :</label>
-                                        <input id="to" type="date">
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <label for="location">City :</label>
-                                        <select id="location">
-                                            <option value="all">All</option>
-                                            <option value="colombo">Colombo</option>
-                                            <option value="galle">Galle</option>
-                                            <option value="kandy">Kandy</option>
-                                            <option value="matara">Matara</option>
-                                            <option value="nuwaraeliya">Nuwara Eliya</option>
-                                            <option value="trincomalee">Trincomalee</option>
-                                        </select>
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <label for="category">Category :</label>
-                                        <select id="category">
-                                            <option value="all">All</option>
-                                            <option value="vegetable">Vegetable</option>
-                                            <option value="fruit">Fruit</option>
-                                            <option value="grains">Grains</option>
-                                            <option value="spices">Spices</option>
-                                        </select>
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <button type="button">Apply</button>
-                                    </div>
 
-                                </div>
-                                <div class="[ search ]">
-                                    <input type="text" placeholder="Search">
-                                    <button type="button">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </div>
-                            </div>
                             <div class="[ requests__wrapper ]">
+
                                 <div class="[ grid__table ]" style="
                                         --xl-cols: 1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.3fr;
                                         --lg-cols: 1.5fr 1fr 1fr 1fr 0.3fr;
                                         --md-cols: 2fr 1fr 0.3fr;
                                         --sm-cols: 3fr 0.3fr;
                                     ">
-                                    <div class="[ head ]">
-                                        <div class="[ data ]">
-                                            <p>Gig</p>
+                                    <div class="[ head stick_to_top ]">
+                                        <div class="[ filters ]">
+                                            <div class="[ options ]">
+                                                <div class="[ input__control ]">
+                                                    <label for="from">From :</label>
+                                                    <input id="from" type="date">
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <label for="to">To :</label>
+                                                    <input id="to" type="date">
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <label for="location">City :</label>
+                                                    <select id="location">
+                                                        <option value="all">All</option>
+                                                        <option value="colombo">Colombo</option>
+                                                        <option value="galle">Galle</option>
+                                                        <option value="kandy">Kandy</option>
+                                                        <option value="matara">Matara</option>
+                                                        <option value="nuwaraeliya">Nuwara Eliya</option>
+                                                        <option value="trincomalee">Trincomalee</option>
+                                                    </select>
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <label for="category">Category :</label>
+                                                    <select id="category">
+                                                        <option value="all">All</option>
+                                                        <option value="vegetable">Vegetable</option>
+                                                        <option value="fruit">Fruit</option>
+                                                        <option value="grains">Grains</option>
+                                                        <option value="spices">Spices</option>
+                                                    </select>
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <button type="button">Apply</button>
+                                                </div>
+
+                                            </div>
+                                            <div class="[ search ]">
+                                                <input type="text" placeholder="Search">
+                                                <button type="button">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
                                         </div>
-                                        <div class="[ data ]" hideIn="md">
-                                            <p>Category</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="sm">
-                                            <p>Offer</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="lg">
-                                            <p>Crop Cycle</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="lg">
-                                            <p>City</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="md">
-                                            <p>Requested Date</p>
+                                        <div class="[ row ]">
+                                            <div class="[ data ]">
+                                                <p>Gig</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="md">
+                                                <p>Category</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="sm">
+                                                <p>Offer</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="lg">
+                                                <p>Crop Cycle</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="lg">
+                                                <p>City</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="md">
+                                                <p>Requested Date</p>
+                                            </div>
                                         </div>
                                     </div>
+
                                     <div class="[ body ]">
                                         <?php
                                         foreach ($pr as $request) {
@@ -419,50 +427,7 @@
                             require(COMPONENTS . "dashboard/noDataFound.php");
                         } else {
                         ?>
-                            <div class="[ filters ]">
-                                <div class="[ options ]">
-                                    <div class="[ input__control ]">
-                                        <label for="from">From :</label>
-                                        <input id="from" type="date">
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <label for="to">To :</label>
-                                        <input id="to" type="date">
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <label for="location">City :</label>
-                                        <select id="location">
-                                            <option value="all">All</option>
-                                            <option value="colombo">Colombo</option>
-                                            <option value="galle">Galle</option>
-                                            <option value="kandy">Kandy</option>
-                                            <option value="matara">Matara</option>
-                                            <option value="nuwaraeliya">Nuwara Eliya</option>
-                                            <option value="trincomalee">Trincomalee</option>
-                                        </select>
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <label for="category">Category :</label>
-                                        <select id="category">
-                                            <option value="all">All</option>
-                                            <option value="vegetable">Vegetable</option>
-                                            <option value="fruit">Fruit</option>
-                                            <option value="grains">Grains</option>
-                                            <option value="spices">Spices</option>
-                                        </select>
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <button type="button">Apply</button>
-                                    </div>
 
-                                </div>
-                                <div class="[ search ]">
-                                    <input type="text" placeholder="Search">
-                                    <button type="button">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </div>
-                            </div>
                             <div class="[ requests__wrapper ]">
                                 <div class="[ grid__table ]" style="
                                         --xl-cols: 1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.3fr;
@@ -471,23 +436,70 @@
                                         --sm-cols: 3fr 0.3fr;
                                     ">
                                     <div class="[ head ]">
-                                        <div class="[ data ]">
-                                            <p>Gig</p>
+
+                                        <div class="[ filters ]">
+                                            <div class="[ options ]">
+                                                <div class="[ input__control ]">
+                                                    <label for="from">From :</label>
+                                                    <input id="from" type="date">
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <label for="to">To :</label>
+                                                    <input id="to" type="date">
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <label for="location">City :</label>
+                                                    <select id="location">
+                                                        <option value="all">All</option>
+                                                        <option value="colombo">Colombo</option>
+                                                        <option value="galle">Galle</option>
+                                                        <option value="kandy">Kandy</option>
+                                                        <option value="matara">Matara</option>
+                                                        <option value="nuwaraeliya">Nuwara Eliya</option>
+                                                        <option value="trincomalee">Trincomalee</option>
+                                                    </select>
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <label for="category">Category :</label>
+                                                    <select id="category">
+                                                        <option value="all">All</option>
+                                                        <option value="vegetable">Vegetable</option>
+                                                        <option value="fruit">Fruit</option>
+                                                        <option value="grains">Grains</option>
+                                                        <option value="spices">Spices</option>
+                                                    </select>
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <button type="button">Apply</button>
+                                                </div>
+
+                                            </div>
+                                            <div class="[ search ]">
+                                                <input type="text" placeholder="Search">
+                                                <button type="button">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
                                         </div>
-                                        <div class="[ data ]" hideIn="md">
-                                            <p>Category</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="sm">
-                                            <p>Offer</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="lg">
-                                            <p>Crop Cycle</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="lg">
-                                            <p>City</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="md">
-                                            <p>Requested Date</p>
+                                        <div class="[ row ]">
+                                            <div class="[ data ]">
+                                                <p>Gig</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="md">
+                                                <p>Category</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="sm">
+                                                <p>Offer</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="lg">
+                                                <p>Crop Cycle</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="lg">
+                                                <p>City</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="md">
+                                                <p>Requested Date</p>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="[ body ]">
@@ -574,102 +586,6 @@
             </div>
         </div>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
     <?php
     require_once("footer.php");
     ?>
