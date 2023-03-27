@@ -147,6 +147,35 @@
 }
 
 
+.grid__table>.body>.row>.flex-start-x {
+    justify-content: flex-start;
+}
+
+.grid__table>.body>.row>.flex-start-y {
+    align-items: flex-start;
+}
+
+.grid__table>.body>.row>.flex-center-x {
+    justify-content: center;
+}
+
+.grid__table>.body>.row>.flex-center-y {
+    align-items: center;
+}
+
+.grid__table>.body>.row>.flex-center {
+    justify-content: center;
+    align-items: center;
+}
+
+.grid__table>.body>.row>.flex-end-x{
+    justify-content: flex-end;
+}
+
+.grid__table>.body>.row>.flex-end-y{
+    align-items: flex-end;
+}
+
 @media screen and (max-width: 1200px) {
 
     .grid__table>.head,

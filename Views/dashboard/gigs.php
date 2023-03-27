@@ -173,67 +173,69 @@
                         } else {
                         ?>
                             <div class="[  ]">
-                                <div class="[ grid ][ filters ]" md="1" lg="2" gap="2">
-                                    <div class="[ grid ][ options ]" sm="1" md="6" lg="6" gap="1">
-                                        <div class="[ input__control ]">
-                                            <label for="from">From :</label>
-                                            <input id="from" type="date">
-                                        </div>
-                                        <div class="[ input__control ]">
-                                            <label for="to">To :</label>
-                                            <input id="to" type="date">
-                                        </div>
-                                        <div class="[ input__control ]">
-                                            <label for="location">Location :</label>
-                                            <select id="location">
-                                                <option value="all">All</option>
-                                                <option value="colombo">Colombo</option>
-                                                <option value="galle">Galle</option>
-                                                <option value="kandy">Kandy</option>
-                                                <option value="matara">Matara</option>
-                                                <option value="nuwaraeliya">Nuwara Eliya</option>
-                                                <option value="trincomalee">Trincomalee</option>
-                                            </select>
-                                        </div>
-                                        <div class="[ input__control ]">
-                                            <label for="category">Category :</label>
-                                            <select id="category">
-                                                <option value="all">All</option>
-                                                <option value="vegetable">Vegetable</option>
-                                                <option value="fruit">Fruit</option>
-                                                <option value="grains">Grains</option>
-                                                <option value="spices">Spices</option>
-                                            </select>
-                                        </div>
-                                        <div class="[ input__control ]">
-                                            <button type="button">Apply</button>
-                                        </div>
-
-                                    </div>
-                                    <div class="[ search ]">
-                                        <input type="text" placeholder="Search">
-                                        <button type="button">
-                                            <i class="fas fa-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
-
 
                                 <div class="[ grid__table ]" style="
-                                        --xl-cols:  2fr 1fr 2fr 2fr 1fr;
-                                        --lg-cols: 4fr 1fr 1fr;
+                                        --xl-cols:  2fr 1fr 0.5fr;
+                                        --lg-cols: 4fr 1fr;
                                         --md-cols: 5fr 1fr;
                                         --sm-cols: 3fr 1fr;
                                     ">
-                                    <div class="[ head ]">
-                                        <div class="[ data ]">
-                                            <p>Gig</p>
+                                    <div class="[ head stick_to_top ]">
+
+                                        <div class="[ grid ][ filters ]" md="1" lg="2" gap="2">
+                                            <div class="[ grid ][ options ]" sm="1" md="6" lg="6" gap="1">
+                                                <div class="[ input__control ]">
+                                                    <label for="from">From :</label>
+                                                    <input id="from" type="date">
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <label for="to">To :</label>
+                                                    <input id="to" type="date">
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <label for="location">Location :</label>
+                                                    <select id="location">
+                                                        <option value="all">All</option>
+                                                        <option value="colombo">Colombo</option>
+                                                        <option value="galle">Galle</option>
+                                                        <option value="kandy">Kandy</option>
+                                                        <option value="matara">Matara</option>
+                                                        <option value="nuwaraeliya">Nuwara Eliya</option>
+                                                        <option value="trincomalee">Trincomalee</option>
+                                                    </select>
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <label for="category">Category :</label>
+                                                    <select id="category">
+                                                        <option value="all">All</option>
+                                                        <option value="vegetable">Vegetable</option>
+                                                        <option value="fruit">Fruit</option>
+                                                        <option value="grains">Grains</option>
+                                                        <option value="spices">Spices</option>
+                                                    </select>
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <button type="button">Apply</button>
+                                                </div>
+
+                                            </div>
+                                            <div class="[ search ]">
+                                                <input type="text" placeholder="Search">
+                                                <button type="button">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
                                         </div>
-                                        <div class="[ data ]" hideIn="md">
-                                            <p>Category</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="lg">
-                                            <p>Prograss</p>
+                                        <div class="[ row ]">
+                                            <div class="[ data ]">
+                                                <p>Gig</p>
+                                            </div>
+                                            <!-- <div class="[ data ]" hideIn="md">
+                                                <p>Category</p>
+                                            </div> -->
+                                            <div class="[ data ]" hideIn="lg">
+                                                <p>Prograss</p>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="[ body ]">
@@ -244,21 +246,21 @@
                                                 <div class="[ data ]">
                                                     <div class="[ item__card ]">
                                                         <div class="[ img ]">
-                                                            <img width="50" src="<?php echo UPLOADS . $gig['image'] ?>" />
+                                                            <img width="50" src="<?php echo UPLOADS . $gig['thumbnail'] ?>" />
                                                         </div>
                                                         <div class="[ content ]">
                                                             <a href="<?php echo URLROOT . "/gig/" . $gig['gigId'] ?>">
                                                                 <h2><?php echo $gig['title'] ?></h2>
                                                             </a>
                                                             <!-- <p><small>by </small> <a href="<?php echo URLROOT . "/profile/" . $request['uid'] ?>"><?php echo $request['firstName'] . " " . $request['lastName'] ?></p></a> -->
-                                                            <h3><?php echo $gig['location'] ?></h3>
+                                                            <h3><?php echo $gig['city'] ?></h3>
 
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="[ data ]" hideIn="md">
+                                                <!-- <div class="[ data ]" hideIn="md">
                                                     <p class="[ tag ]"><?php echo $gig['category'] ?></p>
-                                                </div>
+                                                </div> -->
                                                 <div class="[ data ]" hideIn="lg">
                                                     <div class="[ progress__bar ]">
                                                         <label>
@@ -268,7 +270,7 @@
                                                         <progress min="0" max="100" value="20"></progress>
                                                     </div>
                                                 </div>
-                                                <div class="[ data ]" hideIn="lg">
+                                                <!-- <div class="[ data ]" hideIn="lg">
                                                     <div class="[ progress__bar ]">
                                                         <label>
                                                             <span>overroll</span>
@@ -276,10 +278,10 @@
                                                         </label>
                                                         <progress min="0" max="100" value="50"></progress>
                                                     </div>
-                                                </div>
-                                                <div class="[ data ]">
+                                                </div> -->
+                                                <div class="[ data flex-center ]">
                                                     <div class="[ actions ]">
-                                                        <a href="<?php echo URLROOT ?>/dashboard/progress/<?php echo $gig['gigId'] ?>" class="btn btn-primary">View More</a>
+                                                        <a href="<?php echo URLROOT ?>/dashboard/progress/<?php echo $gig['gigId'] ?>" class="[ button__primary-invert ]">View More</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -462,7 +464,250 @@
             </div>
         </div>
 
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
     </div>
+
 
     <?php
 

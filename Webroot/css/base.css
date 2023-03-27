@@ -133,6 +133,13 @@ dialog::backdrop {
     margin: 0.5rem 0;
 }
 
+.stick_to_top{
+    position: sticky;
+    top: calc(var(--default-navbar-height) + 2rem);
+    z-index: 100;
+}
+
+
 .flex-row {
     display: flex;
     flex-direction: row;
