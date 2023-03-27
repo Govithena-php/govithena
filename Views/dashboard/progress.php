@@ -53,18 +53,11 @@
 
             <div>
                 <div class="[ cards ]">
-                    <img class="[ card__img ]" src="<?php echo UPLOADS . $gig['image']; ?>" />
+                    <img class="[ card__img ]" src="<?php echo UPLOADS . $gig['thumbnail']; ?>" />
                     <div class="[ gig__title ]">
-                        <div class="[ flex__title ]">
-                            <div>
-                                <h3><?php echo $gig['title']; ?></h3>
-                                <p><?php echo $gig['location'] ?></p>
-                            </div>
-                            <div class="[ category__tag ]">
-                                <p><?php echo $gig['category']; ?></p>
-                            </div>
+                        <div class="[ category__tag ]">
+                            <p><?php echo $gig['category']; ?></p>
                         </div>
-
                         <div class="[ farmer__profile ]">
                             <div class="[ profile__image ]">
                                 <img src="<?php echo UPLOADS . $farmer['image'] ?>" />
@@ -74,6 +67,10 @@
                                 <p><?php echo $farmer['city']; ?></p>
                             </div>
                         </div>
+                    </div>
+                    <div class="[ flex__title ]">
+                        <h3><?php echo $gig['title']; ?></h3>
+                        <p><?php echo $gig['city'] ?></p>
                     </div>
                     <div class="[ grid ]" sm="1" md="2" gap="1">
                         <div class="[ card ]">
@@ -234,28 +231,7 @@
                             require(COMPONENTS . "dashboard/noDataFound.php");
                         } else {
                         ?>
-                            <div class="[ grid ][ filters ]" md="1" lg="2" gap="2">
-                                <div class="[ grid ][ options ]" sm="1" md="6" lg="6" gap="1">
-                                    <div class="[ input__control ]">
-                                        <label for="from">Visit Date :</label>
-                                        <input id="from" type="date">
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <label for="to">Entry Date :</label>
-                                        <input id="to" type="date">
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <button type="button">Apply</button>
-                                    </div>
 
-                                </div>
-                                <div class="[ search ]">
-                                    <input type="text" placeholder="Search">
-                                    <button type="button">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </div>
-                            </div>
                             <div class="[ requests__wrapper ]">
                                 <div class="[ grid__table ]" style="
                                         --xl-cols:  2fr 1fr 1fr 0.5fr;
@@ -263,15 +239,39 @@
                                         --md-cols: 2fr 0.5fr;
                                         --sm-cols: 2fr 1fr;
                                     ">
-                                    <div class="[ head ]">
-                                        <div class="[ data ]">
-                                            <p>Title</p>
+                                    <div class="[ head stick_to_top ]">
+                                        <div class="[ grid ][ filters ]" md="1" lg="2" gap="2">
+                                            <div class="[ grid ][ options ]" sm="1" md="6" lg="6" gap="1">
+                                                <div class="[ input__control ]">
+                                                    <label for="from">Visit Date :</label>
+                                                    <input id="from" type="date">
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <label for="to">Entry Date :</label>
+                                                    <input id="to" type="date">
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <button type="button">Apply</button>
+                                                </div>
+
+                                            </div>
+                                            <div class="[ search ]">
+                                                <input type="text" placeholder="Search">
+                                                <button type="button">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
                                         </div>
-                                        <div class="[ data ]" hideIn="md">
-                                            <p>Updated Date</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="md">
-                                            <p>Updated Time</p>
+                                        <div class="[ row ]">
+                                            <div class="[ data ]">
+                                                <p>Title</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="md">
+                                                <p>Updated Date</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="md">
+                                                <p>Updated Time</p>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="[ body ]">
@@ -350,6 +350,51 @@
                         <?php
                         }
                         ?>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
                     </div>
                 </div>
 
@@ -366,49 +411,51 @@
                         ?>
 
                             <div class="[ ]">
-                                <div class="[ grid ][ filters ]" md="1" lg="2" gap="2">
-                                    <div class="[ grid ][ options ]" sm="1" md="6" lg="6" gap="1">
-                                        <div class="[ input__control ]">
-                                            <label for="from">Visit Date :</label>
-                                            <input id="from" type="date">
-                                        </div>
-                                        <div class="[ input__control ]">
-                                            <label for="to">Entry Date :</label>
-                                            <input id="to" type="date">
-                                        </div>
-                                        <div class="[ input__control ]">
-                                            <button type="button">Apply</button>
-                                        </div>
-
-                                    </div>
-                                    <div class="[ search ]">
-                                        <input type="text" placeholder="Search">
-                                        <button type="button">
-                                            <i class="fas fa-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
                                 <div class="[ grid__table ]" style="
                                         --xl-cols: 3fr 1.5fr 1fr 1fr 1fr 0.5fr;
                                         --lg-cols: 2fr 1fr 1fr 0.5fr;
                                         --md-cols: 3fr 1fr 0.5fr;
                                         --sm-cols: 1fr 0.2fr;
                                 ">
-                                    <div class="[ head ]">
-                                        <div class="[ data ]">
-                                            <p>Week</p>
+                                    <div class="[ head stick_to_top ]">
+                                        <div class="[ grid ][ filters ]" md="1" lg="2" gap="2">
+                                            <div class="[ grid ][ options ]" sm="1" md="6" lg="6" gap="1">
+                                                <div class="[ input__control ]">
+                                                    <label for="from">Visit Date :</label>
+                                                    <input id="from" type="date">
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <label for="to">Entry Date :</label>
+                                                    <input id="to" type="date">
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <button type="button">Apply</button>
+                                                </div>
+
+                                            </div>
+                                            <div class="[ search ]">
+                                                <input type="text" placeholder="Search">
+                                                <button type="button">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
                                         </div>
-                                        <div class="[ data ]" hideIn="sm">
-                                            <p>Agrologist</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="md">
-                                            <p>Visit Date</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="lg">
-                                            <p>Entry Date</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="lg">
-                                            <p>Entry Time</p>
+                                        <div class="[ row ]">
+                                            <div class="[ data ]">
+                                                <p>Week</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="sm">
+                                                <p>Agrologist</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="md">
+                                                <p>Visit Date</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="lg">
+                                                <p>Entry Date</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="lg">
+                                                <p>Entry Time</p>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="[ body ]">
