@@ -2,6 +2,8 @@
 <html lang="en">
 <?php
 
+// var_dump($investments);
+// die();
 // foreach ($progress as $p) {
 //     foreach ($p as $i) {
 //         var_dump($i);
@@ -27,7 +29,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/tabs.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/gridTable.css">
-    <link rel="stylesheet" href="<?php echo CSS ?>/investor/progress.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/investor/gig.css">
 
     <title>Dashboard | Investor</title>
 </head>
@@ -197,10 +199,11 @@
         <div class="[ tabs ][ gigTabs ]" tab="2">
             <div class="controls">
                 <button class="control" for="1">Analysis</button>
-                <button class="control" for="2">Progress Updates</button>
-                <button class="control" for="3">Agrologist Updates</button>
+                <button class="control" for="2">Investments</button>
+                <button class="control" for="3">Progress Updates</button>
+                <button class="control" for="4">Agrologist Updates</button>
                 <!-- <span class="[ whitespace ]"></span> -->
-                <button class="control" for="4">About Gig</button>
+                <button class="control" for="5">About Gig</button>
             </div>
             <div class="wrapper">
                 <div class="tab" id="1">
@@ -210,17 +213,98 @@
                             <p>Get the most out of your data with our analysis section - the ultimate tool for unlocking valuable insights and making smarter decisions.</p>
                         </div>
                         <?php
-                        if (empty($ar)) {
-                            require_once(COMPONENTS . "dashboard/noDataFound.php");
+                        // if (empty($ar)) {
+                        //     require(COMPONENTS . "dashboard/noDataFound.php");
+                        // } else {
+                        ?>
+                        <?php
+                        // }
+                        ?>
+                    </div>
+                </div>
+
+                <div class="tab" id="2">
+                    <div class="[ requests__continer ]">
+                        <div class="[ caption ]">
+                            <h2>Investments</h2>
+                            <p>Get the most out of your data with our analysis section - the ultimate tool for unlocking valuable insights and making smarter decisions.</p>
+                        </div>
+                        <?php
+                        if (!isset($investments)) {
+                            require(COMPONENTS . "dashboard/noDataFound.php");
                         } else {
                         ?>
+                            <div class="[ requests__wrapper ]">
+                                <div class="[ grid__table ]" style="
+                                        --xl-cols: 1fr 1fr 1fr;
+                                        --lg-cols: 1fr 1fr 1fr;
+                                        --md-cols: 1fr 1fr 1fr;
+                                        --sm-cols: 1fr 1fr 1fr;
+                                    ">
+                                    <div class="[ head stick_to_top ]">
+                                        <div class="[ grid ][ filters ]" md="1" lg="2" gap="2">
+                                            <div class="[ grid ][ options ]" sm="1" md="6" lg="6" gap="1">
+                                                <div class="[ input__control ]">
+                                                    <label for="from">Visit Date :</label>
+                                                    <input id="from" type="date">
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <label for="to">Entry Date :</label>
+                                                    <input id="to" type="date">
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <button type="button">Apply</button>
+                                                </div>
+
+                                            </div>
+                                            <div class="[ search ]">
+                                                <input type="text" placeholder="Search">
+                                                <button type="button">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="[ row ]">
+                                            <div class="[ data ]">
+                                                <p>Date</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="md">
+                                                <p>Time</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="md">
+                                                <p>Amount</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="[ body ]">
+                                        <?php
+                                        foreach ($investments as $investment) {
+                                        ?>
+                                            <div class="[ row ]">
+                                                <div class="[ data ]" hideIn="md">
+                                                    <h3><?php echo $investment['date'] ?></h3>
+                                                </div>
+                                                <div class="[ data ]" hideIn="md">
+                                                    <h3><?php echo $investment['time'] ?></h3>
+                                                </div>
+                                                <div class="[ data ]" hideIn="md">
+                                                    <h3 class="[ LKR ]"><?php echo $investment['amount'] ?></h3>
+                                                </div>
+                                            </div>
+                                        <?php
+                                        }
+                                        ?>
+
+                                    </div>
+                                </div>
+                            </div>
                         <?php
                         }
                         ?>
                     </div>
                 </div>
 
-                <div class="tab" id="2" active="true">
+                <div class="tab" id="3" active="true">
                     <div class="[ requests__continer ]">
                         <div class="[ caption ]">
                             <h2>Progress Updates</h2>
@@ -398,7 +482,7 @@
                     </div>
                 </div>
 
-                <div class="tab" id="3">
+                <div class="tab" id="4">
                     <div class="[ requests__continer ]">
                         <div class="[ caption ]">
                             <h2>Agrologist Updates</h2>
@@ -537,7 +621,7 @@
                     </div>
                 </div>
 
-                <div class="tab" id="4">
+                <div class="tab" id="5">
                     <div class="[ requests__continer ]">
                         <div class="[ caption ]">
                             <h2>About Gig</h2>

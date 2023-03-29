@@ -10,6 +10,7 @@ class dashboardController extends Controller
     private $reviewByInvestorModel;
     private $farmerProgressModel;
     private $requestFarmerModel;
+    private $investmentModel;
 
     public function __construct()
     {
@@ -30,6 +31,7 @@ class dashboardController extends Controller
         $this->reviewByInvestorModel = $this->model('reviewByInvestor');
         $this->farmerProgressModel = $this->model('farmerProgress');
         $this->requestFarmerModel = $this->model('requestFarmer');
+        $this->investmentModel = $this->model('investment');
     }
 
     public function index()
@@ -45,7 +47,7 @@ class dashboardController extends Controller
         $this->render('gigs');
     }
 
-    public function progress($params)
+    public function gig($params)
     {
         $props = [];
         if (!isset($params[0]) || empty($params[0])) {
@@ -82,6 +84,11 @@ class dashboardController extends Controller
             }
         }
 
+        $investments = $this->investmentModel->fetchByInvestorAndGig($this->currentUser->getUid(), $gigId);
+        if ($investments['success']) {
+            $props['investments'] = $investments['data'];
+        }
+
         // accpted data
         // gig
         // farmer
@@ -97,7 +104,7 @@ class dashboardController extends Controller
 
 
         $this->set($props);
-        $this->render('progress');
+        $this->render('gig');
     }
 
 

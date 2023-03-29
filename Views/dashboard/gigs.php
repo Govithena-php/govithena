@@ -281,7 +281,7 @@
                                                 </div> -->
                                                 <div class="[ data flex-center ]">
                                                     <div class="[ actions ]">
-                                                        <a href="<?php echo URLROOT ?>/dashboard/progress/<?php echo $gig['gigId'] ?>" class="[ button__primary-invert ]">View More</a>
+                                                        <a href="<?php echo URLROOT ?>/dashboard/gig/<?php echo $gig['gigId'] ?>" class="[ button__primary-invert ]">View More</a>
                                                     </div>
                                                 </div>
                                             </div>
