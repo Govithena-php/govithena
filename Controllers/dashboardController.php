@@ -215,16 +215,22 @@ class dashboardController extends Controller
 
     public function myinvestments()
     {
-        require(ROOT . 'Models/investment.php');
-        $uid = Session::get('user')->getUid();
-        $i = new Investment();
+        $props = [];
 
-        $investments = $i->fetchAllBy($uid);
+        $investments = $this->investmentModel->fetchAllBy($this->currentUser->getUid());
         if (isset($investments)) {
-            $this->set(['investments' => $investments]);
+            $props['investments'] = $investments;
         } else {
-            $this->set(['error' => "no investments found"]);
+            $props['error'] = "no investments found";
         }
+
+        $totalInvestment = $this->investmentModel->getTotalInvestmentByInvestor($this->currentUser->getUid());
+
+        if ($totalInvestment['success']) {
+            $props['totalInvestment'] = $totalInvestment['data']['totalInvestment'];
+        }
+
+        $this->set($props);
         $this->render('myinvestments');
     }
 

@@ -32,48 +32,48 @@
             <h3>View all your investment activity in one place.</h3>
             <p>Easily track your investments and see how your portfolio has grown over time.</p>
         </div>
-        <div class="[ investments__heading ]">
-            <div class="[ investments__add ]">
-                <div class="[ input__control ]">
-                    <label for="from">From :</label>
-                    <input id="from" type="date">
+        <div class="inv__cards">
+            <div class="inv__card">
+                <div class="inv__card__header">
+                    <h3>Total Investment</h3>
                 </div>
-                <div class="[ input__control ]">
-                    <label for="to">To :</label>
-                    <input id="to" type="date">
+                <div class="inv__card__body">
+                    <h1 class="[ LKR ]">
+                        <?php
+                        if (isset($totalInvestment)) echo number_format($totalInvestment, 2, '.', ',');
+                        else echo "0.00";
+                        ?></h1>
+                    <p>Within 35 months</p>
                 </div>
-                <div class="[ input__control ]">
-                    <label for="location">Location :</label>
-                    <select id="location">
-                        <option value="all">All</option>
-                        <option value="colombo">Colombo</option>
-                        <option value="galle">Galle</option>
-                        <option value="kandy">Kandy</option>
-                        <option value="matara">Matara</option>
-                        <option value="nuwaraeliya">Nuwara Eliya</option>
-                        <option value="trincomalee">Trincomalee</option>
-                    </select>
-                </div>
-                <div class="[ input__control ]">
-                    <label for="category">Category :</label>
-                    <select id="category">
-                        <option value="all">All</option>
-                        <option value="vegetable">Vegetable</option>
-                        <option value="fruit">Fruit</option>
-                        <option value="grains">Grains</option>
-                        <option value="spices">Spices</option>
-                    </select>
-                </div>
-                <div class="[ input__control ]">
-                    <button type="button">Apply</button>
-                </div>
-
             </div>
-            <div class="[ investments__search ]">
-                <input type="text" placeholder="Search">
-                <button type="button">
-                    <i class="fas fa-search"></i>
-                </button>
+
+            <div class="inv__card">
+                <div class="inv__card__header">
+                    <h3>This Month Investment</h3>
+                </div>
+                <div class="inv__card__body">
+                    <h1 class="[ LKR ]">
+                        <?php
+                        if (isset($totalInvestment)) echo number_format($totalInvestment, 2, '.', ',');
+                        else echo "0.00";
+                        ?>
+                    </h1>
+                    <p>10% <i class="fa fa-arrow-up"></i></p>
+                </div>
+            </div>
+
+            <div class="inv__card">
+                <div class="inv__card__header">
+                    <h3>Total Gigs</h3>
+                </div>
+                <div class="inv__card__body">
+                    <h1>5</h1>
+                    <p>Active 4</p>
+                </div>
+            </div>
+
+            <div class="inv__new">
+                <button class="[ button__primary ]">Invest More</button>
             </div>
         </div>
         <?php
@@ -88,29 +88,75 @@
 
                 <div class="[ requests__wrapper ]">
                     <div class="[ grid__table ]" style="
-                                        --xl-cols:  1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.2fr;
-                                        --lg-cols: 1.5fr 0.5fr 0.5fr 1fr 1fr;
-                                        --md-cols: 1fr 0.5fr 0.5fr;
-                                        --sm-cols: 2fr 1fr;
+                                        --xl-cols:  1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr;
+                                        --lg-cols: 1.5fr 0.5fr 0.5fr 1fr;
+                                        --md-cols: 1fr 0.5fr;
+                                        --sm-cols: 2fr;
                                     ">
-                        <div class="[ head ]">
-                            <div class="[ data ]">
-                                <p>Gig</p>
+                        <div class="[ head stick_to_top ]">
+                            <div class="[ investments__heading ]">
+                                <div class="[ investments__add ]">
+                                    <div class="[ input__control ]">
+                                        <label for="from">From :</label>
+                                        <input id="from" type="date">
+                                    </div>
+                                    <div class="[ input__control ]">
+                                        <label for="to">To :</label>
+                                        <input id="to" type="date">
+                                    </div>
+                                    <div class="[ input__control ]">
+                                        <label for="location">Location :</label>
+                                        <select id="location">
+                                            <option value="all">All</option>
+                                            <option value="colombo">Colombo</option>
+                                            <option value="galle">Galle</option>
+                                            <option value="kandy">Kandy</option>
+                                            <option value="matara">Matara</option>
+                                            <option value="nuwaraeliya">Nuwara Eliya</option>
+                                            <option value="trincomalee">Trincomalee</option>
+                                        </select>
+                                    </div>
+                                    <div class="[ input__control ]">
+                                        <label for="category">Category :</label>
+                                        <select id="category">
+                                            <option value="all">All</option>
+                                            <option value="vegetable">Vegetable</option>
+                                            <option value="fruit">Fruit</option>
+                                            <option value="grains">Grains</option>
+                                            <option value="spices">Spices</option>
+                                        </select>
+                                    </div>
+                                    <div class="[ input__control ]">
+                                        <button type="button">Apply</button>
+                                    </div>
+
+                                </div>
+                                <div class="[ investments__search ]">
+                                    <input type="text" placeholder="Search">
+                                    <button type="button">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
                             </div>
-                            <div class="[ data ]" hideIn="md">
-                                <p>Category</p>
-                            </div>
-                            <div class="[ data ]" hideIn="sm">
-                                <p>Amount</p>
-                            </div>
-                            <div class="[ data ]" hideIn="lg">
-                                <p>Time Period</p>
-                            </div>
-                            <div class="[ data ]" hideIn="lg">
-                                <p>Location</p>
-                            </div>
-                            <div class="[ data ]" hideIn="md">
-                                <p>Invested Date</p>
+                            <div class="[ row ]">
+                                <div class="[ data ]">
+                                    <p>Gig</p>
+                                </div>
+                                <div class="[ data ]" hideIn="md">
+                                    <p>Category</p>
+                                </div>
+                                <div class="[ data ]" hideIn="sm">
+                                    <p>Amount</p>
+                                </div>
+                                <div class="[ data ]" hideIn="lg">
+                                    <p>Time Period</p>
+                                </div>
+                                <div class="[ data ]" hideIn="lg">
+                                    <p>Location</p>
+                                </div>
+                                <div class="[ data ]" hideIn="md">
+                                    <p>Invested Date</p>
+                                </div>
                             </div>
                         </div>
                         <div class="[ body ]">
@@ -121,7 +167,7 @@
                                     <div class="[ data ]">
                                         <div class="[ item__card ]">
                                             <div class="[ img ]">
-                                                <img width="50" src="<?php echo UPLOADS . $investment['image'] ?>" />
+                                                <img width="50" src="<?php echo UPLOADS . $investment['thumbnail'] ?>" />
                                             </div>
                                             <div class="[ content ]">
                                                 <a href="<?php echo URLROOT . "/gig/" . $investment['gigId'] ?>">
@@ -134,22 +180,22 @@
                                         <p class="[ tag ]"><?php echo $investment['category'] ?></p>
                                     </div>
                                     <div class="[ data ]" hideIn="sm">
-                                        <h3>LKR <?php echo $investment['amount'] ?></h3>
+                                        <h3>LKR <?php echo number_format($investment['amount'], 2, '.', ',') ?></h3>
                                     </div>
                                     <div class="[ data ]" hideIn="lg">
-                                        <h3><?php echo $investment['timePeriod'] ?> Months</h3>
+                                        <h3><?php echo $investment['cropCycle'] ?> Days</h3>
                                     </div>
                                     <div class="[ data ]" hideIn="lg">
-                                        <h3><?php echo $investment['location'] ?></h3>
+                                        <h3><?php echo $investment['city'] ?></h3>
                                     </div>
                                     <div class="[ data ]" hideIn="md">
                                         <p><?php echo $investment['investedDate'] ?></p>
                                     </div>
-                                    <div class="[ data ]">
+                                    <!-- <div class="[ data ]">
                                         <div class=" [ actions ]">
                                             <button for="<?php echo $investment['id'] ?>"><i class="fa fa-chevron-circle-down"></i></button>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div id="<?php echo $investment['id'] ?>" class="[ expand ]">
 
                                         <div class="[ data ]" showIn="md">
@@ -157,7 +203,7 @@
                                         </div>
                                         <div class="[ data ]" showIn="sm">
                                             <h4>Offer :</h4>
-                                            <p>LKR <?php echo $investment['offer'] ?></p>
+                                            <p>LKR <?php echo number_format($investment['offer'], 2, '.', ',') ?></p>
                                         </div>
                                         <div class="[ data ]" showIn="lg">
                                             <h4>Time Periold :</h4>
