@@ -10,6 +10,7 @@ class dashboardController extends Controller
     private $reviewByInvestorModel;
     private $farmerProgressModel;
     private $requestFarmerModel;
+    private $investmentModel;
 
     public function __construct()
     {
@@ -30,6 +31,7 @@ class dashboardController extends Controller
         $this->reviewByInvestorModel = $this->model('reviewByInvestor');
         $this->farmerProgressModel = $this->model('farmerProgress');
         $this->requestFarmerModel = $this->model('requestFarmer');
+        $this->investmentModel = $this->model('investment');
     }
 
     public function index()
@@ -39,13 +41,53 @@ class dashboardController extends Controller
 
     public function gigs()
     {
-        $investorGig = new $this->investorGigModel();
-        $gigs = $investorGig->fetchAllByInvestor($this->currentUser->getUid());
-        $this->set(['gigs' => $gigs]);
+        $props = [];
+        // $investorGig = new $this->investorGigModel();
+        // $gigs = $investorGig->fetchAllByInvestor($this->currentUser->getUid());
+        // $this->set(['gigs' => $gigs]);
+
+
+        $activeGigCount = $this->investorGigModel->countActiveGigByInvestor($this->currentUser->getUid());
+
+        if ($activeGigCount['success']) {
+            $props['activeGigCount'] = $activeGigCount['data']['count'];
+        }
+
+        $completedGigCount = $this->investorGigModel->countCompletedGigByInvestor($this->currentUser->getUid());
+
+        if ($completedGigCount['success']) {
+            $props['completedGigCount'] = $completedGigCount['data']['count'];
+        }
+
+        $totalInvestment = $this->investmentModel->getTotalInvestmentByInvestor($this->currentUser->getUid());
+
+        if ($totalInvestment['success']) {
+            $props['totalInvestment'] = $totalInvestment['data']['totalInvestment'];
+        }
+
+        $activeGigs = $this->investorGigModel->fetchAllActiveGigByInvestor($this->currentUser->getUid());
+
+        if ($activeGigs['success']) {
+            $props['activeGigs'] = $activeGigs['data'];
+        }
+
+        $toReviewGigs = $this->investorGigModel->fetchAllToReviewGigByInvestor($this->currentUser->getUid());
+
+        if ($toReviewGigs['success']) {
+            $props['toReviewGigs'] = $toReviewGigs['data'];
+        }
+
+        $completedGigs = $this->investorGigModel->getCompletedGigsByInvestor($this->currentUser->getUid());
+
+        if ($completedGigs['success']) {
+            $props['completedGigs'] = $completedGigs['data'];
+        }
+
+        $this->set($props);
         $this->render('gigs');
     }
 
-    public function progress($params)
+    public function gig($params)
     {
         $props = [];
         if (!isset($params[0]) || empty($params[0])) {
@@ -82,6 +124,24 @@ class dashboardController extends Controller
             }
         }
 
+        $totalInvestment = $this->investorGigModel->getTotalInvestmentForGigByInvestor($this->currentUser->getUid(), $gigId);
+        if ($totalInvestment['success']) {
+            $props['totalInvestment'] = $totalInvestment['data']['totalInvestment'];
+        }
+
+        $startedDate = $this->investorGigModel->getStartedDate($gigId);
+
+        if ($startedDate['success']) {
+            $start = new DateTime($startedDate['data']['startDate']);
+            $end = new DateTime();
+            $props['numberOfDaysLeft'] = $start->diff($end)->days;
+        }
+
+        $investments = $this->investmentModel->fetchByInvestorAndGig($this->currentUser->getUid(), $gigId);
+        if ($investments['success']) {
+            $props['investments'] = $investments['data'];
+        }
+
         // accpted data
         // gig
         // farmer
@@ -97,7 +157,7 @@ class dashboardController extends Controller
 
 
         $this->set($props);
-        $this->render('progress');
+        $this->render('gig');
     }
 
 
@@ -137,9 +197,13 @@ class dashboardController extends Controller
                     'q9' => new Input(POST, 'q9'),
                 ];
 
-                $reviewByInvestor = new $this->reviewByInvestorModel();
-                $response = $reviewByInvestor->save($data);
-                // if($response['success']){}
+                $response = $this->reviewByInvestorModel->save($data);
+                if ($response['success']) {
+                    $res = $this->investorGigModel->markAsCompleted($gigId);
+                    if ($res['success']) {
+                        $this->redirect('/dashboard/gigs/');
+                    }
+                }
             }
         }
 

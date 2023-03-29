@@ -188,7 +188,7 @@
                                                     <p class="[ tag ]"><?php echo $request['category'] ?></p>
                                                 </div>
                                                 <div class="[ data ]" hideIn="sm">
-                                                    <h3>LKR <?php echo $request['offer'] ?></h3>
+                                                    <h3>LKR <?php echo number_format($request['offer'], 2, '.', ',') ?></h3>
                                                 </div>
                                                 <div class="[ data ]" hideIn="lg">
                                                     <h3><?php echo $request['cropCycle'] ?> Days</h3>
@@ -211,7 +211,7 @@
                                                     </div>
                                                     <div class="[ data ]" showIn="sm">
                                                         <h4>Offer :</h4>
-                                                        <p>LKR <?php echo $request['offer'] ?></p>
+                                                        <p>LKR <?php echo number_format($request['offer'], 2, '.', ',') ?></p>
                                                     </div>
                                                     <div class="[ data ]" showIn="lg">
                                                         <h4>Crop Cycle :</h4>
@@ -356,7 +356,7 @@
                                                     <p class="[ tag ]"><?php echo $request['category'] ?></p>
                                                 </div>
                                                 <div class="[ data ]" hideIn="sm">
-                                                    <h3>LKR <?php echo $request['offer'] ?></h3>
+                                                    <h3>LKR <?php echo number_format($request['offer'], 2, '.', ',') ?></h3>
                                                 </div>
                                                 <div class="[ data ]" hideIn="lg">
                                                     <h3><?php echo $request['cropCycle'] ?> Days</h3>
@@ -379,7 +379,7 @@
                                                     </div>
                                                     <div class="[ data ]" showIn="sm">
                                                         <h4>Offer :</h4>
-                                                        <p>LKR <?php echo $request['offer'] ?></p>
+                                                        <p>LKR <?php echo number_format($request['offer'], 2, '.', ',') ?></p>
                                                     </div>
                                                     <div class="[ data ]" showIn="lg">
                                                         <h4>Crop Cycle :</h4>
@@ -524,7 +524,7 @@
                                                     <p class="[ tag ]"><?php echo $request['category'] ?></p>
                                                 </div>
                                                 <div class="[ data ]" hideIn="sm">
-                                                    <h3>LKR <?php echo $request['offer'] ?></h3>
+                                                    <h3>LKR <?php echo number_format($request['offer'], 2, '.', ',') ?></h3>
                                                 </div>
                                                 <div class="[ data ]" hideIn="lg">
                                                     <h3><?php echo $request['cropCycle'] ?> Days</h3>
@@ -547,7 +547,7 @@
                                                     </div>
                                                     <div class="[ data ]" showIn="sm">
                                                         <h4>Offer :</h4>
-                                                        <p>LKR <?php echo $request['offer'] ?></p>
+                                                        <p>LKR <?php echo number_format($request['offer'], 2, '.', ',') ?></p>
                                                     </div>
                                                     <div class="[ data ]" showIn="lg">
                                                         <h4>Crop Cycle :</h4>
