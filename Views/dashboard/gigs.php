@@ -43,7 +43,10 @@
                             <i class="[ fa fa-bell ]"></i>
                         </div>
                         <div class="[ details ]">
-                            <h2>5</h2>
+                            <h2><?php
+                                if (isset($activeGigCount)) echo $activeGigCount;
+                                else echo 0;
+                                ?></h2>
                             <p>Active Gigs</p>
                         </div>
                     </div>
@@ -52,7 +55,10 @@
                             <i class="[ fa fa-bell ]"></i>
                         </div>
                         <div class="[ details ]">
-                            <h2>5</h2>
+                            <h2><?php
+                                if (isset($completedGigCount)) echo $completedGigCount;
+                                else echo 0;
+                                ?></h2>
                             <p>Completed Gigs</p>
                         </div>
                     </div>
@@ -61,7 +67,11 @@
                             <i class="[ fa fa-bell ]"></i>
                         </div>
                         <div class="[ details ]">
-                            <h2><small>LKR</small><br>1,250,000.00</h2>
+                            <h2><small>LKR</small><br>
+                                <?php
+                                if (isset($totalInvestment)) echo number_format($totalInvestment, 2, '.', ',');
+                                else echo "0.00";
+                                ?></h2>
                             <p>Total Investments</p>
                         </div>
                     </div>
@@ -70,7 +80,11 @@
                             <i class="[ fa fa-bell ]"></i>
                         </div>
                         <div class="[ details ]">
-                            <h2><small>LKR</small><br>50,000.00</h2>
+                            <h2><small>LKR</small><br>
+                                <?php
+                                if (isset($totalInvestment)) echo number_format($totalInvestment, 2, '.', ',');
+                                else echo "0.00";
+                                ?></h2>
                             <p>Total Profit</p>
                         </div>
                     </div>

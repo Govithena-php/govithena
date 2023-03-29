@@ -80,7 +80,11 @@
                                 <i class="[ fa fa-bell ]"></i>
                             </div>
                             <div class="[ details ]">
-                                <h2><small>LKR</small><br>1,250,000.00</h2>
+                                <h2><small>LKR</small><br>
+                                    <?php
+                                    if (isset($totalInvestment)) echo number_format($totalInvestment, 2, '.', ',');
+                                    else echo "0.00";
+                                    ?></h2>
                                 <p>Total Investments</p>
                             </div>
                         </div>
@@ -89,7 +93,7 @@
                                 <i class="[ fa fa-bell ]"></i>
                             </div>
                             <div class="[ details ]">
-                                <h2>12%</h2>
+                                <h2><?php echo $gig['profitMargin'] ?> %</h2>
                                 <p>Expected profit</p>
                             </div>
                         </div>
@@ -98,8 +102,11 @@
                                 <i class="[ fa fa-bell ]"></i>
                             </div>
                             <div class="[ details ]">
-                                <h2>100 Days</h2>
-                                <p>Left, out of 120 Days</p>
+                                <h2><?php
+                                    if (isset($numberOfDaysLeft)) echo $numberOfDaysLeft;
+                                    else echo 0
+                                    ?> Days</h2>
+                                <p>out of <?php echo $gig['cropCycle'] ?> Days</p>
                             </div>
                         </div>
                         <div class="[ card ]">
@@ -107,7 +114,7 @@
                                 <i class="[ fa fa-bell ]"></i>
                             </div>
                             <div class="[ details ]">
-                                <h2>2 Hectare</h2>
+                                <h2><?php echo $gig['landArea'] ?> Hectare</h2>
                                 <p>Of Land</p>
                             </div>
                         </div>
@@ -288,7 +295,7 @@
                                                     <h3><?php echo $investment['time'] ?></h3>
                                                 </div>
                                                 <div class="[ data ]" hideIn="md">
-                                                    <h3 class="[ LKR ]"><?php echo $investment['amount'] ?></h3>
+                                                    <h3 class="[ LKR ]"><?php echo number_format($investment['amount'], 2, '.', ',') ?></h3>
                                                 </div>
                                             </div>
                                         <?php

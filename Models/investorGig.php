@@ -59,6 +59,67 @@ class investorGig
         }
     }
 
+    public function countActiveGigByInvestor($investorId)
+    {
+        try {
+            $sql = "SELECT COUNT(*) as count FROM investor_gig WHERE investorId = :investorId AND status = 'ACTIVE'";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['investorId' => $investorId]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $row];
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function countCompletedGigByInvestor($investorId)
+    {
+        try {
+            $sql = "SELECT COUNT(*) as count FROM investor_gig WHERE investorId = :investorId AND status = 'COMPLETED'";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['investorId' => $investorId]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $row];
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function getTotalInvestmentForGigByInvestor($investorId, $gigId)
+    {
+        try {
+            $sql = "SELECT sum(amount) as totalInvestment FROM investment WHERE investorId = :investorId AND gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['investorId' => $investorId, 'gigId' => $gigId]);
+            $res = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($res) {
+                return ['success' => true, 'data' => $res];
+            } else {
+                return ['success' => false, 'data' => 'No investment found'];
+            }
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function getStartedDate($gigId)
+    {
+        try {
+            $sql = "SELECT DATE(timestamp) as startDate FROM investor_gig WHERE gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId]);
+            $res = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($res) {
+                return ['success' => true, 'data' => $res];
+            } else {
+                return ['success' => false, 'data' => 'No investment found'];
+            }
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+
     public function fetchAllByFarmer($id)
     {
         try {

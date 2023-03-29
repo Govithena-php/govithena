@@ -46,6 +46,25 @@ class dashboardController extends Controller
         // $gigs = $investorGig->fetchAllByInvestor($this->currentUser->getUid());
         // $this->set(['gigs' => $gigs]);
 
+
+        $activeGigCount = $this->investorGigModel->countActiveGigByInvestor($this->currentUser->getUid());
+
+        if ($activeGigCount['success']) {
+            $props['activeGigCount'] = $activeGigCount['data']['count'];
+        }
+
+        $completedGigCount = $this->investorGigModel->countCompletedGigByInvestor($this->currentUser->getUid());
+
+        if ($completedGigCount['success']) {
+            $props['completedGigCount'] = $completedGigCount['data']['count'];
+        }
+
+        $totalInvestment = $this->investmentModel->getTotalInvestmentByInvestor($this->currentUser->getUid());
+
+        if ($totalInvestment['success']) {
+            $props['totalInvestment'] = $totalInvestment['data']['totalInvestment'];
+        }
+
         $activeGigs = $this->investorGigModel->fetchAllActiveGigByInvestor($this->currentUser->getUid());
 
         if ($activeGigs['success']) {
@@ -103,6 +122,19 @@ class dashboardController extends Controller
                 $pg['images'] = $progressImages;
                 $props['progress'][] = $pg;
             }
+        }
+
+        $totalInvestment = $this->investorGigModel->getTotalInvestmentForGigByInvestor($this->currentUser->getUid(), $gigId);
+        if ($totalInvestment['success']) {
+            $props['totalInvestment'] = $totalInvestment['data']['totalInvestment'];
+        }
+
+        $startedDate = $this->investorGigModel->getStartedDate($gigId);
+
+        if ($startedDate['success']) {
+            $start = new DateTime($startedDate['data']['startDate']);
+            $end = new DateTime();
+            $props['numberOfDaysLeft'] = $start->diff($end)->days;
         }
 
         $investments = $this->investmentModel->fetchByInvestorAndGig($this->currentUser->getUid(), $gigId);
