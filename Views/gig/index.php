@@ -278,7 +278,7 @@ function render_stars($stars, $outof)
                     <div class="[ capital__profitRate ]">
                         <div>
                             <small>Initial Investment</small>
-                            <p><span class="[ LKR ]">LKR </span><?php echo $gig['capital'] ?>.00</p>
+                            <p><span class="[ LKR ]">LKR </span><?php echo number_format($gig['capital'], 2, '.', ',') ?></p>
                         </div>
                         <div>
                             <small>Profit Margin</small>
@@ -357,7 +357,7 @@ function render_stars($stars, $outof)
                 <div class="[ flex flex-sb-c my-05 ]">
                     <div>
                         <small>Initial Investment</small>
-                        <p><span class="[ LKR ]">LKR </span><?php echo $gig['capital'] ?>.00</p>
+                        <p><span class="[ LKR ]">LKR </span><?php echo number_format($gig['capital'], 2, '.', ',') ?></p>
                     </div>
                     <div>
                         <small>Profit Margin</small>
