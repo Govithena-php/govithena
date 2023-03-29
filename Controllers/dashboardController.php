@@ -41,9 +41,30 @@ class dashboardController extends Controller
 
     public function gigs()
     {
-        $investorGig = new $this->investorGigModel();
-        $gigs = $investorGig->fetchAllByInvestor($this->currentUser->getUid());
-        $this->set(['gigs' => $gigs]);
+        $props = [];
+        // $investorGig = new $this->investorGigModel();
+        // $gigs = $investorGig->fetchAllByInvestor($this->currentUser->getUid());
+        // $this->set(['gigs' => $gigs]);
+
+        $activeGigs = $this->investorGigModel->fetchAllActiveGigByInvestor($this->currentUser->getUid());
+
+        if ($activeGigs['success']) {
+            $props['activeGigs'] = $activeGigs['data'];
+        }
+
+        $toReviewGigs = $this->investorGigModel->fetchAllToReviewGigByInvestor($this->currentUser->getUid());
+
+        if ($toReviewGigs['success']) {
+            $props['toReviewGigs'] = $toReviewGigs['data'];
+        }
+
+        $completedGigs = $this->investorGigModel->getCompletedGigsByInvestor($this->currentUser->getUid());
+
+        if ($completedGigs['success']) {
+            $props['completedGigs'] = $completedGigs['data'];
+        }
+
+        $this->set($props);
         $this->render('gigs');
     }
 
@@ -144,9 +165,13 @@ class dashboardController extends Controller
                     'q9' => new Input(POST, 'q9'),
                 ];
 
-                $reviewByInvestor = new $this->reviewByInvestorModel();
-                $response = $reviewByInvestor->save($data);
-                // if($response['success']){}
+                $response = $this->reviewByInvestorModel->save($data);
+                if ($response['success']) {
+                    $res = $this->investorGigModel->markAsCompleted($gigId);
+                    if ($res['success']) {
+                        $this->redirect('/dashboard/gigs/');
+                    }
+                }
             }
         }
 
