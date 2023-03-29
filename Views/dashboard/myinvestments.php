@@ -46,7 +46,7 @@
 
                     <?php
                     if (isset($monthSinceJoined)) {
-                        echo "<p>Within " . $monthSinceJoined;
+                        echo "<p>Within " . $monthSinceJoined + 1;
                         if ($monthSinceJoined > 1) echo " months";
                         else echo " month";
                     }
