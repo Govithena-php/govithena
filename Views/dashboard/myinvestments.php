@@ -43,7 +43,15 @@
                         if (isset($totalInvestment)) echo number_format($totalInvestment, 2, '.', ',');
                         else echo "0.00";
                         ?></h1>
-                    <p>Within 35 months</p>
+
+                    <?php
+                    if (isset($monthSinceJoined)) {
+                        echo "<p>Within " . $monthSinceJoined;
+                        if ($monthSinceJoined > 1) echo " months";
+                        else echo " month";
+                    }
+                    ?>
+
                 </div>
             </div>
 
@@ -54,11 +62,16 @@
                 <div class="inv__card__body">
                     <h1 class="[ LKR ]">
                         <?php
-                        if (isset($totalInvestment)) echo number_format($totalInvestment, 2, '.', ',');
+                        if (isset($thisMonthInvestment)) echo number_format($thisMonthInvestment, 2, '.', ',');
                         else echo "0.00";
                         ?>
                     </h1>
-                    <p>10% <i class="fa fa-arrow-up"></i></p>
+                    <?php
+                    if (isset($precentage)) {
+                        if ($precentage > 0) echo "<p class='clr__primary'>" . $precentage . " % <i class='fa fa-arrow-up'></i> </p>";
+                        else echo "<p class='clr__danger'>" . $precentage . " % <i class='fa fa-arrow-down'></i></p>";
+                    }
+                    ?>
                 </div>
             </div>
 
@@ -67,8 +80,20 @@
                     <h3>Total Gigs</h3>
                 </div>
                 <div class="inv__card__body">
-                    <h1>5</h1>
-                    <p>Active 4</p>
+                    <?php
+                    if (isset($totalGigs)) echo "<h1>" . $totalGigs . "</h1>";
+                    else echo "<h1>0</h1>";
+                    ?>
+                    <p>
+                        <?php
+                        if (isset($activeGigs)) {
+                            echo $activeGigs;
+                            if ($activeGigs > 1) echo " Active gigs";
+                            else echo " Active gig";
+                        } else echo "0 Active gigs";
+                        ?>
+
+                    </p>
                 </div>
             </div>
 

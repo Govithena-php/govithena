@@ -344,6 +344,14 @@ dialog::backdrop {
     background-color: #f32d2d;
 }
 
+.clr__danger{
+    color: var(--clr-danger);
+}
+
+.clr__primary{
+    color: var(--clr-primary);
+}
+
 
 @media (prefers-reduced-motion:reduce) {
 
