@@ -3,6 +3,7 @@
 class adminController extends Controller
 {
     private $currentUser;
+    private $adminModel;
 
     public function __construct()
     {
@@ -15,6 +16,7 @@ class adminController extends Controller
         if (!$this->currentUser->hasAccess(ACTOR::ADMIN)) {
             $this->redirect('/error/dontHaveAccess');
         }
+        $this->adminModel = $this->model('admin');
     }
 
     public function index()
@@ -24,6 +26,19 @@ class adminController extends Controller
 
     public function users()
     {
+        $props = [];
+
+        $activeUsers = $this->adminModel->fetchAllActiveUsers();
+        if ($activeUsers['success']) {
+            $props['activeUsers'] = $activeUsers['data'];
+        }
+
+        $suspendedUsers = $this->adminModel->fetchAllSuspendedUsers();
+        if ($suspendedUsers['success']) {
+            $props['suspendedUsers'] = $suspendedUsers['data'];
+        }
+
+        $this->set($props);
         $this->render('users');
     }
 
