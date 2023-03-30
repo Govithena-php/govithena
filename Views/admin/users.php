@@ -49,67 +49,57 @@
                         } else {
                         ?>
                             <div class="[  ]">
-                                <div class="[ grid ][ filters ]" md="1" lg="2" gap="2">
-                                    <div class="[ grid ][ options ]" sm="1" md="6" lg="6" gap="1">
-                                        <div class="[ input__control ]">
-                                            <label for="from">From :</label>
-                                            <input id="from" type="date">
-                                        </div>
-                                        <div class="[ input__control ]">
-                                            <label for="to">To :</label>
-                                            <input id="to" type="date">
-                                        </div>
-                                        <div class="[ input__control ]">
-                                            <label for="location">Location :</label>
-                                            <select id="location">
-                                                <option value="all">All</option>
-                                                <option value="colombo">Colombo</option>
-                                                <option value="galle">Galle</option>
-                                                <option value="kandy">Kandy</option>
-                                                <option value="matara">Matara</option>
-                                                <option value="nuwaraeliya">Nuwara Eliya</option>
-                                                <option value="trincomalee">Trincomalee</option>
-                                            </select>
-                                        </div>
-                                        <div class="[ input__control ]">
-                                            <label for="category">Category :</label>
-                                            <select id="category">
-                                                <option value="all">All</option>
-                                                <option value="vegetable">Vegetable</option>
-                                                <option value="fruit">Fruit</option>
-                                                <option value="grains">Grains</option>
-                                                <option value="spices">Spices</option>
-                                            </select>
-                                        </div>
-                                        <div class="[ input__control ]">
-                                            <button type="button">Apply</button>
-                                        </div>
-
-                                    </div>
-                                    <div class="[ search ]">
-                                        <input type="text" placeholder="Search">
-                                        <button type="button">
-                                            <i class="fas fa-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
-
-
                                 <div class="[ grid__table ]" style="
-                                --xl-cols:  2fr 1fr 2fr 2fr 1fr;
+                                --xl-cols:  0.75fr 1.5fr 1.5fr 1fr 1.5fr 3fr;
                                 --lg-cols: 4fr 1fr 1fr;
                                 --md-cols: 5fr 1fr;
                                 --sm-cols: 3fr 1fr;
                                 ">
-                                    <div class="[ head ]">
-                                        <div class="[ data ]">
-                                            <p>Gig</p>
+                                    <div class="[ head stick_to_top ]">
+                                        <div class="[ grid ][ filters ]" md="1" lg="2" gap="2">
+                                            <div class="[ grid ][ options ]" sm="1" md="6" lg="6" gap="1">
+                                                <div class="[ input__control ]">
+                                                    <label for="from">Joined Date :</label>
+                                                    <input id="from" type="date">
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <label for="location">User Type :</label>
+                                                    <select id="location">
+                                                        <option value="INVESTOR">Investor</option>
+                                                        <option value="FARMER">Farmer</option>
+                                                        <option value="AGROLOGIST">Agrologist</option>
+                                                        <option value="TECH">Tech Assistant</option>
+                                                        <option value="ADMIN">Staff</option>
+                                                    </select>
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <button type="button">Apply</button>
+                                                </div>
+
+                                            </div>
+                                            <div class="[ search ]">
+                                                <input type="text" placeholder="Search">
+                                                <button type="button">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
                                         </div>
-                                        <div class="[ data ]" hideIn="md">
-                                            <p>Category</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="lg">
-                                            <p>Prograss</p>
+                                        <div class="[ row ]">
+                                            <div class="[ data ]">
+                                                <p>User</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="md">
+                                                <p>First Name</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="lg">
+                                                <p>Last Name</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="md">
+                                                <p>User Type</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="lg">
+                                                <p>Email</p>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="[ body ]">
@@ -119,23 +109,26 @@
                                             <div class="[ row ]">
                                                 <div class="[ data ]">
                                                     <div class="[ item__card ]">
-                                                        <div class="[ img ]">
-                                                            <img width="50" src="<?php echo UPLOADS . $activeUser['image'] ?>" />
-                                                        </div>
-                                                        <div class="[ content ]">
-                                                            <h2><?php echo $activeUser['firstName'] . " " . $activeUser['lastName'] ?></h2>
-                                                            <h3><?php echo $activeUser['city'] ?></h3>
-
-                                                        </div>
+                                                        <img width="50" src="<?php echo UPLOADS . $activeUser['image'] ?>" />
                                                     </div>
+                                                </div>
+                                                <div class="[ data ]" hideIn="md">
+                                                    <p class="[ tag ]"><?php echo $activeUser['firstName'] ?></p>
+                                                </div>
+                                                <div class="[ data ]" hideIn="md">
+                                                    <p class="[ tag ]"><?php echo $activeUser['lastName'] ?></p>
                                                 </div>
                                                 <div class="[ data ]" hideIn="md">
                                                     <p class="[ tag ]"><?php echo $activeUser['userType'] ?></p>
                                                 </div>
+                                                <div class="[ data ]" hideIn="md">
+                                                    <p class="[ tag ]"><?php echo $activeUser['username'] ?></p>
+                                                </div>
 
-                                                <div class="[ data ]">
+                                                <div class="[ data flex-center ]">
                                                     <div class="[ actions ]">
-                                                        <a href="<?php echo URLROOT ?>/profile/<?php echo $activeUser['uid'] ?>" class="btn btn-primary">View More</a>
+                                                        <a href="<?php echo URLROOT ?>/profile/<?php echo $activeUser['uid'] ?>" class="button__primary">View More</a>
+                                                        <a href="<?php echo URLROOT ?>/profile/<?php echo $activeUser['uid'] ?>" class="button__danger">Suspend</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -163,67 +156,57 @@
                         } else {
                         ?>
                             <div class="[  ]">
-                                <div class="[ grid ][ filters ]" md="1" lg="2" gap="2">
-                                    <div class="[ grid ][ options ]" sm="1" md="6" lg="6" gap="1">
-                                        <div class="[ input__control ]">
-                                            <label for="from">From :</label>
-                                            <input id="from" type="date">
-                                        </div>
-                                        <div class="[ input__control ]">
-                                            <label for="to">To :</label>
-                                            <input id="to" type="date">
-                                        </div>
-                                        <div class="[ input__control ]">
-                                            <label for="location">Location :</label>
-                                            <select id="location">
-                                                <option value="all">All</option>
-                                                <option value="colombo">Colombo</option>
-                                                <option value="galle">Galle</option>
-                                                <option value="kandy">Kandy</option>
-                                                <option value="matara">Matara</option>
-                                                <option value="nuwaraeliya">Nuwara Eliya</option>
-                                                <option value="trincomalee">Trincomalee</option>
-                                            </select>
-                                        </div>
-                                        <div class="[ input__control ]">
-                                            <label for="category">Category :</label>
-                                            <select id="category">
-                                                <option value="all">All</option>
-                                                <option value="vegetable">Vegetable</option>
-                                                <option value="fruit">Fruit</option>
-                                                <option value="grains">Grains</option>
-                                                <option value="spices">Spices</option>
-                                            </select>
-                                        </div>
-                                        <div class="[ input__control ]">
-                                            <button type="button">Apply</button>
-                                        </div>
-
-                                    </div>
-                                    <div class="[ search ]">
-                                        <input type="text" placeholder="Search">
-                                        <button type="button">
-                                            <i class="fas fa-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
-
-
                                 <div class="[ grid__table ]" style="
-                                --xl-cols:  2fr 1fr 2fr 2fr 1fr;
+                                --xl-cols:  0.75fr 1.5fr 1.5fr 1fr 1.5fr 3fr;
                                 --lg-cols: 4fr 1fr 1fr;
                                 --md-cols: 5fr 1fr;
                                 --sm-cols: 3fr 1fr;
                                 ">
-                                    <div class="[ head ]">
-                                        <div class="[ data ]">
-                                            <p>Gig</p>
+                                    <div class="[ head stick_to_top ]">
+                                        <div class="[ grid ][ filters ]" md="1" lg="2" gap="2">
+                                            <div class="[ grid ][ options ]" sm="1" md="6" lg="6" gap="1">
+                                                <div class="[ input__control ]">
+                                                    <label for="from">Joined Date :</label>
+                                                    <input id="from" type="date">
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <label for="location">User Type :</label>
+                                                    <select id="location">
+                                                        <option value="INVESTOR">Investor</option>
+                                                        <option value="FARMER">Farmer</option>
+                                                        <option value="AGROLOGIST">Agrologist</option>
+                                                        <option value="TECH">Tech Assistant</option>
+                                                        <option value="ADMIN">Staff</option>
+                                                    </select>
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <button type="button">Apply</button>
+                                                </div>
+
+                                            </div>
+                                            <div class="[ search ]">
+                                                <input type="text" placeholder="Search">
+                                                <button type="button">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
                                         </div>
-                                        <div class="[ data ]" hideIn="md">
-                                            <p>Category</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="lg">
-                                            <p>Prograss</p>
+                                        <div class="[ row ]">
+                                            <div class="[ data ]">
+                                                <p>User</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="md">
+                                                <p>First Name</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="lg">
+                                                <p>Last Name</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="md">
+                                                <p>User Type</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="lg">
+                                                <p>Email</p>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="[ body ]">
@@ -233,29 +216,33 @@
                                             <div class="[ row ]">
                                                 <div class="[ data ]">
                                                     <div class="[ item__card ]">
-                                                        <div class="[ img ]">
-                                                            <img width="50" src="<?php echo UPLOADS . $suspendedUser['image'] ?>" />
-                                                        </div>
-                                                        <div class="[ content ]">
-                                                            <h2><?php echo $suspendedUser['firstName'] . " " . $suspendedUser['lastName'] ?></h2>
-                                                            <h3><?php echo $suspendedUser['city'] ?></h3>
-
-                                                        </div>
+                                                        <img width="50" src="<?php echo UPLOADS . $suspendedUser['image'] ?>" />
                                                     </div>
+                                                </div>
+                                                <div class="[ data ]" hideIn="md">
+                                                    <p class="[ tag ]"><?php echo $suspendedUser['firstName'] ?></p>
+                                                </div>
+                                                <div class="[ data ]" hideIn="md">
+                                                    <p class="[ tag ]"><?php echo $suspendedUser['lastName'] ?></p>
                                                 </div>
                                                 <div class="[ data ]" hideIn="md">
                                                     <p class="[ tag ]"><?php echo $suspendedUser['userType'] ?></p>
                                                 </div>
+                                                <div class="[ data ]" hideIn="md">
+                                                    <p class="[ tag ]"><?php echo $suspendedUser['username'] ?></p>
+                                                </div>
 
-                                                <div class="[ data ]">
+                                                <div class="[ data flex-center ]">
                                                     <div class="[ actions ]">
-                                                        <a href="<?php echo URLROOT ?>/profile/<?php echo $suspendedUser['uid'] ?>" class="btn btn-primary">View More</a>
+                                                        <a href="<?php echo URLROOT ?>/profile/<?php echo $suspendedUser['uid'] ?>" class="button__primary">View More</a>
+                                                        <a href="<?php echo URLROOT ?>/profile/<?php echo $suspendedUser['uid'] ?>" class="button__danger">Reactive</a>
                                                     </div>
                                                 </div>
                                             </div>
                                         <?php
                                         }
                                         ?>
+
                                     </div>
                                 </div>
                             </div>
