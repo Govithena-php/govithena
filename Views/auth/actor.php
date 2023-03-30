@@ -33,7 +33,7 @@
                     <small>Select your roll in agriculture.</small>
                 </div>
 
-                <form class="[ actors ]" method="post" action="<?php echo URLROOT; ?>/auth/signup">
+                <!-- <form class="[ actors ]" method="post" action="<?php echo URLROOT; ?>/auth/signup">
                     <input type="radio" onclick="submitActor()" name="actor" id="investor" value="INVESTOR" />
                     <input type="radio" onclick="submitActor()" name="actor" id="farmer" value="FARMER" />
                     <input type="radio" onclick="submitActor()" name="actor" id="agrologist" value="AGROLOGIST" />
@@ -42,7 +42,6 @@
                     <label for="investor" class="[ actor ]">
                         <h4>Investor</h4>
                         <p>Grow Your Wealth with Confidence - Invest in Agriculture with Us.</p>
-
                     </label>
                     <label for="farmer" class="[ actor ]">
                         <h4>Farmer</h4>
@@ -56,7 +55,28 @@
                         <h4>Tech Assistant</h4>
                         <p>Empowering farmers through technology - Meet the Technical Assistant.</p>
                     </label>
-                </form>
+                </form> -->
+
+                <div class="[ actors ]">
+                    <a href="<?php echo URLROOT ?>/auth/signup/investor" class="[ actor ]">
+                        <h4>Investor</h4>
+                        <p>Grow Your Wealth with Confidence - Invest in Agriculture with Us.</p>
+                    </a>
+                    <a href="<?php echo URLROOT ?>/auth/signup/farmer" class="[ actor ]">
+                        <h4>Farmer</h4>
+                        <p>Nourishing the world, one seed at a time - Be a hardworking farmer."</p>
+                    </a>
+                    <a href="<?php echo URLROOT ?>/auth/signup/agrologist" class="[ actor ]">
+                        <h4>Agrologist</h4>
+                        <p>Bridging the gap between nature and agriculture - Introducing the Agrologist.</p>
+                    </a>
+                    <a href="<?php echo URLROOT ?>/auth/signup/tech" class="[ actor ]">
+                        <h4>Tech Assistant</h4>
+                        <p>Empowering farmers through technology - Meet the Technical Assistant.</p>
+                    </a>
+                </div>
+
+
 
             </div>
             <p>Already Have an Account? <a class="register" href="<?php echo URLROOT ?>/auth/signin">Sign In</a></p>

@@ -12,7 +12,6 @@
     <title>Govithena | Sign Up</title>
 </head>
 
-
 <body>
     <div class="[ signup ]">
         <div class="[ banner ]">
@@ -32,7 +31,7 @@
                     <h1>Hi!</h1>
                     <small>Sign Up with Govithena</small>
                 </div> -->
-                <form class="form" action="<?php echo URLROOT ?>/auth/signup" method="post">
+                <form class="form" action="<?php echo URLROOT ?>/auth/signup/<?php if (isset($actor)) echo $actor; ?>" method="post">
                     <?php
                     if (isset($msg)) { ?>
                         <div class="alert">
@@ -41,22 +40,29 @@
                     <?php
                     }
                     ?>
+
+                    <!-- <?php if (isset($error)) echo "error"; ?> -->
+                    <!-- <?php if (isset($error)) echo "error"; ?> -->
+                    <div class="[ alert ] <?php if (isset($error)) echo "show"; ?>">
+                        <p><?php echo $error ?></p>
+                    </div>
                     <div class="[ name ]">
                         <div class="[ form__control ]">
                             <label for="firstName">First Name</label>
-                            <input type="text" name="firstName" class="" placeholder="First Name" autocomplete="off">
+                            <input class="" type="text" name="firstName" class="" placeholder="First Name" autocomplete="off">
                         </div>
                         <div class="[ form__control ]">
                             <label for="lastName">Last Name</label>
-                            <input type="text" name="lastName" class="" placeholder="Last Name" autocomplete="off">
+                            <input class="" type="text" name="lastName" class="" placeholder="Last Name" autocomplete="off">
                         </div>
                     </div>
                     <label for="email">Email Address</label>
-                    <input type="email" name="email" class="" placeholder="Email Address" autocomplete="off">
+                    <input class="" type="email" name="email" class="" placeholder="Email Address" autocomplete="off">
                     <label for="password">Password</label>
-                    <input type="password" name="password" class="" placeholder="Password">
+                    <input class="<?php if (isset($error)) echo "error"; ?>" type="password" name="password" class="" placeholder="Password">
                     <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" name="confirmPassword" class="" placeholder="Confirm Password">
+                    <input class="<?php if (isset($error)) echo "error"; ?>" type="password" name="confirmPassword" class="" placeholder="Confirm Password">
+
                     <div class="terms_and_conditions">
                         <input type="checkbox" id="terms_condtions" name="terms_condtions" value="accepted">
                         <label class="terms_condtions" for="terms_condtions">

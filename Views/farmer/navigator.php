@@ -67,6 +67,7 @@ function highlight($active, $link)
 
                     <button onclick="toggleProfileMenu()">
                         <div class="[ image ]">
+                            <!-- locahost/webroot/Uploads/tharasara.png -->
                             <img src="<?php echo UPLOADS . '/' . Session::get('user')->getImage(); ?>" alt="profile">
                         </div>
                     </button>
@@ -195,7 +196,7 @@ function highlight($active, $link)
         <div class="[ grow ]"></div>
         <ul>
             <li>
-                <a href="<?php echo URLROOT ?>/dashboard/myaccount" class="<?php highlight($active, "myaccount") ?>">
+                <a href="<?php echo URLROOT ?>/farmer/myaccount" class="<?php highlight($active, "myaccount") ?>">
                     <i class="[ fa-solid fa-user-tie ]"></i>
                     <p>My Account</p>
                 </a>
@@ -207,7 +208,7 @@ function highlight($active, $link)
                 </a>
             </li>
             <li>
-                <a href="<?php echo URLROOT ?>/dashboard/settings" class="<?php highlight($active, "settings") ?>">
+                <a href="<?php echo URLROOT ?>/farmer/settings" class="<?php highlight($active, "settings") ?>">
                     <i class="[ fa-solid fa-gear ]"></i>
                     <p>Settings</p>
                 </a>

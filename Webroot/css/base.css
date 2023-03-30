@@ -103,6 +103,20 @@ select {
     background: var(--clr-primary-light);
 } */
 
+
+dialog {
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3);
+    border-radius: 0.25rem;
+    outline: none;
+    min-width: 400px;
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1px) grayscale(0.6);
+}
+
 .w-full {
     width: 100%;
 }
@@ -118,6 +132,14 @@ select {
     display: inline-block;
     margin: 0.5rem 0;
 }
+
+.stick_to_top{
+    position: sticky;
+    padding-top: 2rem;
+    top: calc(var(--default-navbar-height) - 1rem);
+    z-index: 100;
+}
+
 
 .flex-row {
     display: flex;
@@ -249,6 +271,80 @@ select {
 }
 
 
+.limit-text-2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.limit-text-3 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+
+.button__primary {
+    border: none;
+    outline: none;
+    text-decoration: none;
+    background-color: var(--clr-primary);
+    color: var(--clr-light);
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.9rem;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button__primary:hover {
+    background-color: var(--clr-primary-light);
+}
+
+.button__primary-invert {
+    border: none;
+    outline: none;
+    text-decoration: none;
+    background-color: var(--clr-light);
+    color: var(--clr-primary);
+    border: 1px solid var(--clr-primary);
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.9rem;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button__primary-invert:hover {
+    background-color: #efefef;
+}
+
+
+.button__danger {
+    border: none;
+    outline: none;
+    text-decoration: none;
+    background-color: #d83b3b;
+    color: var(--clr-light);
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.9rem;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button__danger:hover {
+    background-color: #f32d2d;
+}
+
+
 @media (prefers-reduced-motion:reduce) {
 
     *,
@@ -315,7 +411,7 @@ select {
 @media screen and (max-width: 1024px) {
 
     .container {
-        margin-inline: 6rem;
+        margin-inline: 4rem;
     }
 
     .container[container-type="section"] {

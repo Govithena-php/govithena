@@ -44,7 +44,6 @@ class User extends Model
             $sql = "INSERT INTO login_credential (uid, username, password, userType) VALUES (:uid, :username, :password, :userType)";
             $req = Database::getBdd()->prepare($sql);
             $req->execute(['uid' => $data['uid'], 'username' => $data['username'], 'password' => $data['password'], 'userType' => $data['userType']]);
-
             if ($req->rowCount() > 0) {
                 try {
                     $sql = "INSERT INTO user (uid, firstName, lastName) VALUES (:uid, :firstName, :lastName)";

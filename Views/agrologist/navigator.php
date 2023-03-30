@@ -186,12 +186,12 @@ function highlight($active, $link)
                     <p>Requests</p>
                 </a>
             </li>
-            <li>
+            <!-- <li>
                 <a href="<?php echo URLROOT . "/agrologist/reviews" ?>" class="<?php highlight($active, "reviews") ?>">
                     <i class="[ fa-solid fa-tractor ]"></i>
                     <p>Reviews</p>
                 </a>
-            </li>
+            </li> -->
         </ul>
         <div class="[ grow ]"></div>
         <ul>

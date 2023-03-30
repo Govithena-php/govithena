@@ -11,18 +11,19 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/agrologist/requests.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/agrologist/farmers.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 
 <body class="bg-gray h-screen">
-<?php
+    <?php
     $active = "farmers";
     require_once("navigator.php");
     ?>
     <div class="[ container ][ dashboard ]" container-type="dashboard-section">
-    <h1 class="[ page-heading-1 ]">farmers</h1>
+        <h1 class="[ page-heading-1 ]">farmers</h1>
 
-            <div class="[ requests__continer ]">
+        <div class="[ requests__continer ]">
             <?php
             if (!isset($ar) || empty($ar)) {
                 ?>
@@ -39,18 +40,21 @@
 
                         <div class="[ request__card bg-light ]">
                             <div class="[ request__img ]">
-                                <img src="<?php echo IMAGES ?>/farmer.jpeg" alt="">
+                                <img src="<?php echo UPLOADS . '/' . $request['image'] ?>" alt="">
                             </div>
                             <form action="" method="POST">
                                 <div class="flex flex-row " style="width: 600px">
                                     <div class="[ request__content ]">
 
                                         <h1>
-                                            <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/agrologist/farmers/" . $request['farmerId'] ?>">
-                                                <?php echo ucwords($request['fullName']) ?>    
+                                            <a class="[ text-dec-none  text-dark  ]"
+                                                href="<?php echo URLROOT . "/agrologist/farmers/" . $request['farmerId'] ?>">
+                                                <?php echo ucwords($request['fullName']) ?>
                                             </a>
                                         </h1>
-                                        <h4><?php echo ucwords($request['city']) ?></h4>
+                                        <h4>
+                                            <?php echo ucwords($request['city']) ?>
+                                        </h4>
                                         <p class="flex flex-row">
                                             <span class="fa fa-star rating_checked"></span>
                                             <span class="fa fa-star rating_checked"></span>
@@ -61,9 +65,12 @@
 
                                     </div>
                                     <div class="flex flex-row flex-c-c">
-                                        <button><i class="fab fa-telegram-plane"></i></button>
-                                        <!-- <button type="submit" value="<?php echo $request['requestId']?> "class="btn btn-primary mr-2 mt-2" name="accept">Accept</button>
-                                        <button class="btn btn-danger mt-2" name="decline">Decline</button> -->
+                                        <!-- <i>class="message-icon fab fa-telegram-plane flex"></i> -->
+                                        <a href="<?php echo URLROOT . '/agrologist/chat/' . $request['farmerId'] ?>"
+                                            class="btn btn-primary mt-3 ml-2">Message</a>
+                                        <a href="<?php echo URLROOT . '/agrologist/reviews/' . $request['farmerId'] ?>"
+                                            class="btn btn-primary mt-3 ml-2">Review</a>
+
                                     </div>
                                 </div>
                             </form>

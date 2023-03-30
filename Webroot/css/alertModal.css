@@ -1,0 +1,41 @@
+.alertModal {
+    min-height: 150px;
+    max-width: 400px;
+}
+.alertModal>.container {
+    margin: 0;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.alertModal>.container i {
+    font-size: 4em;
+    color: #f00;
+}
+
+.alertModal>.container>.content {
+    text-align: center;
+}
+
+.alertModal>.container>.content h2 {
+    font-size: 2em;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--clr-text);
+}
+
+.alertModal>.container>.content p {
+    font-size: 0.8em;
+    font-weight: 400;
+    color: var(--clr-text-gray);
+}
+.alertModal>.container>.buttons{
+    margin-top: 0.5rem;
+}
+.alertModal>.container>.buttons button {
+    margin-inline: 1rem;
+}
