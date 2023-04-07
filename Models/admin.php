@@ -53,4 +53,17 @@ class Admin
             return ['success' => false, 'data' => $e->getMessage()];
         }
     }
+
+    public function fetchAll()
+    {
+        try {
+            $sql = "SELECT * FROM user";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $result];
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
 }

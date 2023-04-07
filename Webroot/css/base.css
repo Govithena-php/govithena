@@ -180,6 +180,10 @@ dialog::backdrop {
     justify-content: center;
 }
 
+.align-items-end {
+    align-items: flex-end;
+}
+
 .center-y {
     align-items: center;
 }

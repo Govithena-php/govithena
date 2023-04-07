@@ -73,8 +73,20 @@ class adminController extends Controller
         $this->render('investments');
     }
 
+    public function newCategory()
+    {
+        $this->render('newCategory');
+    }
+
     public function categories()
     {
+        $props = [];
+        $subCategories = $this->adminModel->fetchAll();
+        if ($subCategories['success']) {
+            $props['subCategories'] = $subCategories['data'];
+        }
+
+        $this->set($props);
         $this->render('categories');
     }
 
