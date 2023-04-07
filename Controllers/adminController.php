@@ -42,6 +42,32 @@ class adminController extends Controller
         $this->render('users');
     }
 
+    public function suspend_user()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $suspendUser = new Input(POST, 'suspend-confirm');
+            $response = $this->adminModel->suspendUser($suspendUser);
+            if ($response['success']) {
+                $this->redirect('/admin/users');
+            } else {
+                $this->redirect('/error/500');
+            }
+        }
+    }
+
+    public function reactivate_user()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $reactiveUser = new Input(POST, 'reactivate-confirm');
+            $response = $this->adminModel->reactivateUser($reactiveUser);
+            if ($response['success']) {
+                $this->redirect('/admin/users');
+            } else {
+                $this->redirect('/error/500');
+            }
+        }
+    }
+
     public function investments()
     {
         $this->render('investments');

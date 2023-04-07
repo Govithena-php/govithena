@@ -27,4 +27,30 @@ class Admin
             return ['success' => false, 'data' => $e->getMessage()];
         }
     }
+
+    public function suspendUser($id)
+    {
+        try {
+            $sql = "UPDATE login_credential SET status = 'SUSPENDED' WHERE uid = :uid";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['uid' => $id]);
+            return ['success' => true];
+        } catch (PDOException $e) {
+            die($e->getMessage());
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function reactivateUser($id)
+    {
+        try {
+            $sql = "UPDATE login_credential SET status = 'ACTIVE' WHERE uid = :uid";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['uid' => $id]);
+            return ['success' => true];
+        } catch (PDOException $e) {
+            die($e->getMessage());
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
 }

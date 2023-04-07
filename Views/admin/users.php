@@ -13,12 +13,42 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/table.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/tabs.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/gridTable.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/alertModal.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/admin/users.css">
+
 
     <title>Dashboard | Admin</title>
 </head>
 
 <body>
+
+    <dialog id="conformationModal" class="[ alertModal ]">
+        <div class="[ container ]">
+            <i class="fa fa-circle-xmark" aria-hidden="true"></i>
+            <div class="[ content ]">
+                <h2>Are you sure?</h2>
+                <p>Do you really want to Suspend this user ?</p>
+            </div>
+            <form id="suspendForm" action="<?php echo URLROOT ?>/admin/suspend_user" method="POST" class="[ buttons ]">
+                <button type="button" class="[ button__primary ]" onclick="closeSuspendAlert()" data-dismiss="modal">No, Cancel</button>
+                <button id="confirmSuspendBtn" name="suspend-confirm" type="submit" class="[ button__danger ]">Yes, Suspend</button>
+            </form>
+        </div>
+    </dialog>
+
+    <dialog id="reactivateConformationModal" class="[ alertModal ]">
+        <div class="[ container ]">
+            <i class="fa fa-circle-xmark" aria-hidden="true"></i>
+            <div class="[ content ]">
+                <h2>Are you sure?</h2>
+                <p>Do you really want to Re-Activate this user ?</p>
+            </div>
+            <form id="reactivateForm" action="<?php echo URLROOT ?>/admin/reactivate_user" method="POST" class="[ buttons ]">
+                <button type="button" class="[ button__primary ]" onclick="closeReactivateAlert()" data-dismiss="modal">No, Cancel</button>
+                <button id="confirmReactivateBtn" name="reactivate-confirm" type="submit" class="[ button__danger ]">Yes, Re-Activate</button>
+            </form>
+        </div>
+    </dialog>
 
     <?php
 
@@ -128,7 +158,7 @@
                                                 <div class="[ data flex-center ]">
                                                     <div class="[ actions ]">
                                                         <a href="<?php echo URLROOT ?>/profile/<?php echo $activeUser['uid'] ?>" class="button__primary">View More</a>
-                                                        <a href="<?php echo URLROOT ?>/profile/<?php echo $activeUser['uid'] ?>" class="button__danger">Suspend</a>
+                                                        <button onclick="openSuspendAlert('<?php echo $activeUser['uid'] ?>')" class="button__danger">Suspend</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -235,7 +265,7 @@
                                                 <div class="[ data flex-center ]">
                                                     <div class="[ actions ]">
                                                         <a href="<?php echo URLROOT ?>/profile/<?php echo $suspendedUser['uid'] ?>" class="button__primary">View More</a>
-                                                        <a href="<?php echo URLROOT ?>/profile/<?php echo $suspendedUser['uid'] ?>" class="button__danger">Reactive</a>
+                                                        <button onclick="openReactivateAlert('<?php echo $suspendedUser['uid'] ?>')" class="button__danger">Re-Activate</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -278,6 +308,31 @@
                 })
             })
         })
+
+
+        function openSuspendAlert(id) {
+            const conformationModal = document.getElementById("conformationModal")
+            const confirmSuspendBtn = document.getElementById("confirmSuspendBtn")
+            confirmSuspendBtn.value = id
+            conformationModal.showModal()
+        }
+
+        function closeSuspendAlert() {
+            const conformationModal = document.getElementById("conformationModal")
+            conformationModal.close()
+        }
+
+        function openReactivateAlert(id) {
+            const reactivateConformationModal = document.getElementById("reactivateConformationModal")
+            const confirmReactivateBtn = document.getElementById("confirmReactivateBtn")
+            confirmReactivateBtn.value = id
+            reactivateConformationModal.showModal()
+        }
+
+        function closeReactivateAlert() {
+            const reactivateConformationModal = document.getElementById("reactivateConformationModal")
+            reactivateConformationModal.close()
+        }
     </script>
 </body>
 
