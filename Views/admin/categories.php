@@ -40,8 +40,8 @@
         <div class="[  ]">
             <div class="[ grid__table ]" style="
                                 --xl-cols: 1fr 1fr 1fr 1fr 1fr 1fr 3fr;
-                                --lg-cols: 4fr 1fr 1fr;
-                                --md-cols: 5fr 1fr;
+                                --lg-cols: 1fr 1fr 1fr 1fr 1fr 1fr 3fr;
+                                --md-cols: 1fr 1fr 1fr;
                                 --sm-cols: 3fr 1fr;
                                 ">
                 <div class="[ head stick_to_top ]">
@@ -94,7 +94,7 @@
                     <?php
                     foreach ($subCategories as $subCategory) {
                     ?>
-                        <div class="[ row ]">
+                        <div class="[ view_more row ]">
                             <div class="[ data ]">
                                 <div class="[ item__card ]">
                                     <img width="50" src="<?php echo UPLOADS . 'categories/' . $subCategory['thumbnail'] ?>" />
@@ -106,21 +106,39 @@
                             <div class="[ data ]" hideIn="md">
                                 <p class="[ tag ]"><?php echo $subCategory['type'] ?></p>
                             </div>
-                            <div class="[ data ]" hideIn="md">
+                            <div class="[ data ]" hideIn="lg">
                                 <p class="[ tag ]"><?php echo $subCategory['slug'] ?></p>
                             </div>
-                            <div class="[ data ]" hideIn="md">
+                            <div class="[ data ]" hideIn="lg">
                                 <p class="[ tag ]"><?php echo $subCategory['firstName'] . " " . $subCategory['lastName'] ?></p>
                             </div>
-                            <div class="[ data ]" hideIn="md">
+                            <div class="[ data ]" hideIn="lg">
                                 <p class="[ tag ]"><?php echo $subCategory['createdAt'] ?></p>
                             </div>
 
                             <div class="[ data flex-center ]">
                                 <div class="[ actions ]">
-                                    <a href="<?php echo URLROOT ?>/profile/<?php echo $subCategory['id'] ?>" class="button__primary">View More</a>
+                                    <!-- <button class="view_more" for="<?php echo $subCategory['id'] ?>"><i class="fa fa-chevron-circle-down"></i></button> -->
+                                    <!-- <button for="<?php echo $subCategory['id'] ?>" class="view_more button__primary">View More</button> -->
                                     <button onclick="openSuspendAlert('<?php echo $subCategory['id'] ?>')" class="button__danger">Delete</button>
                                 </div>
+                            </div>
+
+                            <div id="<?php echo $subCategory['id'] ?>" class="[ expand ]">
+                                <div class="[ data ]" showIn="md">
+                                    <p class="[ tag ]"><?php echo $subCategory['slug'] ?></p>
+                                </div>
+                                <div class="[ data ]" showIn="md">
+                                    <p class="[ tag ]"><?php echo $subCategory['firstName'] . " " . $subCategory['lastName'] ?></p>
+                                </div>
+                                <div class="[ data ]" showIn="md">
+                                    <p class="[ tag ]"><?php echo $subCategory['createdAt'] ?></p>
+                                </div>
+
+                                <div class="[ data ]" always>
+                                    <p class="[ tag ]"><?php echo $subCategory['description'] ?></p>
+                                </div>
+
                             </div>
                         </div>
                     <?php
@@ -137,6 +155,34 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="<?php echo JS ?>/dashboard/chart.js"></script>
     <script src="<?php echo JS ?>/dashboard/dashboard.js"></script>
+    <script>
+        const expandBtns = document.querySelectorAll(".view_more")
+        console.log(expandBtns);
+        const expands = document.querySelectorAll(".expand")
+        const icons = document.querySelectorAll(".actions>button>i")
+        Array.from(expandBtns).forEach(expandBtn => {
+
+            expandBtn.addEventListener("click", () => {
+                let id = expandBtn.getAttribute("for")
+
+                Array.from(icons).forEach(icon => {
+                    icon.removeAttribute("show")
+                })
+
+                Array.from(expands).forEach(expand => {
+                    if (expand.id == id) {
+                        expand.toggleAttribute("show")
+                        if (expand.hasAttribute("show")) {
+                            expandBtn.children[0].setAttribute("show", null)
+                        }
+                    } else {
+                        expand.removeAttribute("show")
+                    }
+                })
+
+            })
+        })
+    </script>
 </body>
 
 </html>
