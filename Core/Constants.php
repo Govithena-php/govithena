@@ -10,6 +10,7 @@ class PREFIX
     const REVIEW = 'REV';
     const INVESTMENT = 'INV';
     const PROGRESS = 'PRG';
+    const CATEGORY = 'CAT';
 }
 
 class PRODUCT

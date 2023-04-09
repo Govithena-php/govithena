@@ -31,7 +31,7 @@
             <h2>Create a new category</h2>
             <p>Keep your eyes on the prize by tracking progress with ease.</p>
         </div>
-        <form class="[ new__category_form ]" action="" method="post">
+        <form class="[ new__category_form ]" action="<?php echo URLROOT ?>/admin/newCategory" method="post">
             <div class="[ grid ]" sm="1" lg="3" gap="1">
                 <div class="[ input__control ]">
                     <label for="category">Category Name</label>
@@ -66,7 +66,7 @@
                     <img class="[ upload__svg ]" src="<?php echo IMAGES ?>svg/upload.svg" />
                     <p>Darg and drop your image here<br>or</p>
                     <label class="[ browse__btn ]" for="image-uploader">Browse</label>
-                    <input id="image-uploader" class="text__box_input" type="file" name="image">
+                    <input id="image-uploader" class="text__box_input" type="file" name="categoryImage">
                 </div>
             </div>
             <div class="[ input__control ]">

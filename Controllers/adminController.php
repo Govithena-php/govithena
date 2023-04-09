@@ -4,7 +4,7 @@ class adminController extends Controller
 {
     private $currentUser;
     private $adminModel;
-
+    private $categoryImageHander;
     public function __construct()
     {
         $this->currentUser = Session::get('user');
@@ -16,6 +16,7 @@ class adminController extends Controller
         if (!$this->currentUser->hasAccess(ACTOR::ADMIN)) {
             $this->redirect('/error/dontHaveAccess');
         }
+        $this->categoryImageHander = new ImageHandler($folder = 'Uploads/categories');
         $this->adminModel = $this->model('admin');
     }
 
@@ -100,11 +101,29 @@ class adminController extends Controller
     public function newCategory()
     {
         $props = [];
-        if ($_SERVER['REQUEST_METHOD'] = 'POST') {
-            $name = new Input(POST, 'name');
-            $slug = new Input(POST, 'slug');
-            $mainCategory = new Input(POST, 'mainCategory');
-            $description = new Input(POST, 'description');
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $cid = new UID(PREFIX::CATEGORY);
+            // die($cid);
+            try {
+                $image = $this->categoryImageHander->upload('categoryImage');
+                // var_dump($image);
+                // die();
+            } catch (Exception $e) {
+                echo $e->getMessage();
+                die();
+            }
+
+
+
+            // $data = [
+            //     $id = $cid,
+            //     $categoryName = new Input(POST, 'categoryName'),
+            //     $slug = new Input(POST, 'slug'),
+            //     $mainCategory = new Input(POST, 'mainCategory'),
+            //     $description = new Input(POST, 'description')
+            // ];
+
+            // $res = $this->adminModel->createCategory($data);
         }
 
         $this->render('newCategory');

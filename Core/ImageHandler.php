@@ -12,6 +12,9 @@ class ImageHandler extends Image
 
     public function upload($name)
     {
+
+        var_dump($_FILES);
+
         if (isset($_FILES[$name])) {
             $images = [];
             if (is_array($_FILES[$name]['name'])) {
@@ -28,15 +31,14 @@ class ImageHandler extends Image
             } else {
                 $image = new Image($_FILES[$name]['name'], $_FILES[$name]['type'],  $_FILES[$name]['size'], $_FILES[$name]['tmp_name'], $_FILES[$name]['error']);
                 $res = $image->upload($this->folder);
-
                 if ($res) {
                     $images[0] = $res;
                 } else {
                     throw new Exception('Image Handler Exception: Unable to upload image');
                 }
             }
-
             return $images;
         }
+        die("error");
     }
 }
