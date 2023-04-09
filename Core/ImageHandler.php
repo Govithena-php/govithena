@@ -22,7 +22,7 @@ class ImageHandler extends Image
                     if ($res) {
                         $images[$key] = $res;
                     } else {
-                        throw new Exception('Image Handler Exception: Unable to upload image[' . $key . "]");
+                        return null;
                     }
                 }
             } else {
@@ -31,11 +31,11 @@ class ImageHandler extends Image
                 if ($res) {
                     $images[0] = $res;
                 } else {
-                    throw new Exception('Image Handler Exception: Unable to upload image');
+                    return null;
                 }
             }
             return $images;
         }
-        die("error");
+        return null;
     }
 }

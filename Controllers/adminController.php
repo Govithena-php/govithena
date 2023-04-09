@@ -3,8 +3,10 @@
 class adminController extends Controller
 {
     private $currentUser;
-    private $adminModel;
     private $categoryImageHander;
+    private $adminModel;
+    private $categoryModel;
+
     public function __construct()
     {
         $this->currentUser = Session::get('user');
@@ -17,7 +19,9 @@ class adminController extends Controller
             $this->redirect('/error/dontHaveAccess');
         }
         $this->categoryImageHander = new ImageHandler($folder = 'Uploads/categories');
+
         $this->adminModel = $this->model('admin');
+        $this->categoryModel = $this->model('category');
     }
 
     public function index()
@@ -38,7 +42,7 @@ class adminController extends Controller
             $props['userCount'] = 0;
         }
 
-        $activeCategoriesCount = $this->adminModel->getActiveCategoriesCount();
+        $activeCategoriesCount = $this->categoryModel->getActiveCategoriesCount();
         if ($activeCategoriesCount['success']) {
             $props['activeCategoriesCount'] = $activeCategoriesCount['data']['activeCategoriesCount'];
         } else {
@@ -100,7 +104,6 @@ class adminController extends Controller
 
     public function newCategory()
     {
-        $props = [];
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $cid = new UID(PREFIX::CATEGORY);
             try {
@@ -110,29 +113,84 @@ class adminController extends Controller
                     'name' => new Input(POST, 'name'),
                     'slug' => new Input(POST, 'slug'),
                     'type' => new Input(POST, 'type'),
-                    'description' => new Input(POST, 'description'),
                     'thumbnail' => $image[0],
                     'createdBy' => $this->currentUser->getUid()
                 ];
 
-                $res = $this->adminModel->createCategory($data);
+                $res = $this->categoryModel->createCategory($data);
                 if ($res['success']) {
                     $this->redirect('/admin/categories');
                 } else {
-                    $this->redirect('/admin/newCategory/error');
+                    $this->redirect('/admin/categories/error');
                 }
             } catch (Exception $e) {
                 echo $e->getMessage();
-                die();
+                $this->redirect('/admin/categories/error');
             }
         }
-        $this->render('newCategory');
+    }
+
+    public function delete_category()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $cid = new Input(POST, 'cid-confirm');
+            $response = $this->categoryModel->deleteCategory($cid);
+            if ($response['success']) {
+                $this->redirect('/admin/categories');
+            } else {
+                $this->redirect('/admin/categories/error');
+            }
+        }
+    }
+
+
+    public function update_category()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $cid = new Input(POST, 'u-submitBtn');
+            $image = $this->categoryImageHander->upload('u-thumbnail');
+            if (isset($image)) {
+                $res = $this->categoryModel->updateCategoryImage($cid, $image[0]);
+                if ($res['success']) {
+                    $this->redirect('/admin/categories');
+                } else {
+                    die(var_dump($res));
+                    $this->redirect('/admin/categories/error');
+                }
+            }
+
+            $data = [
+                'name' => new Input(POST, 'u-name'),
+                'slug' => new Input(POST, 'u-slug'),
+                'type' => new Input(POST, 'u-type'),
+                'cid' => $cid,
+            ];
+
+            $res = $this->categoryModel->updateCategory($data);
+            if ($res['success']) {
+                $this->redirect('/admin/categories');
+            } else {
+                die(var_dump($res));
+                $this->redirect('/admin/categories/error');
+            }
+
+
+
+
+
+            // $response = $this->categoryModel->updateCategory($cid, $data);
+            // if ($response['success']) {
+            //     $this->redirect('/admin/categories');
+            // } else {
+            //     $this->redirect('/admin/categories/error');
+            // }
+        }
     }
 
     public function categories()
     {
         $props = [];
-        $subCategories = $this->adminModel->fetchAllCategories();
+        $subCategories = $this->categoryModel->fetchAllCategories();
         if ($subCategories['success']) {
             $props['subCategories'] = $subCategories['data'];
         }
