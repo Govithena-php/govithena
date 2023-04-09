@@ -103,36 +103,36 @@ class adminController extends Controller
         $props = [];
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $cid = new UID(PREFIX::CATEGORY);
-            // die($cid);
             try {
-                $image = $this->categoryImageHander->upload('categoryImage');
-                // var_dump($image);
-                // die();
+                $image = $this->categoryImageHander->upload('thumbnail');
+                $data = [
+                    'id' => $cid,
+                    'name' => new Input(POST, 'name'),
+                    'slug' => new Input(POST, 'slug'),
+                    'type' => new Input(POST, 'type'),
+                    'description' => new Input(POST, 'description'),
+                    'thumbnail' => $image[0],
+                    'createdBy' => $this->currentUser->getUid()
+                ];
+
+                $res = $this->adminModel->createCategory($data);
+                if ($res['success']) {
+                    $this->redirect('/admin/categories');
+                } else {
+                    $this->redirect('/admin/newCategory/error');
+                }
             } catch (Exception $e) {
                 echo $e->getMessage();
                 die();
             }
-
-
-
-            // $data = [
-            //     $id = $cid,
-            //     $categoryName = new Input(POST, 'categoryName'),
-            //     $slug = new Input(POST, 'slug'),
-            //     $mainCategory = new Input(POST, 'mainCategory'),
-            //     $description = new Input(POST, 'description')
-            // ];
-
-            // $res = $this->adminModel->createCategory($data);
         }
-
         $this->render('newCategory');
     }
 
     public function categories()
     {
         $props = [];
-        $subCategories = $this->adminModel->fetchAll();
+        $subCategories = $this->adminModel->fetchAllCategories();
         if ($subCategories['success']) {
             $props['subCategories'] = $subCategories['data'];
         }

@@ -108,14 +108,34 @@ class Admin
         }
     }
 
-    public function fetchAll()
+    public function fetchAllCategories()
     {
         try {
-            $sql = "SELECT * FROM user";
+            $sql = "SELECT c.id, c.name, c.description, c.slug, c.type, c.createdBy, c.createdAt, c.thumbnail, u.firstName, u.lastName FROM category c INNER JOIN user u ON c.createdBy = u.uid ORDER BY (createdAt) DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return ['success' => true, 'data' => $result];
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function createCategory($data)
+    {
+        // die(var_dump($data));
+        try {
+            $sql = "INSERT INTO category (`id`,`name`, `description`, `slug`, `type`, `thumbnail`) VALUES(:id, :name, :description, :slug, :type, :thumbnail)";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'id' => $data['id'],
+                'name' => $data['name'],
+                'description' => $data['description'],
+                'slug' => $data['slug'],
+                'type' => $data['type'],
+                'thumbnail' => $data['thumbnail']
+            ]);
+            return ['success' => true];
         } catch (PDOException $e) {
             return ['success' => false, 'data' => $e->getMessage()];
         }

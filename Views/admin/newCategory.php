@@ -31,7 +31,7 @@
             <h2>Create a new category</h2>
             <p>Keep your eyes on the prize by tracking progress with ease.</p>
         </div>
-        <form class="[ new__category_form ]" action="<?php echo URLROOT ?>/admin/newCategory" method="post">
+        <form class="[ new__category_form ]" action="<?php echo URLROOT ?>/admin/newCategory" method="post" enctype="multipart/form-data">
             <div class="[ grid ]" sm="1" lg="3" gap="1">
                 <div class="[ input__control ]">
                     <label for="category">Category Name</label>
@@ -43,12 +43,12 @@
                 </div>
                 <div class="[ input__control ]">
                     <label for="mainCategory">Main Category</label>
-                    <select id="mainCategory" name="mainCategory">
-                        <option value="vegetable">Vegetables</option>
-                        <option value="fruits">Fruits</option>
-                        <option value="grains">Grains</option>
-                        <option value="spices">Spices</option>
-                        <option value="other">Other</option>
+                    <select id="mainCategory" name="type">
+                        <option value="VEGETABLE">Vegetables</option>
+                        <option value="FRUIT">Fruits</option>
+                        <option value="GRAINS">Grains</option>
+                        <option value="SPICES">Spices</option>
+                        <option value="OTHER">Other</option>
                     </select>
                 </div>
             </div>
@@ -66,7 +66,7 @@
                     <img class="[ upload__svg ]" src="<?php echo IMAGES ?>svg/upload.svg" />
                     <p>Darg and drop your image here<br>or</p>
                     <label class="[ browse__btn ]" for="image-uploader">Browse</label>
-                    <input id="image-uploader" class="text__box_input" type="file" name="categoryImage">
+                    <input id="image-uploader" class="text__box_input" type="file" name="thumbnail">
                 </div>
             </div>
             <div class="[ input__control ]">

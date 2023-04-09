@@ -19,6 +19,7 @@
 <body>
 
     <?php
+
     $active = "users";
     $title = "Users";
     require_once("navigator.php");
@@ -33,12 +34,12 @@
                 <p>Keep your eyes on the prize by tracking progress with ease.</p>
             </div>
             <div class="[ add_new ]">
-                <button type="button" class="[ button__primary ]">Add Category</button>
+                <a href="<?php echo URLROOT ?>/admin/newCategory" class="[ button__primary ]">Add Category</a>
             </div>
         </div>
         <div class="[  ]">
             <div class="[ grid__table ]" style="
-                                --xl-cols: 2.5fr 1fr 1.5fr 3fr 1.5fr 1fr;
+                                --xl-cols: 1fr 1fr 1fr 1fr 1fr 1fr 3fr;
                                 --lg-cols: 4fr 1fr 1fr;
                                 --md-cols: 5fr 1fr;
                                 --sm-cols: 3fr 1fr;
@@ -70,49 +71,55 @@
                     </div>
                     <div class="[ row ]">
                         <div class="[ data ]">
-                            <p>Category Name</p>
+                            <p>Category</p>
                         </div>
                         <div class="[ data ]" hideIn="md">
-                            <p>Type</p>
+                            <p>Name</p>
                         </div>
                         <div class="[ data ]" hideIn="lg">
-                            <p>Created Date</p>
+                            <p>Type</p>
                         </div>
                         <div class="[ data ]" hideIn="md">
+                            <p>Slug</p>
+                        </div>
+                        <div class="[ data ]" hideIn="lg">
                             <p>Created By</p>
                         </div>
                         <div class="[ data ]" hideIn="lg">
-                            <!-- <p>Email</p> -->
+                            <p>Create At</p>
                         </div>
                     </div>
                 </div>
                 <div class="[ body ]">
                     <?php
-                    foreach ($activeUsers as $activeUser) {
+                    foreach ($subCategories as $subCategory) {
                     ?>
                         <div class="[ row ]">
                             <div class="[ data ]">
                                 <div class="[ item__card ]">
-                                    <img width="50" src="<?php echo UPLOADS . $activeUser['image'] ?>" />
+                                    <img width="50" src="<?php echo UPLOADS . 'categories/' . $subCategory['thumbnail'] ?>" />
                                 </div>
                             </div>
                             <div class="[ data ]" hideIn="md">
-                                <p class="[ tag ]"><?php echo $activeUser['firstName'] ?></p>
+                                <p class="[ tag ]"><?php echo $subCategory['name'] ?></p>
                             </div>
                             <div class="[ data ]" hideIn="md">
-                                <p class="[ tag ]"><?php echo $activeUser['lastName'] ?></p>
+                                <p class="[ tag ]"><?php echo $subCategory['type'] ?></p>
                             </div>
                             <div class="[ data ]" hideIn="md">
-                                <p class="[ tag ]"><?php echo $activeUser['userType'] ?></p>
+                                <p class="[ tag ]"><?php echo $subCategory['slug'] ?></p>
                             </div>
                             <div class="[ data ]" hideIn="md">
-                                <p class="[ tag ]"><?php echo $activeUser['username'] ?></p>
+                                <p class="[ tag ]"><?php echo $subCategory['firstName'] . " " . $subCategory['lastName'] ?></p>
+                            </div>
+                            <div class="[ data ]" hideIn="md">
+                                <p class="[ tag ]"><?php echo $subCategory['createdAt'] ?></p>
                             </div>
 
                             <div class="[ data flex-center ]">
                                 <div class="[ actions ]">
-                                    <a href="<?php echo URLROOT ?>/profile/<?php echo $activeUser['uid'] ?>" class="button__primary">View More</a>
-                                    <button onclick="openSuspendAlert('<?php echo $activeUser['uid'] ?>')" class="button__danger">Suspend</button>
+                                    <a href="<?php echo URLROOT ?>/profile/<?php echo $subCategory['id'] ?>" class="button__primary">View More</a>
+                                    <button onclick="openSuspendAlert('<?php echo $subCategory['id'] ?>')" class="button__danger">Delete</button>
                                 </div>
                             </div>
                         </div>

@@ -12,9 +12,6 @@ class ImageHandler extends Image
 
     public function upload($name)
     {
-
-        var_dump($_FILES);
-
         if (isset($_FILES[$name])) {
             $images = [];
             if (is_array($_FILES[$name]['name'])) {
