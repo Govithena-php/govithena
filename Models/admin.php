@@ -54,6 +54,60 @@ class Admin
         }
     }
 
+
+    public function getUserCount()
+    {
+        try {
+            $sql = "SELECT COUNT(uid) AS userCount FROM user";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute();
+            $res = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $res];
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function getActiveUserCount()
+    {
+        try {
+            $sql = "SELECT COUNT(uid) AS activeUserCount FROM login_credential WHERE status = 'ACTIVE'";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute();
+            $res = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $res];
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+
+    public function getGigsCount()
+    {
+        try {
+            $sql = "SELECT category, count(gigId) as numberOfGigs FROM gig WHERE status = 'ACTIVE' GROUP BY(category)";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute();
+            $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $res];
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function getActiveCategoriesCount()
+    {
+        try {
+            $sql = "SELECT COUNT(*) AS activeCategoriesCount FROM category WHERE status = 'ACTIVE'";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute();
+            $res = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $res];
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
     public function fetchAll()
     {
         try {

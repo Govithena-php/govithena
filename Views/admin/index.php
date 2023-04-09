@@ -19,6 +19,7 @@
 <body>
 
     <?php
+
     $active = "dashboard";
     $title = "Dashboard";
     require_once("navigator.php");
@@ -46,16 +47,16 @@
             <div class="[ card ]">
                 <h3>Users</h3>
                 <div class="[ amount ]">
-                    <h1>1250</h1>
+                    <h1><?php echo $userCount ?></h1>
                     <h4>12% <i class="fa-solid fa-arrow-down"></i></h4>
                 </div>
                 <!-- <p>Compared to (LKR 21340 last month)</p> -->
             </div>
 
             <div class="[ card ]">
-                <h3>New Users</h3>
+                <h3>Active Users</h3>
                 <div class="[ amount ]">
-                    <h1>220</h1>
+                    <h1><?php echo $activeUserCount ?></h1>
                     <h4>12% <i class="fa-solid fa-arrow-up"></i></h4>
                 </div>
                 <!-- <p>Compared to (LKR 21340 last month)</p> -->
@@ -65,7 +66,7 @@
                 <h3>Categories</h3>
                 <div class="[ amount ]">
                     <!-- <span class="[ LKRBadge ]"></span> -->
-                    <h1>10</h1>
+                    <h1><?php echo $activeCategoriesCount ?></h1>
                     <h4>12% <i class="fa-solid fa-arrow-down"></i></h4>
                 </div>
                 <p>10 new categories added.</p>
@@ -304,7 +305,89 @@
     require_once("footer.php");
     ?>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="<?php echo JS ?>/dashboard/chart.js"></script>
+    <script>
+        fetch('<?php echo URLROOT ?>/api/gigPieChart')
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    const categories = result.data.map(item => item.category)
+                    const counts = result.data.map(item => item.numberOfGigs)
+
+                    const pieChart = new Chart(document.getElementById('pieChart'), {
+                        type: 'pie',
+                        data: {
+                            labels: categories,
+                            datasets: [{
+                                data: counts
+                            }]
+                        }
+                    });
+                }
+            })
+            .catch(error => console.log(error))
+    </script>
+
+
+    <script>
+        // const data = {
+        //     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        //     datasets: [{
+        //             label: 'Investments',
+        //             data: [65, 59, 80, 81, 56, 55, 40],
+        //             fill: false,
+        //             borderColor: 'rgb(255, 99, 132)',
+        //             tension: 0.1,
+        //             yAxisID: 'y'
+
+        //         },
+        //         {
+        //             label: 'Gain',
+        //             data: [75, 20, 23, 31, 46, 95, 50],
+        //             fill: false,
+        //             borderColor: 'rgb(75, 192, 192)',
+        //             tension: 0.1,
+        //             yAxisID: 'y1'
+        //         }
+        //     ],
+        // };
+
+        // const config = {
+        //     type: 'line',
+        //     data: data,
+        //     options: {
+        //         responsive: true,
+        //         interaction: {
+        //             mode: 'index',
+        //             intersect: false,
+        //         },
+        //         stacked: false,
+        //         plugins: {
+        //             title: {
+        //                 display: true,
+        //                 text: 'Investments VS Gain'
+        //             }
+        //         },
+        //         scales: {
+        //             y: {
+        //                 type: 'linear',
+        //                 display: true,
+        //                 position: 'left',
+        //             },
+        //             y1: {
+        //                 type: 'linear',
+        //                 display: true,
+        //                 position: 'right',
+        //                 grid: {
+        //                     drawOnChartArea: true,
+        //                 },
+        //             },
+        //         }
+        //     },
+        // };
+        // const ctx = document.getElementById('myChart');
+
+        // new Chart(ctx, config);
+    </script>
     <script src="<?php echo JS ?>/dashboard/dashboard.js"></script>
 </body>
 

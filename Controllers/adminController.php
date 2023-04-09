@@ -21,6 +21,30 @@ class adminController extends Controller
 
     public function index()
     {
+        $props = [];
+
+        $activeUserCount = $this->adminModel->getActiveUserCount();
+        if ($activeUserCount['success']) {
+            $props['activeUserCount'] = $activeUserCount['data']['activeUserCount'];
+        } else {
+            $props['activeUserCount'] = 0;
+        }
+
+        $userCount = $this->adminModel->getUserCount();
+        if ($userCount['success']) {
+            $props['userCount'] = $userCount['data']['userCount'];
+        } else {
+            $props['userCount'] = 0;
+        }
+
+        $activeCategoriesCount = $this->adminModel->getActiveCategoriesCount();
+        if ($activeCategoriesCount['success']) {
+            $props['activeCategoriesCount'] = $activeCategoriesCount['data']['activeCategoriesCount'];
+        } else {
+            $props['activeCategoriesCount'] = 0;
+        }
+
+        $this->set($props);
         $this->render('index');
     }
 
@@ -75,6 +99,14 @@ class adminController extends Controller
 
     public function newCategory()
     {
+        $props = [];
+        if ($_SERVER['REQUEST_METHOD'] = 'POST') {
+            $name = new Input(POST, 'name');
+            $slug = new Input(POST, 'slug');
+            $mainCategory = new Input(POST, 'mainCategory');
+            $description = new Input(POST, 'description');
+        }
+
         $this->render('newCategory');
     }
 

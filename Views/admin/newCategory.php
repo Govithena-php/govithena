@@ -31,11 +31,11 @@
             <h2>Create a new category</h2>
             <p>Keep your eyes on the prize by tracking progress with ease.</p>
         </div>
-        <form class="[ new__category_form ]">
+        <form class="[ new__category_form ]" action="" method="post">
             <div class="[ grid ]" sm="1" lg="3" gap="1">
                 <div class="[ input__control ]">
                     <label for="category">Category Name</label>
-                    <input type="text" id="category" name="category" placeholder="Category Name">
+                    <input type="text" id="category" name="name" placeholder="Category Name">
                 </div>
                 <div class="[ input__control ]">
                     <label for="slug">Slug</label>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="[ input__control ]">
                     <label for="mainCategory">Main Category</label>
-                    <select id="mainCategory">
+                    <select id="mainCategory" name="mainCategory">
                         <option value="vegetable">Vegetables</option>
                         <option value="fruits">Fruits</option>
                         <option value="grains">Grains</option>
