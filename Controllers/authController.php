@@ -103,7 +103,7 @@ class authController extends Controller
                         Session::set(['otpHash' => $response['data']['otpHash']]);
                         $this->redirect('/auth/newpwd');
                     } else {
-                        $this->redirect('/auth/verify/error/invalid-otp');
+                        $this->redirect('/auth/reset/error/invalid-otp');
                     }
                 }
             }
@@ -149,6 +149,41 @@ class authController extends Controller
             }
         }
         $this->render('newpwd');
+    }
+
+
+    public function resend()
+    {
+        if (!Session::has('otpHash') && !Session::get('email')) {
+            $this->redirect('/auth');
+            return;
+        }
+
+        $email = Session::get('email');
+        $user_name = Session::get('user_name');
+        $otp = rand(100000, 999999);
+        $otpHash = hash('sha256', $otp);
+
+        Session::unset(['otpHash']);
+        Session::set(['otpHash' => $otpHash]);
+
+        $response = $this->otpModel->saveOtp($email, $otpHash);
+        if ($response['status'] == true) {
+            // email otp
+
+            $body = $this->mailer->loadTemplate('otpMail', ['user' => $user_name, 'otp' => $otp]);
+            $subject = 'Your Password Reset OTP';
+
+            $res = $this->mailer->send($email, $subject, $body);
+            if ($res) {
+                echo 'sent';
+                $this->redirect('/auth/verify');
+            } else {
+                $this->redirect('/auth/reset/error/server-error');
+            }
+        } else {
+            $this->redirect('/auth/reset/error/server-error');
+        }
     }
 
     public function signin($params = null)
