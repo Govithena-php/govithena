@@ -9,5 +9,6 @@ require(ROOT . "Core/Controller.php");
 require(ROOT . "Core/ActiveUser.php");
 require(ROOT . "Core/Image.php");
 require(ROOT . "Core/ImageHandler.php");
+require(ROOT . "Core/Mailer.php");
 
 Session::init();
