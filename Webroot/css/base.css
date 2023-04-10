@@ -180,6 +180,10 @@ dialog::backdrop {
     justify-content: center;
 }
 
+.align-items-end {
+    align-items: flex-end;
+}
+
 .center-y {
     align-items: center;
 }
@@ -342,6 +346,26 @@ dialog::backdrop {
 
 .button__danger:hover {
     background-color: #f32d2d;
+}
+
+.button__danger-invert {
+    border: none;
+    outline: none;
+    text-decoration: none;
+    background-color: #d83b3b;
+    color: var(--clr-danger);
+    border: 1px solid var(--clr-danger);
+    background-color: var(--clr-light);
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.9rem;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button__danger-invert:hover {
+    background-color: #fcb8b8;
 }
 
 
