@@ -3,19 +3,74 @@
 class authController extends Controller
 {
     private $currentUser;
+
+    private $mailer;
+
     private $userModel;
+    private $otpModel;
+
+
     public function __construct()
     {
         if (Session::isLoggedIn()) {
             $this->redirect('/');
         }
 
+        $this->mailer = new Mailer(SMTPACCOUNT, SMTPPASSWORD, SMTPNAME);
+
         $this->userModel = $this->model('User');
+        $this->otpModel = $this->model('Otp');
     }
 
     public function index()
     {
         $this->signin();
+    }
+
+    public function reset()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $resetEmail = new Input(POST, 'resetEmail');
+            $resetEmail->sanatizeEmail();
+
+            $response = $this->userModel->fetchByEmail($resetEmail);
+            if ($response['status'] = true) {
+                if ($response['data'] == false) {
+                    $this->redirect('/auth/reset/error/user-does-not-exist');
+                    return;
+                } else {
+                    $user_name = $response['data']['firstName'];
+                    $otp = rand(100000, 999999);
+                    $otpHash = hash('sha256', $otp);
+
+                    $response = $this->otpModel->saveOtp($resetEmail, $otpHash);
+                    if ($response['status'] == true) {
+                        // email otp
+
+                        $body = $this->mailer->loadTemplate('otpMail', ['user' => $user_name, 'otp' => $otp]);
+                        $subject = 'Your Password Reset OTP';
+
+                        $res = $this->mailer->send($resetEmail, $subject, $body);
+                        if ($res) {
+                            echo 'sent';
+                        } else {
+                            echo 'not sent';
+                        }
+
+
+
+                        $this->redirect('/auth/reset/success');
+                    } else {
+                        $this->redirect('/auth/reset/error/server-error');
+                    }
+                }
+            }
+            var_dump($response);
+            die();
+        }
+
+        $this->render('reset');
     }
 
     public function signin($params = null)
