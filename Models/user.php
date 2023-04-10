@@ -119,4 +119,16 @@ class User extends Model
             return ['status' => false, 'data' => $e->getMessage()];
         }
     }
+
+    public function updatePassword($email, $passwordHash)
+    {
+        try {
+            $sql = "UPDATE login_credential SET password = :password WHERE username = :email";
+            $req = Database::getBdd()->prepare($sql);
+            $req->execute(['password' => $passwordHash, 'email' => $email]);
+            return ['status' => true];
+        } catch (PDOException $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
 }

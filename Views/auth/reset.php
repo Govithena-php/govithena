@@ -37,7 +37,7 @@
                     <button type="submit" name="reset" class="button__primary nextBtn">Next</button>
                 </form>
             </div>
-            <p>Already Have an Account? <a class="register" href="<?php echo URLROOT ?>/auth/signin">Login</a></p>
+            <p>Not a member? <a href="<?php echo URLROOT ?>/auth/signup">Sign up</a></p>
         </div>
     </div>
 </body>

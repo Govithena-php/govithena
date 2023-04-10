@@ -44,6 +44,9 @@ class authController extends Controller
                     $otp = rand(100000, 999999);
                     $otpHash = hash('sha256', $otp);
 
+                    Session::unset(['email', 'user_name', 'otpHash']);
+                    Session::set(['email' => $resetEmail, 'user_name' => $user_name, 'otpHash' => $otpHash]);
+
                     $response = $this->otpModel->saveOtp($resetEmail, $otpHash);
                     if ($response['status'] == true) {
                         // email otp
@@ -54,13 +57,10 @@ class authController extends Controller
                         $res = $this->mailer->send($resetEmail, $subject, $body);
                         if ($res) {
                             echo 'sent';
+                            $this->redirect('/auth/verify');
                         } else {
-                            echo 'not sent';
+                            $this->redirect('/auth/reset/error/server-error');
                         }
-
-
-
-                        $this->redirect('/auth/reset/success');
                     } else {
                         $this->redirect('/auth/reset/error/server-error');
                     }
@@ -71,6 +71,84 @@ class authController extends Controller
         }
 
         $this->render('reset');
+    }
+
+
+    public function verify()
+    {
+        if (!Session::has('otpHash') && !Session::get('email')) {
+            $this->redirect('/auth');
+            return;
+        }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $otp = new Input(POST, 'otp');
+            $otp->sanatizePassword();
+            // echo $otp;
+            // echo '<br>';
+            $email = Session::get('email');
+            $user_name = Session::get('user_name');
+
+            $response = $this->otpModel->fetchOtpByEmail($email);
+
+            if ($response['status'] == true) {
+                $now = new DateTime();
+                $created_at = new DateTime($response['data']['createdAt']);
+                $diff = $now->getTimestamp() - $created_at->getTimestamp();
+
+                if ($diff > 300) {
+                    $this->redirect('/auth/reset/error/otp-expired');
+                } else {
+                    if (hash('sha256', $otp) == $response['data']['otpHash']) {
+                        Session::unset(['otpHash']);
+                        Session::set(['otpHash' => $response['data']['otpHash']]);
+                        $this->redirect('/auth/newpwd');
+                    } else {
+                        $this->redirect('/auth/verify/error/invalid-otp');
+                    }
+                }
+            }
+        }
+
+        $this->render('verify');
+    }
+
+    public function newpwd()
+    {
+        if (!Session::has('otpHash') && !Session::get('email')) {
+            $this->redirect('/auth');
+            return;
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $password = new Input(POST, 'newPassword');
+            $password->sanatizePassword();
+
+            $confirmPassword = new Input(POST, 'confirmPassword');
+            $confirmPassword->sanatizePassword();
+
+            if (!$password->isValidPassword() || !$confirmPassword->isValidPassword()) {
+                $this->redirect('/auth/newpwd/error/invalied-password');
+                $error = 'Password must be 8 characters long and contain at least one number and one special character.';
+                return;
+            }
+
+            if ($password != $confirmPassword) {
+                $this->redirect('/auth/newpwd/error/passwords-dont-match');
+                return;
+            }
+
+            $email = Session::get('email');
+            $password = password_hash($password, PASSWORD_DEFAULT);
+            $response = $this->userModel->updatePassword($email, $password);
+            if ($response['status'] == true) {
+                Session::unset(['email', 'user_name', 'otpHash']);
+                $this->redirect('/auth/signout');
+            } else {
+                $this->redirect('/auth/newpwd/error/server-error');
+            }
+        }
+        $this->render('newpwd');
     }
 
     public function signin($params = null)
