@@ -12,7 +12,7 @@
         <h3 style="padding:0; text-transform:capitalize">Dear {{user}},</h3>
         <p>We received a request to reset your password for your account on Govithena LK. Please use the following OTP
             to reset your password:</p>
-        <h1 style="padding:0; margin:0; color:#404145; font-size: 2.25rem;">{{otp}}</h1>
+        <h1 style="padding:0; margin:0; color:#404145; font-size: 2rem;">{{otp}}</h1>
         <p>Please note that this OTP is only valid for a single use and will expire in 5 minites. If you did not request
             a password reset, please ignore this email. If you have any questions or concerns, please contact us at
             govithena.lk@gmail.com</p>
