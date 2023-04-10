@@ -229,7 +229,7 @@
                                     <div class="[ investmet__location ]">
                                         <div class="[ item ]">
                                             <small>Initial investment :</small>
-                                            <p class="[ LKR ]"><?php echo $result['capital'] ?>.00</p>
+                                            <p class="[ LKR ]"><?php echo number_format($result['capital'], 2, '.', ',') ?></p>
                                         </div>
                                         <div class="[ item ]">
                                             <small>Location :</small>
