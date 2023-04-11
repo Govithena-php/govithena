@@ -36,7 +36,7 @@
             <!-- <div class="[ review__heading ]">
                 <h3>Give your answer for fallowing question.</h3>
             </div> -->
-            <form method="post">
+            <form action="<?php echo URLROOT . '/agrologist/farmers' ?>" method="POST" >
                 <div class="[ question__wrapper ]">
                     <div class="[ counter ]"></div>
                     <div class="[ question ]">

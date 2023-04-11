@@ -5,7 +5,7 @@ class Agrologist extends Model
     function farmerRequest()
     {
         try {
-            $sql = "SELECT CONCAT(u.firstName, ' ', u.lastName) AS fullName, u.city, a.requestId, a.message, u.image FROM agrologist_request a LEFT JOIN user u ON u.uid = a.farmerId WHERE (a.agrologistId = :agrologistId AND a.status='Pending')";
+            $sql = "SELECT CONCAT(u.firstName, ' ', u.lastName) AS fullName, u.city, a.requestId, a.message, u.image, COUNT(r.q1) AS num, (SUM(r.q1)+SUM(r.q2)+SUM(r.q3)+SUM(r.q4)+SUM(r.q5)+SUM(r.q6)+SUM(r.q7)) AS total FROM agrologist_request a LEFT JOIN user u ON u.uid = a.farmerId LEFT JOIN review_by_agrologist r ON  a.farmerId=r.farmerId WHERE (a.agrologistId = :agrologistId AND a.status='Pending') GROUP BY r.farmerId";
             $stmt =  Database::getBdd()->prepare($sql);
             $stmt->execute(['agrologistId' => Session::get('user')->getUid()]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -122,7 +122,7 @@ class Agrologist extends Model
     
     {
         try {
-            $sql = "SELECT CONCAT(u.firstName, ' ', u.lastName) AS fullName, u.city, a.requestId, a.farmerId, u.image FROM agrologist_request a LEFT JOIN user u ON u.uid = a.farmerId WHERE (a.agrologistId = :agrologistId AND a.status='Accepted')";
+            $sql = "SELECT CONCAT(u.firstName, ' ', u.lastName) AS fullName, u.city, a.requestId, a.farmerId, u.image, COUNT(r.q1) AS num, (SUM(r.q1)+SUM(r.q2)+SUM(r.q3)+SUM(r.q4)+SUM(r.q5)+SUM(r.q6)+SUM(r.q7)) AS total FROM agrologist_request a LEFT JOIN user u ON u.uid = a.farmerId LEFT JOIN review_by_agrologist r ON  a.farmerId=r.farmerId  WHERE (a.agrologistId = :agrologistId AND a.status='Accepted') GROUP BY r.farmerId ";
             $stmt =  Database::getBdd()->prepare($sql);
             $stmt->execute(['agrologistId' => Session::get('user')->getUid()]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -133,6 +133,22 @@ class Agrologist extends Model
             return null;
         }
     }
+
+    public function getFarmerReviews($farmerId){
+        try {
+            $sql = "SELECT SUM(q1,q2,q3,q4,q5,q6,q7) AS total FROM review_by_agrologist WHERE farmerId = :farmerId";
+            $stmt =  Database::getBdd()->prepare($sql);
+            $stmt->execute(['agrologistId' => $farmerId]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+        }
+    }
+
+   
 
     public function insertFieldVisit($data)
     {

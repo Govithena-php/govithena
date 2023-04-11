@@ -89,7 +89,7 @@ class agrologistController extends Controller
             $agr = new Agrologist();
             
             $farmers = $agr->getFarmers();
-            
+            // $farmerReviews = $agr->getFarmerReviews();
             if (isset($farmers)) {
                 $this->set(['ar' => $farmers]);
             } 
@@ -191,6 +191,23 @@ class agrologistController extends Controller
                     //var_dump($_POST['accept']);
                     //echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>" . $_POST['accept'] . "</h1>";
                     $agr->acceptRequest($_POST['accept']);
+
+                    $data = [
+                        'reviewId' => new UID(PREFIX::REVIEW),
+                        'agrologistId' => $this->currentUser->getUid(),
+                        'farmerId' => $_POST['accept'],
+                        'q1' => 0,
+                        'q2' => 0,
+                        'q3' => 0,
+                        'q4' => 0,
+                        'q5' => 0,
+                        'q6' => 0,
+                        'q7' => 0,
+                        'q8' => "",
+                        'q9' => "",
+                    ];
+
+                    $agr->save($data);
                     //$this->redirect("/agrologist/farmers");
                 } 
                 elseif (isset($_POST['decline'])) {
