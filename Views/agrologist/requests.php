@@ -39,7 +39,7 @@
 
                         <div class="[ request__card bg-light ]">
                             <div class="[ request__img ]">
-                                <img src="<?php echo IMAGES ?>/farmer.jpeg" alt="">
+                                <img src="<?php echo UPLOADS . '/' . $request['image'] ?>" alt="">
                             </div>
                             <form action="<?php echo URLROOT . '/agrologist/requests' ?>" method="POST">
                                 <div class="flex flex-row " style="width: 600px">
@@ -54,13 +54,16 @@
                                         <h4>
                                             <?php echo ucwords($request['city']) ?>
                                         </h4>
-                                        <p class="flex flex-row">
+
+                                        <meter class="average-rating" min="0" max="5" value="5" title="4.3 out of 5 stars" style="--percent: calc(<?php echo $request['total'] / ($request['num'] * 3) ?>/5*100%)">4.3 out of 5</meter>
+
+                                        <!-- <p class="flex flex-row">
                                             <span class="fa fa-star rating_checked"></span>
                                             <span class="fa fa-star rating_checked"></span>
                                             <span class="fa fa-star rating_checked"></span>
                                             <span class="fa fa-star"></span>
                                             <span class="fa fa-star"></span>
-                                        </p>
+                                        </p> -->
 
                                     </div>
                                     <div class="flex flex-row flex-c-c">

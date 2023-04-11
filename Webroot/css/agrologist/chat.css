@@ -52,18 +52,22 @@
     box-shadow: 0 0 32px rgb(0 0 0 / 8%),
                 0rem 16px 16px -16px rgb(0 0 0 / 10%);
   }
+
   .chat-box .outgoing{
     display: flex;
   }
+
   .chat-box .outgoing .details{
     margin-left: auto;
     max-width: calc(100% - 130px);
   }
+
   .outgoing .details p{
     background: #333;
     color: #fff;
     border-radius: 18px 18px 0 18px;
   }
+
   .chat-box .incoming{
     display: flex;
     align-items: flex-end;
@@ -74,6 +78,7 @@
     margin-left: 10px;
     max-width: calc(100% - 130px);
   }
+
   .incoming .details p{
     background: #fff;
     color: #333;
@@ -85,6 +90,7 @@
     display: flex;
     justify-content: space-between;
   }
+
   .typing-area input{
     height: 45px;
     width: calc(100% - 58px);
@@ -94,6 +100,23 @@
     outline: none;
     border-radius: 5px 0 0 5px;
   }
+/* 
+  .typing-area{
+    padding: 18px 30px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .typing-area input{
+    height: 45px;
+    width: calc(100% - 58px);
+    font-size: 16px;
+    padding: 0 13px;
+    border: 1px solid #e6e6e6;
+    outline: none;
+    border-radius: 5px 0 0 5px;
+  } */
+
   .typing-area button{
     color: #fff;
     width: 55px;

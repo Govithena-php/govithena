@@ -5,6 +5,35 @@
     margin-top: 45px;
 }
 
+.rating_checked {
+    color: orange;
+}
+
+.average-rating {
+    position: relative;
+    appearance: none;
+    color: transparent;
+    width: auto;
+    display: inline-block;
+    vertical-align: baseline;
+  }
+  
+.average-rating::before {
+    /* --percent: calc(4.3/5*100%); */
+    content: '★★★★★';
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 25px;
+    /* font-weight: 500; */
+    color: rgba(0,0,0,0.2);
+    background:
+      linear-gradient(90deg, gold var(--percent), rgba(0,0,0,0.2) var(--percent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+
 .search {
     display: flex;
 }

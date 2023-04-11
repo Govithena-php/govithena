@@ -22,9 +22,11 @@ class agrologistController extends Controller
     {
         require(ROOT . 'Models/agrologist.php');
         $agrologist = new Agrologist();
+
         $notifications = $agrologist->getnotifications();
         // echo json_encode($notifications);
         //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>". $notifications . "</h1>";
+        
         $this->set(['notifications' => $notifications]);
         $this->render('index');
     }
@@ -36,17 +38,22 @@ class agrologistController extends Controller
             //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>". count($params) . "</h1>";
             require(ROOT . 'Models/agrologist.php');
             $agrologist = new Agrologist();
-            if (count($params) == 1) {
+            
+            if (count($params) == 1) 
+            {
                 $this->farmergigs($agrologist, $params[0]);
-            } else {
+            } 
+            else {
                 // require(ROOT . 'Models/agrologist.php');
                 // $agrologist = new Agrologist();
                 $uid = Session::get('user')->getUid();
+                
                 if (isset($_POST['update_details_btn'])) {
                     $week = new Input(POST, 'week');
                     $date = new Input(POST, 'date');
                     // $update_file = new Input(POST, 'update_file');
                     $description = new Input(POST, 'description');
+                    
                     if (move_uploaded_file($_FILES['update_img']['tmp_name'], "Uploads/" . basename($_FILES['update_img']['name']))) {
                         //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'> file uploaded  </h1>";
                         $agrologist->insertFieldVisit([
@@ -59,7 +66,9 @@ class agrologistController extends Controller
                             'visitDate' => $date->get(),
                         ]);
                         // echo "file uploaded";
-                    } else {
+                    } 
+                    
+                    else {
                         //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'> file not uploaded  </h1>";
 
                         //echo "file not uploaded";
@@ -73,16 +82,21 @@ class agrologistController extends Controller
             }
 
 
-        } else {
+        } 
+        else {
 
             require(ROOT . 'Models/agrologist.php');
             $agr = new Agrologist();
+            
             $farmers = $agr->getFarmers();
+            // $farmerReviews = $agr->getFarmerReviews();
             if (isset($farmers)) {
                 $this->set(['ar' => $farmers]);
-            } else {
+            } 
+            else {
                 $this->set(['error' => "no farmers"]);
             }
+            
             $this->render('farmers');
         }
     }
@@ -147,7 +161,7 @@ class agrologistController extends Controller
 
 
         $this->set(['farmerName' => $farmerName]);
-        echo json_encode($farmerName);
+        // echo json_encode($farmerName);
         $this->render('reviews');
     }
 
@@ -158,36 +172,61 @@ class agrologistController extends Controller
         if (!empty($params)) {
             //echo "<h1 style='color: black; margin-top: 1500px; margin-left: 1000px'>". $params[0]. "</h1>";
             $this->requestdetails($params[0]);
-        } else {
+        } 
+        else {
             require(ROOT . 'Models/agrologist.php');
             $agr = new Agrologist();
+            
             $requests = $agr->farmerRequest();
 
             if (isset($requests)) {
                 $this->set(['ar' => $requests]);
-            } else {
+            } 
+            else {
                 $this->set(['error' => "no requests found"]);
             }
+            
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if (isset($_POST['accept'])) {
                     //var_dump($_POST['accept']);
                     //echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>" . $_POST['accept'] . "</h1>";
                     $agr->acceptRequest($_POST['accept']);
+
+                    $data = [
+                        'reviewId' => new UID(PREFIX::REVIEW),
+                        'agrologistId' => $this->currentUser->getUid(),
+                        'farmerId' => $_POST['accept'],
+                        'q1' => 0,
+                        'q2' => 0,
+                        'q3' => 0,
+                        'q4' => 0,
+                        'q5' => 0,
+                        'q6' => 0,
+                        'q7' => 0,
+                        'q8' => "",
+                        'q9' => "",
+                    ];
+
+                    $agr->save($data);
                     //$this->redirect("/agrologist/farmers");
-                } elseif (isset($_POST['decline'])) {
+                } 
+                elseif (isset($_POST['decline'])) {
                     //var_dump($_POST['accept']);
                     //echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>" . $_POST['accept'] . "</h1>";
                     $agr->declineRequest($_POST['decline']);
                     $farmerId = $agr->getFarmerId($_POST['decline']);
                     // echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $farmerId[0] . "</h1>";
                     echo json_encode($farmerId[0]['farmerId']);
+                    
                     $agr->declineNotificationFarmer($farmerId[0]['farmerId']);
                     //$this->redirect("/agrologist/farmers");
-                } else {
+                } 
+                else {
                     echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>nope</h1>";
 
                 }
             }
+            
             $this->render('requests');
         }
 
@@ -198,7 +237,9 @@ class agrologistController extends Controller
     {
         require(ROOT . 'Models/agrologist.php');
         $agrologist = new Agrologist();
+        
         $uid = Session::get('user')->getUid();
+        
         $d['agrologist'] = $agrologist->getAgrologistDetails();
         //var_dump($d['agrologist']);
         // die();
@@ -263,6 +304,7 @@ class agrologistController extends Controller
     {
         require(ROOT . 'Models/agrologist.php');
         $agrologist = new Agrologist();
+        
         $d['requestDetails'] = $agrologist->farmerRequest();
         // echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $d['message'] . "</h1>";
 
@@ -287,6 +329,7 @@ class agrologistController extends Controller
             $date = new Input(POST, 'date');
             // $update_file = new Input(POST, 'update_file');
             $description = new Input(POST, 'description');
+            
             if (move_uploaded_file($_FILES['update_img']['tmp_name'], "Uploads/" . basename($_FILES['update_img']['name']))) {
                 //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'> file uploaded  </h1>";
                 $agrologist->insertFieldVisit([
@@ -328,12 +371,14 @@ class agrologistController extends Controller
         // echo json_encode($userId);
         require(ROOT . 'Models/agrologist.php');
         $agrologist = new Agrologist();
+        
         $d['messages'] = $agrologist->getmessages($userId[0]);
         // echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $d['message'] . "</h1>";
         if (isset($_POST['update_details_btn'])) {
             $incomingMsgId = new Input(POST, 'incomingMsgId');
             $outgoingMsgId = new Input(POST, 'outgoingMsgId');
             $msg = new Input(POST, 'msg');
+            
             $agrologist->insertMessages([
                 'incomingMsgId' => $incomingMsgId->get(),
                 'outgoingMsgId' => $outgoingMsgId->get(),
