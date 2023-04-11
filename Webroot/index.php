@@ -7,6 +7,7 @@ define('URLROOT', 'http://localhost/govithena'); // http://localhost/govithena
 define('COMPONENTS', ROOT . 'Views/components/'); // C:/xampp/htdocs/govithena/Views/components/
 define('IMAGES', URLROOT . '/Webroot/images/'); // http://localhost/govithena/Webroot/images/
 define('UPLOADS', URLROOT . '/Webroot/Uploads/'); // http://localhost/govithena/Webroot/uploads/
+define('UPLOADS3', URLROOT . '/Webroot/Uploads3/'); // http://localhost/govithena/Webroot/uploads3/
 define('CSS', URLROOT . '/Webroot/css/'); // http://localhost/govithena/Webroot/css/
 define('JS', URLROOT . '/Webroot/js/'); // http://localhost/govithena/Webroot/js/
 

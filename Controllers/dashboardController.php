@@ -8,6 +8,9 @@ class dashboardController extends Controller
     private $userModal;
     private $fieldVisitModel;
     private $reviewByInvestorModel;
+    private $farmerProgressModel;
+    private $requestFarmerModel;
+    private $investmentModel;
 
     public function __construct()
     {
@@ -26,6 +29,9 @@ class dashboardController extends Controller
         $this->userModal = $this->model('user');
         $this->fieldVisitModel = $this->model('fieldVisit');
         $this->reviewByInvestorModel = $this->model('reviewByInvestor');
+        $this->farmerProgressModel = $this->model('farmerProgress');
+        $this->requestFarmerModel = $this->model('requestFarmer');
+        $this->investmentModel = $this->model('investment');
     }
 
     public function index()
@@ -35,13 +41,53 @@ class dashboardController extends Controller
 
     public function gigs()
     {
-        $investorGig = new $this->investorGigModel();
-        $gigs = $investorGig->fetchAllByInvestor($this->currentUser->getUid());
-        $this->set(['gigs' => $gigs]);
+        $props = [];
+        // $investorGig = new $this->investorGigModel();
+        // $gigs = $investorGig->fetchAllByInvestor($this->currentUser->getUid());
+        // $this->set(['gigs' => $gigs]);
+
+
+        $activeGigCount = $this->investorGigModel->countActiveGigByInvestor($this->currentUser->getUid());
+
+        if ($activeGigCount['success']) {
+            $props['activeGigCount'] = $activeGigCount['data']['count'];
+        }
+
+        $completedGigCount = $this->investorGigModel->countCompletedGigByInvestor($this->currentUser->getUid());
+
+        if ($completedGigCount['success']) {
+            $props['completedGigCount'] = $completedGigCount['data']['count'];
+        }
+
+        $totalInvestment = $this->investmentModel->getTotalInvestmentByInvestor($this->currentUser->getUid());
+
+        if ($totalInvestment['success']) {
+            $props['totalInvestment'] = $totalInvestment['data']['totalInvestment'];
+        }
+
+        $activeGigs = $this->investorGigModel->fetchAllActiveGigByInvestor($this->currentUser->getUid());
+
+        if ($activeGigs['success']) {
+            $props['activeGigs'] = $activeGigs['data'];
+        }
+
+        $toReviewGigs = $this->investorGigModel->fetchAllToReviewGigByInvestor($this->currentUser->getUid());
+
+        if ($toReviewGigs['success']) {
+            $props['toReviewGigs'] = $toReviewGigs['data'];
+        }
+
+        $completedGigs = $this->investorGigModel->getCompletedGigsByInvestor($this->currentUser->getUid());
+
+        if ($completedGigs['success']) {
+            $props['completedGigs'] = $completedGigs['data'];
+        }
+
+        $this->set($props);
         $this->render('gigs');
     }
 
-    public function progress($params)
+    public function gig($params)
     {
         $props = [];
         if (!isset($params[0]) || empty($params[0])) {
@@ -64,6 +110,38 @@ class dashboardController extends Controller
             $props['fieldVisits'] = $fieldVisits['data'];
         }
 
+        $progress = $this->farmerProgressModel->fetchAllByGig($gigId);
+        $props['progress'] = [];
+        if ($progress['success']) {
+            foreach ($progress['data'] as $pg) {
+                $progressImages = [];
+                $temp = $this->farmerProgressModel->fetchImagesByProgressId($pg['progressId']);
+                foreach ($temp['data'] as $key => $value) {
+                    $progressImages[$key] = $value['imageName'];
+                }
+                $pg['images'] = $progressImages;
+                $props['progress'][] = $pg;
+            }
+        }
+
+        $totalInvestment = $this->investorGigModel->getTotalInvestmentForGigByInvestor($this->currentUser->getUid(), $gigId);
+        if ($totalInvestment['success']) {
+            $props['totalInvestment'] = $totalInvestment['data']['totalInvestment'];
+        }
+
+        $startedDate = $this->investorGigModel->getStartedDate($gigId);
+
+        if ($startedDate['success']) {
+            $start = new DateTime($startedDate['data']['startDate']);
+            $end = new DateTime();
+            $props['numberOfDaysLeft'] = $start->diff($end)->days;
+        }
+
+        $investments = $this->investmentModel->fetchByInvestorAndGig($this->currentUser->getUid(), $gigId);
+        if ($investments['success']) {
+            $props['investments'] = $investments['data'];
+        }
+
         // accpted data
         // gig
         // farmer
@@ -79,7 +157,7 @@ class dashboardController extends Controller
 
 
         $this->set($props);
-        $this->render('progress');
+        $this->render('gig');
     }
 
 
@@ -119,9 +197,13 @@ class dashboardController extends Controller
                     'q9' => new Input(POST, 'q9'),
                 ];
 
-                $reviewByInvestor = new $this->reviewByInvestorModel();
-                $response = $reviewByInvestor->save($data);
-                // if($response['success']){}
+                $response = $this->reviewByInvestorModel->save($data);
+                if ($response['success']) {
+                    $res = $this->investorGigModel->markAsCompleted($gigId);
+                    if ($res['success']) {
+                        $this->redirect('/dashboard/gigs/');
+                    }
+                }
             }
         }
 
@@ -154,11 +236,11 @@ class dashboardController extends Controller
 
     public function myrequests()
     {
-        require(ROOT . 'Models/requestFarmer.php');
-        $uid = Session::get('user')->getUid();
-        $r = new RequestFarmer();
 
-        $requests = $r->getRequestsByInvestor($uid);
+        $uid = Session::get('user')->getUid();
+
+
+        $requests = $this->requestFarmerModel->getRequestsByInvestor($uid);
         $pendingRequests = [];
         $acceptedRequests = [];
         $rejectedRequests = [];
@@ -192,9 +274,40 @@ class dashboardController extends Controller
         $this->render('settings');
     }
 
-    public function test()
+    public function myrequest_delete()
     {
-        var_dump($_POST);
-        die();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $requestId = new Input(POST, 'deleteRequest-confirm');
+            $response = $this->requestFarmerModel->delete($requestId);
+
+            if ($response['success']) {
+                $this->redirect('/dashboard/myrequests/ok');
+            } else {
+                $this->redirect('/dashboard/myrequests/error');
+            }
+        }
+    }
+
+    public function resend_request()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $requestId = new Input(POST, 'request-resend');
+            $offer = new Input(POST, 'resendOffer');
+            $message = new Input(POST, 'resendMessage');
+
+            $data = [
+                'id' => $requestId,
+                'offer' => $offer,
+                'message' => $message
+            ];
+
+            $response = $this->requestFarmerModel->resend($data);
+
+            if ($response['success']) {
+                $this->redirect('/dashboard/myrequests/ok');
+            } else {
+                $this->redirect('/dashboard/myrequests/error');
+            }
+        }
     }
 }

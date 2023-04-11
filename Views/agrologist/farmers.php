@@ -23,31 +23,37 @@
     <div class="[ container ][ dashboard ]" container-type="dashboard-section">
         <h1 class="[ page-heading-1 ]">farmers</h1>
 
-        <div class="[ requests__continer ]">
+        <div class="farmer_continer">
+            <div class="search">
+                <input type="text" placeholder="Search by: farmer name/ location" oninput="liveSearch()" id="searchbox">
+                <button type="button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
             <?php
             if (!isset($ar) || empty($ar)) {
                 ?>
-                <div class="[ no_requests__card ]">
-                    <p class=''>No Requests</p>
+                <div class="no_farmers_card">
+                    <p class=''>No Active Farmers</p>
                 </div>
                 <?php
             } else {
                 ?>
-                <div class="[ requests__wrapper ]">
+                <div class="farmer_card_wrapper">
                     <?php
                     foreach ($ar as $request) {
                         ?>
 
-                        <div class="[ request__card bg-light ]">
-                            <div class="[ request__img ]">
+                        <div class="farmer_card bg-light ">
+                            <div class="farmer_img">
                                 <img src="<?php echo UPLOADS . '/' . $request['image'] ?>" alt="">
                             </div>
                             <form action="" method="POST">
                                 <div class="flex flex-row " style="width: 600px">
-                                    <div class="[ request__content ]">
+                                    <div class="farmer_card_content">
 
                                         <h1>
-                                            <a class="[ text-dec-none  text-dark  ]"
+                                            <a class="text-dec-none  text-dark "
                                                 href="<?php echo URLROOT . "/agrologist/farmers/" . $request['farmerId'] ?>">
                                                 <?php echo ucwords($request['fullName']) ?>
                                             </a>
@@ -94,6 +100,23 @@
 
     <?php require "footer.php"; ?>
     <script src="<?php echo JS ?>/app.js"></script>
+    <script>
+
+        function liveSearch() {
+            let cards = document.querySelectorAll('.farmer_card')
+            let search_query = document.getElementById("searchbox").value;
+            for (var i = 0; i < cards.length; i++) {
+
+                if (cards[i].innerText.toLowerCase()
+                    .includes(search_query.toLowerCase())) {
+                    cards[i].classList.remove("is-hidden");
+                } else {
+                    cards[i].classList.add("is-hidden");
+                }
+            }
+        }
+
+    </script>
 
 </body>
 

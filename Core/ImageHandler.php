@@ -22,21 +22,20 @@ class ImageHandler extends Image
                     if ($res) {
                         $images[$key] = $res;
                     } else {
-                        throw new Exception('Image Handler Exception: Unable to upload image[' . $key . "]");
+                        return null;
                     }
                 }
             } else {
                 $image = new Image($_FILES[$name]['name'], $_FILES[$name]['type'],  $_FILES[$name]['size'], $_FILES[$name]['tmp_name'], $_FILES[$name]['error']);
                 $res = $image->upload($this->folder);
-
                 if ($res) {
                     $images[0] = $res;
                 } else {
-                    throw new Exception('Image Handler Exception: Unable to upload image');
+                    return null;
                 }
             }
-
             return $images;
         }
+        return null;
     }
 }

@@ -2,12 +2,12 @@
 
 class searchController extends Controller
 {
-    private $searchModel;
+    private $searchGigModel;
 
     public function __construct()
     {
 
-        $this->searchModel = $this->model('search');
+        $this->searchGigModel = $this->model('searchGig');
 
         if (!Session::isLoggedIn()) {
             $this->redirect('/signin');
@@ -43,7 +43,7 @@ class searchController extends Controller
                     $terms['price_range'] = $_POST['price_range'];
                 }
 
-                $res = $this->searchModel->searchGigs($terms);
+                $res = $this->searchGigModel->search($terms);
 
                 if (isset($res)) {
                     $data['searchResult'] = $res;

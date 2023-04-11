@@ -1,11 +1,6 @@
 .filters {
-    /* display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    width: 100%; */
-    margin-top: 2rem;
-    margin-bottom: 3rem;
-    padding-bottom: 1rem;
+    padding-top:1rem;
+    padding-bottom:2rem;
     border-bottom: 1px solid #ccc;
     align-items: end;
     justify-items: end;
@@ -457,8 +452,6 @@
     background-color: rgb(17, 118, 225);
 }
 
-
-
 @media screen and (max-width: 1200px) {
     .caption p {
         width: 65%;
@@ -521,3 +514,4 @@
     }
 
 }
+

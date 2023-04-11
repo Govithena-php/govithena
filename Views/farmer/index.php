@@ -15,10 +15,10 @@
 
     <link rel="stylesheet" href="<?php echo CSS ?>/farmer/gigs.css">
 
-    <title>Dashboard | Investor</title>
+    <title>Dashboard | Farmer</title>
 </head>
 
-<body class="bg-gray h-screen">
+<body>
 
     <?php
     $datadata = $notifications;

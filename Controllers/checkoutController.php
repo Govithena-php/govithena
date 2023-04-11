@@ -8,6 +8,7 @@ class checkoutController extends Controller
     private $investmentModel;
     private $requestFarmerModel;
     private $currentUser;
+    private $gigModel;
 
     private $header = [
         'merchant_id' => '1221583',
@@ -32,6 +33,7 @@ class checkoutController extends Controller
         $this->investorGigModel = $this->model('investorGig');
         $this->investmentModel = $this->model('investment');
         $this->requestFarmerModel = $this->model('requestFarmer');
+        $this->gigModel = $this->model('gig');
     }
 
     private function payhere($d)
@@ -51,10 +53,7 @@ class checkoutController extends Controller
         // echo phpversion();
         if (isset($_POST['pay'])) {
             $id = $_POST['pay'];
-
-            require(ROOT . 'Models/requestFarmer.php');
-            $req = new RequestFarmer();
-            $res = $req->getRequestById($id);
+            $res = $this->requestFarmerModel->getRequestById($id);
 
             if (isset($res)) {
 
@@ -104,8 +103,7 @@ class checkoutController extends Controller
 
         if (isset($_POST['pay'])) {
             $id = $_POST['pay'];
-            $request = new $this->requestFarmerModel();
-            $res = $request->getRequestById($id);
+            $res = $this->requestFarmerModel->getRequestById($id);
             $investment = new $this->investmentModel();
             $response = $investment->add([
                 'id' =>  new UID(PREFIX::INVESTMENT),
@@ -114,14 +112,26 @@ class checkoutController extends Controller
                 'amount' => $res['capital']
             ]);
 
-            $investorGig = new $this->investorGigModel();
-            $response = $investorGig->add([
+
+            // if payment success
+
+            // investor__gig ekta add wenn one ✔️
+            // request eke paid accepted -> paid . ✔️
+            // gig eke active -> reserved ✔️
+            // investmet table ekeata gana add wenn one
+            // recent activites walta add wenawa
+
+
+            $response = $this->investorGigModel->add([
                 'investorId' => $this->currentUser->getUid(),
                 'gigId' => $res['gigId'],
                 'farmerId' => $res['farmerId'],
             ]);
 
-            $request->updateStatus($id, 'PAID');
+            $this->requestFarmerModel->updateStatus($id, 'PAID');
+
+            $res = $this->gigModel->updateGigStatusToReserved($res['gigId']);
+
 
             $this->redirect('/dashboard');
         }
@@ -130,8 +140,7 @@ class checkoutController extends Controller
     public function index($params)
     {
         list($id) = $params;
-        $req = new $this->requestFarmerModel();
-        $res = $req->getRequestById($id);
+        $res = $this->requestFarmerModel->getRequestById($id);
         if (isset($res)) {
             $this->set(['res' => $res]);
             $payment = [

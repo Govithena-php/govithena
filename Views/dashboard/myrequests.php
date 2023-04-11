@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/gridTable.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/tabs.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/alertModal.css">
 
     <link rel="stylesheet" href="<?php echo CSS ?>/investor/myrequests.css">
 
@@ -24,7 +25,43 @@
     </style> -->
 </head>
 
+
 <body>
+
+    <dialog id="deleteModal" class="[ alertModal ]">
+        <div class="[ container ]">
+            <i class="fa fa-circle-xmark" aria-hidden="true"></i>
+            <div class="[ content ]">
+                <h2>Are you sure?</h2>
+                <p>Do you really want to delete these records? This process cannot be undone.</p>
+            </div>
+            <form id="deleteForm" action="<?php echo URLROOT ?>/dashboard/myrequest_delete" method="POST" class="[ buttons ]">
+                <button type="button" class="[ button__primary ]" onclick="closeDeleteAlert()" data-dismiss="modal">No, Cancel</button>
+                <button id="confirmDeleteBtn" name="deleteRequest-confirm" type="submit" class="[ button__danger ]">Yes, Delete</button>
+            </form>
+        </div>
+    </dialog>
+
+    <dialog id="resendModal" class="[ resendModal ]">
+        <div class="[ container ]">
+            <div class="[ head ]">
+                <h3>Resend Request</h3>
+            </div>
+            <form action="<?php echo URLROOT ?>/dashboard/resend_request" method="POST" class="[ content ]">
+                <div class="[ input__control ]">
+                    <label class="LKR" for="resendOffer">New Offer :</label>
+                    <input name="resendOffer" id="resendOffer"></input>
+                </div>
+                <div class="[ input__control ]">
+                    <label for="resendMessage">New Message :</label>
+                    <textarea name="resendMessage" id="resendMessage"></textarea>
+                </div>
+                <div class="[ buttons ]">
+                    <button type="submit" id="requestResendBtn" name="request-resend" class="[ button__primary ]">Send</button>
+                    <button type="button" class="[ button__danger ]" onclick="closeResendModal()" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+    </dialog>
 
     <?php
     $active = "myrequests";
@@ -54,76 +91,79 @@
                             require(COMPONENTS . "dashboard/noDataFound.php");
                         } else {
                         ?>
-                            <div class="[ filters ]">
-                                <div class="[ options ]">
-                                    <div class="[ input__control ]">
-                                        <label for="from">From :</label>
-                                        <input id="from" type="date">
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <label for="to">To :</label>
-                                        <input id="to" type="date">
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <label for="location">Location :</label>
-                                        <select id="location">
-                                            <option value="all">All</option>
-                                            <option value="colombo">Colombo</option>
-                                            <option value="galle">Galle</option>
-                                            <option value="kandy">Kandy</option>
-                                            <option value="matara">Matara</option>
-                                            <option value="nuwaraeliya">Nuwara Eliya</option>
-                                            <option value="trincomalee">Trincomalee</option>
-                                        </select>
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <label for="category">Category :</label>
-                                        <select id="category">
-                                            <option value="all">All</option>
-                                            <option value="vegetable">Vegetable</option>
-                                            <option value="fruit">Fruit</option>
-                                            <option value="grains">Grains</option>
-                                            <option value="spices">Spices</option>
-                                        </select>
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <button type="button">Apply</button>
-                                    </div>
-
-                                </div>
-                                <div class="[ search ]">
-                                    <input type="text" placeholder="Search">
-                                    <button type="button">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </div>
-                            </div>
                             <div class="[ requests__wrapper ]">
                                 <div class="[ grid__table ]" style="
-                                        --xl-cols:  1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.7fr;
-                                        --lg-cols: 1.5fr 0.5fr 0.5fr 1fr 1fr;
-                                        --md-cols: 1fr 0.5fr 0.5fr;
-                                        --sm-cols: 2fr 1fr;
+                                        --xl-cols: 1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.3fr;
+                                        --lg-cols: 1.5fr 1fr 1fr 1fr 0.3fr;
+                                        --md-cols: 2fr 1fr 0.3fr;
+                                        --sm-cols: 3fr 0.3fr;
                                     ">
-                                    <div class="[ head ]">
-                                        <div class="[ data ]">
-                                            <p>Gig</p>
+                                    <div class="[ head stick_to_top ]">
+                                        <div class="[ filters ]">
+                                            <div class="[ options ]">
+                                                <div class="[ input__control ]">
+                                                    <label for="from">From :</label>
+                                                    <input id="from" type="date">
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <label for="to">To :</label>
+                                                    <input id="to" type="date">
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <label for="location">City :</label>
+                                                    <select id="location">
+                                                        <option value="all">All</option>
+                                                        <option value="colombo">Colombo</option>
+                                                        <option value="galle">Galle</option>
+                                                        <option value="kandy">Kandy</option>
+                                                        <option value="matara">Matara</option>
+                                                        <option value="nuwaraeliya">Nuwara Eliya</option>
+                                                        <option value="trincomalee">Trincomalee</option>
+                                                    </select>
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <label for="category">Category :</label>
+                                                    <select id="category">
+                                                        <option value="all">All</option>
+                                                        <option value="vegetable">Vegetable</option>
+                                                        <option value="fruit">Fruit</option>
+                                                        <option value="grains">Grains</option>
+                                                        <option value="spices">Spices</option>
+                                                    </select>
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <button type="button">Apply</button>
+                                                </div>
+
+                                            </div>
+                                            <div class="[ search ]">
+                                                <input type="text" placeholder="Search">
+                                                <button type="button">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
                                         </div>
-                                        <div class="[ data ]" hideIn="md">
-                                            <p>Category</p>
+                                        <div class="[ row ]">
+                                            <div class="[ data ]">
+                                                <p>Gig</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="md">
+                                                <p>Category</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="sm">
+                                                <p>Offer</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="lg">
+                                                <p>Crop Cycle</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="lg">
+                                                <p>City</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="md">
+                                                <p>Requested Date</p>
+                                            </div>
                                         </div>
-                                        <div class="[ data ]" hideIn="sm">
-                                            <p>Offer</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="lg">
-                                            <p>Time Period</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="lg">
-                                            <p>Location</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="md">
-                                            <p>Requested Date</p>
-                                        </div>
+
                                     </div>
                                     <div class="[ body ]">
                                         <?php
@@ -133,11 +173,11 @@
                                                 <div class="[ data ]">
                                                     <div class="[ item__card ]">
                                                         <div class="[ img ]">
-                                                            <img width="50" src="<?php echo UPLOADS . $request['image'] ?>" />
+                                                            <img width="50" src="<?php echo UPLOADS . $request['thumbnail'] ?>" />
                                                         </div>
                                                         <div class="[ content ]">
                                                             <a href="<?php echo URLROOT . "/gig/" . $request['gigId'] ?>">
-                                                                <h2><?php echo $request['title'] ?></h2>
+                                                                <h2 class="[ limit-text-2 ]"><?php echo $request['title'] ?></h2>
                                                             </a>
                                                             <p><small>by </small> <a href="<?php echo URLROOT . "/profile/" . $request['uid'] ?>"><?php echo $request['firstName'] . " " . $request['lastName'] ?></p></a>
 
@@ -148,13 +188,13 @@
                                                     <p class="[ tag ]"><?php echo $request['category'] ?></p>
                                                 </div>
                                                 <div class="[ data ]" hideIn="sm">
-                                                    <h3>LKR <?php echo $request['offer'] ?></h3>
+                                                    <h3>LKR <?php echo number_format($request['offer'], 2, '.', ',') ?></h3>
                                                 </div>
                                                 <div class="[ data ]" hideIn="lg">
-                                                    <h3><?php echo $request['timePeriod'] ?> Months</h3>
+                                                    <h3><?php echo $request['cropCycle'] ?> Days</h3>
                                                 </div>
                                                 <div class="[ data ]" hideIn="lg">
-                                                    <h3><?php echo $request['location'] ?></h3>
+                                                    <h3><?php echo $request['city'] ?></h3>
                                                 </div>
                                                 <div class="[ data ]" hideIn="md">
                                                     <p><?php echo $request['requestedDate'] ?></p>
@@ -162,7 +202,6 @@
                                                 <div class="[ data ]">
                                                     <div class="[ actions ]">
                                                         <button for="<?php echo $request['requestId'] ?>"><i class="fa fa-chevron-circle-down"></i></button>
-                                                        <a href="<?php echo URLROOT ?>/checkout/<?php echo $request['requestId'] ?>" class="btn btn-primary">Pay Now</a>
                                                     </div>
                                                 </div>
                                                 <div id="<?php echo $request['requestId'] ?>" class="[ expand ]">
@@ -172,15 +211,15 @@
                                                     </div>
                                                     <div class="[ data ]" showIn="sm">
                                                         <h4>Offer :</h4>
-                                                        <p>LKR <?php echo $request['offer'] ?></p>
+                                                        <p>LKR <?php echo number_format($request['offer'], 2, '.', ',') ?></p>
                                                     </div>
                                                     <div class="[ data ]" showIn="lg">
-                                                        <h4>Time Periold :</h4>
-                                                        <p><?php echo $request['timePeriod'] ?> Months</p>
+                                                        <h4>Crop Cycle :</h4>
+                                                        <p><?php echo $request['cropCycle'] ?> Months</p>
                                                     </div>
                                                     <div class="[ data ]" showIn="lg">
-                                                        <h4>Location</h4>
-                                                        <p><?php echo $request['location'] ?></p>
+                                                        <h4>City</h4>
+                                                        <p><?php echo $request['city'] ?></p>
                                                     </div>
                                                     <div class="[ data ]" showIn="md">
                                                         <h4>Request Date</h4>
@@ -190,6 +229,8 @@
                                                     <div class="[ data ]" always>
                                                         <h4>Your Message :</h4>
                                                         <p><?php echo $request['message'] ?></p>
+                                                        <br>
+                                                        <a href="<?php echo URLROOT ?>/checkout/<?php echo $request['requestId'] ?>" class="[ button__primary ]">Pay Now</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -216,77 +257,82 @@
                             require(COMPONENTS . "dashboard/noDataFound.php");
                         } else {
                         ?>
-                            <div class="[ filters ]">
-                                <div class="[ options ]">
-                                    <div class="[ input__control ]">
-                                        <label for="from">From :</label>
-                                        <input id="from" type="date">
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <label for="to">To :</label>
-                                        <input id="to" type="date">
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <label for="location">Location :</label>
-                                        <select id="location">
-                                            <option value="all">All</option>
-                                            <option value="colombo">Colombo</option>
-                                            <option value="galle">Galle</option>
-                                            <option value="kandy">Kandy</option>
-                                            <option value="matara">Matara</option>
-                                            <option value="nuwaraeliya">Nuwara Eliya</option>
-                                            <option value="trincomalee">Trincomalee</option>
-                                        </select>
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <label for="category">Category :</label>
-                                        <select id="category">
-                                            <option value="all">All</option>
-                                            <option value="vegetable">Vegetable</option>
-                                            <option value="fruit">Fruit</option>
-                                            <option value="grains">Grains</option>
-                                            <option value="spices">Spices</option>
-                                        </select>
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <button type="button">Apply</button>
+
+                            <div class="[ requests__wrapper ]">
+
+                                <div class="[ grid__table ]" style="
+                                        --xl-cols: 1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.3fr;
+                                        --lg-cols: 1.5fr 1fr 1fr 1fr 0.3fr;
+                                        --md-cols: 2fr 1fr 0.3fr;
+                                        --sm-cols: 3fr 0.3fr;
+                                    ">
+                                    <div class="[ head stick_to_top ]">
+                                        <div class="[ filters ]">
+                                            <div class="[ options ]">
+                                                <div class="[ input__control ]">
+                                                    <label for="from">From :</label>
+                                                    <input id="from" type="date">
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <label for="to">To :</label>
+                                                    <input id="to" type="date">
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <label for="location">City :</label>
+                                                    <select id="location">
+                                                        <option value="all">All</option>
+                                                        <option value="colombo">Colombo</option>
+                                                        <option value="galle">Galle</option>
+                                                        <option value="kandy">Kandy</option>
+                                                        <option value="matara">Matara</option>
+                                                        <option value="nuwaraeliya">Nuwara Eliya</option>
+                                                        <option value="trincomalee">Trincomalee</option>
+                                                    </select>
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <label for="category">Category :</label>
+                                                    <select id="category">
+                                                        <option value="all">All</option>
+                                                        <option value="vegetable">Vegetable</option>
+                                                        <option value="fruit">Fruit</option>
+                                                        <option value="grains">Grains</option>
+                                                        <option value="spices">Spices</option>
+                                                    </select>
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <button type="button">Apply</button>
+                                                </div>
+
+                                            </div>
+                                            <div class="[ search ]">
+                                                <input type="text" placeholder="Search">
+                                                <button type="button">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="[ row ]">
+                                            <div class="[ data ]">
+                                                <p>Gig</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="md">
+                                                <p>Category</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="sm">
+                                                <p>Offer</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="lg">
+                                                <p>Crop Cycle</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="lg">
+                                                <p>City</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="md">
+                                                <p>Requested Date</p>
+                                            </div>
+                                        </div>
                                     </div>
 
-                                </div>
-                                <div class="[ search ]">
-                                    <input type="text" placeholder="Search">
-                                    <button type="button">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="[ requests__wrapper ]">
-                                <div class="[ grid__table ]" style="
-                                        --xl-cols:  1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.7fr;
-                                        --lg-cols: 1.5fr 0.5fr 0.5fr 1fr 1fr;
-                                        --md-cols: 1fr 0.5fr 0.5fr;
-                                        --sm-cols: 2fr 1fr;
-                                    ">
-                                    <div class="[ head ]">
-                                        <div class="[ data ]">
-                                            <p>Gig</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="md">
-                                            <p>Category</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="sm">
-                                            <p>Offer</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="lg">
-                                            <p>Time Period</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="lg">
-                                            <p>Location</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="md">
-                                            <p>Requested Date</p>
-                                        </div>
-                                    </div>
                                     <div class="[ body ]">
                                         <?php
                                         foreach ($pr as $request) {
@@ -295,11 +341,11 @@
                                                 <div class="[ data ]">
                                                     <div class="[ item__card ]">
                                                         <div class="[ img ]">
-                                                            <img width="50" src="<?php echo UPLOADS . $request['image'] ?>" />
+                                                            <img width="50" src="<?php echo UPLOADS . $request['thumbnail'] ?>" />
                                                         </div>
                                                         <div class="[ content ]">
                                                             <a href="<?php echo URLROOT . "/gig/" . $request['gigId'] ?>">
-                                                                <h2><?php echo $request['title'] ?></h2>
+                                                                <h2 class="[ limit-text-2 ]"><?php echo $request['title'] ?></h2>
                                                             </a>
                                                             <p><small>by </small> <a href="<?php echo URLROOT . "/profile/" . $request['uid'] ?>"><?php echo $request['firstName'] . " " . $request['lastName'] ?></p></a>
 
@@ -310,13 +356,13 @@
                                                     <p class="[ tag ]"><?php echo $request['category'] ?></p>
                                                 </div>
                                                 <div class="[ data ]" hideIn="sm">
-                                                    <h3>LKR <?php echo $request['offer'] ?></h3>
+                                                    <h3>LKR <?php echo number_format($request['offer'], 2, '.', ',') ?></h3>
                                                 </div>
                                                 <div class="[ data ]" hideIn="lg">
-                                                    <h3><?php echo $request['timePeriod'] ?> Months</h3>
+                                                    <h3><?php echo $request['cropCycle'] ?> Days</h3>
                                                 </div>
                                                 <div class="[ data ]" hideIn="lg">
-                                                    <h3><?php echo $request['location'] ?></h3>
+                                                    <h3><?php echo $request['city'] ?></h3>
                                                 </div>
                                                 <div class="[ data ]" hideIn="md">
                                                     <p><?php echo $request['requestedDate'] ?></p>
@@ -324,7 +370,6 @@
                                                 <div class="[ data ]">
                                                     <div class="[ actions ]">
                                                         <button for="<?php echo $request['requestId'] ?>"><i class="fa fa-chevron-circle-down"></i></button>
-                                                        <a href="<?php echo URLROOT ?>/checkout/<?php echo $request['requestId'] ?>" class="btn btn-primary">Cancel Request</a>
                                                     </div>
                                                 </div>
                                                 <div id="<?php echo $request['requestId'] ?>" class="[ expand ]">
@@ -334,15 +379,15 @@
                                                     </div>
                                                     <div class="[ data ]" showIn="sm">
                                                         <h4>Offer :</h4>
-                                                        <p>LKR <?php echo $request['offer'] ?></p>
+                                                        <p>LKR <?php echo number_format($request['offer'], 2, '.', ',') ?></p>
                                                     </div>
                                                     <div class="[ data ]" showIn="lg">
-                                                        <h4>Time Periold :</h4>
-                                                        <p><?php echo $request['timePeriod'] ?> Months</p>
+                                                        <h4>Crop Cycle :</h4>
+                                                        <p><?php echo $request['cropCycle'] ?> Months</p>
                                                     </div>
                                                     <div class="[ data ]" showIn="lg">
-                                                        <h4>Location</h4>
-                                                        <p><?php echo $request['location'] ?></p>
+                                                        <h4>City</h4>
+                                                        <p><?php echo $request['city'] ?></p>
                                                     </div>
                                                     <div class="[ data ]" showIn="md">
                                                         <h4>Request Date</h4>
@@ -352,7 +397,10 @@
                                                     <div class="[ data ]" always>
                                                         <h4>Your Message :</h4>
                                                         <p><?php echo $request['message'] ?></p>
-                                                        <button class="btn btn-primary">Edit</button>
+                                                        <div class="[ flex gap-1 mt-1 ]">
+                                                            <!-- <button class="button__primary">Edit Message</button> -->
+                                                            <button onclick="openDeleteAlert('<?php echo $request['requestId'] ?>')" class="[ button__danger ]">Cancel Request</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -379,75 +427,78 @@
                             require(COMPONENTS . "dashboard/noDataFound.php");
                         } else {
                         ?>
-                            <div class="[ filters ]">
-                                <div class="[ options ]">
-                                    <div class="[ input__control ]">
-                                        <label for="from">From :</label>
-                                        <input id="from" type="date">
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <label for="to">To :</label>
-                                        <input id="to" type="date">
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <label for="location">Location :</label>
-                                        <select id="location">
-                                            <option value="all">All</option>
-                                            <option value="colombo">Colombo</option>
-                                            <option value="galle">Galle</option>
-                                            <option value="kandy">Kandy</option>
-                                            <option value="matara">Matara</option>
-                                            <option value="nuwaraeliya">Nuwara Eliya</option>
-                                            <option value="trincomalee">Trincomalee</option>
-                                        </select>
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <label for="category">Category :</label>
-                                        <select id="category">
-                                            <option value="all">All</option>
-                                            <option value="vegetable">Vegetable</option>
-                                            <option value="fruit">Fruit</option>
-                                            <option value="grains">Grains</option>
-                                            <option value="spices">Spices</option>
-                                        </select>
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <button type="button">Apply</button>
-                                    </div>
 
-                                </div>
-                                <div class="[ search ]">
-                                    <input type="text" placeholder="Search">
-                                    <button type="button">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </div>
-                            </div>
                             <div class="[ requests__wrapper ]">
                                 <div class="[ grid__table ]" style="
-                                        --xl-cols:  1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.7fr;
-                                        --lg-cols: 1.5fr 0.5fr 0.5fr 1fr 1fr;
-                                        --md-cols: 1fr 0.5fr 0.5fr;
-                                        --sm-cols: 2fr 1fr;
+                                        --xl-cols: 1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.3fr;
+                                        --lg-cols: 1.5fr 1fr 1fr 1fr 0.3fr;
+                                        --md-cols: 2fr 1fr 0.3fr;
+                                        --sm-cols: 3fr 0.3fr;
                                     ">
                                     <div class="[ head ]">
-                                        <div class="[ data ]">
-                                            <p>Gig</p>
+                                        <div class="[ filters ]">
+                                            <div class="[ options ]">
+                                                <div class="[ input__control ]">
+                                                    <label for="from">From :</label>
+                                                    <input id="from" type="date">
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <label for="to">To :</label>
+                                                    <input id="to" type="date">
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <label for="location">City :</label>
+                                                    <select id="location">
+                                                        <option value="all">All</option>
+                                                        <option value="colombo">Colombo</option>
+                                                        <option value="galle">Galle</option>
+                                                        <option value="kandy">Kandy</option>
+                                                        <option value="matara">Matara</option>
+                                                        <option value="nuwaraeliya">Nuwara Eliya</option>
+                                                        <option value="trincomalee">Trincomalee</option>
+                                                    </select>
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <label for="category">Category :</label>
+                                                    <select id="category">
+                                                        <option value="all">All</option>
+                                                        <option value="vegetable">Vegetable</option>
+                                                        <option value="fruit">Fruit</option>
+                                                        <option value="grains">Grains</option>
+                                                        <option value="spices">Spices</option>
+                                                    </select>
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <button type="button">Apply</button>
+                                                </div>
+
+                                            </div>
+                                            <div class="[ search ]">
+                                                <input type="text" placeholder="Search">
+                                                <button type="button">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
                                         </div>
-                                        <div class="[ data ]" hideIn="md">
-                                            <p>Category</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="sm">
-                                            <p>Offer</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="lg">
-                                            <p>Time Period</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="lg">
-                                            <p>Location</p>
-                                        </div>
-                                        <div class="[ data ]" hideIn="md">
-                                            <p>Requested Date</p>
+                                        <div class="[ row ]">
+                                            <div class="[ data ]">
+                                                <p>Gig</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="md">
+                                                <p>Category</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="sm">
+                                                <p>Offer</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="lg">
+                                                <p>Crop Cycle</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="lg">
+                                                <p>City</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="md">
+                                                <p>Requested Date</p>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="[ body ]">
@@ -458,11 +509,11 @@
                                                 <div class="[ data ]">
                                                     <div class="[ item__card ]">
                                                         <div class="[ img ]">
-                                                            <img width="50" src="<?php echo UPLOADS . $request['image'] ?>" />
+                                                            <img width="50" src="<?php echo UPLOADS . $request['thumbnail'] ?>" />
                                                         </div>
                                                         <div class="[ content ]">
                                                             <a href="<?php echo URLROOT . "/gig/" . $request['gigId'] ?>">
-                                                                <h2><?php echo $request['title'] ?></h2>
+                                                                <h2 class="[ limit-text-2 ]"><?php echo $request['title'] ?></h2>
                                                             </a>
                                                             <p><small>by </small> <a href="<?php echo URLROOT . "/profile/" . $request['uid'] ?>"><?php echo $request['firstName'] . " " . $request['lastName'] ?></p></a>
 
@@ -473,13 +524,13 @@
                                                     <p class="[ tag ]"><?php echo $request['category'] ?></p>
                                                 </div>
                                                 <div class="[ data ]" hideIn="sm">
-                                                    <h3>LKR <?php echo $request['offer'] ?></h3>
+                                                    <h3>LKR <?php echo number_format($request['offer'], 2, '.', ',') ?></h3>
                                                 </div>
                                                 <div class="[ data ]" hideIn="lg">
-                                                    <h3><?php echo $request['timePeriod'] ?> Months</h3>
+                                                    <h3><?php echo $request['cropCycle'] ?> Days</h3>
                                                 </div>
                                                 <div class="[ data ]" hideIn="lg">
-                                                    <h3><?php echo $request['location'] ?></h3>
+                                                    <h3><?php echo $request['city'] ?></h3>
                                                 </div>
                                                 <div class="[ data ]" hideIn="md">
                                                     <p><?php echo $request['requestedDate'] ?></p>
@@ -487,7 +538,6 @@
                                                 <div class="[ data ]">
                                                     <div class="[ actions ]">
                                                         <button for="<?php echo $request['requestId'] ?>"><i class="fa fa-chevron-circle-down"></i></button>
-                                                        <a href="<?php echo URLROOT ?>/checkout/<?php echo $request['requestId'] ?>" class="btn btn-primary">Resend</a>
                                                     </div>
                                                 </div>
                                                 <div id="<?php echo $request['requestId'] ?>" class="[ expand ]">
@@ -497,15 +547,15 @@
                                                     </div>
                                                     <div class="[ data ]" showIn="sm">
                                                         <h4>Offer :</h4>
-                                                        <p>LKR <?php echo $request['offer'] ?></p>
+                                                        <p>LKR <?php echo number_format($request['offer'], 2, '.', ',') ?></p>
                                                     </div>
                                                     <div class="[ data ]" showIn="lg">
-                                                        <h4>Time Periold :</h4>
-                                                        <p><?php echo $request['timePeriod'] ?> Months</p>
+                                                        <h4>Crop Cycle :</h4>
+                                                        <p><?php echo $request['cropCycle'] ?> Months</p>
                                                     </div>
                                                     <div class="[ data ]" showIn="lg">
-                                                        <h4>Location</h4>
-                                                        <p><?php echo $request['location'] ?></p>
+                                                        <h4>City</h4>
+                                                        <p><?php echo $request['city'] ?></p>
                                                     </div>
                                                     <div class="[ data ]" showIn="md">
                                                         <h4>Request Date</h4>
@@ -515,6 +565,8 @@
                                                     <div class="[ data ]" always>
                                                         <h4>Your Message :</h4>
                                                         <p><?php echo $request['message'] ?></p>
+                                                        <br>
+                                                        <button onclick="openResendModal('<?php echo $request['requestId'] ?>')" class="[ button__primary-invert ]">Resend Request</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -532,8 +584,55 @@
                 </div>
             </div>
         </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
     </div>
-
     <?php
     require_once("footer.php");
     ?>
@@ -582,6 +681,30 @@
 
             })
         })
+
+        function openDeleteAlert(id) {
+            const deleteModal = document.getElementById("deleteModal")
+            const confirmDeleteBtn = document.getElementById("confirmDeleteBtn")
+            confirmDeleteBtn.value = id
+            deleteModal.showModal()
+        }
+
+        function closeDeleteAlert() {
+            const deleteModal = document.getElementById("deleteModal")
+            deleteModal.close()
+        }
+
+        function openResendModal(id) {
+            const resendModal = document.getElementById("resendModal")
+            const requestResendBtn = document.getElementById("requestResendBtn")
+            requestResendBtn.value = id
+            resendModal.showModal()
+        }
+
+        function closeResendModal() {
+            const resendModal = document.getElementById("resendModal")
+            resendModal.close()
+        }
     </script>
 </body>
 

@@ -67,6 +67,7 @@ h5 a {
     background-color: rgba(236, 75, 75, 0.797);
     border-radius: 10px;
     color: var(--clr-light);
+    
     margin-bottom: 1rem;
 }
 
@@ -102,3 +103,4 @@ h5 a {
     margin: 0;
     font-size: var(--fs-2);
 }
+
