@@ -9,9 +9,10 @@
     <link rel="icon" type="image/x-icon" href="<?php echo IMAGES ?>/favicon.png">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/agrologist/farmergigs.css">
+
     <link rel="stylesheet" href="<?php echo CSS ?>/grid.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/search.css">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 
@@ -36,24 +37,24 @@
                     // die();
             
                     ?>
-                    <div class="[ result__card ]">
-                        <div class="[ card__img ]">
+                    <div class="result__card">
+                        <div class="card__img">
 
                             <img src="<?php echo $imageURL ?>" alt="test" />
 
                             <!-- <img src="<?php echo IMAGES ?>/temp/17.jpg" alt="test"> -->
-                            <div class="[ farmer__name ]">
+                            <div class="location_name">
 
                                 <p class="ml-1">
                                     <?php echo ucwords($gigDetail['location']) ?>
                                 </p>
                             </div>
                         </div>
-                        <div class="[ card__content ]">
-                            <a class="[ text-dec-none mb-1 fs-5 text-dark fw-6 ]" href="<?php echo URLROOT . "/agrologist/farmers/" . $gigDetail['farmerId'] . "/" . $gigDetail['gigId'] ?>">
+                        <div class="card__content">
+                            <a class="text-dec-none mb-1 fs-5 text-dark fw-6" href="<?php echo URLROOT . "/agrologist/farmers/" . $gigDetail['farmerId'] . "/" . $gigDetail['gigId'] ?>">
                                 <?php echo ucwords($gigDetail['title']) ?>
                             </a>
-                            <div class="[ mt-1 flex flex-sb-c ]">
+                            <div class="mt-1 flex flex-sb-c">
                                 <p>
                                     <?php echo ucwords($gigDetail['category']) ?>
                                 </p>
