@@ -106,6 +106,11 @@ define("DISTRICTS", array(
     "TRINCOMALEE" => "Trincomalee",
     "VAVUNIYA" => "Vavuniya"
 ));
+// SMTPACCOUNT, SMTPPASSWORD, SMTPNAME
+
+define('SMTPACCOUNT', 'govithena.lk@gmail.com');
+define('SMTPPASSWORD', 'yxkyiewhrqotyyyf');
+define('SMTPNAME', 'Govithena LK');
 
 
 
