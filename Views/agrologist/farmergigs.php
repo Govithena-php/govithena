@@ -13,6 +13,7 @@
 
     <link rel="stylesheet" href="<?php echo CSS ?>/grid.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/search.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/agrologist/farmergigs.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 
@@ -23,7 +24,15 @@
     ?>
     <div class="[ container ][ dashboard ]" container-type="dashboard-section">
         <h1 class="[ page-heading-1 ]"><?php echo $gigDetails[0]['firstName'] . " " . $gigDetails[0]['lastName'] ?></h1>
+        
         <!-- <?php print_r($gigDetails) ?> -->
+
+        <div class="search">
+                <input type="text" placeholder="Search by: location/ category/ title/ time period" oninput="liveSearch()" id="searchbox">
+                <button type="button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
 
         <div class="[ my-2 ] [ grid ]" gap="1" md="2" lg="4">
             <?php
@@ -59,7 +68,7 @@
                                     <?php echo ucwords($gigDetail['category']) ?>
                                 </p>
                                 <p>
-                                    <?php echo $gigDetail['timePeriod'] ?>
+                                    <?php echo $gigDetail['timePeriod'] ?> days
                                 </p>
                             </div>
                         </div>
@@ -75,6 +84,24 @@
 
     <?php require "footer.php"; ?>
     <script src="<?php echo JS ?>/app.js"></script>
+    <script>
+
+        function liveSearch() {
+            let cards = document.querySelectorAll('.result__card')
+            let search_query = document.getElementById("searchbox").value;
+            for (var i = 0; i < cards.length; i++) {
+
+                if (cards[i].innerText.toLowerCase()
+                    .includes(search_query.toLowerCase())) {
+                    cards[i].classList.remove("is-hidden");
+                } else {
+                    cards[i].classList.add("is-hidden");
+                }
+            }
+        }
+
+    </script>
+
 
 </body>
 
