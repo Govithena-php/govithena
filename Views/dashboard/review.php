@@ -37,12 +37,12 @@
         <div class="[ gig__farmer ]">
             <div class="[ gig ]">
                 <div class="[ gig__image ]">
-                    <img src="<?php echo UPLOADS . $gig['image'] ?>" alt="" />
+                    <img src="<?php echo UPLOADS . $gig['thumbnail'] ?>" alt="" />
                 </div>
                 <div class="[ gig__info ]">
                     <div class="[ top ]">
                         <h3><?php echo $gig['title'] ?></h3>
-                        <p><?php echo $gig['location'] ?></p>
+                        <p><?php echo $gig['city'] ?></p>
                     </div>
                     <div class="[ bottom ]">
                         <div class="[  ]">
@@ -220,8 +220,8 @@
 
                 </div>
 
-                <div class="[ submit__btn ]">
-                    <button type="submit" name="submit_review">Submit</button>
+                <div class="[  ]">
+                    <button type="submit" class="[ button__primary ]" name="submit_review">Submit</button>
                 </div>
             </form>
         </div>

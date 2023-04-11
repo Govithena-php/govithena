@@ -241,6 +241,29 @@
                     <div class="[ requestimg ]">
                         <img class="img" src="<?php echo IMAGES ?>/investor.jfif" alt="profile">
                     </div>
+            </div>
+            <br>
+            <p><h1>Requests</h1></p> <hr>
+
+
+
+
+
+
+
+
+
+       <div class="[ requests__cn ]">
+
+
+                <div class="[ requests__wrap ]">
+
+
+                        <div class="[ requestcard bg-light ]">
+
+                           <div class="[ requestimg ]">
+                                <img class="img" src="<?php echo IMAGES ?>/investor.jfif" alt="profile">
+                            </div>
 
                     <form action="<?php echo URLROOT . '/agrologist/requests' ?>">
                         <div class="flex flex-row ">

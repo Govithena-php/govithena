@@ -8,7 +8,7 @@ class ReviewByInvestor extends Model
             $sql = "INSERT INTO review_by_investor (reviewId, investorId, gigId, q1, q2, q3, q4, q5, q6, q7, q8, q9) VALUES(:reviewId, :investorId, :gigId, :q1, :q2, :q3, :q4, :q5, :q6, :q7, :q8, :q9)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
-            return ['success' => true, 'data' => true];
+            return ['success' => true];
         } catch (PDOException $e) {
             echo $e->getMessage();
             die();

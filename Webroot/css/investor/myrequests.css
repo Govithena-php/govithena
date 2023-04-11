@@ -58,7 +58,6 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    margin-top: 2rem;
 }
 
 .request__card {
@@ -153,6 +152,7 @@
 }
 
 .item__card>.content a>h2 {
+    font-size: 1rem;
     font-weight: 600;
 }
 
@@ -215,9 +215,8 @@
     align-items: flex-end;
     justify-content: space-between;
     width: 100%;
-    margin-top: 2rem;
-    margin-bottom: 3rem;
-    padding-bottom: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
     border-bottom: 1px solid #ccc;
 }
 
@@ -295,7 +294,95 @@
     cursor: pointer;
 }
 
+.stick_to_top{
+    position: sticky;
+    top: calc(var(--default-navbar-height));
+    z-index: 100;
+}
 
+
+.resendModal {
+    min-height: 300px;
+}
+
+.resendModal>.container {
+    margin: 0;
+    padding: 1rem;
+}
+
+
+.resendModal .head {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 1rem;
+}
+
+.resendModal .head h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--clr-text);
+}
+
+.resendModal .content {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.resendModal .input__control {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.resendModal .input__control label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--clr-text);
+}
+
+.resendModal .input__control input {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    position: arelative;
+}
+
+.resendModal .input__control .LKR::after {
+    content: " (LKR)";
+    top: 0;
+    left: 0;
+    bottom: 0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #ff2f00;
+    z-index: 1;
+}
+
+/* .resendModal .input__control input:focus {
+    outline: none;
+    border: 1px solid var(--clr-primary);
+} */
+
+.resendModal .input__control textarea {
+    resize: none;
+    min-height: 200px;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* .resendModal .input__control textarea:focus {
+    outline: none;
+    border: 1px solid var(--clr-primary);
+} */
+
+.resendModal .buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
 
 
@@ -322,6 +409,10 @@
     .caption p {
         width: 80%;
         margin-inline: auto;
+    }
+
+    .item__card .content {
+        text-align: left;
     }
 
 }

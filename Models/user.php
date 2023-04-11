@@ -44,7 +44,6 @@ class User extends Model
             $sql = "INSERT INTO login_credential (uid, username, password, userType) VALUES (:uid, :username, :password, :userType)";
             $req = Database::getBdd()->prepare($sql);
             $req->execute(['uid' => $data['uid'], 'username' => $data['username'], 'password' => $data['password'], 'userType' => $data['userType']]);
-
             if ($req->rowCount() > 0) {
                 try {
                     $sql = "INSERT INTO user (uid, firstName, lastName) VALUES (:uid, :firstName, :lastName)";
@@ -116,6 +115,18 @@ class User extends Model
             } else {
                 return ['status' => true, 'data' => false];
             }
+        } catch (PDOException $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function updatePassword($email, $passwordHash)
+    {
+        try {
+            $sql = "UPDATE login_credential SET password = :password WHERE username = :email";
+            $req = Database::getBdd()->prepare($sql);
+            $req->execute(['password' => $passwordHash, 'email' => $email]);
+            return ['status' => true];
         } catch (PDOException $e) {
             return ['status' => false, 'data' => $e->getMessage()];
         }

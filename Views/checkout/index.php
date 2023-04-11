@@ -40,7 +40,7 @@
                 <h2>Bill Summary</h2>
                 <div class="[ grid ]" gap="2" md="2">
                     <div class="[ image ]">
-                        <img src="<?php echo IMAGES ?>/temp/2.jpg" alt="">
+                        <img src="<?php echo UPLOADS . $res['thumbnail'] ?>" alt="">
                     </div>
                     <div class="[ content ]">
                         <h2><?php echo $res['title'] ?></h2>
@@ -48,8 +48,8 @@
                         <p><?php echo $res['description'] ?></p>
                         <div class="[ grid ]" md="3">
                             <p><small>Offer:</small><br>LKR <?php echo $res['offer'] ?></p>
-                            <p><small>Time period:</small><br><?php echo $res['timePeriod'] ?> Months</p>
-                            <p><small>Location:</small><br><?php echo $res['location'] ?></p>
+                            <p><small>Time period:</small><br><?php echo $res['cropCycle'] ?> Days</p>
+                            <p><small>Location:</small><br><?php echo $res['city'] ?></p>
                         </div>
 
                     </div>
@@ -61,7 +61,7 @@
                         <div class="[ grid ]" md="2">
                             <p><small>First Name:</small><br><?php echo $res['firstName'] ?></p>
                             <p><small>Last Name:</small><br><?php echo $res['lastName'] ?></p>
-                            <p><small>Location:</small><br><?php echo $res['location'] ?></p>
+                            <p><small>Location:</small><br><?php echo $res['city'] ?></p>
                         </div>
                     </div>
                     <!-- <div class="[ shipping__address ]">
@@ -69,7 +69,7 @@
                         <div class="[ grid ]" md="2">
                             <p>First Name: <br><?php echo $res['firstName'] ?></p>
                             <p>Last Name: <br><?php echo $res['lastName'] ?></p>
-                            <p>Location: <br><?php echo $res['location'] ?></p>
+                            <p>Location: <br><?php echo $res['city'] ?></p>
                         </div>
                     </div> -->
                 </div>
@@ -109,7 +109,7 @@
                     <button id="pay" name="pay" value="<?php echo $res['requestId'] ?>" class="[ btn ]">Pay</button>
                 </div> -->
                 <form class="[ flex-row-center ]" action="<?php echo URLROOT; ?>/checkout/pay" method="post">
-                    <button type="submit" name="pay" value="<?php echo $res['requestId'] ?>" class="[ btn ]">Pay</button>
+                    <button type="submit" name="pay" value="<?php echo $res['requestId'] ?>" class="[ button__primary ]">Pay</button>
                 </form>
             </div>
         </div>

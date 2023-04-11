@@ -30,4 +30,39 @@ class Investment extends Model
             return false;
         }
     }
+
+    public function fetchByInvestorAndGig($investorId, $gigId)
+    {
+        try {
+            $sql = "SELECT DATE(timestamp) as date, TIME(timestamp) as time, amount FROM investment WHERE investorId = :investorId AND gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['investorId' => $investorId, 'gigId' => $gigId]);
+            $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if ($res) {
+                return ['success' => true, 'data' => $res];
+            } else {
+                return ['success' => false, 'data' => 'No investment found'];
+            }
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+
+    public function getTotalInvestmentByInvestor($investorId)
+    {
+        try {
+            $sql = "SELECT sum(amount) as totalInvestment FROM investment WHERE investorId = :investorId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['investorId' => $investorId]);
+            $res = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($res) {
+                return ['success' => true, 'data' => $res];
+            } else {
+                return ['success' => false, 'data' => 'No investment found'];
+            }
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
 }
