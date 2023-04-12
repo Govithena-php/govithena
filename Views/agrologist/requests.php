@@ -55,6 +55,10 @@
                                             <?php echo ucwords($request['city']) ?>
                                         </h4>
 
+                                        <h4 class="fw-6">
+                                            LKR <?php echo ucwords($request['offer']) ?>
+                                        </h4>
+
                                         <meter class="average-rating" min="0" max="5" value="5" title="4.3 out of 5 stars" style="--percent: calc(<?php echo $request['total'] / ($request['num'] * 3) ?>/5*100%)">4.3 out of 5</meter>
 
                                         <!-- <p class="flex flex-row">

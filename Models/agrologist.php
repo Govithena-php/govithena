@@ -5,7 +5,7 @@ class Agrologist extends Model
     function farmerRequest()
     {
         try {
-            $sql = "SELECT CONCAT(u.firstName, ' ', u.lastName) AS fullName, u.city, a.requestId, a.message, u.image, COUNT(r.q1) AS num, (SUM(r.q1)+SUM(r.q2)+SUM(r.q3)+SUM(r.q4)+SUM(r.q5)+SUM(r.q6)+SUM(r.q7)) AS total FROM agrologist_request a LEFT JOIN user u ON u.uid = a.farmerId LEFT JOIN review_by_agrologist r ON  a.farmerId=r.farmerId WHERE (a.agrologistId = :agrologistId AND a.status='Pending') GROUP BY r.farmerId";
+            $sql = "SELECT CONCAT(u.firstName, ' ', u.lastName) AS fullName, u.city, a.requestId, a.message, a.offer, u.image, COUNT(r.q1) AS num, (SUM(r.q1)+SUM(r.q2)+SUM(r.q3)+SUM(r.q4)+SUM(r.q5)+SUM(r.q6)+SUM(r.q7)) AS total FROM agrologist_request a LEFT JOIN user u ON u.uid = a.farmerId LEFT JOIN review_by_agrologist r ON  a.farmerId=r.farmerId WHERE (a.agrologistId = :agrologistId AND a.status='Pending') GROUP BY r.farmerId";
             $stmt =  Database::getBdd()->prepare($sql);
             $stmt->execute(['agrologistId' => Session::get('user')->getUid()]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -122,7 +122,7 @@ class Agrologist extends Model
     
     {
         try {
-            $sql = "SELECT CONCAT(u.firstName, ' ', u.lastName) AS fullName, u.city, a.requestId, a.farmerId, u.image, COUNT(r.q1) AS num, (SUM(r.q1)+SUM(r.q2)+SUM(r.q3)+SUM(r.q4)+SUM(r.q5)+SUM(r.q6)+SUM(r.q7)) AS total FROM agrologist_request a LEFT JOIN user u ON u.uid = a.farmerId LEFT JOIN review_by_agrologist r ON  a.farmerId=r.farmerId  WHERE (a.agrologistId = :agrologistId AND a.status='Accepted') GROUP BY r.farmerId ";
+            $sql = "SELECT CONCAT(u.firstName, ' ', u.lastName) AS fullName, u.city, a.requestId, a.farmerId, a.offer, u.image, COUNT(r.q1) AS num, (SUM(r.q1)+SUM(r.q2)+SUM(r.q3)+SUM(r.q4)+SUM(r.q5)+SUM(r.q6)+SUM(r.q7)) AS total FROM agrologist_request a LEFT JOIN user u ON u.uid = a.farmerId LEFT JOIN review_by_agrologist r ON  a.farmerId=r.farmerId  WHERE (a.agrologistId = :agrologistId AND a.status='Accepted') GROUP BY r.farmerId ";
             $stmt =  Database::getBdd()->prepare($sql);
             $stmt->execute(['agrologistId' => Session::get('user')->getUid()]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
