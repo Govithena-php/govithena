@@ -56,10 +56,17 @@
                                         </h4>
 
                                         <h4 class="fw-6">
-                                            LKR <?php echo ucwords($request['offer']) ?>
+                                            LKR
+                                            <?php echo ucwords($request['offer']) ?>
                                         </h4>
 
-                                        <meter class="average-rating" min="0" max="5" value="5" title="4.3 out of 5 stars" style="--percent: calc(<?php echo $request['total'] / ($request['num'] * 3) ?>/5*100%)">4.3 out of 5</meter>
+                                        <h5>
+                                            <?php echo ucwords($request['timePeriod']) ?> days
+                                        </h5>
+                                        <!-- <p>fcvjbhnj</p> -->
+                                        <meter class="average-rating" min="0" max="5" value="5" title="4.3 out of 5 stars"
+                                            style="--percent: calc(<?php echo $request['total'] / ($request['num'] * 3) ?>/5*100%)">4.3
+                                            out of 5</meter>
 
                                         <!-- <p class="flex flex-row">
                                             <span class="fa fa-star rating_checked"></span>
@@ -73,7 +80,7 @@
                                     <div class="flex flex-row flex-c-c">
                                         <button type="submit" value="<?php echo $request['requestId'] ?> "
                                             class="btn btn-primary mr-2 mt-2" name="accept">Accept</button>
-                                        <button type="submit" value="<?php echo $request['requestId'] ?> " 
+                                        <button type="submit" value="<?php echo $request['requestId'] ?> "
                                             class="btn btn-danger mt-2" name="decline">Decline</button>
                                     </div>
                                 </div>
