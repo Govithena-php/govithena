@@ -81,7 +81,12 @@
                                         <button type="submit" value="<?php echo $request['requestId'] ?> "
                                             class="btn btn-primary mr-2 mt-2" name="accept">Accept</button>
                                         <button type="submit" value="<?php echo $request['requestId'] ?> "
-                                            class="btn btn-danger mt-2" name="decline">Decline</button>
+                                            class="btn btn-danger mt-2" id="edit_details" >Decline</button>
+                                            <!-- by adding namebelow and removing id for decline button the decline will work -->
+                                            <!-- name="decline" -->
+                                        <!-- <div class="flex flex-row flex-c-c" style="width: 200px;margin-top: 30px">
+                                            <a href="#" class="btn uppercase fs-4 btn-danger "  " id="edit_details">Decline</a>
+                                        </div> -->
                                     </div>
                                 </div>
                             </form>
@@ -94,12 +99,58 @@
             }
             ?>
         </div>
+        <div id="edit_detials_modal" class="modal">
+
+            <div class="modal-content">
+                <span class="close close_modal1">&times;</span>
+                <h3>Edit Details</h3>
+                <form class="form pt-1" action="<?php echo URLROOT ?>/agrologist/myaccount" method="post"
+                    enctype="multipart/form-data">
+
+                    <input type="text" name="firstName" class="" placeholder="First Name" value=""><br>
+                    <input type="text" name="lastName" class="" placeholder="Last Name" value=""><br>
+                    <input type="text" name="phoneNumber" class="" placeholder="Mobile" value=""><br>
+                    <input type="text" name="NIC" class="" placeholder="NIC" value=""><br>
+                    <input type="text" name="addressLine1" class="" placeholder="Address Line1" value=""><br>
+                    <input type="text" name="addressLine2" class="" placeholder="Address Line2" value=""><br>
+                    <input type="text" name="city" class="" placeholder="City" value=""><br>
+                    <input type="text" name="district" class="" placeholder="District" value=""><br>
+                    <input type="text" name="postalCode" class="" placeholder="Postal Code" value=""><br>
+                    <input type='file' name="profile_img"><br />
+                    <button type="submit" name="edit_details_btn" class="btn uppercase"
+                        onclick="alert('Succesffully updated');">Edit details</button>
+                </form>
+            </div>
+
+        </div>
     </div>
 
 
     <?php require "footer.php"; ?>
     <script src="<?php echo JS ?>/agrologist.js"></script>
+    <script>
+            var modal = document.getElementById("myModal");
+            var edit_detials_modal = document.getElementById("edit_detials_modal");
 
+            var edit_details_btn = document.getElementById("edit_details");
+
+            var span1 = document.getElementsByClassName("close_modal1")[0];
+
+            edit_details_btn.onclick = function () {
+                edit_detials_modal.style.display = "block";
+            }
+
+            span1.onclick = function () {
+                edit_detials_modal.style.display = "none";
+            }
+
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    edit_detials_modal.style.display = "none";
+                }
+            }
+
+        </script>
 </body>
 
 </html>
