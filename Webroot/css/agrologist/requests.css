@@ -28,7 +28,7 @@
     grid-template-columns: 1fr 2fr 2fr;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 0.5rem;
-    height: 150px;
+    height: 160px;
 }
 
 .request__img {

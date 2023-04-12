@@ -18,30 +18,33 @@
 </head>
 
 <body class="bg-gray h-screen">
-<?php
+    <?php
     $active = "farmers";
     require_once("navigator.php");
     ?>
     <div class="[ container ][ dashboard ]" container-type="dashboard-section">
-        <h1 class="[ page-heading-1 ]"><?php echo $gigDetails[0]['firstName'] . " " . $gigDetails[0]['lastName'] ?></h1>
-        
+        <h1 class="[ page-heading-1 ]">
+            <?php echo $gigDetails[0]['firstName'] . " " . $gigDetails[0]['lastName'] ?>
+        </h1>
+
         <!-- <?php print_r($gigDetails) ?> -->
 
         <div class="search">
-                <input type="text" placeholder="Search by: location/ category/ title/ time period" oninput="liveSearch()" id="searchbox">
-                <button type="button">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
+            <input type="text" placeholder="Search by: location/ category/ title/ time period" oninput="liveSearch()"
+                id="searchbox">
+            <button type="button">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
 
         <div class="[ my-2 ] [ grid ]" gap="1" md="2" lg="4">
             <?php
-
+            // echo json_encode($gigDetails);
             if (isset($gigDetails)) {
                 // print_r($searchResult);
                 foreach ($gigDetails as $gigDetail) {
                     $imageURL = UPLOADS . $gigDetail["image"];
-            
+
                     // echo $imageURL;
                     // die();
             
@@ -60,7 +63,8 @@
                             </div>
                         </div>
                         <div class="card__content">
-                            <a class="text-dec-none mb-1 fs-5 text-dark fw-6" href="<?php echo URLROOT . "/agrologist/farmers/" . $gigDetail['farmerId'] . "/" . $gigDetail['gigId'] ?>">
+                            <a class="text-dec-none mb-1 fs-5 text-dark fw-6"
+                                href="<?php echo URLROOT . "/agrologist/farmers/" . $gigDetail['farmerId'] . "/" . $gigDetail['gigId'] ?>">
                                 <?php echo ucwords($gigDetail['title']) ?>
                             </a>
                             <div class="mt-1 flex flex-sb-c">

@@ -1,0 +1,49 @@
+.profile_continer {
+    margin-bottom: 30px;
+  }
+  
+  .profile_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  
+  .profile_card {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+    height: 150px;
+    padding: 50px;
+  }
+
+  .payment_container {
+    margin-top: 2rem;
+
+}
+
+.payment_heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #ccc;
+    background-color: var(--clr-primary);
+    color: var(--clr-light);
+}
+
+.payment {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #ccc;
+}
+
+.payment:nth-child(odd) {
+    background-color: #dcdcdc;
+}
+  

@@ -5,9 +5,24 @@ class Agrologist extends Model
     function farmerRequest()
     {
         try {
-            $sql = "SELECT CONCAT(u.firstName, ' ', u.lastName) AS fullName, u.city, a.requestId, a.message, u.image, COUNT(r.q1) AS num, (SUM(r.q1)+SUM(r.q2)+SUM(r.q3)+SUM(r.q4)+SUM(r.q5)+SUM(r.q6)+SUM(r.q7)) AS total FROM agrologist_request a LEFT JOIN user u ON u.uid = a.farmerId LEFT JOIN review_by_agrologist r ON  a.farmerId=r.farmerId WHERE (a.agrologistId = :agrologistId AND a.status='Pending') GROUP BY r.farmerId";
+            $sql = "SELECT CONCAT(u.firstName, ' ', u.lastName) AS fullName, u.city, a.requestId, a.timePeriod, a.message, a.offer, u.image, COUNT(r.q1) AS num, (SUM(r.q1)+SUM(r.q2)+SUM(r.q3)+SUM(r.q4)+SUM(r.q5)+SUM(r.q6)+SUM(r.q7)) AS total FROM agrologist_request a LEFT JOIN user u ON u.uid = a.farmerId LEFT JOIN review_by_agrologist r ON  a.farmerId=r.farmerId WHERE (a.agrologistId = :agrologistId AND a.status='Pending') GROUP BY r.farmerId";
             $stmt =  Database::getBdd()->prepare($sql);
             $stmt->execute(['agrologistId' => Session::get('user')->getUid()]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+        }
+    }
+
+    function farmerRequestDetails($requestId)
+    {
+        try {
+            $sql = "SELECT CONCAT(u.firstName, ' ', u.lastName) AS fullName, CONCAT_WS(', ',u.addressLine1, u.addressLine2, u.city, u.district, u.postalCode) AS place, a.requestId, a.message, a.offer, a.timePeriod, u.image, COUNT(r.q1) AS num, (SUM(r.q1)+SUM(r.q2)+SUM(r.q3)+SUM(r.q4)+SUM(r.q5)+SUM(r.q6)+SUM(r.q7)) AS total FROM agrologist_request a LEFT JOIN user u ON u.uid = a.farmerId LEFT JOIN review_by_agrologist r ON  a.farmerId=r.farmerId WHERE (a.requestId=:requestId) GROUP BY r.farmerId";
+            $stmt =  Database::getBdd()->prepare($sql);
+            $stmt->execute(['requestId' => $requestId]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $req;
         } catch (PDOException $e) {
@@ -122,7 +137,7 @@ class Agrologist extends Model
     
     {
         try {
-            $sql = "SELECT CONCAT(u.firstName, ' ', u.lastName) AS fullName, u.city, a.requestId, a.farmerId, u.image, COUNT(r.q1) AS num, (SUM(r.q1)+SUM(r.q2)+SUM(r.q3)+SUM(r.q4)+SUM(r.q5)+SUM(r.q6)+SUM(r.q7)) AS total FROM agrologist_request a LEFT JOIN user u ON u.uid = a.farmerId LEFT JOIN review_by_agrologist r ON  a.farmerId=r.farmerId  WHERE (a.agrologistId = :agrologistId AND a.status='Accepted') GROUP BY r.farmerId ";
+            $sql = "SELECT CONCAT(u.firstName, ' ', u.lastName) AS fullName, u.city, a.requestId, a.farmerId, a.offer, u.image, COUNT(r.q1) AS num, (SUM(r.q1)+SUM(r.q2)+SUM(r.q3)+SUM(r.q4)+SUM(r.q5)+SUM(r.q6)+SUM(r.q7)) AS total FROM agrologist_request a LEFT JOIN user u ON u.uid = a.farmerId LEFT JOIN review_by_agrologist r ON  a.farmerId=r.farmerId  WHERE (a.agrologistId = :agrologistId AND a.status='Accepted') GROUP BY r.farmerId ";
             $stmt =  Database::getBdd()->prepare($sql);
             $stmt->execute(['agrologistId' => Session::get('user')->getUid()]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -194,10 +209,9 @@ class Agrologist extends Model
     public function getFarmerGigs($data)
     {
         try {
-            $sql = "SELECT g.image, g.location, g.title, g.category, g.timePeriod, u.firstName, u.lastName, g.farmerId, g.gigId FROM gig g LEFT JOIN agrologist_request a ON g.farmerId=a.farmerId LEFT JOIN user u ON u.uid=g.farmerId WHERE g.farmerId = :farmerId AND a.agrologistId = :agrologistId";
+            $sql = "SELECT g.image, g.location, g.title, g.category, g.timePeriod, u.firstName, u.lastName, g.farmerId, g.gigId FROM gig g LEFT JOIN user u ON u.uid=g.farmerId WHERE g.farmerId = :farmerId";
             $stmt =  Database::getBdd()->prepare($sql);
             $stmt->execute([
-                'agrologistId' => Session::get('user')->getUid(),
                 'farmerId' => $data['farmerId']
             ]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -208,6 +222,24 @@ class Agrologist extends Model
             return null;
         }
     }
+
+    public function getFarmerGigsRequest($requestId)
+    {
+        try {
+            $sql = "SELECT g.image, g.location, g.title, g.category, g.timePeriod, u.firstName, u.lastName, g.farmerId, g.gigId FROM gig g LEFT JOIN agrologist_request a ON g.farmerId=a.farmerId LEFT JOIN user u ON u.uid=g.farmerId WHERE a.requestId = :requestId";
+            $stmt =  Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'requestId' => $requestId
+            ]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+        }
+    }
+
 
 
     public function getnotifications()
