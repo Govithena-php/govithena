@@ -17,4 +17,33 @@
     height: 150px;
     padding: 50px;
   }
+
+  .payment_container {
+    margin-top: 2rem;
+
+}
+
+.payment_heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #ccc;
+    background-color: var(--clr-primary);
+    color: var(--clr-light);
+}
+
+.payment {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #ccc;
+}
+
+.payment:nth-child(odd) {
+    background-color: #dcdcdc;
+}
   
