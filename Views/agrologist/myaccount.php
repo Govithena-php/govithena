@@ -39,6 +39,9 @@
                                 <?php echo "<h1>" . $agrologist[0]['firstName'] . " " . $agrologist[0]['lastName'] . "</h1>"; ?>
 
                                 <?php echo "<h4>" . ucwords($agrologist[0]['userType']) . "</h4>"; ?>
+
+                               
+
                                 <p class="flex flex-row">
                                     <span class="fa fa-star rating_checked"></span>
                                     <span class="fa fa-star rating_checked"></span>
