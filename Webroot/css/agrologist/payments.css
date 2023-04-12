@@ -1,0 +1,20 @@
+.profile_continer {
+    margin-bottom: 30px;
+  }
+  
+  .profile_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  
+  .profile_card {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+    height: 150px;
+    padding: 50px;
+  }
+  
