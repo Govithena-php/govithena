@@ -215,16 +215,61 @@ class dashboardController extends Controller
 
     public function myinvestments()
     {
-        require(ROOT . 'Models/investment.php');
-        $uid = Session::get('user')->getUid();
-        $i = new Investment();
+        $props = [];
 
-        $investments = $i->fetchAllBy($uid);
+        $investments = $this->investmentModel->fetchAllBy($this->currentUser->getUid());
         if (isset($investments)) {
-            $this->set(['investments' => $investments]);
+            $props['investments'] = $investments;
         } else {
-            $this->set(['error' => "no investments found"]);
+            $props['error'] = "no investments found";
         }
+
+        $totalInvestment = $this->investmentModel->getTotalInvestmentByInvestor($this->currentUser->getUid());
+
+        if ($totalInvestment['success']) {
+            $props['totalInvestment'] = $totalInvestment['data']['totalInvestment'];
+        }
+
+        $joinedDate = $this->userModal->getJoinedDate($this->currentUser->getUid());
+        if ($joinedDate['success']) {
+            $start = new DateTime($joinedDate['data']['createdAt']);
+            $end = new DateTime();
+            $diff = date_diff($end, $start);
+            $months = $diff->format('%m');
+            $props['monthSinceJoined'] = $months;
+        }
+
+        $thisMonthInvestment = $this->investmentModel->getThisMonthTotalByInvestor($this->currentUser->getUid());
+
+        if ($thisMonthInvestment['success']) {
+            $thisMonth = $thisMonthInvestment['data']['thisMonthInvestment'];
+            $lastMonthInvestment = $this->investmentModel->getLastMonthTotalByInvestor($this->currentUser->getUid());
+            if ($lastMonthInvestment['success']) {
+                $lastMonth = $lastMonthInvestment['data']['lastMonthInvestment'];
+                if ($lastMonth == 0) {
+                    $lastMonth = 1;
+                }
+                $precentage = round(((intval($thisMonth) - intval($lastMonth)) / intval($lastMonth) * 100), 2);
+                $props['precentage'] = $precentage;
+                $props['lastMonthInvestment'] = $lastMonth;
+            }
+            $props['thisMonthInvestment'] = $thisMonth;
+        }
+
+        $completedGigs = $this->investorGigModel->getCompletedGigCount($this->currentUser->getUid());
+        if ($completedGigs['success']) {
+            $activeGigs = $this->investorGigModel->getActiveGigCount($this->currentUser->getUid());
+            if ($activeGigs['success']) {
+                $props['totalGigs'] = intval($activeGigs['data']['gigCount']) + intval($completedGigs['data']['gigCount']);
+                $props['activeGigs'] = $activeGigs['data']['gigCount'];
+            }
+        }
+
+
+
+
+
+        $this->set($props);
         $this->render('myinvestments');
     }
 

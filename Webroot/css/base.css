@@ -348,6 +348,14 @@ dialog::backdrop {
     background-color: #f32d2d;
 }
 
+.clr__danger{
+    color: var(--clr-danger);
+}
+
+.clr__primary{
+    color: var(--clr-primary);
+}
+
 .button__danger-invert {
     border: none;
     outline: none;

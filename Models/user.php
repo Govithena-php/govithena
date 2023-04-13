@@ -120,6 +120,24 @@ class User extends Model
         }
     }
 
+
+    public function getJoinedDate($uid)
+    {
+        try {
+            $sql = "SELECT createdAt FROM login_credential WHERE uid = :uid";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['uid' => $uid]);
+            $res = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($res) {
+                return ['success' => true, 'data' => $res];
+            } else {
+                return ['success' => true, 'data' => false];
+            }
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
     public function updatePassword($email, $passwordHash)
     {
         try {
