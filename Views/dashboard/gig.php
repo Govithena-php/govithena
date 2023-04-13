@@ -441,51 +441,6 @@
                         <?php
                         }
                         ?>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
                     </div>
                 </div>
 
@@ -645,6 +600,31 @@
                                     <p><?php echo $gig['description'] ?></p>
                                 </div>
                             </div>
+
+                            <?php
+                            if (!isset($gigImages) || empty($gigImages)) {
+                            ?>
+                                <h1>No other Images</h1>
+                            <?php
+                            } else {
+                            ?>
+                                <h3 class="[ about__gig_images_title ]">Gallery</h3>
+                                <div class="[ about__gig_images ]">
+                                    <?php
+                                    foreach ($gigImages as $gigImage) {
+                                    ?>
+                                        <div class="[ gig__image ]">
+                                            <img src="<?php echo UPLOADS . $gigImage['image'] ?>" />
+                                        </div>
+                                    <?php
+                                    }
+
+                                    ?>
+
+                                </div>
+                            <?php
+                            }
+                            ?>
                         <?php
                         }
                         ?>

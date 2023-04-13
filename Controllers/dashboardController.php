@@ -100,6 +100,11 @@ class dashboardController extends Controller
             $this->redirect('/error/dontHaveAccess/2');
         }
 
+        $gigImages  = $this->gigModal->fetchGigImages($gigId);
+        if ($gigImages['success']) {
+            $props['gigImages'] = $gigImages['data'];
+        }
+
         $props['farmer'] = $this->userModal->fetchBy($gig['farmerId']);
         if (!$props['farmer']) {
             $this->redirect('/error/dontHaveAccess/3');

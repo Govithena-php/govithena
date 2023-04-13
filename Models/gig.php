@@ -99,4 +99,18 @@ class Gig extends Model
             return ['success' => false, 'error' => $e->getMessage()];
         }
     }
+
+
+    public function fetchGigImages($gigId)
+    {
+        try {
+            $sql = "SELECT image FROM gig_image WHERE gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId]);
+            $gigImages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $gigImages];
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
 }
