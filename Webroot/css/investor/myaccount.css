@@ -383,7 +383,11 @@ padding: 1rem;
 
 @media screen and (max-width: 1200px) {}
 
-@media screen and (max-width: 1024px) {}
+@media screen and (max-width: 1024px) {
+    .Modal{
+        min-width:600px;
+    }
+}
 
 @media screen and (max-width: 768px) {
     .left__right {
@@ -408,6 +412,14 @@ padding: 1rem;
     .details__card .bottom .de__row-3{
         grid-template-columns: 1fr;
     }
+
+    .Modal{
+        min-width:500px;
+    }
 }
 
-@media screen and (max-width: 576px) {}
+@media screen and (max-width: 576px) {
+    .Modal{
+        min-width:400px;
+    }
+}
