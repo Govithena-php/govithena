@@ -23,7 +23,9 @@
     ?>
     <div class="[ container ] " container-type="dashboard-section">
         <?php $farmerName = $farmerName[0]['fullName'] ?>
-        <h1>Review Farmer <?php  echo '<b>' . $farmerName . '</b>' ?></h1>
+        <h1>Review Farmer
+            <?php echo '<b>' . $farmerName . '</b>' ?>
+        </h1>
         <hr>
 
 
@@ -32,163 +34,177 @@
             <disv class="[ caption ]">
                 <h3>Answer the following questions about your experience</h3>
                 <p>Please take a moment to answer the following questions about your experience with the farmer.</p>
-            </div>
-            <!-- <div class="[ review__heading ]">
+        </div>
+        <!-- <div class="[ review__heading ]">
                 <h3>Give your answer for fallowing question.</h3>
             </div> -->
-            <form method="post">
-                <div class="[ question__wrapper ]">
-                    <div class="[ counter ]"></div>
-                    <div class="[ question ]">
-                        <p>How would you rate the quality of the work done by the farmer?</p>
-                        <div class="[ answers ]">
-                            <label q="one" class="[ rating__star ]" for="q1_a1"><i class="fa fa-star"></i></label>
-                            <input class="[ start__checkbox ]" type="radio" name="q1" id="q1_a1" value="1"></input>
-                            <label q="one" class="[ rating__star ]" for="q1_a2"><i class="fa fa-star"></i></label>
-                            <input class="[ start__checkbox ]" type="radio" name="q1" id="q1_a2" value="2"></input>
-                            <label q="one" class="[ rating__star ]" for="q1_a3"><i class="fa fa-star"></i></label>
-                            <input class="[ start__checkbox ]" type="radio" name="q1" id="q1_a3" value="3"></input>
-                            <label q="one" class="[ rating__star ]" for="q1_a4"><i class="fa fa-star"></i></label>
-                            <input class="[ start__checkbox ]" type="radio" name="q1" id="q1_a4" value="4"></input>
-                            <label q="one" class="[ rating__star ]" for="q1_a5"><i class="fa fa-star"></i></label>
-                            <input class="[ start__checkbox ]" type="radio" name="q1" id="q1_a5" value="5"></input>
+        <form action="<?php echo URLROOT . '/agrologist/farmers' ?>" method="POST">
+            <div class="[ question__wrapper ]">
+                <div class="[ counter ]"></div>
+                <div class="[ question ]">
+                    <p>How would you rate the quality of the work done by the farmer?</p>
+                    <div class="[ answers ]">
+                        <label q="one" class="[ rating__star ]" for="q1_a1"><i class="fa fa-star"></i></label>
+                        <input class="[ start__checkbox ]" type="radio" name="q1" id="q1_a1" value="1"></input>
+                        <label q="one" class="[ rating__star ]" for="q1_a2"><i class="fa fa-star"></i></label>
+                        <input class="[ start__checkbox ]" type="radio" name="q1" id="q1_a2" value="2"></input>
+                        <label q="one" class="[ rating__star ]" for="q1_a3"><i class="fa fa-star"></i></label>
+                        <input class="[ start__checkbox ]" type="radio" name="q1" id="q1_a3" value="3"></input>
+                        <label q="one" class="[ rating__star ]" for="q1_a4"><i class="fa fa-star"></i></label>
+                        <input class="[ start__checkbox ]" type="radio" name="q1" id="q1_a4" value="4"></input>
+                        <label q="one" class="[ rating__star ]" for="q1_a5"><i class="fa fa-star"></i></label>
+                        <input class="[ start__checkbox ]" type="radio" name="q1" id="q1_a5" value="5"></input>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <?php
+            if (!empty($_POST['q1'])) {
+                // Counting number of checked checkboxes.
+                $checked_count = count($_POST['q1']);
+                echo "You have selected following " . $checked_count . " option(s): <br/>";
+                // Loop to store and display values of individual checked checkbox.
+                foreach ($_POST['check_list'] as $selected) {
+                    echo "<p>" . $selected . "</p>";
+                }
+            } else {
+                echo "<b>Please Select at least One Option.</b>";
+            }
+            ?> -->
+            
+            <div class="[ question__wrapper rating__question ]">
+                <div class="[ counter ]"></div>
+                <div class="[ question ]">
+                    <p>How satisfied are you about the farmers abiity of handling risks?</p>
+                    <div class="[ answers ]">
+                        <label q="two" class="[ rating__star ]" for="q2_a1"><i class="fa fa-star"></i></label>
+                        <input class="[ start__checkbox ]" type="radio" name="q2" id="q2_a1" value="1"></input>
+                        <label q="two" class="[ rating__star ]" for="q2_a2"><i class="fa fa-star"></i></label>
+                        <input class="[ start__checkbox ]" type="radio" name="q2" id="q2_a2" value="2"></input>
+                        <label q="two" class="[ rating__star ]" for="q3_a3"><i class="fa fa-star"></i></label>
+                        <input class="[ start__checkbox ]" type="radio" name="q2" id="q3_a3" value="3"></input>
+                        <label q="two" class="[ rating__star ]" for="q4_a4"><i class="fa fa-star"></i></label>
+                        <input class="[ start__checkbox ]" type="radio" name="q2" id="q4_a4" value="4"></input>
+                        <label q="two" class="[ rating__star ]" for="q5_a5"><i class="fa fa-star"></i></label>
+                        <input class="[ start__checkbox ]" type="radio" name="q2" id="q5_a5" value="5"></input>
+                    </div>
+                </div>
+            </div>
+
+            <div class="[ question__wrapper ]">
+                <div class="[ counter ]"></div>
+                <div class="[ question ]">
+                    <p>Did the farmer meet the expectations that he/she was planning?</p>
+                    <div class="[ answers ]">
+                        <div class="[ answer ]">
+                            <label class="[ yes ]" for="q3_a1">Yes <i class="fa-solid fa-check"></i></label>
+                            <input type="radio" name="q3" id="q3_a1" value="1"></input>
+                        </div>
+                        <div class="[ answer ]">
+                            <label class="[ no ]" for="q3_a2">No <i class="fa-solid fa-xmark"></i></label>
+                            <input type="radio" name="q3" id="q3_a2" value="0"></input>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="[ question__wrapper rating__question ]">
-                    <div class="[ counter ]"></div>
-                    <div class="[ question ]">
-                        <p>How satisfied are you about the farmers abiity of handling risks?</p>
-                        <div class="[ answers ]">
-                            <label q="two" class="[ rating__star ]" for="q2_a1"><i class="fa fa-star"></i></label>
-                            <input class="[ start__checkbox ]" type="radio" name="q2" id="q2_a1" value="1"></input>
-                            <label q="two" class="[ rating__star ]" for="q2_a2"><i class="fa fa-star"></i></label>
-                            <input class="[ start__checkbox ]" type="radio" name="q2" id="q2_a2" value="2"></input>
-                            <label q="two" class="[ rating__star ]" for="q3_a3"><i class="fa fa-star"></i></label>
-                            <input class="[ start__checkbox ]" type="radio" name="q2" id="q3_a3" value="3"></input>
-                            <label q="two" class="[ rating__star ]" for="q4_a4"><i class="fa fa-star"></i></label>
-                            <input class="[ start__checkbox ]" type="radio" name="q2" id="q4_a4" value="4"></input>
-                            <label q="two" class="[ rating__star ]" for="q5_a5"><i class="fa fa-star"></i></label>
-                            <input class="[ start__checkbox ]" type="radio" name="q2" id="q5_a5" value="5"></input>
+            <div class="[ question__wrapper ]">
+                <div class="[ counter ]"></div>
+                <div class="[ question ]">
+                    <p>Was the farmer interactive throughout the project?</p>
+                    <div class="[ answers ]">
+                        <div class="[ answer ]">
+                            <label class="[ yes ]" for="q4_a1">Yes <i class="fa-solid fa-check"></i></label>
+                            <input type="radio" name="q4" id="q4_a1" value="1"></input>
+                        </div>
+                        <div class="[ answer ]">
+                            <label class="[ no ]" for="q4_a2">No <i class="fa-solid fa-xmark"></i></label>
+                            <input type="radio" name="q4" id="q4_a2" value="0"></input>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="[ question__wrapper ]">
-                    <div class="[ counter ]"></div>
-                    <div class="[ question ]">
-                        <p>Did the farmer meet the expectations that he/she was planning?</p>
-                        <div class="[ answers ]">
-                            <div class="[ answer ]">
-                                <label class="[ yes ]" for="q3_a1">Yes <i class="fa-solid fa-check"></i></label>
-                                <input type="radio" name="q3" id="q3_a1" value="1"></input>
-                            </div>
-                            <div class="[ answer ]">
-                                <label class="[ no ]" for="q3_a2">No <i class="fa-solid fa-xmark"></i></label>
-                                <input type="radio" name="q3" id="q3_a2" value="0"></input>
-                            </div>
+            <div class="[ question__wrapper ]">
+                <div class="[ counter ]"></div>
+                <div class="[ question ]">
+                    <p>Did the farmer communicate effectively throughout the project?</p>
+                    <div class="[ answers ]">
+                        <div class="[ answer ]">
+                            <label class="[ yes ]" for="q5_a1">Yes <i class="fa-solid fa-check"></i></label>
+                            <input type="radio" name="q5" id="q5_a1" value="1"></input>
+                        </div>
+                        <div class="[ answer ]">
+                            <label class="[ no ]" for="q5_a2">No <i class="fa-solid fa-xmark"></i></label>
+                            <input type="radio" name="q5" id="q5_a2" value="0"></input>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="[ question__wrapper ]">
-                    <div class="[ counter ]"></div>
-                    <div class="[ question ]">
-                        <p>Was the farmer interactive throughout the project?</p>
-                        <div class="[ answers ]">
-                            <div class="[ answer ]">
-                                <label class="[ yes ]" for="q4_a1">Yes <i class="fa-solid fa-check"></i></label>
-                                <input type="radio" name="q4" id="q4_a1" value="1"></input>
-                            </div>
-                            <div class="[ answer ]">
-                                <label class="[ no ]" for="q4_a2">No <i class="fa-solid fa-xmark"></i></label>
-                                <input type="radio" name="q4" id="q4_a2" value="0"></input>
-                            </div>
+            <div class="[ question__wrapper ]">
+                <div class="[ counter ]"></div>
+                <div class="[ question ]">
+                    <p>Did the farmer follow all the instructions provided by you?</p>
+                    <div class="[ answers ]">
+                        <div class="[ answer ]">
+                            <label class="[ yes ]" for="q6_a1">Yes <i class="fa-solid fa-check"></i></label>
+                            <input type="radio" name="q6" id="q6_a1" value="1"></input>
+                        </div>
+                        <div class="[ answer ]">
+                            <label class="[ no ]" for="q6_a2">No <i class="fa-solid fa-xmark"></i></label>
+                            <input type="radio" name="q6" id="q6_a2" value="0"></input>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="[ question__wrapper ]">
-                    <div class="[ counter ]"></div>
-                    <div class="[ question ]">
-                        <p>Did the farmer communicate effectively throughout the project?</p>
-                        <div class="[ answers ]">
-                            <div class="[ answer ]">
-                                <label class="[ yes ]" for="q5_a1">Yes <i class="fa-solid fa-check"></i></label>
-                                <input type="radio" name="q5" id="q5_a1" value="1"></input>
-                            </div>
-                            <div class="[ answer ]">
-                                <label class="[ no ]" for="q5_a2">No <i class="fa-solid fa-xmark"></i></label>
-                                <input type="radio" name="q5" id="q5_a2" value="0"></input>
-                            </div>
+            <div class="[ question__wrapper ]">
+                <div class="[ counter ]"></div>
+                <div class="[ question ]">
+                    <p>Would you recommend this farmer for others to work with?</p>
+                    <div class="[ answers ]">
+                        <div class="[ answer ]">
+                            <label class="[ yes ]" for="q7_a1">Yes <i class="fa-solid fa-check"></i></label>
+                            <input type="radio" name="q7" id="q7_a1" value="1"></input>
+                        </div>
+                        <div class="[ answer ]">
+                            <label class="[ no ]" for="q7_a2">No <i class="fa-solid fa-xmark"></i></label>
+                            <input type="radio" name="q7" id="q7_a2" value="0"></input>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="[ question__wrapper ]">
-                    <div class="[ counter ]"></div>
-                    <div class="[ question ]">
-                        <p>Did the farmer follow all the instructions provided by you?</p>
-                        <div class="[ answers ]">
-                            <div class="[ answer ]">
-                                <label class="[ yes ]" for="q6_a1">Yes <i class="fa-solid fa-check"></i></label>
-                                <input type="radio" name="q6" id="q6_a1" value="1"></input>
-                            </div>
-                            <div class="[ answer ]">
-                                <label class="[ no ]" for="q6_a2">No <i class="fa-solid fa-xmark"></i></label>
-                                <input type="radio" name="q6" id="q6_a2" value="0"></input>
-                            </div>
-                        </div>
-                    </div>
+            <div class="[ feedbacks ]">
+                <div class="[ caption ]">
+                    <h3>Share your honest review and feedback</h3>
+                    <p>Please share your honest review and feedback about the farmer's work here. Your comments will
+                        help
+                        the farmer to improve their services.
+                    </p>
                 </div>
-
-                <div class="[ question__wrapper ]">
-                    <div class="[ counter ]"></div>
-                    <div class="[ question ]">
-                        <p>Would you recommend this farmer for others to work with?</p>
-                        <div class="[ answers ]">
-                            <div class="[ answer ]">
-                                <label class="[ yes ]" for="q7_a1">Yes <i class="fa-solid fa-check"></i></label>
-                                <input type="radio" name="q7" id="q7_a1" value="1"></input>
-                            </div>
-                            <div class="[ answer ]">
-                                <label class="[ no ]" for="q7_a2">No <i class="fa-solid fa-xmark"></i></label>
-                                <input type="radio" name="q7" id="q7_a2" value="0"></input>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="[ feedbacks ]">
-                    <div class="[ caption ]">
-                        <h3>Share your honest review and feedback</h3>
-                        <p>Please share your honest review and feedback about the farmer's work here. Your comments will
-                            help
-                            the farmer to improve their services.
-                        </p>
-                    </div>
-                    <!-- <div class="[ feedbacks__heading ]">
+                <!-- <div class="[ feedbacks__heading ]">
                         <h3>Give your answer for fallowing question.</h3>
                     </div> -->
-                    <div class="[ feedback ]">
-                        <label for="q8">What is your overall experience working with the farmer?</label>
-                        <textarea id="q8" name="q8"></textarea>
-                    </div>
-
-                    <div class="[ feedback ]">
-                        <label for="q9">Do you have any suggestions or feedback for the farmer to improve their work or
-                            services?</label>
-                        <textarea id="q9" name="q9"></textarea>
-                    </div>
-
+                <div class="[ feedback ]">
+                    <label for="q8">What is your overall experience working with the farmer?</label>
+                    <textarea id="q8" name="q8"></textarea>
                 </div>
 
-                <div class="[ submit__btn ]">
-                    <button type="submit" name="submit_review">Submit</button>
+                <div class="[ feedback ]">
+                    <label for="q9">Do you have any suggestions or feedback for the farmer to improve their work or
+                        services?</label>
+                    <textarea id="q9" name="q9"></textarea>
                 </div>
-            </form>
-        </div>
+
+            </div>
+
+            <div class="[ submit__btn ]">
+                <button type="submit" name="submit_review">Submit</button>
+            </div>
+        </form>
+    </div>
 
     </div>
     <?php require "footer.php"; ?>
