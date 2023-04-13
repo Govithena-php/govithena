@@ -14,6 +14,7 @@ function highlight($active, $link)
 }
 
 ?>
+die(); ?>
 
 
 <link rel="stylesheet" href="<?php echo CSS ?>/dashboard/navigator.css" type="text/css">
@@ -63,7 +64,7 @@ function highlight($active, $link)
 
                     <button onclick="toggleProfileMenu()">
                         <div class="[ image ]">
-                            <img src="<?php echo UPLOADS . '/' . $currentUser->getImage(); ?>" alt="profile">
+                            <img src="<?php echo UPLOADS . 'profilePictures/' . $currentUser->getImage(); ?>" alt="profile">
                         </div>
                     </button>
                 </div>

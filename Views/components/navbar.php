@@ -48,7 +48,7 @@ $currentUser = Session::get('user');
                         <div class="[ image ]">
                             <?php
                             ?>
-                            <img src="<?php echo UPLOADS . '/' . Session::get('user')->getImage(); ?>" alt="profile">
+                            <img src="<?php echo UPLOADS . 'profilePictures/' . Session::get('user')->getImage(); ?>" alt="profile">
                         </div>
                     </button>
                 </div>

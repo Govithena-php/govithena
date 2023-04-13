@@ -259,7 +259,7 @@ dialog::backdrop {
     margin-right: var(--container-margin-right);
     margin-left: var(--container-margin-left);
     margin-top: var(--navbar-height);
-    margin-bottom: 0;
+    margin-bottom: 2rem;
     padding-block: 1rem;
     transition: all 0.3s ease-in-out;
     min-height: calc(100vh - var(--default-footer-height));

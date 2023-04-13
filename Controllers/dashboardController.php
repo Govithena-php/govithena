@@ -4,13 +4,14 @@ class dashboardController extends Controller
 {
     private $currentUser;
     private $investorGigModel;
-    private $gigModal;
-    private $userModal;
+    private $gigModel;
+    private $userModel;
     private $fieldVisitModel;
     private $reviewByInvestorModel;
     private $farmerProgressModel;
     private $requestFarmerModel;
     private $investmentModel;
+    private $profilePictureHandler;
 
     public function __construct()
     {
@@ -25,13 +26,15 @@ class dashboardController extends Controller
         }
 
         $this->investorGigModel = $this->model('investorGig');
-        $this->gigModal = $this->model('gig');
-        $this->userModal = $this->model('user');
+        $this->gigModel = $this->model('gig');
+        $this->userModel = $this->model('user');
         $this->fieldVisitModel = $this->model('fieldVisit');
         $this->reviewByInvestorModel = $this->model('reviewByInvestor');
         $this->farmerProgressModel = $this->model('farmerProgress');
         $this->requestFarmerModel = $this->model('requestFarmer');
         $this->investmentModel = $this->model('investment');
+
+        $this->profilePictureHandler = new ImageHandler($folder = 'Uploads/profilePictures');
     }
 
     public function index()
@@ -95,17 +98,17 @@ class dashboardController extends Controller
         }
         $gigId = $params[0];
 
-        $props['gig'] = $gig = $this->gigModal->fetchBy($gigId);
+        $props['gig'] = $gig = $this->gigModel->fetchBy($gigId);
         if (!$props['gig']) {
             $this->redirect('/error/dontHaveAccess/2');
         }
 
-        $gigImages  = $this->gigModal->fetchGigImages($gigId);
+        $gigImages  = $this->gigModel->fetchGigImages($gigId);
         if ($gigImages['success']) {
             $props['gigImages'] = $gigImages['data'];
         }
 
-        $props['farmer'] = $this->userModal->fetchBy($gig['farmerId']);
+        $props['farmer'] = $this->userModel->fetchBy($gig['farmerId']);
         if (!$props['farmer']) {
             $this->redirect('/error/dontHaveAccess/3');
         }
@@ -175,12 +178,12 @@ class dashboardController extends Controller
         $gigId = $params[0];
         Session::set(['gigId' => $gigId]);
 
-        $props['gig'] = $gig = $this->gigModal->fetchBy($gigId);
+        $props['gig'] = $gig = $this->gigModel->fetchBy($gigId);
         if (!$props['gig']) {
             $this->redirect('/error/dontHaveAccess/2');
         }
 
-        $props['farmer'] = $this->userModal->fetchBy($gig['farmerId']);
+        $props['farmer'] = $this->userModel->fetchBy($gig['farmerId']);
         if (!$props['farmer']) {
             $this->redirect('/error/dontHaveAccess/3');
         }
@@ -235,7 +238,7 @@ class dashboardController extends Controller
             $props['totalInvestment'] = $totalInvestment['data']['totalInvestment'];
         }
 
-        $joinedDate = $this->userModal->getJoinedDate($this->currentUser->getUid());
+        $joinedDate = $this->userModel->getJoinedDate($this->currentUser->getUid());
         if ($joinedDate['success']) {
             $start = new DateTime($joinedDate['data']['createdAt']);
             $end = new DateTime();
@@ -316,6 +319,14 @@ class dashboardController extends Controller
 
     public function myaccount()
     {
+        $props = [];
+        $personalDetails = $this->userModel->getPersonalDetails($this->currentUser->getUid());
+        // die(var_dump($personalDetails));
+        if ($personalDetails['success']) {
+            $props['personalDetails'] = $personalDetails['data'];
+        }
+
+        $this->set($props);
         $this->render('myaccount');
     }
 
@@ -357,6 +368,61 @@ class dashboardController extends Controller
                 $this->redirect('/dashboard/myrequests/ok');
             } else {
                 $this->redirect('/dashboard/myrequests/error');
+            }
+        }
+    }
+
+    public function update_user_details()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $data = [
+                'uid' => new Input(POST, 'u-submitBtn'),
+                'firstName' => new Input(POST, 'u-firstName'),
+                'lastName' => new Input(POST, 'u-lastName'),
+                'phone' => new Input(POST, 'u-phone'),
+                'addressLine1' => new Input(POST, 'u-addressLine1'),
+                'addressLine2' => new Input(POST, 'u-addressLine2'),
+                'postalCode' => new Input(POST, 'u-postalCode'),
+                'city' => new Input(POST, 'u-city'),
+                'district' => new Input(POST, 'u-district'),
+            ];
+
+            $response = $this->userModel->update($data);
+
+            if ($response['success']) {
+                $this->redirect('/dashboard/myaccount/ok');
+            } else {
+                $this->redirect('/dashboard/myaccount/error');
+            }
+        }
+    }
+
+
+    public function change_profile_picture()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $uid = new Input(POST, 'u-submitBtn');
+            try {
+                $profilePicture = $this->profilePictureHandler->upload('u-profilePicture');
+
+                $this->currentUser->setImage($profilePicture[0]);
+                Session::unset(['user']);
+                Session::set(['user' => $this->currentUser]);
+                $data = [
+                    'uid' => $uid,
+                    'profilePicture' => $profilePicture[0]
+                ];
+
+                $response = $this->userModel->updateProfilePicture($data);
+                if ($response['success']) {
+                    $this->redirect('/dashboard/myaccount/ok');
+                } else {
+                    $this->redirect('/dashboard/myaccount/error');
+                }
+            } catch (Exception $e) {
+                echo $e->getMessage();
+                $this->redirect('/dashboard/myaccount/error');
             }
         }
     }
