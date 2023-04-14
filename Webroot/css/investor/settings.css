@@ -1,0 +1,167 @@
+.caption {
+    /* width: 60%; */
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    margin-inline: 0;
+}
+
+.caption h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.caption h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.caption p {
+    width: 60%;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--clr-text-gray, #535353);
+    margin-bottom: 0.5rem;
+}
+
+.caption__modal p {
+    width: 100%;
+}
+
+
+.settings {
+    display: flex;
+    flex-direction: column;
+    gap: 0rem;
+}
+
+.settings .row {
+    padding: 1rem;
+    margin: 0.5rem;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.settings .row h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--clr-text);
+}
+
+.settings .row p {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--clr-text-gray, #535353);
+}
+
+
+.settings .delete__row {
+    padding: 2rem 1rem;
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+
+
+.Modal {
+    min-width: 200px;
+    max-width: 500px;
+}
+
+.Modal .container {
+    margin: 1rem;
+}
+
+.Modal .caption {
+    margin-bottom: 2rem;
+}
+
+
+.new__details_form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.input__control {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.input__control label {
+    font-weight: 600;
+}
+
+.input__control input {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input__control input:focus {
+    outline: 1px solid var(--clr-primary);
+}
+
+.input__control select {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input__control select:focus {
+    outline: 1px solid var(--clr-primary);
+}
+
+
+.control__buttons {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+
+
+@media screen and (max-width: 1200px) {
+    .caption p {
+        width: 65%;
+    }
+
+}
+
+@media screen and (max-width: 1024px) {
+    .caption p {
+        width: 75%;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+    .caption {
+        text-align: center;
+    }
+
+    .caption p {
+        width: 80%;
+        margin-inline: auto;
+    }
+
+
+}
+
+@media screen and (max-width: 576px) {
+
+    .caption {
+        text-align: center;
+    }
+
+    .caption p {
+        width: 100%;
+    }
+}

@@ -69,7 +69,7 @@ class User extends Model
     public function fetchByEmail($username)
     {
         try {
-            $sql = "SELECT * FROM login_credential INNER JOIN user ON login_credential.uid = user.uid WHERE username = :value";
+            $sql = "SELECT * FROM login_credential INNER JOIN user ON login_credential.uid = user.uid WHERE username = :value AND status = 'ACTIVE'";
             $req = Database::getBdd()->prepare($sql);
             $req->execute(['value' => $username]);
             $res = $req->fetch(PDO::FETCH_ASSOC);
@@ -149,6 +149,44 @@ class User extends Model
             return ['status' => false, 'data' => $e->getMessage()];
         }
     }
+    public function updatePasswordByUid($uid, $passwordHash)
+    {
+        try {
+            $sql = "UPDATE login_credential SET password = :password WHERE uid = :uid";
+            $req = Database::getBdd()->prepare($sql);
+            $req->execute(['password' => $passwordHash, 'uid' => $uid]);
+            return ['status' => true];
+        } catch (PDOException $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function updateEmailByUid($uid, $email)
+    {
+        try {
+            $sql = "UPDATE login_credential SET username = :email WHERE uid = :uid";
+            $req = Database::getBdd()->prepare($sql);
+            $req->execute(['email' => $email, 'uid' => $uid]);
+            return ['status' => true];
+        } catch (PDOException $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function deleteByUid($uid)
+    {
+        try {
+            $sql = "UPDATE login_credential SET status = 'DELETED' WHERE uid = :uid";
+            $req = Database::getBdd()->prepare($sql);
+            $req->execute(['uid' => $uid]);
+            return ['status' => true];
+        } catch (PDOException $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+
+
 
 
     public function getPersonalDetails($uid)
@@ -201,6 +239,23 @@ class User extends Model
                 'profilePicture' => $data['profilePicture'],
             ]);
             return ['success' => true];
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function fetchByUid($id)
+    {
+        try {
+            $sql = "SELECT password FROM login_credential WHERE uid = :id";
+            $req = Database::getBdd()->prepare($sql);
+            $req->execute(['id' => $id]);
+            $res = $req->fetch(PDO::FETCH_ASSOC);
+            if ($res) {
+                return ['success' => true, 'data' => $res];
+            } else {
+                return ['success' => true, 'data' => false];
+            }
         } catch (PDOException $e) {
             return ['success' => false, 'data' => $e->getMessage()];
         }

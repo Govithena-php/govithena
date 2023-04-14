@@ -88,7 +88,7 @@
                 </div>
 
                 <div class="[ control__buttons ]">
-                    <button type="button" onclick="closeEditCategoryModal()" class="[ button__danger ]" data-dismiss="modal">Cancel</button>
+                    <button type="button" onclick="closeEditDetailsModal()" class="[ button__danger ]" data-dismiss="modal">Cancel</button>
                     <button type="submit" id="u-submitBtn" name="u-submitBtn" value="<?php echo $personalDetails['uid'] ?>" class="[ button__primary button__submit ]" data-dismiss="modal">Update</button>
                 </div>
             </form>
@@ -223,55 +223,6 @@
     </dialog>
 
 
-    <!-- <dialog id="editCategoryModal" class="[ categoryModal ]">
-        <div class="[ container ]">
-            <div class="[ caption ]">
-                <h2>Update category</h2>
-                <p>Edit a category.</p>
-            </div>
-            <form class="[ new__category_form ]" action="<?php echo URLROOT ?>/admin/update_category" method="post" enctype="multipart/form-data">
-                <div class="[ grid ]" sm="1" lg="3" gap="1">
-                    <div class="[ input__control ]">
-                        <label for="category">Category Name</label>
-                        <input type="text" id="u-category" name="u-name" placeholder="Category Name">
-                    </div>
-                    <div class="[ input__control ]">
-                        <label for="slug">Slug</label>
-                        <input type="text" id="u-slug" name="u-slug" placeholder="Slug">
-                    </div>
-                    <div class="[ input__control ]">
-                        <label for="mainCategory">Main Category</label>
-                        <select id="u-mainCategory" name="u-type">
-                            <option value="VEGETABLE">Vegetables</option>
-                            <option value="FRUIT">Fruits</option>
-                            <option value="GRAINS">Grains</option>
-                            <option value="SPICES">Spices</option>
-                            <option value="OTHER">Other</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="[ input__control image__uploader ]">
-                    <div class="[ title ]">
-                        <p id="u-image_message">Category Thumbnail</p>
-                    </div>
-
-                    <div class="[ text__box ]">
-                        <div class="[ text__box_preview text__box_preview--update  ]">
-                        </div>
-                        <img class="[ upload__svg ]" src="<?php echo IMAGES ?>svg/upload.svg" />
-                        <p>Darg and drop your image here<br>or</p>
-                        <label class="[ browse__btn ]" for="u-image-uploader">Browse</label>
-                        <input id="u-image-uploader" class="text__box_input" type="file" name="u-thumbnail">
-                    </div>
-                </div>
-                <div class="[ control__buttons ]">
-                    <button type="button" onclick="closeEditCategoryModal()" class="[ button__danger ]" data-dismiss="modal">Cancel</button>
-                    <button type="submit" id="u-submitBtn" name="u-submitBtn" class="[ button__primary button__submit ]" data-dismiss="modal">Update</button>
-                </div>
-            </form>
-        </div>
-    </dialog> -->
-
     <div class="[ container ][ ]" container-type="dashboard-section">
         <div class="[ left__right ]">
             <div class="[ left ]">
@@ -281,7 +232,7 @@
                             <h3>Personal Details</h3>
                             <p>View and edit your personal details.</p>
                         </div>
-                        <button onclick='openEditCategoryModal()' class="button__primary">Edit Details</button>
+                        <button onclick='openEditDetailsModal()' class="button__primary">Edit Details</button>
                     </div>
                     <div class="[ bottom ]">
                         <div class="[ de__row ]">
@@ -467,12 +418,12 @@
     <script src="https://kit.fontawesome.com/b8084a92f1.js" crossorigin="anonymous"></script>
     <script src="<?php echo JS ?>/dashboard/dashboard.js"></script>
     <script>
-        function openEditCategoryModal() {
+        function openEditDetailsModal() {
             const editDetailsModal = document.getElementById("editDetailsModal")
             editDetailsModal.showModal()
         }
 
-        function closeEditCategoryModal() {
+        function closeEditDetailsModal() {
             location.reload()
             const editDetailsModal = document.getElementById("editDetailsModal")
             editDetailsModal.close()
