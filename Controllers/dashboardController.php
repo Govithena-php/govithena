@@ -3,6 +3,7 @@
 class dashboardController extends Controller
 {
     private $currentUser;
+
     private $investorGigModel;
     private $gigModel;
     private $userModel;
@@ -11,6 +12,8 @@ class dashboardController extends Controller
     private $farmerProgressModel;
     private $requestFarmerModel;
     private $investmentModel;
+    private $bankAccountModel;
+
     private $profilePictureHandler;
 
     public function __construct()
@@ -33,6 +36,7 @@ class dashboardController extends Controller
         $this->farmerProgressModel = $this->model('farmerProgress');
         $this->requestFarmerModel = $this->model('requestFarmer');
         $this->investmentModel = $this->model('investment');
+        $this->bankAccountModel = $this->model('bankAccount');
 
         $this->profilePictureHandler = new ImageHandler($folder = 'Uploads/profilePictures');
     }
@@ -320,10 +324,30 @@ class dashboardController extends Controller
     public function myaccount()
     {
         $props = [];
+
         $personalDetails = $this->userModel->getPersonalDetails($this->currentUser->getUid());
-        // die(var_dump($personalDetails));
         if ($personalDetails['success']) {
             $props['personalDetails'] = $personalDetails['data'];
+        }
+
+        $bankDetails = $this->bankAccountModel->getBankDetails($this->currentUser->getUid());
+        if ($bankDetails['success']) {
+            $props['bankAccounts'] = $bankDetails['data'];
+        }
+
+
+        $joinedDate = $this->userModel->getJoinedDate($this->currentUser->getUid());
+        if ($joinedDate['success']) {
+            $start = new DateTime($joinedDate['data']['createdAt']);
+            $end = new DateTime();
+            $diff = date_diff($end, $start);
+            $months = $diff->format('%m');
+            $props['monthSinceJoined'] = $months;
+        }
+
+        $totalInvestment = $this->investmentModel->getTotalInvestmentByInvestor($this->currentUser->getUid());
+        if ($totalInvestment['success']) {
+            $props['totalInvestment'] = $totalInvestment['data']['totalInvestment'];
         }
 
         $this->set($props);
@@ -422,6 +446,64 @@ class dashboardController extends Controller
                 }
             } catch (Exception $e) {
                 echo $e->getMessage();
+                $this->redirect('/dashboard/myaccount/error');
+            }
+        }
+    }
+
+    public function add_new_bank_account()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data = [
+                'user' => new Input(POST, 'n-userId'),
+                'bank' => new Input(POST, 'n-bank'),
+                'accountNumber' => new Input(POST, 'n-accountNumber'),
+                'branch' => new Input(POST, 'n-branch'),
+                'branchCode' => new Input(POST, 'n-branchCode'),
+            ];
+
+            $response = $this->bankAccountModel->add($data);
+
+            if ($response['success']) {
+                $this->redirect('/dashboard/myaccount/ok');
+            } else {
+                $this->redirect('/dashboard/myaccount/error');
+            }
+        }
+    }
+
+
+    public function delete_bank_account()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $accountNumber =  new Input(POST, 'deleteBankAccount-confirm');
+
+            $response = $this->bankAccountModel->delete($accountNumber);
+
+            if ($response['success']) {
+                $this->redirect('/dashboard/myaccount/ok');
+            } else {
+                $this->redirect('/dashboard/myaccount/error');
+            }
+        }
+    }
+
+    public function edit_bank_account()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data = [
+                'oldAccountNumber' => new Input(POST, 'u-oldAccountNumber'),
+                'bank' => new Input(POST, 'u-bank'),
+                'accountNumber' => new Input(POST, 'u-accountNumber'),
+                'branch' => new Input(POST, 'u-branch'),
+                'branchCode' => new Input(POST, 'u-branchCode'),
+            ];
+
+            $response = $this->bankAccountModel->update($data);
+
+            if ($response['success']) {
+                $this->redirect('/dashboard/myaccount/ok');
+            } else {
                 $this->redirect('/dashboard/myaccount/error');
             }
         }

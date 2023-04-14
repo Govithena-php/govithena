@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="<?php echo IMAGES ?>/favicon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" /> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
 
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
@@ -128,6 +129,100 @@
     </dialog>
 
 
+    <dialog id="newBankAccountModal" class="[ Modal ]">
+        <div class="[ container ]">
+            <div class="[ caption ]">
+                <h2>Add New Bank Account</h2>
+                <p>Add your new bank account you wish to withdraw.</p>
+            </div>
+            <form class="[ new__category_form ]" action="<?php echo URLROOT ?>/dashboard/add_new_bank_account" method="post" enctype="multipart/form-data">
+                <div class="[ grid ]" sm="1" lg="2" gap="1">
+                    <div class="[ input__control ]">
+                        <label for="n-accountNumber">Account Number</label>
+                        <input type="text" id="n-accountNumber" name="n-accountNumber" placeholder="Account Number">
+                    </div>
+                    <div class="[ input__control ]">
+                        <label for="n-bank">Bank</label>
+                        <select id="n-bank" name="n-bank">
+                            <?php
+                            foreach (BANK as $key => $value)
+                                echo "<option value='$key'>$value</option>";
+                            ?>
+                        </select>
+                    </div>
+                    <div class="[ input__control ]">
+                        <label for="n-branch">Branch</label>
+                        <input type="text" id="n-branch" name="n-branch" placeholder="Branch">
+                    </div>
+                    <div class="[ input__control ]">
+                        <label for="n-branchCode">Branch Code</label>
+                        <input type="text" id="n-branchCode" name="n-branchCode" placeholder="Branch Code">
+                    </div>
+                </div>
+
+                <div class="[ control__buttons ]">
+                    <button type="button" onclick="closeNewBankAccountModal()" class="[ button__danger ]" data-dismiss="modal">Cancel</button>
+                    <button type="submit" id="submitBtn" name="n-userId" value="<?php echo  $personalDetails['uid'] ?>" class="[ button__primary button__submit ]" data-dismiss="modal">Save</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
+
+    <dialog id="deleteConformationModal" class="[ alertModal ]">
+        <div class="[ container ]">
+            <i class="fa fa-circle-xmark" aria-hidden="true"></i>
+            <div class="[ content ]">
+                <h2>Are you sure?</h2>
+                <p>Do you really want to Delete this bank account ?</p>
+            </div>
+            <form id="suspendForm" action="<?php echo URLROOT ?>/dashboard/delete_bank_account" method="POST" class="[ buttons ]">
+                <button type="button" class="[ button__primary ]" onclick="closeDeleteAlert()" data-dismiss="modal">No, Cancel</button>
+                <button id="confirmDeleteBtn" name="deleteBankAccount-confirm" type="submit" class="[ button__danger ]">Yes, Delete</button>
+            </form>
+        </div>
+    </dialog>
+
+    <dialog id="editBankAccountModal" class="[ Modal ]">
+        <div class="[ container ]">
+            <div class="[ caption ]">
+                <h2>Edit Bank Account</h2>
+                <p>Edit your bank account details.</p>
+            </div>
+            <form class="[ new__category_form ]" action="<?php echo URLROOT ?>/dashboard/edit_bank_account" method="post" enctype="multipart/form-data">
+                <div class="[ grid ]" sm="1" lg="2" gap="1">
+                    <div class="[ input__control ]">
+                        <label for="u-accountNumber">Account Number</label>
+                        <input type="text" id="u-accountNumber" name="u-accountNumber" placeholder="Account Number">
+                    </div>
+                    <div class="[ input__control ]">
+                        <label for="u-bank">Bank</label>
+                        <select id="u-bank" name="u-bank">
+                            <?php
+                            foreach (BANK as $key => $value)
+                                echo "<option value='$key'>$value</option>";
+                            ?>
+                        </select>
+                    </div>
+                    <div class="[ input__control ]">
+                        <label for="u-branch">Branch</label>
+                        <input type="text" id="u-branch" name="u-branch" placeholder="Branch">
+                    </div>
+                    <div class="[ input__control ]">
+                        <label for="u-branchCode">Branch Code</label>
+                        <input type="text" id="u-branchCode" name="u-branchCode" placeholder="Branch Code">
+                    </div>
+                </div>
+
+                <div class="[ control__buttons ]">
+                    <button type="button" onclick="closeEditBankAccountModal()" class="[ button__danger ]" data-dismiss="modal">Cancel</button>
+                    <button type="submit" id="u-oldAccountNumber" name="u-oldAccountNumber" class="[ button__primary button__submit ]" data-dismiss="modal">Save</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
+
     <!-- <dialog id="editCategoryModal" class="[ categoryModal ]">
         <div class="[ container ]">
             <div class="[ caption ]">
@@ -186,7 +281,7 @@
                             <h3>Personal Details</h3>
                             <p>View and edit your personal details.</p>
                         </div>
-                        <button onclick='openEditCategoryModal()' class="button__primary edit_details">Edit Details</button>
+                        <button onclick='openEditCategoryModal()' class="button__primary">Edit Details</button>
                     </div>
                     <div class="[ bottom ]">
                         <div class="[ de__row ]">
@@ -241,11 +336,11 @@
                             <h3>Bank Account Details</h3>
                             <p>View and edit your Bank Account Details.</p>
                         </div>
-                        <button class="button__primary edit_details">Add New</button>
+                        <button onclick="openNewBankAccountModal()" class="button__primary">Add New</button>
                     </div>
                     <div class="[ bottom ]">
                         <div class="[ grid__table ]" style="
-                        --xl-cols: 1fr 1fr 1fr 1fr 2fr;
+                        --xl-cols: 1.25fr 2fr 1fr 1fr 1fr;
                         --lg-cols: 1fr 1fr 1fr 1fr;
                         --md-cols: 1fr 1fr 1fr 1fr;
                         --sm-cols: 1fr 1fr 1fr 1fr;
@@ -270,43 +365,69 @@
                                 </div>
                             </div>
                             <div class="[ body ]">
-                                <div class="[ row ]">
-                                    <div class="[ data ]">
-                                        <p>123456789</p>
-                                    </div>
-                                    <div class="[ data ]">
-                                        <p>Commercial Bank</p>
-                                    </div>
-                                    <div class="[ data ]">
-                                        <p>Matara</p>
-                                    </div>
-                                    <div class="[ data ]">
-                                        <p>1234</p>
-                                    </div>
 
-                                    <div class="[ data ]">
-                                        <button class="button__primary edit_details">expnad</button>
-                                        <button class="button__primary edit_details">Edit</button>
-                                        <button class="button__primary edit_details">Delete</button>
+                                <?php
+                                if (!isset($bankAccounts) && empty($bankAccounts)) {
+                                ?>
+                                    <div class="no__details">
+                                        <img src="<?php echo IMAGES ?>/svg/no_data.svg" alt="empty">
+                                        <p>No Bank Accounts</p>
+                                        <button onclick="openNewBankAccountModal()" class="button__primary">Add New</button>
                                     </div>
+                                    <?php
+                                } else {
+                                    foreach ($bankAccounts as $bankAccount) {
+                                    ?>
+                                        <div class="[ row ]">
+                                            <div class="[ data ]">
+                                                <p><?php printValue($bankAccount['accountNumber']) ?></p>
+                                            </div>
+                                            <div class="[ data ]">
+                                                <p><?php
 
-                                    <div class="[ expand ]">
-                                        <div class="[ data ]">
-                                            <p>Matara</p>
+                                                    if (!isset($bankAccount['bank']) || empty($bankAccount['bank'])) {
+                                                        echo "Other";
+                                                    } else {
+                                                        echo BANK[$bankAccount['bank']];
+                                                    }
+
+                                                    ?></p>
+                                            </div>
+                                            <div class="[ data ]">
+                                                <p><?php printValue($bankAccount['branch']) ?></p>
+                                            </div>
+                                            <div class="[ data ]">
+                                                <p><?php printValue($bankAccount['branchCode']) ?></p>
+                                            </div>
+
+                                            <div class="[ data action__buttons ]">
+                                                <!-- <button class="edit_details more"><i class="bi bi-chevron-double-down"></i></button> -->
+                                                <button onclick='openEditBankAccountModal(<?php echo json_encode($bankAccount) ?>)' class="edit_details edit"><i class="bi bi-pen"></i></button>
+                                                <button onclick="openDeleteAlert('<?php echo $bankAccount['accountNumber'] ?>')" class="edit_details delete"><i class="bi bi-trash"></i></button>
+                                            </div>
+
+                                            <div class="[ expand ]">
+                                                <div class="[ data ]">
+                                                    <p><?php printValue($bankAccount['branch']) ?></p>
+                                                </div>
+                                                <div class="[ data ]">
+                                                    <p><?php printValue($bankAccount['branchCode']) ?></p>
+                                                </div>
+                                            </div>
+
                                         </div>
-                                        <div class="[ data ]">
-                                            <p>1234</p>
-                                        </div>
-                                    </div>
+                                <?php
+                                    }
+                                }
+                                ?>
 
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="[ right ]">
-                <div class="[ profile__card ]">
+                <div class="[ profile__card stick ]">
                     <div class="[ top ]">
                         <div class="[ profile__image ]">
                             <?php
@@ -324,12 +445,16 @@
                     </div>
                     <div class="[ bottom ]">
                         <div class="[ card ]">
-                            <small>You have Invested :</small>
-                            <p class="[ LKR ]">12345600</p>
+                            <small> Joined</small>
+                            <p class="months__ago"><?php echo $monthSinceJoined ?> Months ago</p>
                         </div>
                         <div class="[ card ]">
-                            <small>You have Earned :</small>
-                            <p class="[ LKR ]">12345600</p>
+                            <small>You have Invested</small>
+                            <p class="[ LKR ]"><?php echo number_format($totalInvestment, 2, '.', ',') ?></p>
+                        </div>
+                        <div class="[ card ]">
+                            <small>You have Earned</small>
+                            <p class="[ LKR ]"><?php echo number_format($totalInvestment, 2, '.', ',') ?></p>
                         </div>
                     </div>
                 </div>
@@ -339,6 +464,7 @@
     <?php
     require_once("footer.php");
     ?>
+    <script src="https://kit.fontawesome.com/b8084a92f1.js" crossorigin="anonymous"></script>
     <script src="<?php echo JS ?>/dashboard/dashboard.js"></script>
     <script>
         function openEditCategoryModal() {
@@ -350,6 +476,17 @@
             location.reload()
             const editDetailsModal = document.getElementById("editDetailsModal")
             editDetailsModal.close()
+        }
+
+        function openNewBankAccountModal() {
+            const newBankAccountModal = document.getElementById("newBankAccountModal")
+            newBankAccountModal.showModal()
+        }
+
+        function closeNewBankAccountModal() {
+            location.reload()
+            const newBankAccountModal = document.getElementById("newBankAccountModal")
+            newBankAccountModal.close()
         }
 
         function openEditProfilePictureModal() {
@@ -373,6 +510,22 @@
         function closeDeleteAlert() {
             const deleteConformationModal = document.getElementById("deleteConformationModal")
             deleteConformationModal.close()
+        }
+
+        function openEditBankAccountModal(data) {
+            const editBankAccountModal = document.getElementById("editBankAccountModal")
+            document.getElementById("u-accountNumber").value = data.accountNumber
+            document.getElementById("u-bank").value = data.bank
+            document.getElementById("u-branch").value = data.branch
+            document.getElementById("u-branchCode").value = data.branchCode
+            document.getElementById("u-oldAccountNumber").value = data.accountNumber
+            editBankAccountModal.showModal()
+        }
+
+        function closeEditBankAccountModal() {
+            location.reload()
+            const editBankAccountModal = document.getElementById("editBankAccountModal")
+            editBankAccountModal.close()
         }
     </script>
 

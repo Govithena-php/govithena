@@ -106,6 +106,83 @@ define("DISTRICTS", array(
     "TRINCOMALEE" => "Trincomalee",
     "VAVUNIYA" => "Vavuniya"
 ));
+
+
+define(
+    "BANK_ARRAY",
+    array(
+        "Amana Bank",
+        "Axis Bank",
+        "Bank of Ceylon",
+        "Cargills Bank",
+        "Central Finance Company PLC",
+        "Citibank",
+        "Commercial Bank of Ceylon",
+        "DFCC Bank",
+        "Deutsche Bank",
+        "Habib Bank",
+        "Hatton National Bank",
+        "HDFC Bank",
+        "HSBC",
+        "ICICI Bank",
+        "Indian Bank",
+        "Indian Overseas Bank",
+        "MBSL Savings Bank",
+        "Merchant Bank of Sri Lanka",
+        "Nations Trust Bank",
+        "National Development Bank PLC",
+        "Pan Asia Banking Corporation",
+        "People's Bank",
+        "Public Bank",
+        "Sampath Bank",
+        "Seylan Bank",
+        "Standard Chartered Bank",
+        "State Bank of India",
+        "Union Bank of Colombo PLC"
+    )
+);
+
+define(
+    "BANK",
+    array(
+        "AMANA_BANK" => "Amana Bank",
+        "AXIS_BANK" => "Axis Bank",
+        "BANK_OF_CEYLON" => "Bank of Ceylon",
+        "CARGILLS_BANK" => "Cargills Bank",
+        "CENTRAL_FINANCE_COMPANY_PLC" => "Central Finance Company PLC",
+        "CITIBANK" => "Citibank",
+        "COMMERCIAL_BANK_OF_CEYLON" => "Commercial Bank of Ceylon",
+        "DFCC_BANK" => "DFCC Bank",
+        "DEUTSCHE_BANK" => "Deutsche Bank",
+        "HABIB_BANK" => "Habib Bank",
+        "HATTON_NATIONAL_BANK" => "Hatton National Bank",
+        "HDFC_BANK" => "HDFC Bank",
+        "HSBC" => "HSBC",
+        "ICICI_BANK" => "ICICI Bank",
+        "INDIAN_BANK" => "Indian Bank",
+        "INDIAN_OVERSEAS_BANK" => "Indian Overseas Bank",
+        "MBSL_SAVINGS_BANK" => "MBSL Savings Bank",
+        "MERCHANT_BANK_OF_SRI_LANKA" => "Merchant Bank of Sri Lanka",
+        "NATIONS_TRUST_BANK" => "Nations Trust Bank",
+        "NATIONAL_DEVELOPMENT_BANK_PLC" => "National Development Bank PLC",
+        "PAN_ASIA_BANKING_CORPORATION" => "Pan Asia Banking Corporation",
+        "PEOPLE'S_BANK" => "People's Bank",
+        "PUBLIC_BANK" => "Public Bank",
+        "SAMPATH_BANK" => "Sampath Bank",
+        "SEYLAN_BANK" => "Seylan Bank",
+        "STANDARD_CHARTERED_BANK" => "Standard Chartered Bank",
+        "STATE_BANK_OF_INDIA" => "State Bank of India",
+        "UNION_BANK_OF_COLOMBO_PLC" => "Union Bank of Colombo PLC"
+    )
+);
+
+
+
+
+
+
+
+
 // SMTPACCOUNT, SMTPPASSWORD, SMTPNAME
 
 define('SMTPACCOUNT', 'govithena.lk@gmail.com');
