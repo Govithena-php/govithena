@@ -1,12 +1,74 @@
-.filters {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: 2rem;
-    margin-bottom: 3rem;
+
+.inv__cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 1rem 0;
     padding-bottom: 1rem;
     border-bottom: 1px solid #ccc;
+}
+
+.inv__card {
+    min-height: 5rem;
+    background-color: var(--clr-light);
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 20px 1px rgba(62, 62, 62, 0.1);
+}
+
+.inv__card__header {
+    padding: 0.5rem 1rem;
+    color: var(--clr-text);
+}
+
+.inv__card__header h3 {
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.inv__card__body {
+    color: var(--clr-text);
+}
+
+.inv__card__body h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.inv__card__body p {
+    font-size: 0.75rem;
+    font-weight: 400;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.inv__new {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.LKR::before {
+    content: "LKR ";
+    color: rgb(255, 38, 0);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-right: 0.5rem;
+}
+
+.filters {
+    padding-top:1rem;
+    padding-bottom:2rem;
+    border-bottom: 1px solid #ccc;
+    align-items: end;
+    justify-items: end;
 }
 
 .filters .search {
@@ -43,10 +105,7 @@
 }
 
 .options {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 1rem;
+    align-items: end;
 }
 
 .options .input__control {
@@ -84,9 +143,6 @@
 }
 
 .caption {
-    /* width: 60%; */
-    margin-top: 1rem;
-    margin-bottom: 2rem;
     margin-inline: 0;
 }
 
@@ -102,6 +158,11 @@
     font-weight: 400;
     color: var(--clr-text-gray, #535353);
     margin-bottom: 0.5rem;
+}
+
+
+.stick_to_top{
+    padding-top:1rem;
 }
 
 

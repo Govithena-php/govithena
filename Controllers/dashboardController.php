@@ -13,6 +13,7 @@ class dashboardController extends Controller
     private $requestFarmerModel;
     private $investmentModel;
     private $bankAccountModel;
+    private $withdrawlModel;
 
     private $profilePictureHandler;
 
@@ -37,6 +38,7 @@ class dashboardController extends Controller
         $this->requestFarmerModel = $this->model('requestFarmer');
         $this->investmentModel = $this->model('investment');
         $this->bankAccountModel = $this->model('bankAccount');
+        $this->withdrawlModel = $this->model('withdrawl');
 
         $this->profilePictureHandler = new ImageHandler($folder = 'Uploads/profilePictures');
     }
@@ -287,6 +289,16 @@ class dashboardController extends Controller
 
     public function withdraw()
     {
+        $props = [];
+
+        $withdrawls = $this->withdrawlModel->fetchAllBy($this->currentUser->getUid());
+
+        if ($withdrawls['success']) {
+            $props['withdrawls'] = $withdrawls['data'];
+        }
+
+
+        $this->set($props);
         $this->render('withdraw');
     }
 
