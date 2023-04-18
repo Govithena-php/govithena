@@ -14,8 +14,6 @@ function highlight($active, $link)
 }
 
 ?>
-die(); ?>
-
 
 <link rel="stylesheet" href="<?php echo CSS ?>/dashboard/navigator.css" type="text/css">
 

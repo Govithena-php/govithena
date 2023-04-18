@@ -38,13 +38,13 @@ class Alert
 
     private function if_empty_Set_message_to($message)
     {
-        if (empty($this->message)) {
+        if (empty($this->message) || !isset($this->message)) {
             $this->message = $message;
         }
     }
     private function if_empty_Set_icon_to($icon)
     {
-        if (empty($this->icon)) {
+        if (empty($this->icon) || !isset($this->icon)) {
             $this->icon = $icon;
         }
     }
@@ -58,7 +58,7 @@ class Alert
           position: fixed;
           width: fit-content;
           top: 5rem;
-          right: 1rem;
+          right: calc(-100% - 1rem);
           background-color: rgb(48, 48, 48);
           color: #fff;
           padding: 1rem 1.5rem;
@@ -68,7 +68,14 @@ class Alert
           pointer-events: none;
           border-radius: 5px;
           box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.3);
+          z-index: 9999;
+          transition: right 0.5s ease-in-out;
         }
+
+        .show{
+            right: 1rem;
+        }
+
         .alert>i {
           font-size: 1.5rem;
           margin-right: 1rem;
@@ -80,6 +87,7 @@ class Alert
           padding-bottom: 0.2rem;
           border-bottom: 1px solid #ccc;
         }
+
         .alert p {
           font-size: 0.9rem;
           padding-top: 0.2rem;
@@ -97,7 +105,7 @@ class Alert
           background: #0984e3;
         }
       </style>
-      <div class='alert warning'>
+      <div class='alert " . $this->type . " show'>
         " . $this->icon . "
         <div class='alert_contnet'>
           <h4>" . $this->type . "</h4>
@@ -106,8 +114,8 @@ class Alert
       </div>
       <script>
         setTimeout(() => {
-          document.querySelector('.alert').style.display = 'none';
-        }, 2000);
+          document.querySelector('.alert').classList.remove('show');
+        }, 3000);
       </script>
         ";
     }

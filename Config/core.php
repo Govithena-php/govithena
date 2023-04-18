@@ -11,7 +11,7 @@ require(ROOT . "Core/Image.php");
 require(ROOT . "Core/ImageHandler.php");
 require(ROOT . "Core/Mailer.php");
 require(ROOT . "Core/Alert.php");
-require(ROOT . "Core/AlertHandler.php");
+// require(ROOT . "Core/AlertHandler.php");
 
 
 date_default_timezone_set('Asia/Kolkata');

@@ -425,12 +425,13 @@ class dashboardController extends Controller
             ];
 
             $response = $this->userModel->update($data);
-
             if ($response['success']) {
-                $this->redirect('/dashboard/myaccount/ok');
+                $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully updated your details');
             } else {
-                $this->redirect('/dashboard/myaccount/error');
+                $alert = new Alert($type = 'error', $icon = "", $message = 'Error updating your details');
             }
+            Session::set(['update_user_details_alert' => $alert]);
+            $this->redirect('/dashboard/myaccount');
         }
     }
 
@@ -452,14 +453,15 @@ class dashboardController extends Controller
 
                 $response = $this->userModel->updateProfilePicture($data);
                 if ($response['success']) {
-                    $this->redirect('/dashboard/myaccount/ok');
+                    $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully changed your profile picture');
                 } else {
-                    $this->redirect('/dashboard/myaccount/error');
+                    $alert = new Alert($type = 'error', $icon = "", $message = 'Error changing your profile picture');
                 }
             } catch (Exception $e) {
-                echo $e->getMessage();
-                $this->redirect('/dashboard/myaccount/error');
+                $alert = new Alert($type = 'error', $icon = "", $message =  $e->getMessage());
             }
+            Session::set(['change_profile_picture_alert' => $alert]);
+            $this->redirect('/dashboard/myaccount');
         }
     }
 
@@ -477,10 +479,12 @@ class dashboardController extends Controller
             $response = $this->bankAccountModel->add($data);
 
             if ($response['success']) {
-                $this->redirect('/dashboard/myaccount/ok');
+                $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully added new bank account');
             } else {
-                $this->redirect('/dashboard/myaccount/error');
+                $alert = new Alert($type = 'error', $icon = "", $message = 'Error adding new bank account');
             }
+            Session::set(['add_new_bank_account_alert' => $alert]);
+            $this->redirect('/dashboard/myaccount');
         }
     }
 
@@ -493,10 +497,12 @@ class dashboardController extends Controller
             $response = $this->bankAccountModel->delete($accountNumber);
 
             if ($response['success']) {
-                $this->redirect('/dashboard/myaccount/ok');
+                $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully deleted bank account');
             } else {
-                $this->redirect('/dashboard/myaccount/error');
+                $alert = new Alert($type = 'error', $icon = "", $message = 'Error deleting bank account');
             }
+            Session::set(['delete_bank_account_alert' => $alert]);
+            $this->redirect('/dashboard/myaccount');
         }
     }
 
@@ -512,12 +518,15 @@ class dashboardController extends Controller
             ];
 
             $response = $this->bankAccountModel->update($data);
-
+            
             if ($response['success']) {
                 $this->redirect('/dashboard/myaccount/ok');
+                $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully updated bank account');
             } else {
-                $this->redirect('/dashboard/myaccount/error');
+                $alert = new Alert($type = 'error', $icon = "", $message = 'Error updating bank account');
             }
+            Session::set(['edit_bank_account_alert' => $alert]);
+            $this->redirect('/dashboard/myaccount');
         }
     }
 }

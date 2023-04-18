@@ -38,6 +38,30 @@
         else echo "-";
     }
 
+    if (Session::has('update_user_details_alert')) {
+        $alert = Session::pop('update_user_details_alert');
+        $alert->show_default_alert();
+    }
+
+    if (Session::has('change_profile_picture_alert')) {
+        $alert = Session::pop('change_profile_picture_alert');
+        $alert->show_default_alert();
+    }
+
+    if (Session::has('add_new_bank_account_alert')) {
+        $alert = Session::pop('add_new_bank_account_alert');
+        $alert->show_default_alert();
+    }
+
+    if (Session::has('delete_bank_account_alert')) {
+        $alert = Session::pop('delete_bank_account_alert');
+        $alert->show_default_alert();
+    }
+
+    if (Session::has('edit_bank_account_alert')) {
+        $alert = Session::pop('edit_bank_account_alert');
+        $alert->show_default_alert();
+    }
 
 
     $active = "myaccount";
