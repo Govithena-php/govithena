@@ -51,6 +51,15 @@ class IMAGES
     const TYPES = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
 }
 
+
+class ALERT_TYPE
+{
+    const SUCCESS = "success";
+    const INFO = "info";
+    const WARNING = "warning";
+    const ERROR = "error";
+}
+
 define("DISTRICTS_ARRAY", array(
     "Ampara",
     "Anuradhapura",

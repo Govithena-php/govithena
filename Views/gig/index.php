@@ -66,7 +66,6 @@ function render_stars($stars, $outof)
     }
 
     ?>
-
     <div class="[ container mb ]" container-type="section">
 
         <div class="[ images__details ]" gap="2" md="2">
