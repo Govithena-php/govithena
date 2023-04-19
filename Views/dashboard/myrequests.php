@@ -18,15 +18,24 @@
     <link rel="stylesheet" href="<?php echo CSS ?>/investor/myrequests.css">
 
     <title>Dashboard | Investor</title>
-    <!-- <style>
-        *{
-            outline: 1px solid limegreen;
-        }
-    </style> -->
 </head>
 
 
 <body>
+
+    <?php
+
+    if (Session::has('myrequest_delete_alert')) {
+        $alert = Session::pop('myrequest_delete_alert');
+        $alert->show_default_alert();
+    }
+
+    if (Session::has('resend_request_alert')) {
+        $alert = Session::pop('resend_request_alert');
+        $alert->show_default_alert();
+    }
+
+    ?>
 
     <dialog id="deleteModal" class="[ alertModal ]">
         <div class="[ container ]">

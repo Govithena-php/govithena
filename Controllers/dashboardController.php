@@ -378,10 +378,12 @@ class dashboardController extends Controller
             $response = $this->requestFarmerModel->delete($requestId);
 
             if ($response['success']) {
-                $this->redirect('/dashboard/myrequests/ok');
+                $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully deleted request.');
             } else {
-                $this->redirect('/dashboard/myrequests/error');
+                $alert = new Alert($type = 'error', $icon = "", $message = 'Error deleting request.');
             }
+            Session::set(['myrequest_delete_alert' => $alert]);
+            $this->redirect('/dashboard/myrequests');
         }
     }
 
@@ -401,10 +403,12 @@ class dashboardController extends Controller
             $response = $this->requestFarmerModel->resend($data);
 
             if ($response['success']) {
-                $this->redirect('/dashboard/myrequests/ok');
+                $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully resent.');
             } else {
-                $this->redirect('/dashboard/myrequests/error');
+                $alert = new Alert($type = 'error', $icon = "", $message = 'Error resending.');
             }
+            Session::set(['resend_request_alert' => $alert]);
+            $this->redirect('/dashboard/myrequests');
         }
     }
 
@@ -518,7 +522,7 @@ class dashboardController extends Controller
             ];
 
             $response = $this->bankAccountModel->update($data);
-            
+
             if ($response['success']) {
                 $this->redirect('/dashboard/myaccount/ok');
                 $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully updated bank account');

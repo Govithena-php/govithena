@@ -19,11 +19,27 @@
 
 <body>
 
+
+    <?php
+
+    if (Session::has('password_changed_alert')) {
+        $alert = Session::pop('password_changed_alert');
+        $alert->show_default_alert();
+    }
+
+    if (Session::has('email_changed_alert')) {
+        $alert = Session::pop('email_changed_alert');
+        $alert->show_default_alert();
+    }
+
+    ?>
+
     <?php
     $active = "settings";
     $title = "Settings";
     require_once("navigator.php");
     ?>
+
 
     <dialog id="changePassowrdModal" class="[ Modal ]">
         <div class="[ container ]">

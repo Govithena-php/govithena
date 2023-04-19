@@ -34,35 +34,10 @@ function render_stars($stars, $outof)
     include COMPONENTS . 'navbar.php';
     ?>
     <?php
-    if (isset($state)) {
-        if ($state == 'success') {
-    ?>
 
-            <div class="[ alert alert-success ]">
-                <i class="fas fa-check"></i>
-                <div>
-                    <h4>Success</h4>
-                    <p>Your request has been sent to the farmer</p>
-                </div>
-                <!-- <i class="fas fa-times"></i> -->
-            </div>
-
-        <?php
-        }
-        if ($state == 'error') {
-        ?>
-
-            <div class="[ alert alert-error ]">
-                <i class="fas fa-times"></i>
-                <div>
-                    <h4>Error</h4>
-                    <p>Something went wrong.</p>
-                </div>
-                <!-- <i class="fas fa-times"></i> -->
-            </div>
-
-    <?php
-        }
+    if (Session::has('send_gig_request_alert')) {
+        $alert = Session::pop('send_gig_request_alert');
+        $alert->show_default_alert();
     }
 
     ?>

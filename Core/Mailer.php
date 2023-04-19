@@ -26,11 +26,11 @@ class Mailer
 
     public function loadTemplate($template, $data)
     {
-            $template = file_get_contents(ROOT . 'templates/mail/' . $template . '.php');
-            foreach ($data as $key => $value) {
-                $template = str_replace('{{' . $key . '}}', $value, $template);
-            }
-            return $template;
+        $template = file_get_contents(ROOT . 'templates/mail/' . $template . '.php');
+        foreach ($data as $key => $value) {
+            $template = str_replace('{{' . $key . '}}', $value, $template);
+        }
+        return $template;
     }
 
 

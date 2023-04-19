@@ -2,62 +2,62 @@
 
 class Alert
 {
-    private $type;
-    private $message;
-    private $icon;
+  private $type;
+  private $message;
+  private $icon;
 
-    public function __construct($type = "success", $icon = "", $message = "")
-    {
-        $this->type = $type;
-        $this->icon = $icon;
-        $this->message = $message;
+  public function __construct($type = "success", $icon = "", $message = "")
+  {
+    $this->type = $type;
+    $this->icon = $icon;
+    $this->message = $message;
 
-        switch (strtolower($this->type)) {
-            case ALERT_TYPE::SUCCESS:
-                $this->if_empty_Set_icon_to("<i class='fa fa-check'></i>");
-                $this->if_empty_Set_message_to("successful");
-                break;
-            case ALERT_TYPE::INFO:
-                $this->if_empty_Set_icon_to("<i class='fa fa-info'></i>");
-                $this->if_empty_Set_message_to("Information");
-                break;
-            case ALERT_TYPE::WARNING:
-                $this->if_empty_Set_icon_to("<i class='fa fa-exclamation-triangle'></i>");
-                $this->if_empty_Set_message_to("Warning");
-                break;
-            case ALERT_TYPE::ERROR:
-                $this->if_empty_Set_icon_to("<i class='fa fa-exclamation-circle'></i>");
-                $this->if_empty_Set_message_to("Error");
-                break;
-            default:
-                $this->if_empty_Set_icon_to("<i class='fa fa-info'></i>");
-                $this->if_empty_Set_message_to("Information");
-                break;
-        }
+    switch (strtolower($this->type)) {
+      case ALERT_TYPE::SUCCESS:
+        $this->if_empty_Set_icon_to("<i class='fa fa-check'></i>");
+        $this->if_empty_Set_message_to("successful");
+        break;
+      case ALERT_TYPE::INFO:
+        $this->if_empty_Set_icon_to("<i class='fa fa-info'></i>");
+        $this->if_empty_Set_message_to("Information");
+        break;
+      case ALERT_TYPE::WARNING:
+        $this->if_empty_Set_icon_to("<i class='fa fa-exclamation-triangle'></i>");
+        $this->if_empty_Set_message_to("Warning");
+        break;
+      case ALERT_TYPE::ERROR:
+        $this->if_empty_Set_icon_to("<i class='fa fa-exclamation-circle'></i>");
+        $this->if_empty_Set_message_to("Error");
+        break;
+      default:
+        $this->if_empty_Set_icon_to("<i class='fa fa-info'></i>");
+        $this->if_empty_Set_message_to("Information");
+        break;
     }
+  }
 
-    private function if_empty_Set_message_to($message)
-    {
-        if (empty($this->message) || !isset($this->message)) {
-            $this->message = $message;
-        }
+  private function if_empty_Set_message_to($message)
+  {
+    if (empty($this->message) || !isset($this->message)) {
+      $this->message = $message;
     }
-    private function if_empty_Set_icon_to($icon)
-    {
-        if (empty($this->icon) || !isset($this->icon)) {
-            $this->icon = $icon;
-        }
+  }
+  private function if_empty_Set_icon_to($icon)
+  {
+    if (empty($this->icon) || !isset($this->icon)) {
+      $this->icon = $icon;
     }
+  }
 
 
-    public function show_default_alert()
-    {
-        echo "
+  public function show_default_alert()
+  {
+    echo "
         <style>
         .alert {
           position: fixed;
           width: fit-content;
-          top: 5rem;
+          top: 6rem;
           right: calc(-100% - 1rem);
           background-color: rgb(48, 48, 48);
           color: #fff;
@@ -118,26 +118,26 @@ class Alert
         }, 3000);
       </script>
         ";
-    }
+  }
 
-    public function load_alert_template($template, $data)
-    {
-        $template = file_get_contents(ROOT . 'templates/alert/' . $template . '.php');
-        foreach ($data as $key => $value) {
-            $template = str_replace('{{' . $key . '}}', $value, $template);
-        }
-        echo $template;
+  public function load_alert_template($template, $data)
+  {
+    $template = file_get_contents(ROOT . 'templates/alert/' . $template . '.php');
+    foreach ($data as $key => $value) {
+      $template = str_replace('{{' . $key . '}}', $value, $template);
     }
+    echo $template;
+  }
 
-    public function show_custom_alert($template, $extra = [])
-    {
-        $data = [
-            'icon' => $this->icon,
-            'type' => $this->type,
-            'message' => $this->message
-        ];
-        $data = array_merge($data, $extra);
+  public function show_custom_alert($template, $extra = [])
+  {
+    $data = [
+      'icon' => $this->icon,
+      'type' => $this->type,
+      'message' => $this->message
+    ];
+    $data = array_merge($data, $extra);
 
-        $this->load_alert_template($template, $data);
-    }
+    $this->load_alert_template($template, $data);
+  }
 }

@@ -233,16 +233,15 @@ class authController extends Controller
                     echo $passwordHash;
                     $response = $this->userModel->updatePasswordByUid($uid, $passwordHash);
                     if ($response['status']) {
-                        $this->redirect('/dashboard/settings/password-changed');
+                        $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully changed password.');
                     } else {
-                        var_dump($response);
-                        die();
-                        $this->redirect('/dashboard/settings/error/server-error');
+                        $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong.');
                     }
-                    die();
                 } else {
-                    $this->redirect('/dashboard/settings/error/invalid-password');
+                    $alert = new Alert($type = 'error', $icon = "", $message = 'Invalid password.');
                 }
+                Session::set(['password_changed_alert' => $alert]);
+                $this->redirect('/dashboard/settings');
             }
         }
     }
@@ -266,14 +265,16 @@ class authController extends Controller
                 if (password_verify($currentPassword, $response['data']['password'])) {
                     $response = $this->userModel->updateEmailByUid($uid, $newEmail);
                     if ($response['status']) {
-                        $this->redirect('/dashboard/settings/email-changed');
+                        $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully changed email.');
                     } else {
-                        $this->redirect('/dashboard/settings/error/server-error');
+                        $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong.');
                     }
                 } else {
-                    $this->redirect('/dashboard/settings/error/invalid-password');
+                    $alert = new Alert($type = 'error', $icon = "", $message = 'Invalid password.');
                 }
             }
+            Session::set(['email_changed_alert' => $alert]);
+            $this->redirect('/dashboard/settings');
         }
     }
 

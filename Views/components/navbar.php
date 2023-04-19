@@ -18,11 +18,11 @@ $currentUser = Session::get('user');
         </div>
 
         <div class="[ menu ]">
-            <ul>
+            <!-- <ul>
                 <li><a href="<?php echo URLROOT ?>/home/about">About Us</a></li>
                 <li><a href="<?php echo URLROOT ?>/home/services">Services</a></li>
                 <li><a href="<?php echo URLROOT ?>/home/contact">Contact Us</a></li>
-            </ul>
+            </ul> -->
         </div>
 
         <div class="[ profile ]">

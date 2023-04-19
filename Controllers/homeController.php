@@ -21,7 +21,6 @@ class homeController extends Controller
     function index()
     {
         $response = $this->gigModal->fetchAll($order = "DESC", $limit = 8);
-
         if ($response['status']) {
             $props['gigs'] = $response['data'];
         } else {
