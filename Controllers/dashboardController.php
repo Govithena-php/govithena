@@ -79,6 +79,10 @@ class dashboardController extends Controller
             $props['profits'] = $profits['data'];
         }
 
+
+        $props['investments'] = $this->investmentModel->fetchAllBy($this->currentUser->getUid());
+
+
         $this->set($props);
         $this->render('index');
     }

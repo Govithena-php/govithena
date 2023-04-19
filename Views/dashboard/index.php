@@ -157,48 +157,48 @@
                     <h4>Investments</h4>
                     <a href="">View All</a href="">
                 </div>
-                <table class="[  ]">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Farmer name</th>
-                            <th>Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer nameFarmer name</td>
-                            <td>150000.00</td>
-                        </tr>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer name</td>
-                            <td>150000.00</td>
-                        </tr>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer name</td>
-                            <td>150000.00</td>
-                        </tr>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer nameFarmer name</td>
-                            <td>150000.00</td>
-                        </tr>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer name</td>
-                            <td>150000.00</td>
-                        </tr>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer name</td>
-                            <td>150000.00</td>
-                        </tr>
+                <?php
+                if (!isset($investments) || empty($investments)) {
+                    echo '<h3>No data found</h3>';
+                } else {
+                ?>
+                    <table class="[ ]">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Farmer name</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                    </tbody>
-                </table>
+                            <?php
+                            $limit = 5;
+                            foreach ($investments as $investment) {
+                                if ($limit == 0) {
+                                    break;
+                                }
+                                $limit--;
+                            ?>
+                                <tr>
+                                    <td><?php echo $investment['title'] ?></td>
+                                    <td class="[ LKR ]"><?php echo number_format($investment['amount'], 2, '.', ',') ?></td>
+                                    <td><?php echo $investment['investedDate'] ?></td>
+                                </tr>
+
+                            <?php
+                            }
+                            ?>
+
+                        </tbody>
+                    </table>
+
+
+                <?php
+
+
+
+                } ?>
             </div>
         </div>
 
