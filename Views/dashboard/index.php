@@ -100,7 +100,7 @@
 
                 <div class="[ heading ]">
                     <h4>Progress</h4>
-                    <a href="">View All</a href="">
+                    <a href="<?php echo URLROOT ?>/dashboard/gigs">View All</a>
                 </div>
 
                 <div class="[ card ]">
@@ -155,7 +155,7 @@
             <div class="[ block investments ]">
                 <div class="[ heading ]">
                     <h4>Investments</h4>
-                    <a href="">View All</a href="">
+                    <a href="<?php echo URLROOT ?>/dashboard/myinvestments">View All</a>
                 </div>
                 <?php
                 if (!isset($investments) || empty($investments)) {
@@ -207,7 +207,7 @@
             <div class="[ block Profits ]">
                 <div class="[ heading ]">
                     <h4>Profits</h4>
-                    <a href="">View All</a href="">
+                    <a href="<?php echo URLROOT ?>/dashboard/profits">View All</a>
                 </div>
 
                 <?php
@@ -247,7 +247,7 @@
             <div class="[ block widthdrawal ]">
                 <div class="[ heading ]">
                     <h4>Widthdrawal</h4>
-                    <a href="">View All</a href="">
+                    <a href="<?php echo URLROOT ?>/dashboard/withdraw">View All</a>
                 </div>
                 <?php
                 if (!isset($widthdrawals) || empty($widthdrawals)) {
