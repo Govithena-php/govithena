@@ -85,7 +85,14 @@
         </div>
 
         <div class="[ charts ]">
-            <div class="[ chart ]">
+            <style>
+                .ind {
+                    display: grid;
+                    place-items: center;
+                }
+            </style>
+            <div class="[ chart ind ]">
+                <h1>Insufficient data!</h1>
                 <canvas id="myChart"></canvas>
             </div>
             <div class="[ chart ]">
@@ -94,7 +101,7 @@
         </div>
 
 
-        <div class="[ progress__inestments ]">
+        <!-- <div class="[ progress__inestments ]">
             <div class="[ block progress ]">
 
                 <div class="[ heading ]">
@@ -199,10 +206,10 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> -->
 
 
-        <div class="[ grid ][ profit__widthdrawal ]" gap="2" md="2">
+        <!-- <div class="[ grid ][ profit__widthdrawal ]" gap="2" md="2">
             <div class="[ block Profits ]">
                 <div class="[ heading ]">
                     <h4>Profits</h4>
@@ -299,7 +306,7 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> -->
     </div>
     <?php
     require_once("footer.php");
