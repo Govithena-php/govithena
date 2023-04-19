@@ -37,7 +37,7 @@
                 <h3>Balance</h3>
                 <div class="[ amount ]">
                     <span class="[ LKRBadge ]"></span>
-                    <h1>191,500.00</h1>
+                    <h1><?php echo number_format($totalBalance, 2, '.', ',') ?></h1>
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
                 <h3>Investments</h3>
                 <div class="[ amount ]">
                     <span class="[ LKRBadge ]"></span>
-                    <h1>180,000.00</h1>
+                    <h1><?php echo number_format($totalInvestment, 2, '.', ',') ?></h1>
                     <h4>12% <i class="fa-solid fa-arrow-down"></i></h4>
                 </div>
                 <p>Compared to (LKR 21340 last month)</p>
@@ -57,7 +57,7 @@
                 <h3>Gain</h3>
                 <div class="[ amount ]">
                     <span class="[ LKRBadge ]"></span>
-                    <h1>230,000.00</h1>
+                    <h1><?php echo number_format($totalGain, 2, '.', ',') ?></h1>
                     <h4>12% <i class="fa-solid fa-arrow-up"></i></h4>
                 </div>
                 <p>Compared to (LKR 21340 last month)</p>
@@ -67,7 +67,7 @@
                 <h3>Profilt</h3>
                 <div class="[ amount ]">
                     <span class="[ LKRBadge ]"></span>
-                    <h1>50,000.00</h1>
+                    <h1><?php echo number_format($totalProfit, 2, '.', ',') ?></h1>
                     <h4>12% <i class="fa-solid fa-arrow-down"></i></h4>
                 </div>
                 <p>Compared to (LKR 21340 last month)</p>
@@ -77,7 +77,7 @@
                 <h3>Widthdraw</h3>
                 <div class="[ amount ]">
                     <span class="[ LKRBadge ]"></span>
-                    <h1>38,500.00</h1>
+                    <h1><?php echo number_format($totalWithdrawn, 2, '.', ',') ?></h1>
                     <h4>12% <i class="fa-solid fa-arrow-up"></i></h4>
                 </div>
                 <p>Compared to (LKR 21340 last month)</p>
@@ -209,96 +209,84 @@
                     <h4>Profits</h4>
                     <a href="">View All</a href="">
                 </div>
-                <table class="[ ]">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Farmer name</th>
-                            <th>Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer nameFarmer name</td>
-                            <td>150000.00</td>
-                        </tr>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer name</td>
-                            <td>150000.00</td>
-                        </tr>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer name</td>
-                            <td>150000.00</td>
-                        </tr>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer nameFarmer name</td>
-                            <td>150000.00</td>
-                        </tr>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer name</td>
-                            <td>150000.00</td>
-                        </tr>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer name</td>
-                            <td>150000.00</td>
-                        </tr>
 
-                    </tbody>
-                </table>
+                <?php
+                if (!isset($profits) || empty($profits)) {
+                    echo '<h3>No data found</h3>';
+                } else {
+                ?>
+                    <table class="[ ]">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Farmer name</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            foreach ($profits as $profit) {
+                            ?>
+                                <tr>
+                                    <td><?php echo $profit['wDate'] ?></td>
+                                    <td><?php echo $profit['wTime'] ?></td>
+                                    <td class="[ LKR ]"><?php echo number_format($profit['amount'], 2, '.', ',') ?></td>
+                                </tr>
+
+                            <?php
+                            }
+                            ?>
+
+                        </tbody>
+                    </table>
+                <?php
+                }
+
+                ?>
             </div>
             <div class="[ block widthdrawal ]">
                 <div class="[ heading ]">
                     <h4>Widthdrawal</h4>
                     <a href="">View All</a href="">
                 </div>
-                <table class="[ ]">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Farmer name</th>
-                            <th>Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer nameFarmer name</td>
-                            <td>150000.00</td>
-                        </tr>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer name</td>
-                            <td>150000.00</td>
-                        </tr>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer name</td>
-                            <td>150000.00</td>
-                        </tr>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer nameFarmer name</td>
-                            <td>150000.00</td>
-                        </tr>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer name</td>
-                            <td>150000.00</td>
-                        </tr>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer name</td>
-                            <td>150000.00</td>
-                        </tr>
+                <?php
+                if (!isset($widthdrawals) || empty($widthdrawals)) {
+                    echo '<h3>No data found</h3>';
+                } else {
+                ?>
+                    <table class="[ ]">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Farmer name</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                    </tbody>
-                </table>
+                            <?php
+                            foreach ($widthdrawals as $widthdrawal) {
+                            ?>
+                                <tr>
+                                    <td><?php echo $widthdrawal['wDate'] ?></td>
+                                    <td><?php echo $widthdrawal['wTime'] ?></td>
+                                    <td class="[ LKR ]"><?php echo number_format($widthdrawal['amount'], 2, '.', ',') ?></td>
+                                </tr>
+
+                            <?php
+                            }
+                            ?>
+
+                        </tbody>
+                    </table>
+
+
+                <?php
+
+
+
+                } ?>
+
             </div>
         </div>
     </div>

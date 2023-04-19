@@ -13,7 +13,8 @@ class dashboardController extends Controller
     private $requestFarmerModel;
     private $investmentModel;
     private $bankAccountModel;
-    private $withdrawlModel;
+    private $widthdrawModel;
+    private $profitModel;
 
     private $profilePictureHandler;
 
@@ -38,13 +39,47 @@ class dashboardController extends Controller
         $this->requestFarmerModel = $this->model('requestFarmer');
         $this->investmentModel = $this->model('investment');
         $this->bankAccountModel = $this->model('bankAccount');
-        $this->withdrawlModel = $this->model('withdrawl');
+        $this->widthdrawModel = $this->model('widthrawl');
+        $this->profitModel = $this->model('profit');
 
         $this->profilePictureHandler = new ImageHandler($folder = 'Uploads/profilePictures');
     }
 
     public function index()
     {
+        $props = [];
+
+        $totalInvestment = $this->investmentModel->getTotalInvestmentByInvestor($this->currentUser->getUid());
+        if ($totalInvestment['success']) {
+            $props['totalInvestment'] = $totalInvestment['data']['totalInvestment'];
+        }
+
+        $totalWithdrawn = $this->widthdrawModel->getTotalWithdrawnByInvestor($this->currentUser->getUid());
+        if ($totalWithdrawn['success']) {
+            $props['totalWithdrawn'] = $totalWithdrawn['data']['totalWithdrawn'];
+        }
+
+        $totalProfit = $this->profitModel->getTotalProfitByInvestor($this->currentUser->getUid());
+        if ($totalProfit['success']) {
+            $props['totalProfit'] = $totalProfit['data']['totalProfit'];
+        }
+        $totalGain = $props['totalInvestment'] + $props['totalProfit'];
+        $totalBalance = $totalGain - $props['totalWithdrawn'];
+        $props['totalGain'] = $totalGain;
+        $props['totalBalance'] = $totalBalance;
+
+
+        $widthdrawals = $this->widthdrawModel->fetchAllBy($this->currentUser->getUid());
+        if ($widthdrawals['success']) {
+            $props['widthdrawals'] = $widthdrawals['data'];
+        }
+
+        $profits = $this->profitModel->fetchAllBy($this->currentUser->getUid());
+        if ($profits['success']) {
+            $props['profits'] = $profits['data'];
+        }
+
+        $this->set($props);
         $this->render('index');
     }
 
@@ -291,7 +326,7 @@ class dashboardController extends Controller
     {
         $props = [];
 
-        $withdrawls = $this->withdrawlModel->fetchAllBy($this->currentUser->getUid());
+        $withdrawls = $this->widthdrawModel->fetchAllBy($this->currentUser->getUid());
 
         if ($withdrawls['success']) {
             $props['withdrawls'] = $withdrawls['data'];
