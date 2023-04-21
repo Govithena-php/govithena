@@ -18,8 +18,11 @@ function render_stars($stars, $outof)
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
+    <title>Profile | Farmer</title>
+    <link rel="icon" type="image/x-icon" href="<?php echo IMAGES ?>/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
+
     <link rel="stylesheet" href="<?php echo CSS ?>base.css">
     <link rel="stylesheet" href="<?php echo CSS ?>grid.css">
     <link rel="stylesheet" href="<?php echo CSS ?>profile/index.css">
@@ -31,6 +34,210 @@ function render_stars($stars, $outof)
     ?>
     <div class="[ container ][ heading ]" container-type="section">
 
+        <div class="[ top ]">
+            <div class="[ left ]">
+                <div class="user__profile">
+                    <div class="picture__name">
+                        <div class="picture">
+                            <img src="<?php echo UPLOADS . $user['image'] ?>" alt="">
+                        </div>
+                        <div class="name">
+                            <h1><?php echo $user['firstName'] . " " . $user['lastName'] ?></h1>
+                            <p class="type"><?php echo strtolower($user['userType']) ?> from <?php echo $user['city'] ?></p>
+                        </div>
+                    </div>
+                    <!-- <button class="button__primary">Contact</button> -->
+                </div>
+                <div class="preformance">
+                    <div class="cards">
+                        <div class="card">
+                            <small>Worked with </small>
+                            <p>3</p>
+                            <small>Investors</small>
+                        </div>
+                        <div class="card">
+                            <small>Invested Over </small>
+                            <p class="[ LKR ]"><?php echo number_format('10000.00', 0, '', ',') ?>+</p>
+                            <small>From Investors</small>
+                        </div>
+                        <div class="card">
+                            <small>Overall Score </small>
+                            <p>4.5</p>
+                            <small>out of 5</small>
+                        </div>
+                    </div>
+                    <div class="progress">
+                        <h1>Preformance</h1>
+                        <div class="[ grid ]" sm="1" md="2" gap="1">
+                            <div class="progress__bar">
+                                <div class="progress__details">
+                                    <p>Quality of Work</p>
+                                    <p>80%</p>
+                                </div>
+                                <div class="bar">
+                                    <div class="fill" style="--value: 50%;"></div>
+                                </div>
+                            </div>
+                            <div class="progress__bar">
+                                <div class="progress__details">
+                                    <p>Communication</p>
+                                    <p>80%</p>
+                                </div>
+                                <div class="bar">
+                                    <div class="fill" style="--value: 40%;"></div>
+                                </div>
+                            </div>
+                            <div class="progress__bar">
+                                <div class="progress__details">
+                                    <p>Expertise</p>
+                                    <p>80%</p>
+                                </div>
+                                <div class="bar">
+                                    <div class="fill" style="--value: 67%;"></div>
+                                </div>
+                            </div>
+                            <div class="progress__bar">
+                                <div class="progress__details">
+                                    <p>Professionalism</p>
+                                    <p>80%</p>
+                                </div>
+                                <div class="bar">
+                                    <div class="fill" style="--value: 48%;"></div>
+                                </div>
+                            </div>
+                            <div class="progress__bar">
+                                <div class="progress__details">
+                                    <p>Quality of Work</p>
+                                    <p>80%</p>
+                                </div>
+                                <div class="bar">
+                                    <div class="fill" style="--value: 90%;"></div>
+                                </div>
+                            </div>
+                            <div class="progress__bar">
+                                <div class="progress__details">
+                                    <p>Communication</p>
+                                    <p>80%</p>
+                                </div>
+                                <div class="bar">
+                                    <div class="fill" style="--value: 80%;"></div>
+                                </div>
+                            </div>
+                            <div class="progress__bar">
+                                <div class="progress__details">
+                                    <p>Expertise</p>
+                                    <p>80%</p>
+                                </div>
+                                <div class="bar">
+                                    <div class="fill" style="--value: 76%;"></div>
+                                </div>
+                            </div>
+                            <div class="progress__bar">
+                                <div class="progress__details">
+                                    <p>Professionalism</p>
+                                    <p>80%</p>
+                                </div>
+                                <div class="bar">
+                                    <div class="fill" style="--value: 50%;"></div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="[ right ]">
+                <div class="personal__details">
+                    <h1>Personal Details</h1>
+                    <ul class="items">
+                        <li class="item">
+                            <i class="bi bi-envelope-at"></i>
+                            <div>
+                                <p class="email"><?php echo $user['username'] ?></p>
+                                <small>Email Address</small>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <i class="bi bi-phone"></i>
+                            <div>
+                                <p class="email"><?php echo $user['phoneNumber'] ?></p>
+                                <small>Phone Number</small>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <i class="bi bi-signpost-split"></i>
+                            <div>
+                                <p>
+                                    <?php
+                                    echo $user['addressLine1'] .
+                                        "<br>" . $user['addressLine2'] .
+                                        "<br>" . $user['city'];
+                                    ?>
+                                </p> <small>Address</small>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <i class="bi bi-geo"></i>
+                            <div>
+                                <p><?php echo $user['district'] ?></p>
+                                <small>District</small>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <i class="bi bi-translate"></i>
+                            <div>
+                                <p><?php echo "Sinhala, English" ?></p>
+                                <small>Languages</small>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <i class="bi bi-tree"></i>
+                            <div>
+                                <p><?php echo "Fruits" ?></p>
+                                <small>Categories</small>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <i class="bi bi-calendar"></i>
+                            <div>
+                                <p><?php echo "2 months ago, on 12/15/2022" ?></p>
+                                <small>Joined Date</small>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="buttons">
+                        <button class="button__primary-invert">Contact Farmer</button>
+                        <button class="button__primary">Send a message</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="reviews">
+            <h1>Reviews</h1>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- 
         <div class="[ heading__content ]">
             <div class="[ cover__img ]">
                 <img src="<?php echo IMAGES; ?>/placeholder.jpg" alt="">
@@ -62,9 +269,9 @@ function render_stars($stars, $outof)
                 <h2>Description</h2>
                 <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non sapiente quis recusandae rerum, quo id molestias minima! Facilis molestiae facere optio natus beatae deserunt ratione et quo deleniti, consequatur assumenda.</p>
             </div>
-        </div>
+        </div> -->
 
-        <div class="[ additional__details ]">
+        <!-- <div class="[ additional__details ]">
             <h2>Additional Details</h2>
             <ul>
                 <li>
@@ -116,7 +323,7 @@ function render_stars($stars, $outof)
                     </div>
                 </li>
             </ul>
-        </div>
+        </div> -->
     </div>
     <?php
 
