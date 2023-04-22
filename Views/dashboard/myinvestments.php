@@ -132,8 +132,8 @@
                                         </select>
                                     </div>
                                     <div class="[ input__control ]">
-                                        <label for="city">Crop Cycle :</label>
-                                        <select id="city" name="city">
+                                        <label for="cropCycle">Crop Cycle :</label>
+                                        <select id="cropCycle" name="cropCycle">
                                             <option value="all">Any</option>
                                             <option value="30">30 Days</option>
                                             <option value="60">60 Days</option>
@@ -161,12 +161,12 @@
                                     </div>
 
                                 </div>
-                                <div class="[ search ]">
+                                <!-- <div class="[ search ]">
                                     <input type="text" placeholder="Search">
                                     <button type="button">
                                         <i class="fas fa-search"></i>
                                     </button>
-                                </div>
+                                </div> -->
                             </form>
                             <div class="[ row ]">
                                 <div class="[ data ]">
