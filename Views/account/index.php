@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/gridTable.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/alertModal.css">
 
-    <link rel="stylesheet" href="<?php echo CSS ?>/investor/myaccount.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/account/index.css">
 
 
     <title>Account | Investor</title>
@@ -62,11 +62,6 @@
         $alert = Session::pop('edit_bank_account_alert');
         $alert->show_default_alert();
     }
-
-
-    $active = "myaccount";
-    $title = "My Account";
-    require_once("navigator.php");
     ?>
 
     <dialog id="editDetailsModal" class="[ Modal ]">
@@ -75,7 +70,7 @@
                 <h2>Personal Details</h2>
                 <p>Update your Personal Details.</p>
             </div>
-            <form class="[ new__details_form ]" action="<?php echo URLROOT ?>/dashboard/update_user_details" method="post" enctype="multipart/form-data">
+            <form class="[ new__details_form ]" action="<?php echo URLROOT ?>/account/update_user_details" method="post" enctype="multipart/form-data">
                 <div class="[ grid ]" sm="1" lg="2" gap="1">
                     <div class="[ input__control ]">
                         <label for="u-firstName">First Name</label>
@@ -124,7 +119,7 @@
             <div class="[ caption ]">
                 <h2>Change Profile Picture</h2>
             </div>
-            <form class="[ new__profile_picture ]" action="<?php echo URLROOT ?>/dashboard/change_profile_picture" method="post" enctype="multipart/form-data">
+            <form class="[ new__profile_picture ]" action="<?php echo URLROOT ?>/account/change_profile_picture" method="post" enctype="multipart/form-data">
                 <div class="[ image__uploader ]">
                     <div class="previewer">
                         <div class="preview__image">
@@ -159,7 +154,7 @@
                 <h2>Add New Bank Account</h2>
                 <p>Add your new bank account you wish to withdraw.</p>
             </div>
-            <form class="[ new__category_form ]" action="<?php echo URLROOT ?>/dashboard/add_new_bank_account" method="post" enctype="multipart/form-data">
+            <form class="[ new__category_form ]" action="<?php echo URLROOT ?>/account/add_new_bank_account" method="post" enctype="multipart/form-data">
                 <div class="[ grid ]" sm="1" lg="2" gap="1">
                     <div class="[ input__control ]">
                         <label for="n-accountNumber">Account Number</label>
@@ -200,7 +195,7 @@
                 <h2>Are you sure?</h2>
                 <p>Do you really want to Delete this bank account ?</p>
             </div>
-            <form id="suspendForm" action="<?php echo URLROOT ?>/dashboard/delete_bank_account" method="POST" class="[ buttons ]">
+            <form id="suspendForm" action="<?php echo URLROOT ?>/account/delete_bank_account" method="POST" class="[ buttons ]">
                 <button type="button" class="[ button__primary ]" onclick="closeDeleteAlert()" data-dismiss="modal">No, Cancel</button>
                 <button id="confirmDeleteBtn" name="deleteBankAccount-confirm" type="submit" class="[ button__danger ]">Yes, Delete</button>
             </form>
@@ -213,7 +208,7 @@
                 <h2>Edit Bank Account</h2>
                 <p>Edit your bank account details.</p>
             </div>
-            <form class="[ new__category_form ]" action="<?php echo URLROOT ?>/dashboard/edit_bank_account" method="post" enctype="multipart/form-data">
+            <form class="[ new__category_form ]" action="<?php echo URLROOT ?>/account/edit_bank_account" method="post" enctype="multipart/form-data">
                 <div class="[ grid ]" sm="1" lg="2" gap="1">
                     <div class="[ input__control ]">
                         <label for="u-accountNumber">Account Number</label>
@@ -246,8 +241,9 @@
         </div>
     </dialog>
 
+    <?php require_once(COMPONENTS . 'navbar.php'); ?>
 
-    <div class="[ container ][ ]" container-type="dashboard-section">
+    <div class="[ container ][ ]" container-type="section">
         <div class="[ left__right ]">
             <div class="[ left ]">
                 <div class="[ details__card ]">
@@ -437,7 +433,7 @@
         </div>
     </div>
     <?php
-    require_once("footer.php");
+    require COMPONENTS . "footer.php";
     ?>
     <script src="https://kit.fontawesome.com/b8084a92f1.js" crossorigin="anonymous"></script>
     <script src="<?php echo JS ?>/dashboard/dashboard.js"></script>

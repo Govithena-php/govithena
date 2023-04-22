@@ -1,3 +1,10 @@
+.container[container-type="section"] {
+    margin-block: 5rem;
+}
+
+nav {
+    background-color: var(--clr-dark, #000);
+}
 .caption {
     /* width: 60%; */
     margin-top: 1rem;

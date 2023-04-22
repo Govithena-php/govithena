@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/table.css">
-    <link rel="stylesheet" href="<?php echo CSS ?>/investor/settings.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/settings/index.css">
 
     <title>Dashboard | Investor</title>
 </head>
@@ -34,10 +34,7 @@
 
     ?>
 
-    <?php
-    $active = "settings";
-    $title = "Settings";
-    require_once("navigator.php");
+    <?php require_once(COMPONENTS . "navbar.php");
     ?>
 
 
@@ -47,7 +44,7 @@
                 <h2>Change your Password</h2>
                 <p>you can change your password here. if you don't remember your current password, signout and use forgot password option to reset your password.</p>
             </div>
-            <form class="[ ]" action="<?php echo URLROOT ?>/auth/change_password" method="post">
+            <form class="[ ]" action="<?php echo URLROOT ?>/settings/change_password" method="post">
                 <div class="[ grid ]" sm="1" lg="1" gap="1">
                     <div class="[ input__control ]">
                         <label for="u-currentPassword">Current Password</label>
@@ -77,7 +74,7 @@
                 <h2>Change your Email</h2>
                 <p>you can change your Email address here.</p>
             </div>
-            <form class="[ ]" action="<?php echo URLROOT ?>/auth/change_email" method="post">
+            <form class="[ ]" action="<?php echo URLROOT ?>/settings/change_email" method="post">
                 <div class="[ grid ]" sm="1" lg="1" gap="1">
                     <div class="[ input__control ]">
                         <label for="u-newEmail">New Email</label>
@@ -108,7 +105,7 @@
                     We're sorry to see you go! If you change your mind and decide to keep your account
                 </p>
             </div>
-            <form class="[ ]" action="<?php echo URLROOT ?>/auth/delete_account" method="post">
+            <form class="[ ]" action="<?php echo URLROOT ?>/settings/delete_account" method="post">
                 <div class="[ grid ]" sm="1" lg="1" gap="1">
                     <p>Are you sure you want to delete your account? This action is permanent and cannot be undone. If you delete your account, you will lose access to all of your data and any associated services..</p>
                     <p>
@@ -129,7 +126,7 @@
 
 
 
-    <div class="[ container ][ ]" container-type="dashboard-section">
+    <div class="[ container ][ ]" container-type="section">
         <div class="[ caption ]">
             <h3>Security</h3>
             <p>Manage your security settings</p>
@@ -159,7 +156,7 @@
         </div>
     </div>
     <?php
-    require_once("footer.php");
+    require COMPONENTS . "footer.php";
     ?>
     <script src="<?php echo JS ?>/dashboard/dashboard.js"></script>
     <script>
