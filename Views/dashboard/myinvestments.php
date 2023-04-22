@@ -119,31 +119,11 @@
                                         --sm-cols: 2fr;
                                     ">
                         <div class="[ head stick_to_top ]">
-                            <div class="[ investments__heading ]">
-                                <div class="[ investments__add ]">
-                                    <div class="[ input__control ]">
-                                        <label for="from">From :</label>
-                                        <input id="from" type="date">
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <label for="to">To :</label>
-                                        <input id="to" type="date">
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <label for="location">Location :</label>
-                                        <select id="location">
-                                            <option value="all">All</option>
-                                            <option value="colombo">Colombo</option>
-                                            <option value="galle">Galle</option>
-                                            <option value="kandy">Kandy</option>
-                                            <option value="matara">Matara</option>
-                                            <option value="nuwaraeliya">Nuwara Eliya</option>
-                                            <option value="trincomalee">Trincomalee</option>
-                                        </select>
-                                    </div>
+                            <form class="[ filters ]" method="post" action="<?php echo URLROOT ?>/dashboard/myinvestments">
+                                <div class="[ options ]">
                                     <div class="[ input__control ]">
                                         <label for="category">Category :</label>
-                                        <select id="category">
+                                        <select id="category" name="category">
                                             <option value="all">All</option>
                                             <option value="vegetable">Vegetable</option>
                                             <option value="fruit">Fruit</option>
@@ -152,17 +132,42 @@
                                         </select>
                                     </div>
                                     <div class="[ input__control ]">
-                                        <button type="button">Apply</button>
+                                        <label for="city">Crop Cycle :</label>
+                                        <select id="city" name="city">
+                                            <option value="all">Any</option>
+                                            <option value="30">30 Days</option>
+                                            <option value="60">60 Days</option>
+                                            <option value="90">90 Days</option>
+                                            <option value="120">120 Days</option>
+                                            <option value="150">150 Days</option>
+                                            <option value="200">More than 150 Days</option>
+                                        </select>
+                                    </div>
+                                    <div class="[ input__control ]">
+                                        <label for="city">City :</label>
+                                        <select id="city" name="city">
+                                            <option value="all">All</option>
+                                            <option value="Eppawala">Eppawala</option>
+                                            <option value="galle">Galle</option>
+                                            <option value="kandy">Kandy</option>
+                                            <option value="matara">Matara</option>
+                                            <option value="Nuwaraeliya">Nuwara Eliya</option>
+                                            <option value="trincomalee">Trincomalee</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="[ input__control ]">
+                                        <button type="submit" name="apply">Apply</button>
                                     </div>
 
                                 </div>
-                                <div class="[ investments__search ]">
+                                <div class="[ search ]">
                                     <input type="text" placeholder="Search">
                                     <button type="button">
                                         <i class="fas fa-search"></i>
                                     </button>
                                 </div>
-                            </div>
+                            </form>
                             <div class="[ row ]">
                                 <div class="[ data ]">
                                     <p>Gig</p>

@@ -108,7 +108,7 @@
                                         --sm-cols: 3fr 0.3fr;
                                     ">
                                     <div class="[ head stick_to_top ]">
-                                        <div class="[ filters ]">
+                                        <form class="[ filters ]">
                                             <div class="[ options ]">
                                                 <div class="[ input__control ]">
                                                     <label for="from">From :</label>
@@ -151,7 +151,7 @@
                                                     <i class="fas fa-search"></i>
                                                 </button>
                                             </div>
-                                        </div>
+                                        </form>
                                         <div class="[ row ]">
                                             <div class="[ data ]">
                                                 <p>Gig</p>
@@ -276,19 +276,19 @@
                                         --sm-cols: 3fr 0.3fr;
                                     ">
                                     <div class="[ head stick_to_top ]">
-                                        <div class="[ filters ]">
+                                        <form class="[ filters ]" method="post" action="<?php echo URLROOT ?>/dashboard/test1">
                                             <div class="[ options ]">
                                                 <div class="[ input__control ]">
                                                     <label for="from">From :</label>
-                                                    <input id="from" type="date">
+                                                    <input id="from" name="fromDate" type="date">
                                                 </div>
                                                 <div class="[ input__control ]">
                                                     <label for="to">To :</label>
-                                                    <input id="to" type="date">
+                                                    <input id="to" name="toDate" type="date">
                                                 </div>
                                                 <div class="[ input__control ]">
-                                                    <label for="location">City :</label>
-                                                    <select id="location">
+                                                    <label for="city">City :</label>
+                                                    <select id="city" name="city">
                                                         <option value="all">All</option>
                                                         <option value="colombo">Colombo</option>
                                                         <option value="galle">Galle</option>
@@ -300,7 +300,7 @@
                                                 </div>
                                                 <div class="[ input__control ]">
                                                     <label for="category">Category :</label>
-                                                    <select id="category">
+                                                    <select id="category" name="category">
                                                         <option value="all">All</option>
                                                         <option value="vegetable">Vegetable</option>
                                                         <option value="fruit">Fruit</option>
@@ -309,7 +309,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="[ input__control ]">
-                                                    <button type="button">Apply</button>
+                                                    <button type="submit" name="apply">Apply</button>
                                                 </div>
 
                                             </div>
@@ -319,7 +319,7 @@
                                                     <i class="fas fa-search"></i>
                                                 </button>
                                             </div>
-                                        </div>
+                                        </form>
                                         <div class="[ row ]">
                                             <div class="[ data ]">
                                                 <p>Gig</p>
@@ -445,7 +445,7 @@
                                         --sm-cols: 3fr 0.3fr;
                                     ">
                                     <div class="[ head ]">
-                                        <div class="[ filters ]">
+                                        <form class="[ filters ]">
                                             <div class="[ options ]">
                                                 <div class="[ input__control ]">
                                                     <label for="from">From :</label>
@@ -488,7 +488,7 @@
                                                     <i class="fas fa-search"></i>
                                                 </button>
                                             </div>
-                                        </div>
+                                        </form>
                                         <div class="[ row ]">
                                             <div class="[ data ]">
                                                 <p>Gig</p>

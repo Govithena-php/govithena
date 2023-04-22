@@ -43,6 +43,11 @@ class dashboardController extends Controller
         $this->profilePictureHandler = new ImageHandler($folder = 'Uploads/profilePictures');
     }
 
+
+    public function test1()
+    {
+    }
+
     public function index()
     {
         $props = [];
@@ -268,7 +273,10 @@ class dashboardController extends Controller
     {
         $props = [];
 
-        $investments = $this->investmentModel->fetchAllBy($this->currentUser->getUid());
+        $filters = new Filter(['fromDate', 'toDate', 'city', 'category'], 'apply');
+
+        $investments = $this->investmentModel->fetchAllBy($this->currentUser->getUid(), $filters);
+
         if (isset($investments)) {
             $props['investments'] = $investments;
         } else {
