@@ -331,11 +331,11 @@ function render_stars($stars, $outof)
                 <div class="[ flex flex-sb-c my-05 ]">
                     <div>
                         <small>Initial Investment</small>
-                        <p><span class="[ LKR ]">LKR </span><?php echo number_format($gig['capital'], 2, '.', ',') ?></p>
+                        <p class="[ LKR ]"><?php echo number_format($gig['capital'], 2, '.', ',') ?></p>
                     </div>
                     <div>
                         <small>Profit Margin</small>
-                        <p class="[ profit__precentage ]">12<span class="[ precentage ]">%</span></p>
+                        <p class="[ profit__precentage ]"><?php echo $gig['profitMargin'] ?><span class="[ precentage ]">%</span></p>
                     </div>
                 </div>
                 <form class="[ modal__form ]" method="post" action="<?php echo URLROOT ?>/gig/request">
