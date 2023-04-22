@@ -216,7 +216,7 @@ function render_stars($stars, $outof)
 
         </div>
 
-        <div class="previous__work">
+        <!-- <div class="previous__work">
             <div class="[ caption ]">
                 <h2>Previous Work</h2>
                 <p>Update your Personal Details.</p>
@@ -242,7 +242,7 @@ function render_stars($stars, $outof)
                 }
                 ?>
             </div>
-        </div>
+        </div> -->
 
 
         <div class="reviews">

@@ -186,6 +186,13 @@ nav {
     margin: 0.5rem 0;
 }
 
+.progress__bar .progress__details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
 .progress__bar .bar {
     width: 100%;
     height: 0.8rem;
