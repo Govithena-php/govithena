@@ -275,7 +275,7 @@ class dashboardController extends Controller
 
         $filters = new Filter(['fromDate', 'toDate', 'city', 'category'], 'apply');
 
-        $investments = $this->investmentModel->fetchAllBy($this->currentUser->getUid(), $filters);
+        $investments = $this->investmentModel->fetchAllByUsingFilters($this->currentUser->getUid(), $filters);
 
         if (isset($investments)) {
             $props['investments'] = $investments;
