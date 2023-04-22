@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/table.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/settings/index.css">
 
-    <title>Dashboard | Investor</title>
+    <title>Govithena | Settings</title>
 </head>
 
 <body>

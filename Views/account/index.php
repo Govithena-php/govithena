@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="<?php echo CSS ?>/account/index.css">
 
 
-    <title>Account | Investor</title>
+    <title>Govithena | Account</title>
     <!-- <style>
         *{
             outline: 1px solid limegreen;
