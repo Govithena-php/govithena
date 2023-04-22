@@ -102,7 +102,7 @@
             <div class="[ caption caption__modal ]">
                 <h2>Delete Your Account</h2>
                 <p>
-                    We're sorry to see you go! If you change your mind and decide to keep your account
+                    We're sorry to see you go!
                 </p>
             </div>
             <form class="[ ]" action="<?php echo URLROOT ?>/settings/delete_account" method="post">
