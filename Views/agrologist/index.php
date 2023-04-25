@@ -21,8 +21,7 @@
     $active = "dashboard";
     require_once("navigator.php");
     ?>
-
-    <?php $name = "Sanduni"; ?>
+    <?php $name = Session::get('user')->getFirstName(); ?>
 
     <div class="[ container ][ dashboard ]" container-type="dashboard-section">
         <div class="[ header ]">
@@ -35,10 +34,14 @@
             </div>
             <!-- <button onclick="sendData()">Send Data</button> -->
             <div class="[ flex-col center-x ][ balance ]">
-                <h3>Balance</h3>
+                <h3>
+                    <?php echo date('F') ?> Income
+                </h3>
                 <div class="[ amount ]">
                     <span class="[ LKRBadge ]"></span>
-                    <h1>150 000.00</h1>
+                    <h1>
+                        <?php echo number_format($agrologistMonthlyIncome[0]['total_income']) ?>
+                    </h1>
                 </div>
             </div>
         </div>
@@ -48,40 +51,111 @@
                 <h3>No. of Farmers</h3>
                 <div class="[ amount ]">
                     <!-- <span class="[ LKRBadge ]"></span> -->
-                    <h1>11</h1>
-                    <h4>54% <i class="fa-solid fa-arrow-down"></i></h4>
+                   
+
+                    <?php
+                       echo  "<h1>" . $farmerCount[0]['farmerCount'] . "</h1>";
+                       $farmer_diff = $farmerCount[0]['farmerCount'] - $farmerCountLastMonh[0]['farmerCount'];
+                          if($farmerCountLastMonh[0]['farmerCount'] == 0){
+                            echo "<h4> No farmers last month </h4>";
+                          }
+                          elseif($farmer_diff > 0){
+                            echo "<h4>" . $farmer_diff / $farmerCountLastMonh[0]['farmerCount'] * 100 . "% <i class='fa-solid fa-arrow-up'></i></h4>" . "<br>" .
+                            "<p>Compared to (" . $farmerCountLastMonh[0]['farmerCount'] . " last month)</p>";
+                          }
+                          else{
+                            echo "<h4>" . $farmer_diff / $farmerCountLastMonh[0]['farmerCount'] * 100 . "% <i class='fa-solid fa-arrow-down'></i></h4>" . "<br>" .
+                            "<p>Compared to (" . $farmerCountLastMonh[0]['farmerCount'] . " last month)</p>";
+                          }
+                    ?>
+
+
+                    <!-- <h4>54% <i class="fa-solid fa-arrow-down"></i></h4> -->
                 </div>
-                <p>Compared to (24 farmers last month)</p>
+                <!-- <p>Compared to (<?php echo $lastmonthFarmerCount ?> farmers last month)</p> -->
             </div>
 
             <div class="[ card ]">
                 <h3>No. of Gigs</h3>
                 <div class="[ amount ]">
                     <!-- <span class="[ LKRBadge ]"></span> -->
-                    <h1>13</h1>
-                    <h4>45% <i class="fa-solid fa-arrow-down"></i></h4>
+
+                    <?php
+                    if ($gigCount[0]['gigCount'] > 0) {
+                        echo "<h1>" . $gigCount[0]['gigCount'] . "</h1>";
+                        $gig_diff = $gigCount[0]['gigCount'] - $gigCountLastMonth[0]['gigCount'];
+                        if($gigCountLastMonth[0]['gigCount'] == 0){
+                            echo "<h4> No gigs last month </h4>";
+                        }
+                        elseif($gig_diff > 0){
+                            echo "<h4>" . $gig_diff / $gigCountLastMonth[0]['gigCount'] * 100 . "% <i class='fa-solid fa-arrow-up'></i></h4>" . "<br>" .
+                            "<p>Compared to (" . $gigCountLastMonth[0]['gigCount'] . " last month)</p>";
+                        }
+                        else{
+                            echo "<h4>" . $gig_diff / $gigCountLastMonth[0]['gigCount'] * 100 . "% <i class='fa-solid fa-arrow-down'></i></h4>" . "<br>" .
+                            "<p>Compared to (" . $gigCountLastMonth[0]['gigCount'] . " last month)</p>";
+                        }
+                    }
+                    else{
+                        echo "<h1>0</h1>";
+                    }
+                    ?>
+
+                    <!-- <h4>45% <i class="fa-solid fa-arrow-down"></i></h4> -->
                 </div>
-                <p>Compared to (24 last month)</p>
+                <!-- <p>Compared to (<?php echo $gigCountLastMonth[0]['gigCount'] ?> last month)</p> -->
             </div>
 
             <div class="[ card ]">
-                <h3>Profilt</h3>
+                <h3>No. of Field Visits</h3>
                 <div class="[ amount ]">
-                    <span class="[ LKRBadge ]"></span>
-                    <h1>1500000.00</h1>
-                    <h4>12% <i class="fa-solid fa-arrow-down"></i></h4>
+
+                    <!-- <span class="[ LKRBadge ]"></span> -->
+                    <?php
+                    if ($agrologistFieldVisits[0]['visit_count'] > 0) {
+                        echo "<h1>" . $agrologistFieldVisits[0]['visit_count'] . "</h1>";
+                        $visit_diff = $agrologistFieldVisits[0]['visit_count'] - $agrologistFieldVisitsLastMonth[0]['visit_count'];
+                        if ($agrologistFieldVisitsLastMonth[0]['visit_count'] == 0) {
+                            echo "<h4> No field visits last month </h4>";
+                        } elseif ($visit_diff > 0) {
+                            echo "<h4>" . $visit_diff / $agrologistFieldVisitsLastMonth[0]['visit_count'] * 100 . "% <i class='fa-solid fa-arrow-up'></i></h4>" . "<br>" .
+                                "<p>Compared to (" . $agrologistFieldVisitsLastMonth[0]['visit_count'] . " last month)</p>";
+                        } else {
+                            echo "<h4>" . $visit_diff / $agrologistFieldVisitsLastMonth[0]['visit_count'] * 100 . "% <i class='fa-solid fa-arrow-down'></i></h4>" . "<br>" .
+                                "<p>Compared to (" . $agrologistFieldVisitsLastMonth[0]['visit_count'] . " last month)</p>";
+                            ;
+                        }
+                    } else {
+                        echo "<h1>0</h1>";
+                        $visit_diff = $agrologistFieldVisits[0]['visit_count'] - $agrologistFieldVisitsLastMonth[0]['visit_count'];
+                        if ($agrologistFieldVisitsLastMonth[0]['visit_count'] == 0) {
+                            echo "<h4> No field visits last month </h4>";
+                        } elseif ($visit_diff > 0) {
+                            echo "<h4>" . $visit_diff / $agrologistFieldVisitsLastMonth[0]['visit_count'] * 100 . "% <i class='fa-solid fa-arrow-up'></i></h4>" . "<br>" .
+                                "<p>Compared to (" . $agrologistFieldVisitsLastMonth[0]['visit_count'] . " last month)</p>";
+                        } else {
+                            echo "<h4>" . $visit_diff / $agrologistFieldVisitsLastMonth[0]['visit_count'] * 100 . "% <i class='fa-solid fa-arrow-down'></i></h4>" . "<br>" .
+                                "<p>Compared to (" . $agrologistFieldVisitsLastMonth[0]['visit_count'] . " last month)</p>";
+                            ;
+                        }
+                    }
+                    ?>
+
+                    <!-- <h4>45% <i class="fa-solid fa-arrow-down"></i></h4> -->
                 </div>
-                <p>Compared to (LKR 21340 last month)</p>
+                <!-- <p>Compared to (<?php echo $agrologistFieldVisitsLastMonth[0]['visit_count'] ?> last month)</p> -->
             </div>
 
             <div class="[ card ]">
-                <h3>Widthdraw</h3>
+                <h3>Total Income</h3>
                 <div class="[ amount ]">
                     <span class="[ LKRBadge ]"></span>
-                    <h1>15000.00</h1>
-                    <h4>12% <i class="fa-solid fa-arrow-up"></i></h4>
+                    <h1>
+                        <?php echo number_format($agrologistTotalIncome[0]['total_income']) ?>
+                    </h1>
+                    <!-- <h4>12% <i class="fa-solid fa-arrow-up"></i></h4> -->
                 </div>
-                <p>Compared to (LKR 21340 last month)</p>
+                <!-- <p>Compared to (LKR 21340 last month)</p> -->
             </div>
 
         </div>
@@ -114,7 +188,7 @@
         </div>
 
 
-<!-- ================================================================ -->
+        <!-- ================================================================ -->
 
         <div class="[ progress__inestments ]">
             <div class="[ block progress ]">

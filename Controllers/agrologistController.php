@@ -3,6 +3,7 @@
 class agrologistController extends Controller
 {
     private $currentUser;
+    private $lastmonthFarmerCount=0;
 
     public function __construct()
     {
@@ -11,12 +12,19 @@ class agrologistController extends Controller
         if (!Session::isLoggedIn()) {
             $this->redirect('/auth/signin');
         }
-
+        // $this->lastmonthFarmerCount =0;
         if (!$this->currentUser->hasAccess(ACTOR::AGROLOGIST)) {
             $this->redirect('/error/dontHaveAccess');
         }
 
     }
+
+    // public function setlastmonthFarmerCount($lastmonthFarmerCount) { 
+    //     $this->lastmonthFarmerCount = $lastmonthFarmerCount; 
+    // }
+    // public function getlastmonthFarmerCount() { 
+    //     return $this->lastmonthFarmerCount; 
+    // }
 
     public function index()
     {
@@ -24,10 +32,36 @@ class agrologistController extends Controller
         $agrologist = new Agrologist();
 
         $notifications = $agrologist->getnotifications();
+        $farmerCount = $agrologist->getFarmerCount();
+        $farmerCountLastMonh = $agrologist->getFarmerCountLastMonh();
+        $AgrologistTotalIncome = $agrologist->getAgrologistTotalIncome();
+        $AgrologistMonthlyIncome = $agrologist->getAgrologistMonthlyIncome();
+        $AgrologistFieldVisits = $agrologist->getAgrologistFieldVisits();
+        $AgrologistFieldVisitsLastMonth = $agrologist->getAgrologistFieldVisitsLastMonth();
+        $GigCount = $agrologist->getGigCount();
+        $GigCountLastMonth =$agrologist->getGigCountLastMonth();
         // echo json_encode($notifications);
         //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>". $notifications . "</h1>";
-
-        $this->set(['notifications' => $notifications]);
+        
+        //assign farmer count if month changes
+        // date('m') != date('m', strtotime("-1 days")
+        if(date('m') != 2){
+            $this->lastmonthFarmerCount = $farmerCount[0]['farmerCount'];
+        }
+        // echo json_encode($this->lastmonthFarmerCount);
+        // $lastmonthFarmerCount = 
+        
+        $this->set([
+            'notifications' => $notifications,
+            'farmerCount' => $farmerCount,
+            'farmerCountLastMonh' => $farmerCountLastMonh,
+            'agrologistTotalIncome' => $AgrologistTotalIncome,
+            'agrologistMonthlyIncome' => $AgrologistMonthlyIncome,
+            'agrologistFieldVisits' => $AgrologistFieldVisits,
+            'agrologistFieldVisitsLastMonth' => $AgrologistFieldVisitsLastMonth,
+            'gigCount' => $GigCount,
+            'gigCountLastMonth' => $GigCountLastMonth
+        ]);
         $this->render('index');
     }
 
