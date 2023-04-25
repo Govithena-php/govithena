@@ -49,7 +49,7 @@
                                 <img src="<?php echo UPLOADS . '/' . $request['image'] ?>" alt="">
                             </div>
                             <form action="" method="POST">
-                                <div class="flex flex-row " style="width: 600px">
+                                <div class="farmer_inner_card">
                                     <div class="farmer_card_content">
 
                                         <h1>
@@ -63,14 +63,17 @@
                                         </h4>
 
                                         <h4 class="fw-6">
-                                            LKR <?php echo ucwords($request['offer']) ?>
+                                            LKR
+                                            <?php echo ucwords($request['offer']) ?>
                                         </h4>
 
                                         <!-- <?php echo $request['total'] / ($request['num'] * 3) ?>
                                         <?php echo $request['num'] ?> -->
 
-                                        <meter class="average-rating" min="0" max="5" value="5" title="4.3 out of 5 stars" style="--percent: calc(<?php echo $request['total'] / ($request['num'] * 3) ?>/5*100%)">4.3 out of 5</meter>
-                                        
+                                        <meter class="average-rating" min="0" max="5" value="5" title="4.3 out of 5 stars"
+                                            style="--percent: calc(<?php echo $request['total'] / ($request['num'] * 3) ?>/5*100%)">4.3
+                                            out of 5</meter>
+
                                         <!-- <p class="flex flex-row">
                                             <span class="fa fa-star rating_checked"></span>
                                             <span class="fa fa-star rating_checked"></span>
@@ -80,14 +83,31 @@
                                         </p> -->
 
                                     </div>
-                                    <div class="flex flex-row flex-c-c">
+                                    <div class="flex flex-row flex-sa-c">
                                         <!-- <i>class="message-icon fab fa-telegram-plane flex"></i> -->
                                         <!-- <a href="<?php echo URLROOT . '/agrologist/chat/' . $request['farmerId'] ?>"
                                             class="btn btn-primary mt-3 ml-2">Message</a> -->
-                                            <a href="tel:720523034" class="btn btn-primary mt-3 ml-2">Call</a>
-                                        <a href="<?php echo URLROOT . '/agrologist/reviews/' . $request['farmerId'] ?>"
-                                            class="btn btn-primary mt-3 ml-2">Review</a>
-
+                                        <div>
+                                            <a href="tel:720523034" class="btn btn-primary ">Call</a>
+                                        </div>
+                                        <div>
+                                            <a href="<?php echo URLROOT . '/agrologist/reviews/' . $request['farmerId'] ?>"
+                                                class="btn btn-primary ">Review</a>
+                                        </div>
+                                        <div>
+                                            <?php
+                                            $d = date($request['requestedDate'], strtotime("+" . $request['timePeriod'] . "days"));
+                                            // echo date('Y-m-d', strtotime($d));
+                                            // echo date('Y-m-d', time());
+                                            if (date('Y-m-d', strtotime($d)) == date('Y-m-d', time())) {
+                                                ?>
+                                                <a href="<?php echo URLROOT . '/agrologist/accept/' . $request['farmerId'] ?>"
+                                                    class="btn btn-danger ">Complete
+                                                </a>
+                                                <?php
+                                            }
+                                            ?>
+                                        </div>
                                     </div>
                                 </div>
                             </form>

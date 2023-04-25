@@ -350,6 +350,11 @@ select {
     align-items: end;
 }
 
+.flex-e-c {
+    justify-content: end;
+    align-items: center;
+}
+
 .flex-stretch {
     align-items: stretch;
 }
