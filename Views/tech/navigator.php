@@ -19,7 +19,7 @@ function highlight($active, $link)
 <link rel="stylesheet" href="<?php echo CSS ?>/dashboard/navigator.css" type="text/css">
 
 <nav class="[ nav ]">
-    <div class="[ container ]" container-type="dashboard-section">
+    <div class="[ container ]" container-type="dashboard-navbar">
         <div class="[ open__btn ]">
             <button onclick="openSidebar()">
                 <i class="fa-solid fa-bars"></i>
