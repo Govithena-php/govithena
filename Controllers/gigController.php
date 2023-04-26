@@ -111,12 +111,14 @@ class gigController extends Controller
                 'offer' => $offer,
                 'message' => $message
             ]);
-            if (!$result) {
-                $this->redirect("/gig/" . $gigId . "/error");
+
+            if ($result) {
+                $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully sent. Please wait for the farmer to respond.');
+            } else {
+                $alert = new Alert($type = 'error', $icon = "", $message = 'Error sending request. Please try again later.');
             }
-            $this->redirect("/gig/" . $gigId . "/success");
-        } else {
-            $this->redirect("/gig/" . $gigId . "/error");
+            Session::set(['send_gig_request_alert' => $alert]);
+            $this->redirect('/gig/' . $gigId);
         }
     }
 }

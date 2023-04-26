@@ -15,7 +15,6 @@ function highlight($active, $link)
 
 ?>
 
-
 <link rel="stylesheet" href="<?php echo CSS ?>/dashboard/navigator.css" type="text/css">
 
 <nav class="[ nav ]">
@@ -63,7 +62,7 @@ function highlight($active, $link)
 
                     <button onclick="toggleProfileMenu()">
                         <div class="[ image ]">
-                            <img src="<?php echo UPLOADS . '/' . $currentUser->getImage(); ?>" alt="profile">
+                            <img src="<?php echo UPLOADS . 'profilePictures/' . $currentUser->getImage(); ?>" alt="profile">
                         </div>
                     </button>
                 </div>
@@ -77,9 +76,9 @@ function highlight($active, $link)
                         <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/">
                                 <i class="[ fa-solid fa-gauge ]"></i>Dashboard
                             </a></li>
-                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/profile">
-                                <i class="[ fa-solid fa-user-tie ]"></i>Profile</a></li>
-                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/signout">
+                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/myaccount">
+                                <i class="[ fa-solid fa-user-tie ]"></i>My Account</a></li>
+                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/settings">
                                 <i class="[ fa-solid fa-gear ]"></i>Settings</a>
                         </li>
                     </ul>

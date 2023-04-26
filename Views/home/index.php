@@ -182,7 +182,7 @@
             <div class="[ grid ]" gap="1" sm="1" md="2" lg="4">
                 <?php
                 foreach ($gigs as $gig) {
-                    $imageURL = UPLOADS . $gig["image"];
+                    $imageURL = UPLOADS . $gig["thumbnail"];
                 ?>
                     <div class="[ result__card ]">
                         <div class="[ card__img ]">
@@ -203,11 +203,11 @@
                             <div class="[ flex ]">
                                 <div>
                                     <small>Location :</small>
-                                    <p><?php echo $gig['location'] ?></p>
+                                    <p><?php echo $gig['city'] ?></p>
                                 </div>
                                 <div>
                                     <small>Time Period :</small>
-                                    <p><?php echo $gig['timePeriod'] ?> Months</p>
+                                    <p><?php echo $gig['cropCycle'] ?> Months</p>
                                 </div>
                             </div>
                         </div>

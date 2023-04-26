@@ -133,6 +133,14 @@ dialog::backdrop {
     margin: 0.5rem 0;
 }
 
+.LKR::before {
+    content: "LKR ";
+    color: rgb(255, 38, 0);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-right: 0.5rem;
+}
+
 .stick_to_top{
     position: sticky;
     padding-top: 2rem;
@@ -259,7 +267,7 @@ dialog::backdrop {
     margin-right: var(--container-margin-right);
     margin-left: var(--container-margin-left);
     margin-top: var(--navbar-height);
-    margin-bottom: 0;
+    margin-bottom: 2rem;
     padding-block: 1rem;
     transition: all 0.3s ease-in-out;
     min-height: calc(100vh - var(--default-footer-height));
@@ -346,6 +354,14 @@ dialog::backdrop {
 
 .button__danger:hover {
     background-color: #f32d2d;
+}
+
+.clr__danger{
+    color: var(--clr-danger);
+}
+
+.clr__primary{
+    color: var(--clr-primary);
 }
 
 .button__danger-invert {

@@ -1081,45 +1081,6 @@ select {
 /* alert */
 
 
-.alert {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 1.2rem;
-    border-radius: 0.2rem;
-    position: absolute;
-    top: 5rem;
-    right: 2rem;
-}
-
-.alert>i {
-    margin-right: 1.5rem;
-}
-
-.alert>div {
-    display: flex;
-    flex-direction: column;
-}
-
-.alert>div>h4 {
-    padding-bottom: 0.3rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.alert>div>p {
-    padding-top: 0.3rem;
-}
-
-.alert-success {
-    background-color: rgb(14, 175, 108);
-    color: var(--clr-light);
-}
-
-.alert-error {
-    background-color: rgba(223, 48, 48, 0.905);
-    color: var(--clr-light);
-}
-
 
 
 /* breadcrumbs */

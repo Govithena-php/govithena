@@ -3,14 +3,20 @@
 class dashboardController extends Controller
 {
     private $currentUser;
+
     private $investorGigModel;
-    private $gigModal;
-    private $userModal;
+    private $gigModel;
+    private $userModel;
     private $fieldVisitModel;
     private $reviewByInvestorModel;
     private $farmerProgressModel;
     private $requestFarmerModel;
     private $investmentModel;
+    private $bankAccountModel;
+    private $widthdrawModel;
+    private $profitModel;
+
+    private $profilePictureHandler;
 
     public function __construct()
     {
@@ -25,17 +31,59 @@ class dashboardController extends Controller
         }
 
         $this->investorGigModel = $this->model('investorGig');
-        $this->gigModal = $this->model('gig');
-        $this->userModal = $this->model('user');
+        $this->gigModel = $this->model('gig');
+        $this->userModel = $this->model('user');
         $this->fieldVisitModel = $this->model('fieldVisit');
         $this->reviewByInvestorModel = $this->model('reviewByInvestor');
         $this->farmerProgressModel = $this->model('farmerProgress');
         $this->requestFarmerModel = $this->model('requestFarmer');
         $this->investmentModel = $this->model('investment');
+        $this->bankAccountModel = $this->model('bankAccount');
+        $this->widthdrawModel = $this->model('widthrawl');
+        $this->profitModel = $this->model('profit');
+
+        $this->profilePictureHandler = new ImageHandler($folder = 'Uploads/profilePictures');
     }
 
     public function index()
     {
+        $props = [];
+
+        $totalInvestment = $this->investmentModel->getTotalInvestmentByInvestor($this->currentUser->getUid());
+        if ($totalInvestment['success']) {
+            $props['totalInvestment'] = $totalInvestment['data']['totalInvestment'];
+        }
+
+        $totalWithdrawn = $this->widthdrawModel->getTotalWithdrawnByInvestor($this->currentUser->getUid());
+        if ($totalWithdrawn['success']) {
+            $props['totalWithdrawn'] = $totalWithdrawn['data']['totalWithdrawn'];
+        }
+
+        $totalProfit = $this->profitModel->getTotalProfitByInvestor($this->currentUser->getUid());
+        if ($totalProfit['success']) {
+            $props['totalProfit'] = $totalProfit['data']['totalProfit'];
+        }
+        $totalGain = $props['totalInvestment'] + $props['totalProfit'];
+        $totalBalance = $totalGain - $props['totalWithdrawn'];
+        $props['totalGain'] = $totalGain;
+        $props['totalBalance'] = $totalBalance;
+
+
+        $widthdrawals = $this->widthdrawModel->fetchAllBy($this->currentUser->getUid());
+        if ($widthdrawals['success']) {
+            $props['widthdrawals'] = $widthdrawals['data'];
+        }
+
+        $profits = $this->profitModel->fetchAllBy($this->currentUser->getUid());
+        if ($profits['success']) {
+            $props['profits'] = $profits['data'];
+        }
+
+
+        $props['investments'] = $this->investmentModel->fetchAllBy($this->currentUser->getUid());
+
+
+        $this->set($props);
         $this->render('index');
     }
 
@@ -95,12 +143,17 @@ class dashboardController extends Controller
         }
         $gigId = $params[0];
 
-        $props['gig'] = $gig = $this->gigModal->fetchBy($gigId);
+        $props['gig'] = $gig = $this->gigModel->fetchBy($gigId);
         if (!$props['gig']) {
             $this->redirect('/error/dontHaveAccess/2');
         }
 
-        $props['farmer'] = $this->userModal->fetchBy($gig['farmerId']);
+        $gigImages  = $this->gigModel->fetchGigImages($gigId);
+        if ($gigImages['success']) {
+            $props['gigImages'] = $gigImages['data'];
+        }
+
+        $props['farmer'] = $this->userModel->fetchBy($gig['farmerId']);
         if (!$props['farmer']) {
             $this->redirect('/error/dontHaveAccess/3');
         }
@@ -170,12 +223,12 @@ class dashboardController extends Controller
         $gigId = $params[0];
         Session::set(['gigId' => $gigId]);
 
-        $props['gig'] = $gig = $this->gigModal->fetchBy($gigId);
+        $props['gig'] = $gig = $this->gigModel->fetchBy($gigId);
         if (!$props['gig']) {
             $this->redirect('/error/dontHaveAccess/2');
         }
 
-        $props['farmer'] = $this->userModal->fetchBy($gig['farmerId']);
+        $props['farmer'] = $this->userModel->fetchBy($gig['farmerId']);
         if (!$props['farmer']) {
             $this->redirect('/error/dontHaveAccess/3');
         }
@@ -215,21 +268,76 @@ class dashboardController extends Controller
 
     public function myinvestments()
     {
-        require(ROOT . 'Models/investment.php');
-        $uid = Session::get('user')->getUid();
-        $i = new Investment();
+        $props = [];
 
-        $investments = $i->fetchAllBy($uid);
+        $investments = $this->investmentModel->fetchAllBy($this->currentUser->getUid());
         if (isset($investments)) {
-            $this->set(['investments' => $investments]);
+            $props['investments'] = $investments;
         } else {
-            $this->set(['error' => "no investments found"]);
+            $props['error'] = "no investments found";
         }
+
+        $totalInvestment = $this->investmentModel->getTotalInvestmentByInvestor($this->currentUser->getUid());
+
+        if ($totalInvestment['success']) {
+            $props['totalInvestment'] = $totalInvestment['data']['totalInvestment'];
+        }
+
+        $joinedDate = $this->userModel->getJoinedDate($this->currentUser->getUid());
+        if ($joinedDate['success']) {
+            $start = new DateTime($joinedDate['data']['createdAt']);
+            $end = new DateTime();
+            $diff = date_diff($end, $start);
+            $months = $diff->format('%m');
+            $props['monthSinceJoined'] = $months;
+        }
+
+        $thisMonthInvestment = $this->investmentModel->getThisMonthTotalByInvestor($this->currentUser->getUid());
+
+        if ($thisMonthInvestment['success']) {
+            $thisMonth = $thisMonthInvestment['data']['thisMonthInvestment'];
+            $lastMonthInvestment = $this->investmentModel->getLastMonthTotalByInvestor($this->currentUser->getUid());
+            if ($lastMonthInvestment['success']) {
+                $lastMonth = $lastMonthInvestment['data']['lastMonthInvestment'];
+                if ($lastMonth == 0) {
+                    $lastMonth = 1;
+                }
+                $precentage = round(((intval($thisMonth) - intval($lastMonth)) / intval($lastMonth) * 100), 2);
+                $props['precentage'] = $precentage;
+                $props['lastMonthInvestment'] = $lastMonth;
+            }
+            $props['thisMonthInvestment'] = $thisMonth;
+        }
+
+        $completedGigs = $this->investorGigModel->getCompletedGigCount($this->currentUser->getUid());
+        if ($completedGigs['success']) {
+            $activeGigs = $this->investorGigModel->getActiveGigCount($this->currentUser->getUid());
+            if ($activeGigs['success']) {
+                $props['totalGigs'] = intval($activeGigs['data']['gigCount']) + intval($completedGigs['data']['gigCount']);
+                $props['activeGigs'] = $activeGigs['data']['gigCount'];
+            }
+        }
+
+
+
+
+
+        $this->set($props);
         $this->render('myinvestments');
     }
 
     public function withdraw()
     {
+        $props = [];
+
+        $withdrawls = $this->widthdrawModel->fetchAllBy($this->currentUser->getUid());
+
+        if ($withdrawls['success']) {
+            $props['withdrawls'] = $withdrawls['data'];
+        }
+
+
+        $this->set($props);
         $this->render('withdraw');
     }
 
@@ -266,6 +374,34 @@ class dashboardController extends Controller
 
     public function myaccount()
     {
+        $props = [];
+
+        $personalDetails = $this->userModel->getPersonalDetails($this->currentUser->getUid());
+        if ($personalDetails['success']) {
+            $props['personalDetails'] = $personalDetails['data'];
+        }
+
+        $bankDetails = $this->bankAccountModel->getBankDetails($this->currentUser->getUid());
+        if ($bankDetails['success']) {
+            $props['bankAccounts'] = $bankDetails['data'];
+        }
+
+
+        $joinedDate = $this->userModel->getJoinedDate($this->currentUser->getUid());
+        if ($joinedDate['success']) {
+            $start = new DateTime($joinedDate['data']['createdAt']);
+            $end = new DateTime();
+            $diff = date_diff($end, $start);
+            $months = $diff->format('%m');
+            $props['monthSinceJoined'] = $months;
+        }
+
+        $totalInvestment = $this->investmentModel->getTotalInvestmentByInvestor($this->currentUser->getUid());
+        if ($totalInvestment['success']) {
+            $props['totalInvestment'] = $totalInvestment['data']['totalInvestment'];
+        }
+
+        $this->set($props);
         $this->render('myaccount');
     }
 
@@ -281,10 +417,12 @@ class dashboardController extends Controller
             $response = $this->requestFarmerModel->delete($requestId);
 
             if ($response['success']) {
-                $this->redirect('/dashboard/myrequests/ok');
+                $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully deleted request.');
             } else {
-                $this->redirect('/dashboard/myrequests/error');
+                $alert = new Alert($type = 'error', $icon = "", $message = 'Error deleting request.');
             }
+            Session::set(['myrequest_delete_alert' => $alert]);
+            $this->redirect('/dashboard/myrequests');
         }
     }
 
@@ -304,10 +442,134 @@ class dashboardController extends Controller
             $response = $this->requestFarmerModel->resend($data);
 
             if ($response['success']) {
-                $this->redirect('/dashboard/myrequests/ok');
+                $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully resent.');
             } else {
-                $this->redirect('/dashboard/myrequests/error');
+                $alert = new Alert($type = 'error', $icon = "", $message = 'Error resending.');
             }
+            Session::set(['resend_request_alert' => $alert]);
+            $this->redirect('/dashboard/myrequests');
+        }
+    }
+
+    public function update_user_details()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $data = [
+                'uid' => new Input(POST, 'u-submitBtn'),
+                'firstName' => new Input(POST, 'u-firstName'),
+                'lastName' => new Input(POST, 'u-lastName'),
+                'phone' => new Input(POST, 'u-phone'),
+                'addressLine1' => new Input(POST, 'u-addressLine1'),
+                'addressLine2' => new Input(POST, 'u-addressLine2'),
+                'postalCode' => new Input(POST, 'u-postalCode'),
+                'city' => new Input(POST, 'u-city'),
+                'district' => new Input(POST, 'u-district'),
+            ];
+
+            $response = $this->userModel->update($data);
+            if ($response['success']) {
+                $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully updated your details');
+            } else {
+                $alert = new Alert($type = 'error', $icon = "", $message = 'Error updating your details');
+            }
+            Session::set(['update_user_details_alert' => $alert]);
+            $this->redirect('/dashboard/myaccount');
+        }
+    }
+
+
+    public function change_profile_picture()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $uid = new Input(POST, 'u-submitBtn');
+            try {
+                $profilePicture = $this->profilePictureHandler->upload('u-profilePicture');
+
+                $this->currentUser->setImage($profilePicture[0]);
+                Session::unset(['user']);
+                Session::set(['user' => $this->currentUser]);
+                $data = [
+                    'uid' => $uid,
+                    'profilePicture' => $profilePicture[0]
+                ];
+
+                $response = $this->userModel->updateProfilePicture($data);
+                if ($response['success']) {
+                    $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully changed your profile picture');
+                } else {
+                    $alert = new Alert($type = 'error', $icon = "", $message = 'Error changing your profile picture');
+                }
+            } catch (Exception $e) {
+                $alert = new Alert($type = 'error', $icon = "", $message =  $e->getMessage());
+            }
+            Session::set(['change_profile_picture_alert' => $alert]);
+            $this->redirect('/dashboard/myaccount');
+        }
+    }
+
+    public function add_new_bank_account()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data = [
+                'user' => new Input(POST, 'n-userId'),
+                'bank' => new Input(POST, 'n-bank'),
+                'accountNumber' => new Input(POST, 'n-accountNumber'),
+                'branch' => new Input(POST, 'n-branch'),
+                'branchCode' => new Input(POST, 'n-branchCode'),
+            ];
+
+            $response = $this->bankAccountModel->add($data);
+
+            if ($response['success']) {
+                $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully added new bank account');
+            } else {
+                $alert = new Alert($type = 'error', $icon = "", $message = 'Error adding new bank account');
+            }
+            Session::set(['add_new_bank_account_alert' => $alert]);
+            $this->redirect('/dashboard/myaccount');
+        }
+    }
+
+
+    public function delete_bank_account()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $accountNumber =  new Input(POST, 'deleteBankAccount-confirm');
+
+            $response = $this->bankAccountModel->delete($accountNumber);
+
+            if ($response['success']) {
+                $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully deleted bank account');
+            } else {
+                $alert = new Alert($type = 'error', $icon = "", $message = 'Error deleting bank account');
+            }
+            Session::set(['delete_bank_account_alert' => $alert]);
+            $this->redirect('/dashboard/myaccount');
+        }
+    }
+
+    public function edit_bank_account()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data = [
+                'oldAccountNumber' => new Input(POST, 'u-oldAccountNumber'),
+                'bank' => new Input(POST, 'u-bank'),
+                'accountNumber' => new Input(POST, 'u-accountNumber'),
+                'branch' => new Input(POST, 'u-branch'),
+                'branchCode' => new Input(POST, 'u-branchCode'),
+            ];
+
+            $response = $this->bankAccountModel->update($data);
+
+            if ($response['success']) {
+                $this->redirect('/dashboard/myaccount/ok');
+                $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully updated bank account');
+            } else {
+                $alert = new Alert($type = 'error', $icon = "", $message = 'Error updating bank account');
+            }
+            Session::set(['edit_bank_account_alert' => $alert]);
+            $this->redirect('/dashboard/myaccount');
         }
     }
 }

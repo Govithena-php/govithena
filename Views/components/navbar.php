@@ -18,11 +18,11 @@ $currentUser = Session::get('user');
         </div>
 
         <div class="[ menu ]">
-            <ul>
+            <!-- <ul>
                 <li><a href="<?php echo URLROOT ?>/home/about">About Us</a></li>
                 <li><a href="<?php echo URLROOT ?>/home/services">Services</a></li>
                 <li><a href="<?php echo URLROOT ?>/home/contact">Contact Us</a></li>
-            </ul>
+            </ul> -->
         </div>
 
         <div class="[ profile ]">
@@ -48,7 +48,7 @@ $currentUser = Session::get('user');
                         <div class="[ image ]">
                             <?php
                             ?>
-                            <img src="<?php echo UPLOADS . '/' . Session::get('user')->getImage(); ?>" alt="profile">
+                            <img src="<?php echo UPLOADS . 'profilePictures/' . Session::get('user')->getImage(); ?>" alt="profile">
                         </div>
                     </button>
                 </div>
@@ -62,9 +62,9 @@ $currentUser = Session::get('user');
                         <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/">
                                 <i class="[ fa-solid fa-gauge ]"></i>Dashboard
                             </a></li>
-                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/profile">
-                                <i class="[ fa-solid fa-user-tie ]"></i>Profile</a></li>
-                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/signout">
+                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/myaccount">
+                                <i class="[ fa-solid fa-user-tie ]"></i>My Account</a></li>
+                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/settings">
                                 <i class="[ fa-solid fa-gear ]"></i>Settings</a>
                         </li>
                     </ul>

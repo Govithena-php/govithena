@@ -131,7 +131,7 @@ function render_stars($stars, $outof)
                     <div class="[ result__card ]">
                         <p class="category__tag"><?php echo $gig["category"] ?></p>
                         <div class="[ card__img ]">
-                            <img src="<?php echo UPLOADS . $gig['image'] ?>" alt="test" />
+                            <img src="<?php echo UPLOADS . $gig['thumbnail'] ?>" alt="test" />
                         </div>
                         <div class="[ card__content ]">
 
@@ -147,12 +147,12 @@ function render_stars($stars, $outof)
                             <div class="[ flex-row ]">
                                 <div>
                                     <small>Location :</small>
-                                    <p><?php echo $gig['location'] ?></p>
+                                    <p><?php echo $gig['city'] ?></p>
                                 </div>
                                 <div>
 
                                     <small>Time Period :</small>
-                                    <p><?php echo $gig["timePeriod"] ?> Months</p>
+                                    <p><?php echo $gig["cropCycle"] ?> Days</p>
                                 </div>
                             </div>
                         </div>

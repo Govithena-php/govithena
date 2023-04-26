@@ -161,4 +161,31 @@ class investorGig
             return false;
         }
     }
+
+
+    public function getActiveGigCount($investorId)
+    {
+        try {
+            $sql = "SELECT count(*) as gigCount FROM investor_gig WHERE investorId = :investorId AND status = 'ACTIVE' ";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['investorId' => $investorId]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $row];
+        } catch (PDOException $e) {
+            return ['success' => false, 'message' => $e->getMessage()];
+        }
+    }
+
+    public function getCompletedGigCount($investorId)
+    {
+        try {
+            $sql = "SELECT count(*) as gigCount FROM investor_gig WHERE investorId = :investorId AND status = 'COMPLETED'";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['investorId' => $investorId]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $row];
+        } catch (PDOException $e) {
+            return ['success' => false, 'message' => $e->getMessage()];
+        }
+    }
 }

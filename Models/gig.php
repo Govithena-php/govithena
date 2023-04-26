@@ -21,7 +21,7 @@ class Gig extends Model
     public function fetchAll($order = "ASC", $limit = null)
     {
         try {
-            $sql = "SELECT gig.gigId, gig.farmerId, gig.title, gig.image, gig.capital, gig.location, gig.category, gig.timePeriod, user.firstName, user.lastName FROM gig INNER JOIN user ON gig.farmerId = user.uid";
+            $sql = "SELECT gig.gigId, gig.farmerId, gig.title, gig.thumbnail, gig.capital, gig.city, gig.category, gig.cropCycle, user.firstName, user.lastName FROM gig INNER JOIN user ON gig.farmerId = user.uid";
             if ($order == "ASC") {
                 $sql .= " ORDER BY createdAt ASC";
             } else {
@@ -95,6 +95,20 @@ class Gig extends Model
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             return ['success' => true];
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
+
+
+    public function fetchGigImages($gigId)
+    {
+        try {
+            $sql = "SELECT image FROM gig_image WHERE gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId]);
+            $gigImages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $gigImages];
         } catch (PDOException $e) {
             return ['success' => false, 'error' => $e->getMessage()];
         }
