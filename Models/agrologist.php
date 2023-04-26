@@ -208,7 +208,7 @@ class Agrologist extends Model
     public function getFarmerGigs($data)
     {
         try {
-            $sql = "SELECT g.image, g.location, g.title, g.category, g.timePeriod, u.firstName, u.lastName, g.farmerId, g.gigId FROM gig g LEFT JOIN user u ON u.uid=g.farmerId WHERE g.farmerId = :farmerId";
+            $sql = "SELECT g.thumbnail, g.city, g.title, g.category, g.cropCycle, u.firstName, u.lastName, g.farmerId, g.gigId FROM gig g LEFT JOIN user u ON u.uid=g.farmerId WHERE g.farmerId = :farmerId";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
                 'farmerId' => $data['farmerId']
@@ -225,7 +225,7 @@ class Agrologist extends Model
     public function getFarmerGigsRequest($requestId)
     {
         try {
-            $sql = "SELECT g.image, g.location, g.title, g.category, g.timePeriod, u.firstName, u.lastName, g.farmerId, g.gigId FROM gig g LEFT JOIN agrologist_request a ON g.farmerId=a.farmerId LEFT JOIN user u ON u.uid=g.farmerId WHERE a.requestId = :requestId";
+            $sql = "SELECT g.thumbnail, g.city, g.title, g.category, g.cropCycle, u.firstName, u.lastName, g.farmerId, g.gigId FROM gig g LEFT JOIN agrologist_request a ON g.farmerId=a.farmerId LEFT JOIN user u ON u.uid=g.farmerId WHERE a.requestId = :requestId";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
                 'requestId' => $requestId

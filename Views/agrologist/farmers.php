@@ -10,6 +10,8 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
+    <!-- <link rel="stylesheet" href="<?php echo CSS ?>/agrologist/myaccount.css"> -->
+
     <!-- <link rel="stylesheet" href="<?php echo CSS ?>/agrologist/requests.css"> -->
     <link rel="stylesheet" href="<?php echo CSS ?>/agrologist/farmers.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -96,21 +98,47 @@
                                         </div>
                                         <div>
                                             <?php
-                                            $d = date($request['requestedDate'], strtotime("+" . $request['timePeriod'] . "days"));
+                                            $date = date('Y-m-d', strtotime($request['requestedDate']));
+                                            // echo $date;
+                                            $f = " + " . $request['timePeriod'] . " days";
+                                            // echo $f;
+                                            $d = date('Y-m-d', strtotime($date . $f));
+                                            // date_add($date,date_interval_create_from_date_string("40 days"))
+                                            // echo $d;
                                             // echo date('Y-m-d', strtotime($d));
                                             // echo date('Y-m-d', time());
-                                            if (date('Y-m-d', strtotime($d)) == date('Y-m-d', time())) {
+                                            if ($d <= date('Y-m-d', time())) {
                                                 ?>
-                                                <a href="<?php echo URLROOT . '/agrologist/accept/' . $request['farmerId'] ?>"
-                                                    class="btn btn-danger ">Complete
-                                                </a>
+                                                <a href="#" class="btn btn-danger " id="edit_details">Complete</a>
                                                 <?php
                                             }
                                             ?>
+
+
                                         </div>
                                     </div>
+                                    
                                 </div>
                             </form>
+                            <div id="edit_detials_modal" class="modal">
+
+                                        <div class="modal-content">
+                                            <span class="close close_modal1">&times;</span>
+                                            <h3 class="fw-6">Complete</h3>
+                                            <p class="pt-1">Are you sure you want to complete?</p>
+                                            <form class="form pt-1" action=""
+                                                method="post" enctype="multipart/form-data">
+
+                                                <!-- <input type="text" name="firstName" class="" placeholder="First Name"
+                                                    value=""><br>
+                                                <input type="text" name="lastName" class="" placeholder="Last Name"
+                                                    value=""><br> -->
+                                                <button type="submit" name="edit_details_btn" class="btn uppercase"
+                                                    onclick="alert('Succesffully updated');">Complete</button>
+                                            </form>
+                                        </div>
+
+                                    </div>
                         </div>
                         <?php
                     }
@@ -138,6 +166,27 @@
                 } else {
                     cards[i].classList.add("is-hidden");
                 }
+            }
+        }
+
+        // var modal = document.getElementById("myModal");
+        var edit_detials_modal = document.getElementById("edit_detials_modal");
+
+        var edit_details_btn = document.getElementById("edit_details");
+
+        var span1 = document.getElementsByClassName("close_modal1")[0];
+
+        edit_details_btn.onclick = function () {
+            edit_detials_modal.style.display = "block";
+        }
+
+        span1.onclick = function () {
+            edit_detials_modal.style.display = "none";
+        }
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                edit_detials_modal.style.display = "none";
             }
         }
 
