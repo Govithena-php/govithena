@@ -35,6 +35,20 @@ class profileController extends Controller
             }
 
             $user = $this->userModel->getUserById($uid);
+
+            $reviewCount = $this->reviewByInvestorModel->getReviewCountByFarmer($uid);
+            if ($reviewCount['success']) {
+                $props['reviewCount'] = $reviewCount['data'];
+            } else {
+                $props['reviewCount'] = 0;
+            }
+
+            $qCounts = $this->reviewByInvestorModel->getQuestionsCountsByFarmer($uid);
+
+            var_dump($qCounts);
+            die();
+
+
             if ($user['status']) {
                 $props['user'] = $user['data'];
 

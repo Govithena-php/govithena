@@ -74,6 +74,15 @@ function render_stars($stars, $outof)
                         <div class="[ grid ]" sm="1" md="2" gap="1">
                             <div class="progress__bar">
                                 <div class="progress__details">
+                                    <p>Reccomandations</p>
+                                    <p>80%</p>
+                                </div>
+                                <div class="bar">
+                                    <div class="fill" style="--value: 50%;"></div>
+                                </div>
+                            </div>
+                            <div class="progress__bar">
+                                <div class="progress__details">
                                     <p>Quality of Work</p>
                                     <p>80%</p>
                                 </div>
@@ -83,7 +92,7 @@ function render_stars($stars, $outof)
                             </div>
                             <div class="progress__bar">
                                 <div class="progress__details">
-                                    <p>Communication</p>
+                                    <p>Overall performance</p>
                                     <p>80%</p>
                                 </div>
                                 <div class="bar">
@@ -92,7 +101,7 @@ function render_stars($stars, $outof)
                             </div>
                             <div class="progress__bar">
                                 <div class="progress__details">
-                                    <p>Expertise</p>
+                                    <p>Communication</p>
                                     <p>80%</p>
                                 </div>
                                 <div class="bar">
@@ -101,7 +110,7 @@ function render_stars($stars, $outof)
                             </div>
                             <div class="progress__bar">
                                 <div class="progress__details">
-                                    <p>Professionalism</p>
+                                    <p>Experties</p>
                                     <p>80%</p>
                                 </div>
                                 <div class="bar">
@@ -110,7 +119,7 @@ function render_stars($stars, $outof)
                             </div>
                             <div class="progress__bar">
                                 <div class="progress__details">
-                                    <p>Quality of Work</p>
+                                    <p>Professionalism</p>
                                     <p>80%</p>
                                 </div>
                                 <div class="bar">
@@ -119,7 +128,7 @@ function render_stars($stars, $outof)
                             </div>
                             <div class="progress__bar">
                                 <div class="progress__details">
-                                    <p>Communication</p>
+                                    <p>easy to work with</p>
                                     <p>80%</p>
                                 </div>
                                 <div class="bar">
@@ -135,17 +144,6 @@ function render_stars($stars, $outof)
                                     <div class="fill" style="--value: 76%;"></div>
                                 </div>
                             </div>
-                            <div class="progress__bar">
-                                <div class="progress__details">
-                                    <p>Professionalism</p>
-                                    <p>80%</p>
-                                </div>
-                                <div class="bar">
-                                    <div class="fill" style="--value: 50%;"></div>
-                                </div>
-                            </div>
-
-
                         </div>
                     </div>
                 </div>
