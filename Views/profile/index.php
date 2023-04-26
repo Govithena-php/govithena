@@ -52,7 +52,7 @@ function render_stars($stars, $outof)
                     <div class="cards">
                         <div class="card">
                             <small>Worked with </small>
-                            <p>3</p>
+                            <p><?php echo $WorkedWith; ?></p>
                             <small>Investors</small>
                         </div>
                         <div class="card">
@@ -75,73 +75,73 @@ function render_stars($stars, $outof)
                             <div class="progress__bar">
                                 <div class="progress__details">
                                     <p>Reccomandations</p>
-                                    <p>80%</p>
+                                    <p><?php echo $qPrecentages['q7Count'] ?>%</p>
                                 </div>
                                 <div class="bar">
-                                    <div class="fill" style="--value: 50%;"></div>
+                                    <div class="fill" style="--value: <?php echo $qPrecentages['q7Count'] ?>%;"></div>
                                 </div>
                             </div>
                             <div class="progress__bar">
                                 <div class="progress__details">
                                     <p>Quality of Work</p>
-                                    <p>80%</p>
+                                    <p><?php echo $qPrecentages['q3Count'] ?>%</p>
                                 </div>
                                 <div class="bar">
-                                    <div class="fill" style="--value: 50%;"></div>
+                                    <div class="fill" style="--value: <?php echo $qPrecentages['q3Count'] ?>%;"></div>
                                 </div>
                             </div>
                             <div class="progress__bar">
                                 <div class="progress__details">
                                     <p>Overall performance</p>
-                                    <p>80%</p>
+                                    <p><?php echo $qPrecentages['q7Count'] ?>%</p>
                                 </div>
                                 <div class="bar">
-                                    <div class="fill" style="--value: 40%;"></div>
+                                    <div class="fill" style="--value: <?php echo $qPrecentages['q7Count'] ?>%;"></div>
                                 </div>
                             </div>
                             <div class="progress__bar">
                                 <div class="progress__details">
                                     <p>Communication</p>
-                                    <p>80%</p>
+                                    <p><?php echo $qPrecentages['q7Count'] ?>%</p>
                                 </div>
                                 <div class="bar">
-                                    <div class="fill" style="--value: 67%;"></div>
+                                    <div class="fill" style="--value: <?php echo $qPrecentages['q7Count'] ?>%;"></div>
                                 </div>
                             </div>
                             <div class="progress__bar">
                                 <div class="progress__details">
                                     <p>Experties</p>
-                                    <p>80%</p>
+                                    <p><?php echo $qPrecentages['q7Count'] ?>%</p>
                                 </div>
                                 <div class="bar">
-                                    <div class="fill" style="--value: 48%;"></div>
+                                    <div class="fill" style="--value: <?php echo $qPrecentages['q7Count'] ?>%;"></div>
                                 </div>
                             </div>
                             <div class="progress__bar">
                                 <div class="progress__details">
                                     <p>Professionalism</p>
-                                    <p>80%</p>
+                                    <p><?php echo $qPrecentages['q7Count'] ?>%</p>
                                 </div>
                                 <div class="bar">
-                                    <div class="fill" style="--value: 90%;"></div>
+                                    <div class="fill" style="--value: <?php echo $qPrecentages['q7Count'] ?>%;"></div>
                                 </div>
                             </div>
                             <div class="progress__bar">
                                 <div class="progress__details">
-                                    <p>easy to work with</p>
-                                    <p>80%</p>
+                                    <p>Easy to work with</p>
+                                    <p><?php echo $qPrecentages['q7Count'] ?>%</p>
                                 </div>
                                 <div class="bar">
-                                    <div class="fill" style="--value: 80%;"></div>
+                                    <div class="fill" style="--value: <?php echo $qPrecentages['q7Count'] ?>%;"></div>
                                 </div>
                             </div>
                             <div class="progress__bar">
                                 <div class="progress__details">
                                     <p>Expertise</p>
-                                    <p>80%</p>
+                                    <p><?php echo $qPrecentages['q7Count'] ?>%</p>
                                 </div>
                                 <div class="bar">
-                                    <div class="fill" style="--value: 76%;"></div>
+                                    <div class="fill" style="--value: <?php echo $qPrecentages['q7Count'] ?>%;"></div>
                                 </div>
                             </div>
                         </div>

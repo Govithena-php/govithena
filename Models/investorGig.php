@@ -201,4 +201,17 @@ class investorGig
             return ['success' => false, 'message' => $e->getMessage()];
         }
     }
+
+    public function getWorkedWith($uid)
+    {
+        try {
+            $sql = "SELECT COUNt(investorId) as investorCount FROM investor_gig WHERE farmerId = :uid";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['uid' => $uid]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $row];
+        } catch (PDOException $e) {
+            return ['success' => false, 'message' => $e->getMessage()];
+        }
+    }
 }

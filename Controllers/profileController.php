@@ -36,18 +36,37 @@ class profileController extends Controller
 
             $user = $this->userModel->getUserById($uid);
 
-            $reviewCount = $this->reviewByInvestorModel->getReviewCountByFarmer($uid);
-            if ($reviewCount['success']) {
-                $props['reviewCount'] = $reviewCount['data'];
+            $WorkedWith = $this->investorGigModel->getWorkedWith($uid);
+            if ($WorkedWith['success']) {
+                $props['WorkedWith'] = $WorkedWith['data']['investorCount'];
             } else {
-                $props['reviewCount'] = 0;
+                $props['WorkedWith'] = 0;
             }
 
+            $reviewCount = $this->reviewByInvestorModel->getReviewCountByFarmer($uid);
             $qCounts = $this->reviewByInvestorModel->getQuestionsCountsByFarmer($uid);
+            if ($reviewCount['success']) {
+                $totalReviews = $reviewCount['data']['totalReviewCount'];
+                if ($qCounts['success']) {
+                    foreach ($qCounts['data'] as $qKey => $qCount) {
+                        $props['qPrecentages'][$qKey] = ($qCount / $totalReviews) * 100;
+                    }
+                } else {
+                    foreach ($qCounts['data'] as $qKey => $qCount) {
+                        $props['qPrecentages'][$qKey] = 0;
+                    }
+                }
+            } else {
+                $props['reviewCount'] = 0;
+                foreach ($qCounts['data'] as $qKey => $qCount) {
+                    $props['qPrecentages'][$qKey] = 0;
+                }
+            }
 
-            var_dump($qCounts);
-            die();
 
+
+            // die(var_dump($props['qPrecentages']));
+            // die();
 
             if ($user['status']) {
                 $props['user'] = $user['data'];
