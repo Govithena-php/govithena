@@ -44,7 +44,7 @@
 
         <div class="[ grid ][ cards ]" md="2" lg="4">
             <div class="[ card ]">
-                <h3>Investments</h3>
+                <h3>Total Investments</h3>
                 <div class="[ amount ]">
                     <span class="[ LKRBadge ]"></span>
                     <h1><?php echo number_format($totalInvestment, 2, '.', ',') ?></h1>
@@ -54,7 +54,7 @@
             </div>
 
             <div class="[ card ]">
-                <h3>Gain</h3>
+                <h3>Total Income</h3>
                 <div class="[ amount ]">
                     <span class="[ LKRBadge ]"></span>
                     <h1><?php echo number_format($totalGain, 2, '.', ',') ?></h1>

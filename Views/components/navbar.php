@@ -62,9 +62,9 @@ $currentUser = Session::get('user');
                         <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/">
                                 <i class="[ fa-solid fa-gauge ]"></i>Dashboard
                             </a></li>
-                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/myaccount">
+                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/account">
                                 <i class="[ fa-solid fa-user-tie ]"></i>My Account</a></li>
-                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/settings">
+                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/settings">
                                 <i class="[ fa-solid fa-gear ]"></i>Settings</a>
                         </li>
                     </ul>

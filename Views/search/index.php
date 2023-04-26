@@ -57,7 +57,7 @@
 
 
         <div class="[ filters__results ]">
-            <div class="[ left ]">
+            <!-- <div class="[ left ]">
                 <div class="[ filter__by ]">
                     <div class="[ heading ]">
                         <h3>Filter by</h3>
@@ -195,11 +195,11 @@
 
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div class="[ right ]">
                 <p class="[ right__heading ]">Search results for "<?php echo $_GET["terms"] ?>"</p>
-                <div class="[ grid ] [ search__results ]" gap="2" md="2" lg="3">
+                <div class="[ grid ] [ search__results ]" gap="2" md="2" lg="4">
                     <?php
                     if (isset($searchResult)) {
                         foreach ($searchResult as $result) {

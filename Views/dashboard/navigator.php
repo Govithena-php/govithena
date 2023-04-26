@@ -76,9 +76,9 @@ function highlight($active, $link)
                         <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/">
                                 <i class="[ fa-solid fa-gauge ]"></i>Dashboard
                             </a></li>
-                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/myaccount">
+                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/account">
                                 <i class="[ fa-solid fa-user-tie ]"></i>My Account</a></li>
-                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/settings">
+                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/settings">
                                 <i class="[ fa-solid fa-gear ]"></i>Settings</a>
                         </li>
                     </ul>
@@ -145,19 +145,19 @@ function highlight($active, $link)
         <div class="[ grow ]"></div>
         <ul>
             <li>
-                <a href="<?php echo URLROOT ?>/dashboard/myaccount" class="<?php highlight($active, "myaccount") ?>">
-                    <i class="[ fa-solid fa-user-tie ]"></i>
+                <a href="<?php echo URLROOT ?>/account" class="">
+                    <i class=" [ fa-solid fa-user-tie ]"></i>
                     <p>My Account</p>
                 </a>
             </li>
             <li>
-                <a href="<?php echo URLROOT ?>/help" class="<?php highlight($active, "help") ?>">
+                <a href="<?php echo URLROOT ?>/help" class="">
                     <i class="[ fa-solid fa-circle-question ]"></i>
                     <p>Help</p>
                 </a>
             </li>
             <li>
-                <a href="<?php echo URLROOT ?>/dashboard/settings" class="<?php highlight($active, "settings") ?>">
+                <a href="<?php echo URLROOT ?>/settings" class="">
                     <i class="[ fa-solid fa-gear ]"></i>
                     <p>Settings</p>
                 </a>
