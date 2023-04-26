@@ -60,6 +60,20 @@ class Agrologist extends Model
         }
     }
 
+    function completeRequest($requestId)
+    {
+        try {
+            $sql = "UPDATE agrologist_request SET status = 'Completed' WHERE requestId = :requestId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['requestId' => $requestId]);
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+        }
+    }
+
     function declineNotificationFarmer($uid)
     {
         try {

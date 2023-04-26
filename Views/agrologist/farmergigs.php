@@ -58,7 +58,7 @@
                             <div class="location_name">
 
                                 <p class="ml-1">
-                                    <?php echo ucwords($gigDetail['location']) ?>
+                                    <?php echo ucwords($gigDetail['city']) ?>
                                 </p>
                             </div>
                         </div>
@@ -72,7 +72,7 @@
                                     <?php echo ucwords($gigDetail['category']) ?>
                                 </p>
                                 <p>
-                                    <?php echo $gigDetail['timePeriod'] ?> days
+                                    <?php echo $gigDetail['cropCycle'] ?> days
                                 </p>
                             </div>
                         </div>

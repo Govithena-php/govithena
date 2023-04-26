@@ -64,9 +64,8 @@
                                             <?php echo ucwords($request['city']) ?>
                                         </h4>
 
-                                        <h4 class="fw-6">
-                                            LKR
-                                            <?php echo ucwords($request['offer']) ?>
+                                        <h4 class="fw-6 LKR">
+                                            <?php echo number_format(ucwords($request['offer'])) ?>
                                         </h4>
 
                                         <!-- <?php echo $request['total'] / ($request['num'] * 3) ?>
@@ -126,15 +125,15 @@
                                             <span class="close close_modal1">&times;</span>
                                             <h3 class="fw-6">Complete</h3>
                                             <p class="pt-1">Are you sure you want to complete?</p>
-                                            <form class="form pt-1" action=""
+                                            <form class="form pt-1" action="<?php echo URLROOT . '/agrologist/farmers' ?>"
                                                 method="post" enctype="multipart/form-data">
 
                                                 <!-- <input type="text" name="firstName" class="" placeholder="First Name"
                                                     value=""><br>
                                                 <input type="text" name="lastName" class="" placeholder="Last Name"
                                                     value=""><br> -->
-                                                <button type="submit" name="edit_details_btn" class="btn uppercase"
-                                                    onclick="alert('Succesffully updated');">Complete</button>
+                                                <button type="submit" name="complete_btn" class="btn uppercase"
+                                                value="<?php echo $request['requestId'] ?> ">Complete</button>
                                             </form>
                                         </div>
 

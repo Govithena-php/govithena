@@ -125,6 +125,13 @@ class agrologistController extends Controller
                 $this->set(['error' => "no farmers"]);
             }
 
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                if(isset($_POST['complete_btn'])){
+                    $agr->completeRequest($_POST['complete_btn']);
+                }
+            }
+
+
             $this->render('farmers');
         }
     }
