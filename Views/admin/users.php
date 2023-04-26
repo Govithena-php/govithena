@@ -139,7 +139,7 @@
                                             <div class="[ row ]">
                                                 <div class="[ data ]">
                                                     <div class="[ item__card ]">
-                                                        <img width="50" src="<?php echo UPLOADS . $activeUser['image'] ?>" />
+                                                        <img width="50" src="<?php echo UPLOADS . '/profilePictures/' . $activeUser['image'] ?>" />
                                                     </div>
                                                 </div>
                                                 <div class="[ data ]" hideIn="md">

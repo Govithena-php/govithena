@@ -214,7 +214,7 @@ function render_stars($stars, $outof)
                         ?>
                                 <div class="[ review ]">
                                     <div class="[ review__header ]">
-                                        <img src="<?php echo UPLOADS . $review['image'] ?>" alt="profile">
+                                        <img src="<?php echo UPLOADS . 'profilePictures/' . $review['image'] ?>" alt="profile">
                                         <h3><?php echo $review['firstName'] . " " . $review['lastName'] ?></h3>
                                     </div>
                                     <p><?php echo $review['q8'] ?></p>
@@ -252,7 +252,7 @@ function render_stars($stars, $outof)
                     <div class="[ capital__profitRate ]">
                         <div>
                             <small>Initial Investment</small>
-                            <p><span class="[ LKR ]">LKR </span><?php echo number_format($gig['capital'], 2, '.', ',') ?></p>
+                            <p class="[ LKR ]"><?php echo number_format($gig['capital'], 2, '.', ',') ?></p>
                         </div>
                         <div>
                             <small>Profit Margin</small>
@@ -271,7 +271,7 @@ function render_stars($stars, $outof)
                             </div>
                             <div class="[ content__item ]">
                                 <small>Market Demand (pre 1 Unit)</small>
-                                <p><span class="[ LKR ]">LKR</span>500.00 - <span class="[ LKR ]">LKR</span>600.00</p>
+                                <p><span class="[ LKR ]"></span>500.00 - <span class="[ LKR ]"></span>600.00</p>
                             </div>
                         </div>
                         <div class="[ content__item address ]">
@@ -331,11 +331,11 @@ function render_stars($stars, $outof)
                 <div class="[ flex flex-sb-c my-05 ]">
                     <div>
                         <small>Initial Investment</small>
-                        <p><span class="[ LKR ]">LKR </span><?php echo number_format($gig['capital'], 2, '.', ',') ?></p>
+                        <p class="[ LKR ]"><?php echo number_format($gig['capital'], 2, '.', ',') ?></p>
                     </div>
                     <div>
                         <small>Profit Margin</small>
-                        <p class="[ profit__precentage ]">12<span class="[ precentage ]">%</span></p>
+                        <p class="[ profit__precentage ]"><?php echo $gig['profitMargin'] ?><span class="[ precentage ]">%</span></p>
                     </div>
                 </div>
                 <form class="[ modal__form ]" method="post" action="<?php echo URLROOT ?>/gig/request">

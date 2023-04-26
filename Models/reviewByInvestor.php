@@ -55,4 +55,18 @@ class ReviewByInvestor extends Model
             return ['success' => false, 'data' => $e->getMessage()];
         }
     }
+
+    public function getReviewCountByFarmer($uid)
+    {
+        try {
+            $sql = "SELECT COUNT(reviewId) AS totalReviewCount FROM review_by_investor WHERE farmerId = :uid";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['uid' => $uid]);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            var_dump($result);
+            die();
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
 }
