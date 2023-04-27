@@ -51,14 +51,14 @@ function render_stars($stars, $outof)
                 <div class="preformance">
                     <div class="cards">
                         <div class="card">
-                            <small>Worked with </small>
+                            <small>Had worked with </small>
                             <p><?php echo $WorkedWith; ?></p>
                             <small>Investors</small>
                         </div>
                         <div class="card">
-                            <small>Invested Over </small>
-                            <p class="[ LKR ]"><?php echo number_format('10000.00', 0, '', ',') ?>+</p>
-                            <small>From Investors</small>
+                            <small>Acquired Over </small>
+                            <p class="[ LKR accequerdOver ]"><?php echo number_format($accequerdOver, 0, '', ',') ?>+</p>
+                            <small>From the platform</small>
                         </div>
                         <div class="card">
                             <small>Overall Score </small>

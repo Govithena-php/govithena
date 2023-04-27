@@ -101,6 +101,8 @@ class checkoutController extends Controller
     public function pay()
     {
 
+
+
         if (isset($_POST['pay'])) {
             $id = $_POST['pay'];
             $res = $this->requestFarmerModel->getRequestById($id);
@@ -109,6 +111,7 @@ class checkoutController extends Controller
                 'id' =>  new UID(PREFIX::INVESTMENT),
                 'investorId' => $this->currentUser->getUid(),
                 'gigId' => $res['gigId'],
+                'farmerId' => $res['farmerId'],
                 'amount' => $res['capital']
             ]);
 

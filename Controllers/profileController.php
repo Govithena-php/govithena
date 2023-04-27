@@ -43,6 +43,20 @@ class profileController extends Controller
                 $props['WorkedWith'] = 0;
             }
 
+            $investmentsSum = $this->investorGigModel->getInvestmentsSumByFarmer($uid);
+            if ($investmentsSum['success']) {
+                $sum = $investmentsSum['data']['totalInvestment'];
+            } else {
+                $sum = 0;
+            }
+            $tot = $sum;
+            $rounding_factor = 1;
+            while ($tot >= 10) {
+                $rounding_factor *= 10;
+                $tot = floor($tot / 10);
+            }
+            $props['accequerdOver'] = floor($sum / $rounding_factor) * $rounding_factor;
+
             $reviewCount = $this->reviewByInvestorModel->getReviewCountByFarmer($uid);
             $qCounts = $this->reviewByInvestorModel->getQuestionsCountsByFarmer($uid);
             if ($reviewCount['success']) {

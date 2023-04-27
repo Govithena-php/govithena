@@ -214,4 +214,17 @@ class investorGig
             return ['success' => false, 'message' => $e->getMessage()];
         }
     }
+
+    public function getInvestmentsSumByFarmer($uid)
+    {
+        try {
+            $sql = "SELECT SUM(amount) as totalInvestment FROM investment WHERE farmerId = :uid";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['uid' => $uid]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $row];
+        } catch (PDOException $e) {
+            return ['success' => false, 'message' => $e->getMessage()];
+        }
+    }
 }
