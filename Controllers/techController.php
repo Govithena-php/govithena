@@ -4,6 +4,9 @@ class techController extends Controller
 {
     private $currentUser;
 
+    private $techModel;
+    
+
     public function __construct()
     {
         $this->currentUser = Session::get('user');
@@ -12,9 +15,11 @@ class techController extends Controller
             $this->redirect('/auth/signin');
         }
 
-        if (!$this->currentUser->hasAccess(ACTOR::TECH_ASSISTANT)) {
+        if (!$this->currentUser->hasAccess(ACTOR::TECH)) {
             $this->redirect('/error/dontHaveAccess');
         }
+
+        $this->techModel = $this->model('techAssistant');
     }
 
     public function index()
@@ -24,39 +29,29 @@ class techController extends Controller
 
     public function farmers()
     {
-        require(ROOT . 'Models/tech.php');
-        $tech = new Tech();
-        $farmers = $tech->getFarmers();
-        if (isset($farmers)) {
-            $this->set(['ar' => $farmers]);
-        } else {
-            $this->set(['error' => "no farmers"]);
+        $props = [];
+        $farmers = $this->techModel->getFarmers();
+        if($farmers['success']){
+            $props['farmers'] = $farmers['data'];
         }
+        $this->set($props);
         $this->render('farmers');
     }
 
     public function requests()
     {
-        require(ROOT . 'Models/tech.php');
-        $tech = new Tech();
-        $requests = $tech->farmerRequest();
+        $props = [];
 
-        if (isset($requests)) {
-            $this->set(['ar' => $requests]);
-        } else {
-            $this->set(['error' => "no requests found"]);
-        }
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (isset($_POST['accept'])) {
-                var_dump($_POST['accept']);
-                //echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>" . $_POST['accept'] . "</h1>";
-                $tech->acceptRequest($_POST['accept']);
-                //$this->redirect("/agrologist/farmers");
-            } else {
-                echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>nope</h1>";
-            }
+        $farmerRequests = $this->techModel->farmerRequest();
+        if($farmerRequests['success']){
+            $props['farmerRequests'] = $farmerRequests['data'];
         }
 
+        $rejectedFarmerRequests = $this->techModel->getRejectedFarmerRequest();
+        if($rejectedFarmerRequests['success']){
+            $props['rejectedFarmerRequests'] = $rejectedFarmerRequests['data'];
+        }
+        $this->set($props);
         $this->render('requests');
     }
 
@@ -68,6 +63,55 @@ class techController extends Controller
     public function myaccount()
     {
         $this->render('myaccount');
+    }
+
+
+    public function accept_farmer_request(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $reqId = new Input(POST, 'acceptRequest-confirm');
+            $res = $this->techModel->acceptRequest($reqId);
+            if($res){
+                $data = $this->techModel->getRequestData($reqId);
+                $this->techModel->addTechFarmer([
+                    'techId' => $data[0]['technicalAssistantId'],
+                    'farmerId' => $data[0]['farmerId']
+                ]);
+                $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully accepted request.');
+                Session::set(['farmer_request_accept_alert' => $alert]);
+            }else {
+                $alert = new Alert($type = 'success', $icon = "", $message = 'accept request failed.');
+                Session::set(['farmer_request_accept_alert' => $alert]);
+            }
+            $this->redirect('/tech');
+        }
+    }
+
+    public function reject_farmer_request(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $reqId = new Input(POST, 'rejectRequest-confirm');
+            $res = $this->techModel->rejectRequest($reqId);
+            if($res){
+                $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully rejected request.');
+                Session::set(['farmer_request_reject_alert' => $alert]);
+            }else {
+                $alert = new Alert($type = 'success', $icon = "", $message = 'reject request failed.');
+                Session::set(['farmer_request_reject_alert' => $alert]);
+            }
+            $this->redirect('/tech');
+        }
+    }
+
+    public function assignedGigs(){
+
+        $props = [];
+        
+        $assignedGigs = $this->techModel->getAssignedGigs($this->currentUser->getUid());        
+        if($assignedGigs['success']){
+            $props['assignedGigs'] = $assignedGigs['data'];
+        }
+
+        $this->set($props);
+        $this->render('assignedGigs');
     }
 
 }

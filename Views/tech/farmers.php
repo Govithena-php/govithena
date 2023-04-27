@@ -11,7 +11,6 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/table.css">
-    <link rel="stylesheet" href="<?php echo CSS ?>/agrologist/requests.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/tech/farmers.css">
 
     <title>Dashboard | Tech Assistant</title>
@@ -26,11 +25,14 @@
 
     <div class="[ container ][ ]" container-type="dashboard-section">
 
-        <h1 class="[ page-heading-1 ]">farmers</h1>
+    <div class="[ caption ]">
+            <h3>Farmers</h3>
+            <p>Keep an eye on the status of your investments with our investor dashboard. Quickly see which requests are accepted, rejected, or still pending, and stay in the know about the progress of your investments.</p>
+        </div>
 
-        <div class="[ requests__continer ]">
+        <div class="[ requests__container ]">
             <?php
-            if (!isset($ar) || empty($ar)) {
+            if (!isset($farmers) || empty($farmers)) {
             ?>
                 <div class="[ no_requests__card ]">
                     <p class=''>No Requests</p>
@@ -40,38 +42,24 @@
             ?>
                 <div class="[ requests__wrapper ]">
                     <?php
-                    foreach ($ar as $request) {
+
+                    foreach ($farmers as $request) {
                     ?>
 
-                        <div class="[ request__card bg-light ]">
-                            <div class="[ request__img ]">
-                                <img src="<?php echo IMAGES ?>/farmer.jpeg" alt="">
-                            </div>
-                            <form action="" method="POST">
-                                <div class="flex flex-row " style="width: 600px">
-                                    <div class="[ request__content ]">
-
-                                        <h1>
-                                            <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/agrologist/farmers/" . $request['farmerId'] ?>">
-                                                <?php echo ucwords($request['fullName']) ?>
-                                            </a>
-                                        </h1>
-                                        <h4><?php echo ucwords($request['city']) ?></h4>
-                                        <p class="flex flex-row">
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                        </p>
-
-                                    </div>
-                                    <!-- <div class="flex flex-row flex-c-c">
-                            <button type="submit" value="<?php echo $request['requestId'] ?> "class="btn btn-primary mr-2 mt-2" name="accept">Accept</button>
-                            <button class="btn btn-danger mt-2" name="decline">Decline</button>
-                        </div> -->
+                        <div class="[ request__card ]">
+                            <div class="left">
+                                <div class="[ request__img ]">
+                                    <img src="<?php echo UPLOADS ?>/profilePictures/<?php echo $request['image']?>" alt="">
                                 </div>
-                            </form>
+                                <div class="name">
+                                    <h1> <?php echo ucwords($request['firstName'] ." ". $request['lastName'] ) ?></h1>
+                                    <h5><?php echo ucwords($request['city']) ?></h5>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <a class = "button__primary" href=" <?php echo URLROOT?>/tech/assignedGigs">Assigned Gigs</a>
+                                <a class = "button__primary" href=" <?php echo URLROOT?>/tech/otherTasks">Other Tasks</a>
+                            </div>
                         </div>
                     <?php
                     }
