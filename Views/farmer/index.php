@@ -100,7 +100,70 @@
 
 
         
-
+        <div class="grid__table"
+                        style="
+                                --xl-cols: 1fr 0.7fr 0.7fr 0.7fr 2fr 1fr;
+                                --lg-cols: 1.5fr 1fr 1fr 1fr 0.3fr;
+                                --md-cols: 2fr 1fr 0.3fr;
+                                --sm-cols: 3fr 0.3fr;
+                            "
+                        >
+                        <div class="head">
+                            <div class="row">
+                                <div class="data">
+                                    <p>Farmer Name</p>
+                                </div>
+                                <div class="data">
+                                    <p>Initial Investment</p>
+                                </div>
+                                <div class="data">
+                                    <p>Location</p>
+                                </div>
+                                <div class="data">
+                                    <p>Land Area</p>
+                                </div>
+                                <div class="data">
+                                    <p>Description</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="body">
+                            <?php
+                            foreach($products as $p){
+                                ?>
+                            <div class="row">
+                                <div class="data farmer__">
+                                    <div class="farmer__image">
+                                        <img src="<?php echo UPLOADS . '/profilePictures/' . $p['thumbnail']?>" alt="Picture">
+                                    </div>
+                                    <p><?php echo $p['title'] . " " . $p['category']?></p>
+                                </div>
+                                <div class="data">
+                                    <p class="LKR"><?php echo number_format($p['capital'], 2, '.', ',')?></p>
+                                </div>
+                                <div class="data">
+                                    <p><?php echo $p['city']?></p>
+                                </div>
+                                <div class="data">
+                                    <p><?php echo $p['landArea']?></p>
+                                </div>
+                                <div class="data">
+                                    <p><?php echo $p['description']?></p>
+                                </div>
+                                <div class="data flex-right">
+                                    <div class="actions">
+                                        <button onclick="openAcceptModal('<?php echo $p['gigId']?>')" class="button__primary">Accept</button>
+                                        <button onclick="openRejectModal('<?php echo $p['gigId']?>')" class="button__danger">Reject</button>
+                                        <!-- <a href="#" class="btn btn-primary">Edit</a>
+                                        <a href="<?php echo URLROOT . "/farmer/deleteGig/" . $p['gigId'] ?>" class="btn btn-danger">Delete</a> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                    </div>
     </div>
     <?php
     require_once("footer.php");
