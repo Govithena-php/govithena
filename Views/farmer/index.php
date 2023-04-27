@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/table.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/gridTable.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
 
     <link rel="stylesheet" href="<?php echo CSS ?>/farmer/gigs.css">
@@ -69,13 +70,37 @@
                             </div>
                         </div>
                     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
             <?php
 
                 }
             }
             ?>
         </div>
-    </div>
+
+
+
+
+
+        
+
     </div>
     <?php
     require_once("footer.php");
