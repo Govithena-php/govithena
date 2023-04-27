@@ -49,9 +49,9 @@ nav {
 
 
 .filters__results {
-    display: grid;
-    grid-template-columns: 1fr 3.5fr;
-    gap: 1.5rem;
+    /* display: grid; */
+    /* grid-template-columns: 1fr 3.5fr; */
+    /* gap: 1.5rem; */
 }
 
 

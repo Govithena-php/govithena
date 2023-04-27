@@ -11,8 +11,8 @@ define('UPLOADS3', URLROOT . '/Webroot/Uploads3/'); // http://localhost/govithen
 define('CSS', URLROOT . '/Webroot/css/'); // http://localhost/govithena/Webroot/css/
 define('JS', URLROOT . '/Webroot/js/'); // http://localhost/govithena/Webroot/js/
 
-define('POST', $_POST);
-define('GET', $_GET);
+define('POST', 'POST');
+define('GET', 'GET');
 
 require(ROOT . 'Config/core.php');
 require(ROOT . 'dispatcher.php');

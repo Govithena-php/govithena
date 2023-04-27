@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/table.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/investor/index.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/tech/index.css">
 
     <title>Dashboard | Tech Assistant</title>
     <style>
@@ -27,6 +27,19 @@
     $active = "dashboard";
     $title = "Tech";
     require_once("navigator.php");
+    ?>
+
+    
+<?php
+    if(Session::has('farmer_request_accept_alert')){
+        $alert = Session::pop('farmer_request_accept_alert');
+        $alert->show_default_alert();
+    }
+    if(Session::has('farmer_request_reject_alert')){
+        $alert = Session::pop('farmer_request_reject_alert');
+        $alert->show_default_alert();
+    }
+    
     ?>
 
     <div class="[ container ][ dashboard ]" container-type="dashboard-section">
