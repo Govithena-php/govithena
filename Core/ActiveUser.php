@@ -45,7 +45,7 @@ class ActiveUser
 
     public function isTechAssistant()
     {
-        return $this->type == ACTOR::TECH_ASSISTANT;
+        return $this->type == ACTOR::TECH;
     }
 
     public function isAdmin()

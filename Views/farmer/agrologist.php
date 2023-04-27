@@ -108,7 +108,7 @@
                 foreach ($agrologists as $agrologist) {
             ?>
 
-                    <div class="[ requestcard bg-light ]">
+                    <!-- <div class="[ requestcard bg-light ]">
                         <div class="[ requestimg ]">
                             <img class="img" src="<?php echo UPLOADS . $agrologist['image'] ?>" alt=" profile">
                         </div>
@@ -130,14 +130,69 @@
                             <a class="request__btn" href="<?php echo URLROOT . "/farmer/send/" . $agrologist['uid'] ?>">Send Request</a>
                         </div>
 
-                    </div>
+                    </div> -->
+                    <div class="requestcardn">
+                        <div class="[ requestimg1 ]">
+                            <img class="img" src="<?php echo UPLOADS . $agrologist['image'] ?>" alt=" profile">
+                            <!-- <img class="img" src="<?php echo IMAGES ?>/21.jpg" alt=" profile"> -->
+
+                        </div>
+                        <div class="flex flex-row ">
+                            <div class=" requestlist ">
+                                <a class="namebox" href="<?php echo URLROOT . "/profile/" . $agrologist['uid'] ?>">
+                                    <p><b><?php echo $agrologist['firstName'] . " " . $agrologist['lastName']; ?></b></p>
+                                </a>
+                                <p class="flex flex-row">
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class=" flex-c-c">
+                            <!-- <a class="request__btn" href="<?php echo URLROOT . "/farmer/send/" . $agrologist['uid'] ?>">Send Request</a> -->
+                            <a class="requestbtn" href="<?php echo URLROOT . "/farmer/send/" . $agrologist['uid'] ?>">Send Request</a>
+
+                        </div>
+
+                 </div>
 
             <?php
                 }
             }
+            
 
 
             ?>
+            <div class="requestcardn">
+                        <div class="[ requestimg1 ]">
+                            <!-- <img class="img" src="<?php echo UPLOADS . $agrologist['image'] ?>" alt=" profile"> -->
+                            <img class="img" src="<?php echo IMAGES ?>/21.jpg" alt=" profile">
+
+                        </div>
+                        <div class="flex flex-row ">
+                            <div class=" requestlist ">
+                                <a class="namebox" href="<?php echo URLROOT . "/profile/" . $agrologist['uid'] ?>">
+                                    <p><b><?php echo $agrologist['firstName'] . " " . $agrologist['lastName']; ?></b></p>
+                                </a>
+                                <p class="flex flex-row">
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class=" flex-c-c">
+                            <!-- <a class="request__btn" href="<?php echo URLROOT . "/farmer/send/" . $agrologist['uid'] ?>">Send Request</a> -->
+                            <a class="requestbtn" href="<?php echo URLROOT . "/farmer/send/" . $agrologist['uid'] ?>">Send Request</a>
+
+                        </div>
+
+                 </div>
         </div>
 
 

@@ -21,7 +21,7 @@ class Farmer extends Model
         try {
             $sql = "SELECT LG.uid, user.firstName, user.lastName, user.image FROM login_credential LG INNER JOIN user ON LG.uid = user.uid WHERE LG.userType = :userType";
             $stmt = Database::getBdd()->prepare($sql);
-            $stmt->execute(['userType' => ACTOR::TECH_ASSISTANT]);
+            $stmt->execute(['userType' => ACTOR::TECH]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return ['status' => true, 'data' => $req];
         } catch (Exception $e) {
@@ -77,7 +77,7 @@ class Farmer extends Model
     public function investors($data)
     {
         try {
-            $sql = "SELECT fr.requestId, fr.requestedDate, fr.offer, fr.message, user.firstName, user.lastName,  gig.title, gig.image, gig.location from farmer_request fr INNER JOIN gig ON gig.gigId = fr.gigId INNER JOIN user ON user.uid = fr.investorId WHERE fr.farmerId = :farmerId AND fr.state = :state";
+            $sql = "SELECT fr.requestId, fr.requestedDate, fr.offer, fr.message, user.firstName, user.lastName,  gig.title, gig.thumbnail, gig.city from farmer_request fr INNER JOIN gig ON gig.gigId = fr.gigId INNER JOIN user ON user.uid = fr.investorId WHERE fr.farmerId = :farmerId AND fr.state = :state";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);

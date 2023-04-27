@@ -47,7 +47,7 @@
                 <?php
             } else {
                 foreach ($products as $p) {
-                    $imageURL = UPLOADS . $p["image"];
+                    $imageURL = UPLOADS . $p["thumbnail"];
                 ?>
                     <div class="card">
                         <div class="img_wrapper">
@@ -56,12 +56,12 @@
                         <div class="card_content">
                             <h1><?php echo ucwords($p['title']) ?></h1>
                             <h4><?php echo ucwords($p['category']) ?></h4>
-                            <div style="color: grey">Capital(LKR)</div>
-                            <h2><?php echo $p['capital'] ?></h2>
+                            <div style="color: grey">Initial Investment</div>
+                            <h2 class="LKR"><?php echo $p['capital'] ?></h2>
                             <div style="color: grey">Location</div>
-                            <p><?php echo ucwords($p['location']) ?></p>
-                            <div style="color: grey">Land Area(Hectare)</div>
-                            <p><?php echo $p['landArea'] ?></p>
+                            <p><?php echo ucwords($p['city']) ?></p>
+                            <div style="color: grey">Land Area</div>
+                            <p><?php echo $p['landArea'] ?> Hectare</p>
                             <p><?php echo $p['description'] ?></p>
                             <div class="actions">
                                 <a href="#" class="btn btn-primary">Edit</a>

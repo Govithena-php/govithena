@@ -62,7 +62,7 @@ class Gig extends Model
     public function create($data)
     {
         try {
-            $sql = "INSERT INTO `gig` (`gigId`, `title`, `description`, `category`, `image`, `capital`, `timePeriod`, `location`, `landArea`, `farmerId`) VALUES (:gigId, :title, :description, :category, :image, :capital, :timePeriod, :location, :landArea, :farmerId)";
+            $sql = "INSERT INTO `gig` (`gigId`, `title`, `description`, `category`, `image`, `capital`, 'profitMargin', `timePeriod`, `location`, `landArea`, `farmerId`) VALUES (:gigId, :title, :description, :category, :image, :capital, :profitMargin, :timePeriod, :location, :landArea, :farmerId)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
             return true;

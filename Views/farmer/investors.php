@@ -151,7 +151,7 @@
             <div class="investors">
                 <?php
                 foreach ($investors as $investor) {
-                    $imgURL = UPLOADS . "/" . $investor['image'];
+                    $imgURL = UPLOADS . "/" . $investor['thumbnail'];
                 ?>
                     <div class="investor__card">
                         <div class="card__img">
@@ -167,7 +167,7 @@
                             </div>
                             <div>
                                 <small>Location :</small>
-                                <p class="farmer"><?php echo $investor['location'] ?></p>
+                                <p class="farmer"><?php echo $investor['city'] ?></p>
                                 <small>Farmer :</small>
                                 <p class="card__farmer_name"><?php echo $investor['firstName'] . " " . $investor['lastName'] ?></p>
                             </div>

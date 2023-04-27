@@ -2,7 +2,11 @@
 class farmerController extends Controller
 {
     private $currentUser;
-    private $imageHandler;
+    
+    private $progressImageHandler;
+
+    private $gigImageHandler;
+    
     private $farmerModel;
     private $investorGigModel;
     private $gigModel;
@@ -14,7 +18,13 @@ class farmerController extends Controller
     public function __construct()
     {
         $this->currentUser = Session::get('user');
-        $this->imageHandler = new ImageHandler($folder = 'Uploads3');
+        
+
+        // <input type="file" name="name eke"
+        //image ekk upload kranna imsgeHandler->upload('name eka')
+
+        $this->progressImageHandler = new ImageHandler($folder = 'Uploads3');
+        $this->gigImageHandler = new ImageHandler($folder = "Uploads/gigs");
 
         $this->farmerModel = $this->model('farmer');
         $this->investorGigModel = $this->model('investorGig');
@@ -37,17 +47,18 @@ class farmerController extends Controller
     {
         if (isset($_POST['createGig'])) {
 
-            $gigId = uniqid();
-            $title = $_POST['title'];
-            $landArea = $_POST['landArea'];
-            $capital = $_POST['capital'];
-            $timePeriod = $_POST['timePeriod'];
-            $location = $_POST['location'];
-            $category = $_POST['category'];
 
-            var_dump($_POST);
-            var_dump($_FILES);
-            die();
+
+            $gigId = new UID(PREFIX::GIG);
+
+            $title = new Input(POST, 'title');
+            $landArea = new Input(POST, 'landArea');
+            $capital = new Input(POST, 'capital');
+            $profitMargin = new Input(POST, 'profitMargin');
+            $timePeriod = new Input(POST, 'timePeriod');
+            $location = new Input(POST, 'location');
+            $category = new Input(POST, 'category');
+
 
             $file_name = $_FILES['image']['name'];
             $file_size = $_FILES['image']['size'];
@@ -82,6 +93,7 @@ class farmerController extends Controller
                 'category' => $category,
                 'image' => $new_img_name,
                 'capital' => $capital,
+                'profitMargin' => $profitMargin,
                 'timePeriod' => $timePeriod,
                 'location' => $location,
                 'landArea' => $landArea,
@@ -107,20 +119,21 @@ class farmerController extends Controller
         // require(ROOT . 'Models/gig.php');
         //require(ROOT . 'Models/farmer.php');
         // $gig = new $this->gigModel();
-        
-        $id = Session::get('user')->getUid(); //session eken user id eka gannawa
+        $props = [];
+
+        $id = $this->currentUser->getUid(); //session eken user id eka gannawa activeUser.php file eke tiyenne
         $products = $this->gigModel->All($id);
-        $d['products'] = $products;
-        $this->set($d);
-
-
+        $props['products'] = $products;
+        
+        
         // $farmer = new Farmer();
         $notifications = $this->farmerModel->getnotifications();
         //echo json_encode($notifications);
-        $this->set(['notifications' => $notifications]);
 
-
-
+        $props['notifications'] = $notifications;
+        
+        
+        $this->set($props);
         $this->render("index");
     }
 
@@ -135,7 +148,7 @@ class farmerController extends Controller
         $id = Session::get('user')->getUid(); //session eken data ganne mehema
         $gigslist = $this->abcModel->getAllGigs($id); // model eke thiyana adala funciton eka call krla output eka
         $props['gigs'] = $gigslist; //view ekata yawann one data tika props kiyal hri d kiyala hri passkrann one
-
+        $props['aaaa'] = 1233;
 
         //insert=======================
 
@@ -143,15 +156,18 @@ class farmerController extends Controller
 
         // if ($_SERVER['REQUEST_METHOD'] == 'POST'){ // submit button ekak click krlad kiyla --> POST method
            
+                // <input type="submit" name="form1">
+
         //     if(isset($_POST['form1'])){ // mona sumbit button eked click kale ---> mona form ekada
         //         echo "form 1";
         //     }
+
+        // <button type="submit" name="form2">click</button>
 
         //     if(isset($_POST['form2'])){
         //         echo "form 2";
         //     }  
         // }
-
         //=====================
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){ 
@@ -160,6 +176,8 @@ class farmerController extends Controller
             $name = new Input(POST, 'uname'); // uname kiyla thiyana input filed eken value eka varibale ekata gannwa
             $p = new Input(POST, 'pass'); // pass kiyl thiyana input field eken value eka variable ekata gannawa.
             
+
+
             // model ekata insert karann one values pass kranna data object eka hadagann one.
              $data = [
                     'x' => $name,
@@ -175,7 +193,7 @@ class farmerController extends Controller
 
 
         $this->set($props); // view ekata set kranne
-        $this->render('abc');
+        $this->render('abc'); // file eke nama denn one () athule
     }
 
 
@@ -190,6 +208,10 @@ class farmerController extends Controller
             'farmerId' => $this->currentUser->getUid(),
             'state' => STATUS::PENDING
         ]);
+        
+        // var_dump($investors); die();
+
+
         if ($investors['status']) {
             $props['investors'] = $investors['data'];
             $this->set($props);
@@ -305,7 +327,7 @@ class farmerController extends Controller
             if ($response['success']) {
 
                 try {
-                    $images = $this->imageHandler->upload('images');
+                    $images = $this->progressImageHandler->upload('images');
                     if (!empty($images)) {
                         foreach ($images as $image) {
                             $data = [

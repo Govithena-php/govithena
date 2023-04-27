@@ -180,6 +180,14 @@ form>div {
     justify-content: stretch;
 }
 
+.row2 {
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+    justify-content: stretch;
+    width: 50%;
+}
+
 form>.form__control {
     /* width: 100%; */
     display: flex;
