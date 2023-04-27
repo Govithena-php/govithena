@@ -12,7 +12,7 @@ class techController extends Controller
             $this->redirect('/auth/signin');
         }
 
-        if (!$this->currentUser->hasAccess(ACTOR::TECH_ASSISTANT)) {
+        if (!$this->currentUser->hasAccess(ACTOR::TECH)) {
             $this->redirect('/error/dontHaveAccess');
         }
     }

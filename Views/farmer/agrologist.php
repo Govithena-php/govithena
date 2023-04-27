@@ -132,7 +132,7 @@
 
                     </div> -->
                     <div class="requestcardn">
-                        <div class="[ requestimg1 ]">
+                        <div class=" requestimg1 ">
                             <img class="img" src="<?php echo UPLOADS . $agrologist['image'] ?>" alt=" profile">
                             <!-- <img class="img" src="<?php echo IMAGES ?>/21.jpg" alt=" profile"> -->
 
@@ -140,15 +140,9 @@
                         <div class="flex flex-row ">
                             <div class=" requestlist ">
                                 <a class="namebox" href="<?php echo URLROOT . "/profile/" . $agrologist['uid'] ?>">
-                                    <p><b><?php echo $agrologist['firstName'] . " " . $agrologist['lastName']; ?></b></p>
+                                    <p><?php echo $agrologist['firstName'] . " " . $agrologist['lastName']; ?></p>
                                 </a>
-                                <p class="flex flex-row">
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                </p>
+                
                             </div>
                         </div>
                         <div class=" flex-c-c">
@@ -166,9 +160,9 @@
 
 
             ?>
-            <div class="requestcardn">
+            <!-- <div class="requestcardn">
                         <div class="[ requestimg1 ]">
-                            <!-- <img class="img" src="<?php echo UPLOADS . $agrologist['image'] ?>" alt=" profile"> -->
+                            <img class="img" src="<?php echo UPLOADS . $agrologist['image'] ?>" alt=" profile">
                             <img class="img" src="<?php echo IMAGES ?>/21.jpg" alt=" profile">
 
                         </div>
@@ -187,12 +181,12 @@
                             </div>
                         </div>
                         <div class=" flex-c-c">
-                            <!-- <a class="request__btn" href="<?php echo URLROOT . "/farmer/send/" . $agrologist['uid'] ?>">Send Request</a> -->
+                            <a class="request__btn" href="<?php echo URLROOT . "/farmer/send/" . $agrologist['uid'] ?>">Send Request</a>
                             <a class="requestbtn" href="<?php echo URLROOT . "/farmer/send/" . $agrologist['uid'] ?>">Send Request</a>
 
                         </div>
 
-                 </div>
+                 </div> -->
         </div>
 
 
