@@ -19,7 +19,7 @@ class techController extends Controller
             $this->redirect('/error/dontHaveAccess');
         }
 
-        $this->techModel = $this->model('tech');
+        $this->techModel = $this->model('techAssistant');
     }
 
     public function index()
@@ -29,14 +29,12 @@ class techController extends Controller
 
     public function farmers()
     {
-        require(ROOT . 'Models/tech.php');
-        $tech = new Tech();
-        $farmers = $tech->getFarmers();
-        if (isset($farmers)) {
-            $this->set(['ar' => $farmers]);
-        } else {
-            $this->set(['error' => "no farmers"]);
+        $props = [];
+        $farmers = $this->techModel->getFarmers();
+        if($farmers['success']){
+            $props['farmers'] = $farmers['data'];
         }
+        $this->set($props);
         $this->render('farmers');
     }
 
@@ -73,6 +71,11 @@ class techController extends Controller
             $reqId = new Input(POST, 'acceptRequest-confirm');
             $res = $this->techModel->acceptRequest($reqId);
             if($res){
+                $data = $this->techModel->getRequestData($reqId);
+                $this->techModel->addTechFarmer([
+                    'techId' => $data[0]['technicalAssistantId'],
+                    'farmerId' => $data[0]['farmerId']
+                ]);
                 $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully accepted request.');
                 Session::set(['farmer_request_accept_alert' => $alert]);
             }else {
@@ -96,6 +99,19 @@ class techController extends Controller
             }
             $this->redirect('/tech');
         }
+    }
+
+    public function assignedGigs(){
+
+        $props = [];
+        
+        $assignedGigs = $this->techModel->getAssignedGigs($this->currentUser->getUid());        
+        if($assignedGigs['success']){
+            $props['assignedGigs'] = $assignedGigs['data'];
+        }
+
+        $this->set($props);
+        $this->render('assignedGigs');
     }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-class Tech extends Model
+class TechAssistant extends Model
 {
 
     function farmerRequest()
@@ -35,7 +35,7 @@ class Tech extends Model
     {
         try {
             // $sql = "SELECT tr.requestId, tr.requestedDate, tr.farmerId, tr.offer, tr.message, tr.status, u.firstName, u.lastName, u.city FROM techassistant_request tr INNER JOIN user u ON tr.technicalAssistantId = u.uid WHERE tr.technicalAssistantId = :id ORDER BY requestedDate DESC";
-            $sql = "UPDATE techassistant_request SET status = 'Accepted' WHERE requestId = :requestId";
+            $sql = "UPDATE techAssistant_request SET status = 'Accepted' WHERE requestId = :requestId";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['requestId' => $requestId]);
             return true;
@@ -65,15 +65,60 @@ class Tech extends Model
     public function getFarmers()
     {
         try {
-            $sql = "SELECT CONCAT(u.firstName, ' ', u.lastName) AS fullName, u.city, a.requestId, a.farmerId FROM techassistant_request a LEFT JOIN user u ON u.uid = a.farmerId WHERE (a.technicalAssistantId = :techId AND a.status='Accepted')";
+            $sql = "SELECT tf.id, tf.techId, tf.farmerId, tf.status, DATE(tf.timestamp) AS acceptedDate, u.firstName, u.lastName, u.image, u.city FROM tech_farmer tf INNER JOIN user u on tf.farmerId = u.uid WHERE tf.techId = :techId AND tf.status = 'ACTIVE'";
             $stmt =  Database::getBdd()->prepare($sql);
             $stmt->execute(['techId' => Session::get('user')->getUid()]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            return $req;
+            return ['success' => true, 'data' => $req];
         } catch (PDOException $e) {
             echo $e->getMessage();
             die();
             return null;
+        }
+    }
+
+
+    public function getRequestData($reqId){
+        try{
+            $sql = "SELECT * FROM techassistant_request WHERE requestId = :reqId";
+            $stmt =  Database::getBdd()->prepare($sql);
+            $stmt->execute(['reqId' => $reqId]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        }catch(PDOException $e){
+            echo $e->getMessage();
+            die();
+            return null; 
+        }
+    }
+
+    public function addTechFarmer($data){
+        try{
+            $sql = "INSERT INTO tech_farmer(id, techId, farmerId) VALUES(:id, :techId, :farmerId)";
+            $stmt =  Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'id' => uniqid(),
+                'techId' => $data['techId'],
+                'farmerId' => $data['farmerId']
+            ]);
+
+        }catch(PDOException $e){
+            echo $e->getMessage();
+            die();
+            return null;  
+        }
+    }
+
+    public function getAssignedGigs($techId){
+        try{
+            $sql = "SELECT tg.id, tg.status, tg.timestamp, tg.gigId, g.title, g.thumbnail, g.category from tech_gig tg INNER JOIN gig g ON tg.gigId = g.gigId WHERE tg.techId = :techId";
+            $stmt =  Database::getBdd()->prepare($sql);
+            $stmt->execute(['techId' => $techId]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $req];
+        }catch(PDOException $e){
+            echo $e->getMessage();
+            die();
         }
     }
 }
