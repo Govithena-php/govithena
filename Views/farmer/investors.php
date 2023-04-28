@@ -270,7 +270,7 @@
 
             <div class="tab" id="2">
                 <?php
-                if (empty($investors)) {
+                if (empty($reqinvestors)) {
                     require(COMPONENTS . "dashboard/noDataFound.php");
                 } else { ?>
                     <div class="investors">
@@ -303,34 +303,34 @@
                                 </div>
                                 <div class="body">
                                     <?php
-                                    foreach($investors as $investor){
+                                    foreach($reqinvestors as $reqinvestor){
                                         ?>
                                     <div class="row">
                                         <div class="data farmer__">
                                             <div class="investorimg">
-                                            <img src="<?php echo UPLOADS . "/" . $investor['thumbnail']; ?>" alt="">
-                                                <!-- <img src="<?php echo UPLOADS . '/profilePictures/' . $investor['thumbnail']?>" alt="Picture"> -->
+                                            <img src="<?php echo UPLOADS . "/" . $reqinvestor['thumbnail']; ?>" alt="">
+                                                <!-- <img src="<?php echo UPLOADS . '/profilePictures/' . $reqinvestor['thumbnail']?>" alt="Picture"> -->
                                             </div>
                                             <div class="namecol">
-                                                <h1><p><?php echo $investor['firstName'] ?></p></h1>
-                                                <h3><p><?php echo $investor['lastName']?></p></h3>
+                                                <h1><p><?php echo $reqinvestor['firstName'] ?></p></h1>
+                                                <h3><p><?php echo $reqinvestor['lastName']?></p></h3>
                                             </div>
                                         </div>
                                         <!-- <div class="data">
-                                            <p> LKR <?php echo $investor['offer'] ?></p>
-                                            <p class="LKR"><?php echo number_format($investor['capital'], 2, '.', ',')?></p>
+                                            <p> LKR <?php echo $reqinvestor['offer'] ?></p>
+                                            <p class="LKR"><?php echo number_format($reqinvestor['capital'], 2, '.', ',')?></p>
                                         </div> -->
                                         <div class="data">
-                                            <p><?php echo $investor['title'] ?></p>
+                                            <p><?php echo $reqinvestor['title'] ?></p>
                                         </div>
                                         <div class="data">
-                                            <p> LKR <?php echo $investor['offer']?></p>
+                                            <p> LKR <?php echo $reqinvestor['offer']?></p>
                                         </div>
                                         <div class="data">
-                                            <p><?php echo $investor['city']?></p>
+                                            <p><?php echo $reqinvestor['city']?></p>
                                         </div>
                                         <div class="data">
-                                            <p><?php echo $investor['message']?></p>
+                                            <p><?php echo $reqinvestor['message']?></p>
                                         </div>
    
                                     </div>

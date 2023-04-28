@@ -87,6 +87,19 @@ class Farmer extends Model
         }
     }
 
+    public function reqinvestors($data)
+    {
+        try {
+            $sql = "SELECT fr.requestId, fr.requestedDate, fr.offer, fr.message, user.firstName, user.lastName,  gig.title, gig.thumbnail, gig.city from farmer_request fr INNER JOIN gig ON gig.gigId = fr.gigId INNER JOIN user ON user.uid = fr.investorId WHERE fr.farmerId = :farmerId AND fr.state = :state";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute($data);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['status' => true, 'data' => $req];
+        } catch (Exception $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+
     public function acceptInvestor($data)
     {
         try {

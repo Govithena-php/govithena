@@ -208,13 +208,18 @@ class farmerController extends Controller
             'farmerId' => $this->currentUser->getUid(),
             'state' => STATUS::PENDING
         ]);
+
+        $reqinvestors = $this->farmerModel->reqinvestors([
+            'farmerId' => $this->currentUser->getUid(),
+            'state' => STATUS::ACCEPTED
+        ]);
         
         // var_dump($investors); die();
 
 
         if ($investors['status']) {
             $props['investors'] = $investors['data'];
-            $this->set($props);
+            $props['reqinvestors'] = $reqinvestors['data'];
         }
         $this->set($props);
         $this->render('investors');
