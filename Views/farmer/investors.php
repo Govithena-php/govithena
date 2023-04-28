@@ -301,6 +301,63 @@
             </div>
         </div> -->
 
+
+
+
+
+
+
+
+
+
+               <div class="[ requests__cn ]">
+
+
+                <div class="[ requests__wrap ]">
+
+
+                        <div class="[ requestcard bg-light ]">
+
+                           <div class="[ requestimg ]">
+                                <img class="img" src="<?php echo IMAGES ?>/investor.jfif" alt="profile">
+                            </div>
+
+                    <form action="<?php echo URLROOT . '/agrologist/requests' ?>">
+                        <div class="flex flex-row ">
+                            <div class="[ requestcont ]">
+
+
+
+                                <h1>
+                                    <p><b>Amal Perera</b></p>
+                                </h1>
+                                <p>Sent you a request</p>
+
+
+
+                                <p class="flex flex-row">
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                </p>
+
+                            </div>
+
+                        </div>
+                    </form>
+
+                    <div class=" flex-c-c">
+                        <button type="button" class="btn_accept" name="accept">Accept</button> &emsp;
+                        <button type="button" class="btn_decline" name="decline">Decline</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
     </div>
     <?php
     require_once("footer.php");
