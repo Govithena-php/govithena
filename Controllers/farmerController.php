@@ -6,7 +6,7 @@ class farmerController extends Controller
     private $farmerModel;
     private $investorGigModel;
     private $gigModel;
-    private $farmerProgressModel;
+    private $progressModel;
 
     // model ekat PRIVATE  variable ekak define kra
     private $abcModel;
@@ -19,7 +19,7 @@ class farmerController extends Controller
         $this->farmerModel = $this->model('farmer');
         $this->investorGigModel = $this->model('investorGig');
         $this->gigModel = $this->model('gig');
-        $this->farmerProgressModel = $this->model('farmerProgress');
+        $this->progressModel = $this->model('fprogress');
 
         $this->abcModel = $this->model('abc'); //model eka import krann ('abc' file eke name)
 
@@ -32,7 +32,7 @@ class farmerController extends Controller
             $this->redirect('/error/dontHaveAccess');
         }
     }
-    
+
     function createGig()
     {
         if (isset($_POST['createGig'])) {
@@ -107,7 +107,7 @@ class farmerController extends Controller
         // require(ROOT . 'Models/gig.php');
         //require(ROOT . 'Models/farmer.php');
         // $gig = new $this->gigModel();
-        
+
         $id = Session::get('user')->getUid(); //session eken user id eka gannawa
         $products = $this->gigModel->All($id);
         $d['products'] = $products;
@@ -126,8 +126,9 @@ class farmerController extends Controller
 
 
     // view eke abc.php page eka
-    function abc($params = []){
-        
+    function abc($params = [])
+    {
+
         // url eke controller/action eken passe / ghala den values tika okkom $params kiyn array eke tyenne.
         var_dump($params[0]);
 
@@ -142,7 +143,7 @@ class farmerController extends Controller
         // forms adunragann vidiya
 
         // if ($_SERVER['REQUEST_METHOD'] == 'POST'){ // submit button ekak click krlad kiyla --> POST method
-           
+
         //     if(isset($_POST['form1'])){ // mona sumbit button eked click kale ---> mona form ekada
         //         echo "form 1";
         //     }
@@ -154,19 +155,19 @@ class farmerController extends Controller
 
         //=====================
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST'){ 
-            if(isset($_POST['form1'])){
-             
-            $name = new Input(POST, 'uname'); // uname kiyla thiyana input filed eken value eka varibale ekata gannwa
-            $p = new Input(POST, 'pass'); // pass kiyl thiyana input field eken value eka variable ekata gannawa.
-            
-            // model ekata insert karann one values pass kranna data object eka hadagann one.
-             $data = [
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (isset($_POST['form1'])) {
+
+                $name = new Input(POST, 'uname'); // uname kiyla thiyana input filed eken value eka varibale ekata gannwa
+                $p = new Input(POST, 'pass'); // pass kiyl thiyana input field eken value eka variable ekata gannawa.
+
+                // model ekata insert karann one values pass kranna data object eka hadagann one.
+                $data = [
                     'x' => $name,
                     'pass' => $p
                 ];
 
-            $this->abcModel->insertToTable($data);
+                $this->abcModel->insertToTable($data);
             }
         }
 
@@ -296,11 +297,11 @@ class farmerController extends Controller
                 'gigId' => $gigId,
                 'subject' => new Input(POST, 'subject'),
                 'description' => new Input(POST, 'description'),
-                'farmerId' => $this->currentUser->getUid()
+                'userId' => $this->currentUser->getUid()
             ];
 
 
-            $response = $this->farmerProgressModel->create($data);
+            $response = $this->progressModel->create($data);
 
             if ($response['success']) {
 
@@ -312,7 +313,7 @@ class farmerController extends Controller
                                 'progressId' => $progressId,
                                 'imageName' => $image
                             ];
-                            $res = $this->farmerProgressModel->saveProgressImage($data);
+                            $res = $this->progressModel->saveProgressImage($data);
                             if (!$res['success']) {
                                 $this->redirect('/farmer/newprogress/' . $res['error']);
                             }
@@ -405,7 +406,7 @@ class farmerController extends Controller
     {
         $this->render('settings');
     }
-    
+
     public function deleteGig($params)
     {
         if (isset($params)) {

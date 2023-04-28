@@ -126,10 +126,28 @@ class TechAssistant extends Model
     }
 
 
+    public function checkGig($id)
+    {
+        try {
+            $sql = "SELECT gigId FROM tech_gig WHERE gigId = :id";
+            $stmt =  Database::getBdd()->prepare($sql);
+            $stmt->execute(['id' => $id]);
+            $req = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($req) {
+                return ['success' => true, 'data' => true];
+            } else {
+                return ['success' => true, 'data' => false];
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+        }
+    }
+
     public function findGigById($id)
     {
         try {
-            $sql = "SELECT g.title, g.description, g.thumbnail, g.category, g.capital, g.profitMargin, g.cropCycle, g.city, g.district, g.landArea, u.firstName, u.lastName, u.city, u.image FROM gig g INNER JOIN user u ON g.farmerId = u.uid WHERE g.gigId = :id";
+            $sql = "SELECT g.gigId, g.title, g.description, g.thumbnail, g.category, g.capital, g.profitMargin, g.cropCycle, g.city, g.district, g.landArea, g.addressLine1, g.addressLine2, u.firstName, u.lastName, u.city, u.image FROM gig g INNER JOIN user u ON g.farmerId = u.uid WHERE g.gigId = :id";
             $stmt =  Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $req = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -137,6 +155,33 @@ class TechAssistant extends Model
         } catch (PDOException $e) {
             echo $e->getMessage();
             die();
+        }
+    }
+
+    public function getProgressById($id)
+    {
+        try {
+            $sql = "SELECT gp.progressId, gp.userId, gp.subject, gp.description, DATE(gp.timestamp) AS progressDate, TIME(gp.timestamp) AS progressTime, u.firstName, u.lastName, u.image FROM gig_progress gp INNER JOIN user u ON u.uid = gp.userId WHERE gigId = :id";
+            $stmt =  Database::getBdd()->prepare($sql);
+            $stmt->execute(['id' => $id]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $req];
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+        }
+    }
+
+    public function fetchImagesByProgressId($progressId)
+    {
+        try {
+            $sql = "SELECT imageName FROM gig_progress_image WHERE progressId = :progressId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['progressId' => $progressId]);
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $data];
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
         }
     }
 }

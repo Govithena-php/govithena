@@ -4,7 +4,11 @@ class techController extends Controller
 {
     private $currentUser;
 
+    private $progressImageHandler;
+
     private $techModel;
+    private $progressModel;
+    private $gigModel;
 
 
     public function __construct()
@@ -19,7 +23,12 @@ class techController extends Controller
             $this->redirect('/error/dontHaveAccess');
         }
 
+        $this->progressImageHandler = new ImageHandler($folder = 'Uploads/progress');
+
+
         $this->techModel = $this->model('techAssistant');
+        $this->progressModel = $this->model('progress');
+        $this->gigModel = $this->model('gig');
     }
 
     public function index()
@@ -130,19 +139,190 @@ class techController extends Controller
 
         if (!empty($params)) $gigId = $params[0];
 
-        $gig = $this->techModel->findGigById($gigId);
-        if ($gig['success']) {
-            $props['gig'] = $gig['data'];
+        $res = $this->techModel->checkGig($gigId);
+        if ($res['success'] && $res['data'] == true) {
+            $gig = $this->techModel->findGigById($gigId);
+            if ($gig['success']) {
+                $props['gig'] = $gig['data'];
+            }
+        } else {
+            $this->redirect('/error/dontHaveAccess');
         }
 
         $this->set($props);
         $this->render('editGig');
     }
 
-    public function updateProgress()
+    public function progress($params = [])
     {
         $props = [];
+
+        if (!empty($params[0])) $gigId = $params[0];
+
+        $res = $this->techModel->checkGig($gigId);
+        if ($res['success'] && $res['data'] == true) {
+            $progress = $this->techModel->getProgressById($gigId);
+            if ($progress['success']) {
+
+                $temp = $progress['data'];
+
+                $imagesArray = [];
+                foreach ($temp as $t) {
+                    $images = $this->techModel->fetchImagesByProgressId($t['progressId']);
+                    if ($images['success']) {
+                        $a = [];
+                        foreach ($images['data'] as $i) {
+                            $a[] = $i['imageName'];
+                        }
+
+                        $imagesArray[$t['progressId']] = $a;
+                    }
+                }
+
+                $props['gigId'] = $gigId;
+                $props['progress'] = $temp;
+                $props['images'] = $imagesArray;
+            }
+        } else {
+            $this->redirect('/error/dontHaveAccess');
+        }
+
         $this->set($props);
-        $this->render('updateProgress');
+        $this->render('progress');
+    }
+
+    public function newProgress($params = [])
+    {
+        $props = [];
+
+        if (!empty($params[0])) $gigId = $params[0];
+
+        $res = $this->techModel->checkGig($gigId);
+        if ($res['success'] && $res['data'] == true) {
+
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+                $progressId = new UID(PREFIX::PROGRESS);
+                $subject = new Input(POST, 'subject');
+                $description = new Input(POST, 'description');
+
+                $response = $this->progressModel->create([
+                    'progressId' => $progressId,
+                    'gigId' => $gigId,
+                    'userId' => $this->currentUser->getUid(),
+                    'subject' => $subject,
+                    'description' => $description
+                ]);
+
+                if ($response['success']) {
+                    $images = $this->progressImageHandler->upload('images');
+                    if (!empty($images)) {
+                        foreach ($images as $image) {
+                            $res = $this->progressModel->saveProgressImage([
+                                'progressId' => $progressId,
+                                'imageName' => $image
+                            ]);
+
+                            if ($res['success']) {
+                                $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully added progress.');
+                            } else {
+                                $alert = new Alert($type = 'success', $icon = "", $message = 'Failed to add progress.');
+                            }
+                        }
+                    } else {
+                        $alert = new Alert($type = 'success', $icon = "", $message = 'Failed to add progress.');
+                    }
+                } else {
+                    $alert = new Alert($type = 'success', $icon = "", $message = 'Failed to add progress.');
+                }
+                Session::set(['progress_add_alert' => $alert]);
+                $this->redirect('/tech/progress/' . $gigId);
+            }
+        } else {
+            $this->redirect('/error/dontHaveAccess');
+        }
+
+        $this->set($props);
+        $this->render('newProgress');
+    }
+
+    public function update_gig_details()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $gigId = new Input(POST, 'u-submitBtn');
+            $res = $this->techModel->checkGig($gigId);
+            if ($res['success'] && $res['data']) {
+
+                $response = $this->gigModel->updateGigDetails([
+                    'gigId' => $gigId,
+                    'title' => new Input(POST, 'u-title'),
+                    'category' => new Input(POST, 'u-category'),
+                    'cropCycle' => new Input(POST, 'u-cropCycle'),
+                    'landArea' => new Input(POST, 'u-landArea'),
+                    'initialInvestment' => new Input(POST, 'u-initialInvestment'),
+                    'profitMargin' => new Input(POST, 'u-profitMargin')
+                ]);
+
+                if ($response['success']) {
+                    $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully updated gig details.');
+                } else {
+                    $alert = new Alert($type = 'success', $icon = "", $message = 'Failed to update gig details.');
+                }
+
+                Session::set(['gig_update_details_alert' => $alert]);
+            }
+        }
+        $this->redirect('/tech/editGig/' . $gigId);
+    }
+
+    public function update_gig_location_details()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $gigId = new Input(POST, 'u-submitBtn');
+            $res = $this->techModel->checkGig($gigId);
+            if ($res['success'] && $res['data']) {
+
+                $response = $this->gigModel->updateGigLocation([
+                    'gigId' => $gigId,
+                    'addressLine1' => new Input(POST, 'u-addressLine1'),
+                    'addressLine2' => new Input(POST, 'u-addressLine2'),
+                    'city' => new Input(POST, 'u-city'),
+                    'district' => new Input(POST, 'u-district'),
+                ]);
+
+                if ($response['success']) {
+                    $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully updated location details.');
+                } else {
+                    $alert = new Alert($type = 'success', $icon = "", $message = 'Failed to update location details.');
+                }
+
+                Session::set(['gig_update_location_details_alert' => $alert]);
+            }
+        }
+        $this->redirect('/tech/editGig/' . $gigId);
+    }
+
+    public function update_gig_description_details()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $gigId = new Input(POST, 'u-submitBtn');
+            $res = $this->techModel->checkGig($gigId);
+            if ($res['success'] && $res['data']) {
+
+                $response = $this->gigModel->updateGigDescription([
+                    'gigId' => $gigId,
+                    'description' => new Input(POST, 'u-description')
+                ]);
+
+                if ($response['success']) {
+                    $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully updated gig description.');
+                } else {
+                    $alert = new Alert($type = 'success', $icon = "", $message = 'Failed to update gig description.');
+                }
+
+                Session::set(['update_gig_description_details_alert' => $alert]);
+            }
+        }
+        $this->redirect('/tech/editGig/' . $gigId);
     }
 }

@@ -46,9 +46,8 @@
                     </div>
                     <div class="right">
                         <div class="buttons">
-                            <a href="<?php echo URLROOT ?>/tech/assignedGig" class="button__primary">Read more</a>
                             <a href="<?php echo URLROOT ?>/tech/editGig/<?php echo $gig['gigId'] ?>" class="button__primary">Edit gig</a>
-                            <a href="<?php echo URLROOT ?>/tech/updateProgress" class="button__primary">Update progress</a>
+                            <a href="<?php echo URLROOT ?>/tech/progress/<?php echo $gig['gigId'] ?>" class="button__primary">progress</a>
                         </div>
                     </div>
                 </div>
