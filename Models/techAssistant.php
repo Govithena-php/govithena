@@ -161,7 +161,7 @@ class TechAssistant extends Model
     public function getProgressById($id)
     {
         try {
-            $sql = "SELECT gp.progressId, gp.userId, gp.subject, gp.description, DATE(gp.timestamp) AS progressDate, TIME(gp.timestamp) AS progressTime, u.firstName, u.lastName, u.image FROM gig_progress gp INNER JOIN user u ON u.uid = gp.userId WHERE gigId = :id";
+            $sql = "SELECT gp.progressId, gp.userId, gp.subject, gp.description, DATE(gp.timestamp) AS progressDate, TIME(gp.timestamp) AS progressTime, u.firstName, u.lastName, u.image FROM gig_progress gp INNER JOIN user u ON u.uid = gp.userId WHERE gigId = :id ORDER BY timestamp DESC";
             $stmt =  Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);

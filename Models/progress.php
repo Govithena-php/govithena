@@ -61,4 +61,32 @@ class Progress
             return ['success' => false, 'error' => $e->getMessage()];
         }
     }
+
+    public function deleteProgress($progressId)
+    {
+        try {
+            $sql = "DELETE FROM gig_progress WHERE progressId = :progressId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'progressId' => $progressId
+            ]);
+            return ['success' => true];
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
+
+    public function deleteProgressImages($progressId)
+    {
+        try {
+            $sql = "DELETE FROM gig_progress_image WHERE progressId = :progressId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'progressId' => $progressId
+            ]);
+            return ['success' => true];
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
 }

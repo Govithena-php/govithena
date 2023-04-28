@@ -191,6 +191,34 @@ class techController extends Controller
         $this->render('progress');
     }
 
+
+    public function delete_progress()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $progressId = new Input(POST, 'delete-confirm');
+            $gigId = new Input(POST, 'gigId');
+
+            $response = $this->progressModel->deleteProgress($progressId);
+
+            if ($response['success']) {
+                $res = $this->progressModel->deleteProgressImages($progressId);
+
+                if ($res['success']) {
+                    $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully deleted progress.');
+                } else {
+                    $alert = new Alert($type = 'success', $icon = "", $message = 'Failed to delete progress.');
+                }
+            } else {
+                $alert = new Alert($type = 'success', $icon = "", $message = 'Failed to delete progress.');
+            }
+
+            Session::set(['delete_progress_alert' => $alert]);
+        }
+
+        $this->redirect('/tech/progress/' . $gigId);
+    }
+
     public function newProgress($params = [])
     {
         $props = [];

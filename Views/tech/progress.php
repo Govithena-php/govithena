@@ -7,10 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="<?php echo IMAGES ?>/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/gridTable.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/alertModal.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/tech/progress.css">
 
     <title>Dashboard | Tech</title>
@@ -29,7 +31,26 @@
         $alert = Session::pop('progress_add_alert');
         $alert->show_default_alert();
     }
+    if (Session::has('delete_progress_alert')) {
+        $alert = Session::pop('delete_progress_alert');
+        $alert->show_default_alert();
+    }
     ?>
+
+    <dialog id="conformationModal" class="[ alertModal ]">
+        <div class="[ container ]">
+            <i class="fa fa-circle-xmark" aria-hidden="true"></i>
+            <div class="[ content ]">
+                <h2>Are you sure?</h2>
+                <p>Do you really want to delete this progress update ?</p>
+            </div>
+            <form id="suspendForm" action="<?php echo URLROOT ?>/tech/delete_progress" method="POST" class="[ buttons ]">
+                <input type="hidden" name="gigId" id="gigId" value="<?php echo $gigId ?>">
+                <button type="button" class="[ button__primary ]" onclick="closeDeleteConfirmModal()" data-dismiss="modal">No, Cancel</button>
+                <button id="confirmDeleteBtn" name="delete-confirm" type="submit" class="[ button__danger ]">Yes, Delete</button>
+            </form>
+        </div>
+    </dialog>
 
     <?php
     $active = "dashboard";
@@ -50,7 +71,7 @@
 
                     <div class="[ requests__wrapper ]">
                         <div class="[ grid__table ]" style="
-                                        --xl-cols:  1.75fr 1.25fr 1fr 1fr 0.5fr;
+                                        --xl-cols:  1.75fr 1.25fr 0.5fr 0.5fr 1fr;
                                         --lg-cols: 1.5fr 0.75fr 0.75fr 0.3fr;
                                         --md-cols: 2fr 0.5fr;
                                         --sm-cols: 2fr 1fr;
@@ -131,8 +152,15 @@
                                             <h3><?php echo $pr['progressTime'] ?></h3>
                                         </div>
                                         <div class="[ actions ]">
-                                            <button for="<?php echo $pr['progressId'] ?>"><i class="fa fa-chevron-circle-down"></i></button>
-                                            <!-- <a href="<?php echo URLROOT ?>/<?php echo $pr['progressId'] ?>" class="btn btn-primary">Cancel Request</a> -->
+                                            <?php
+                                            if ($pr['userId'] == Session::get('user')->getUid()) {
+                                            ?>
+                                                <button><i class="bi bi-pencil-square"></i></button>
+                                                <button onclick="openDeleteConfirmModal('<?php echo $pr['progressId'] ?>')"><i class="bi bi-trash"></i></button>
+                                            <?php
+                                            }
+                                            ?>
+                                            <button for="<?php echo $pr['progressId'] ?>"><i class="bi bi-three-dots-vertical"></i></button>
                                         </div>
                                         <div id="<?php echo $pr['progressId'] ?>" class="[ expand progress__more ]">
 
@@ -165,10 +193,6 @@
                                                     }
                                                     ?>
                                                 </div>
-                                                <div class="[ progress__actions ]">
-                                                    <a href="<?php echo URLROOT ?>/<?php echo $pr['progressId'] ?>" class="[ feedback__btn ]">Give some feedback</a>
-                                                </div>
-
                                             </div>
 
                                         </div>
@@ -236,6 +260,19 @@
 
             })
         })
+
+
+        function openDeleteConfirmModal(id) {
+            const conformationModal = document.getElementById("conformationModal")
+            const confirmDeleteBtn = document.getElementById("confirmDeleteBtn")
+            confirmDeleteBtn.value = id
+            conformationModal.showModal()
+        }
+
+        function closeDeleteConfirmModal() {
+            const conformationModal = document.getElementById("conformationModal")
+            conformationModal.close()
+        }
     </script>
 </body>
 
