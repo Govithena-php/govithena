@@ -25,37 +25,37 @@
 
     <div class="[ container ][ ]" container-type="dashboard-section">
 
-    <div class="[ caption ]">
-        <h3>Assigned Gigs</h3>
-        <p>Keep an eye on the status of your investments with our investor dashboard. Quickly see which requests are accepted, rejected, or still pending, and stay in the know about the progress of your investments.</p>  
-    </div>
+        <div class="[ caption ]">
+            <h3>Assigned Gigs</h3>
+            <p>Keep an eye on the status of your investments with our investor dashboard. Quickly see which requests are accepted, rejected, or still pending, and stay in the know about the progress of your investments.</p>
+        </div>
 
-    <div class="gigs">
-        <?php
-        foreach($assignedGigs as $gig){
-        ?>
-           <div class="gig__card">
-                <div class="left">
-                    <div class="gig__img">
-                        <img src="<?php echo UPLOADS . $gig['thumbnail']?>">
+        <div class="gigs">
+            <?php
+            foreach ($assignedGigs as $gig) {
+            ?>
+                <div class="gig__card">
+                    <div class="left">
+                        <div class="gig__img">
+                            <img src="<?php echo UPLOADS . $gig['thumbnail'] ?>">
+                        </div>
+                        <div class="gig__content">
+                            <h4><?php echo $gig['title'] ?></h4>
+                            <p><?php echo $gig['category'] ?></p>
+                        </div>
                     </div>
-                    <div class="gig__content">
-                        <h4><?php echo $gig['title'] ?></h4>
-                        <p><?php echo $gig['category'] ?></p>
+                    <div class="right">
+                        <div class="buttons">
+                            <a href="<?php echo URLROOT ?>/tech/assignedGig" class="button__primary">Read more</a>
+                            <a href="<?php echo URLROOT ?>/tech/editGig/<?php echo $gig['gigId'] ?>" class="button__primary">Edit gig</a>
+                            <a href="<?php echo URLROOT ?>/tech/updateProgress" class="button__primary">Update progress</a>
+                        </div>
                     </div>
                 </div>
-                <div class="right">
-                    <div class="buttons">
-                        <a class="button__primary">Read more</a>
-                        <a class="button__primary">Edit gig</a>
-                        <a class="button__primary">Update progress</a>
-                    </div>
-                </div>
-           </div>
-        <?php
-        }
-        ?>
-    </div>
+            <?php
+            }
+            ?>
+        </div>
 
 
 

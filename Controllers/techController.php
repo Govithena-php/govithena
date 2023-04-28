@@ -5,7 +5,7 @@ class techController extends Controller
     private $currentUser;
 
     private $techModel;
-    
+
 
     public function __construct()
     {
@@ -31,7 +31,7 @@ class techController extends Controller
     {
         $props = [];
         $farmers = $this->techModel->getFarmers();
-        if($farmers['success']){
+        if ($farmers['success']) {
             $props['farmers'] = $farmers['data'];
         }
         $this->set($props);
@@ -43,12 +43,12 @@ class techController extends Controller
         $props = [];
 
         $farmerRequests = $this->techModel->farmerRequest();
-        if($farmerRequests['success']){
+        if ($farmerRequests['success']) {
             $props['farmerRequests'] = $farmerRequests['data'];
         }
 
         $rejectedFarmerRequests = $this->techModel->getRejectedFarmerRequest();
-        if($rejectedFarmerRequests['success']){
+        if ($rejectedFarmerRequests['success']) {
             $props['rejectedFarmerRequests'] = $rejectedFarmerRequests['data'];
         }
         $this->set($props);
@@ -66,11 +66,12 @@ class techController extends Controller
     }
 
 
-    public function accept_farmer_request(){
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    public function accept_farmer_request()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $reqId = new Input(POST, 'acceptRequest-confirm');
             $res = $this->techModel->acceptRequest($reqId);
-            if($res){
+            if ($res) {
                 $data = $this->techModel->getRequestData($reqId);
                 $this->techModel->addTechFarmer([
                     'techId' => $data[0]['technicalAssistantId'],
@@ -78,7 +79,7 @@ class techController extends Controller
                 ]);
                 $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully accepted request.');
                 Session::set(['farmer_request_accept_alert' => $alert]);
-            }else {
+            } else {
                 $alert = new Alert($type = 'success', $icon = "", $message = 'accept request failed.');
                 Session::set(['farmer_request_accept_alert' => $alert]);
             }
@@ -86,14 +87,15 @@ class techController extends Controller
         }
     }
 
-    public function reject_farmer_request(){
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    public function reject_farmer_request()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $reqId = new Input(POST, 'rejectRequest-confirm');
             $res = $this->techModel->rejectRequest($reqId);
-            if($res){
+            if ($res) {
                 $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully rejected request.');
                 Session::set(['farmer_request_reject_alert' => $alert]);
-            }else {
+            } else {
                 $alert = new Alert($type = 'success', $icon = "", $message = 'reject request failed.');
                 Session::set(['farmer_request_reject_alert' => $alert]);
             }
@@ -101,12 +103,13 @@ class techController extends Controller
         }
     }
 
-    public function assignedGigs(){
+    public function assignedGigs()
+    {
 
         $props = [];
-        
-        $assignedGigs = $this->techModel->getAssignedGigs($this->currentUser->getUid());        
-        if($assignedGigs['success']){
+
+        $assignedGigs = $this->techModel->getAssignedGigs($this->currentUser->getUid());
+        if ($assignedGigs['success']) {
             $props['assignedGigs'] = $assignedGigs['data'];
         }
 
@@ -114,4 +117,32 @@ class techController extends Controller
         $this->render('assignedGigs');
     }
 
+    public function assignedGig()
+    {
+        $props = [];
+        $this->set($props);
+        $this->render('assignedGig');
+    }
+
+    public function editGig($params = [])
+    {
+        $props = [];
+
+        if (!empty($params)) $gigId = $params[0];
+
+        $gig = $this->techModel->findGigById($gigId);
+        if ($gig['success']) {
+            $props['gig'] = $gig['data'];
+        }
+
+        $this->set($props);
+        $this->render('editGig');
+    }
+
+    public function updateProgress()
+    {
+        $props = [];
+        $this->set($props);
+        $this->render('updateProgress');
+    }
 }
