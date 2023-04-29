@@ -2,11 +2,11 @@
 class farmerController extends Controller
 {
     private $currentUser;
-    
+
     private $progressImageHandler;
 
     private $gigImageHandler;
-    
+
     private $farmerModel;
     private $investorGigModel;
     private $gigModel;
@@ -18,7 +18,7 @@ class farmerController extends Controller
     public function __construct()
     {
         $this->currentUser = Session::get('user');
-        
+
 
         // <input type="file" name="name eke"
         //image ekk upload kranna imsgeHandler->upload('name eka')
@@ -42,7 +42,7 @@ class farmerController extends Controller
             $this->redirect('/error/dontHaveAccess');
         }
     }
-    
+
     function createGig()
     {
         if (isset($_POST['createGig'])) {
@@ -124,23 +124,24 @@ class farmerController extends Controller
         $id = $this->currentUser->getUid(); //session eken user id eka gannawa activeUser.php file eke tiyenne
         $products = $this->gigModel->All($id);
         $props['products'] = $products;
-        
-        
+
+
         // $farmer = new Farmer();
         $notifications = $this->farmerModel->getnotifications();
         //echo json_encode($notifications);
 
         $props['notifications'] = $notifications;
-        
-        
+
+
         $this->set($props);
         $this->render("index");
     }
 
 
     // view eke abc.php page eka
-    function abc($params = []){
-        
+    function abc($params = [])
+    {
+
         // url eke controller/action eken passe / ghala den values tika okkom $params kiyn array eke tyenne.
         var_dump($params[0]);
 
@@ -155,8 +156,6 @@ class farmerController extends Controller
         // forms adunragann vidiya
 
         // if ($_SERVER['REQUEST_METHOD'] == 'POST'){ // submit button ekak click krlad kiyla --> POST method
-           
-                // <input type="submit" name="form1">
 
         //     if(isset($_POST['form1'])){ // mona sumbit button eked click kale ---> mona form ekada
         //         echo "form 1";
@@ -166,25 +165,23 @@ class farmerController extends Controller
 
         //     if(isset($_POST['form2'])){
         //         echo "form 2";
-        //     }  
+        //     }
         // }
         //=====================
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST'){ 
-            if(isset($_POST['form1'])){
-             
-            $name = new Input(POST, 'uname'); // uname kiyla thiyana input filed eken value eka varibale ekata gannwa
-            $p = new Input(POST, 'pass'); // pass kiyl thiyana input field eken value eka variable ekata gannawa.
-            
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (isset($_POST['form1'])) {
 
+                $name = new Input(POST, 'uname'); // uname kiyla thiyana input filed eken value eka varibale ekata gannwa
+                $p = new Input(POST, 'pass'); // pass kiyl thiyana input field eken value eka variable ekata gannawa.
 
-            // model ekata insert karann one values pass kranna data object eka hadagann one.
-             $data = [
+                // model ekata insert karann one values pass kranna data object eka hadagann one.
+                $data = [
                     'x' => $name,
                     'pass' => $p
                 ];
 
-            $this->abcModel->insertToTable($data);
+                $this->abcModel->insertToTable($data);
             }
         }
 
@@ -213,7 +210,7 @@ class farmerController extends Controller
             'farmerId' => $this->currentUser->getUid(),
             'state' => STATUS::ACCEPTED
         ]);
-        
+
         // var_dump($investors); die();
 
 
@@ -323,7 +320,7 @@ class farmerController extends Controller
                 'gigId' => $gigId,
                 'subject' => new Input(POST, 'subject'),
                 'description' => new Input(POST, 'description'),
-                'farmerId' => $this->currentUser->getUid()
+                'userId' => $this->currentUser->getUid()
             ];
 
 
@@ -432,7 +429,7 @@ class farmerController extends Controller
     {
         $this->render('settings');
     }
-    
+
     public function deleteGig($params)
     {
         if (isset($params)) {

@@ -17,6 +17,11 @@
     background-color: var(--clr-light);
 }
 
+.grid__table>.head>.row {
+    background-color: var(--clr-primary);
+    color: var(--clr-light);
+}
+
 .grid__table>.head>.row,
 .grid__table>.body>.row {
     display: grid;
