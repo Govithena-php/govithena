@@ -21,6 +21,13 @@
     <?php
     $active = "farmers";
     require_once("navigator.php");
+
+    if (Session::has('complete_farmer_alert')) {
+        $alert = Session::pop('complete_farmer_alert');
+        $alert->show_default_alert();
+    }
+
+
     ?>
     <div class="[ container ][ dashboard ]" container-type="dashboard-section">
         <h1 class="[ page-heading-1 ]">farmers</h1>

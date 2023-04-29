@@ -80,7 +80,7 @@ class accountController extends Controller
             ];
 
             $response = $this->userModel->update($data);
-            if ($response['success']) {
+            if ($response['success']) { 
                 $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully updated your details');
             } else {
                 $alert = new Alert($type = 'error', $icon = "", $message = 'Error updating your details');

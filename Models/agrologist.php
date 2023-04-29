@@ -181,9 +181,10 @@ class Agrologist extends Model
     public function insertFieldVisit($data)
     {
         try {
-            $sql = "INSERT INTO field_visit (week, gigId, agrologistId, farmerId, fieldVisitDetails, image, visitDate) VALUES (:week, :gigId, :agrologistId, :farmerId, :fieldVisitDetails, :fieldVisitImage, :visitDate)";
+            $sql = "INSERT INTO field_visit (visitId, week, gigId, agrologistId, farmerId, fieldVisitDetails, thumbnail, visitDate) VALUES (:visitId, :week, :gigId, :agrologistId, :farmerId, :fieldVisitDetails, :fieldVisitImage, :visitDate)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
+                'visitId' => $data['visitId'],
                 'week' => $data['week'],
                 'gigId' => $data['gigId'],
                 'farmerId' => $data['farmerId'],
@@ -200,10 +201,27 @@ class Agrologist extends Model
         }
     }
 
+    public function insertFieldVisitImage($data)
+    {
+        try {
+            $sql = "INSERT INTO field_visit_image (image, visitId) VALUES (:image, :visitId)";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'image' => $data['image'],
+                'visitId' => $data['visitId'],
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return false;
+        }
+    }
+
     public function getFieldVisitDetails($fid, $gid)
     {
         try {
-            $sql = "SELECT * FROM field_visit  WHERE agrologistId = :agrologistId AND farmerId= :farmerId AND gigId = :gigId ORDER BY visitDate DESC";
+            $sql = "SELECT f.week, f.visitDate, f.fieldVisitDetails, f.thumbnail, i.image FROM field_visit f LEFT JOIN field_visit_image i ON f.visitId=i.visitId WHERE f.agrologistId = :agrologistId AND f.farmerId= :farmerId AND f.gigId = :gigId ORDER BY f.visitDate DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
                 'agrologistId' => Session::get('user')->getUid(),

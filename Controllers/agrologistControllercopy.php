@@ -4,13 +4,10 @@ class agrologistController extends Controller
 {
     private $currentUser;
     private $lastmonthFarmerCount = 0;
-    private $imageHandler;
 
     public function __construct()
     {
         $this->currentUser = Session::get('user');
-
-        $this->imageHandler = new ImageHandler($folder = 'Uploads');
 
         if (!Session::isLoggedIn()) {
             $this->redirect('/auth/signin');
@@ -70,65 +67,46 @@ class agrologistController extends Controller
 
     public function farmers($params)
     {
+
+        
         if (!empty($params)) {
+            // echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>". count($params) . "</h1>";
             require(ROOT . 'Models/agrologist.php');
             $agrologist = new Agrologist();
 
             if (count($params) == 1) {
                 $this->farmergigs($agrologist, $params[0]);
             } 
-            else if($params[1]=="payments"){
-                $this->payments();
-            }
             else {
+                // require(ROOT . 'Models/agrologist.php');
+                // $agrologist = new Agrologist();
                 $uid = Session::get('user')->getUid();
-                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    if (isset($_POST['update_details_btn'])) {
-        
-                        $fieldVisitId = new UID(PREFIX::FEILDVISIT);
-        
-                        $week = new Input(POST, 'week');
-                        $date = new Input(POST, 'date');
-                        $description = new Input(POST, 'description');
-        
 
+                if (isset($_POST['update_details_btn'])) {
+                    $week = new Input(POST, 'week');
+                    $date = new Input(POST, 'date');
+                    // $update_file = new Input(POST, 'update_file');
+                    $description = new Input(POST, 'description');
 
-                        // if ($update) {
-                              try {
-                                $images = $this->imageHandler->upload('images');
-        
-                                // echo json_encode($images);
-                                // echo("<script>console.log('PHP: " . $images . "');</script>");
-                                if(!empty($images)){
-                                    $update = $agrologist->insertFieldVisit([
-                                        'visitId' => $fieldVisitId,
-                                        'week' => $week->get(),
-                                        'gigId' => $params[1],
-                                        'agrologistId' => $uid,
-                                        'farmerId' => $params[0],
-                                        'fieldVisitDetails' => $description->get(),
-                                        'fieldVisitImage' => $images[0],
-                                        'visitDate' => $date->get(),
-                                    ]);
-                                    $images = array_slice($images, 1);
-                                    if(!empty($images)){
-                                        foreach($images as $image){
-                                            $agrologist->insertFieldVisitImage([
-                                                'visitId' => $fieldVisitId,
-                                                'image' => $image,
-                                            ]);
-                                        }
-                                    }
-                                    
-                                }
-        
-                            } catch (Exception $e) {
-                                echo $e->getMessage();
-                                die();
-                            }
-                        // }
-        
+                    if (move_uploaded_file($_FILES['update_img']['tmp_name'], "Uploads/" . basename($_FILES['update_img']['name']))) {
+                        //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'> file uploaded  </h1>";
+                        $agrologist->insertFieldVisit([
+                            'week' => $week->get(),
+                            'gigId' => $params[1],
+                            'agrologistId' => $uid,
+                            'farmerId' => $params[0],
+                            'fieldVisitDetails' => $description->get(),
+                            'fieldVisitImage' => basename($_FILES['update_img']['name']),
+                            'visitDate' => $date->get(),
+                        ]);
+                        // echo "file uploaded";
+                    } else {
+                        //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'> file not uploaded  </h1>";
+
+                        //echo "file not uploaded";
                     }
+
+                    //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $Session::get('uid') . "</h1>";
                 }
 
                 $this->farmerdetails($agrologist, $params[0], $params[1]);
@@ -156,14 +134,15 @@ class agrologistController extends Controller
                     if ($complete) {
                         $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully Completed.');
 
-                    } else {
+                    }
+                    else{
                         $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong.');
                     }
                 }
                 // echo json_encode($complete);
                 Session::set(['complete_farmer_alert' => $alert]);
 
-
+                
             }
             $this->render('farmers');
         }
@@ -432,11 +411,34 @@ class agrologistController extends Controller
         $d['fieldVisit'] = $agrologist->getFieldVisitDetails($fid, $gid);
         $d['fid'] = $fid;
         $d['gid'] = $gid;
+        //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $uid . "</h1>";
 
+        if (isset($_POST['update_details_btn'])) {
+            $week = new Input(POST, 'week');
+            $date = new Input(POST, 'date');
+            // $update_file = new Input(POST, 'update_file');
+            $description = new Input(POST, 'description');
 
+            if (move_uploaded_file($_FILES['update_img']['tmp_name'], "Uploads/" . basename($_FILES['update_img']['name']))) {
+                //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'> file uploaded  </h1>";
+                $agrologist->insertFieldVisit([
+                    'week' => $week->get(),
+                    'gigId' => $gid,
+                    'agrologistId' => $uid,
+                    'farmerId' => $fid,
+                    'fieldVisitDetails' => $description->get(),
+                    'fieldVisitImage' => basename($_FILES['update_img']['name']),
+                    'visitDate' => $date->get(),
+                ]);
+                // echo "file uploaded";
+            } else {
+                //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'> file not uploaded  </h1>";
 
-        
-       
+                //echo "file not uploaded";
+            }
+
+            //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $Session::get('uid') . "</h1>";
+        }
 
         $this->set($d);
         return $this->render('farmerdetails');
