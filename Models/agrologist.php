@@ -504,4 +504,44 @@ class Agrologist extends Model
 
         }
     }
+
+    public function getRequestTimePeriod($farmerId)
+    {
+        try {
+            $sql = "SELECT r.timePeriod, r.statusChangeDate,r.offer, COUNT(f.visitId) AS numvisits FROM agrologist_request r
+            LEFT JOIN field_visit f ON (r.farmerId=f.farmerId AND r.agrologistId=f.agrologistId) 
+            WHERE (r.agrologistId=:agrologistId AND r.farmerId=:farmerId AND r.status='Accepted')";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'agrologistId' => Session::get('user')->getUid(),
+                'farmerId' => $farmerId
+            ]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+
+        }
+    }
+
+    public function getPaymentDetails($farmerId)
+    {
+        try {
+            $sql = "SELECT p.payment, p.paidDate FROM agrologist_payment p WHERE p.agrologistId=:agrologistId AND p.farmerId=:farmerId"; 
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'agrologistId' => Session::get('user')->getUid(),
+                'farmerId' => $farmerId
+            ]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+
+        }
+    }
 }

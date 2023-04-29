@@ -78,7 +78,7 @@ class agrologistController extends Controller
                 $this->farmergigs($agrologist, $params[0]);
             } 
             else if($params[1]=="payments"){
-                $this->payments();
+                $this->payments($agrologist, $params[0]);
             }
             else {
                 $uid = Session::get('user')->getUid();
@@ -478,11 +478,14 @@ class agrologistController extends Controller
         return $this->render('chat');
     }
 
-    public function payments()
+    public function payments($agrologist, $fid)
     {
         // require(ROOT . 'Models/agrologist.php');
         // $agrologist = new Agrologist();
 
+        $d['timePeriod'] = $agrologist->getRequestTimePeriod($fid);
+        $d['paymentDetails'] = $agrologist->getPaymentDetails($fid);
+        $this->set($d);
         return $this->render('payments');
     }
 
