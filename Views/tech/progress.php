@@ -7,13 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="<?php echo IMAGES ?>/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/gridTable.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/alertModal.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/imageUploader.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/tech/progress.css">
 
     <title>Dashboard | Tech</title>
@@ -38,6 +36,10 @@
 
     if (Session::has('progress_add_alert')) {
         $alert = Session::pop('progress_add_alert');
+        $alert->show_default_alert();
+    }
+    if (Session::has('gig_update_progress_alert')) {
+        $alert = Session::pop('gig_update_progress_alert');
         $alert->show_default_alert();
     }
     if (Session::has('delete_progress_alert')) {
@@ -77,20 +79,6 @@
                         <label for="u-lastName">Last Name</label>
                         <textarea name="u-description" id="u-description"></textarea>
                     </div>
-                    <div class="[ form__control image__uploader ]">
-                        <div class="[ title ]">
-                            <p>Upload Images <span>*</span></p>
-                        </div>
-
-                        <div class="[ text__box ]">
-                            <div class="[ text__box_preview ]"></div>
-                            <img class="[ upload__svg ]" src="<?php echo IMAGES ?>svg/upload.svg" />
-                            <p>Darg and drop your images here<br>or</p>
-                            <label class="[ browse__btn ]" for="image-uploader">Browse</label>
-                            <input id="image-uploader" class="text__box_input" type="file" name="images[]" multiple>
-                        </div>
-                    </div>
-
                     <div class="[ control__buttons ]">
                         <button type="button" onclick="closeEditProgressModal()" class="[ button__danger ]" data-dismiss="modal">Cancel</button>
                         <button type="submit" id="u-editProgressBtn" name="u-editProgressBtn" value="<?php echo $personalDetails['uid'] ?>" class="[ button__primary button__submit ]" data-dismiss="modal">Update</button>
@@ -263,7 +251,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="<?php echo JS ?>/dashboard/chart.js"></script>
     <script src="<?php echo JS ?>/dashboard/dashboard.js"></script>
-    <script src="<?php echo JS ?>/imageUploader.js"></script>
 
     <script>
         // const controls = document.querySelectorAll(".controls>button");
