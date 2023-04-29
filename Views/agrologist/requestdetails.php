@@ -120,7 +120,7 @@
                                     </div>
                                 </div>
                                 <div class="card__content">
-                                    <a class="text-dec-none mb-1 fs-5 text-dark fw-6"
+                                    <a class="text-dec-none mb-1  text-dark fw-6 limit-text-2"
                                         href="">
                                         <?php echo ucwords($gigDetail['title']) ?>
                                     </a>

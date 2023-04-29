@@ -148,3 +148,33 @@
   border: 2px solid var(--clr-primary, #ff6b00);
 }
 
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/*css to have two input fieds in same line*/  
+.form-inline { 
+  display: flex; 
+  direction: row;
+  /* flex-flow: row wrap;  */
+  /* align-items: center;  */
+}
+
+.form-inline label { 
+  margin: 5px 10px 5px 0; 
+}
+
+.form-inline input { 
+  width: 100%;
+  vertical-align: middle; 
+  margin: 5px 10px 5px 0; 
+  padding: 10px; 
+  background-color: #fff; 
+  border: 1px solid #ddd; 
+}
+
+
+
+

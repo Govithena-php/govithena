@@ -97,8 +97,6 @@ class agrologistController extends Controller
                               try {
                                 $images = $this->imageHandler->upload('images');
         
-                                // echo json_encode($images);
-                                // echo("<script>console.log('PHP: " . $images . "');</script>");
                                 if(!empty($images)){
                                     $update = $agrologist->insertFieldVisit([
                                         'visitId' => $fieldVisitId,
@@ -113,7 +111,7 @@ class agrologistController extends Controller
                                     $images = array_slice($images, 1);
                                     if(!empty($images)){
                                         foreach($images as $image){
-                                            $agrologist->insertFieldVisitImage([
+                                            $updateimages = $agrologist->insertFieldVisitImage([
                                                 'visitId' => $fieldVisitId,
                                                 'image' => $image,
                                             ]);
@@ -121,7 +119,16 @@ class agrologistController extends Controller
                                     }
                                     
                                 }
-        
+
+                                if($update){
+                                    $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully Updated!');
+                                }
+                                else{
+                                    $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong.');
+                                }
+
+                                Session::set(['update_field_visit_alert' => $alert]);
+
                             } catch (Exception $e) {
                                 echo $e->getMessage();
                                 die();

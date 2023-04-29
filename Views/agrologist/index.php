@@ -160,16 +160,9 @@
 
         </div>
 
-        <!-- <div class="[ charts ]">
-            <div class="[ chart ]">
-                <canvas id="myChart"></canvas>
-            </div>
-            <div class="[ chart ]">
-                <canvas id="pieChart"></canvas>
-            </div>
-        </div> -->
+  
 
-        <div class="[ chart-pie ]">
+        <div class="[ chart-pie ] grid" xs="1" sm="1" md="2" lg="3">
             <!-- <div class="[ chart ]">
                 <canvas id="myChart1"></canvas>
             </div> -->
