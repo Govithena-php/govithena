@@ -274,6 +274,47 @@ class techController extends Controller
         $this->render('newProgress');
     }
 
+    public function update_progress($params = [])
+    {
+        if (!empty($params)) $gigId = $params[0];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $progressId = new Input(POST, 'u-editProgressBtn');
+
+            $subject = new Input(POST, 'u-subject');
+            $description = new Input(POST, 'u-description');
+
+            $response = $this->progressModel->updateProgress([
+                'progressId' => $progressId,
+                'subject' => $subject,
+                'description' => $description
+            ]);
+
+
+            if ($response['success']) {
+
+                $images = $this->progressImageHandler->upload('images');
+                if (!empty($images)) {
+                    foreach ($images as $image) {
+                        $res = $this->progressModel->updateProgressImage([
+                            'progressId' => $progressId,
+                            'imageName' => $image
+                        ]);
+
+                        if ($res['success']) {
+                            $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully updated progress.');
+                        } else {
+                            $alert = new Alert($type = 'success', $icon = "", $message = 'Failed to update progress.');
+                        }
+                    }
+                }
+            } else {
+                $alert = new Alert($type = 'success', $icon = "", $message = 'Failed to update progress.');
+            }
+        }
+        $this->redirect('/tech/progress/' . $gigId);
+    }
+
     public function update_gig_details()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {

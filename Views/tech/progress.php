@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/gridTable.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/alertModal.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/imageUploader.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/tech/progress.css">
 
     <title>Dashboard | Tech</title>
@@ -27,6 +28,14 @@
 <body>
 
     <?php
+
+
+    function printValue($value)
+    {
+        if (isset($value)) echo $value;
+        else echo "-";
+    }
+
     if (Session::has('progress_add_alert')) {
         $alert = Session::pop('progress_add_alert');
         $alert->show_default_alert();
@@ -48,6 +57,44 @@
                 <input type="hidden" name="gigId" id="gigId" value="<?php echo $gigId ?>">
                 <button type="button" class="[ button__primary ]" onclick="closeDeleteConfirmModal()" data-dismiss="modal">No, Cancel</button>
                 <button id="confirmDeleteBtn" name="delete-confirm" type="submit" class="[ button__danger ]">Yes, Delete</button>
+            </form>
+        </div>
+    </dialog>
+
+    <dialog id="editProgressModal" class="[ Modal ]">
+        <div class="[ container ]">
+            <div class="[ caption ]">
+                <h2>Gig Progress</h2>
+                <p>Update gig progress.</p>
+            </div>
+            <form class="[ new__details_form ]" action="<?php echo URLROOT ?>/tech/update_progress/<?php echo $gigId ?>" method="post" enctype="multipart/form-data">
+                <div class="[ grid ]" lg="1">
+                    <div class="[ input__control ]">
+                        <label for="u-subject">Subject</label>
+                        <input type="text" id="u-subject" name="u-subject" placeholder="First Name">
+                    </div>
+                    <div class="[ input__control ]">
+                        <label for="u-lastName">Last Name</label>
+                        <textarea name="u-description" id="u-description"></textarea>
+                    </div>
+                    <div class="[ form__control image__uploader ]">
+                        <div class="[ title ]">
+                            <p>Upload Images <span>*</span></p>
+                        </div>
+
+                        <div class="[ text__box ]">
+                            <div class="[ text__box_preview ]"></div>
+                            <img class="[ upload__svg ]" src="<?php echo IMAGES ?>svg/upload.svg" />
+                            <p>Darg and drop your images here<br>or</p>
+                            <label class="[ browse__btn ]" for="image-uploader">Browse</label>
+                            <input id="image-uploader" class="text__box_input" type="file" name="images[]" multiple>
+                        </div>
+                    </div>
+
+                    <div class="[ control__buttons ]">
+                        <button type="button" onclick="closeEditProgressModal()" class="[ button__danger ]" data-dismiss="modal">Cancel</button>
+                        <button type="submit" id="u-editProgressBtn" name="u-editProgressBtn" value="<?php echo $personalDetails['uid'] ?>" class="[ button__primary button__submit ]" data-dismiss="modal">Update</button>
+                    </div>
             </form>
         </div>
     </dialog>
@@ -155,7 +202,7 @@
                                             <?php
                                             if ($pr['userId'] == Session::get('user')->getUid()) {
                                             ?>
-                                                <button><i class="bi bi-pencil-square"></i></button>
+                                                <button onclick='openEditProgressModal(<?php echo json_encode($pr) ?>)'><i class="bi bi-pencil-square"></i></button>
                                                 <button onclick="openDeleteConfirmModal('<?php echo $pr['progressId'] ?>')"><i class="bi bi-trash"></i></button>
                                             <?php
                                             }
@@ -216,6 +263,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="<?php echo JS ?>/dashboard/chart.js"></script>
     <script src="<?php echo JS ?>/dashboard/dashboard.js"></script>
+    <script src="<?php echo JS ?>/imageUploader.js"></script>
+
     <script>
         // const controls = document.querySelectorAll(".controls>button");
         // const tabs = document.querySelectorAll(".tab");
@@ -272,6 +321,24 @@
         function closeDeleteConfirmModal() {
             const conformationModal = document.getElementById("conformationModal")
             conformationModal.close()
+        }
+
+        function openEditProgressModal(data) {
+            const editProgressModal = document.getElementById("editProgressModal")
+            const description = document.getElementById("u-description")
+            description.value = data.description
+            description.textContent = data.description
+            const subject = document.getElementById("u-subject")
+            subject.value = data.subject
+            const editProgressBtn = document.getElementById("u-editProgressBtn")
+            editProgressBtn.value = data.progressId
+            editProgressModal.showModal()
+        }
+
+        function closeEditProgressModal() {
+            location.reload()
+            const editProgressModal = document.getElementById("editProgressModal")
+            editProgressModal.close()
         }
     </script>
 </body>

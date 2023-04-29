@@ -89,4 +89,39 @@ class Progress
             return ['success' => false, 'error' => $e->getMessage()];
         }
     }
+
+    public function updateProgress($data)
+    {
+        try {
+            $sql = "UPDATE gig_progress SET subject = :subject, description = :description, timestamp = CURRENT_TIMESTAMP WHERE progressId = :progressId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'progressId' => $data['progressId'],
+                'subject' => $data['subject'],
+                'description' => $data['description']
+            ]);
+            return ['success' => true];
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            die();
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
+
+    public function updateProgressImage($data)
+    {
+        try {
+            $sql = "UPDATE gig_progress_image SET imageName = :imageName WHERE progressId = :progressId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'progressId' => $data['progressId'],
+                'imageName' => $data['imageName']
+            ]);
+            return ['success' => true];
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            die();
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
 }

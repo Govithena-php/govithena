@@ -17,6 +17,7 @@
 </head>
 
 <body>
+
     <?php
     $active = "farmers";
     $title = "Farmers";
@@ -40,7 +41,7 @@
                             <img src="<?php echo UPLOADS . $gig['thumbnail'] ?>">
                         </div>
                         <div class="gig__content">
-                            <h4><?php echo $gig['title'] ?></h4>
+                            <h4 class="limit-text-2"><?php echo $gig['title'] ?></h4>
                             <p><?php echo $gig['category'] ?></p>
                         </div>
                     </div>

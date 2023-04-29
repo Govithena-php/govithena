@@ -24,17 +24,17 @@
     margin-bottom: 0.5rem;
 }
 
-.strong{
+.strong {
     font-size: 1rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
 }
 
-.pt-1{
+.pt-1 {
     padding-top: 1rem;
 }
 
-.flex-space-between{
+.flex-space-between {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -99,4 +99,80 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+
+.Modal {
+    min-width: 650px;
+}
+
+.Modal .container {
+    margin: 1rem;
+}
+
+.Modal .caption {
+    margin-bottom: 2rem;
+}
+
+
+.new__details_form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.input__control {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.input__control label {
+    font-weight: 600;
+}
+
+.input__control input {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input__control input:focus {
+    outline: 1px solid var(--clr-primary);
+}
+
+.input__control select {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input__control select:focus {
+    outline: 1px solid var(--clr-primary);
+}
+
+.input__control textarea {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 100px;
+    resize: none;
+}
+
+.input__control textarea:focus {
+    outline: 1px solid var(--clr-primary);
+}
+
+
+.control__buttons {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.upload__svg {
+    width: 50px !important;
 }
