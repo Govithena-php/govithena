@@ -191,16 +191,16 @@
                         </div> -->
                         <div class="grid__table"
                             style="
-                                    --xl-cols: 1.3fr 0.7fr 0.7fr 0.5fr 1.7fr 1fr;
-                                    --lg-cols: 1.5fr 1fr 1fr 1fr 0.3fr;
-                                    --md-cols: 2fr 1fr 0.3fr;
-                                    --sm-cols: 3fr 0.3fr;
+                                    --xl-cols: 0.8fr 1.1fr 0.6fr 0.7fr 0.9fr 1.7fr 1.4fr;
                                 "
                             >
                             <div class="head">
                                 <div class="row">
                                     <div class="data">
-                                        <p>Farmer Name</p>
+                                        <p></p>
+                                    </div>
+                                    <div class="data remove-border">
+                                        <p>Investor Name</p>
                                     </div>
                                     <div class="data">
                                         <p>Title</p>
@@ -226,6 +226,8 @@
                                         <img src="<?php echo UPLOADS . "/" . $investor['thumbnail']; ?>" alt="">
                                             <!-- <img src="<?php echo UPLOADS . '/profilePictures/' . $investor['thumbnail']?>" alt="Picture"> -->
                                         </div>
+                                    </div>
+                                    <div class="data">
                                         <div class="namecol">
                                             <h1><p><?php echo $investor['firstName'] ?></p></h1>
                                             <h3><p><?php echo $investor['lastName']?></p></h3>
@@ -276,7 +278,7 @@
                     <div class="investors">
                             <div class="grid__table"
                                 style="
-                                        --xl-cols: 1.3fr 0.7fr 0.7fr 0.5fr 1.7fr 1fr;
+                                       --xl-cols: 0.7fr 1fr 0.5fr 0.5fr 0.9fr 1.8fr;
                                         --lg-cols: 1.5fr 1fr 1fr 1fr 0.3fr;
                                         --md-cols: 2fr 1fr 0.3fr;
                                         --sm-cols: 3fr 0.3fr;
@@ -284,8 +286,11 @@
                                 >
                                 <div class="head">
                                     <div class="row">
-                                        <div class="data">
-                                            <p>Farmer Name</p>
+                                    <div class="data">
+                                            <p></p>
+                                        </div>
+                                        <div class="data remove-border">
+                                            <p>Investor Name</p>
                                         </div>
                                         <div class="data">
                                             <p>Title</p>
@@ -311,6 +316,8 @@
                                             <img src="<?php echo UPLOADS . "/" . $reqinvestor['thumbnail']; ?>" alt="">
                                                 <!-- <img src="<?php echo UPLOADS . '/profilePictures/' . $reqinvestor['thumbnail']?>" alt="Picture"> -->
                                             </div>
+                                        </div>
+                                        <div class="data">
                                             <div class="namecol">
                                                 <h1><p><?php echo $reqinvestor['firstName'] ?></p></h1>
                                                 <h3><p><?php echo $reqinvestor['lastName']?></p></h3>
@@ -352,12 +359,12 @@
 
         
         <?php
-        if (empty($activeInvestors)) {
-            require(COMPONENTS . "dashboard/noDataFound.php");
-        } else { ?>
+        // if (empty($   )) {
+        //     require(COMPONENTS . "dashboard/noDataFound.php");
+        // } else { ?>
 
         <?php
-        }
+        // }
         ?>
         <br>
 

@@ -335,11 +335,11 @@ input[type="select"] {
 
 .farmerimg {
    
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     overflow: hidden;
-    margin-right: 30px;
+    /* margin-right: 30px; */
 
 
 }
@@ -353,3 +353,8 @@ input[type="select"] {
     display: flex;
     flex-direction: column;
 }
+
+.remove-border{
+    border-left:  none !important;
+  }
+  
