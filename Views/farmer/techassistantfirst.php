@@ -135,13 +135,13 @@
                                 <a class="namebox" href="<?php echo URLROOT . "/profile/" . $techAssistant['uid'] ?>">
                                     <?php echo $techAssistant['firstName'] . " " . $techAssistant['lastName']; ?>
                                 </a>
-                                <p class="flex flex-row">
+                                <!-- <p class="flex flex-row">
                                     <span class="fa fa-star"></span>
                                     <span class="fa fa-star"></span>
                                     <span class="fa fa-star"></span>
                                     <span class="fa fa-star"></span>
                                     <span class="fa fa-star"></span>
-                                </p>
+                                </p> -->
                             </div>
                         </div>
                         <div class=" flex-c-c">

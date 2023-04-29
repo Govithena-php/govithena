@@ -10,7 +10,7 @@ class farmerController extends Controller
     private $farmerModel;
     private $investorGigModel;
     private $gigModel;
-    private $farmerProgressModel;
+    private $progressModel;
 
     // model ekat PRIVATE  variable ekak define kra
     private $abcModel;
@@ -29,7 +29,7 @@ class farmerController extends Controller
         $this->farmerModel = $this->model('farmer');
         $this->investorGigModel = $this->model('investorGig');
         $this->gigModel = $this->model('gig');
-        $this->farmerProgressModel = $this->model('farmerProgress');
+        $this->progressModel = $this->model('progress');
 
         $this->abcModel = $this->model('abc'); //model eka import krann ('abc' file eke name)
 
@@ -327,7 +327,7 @@ class farmerController extends Controller
             ];
 
 
-            $response = $this->farmerProgressModel->create($data);
+            $response = $this->progressModel->create($data);
 
             if ($response['success']) {
 
@@ -339,7 +339,7 @@ class farmerController extends Controller
                                 'progressId' => $progressId,
                                 'imageName' => $image
                             ];
-                            $res = $this->farmerProgressModel->saveProgressImage($data);
+                            $res = $this->progressModel->saveProgressImage($data);
                             if (!$res['success']) {
                                 $this->redirect('/farmer/newprogress/' . $res['error']);
                             }
