@@ -103,3 +103,48 @@
 .dashboard {
   min-height: 100vh;
 }
+
+.image__uploader input {
+  display: none;
+}
+
+.image__uploader .title p {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.image__uploader .title span {
+  color: red;
+  font-size: 1.5rem;
+}
+
+.image__uploader .text__box {
+  min-height: 150px;
+  padding: 2rem;
+  border: 2px dashed #ccc;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+}
+
+.image__uploader .upload__svg {
+  width: 150px;
+  margin-left: 2rem;
+}
+
+.image__uploader .text__box p {
+  color: #3c3c3c;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.image__uploader .text__box_dragover {
+  border: 2px solid var(--clr-primary, #ff6b00);
+}
+
