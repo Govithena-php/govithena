@@ -45,7 +45,7 @@ function highlight($active, $link)
                 <div class="[ buttons ]">
                     <div class="[ notification ]">
                         <button>
-                            <i class="[ fa-solid fa-bell ]"></i>
+                            <i class="bi bi-bell"></i>
                             <?php
                             $notificationCount = 4;
                             if (isset($notificationCount)) {

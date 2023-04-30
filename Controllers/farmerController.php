@@ -19,7 +19,7 @@ class farmerController extends Controller
         $this->farmerModel = $this->model('farmer');
         $this->investorGigModel = $this->model('investorGig');
         $this->gigModel = $this->model('gig');
-        $this->progressModel = $this->model('fprogress');
+        $this->progressModel = $this->model('progress');
 
         $this->abcModel = $this->model('abc'); //model eka import krann ('abc' file eke name)
 
