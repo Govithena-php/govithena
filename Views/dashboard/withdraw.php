@@ -163,16 +163,16 @@
                         </div>
                         <div class="[ row ]">
                             <div class="[ data ]">
-                                <h3>Date</h3>
+                                <p>Date</p>
                             </div>
                             <div class="[ data ]">
-                                <h3>Time</h3>
+                                <p>Time</p>
                             </div>
                             <div class="[ data ]">
-                                <h3>Amount</h3>
+                                <p>Amount</p>
                             </div>
                             <div class="[ data ]">
-                                <h3>Status</h3>
+                                <p>Status</p>
                             </div>
                         </div>
                     </div>

@@ -5,7 +5,7 @@ class investorGig
     public function fetchAllActiveGigByInvestor($id)
     {
         try {
-            $sql = "SELECT * FROM investor_gig INNER JOIN gig ON investor_gig.gigId = gig.gigId WHERE investorId = :id AND investor_gig.status = 'ACTIVE' ORDER BY timestamp DESC";
+            $sql = "SELECT ig.gigId, ig.farmerId, g.title, g.city, g.thumbnail, u.firstName, u.lastName, u.image, u.city as FCity FROM investor_gig ig INNER JOIN gig g ON ig.gigId = g.gigId INNER JOIN user u ON ig.farmerId = u.uid WHERE ig.investorId = :id AND ig.status = 'ACTIVE' ORDER BY timestamp DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $row = $stmt->fetchAll(PDO::FETCH_ASSOC);

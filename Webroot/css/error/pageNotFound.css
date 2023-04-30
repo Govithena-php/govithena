@@ -25,7 +25,6 @@
 }
 
 .row {
-    /* background-color: red; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -34,7 +33,7 @@
 }
 
 .row .img {
-    height: 300px;
+    height: 200px;
     overflow: hidden;
 }
 
@@ -51,13 +50,26 @@
     font-weight: 700;
 }
 
+.row .details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.row .details p {
+    text-align: center;
+    width: 65%;
+}
+
 .row button {
-    padding: 0.75rem 1.25rem;
+    padding: 0.5rem 1rem;
     border: none;
     border-radius: 5px;
     background-color: var(--clr-gray);
     color: var(--clr-primary);
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease-in-out;

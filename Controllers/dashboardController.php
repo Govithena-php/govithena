@@ -93,10 +93,6 @@ class dashboardController extends Controller
     public function gigs()
     {
         $props = [];
-        // $investorGig = new $this->investorGigModel();
-        // $gigs = $investorGig->fetchAllByInvestor($this->currentUser->getUid());
-        // $this->set(['gigs' => $gigs]);
-
 
         $activeGigCount = $this->investorGigModel->countActiveGigByInvestor($this->currentUser->getUid());
 
@@ -115,6 +111,20 @@ class dashboardController extends Controller
         if ($totalInvestment['success']) {
             $props['totalInvestment'] = $totalInvestment['data']['totalInvestment'];
         }
+
+        $totalInvestmentPerGig = $this->investmentModel->getTotalInvestmentPerGigByInvestor($this->currentUser->getUid());
+
+
+        if ($totalInvestmentPerGig['success']) {
+            $temp = [];
+            foreach ($totalInvestmentPerGig['data'] as $key => $value) {
+                $temp[$value['gigId']] = $value['totalInvestment'];
+            }
+
+            $props['totalInvestmentPerGig'] = $temp;
+        }
+        // print_r($props['totalInvestmentPerGig']);
+        // die();
 
         $activeGigs = $this->investorGigModel->fetchAllActiveGigByInvestor($this->currentUser->getUid());
 
