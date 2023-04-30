@@ -9,7 +9,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
 }
 
 .alertModal>.container i {
@@ -35,7 +34,7 @@
     color: var(--clr-text-gray);
 }
 .alertModal>.container>.buttons{
-    margin-top: 0.5rem;
+    margin-top: 1.5rem;
 }
 .alertModal>.container>.buttons button {
     margin-inline: 1rem;

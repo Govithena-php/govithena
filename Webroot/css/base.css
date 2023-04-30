@@ -119,7 +119,9 @@ dialog {
     border-radius: 0.25rem;
     outline: none;
     min-width: 400px;
-}
+    overflow: hidden;
+    touch-action: none;
+  }
 
 dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.5);
@@ -391,6 +393,38 @@ dialog::backdrop {
 
 .button__danger-invert:hover {
     background-color: #fcb8b8;
+}
+
+
+.caption {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    margin-inline: 0;
+}
+
+.tab .caption {
+    margin-bottom: 0.2rem;
+    margin-top: 0.5rem;
+}
+
+.caption h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.caption h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.caption p {
+    width: 60%;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--clr-text-gray, #535353);
+    margin-bottom: 0.5rem;
 }
 
 

@@ -1,0 +1,102 @@
+.filters {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+}
+
+.filters .options {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.filters .options .input__control {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+.filters .options .input__control label {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.filters .options .input__control input {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.filters .options .input__control input:focus {
+    outline: 1px solid var(--clr-primary);
+}
+
+.filters .options .input__control select {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.filters .options .input__control select:focus {
+    outline: 1px solid var(--clr-primary);
+}
+
+.filters .options .input__control button {
+    padding: 0.6rem 1rem;
+}
+
+.filters .search {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: 0;
+}
+
+.filters .search input {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    font-size: 1rem;
+    font-weight: 400;
+    width: 100%;
+}
+
+.filters .search input:focus {
+    outline: 1px solid var(--clr-primary);
+}
+
+
+.filters .search button {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--clr-primary);
+    border-radius: 0 5px 5px 0;
+    background-color: var(--clr-primary);
+    color: var(--clr-light);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.filters .search button:hover {
+    background-color: var(--clr-primary-light);
+}
+
+
+@media screen and (max-width:768px) {
+    .filters {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4rem;
+    }
+
+    .filters .options {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+@media screen and (max-width: 576px) {}

@@ -13,6 +13,8 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/gridTable.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/tabs.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/alertModal.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/formModal.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/filters.css">
 
     <link rel="stylesheet" href="<?php echo CSS ?>/investor/myrequests.css">
 
@@ -38,7 +40,7 @@
 
     <dialog id="deleteModal" class="[ alertModal ]">
         <div class="[ container ]">
-            <i class="fa fa-circle-xmark" aria-hidden="true"></i>
+            <i class="bi bi-x-circle"></i>
             <div class="[ content ]">
                 <h2>Are you sure?</h2>
                 <p>Do you really want to delete these records? This process cannot be undone.</p>
@@ -50,7 +52,7 @@
         </div>
     </dialog>
 
-    <dialog id="resendModal" class="[ resendModal ]">
+    <dialog id="resendModal" class="[ modal ]">
         <div class="[ container ]">
             <div class="[ head ]">
                 <h3>Resend Request</h3>
@@ -65,8 +67,8 @@
                     <textarea name="resendMessage" id="resendMessage"></textarea>
                 </div>
                 <div class="[ buttons ]">
-                    <button type="submit" id="requestResendBtn" name="request-resend" class="[ button__primary ]">Send</button>
                     <button type="button" class="[ button__danger ]" onclick="closeResendModal()" data-dismiss="modal">Cancel</button>
+                    <button type="submit" id="requestResendBtn" name="request-resend" class="[ button__primary ]">Send</button>
                 </div>
             </form>
     </dialog>
@@ -107,31 +109,32 @@
                                         --sm-cols: 3fr 0.3fr;
                                     ">
                                     <div class="[ head stick_to_top ]">
-                                        <form class="[ filters ]">
+                                        <!-- <form class="[ filters ]" action="<?php echo URLROOT ?>/dashboard/myrequests" method="POST">
                                             <div class="[ options ]">
                                                 <div class="[ input__control ]">
-                                                    <label for="from">From :</label>
-                                                    <input id="from" type="date">
+                                                    <label for="fromDate">From</label>
+                                                    <input id="fromDate" type="date" tag="fromDate" name="fromDate">
                                                 </div>
                                                 <div class="[ input__control ]">
-                                                    <label for="to">To :</label>
-                                                    <input id="to" type="date">
+                                                    <label for="toDate">To</label>
+                                                    <input id="toDate" type="date" tag="toDate" name="toDate">
                                                 </div>
                                                 <div class="[ input__control ]">
-                                                    <label for="location">City :</label>
-                                                    <select id="location">
+                                                    <label for="district">District</label>
+                                                    <select id="district" name="district">
                                                         <option value="all">All</option>
-                                                        <option value="colombo">Colombo</option>
-                                                        <option value="galle">Galle</option>
-                                                        <option value="kandy">Kandy</option>
-                                                        <option value="matara">Matara</option>
-                                                        <option value="nuwaraeliya">Nuwara Eliya</option>
-                                                        <option value="trincomalee">Trincomalee</option>
+                                                        <?php
+                                                        foreach (DISTRICTS as $key => $value) {
+                                                        ?>
+                                                            <option value="<?php echo $key ?>"><?php echo $value ?></option>
+                                                        <?php
+                                                        }
+                                                        ?>
                                                     </select>
                                                 </div>
                                                 <div class="[ input__control ]">
-                                                    <label for="category">Category :</label>
-                                                    <select id="category">
+                                                    <label for="category">Category</label>
+                                                    <select id="category" name="category">
                                                         <option value="all">All</option>
                                                         <option value="vegetable">Vegetable</option>
                                                         <option value="fruit">Fruit</option>
@@ -140,7 +143,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="[ input__control ]">
-                                                    <button type="button">Apply</button>
+                                                    <button type="submit" name="submit" class="button__primary">Apply</button>
                                                 </div>
 
                                             </div>
@@ -149,8 +152,9 @@
                                                 <button type="button">
                                                     <i class="bi bi-search"></i>
                                                 </button>
-                                            </div>
+                                            </div> -->
                                         </form>
+
                                         <div class="[ row ]">
                                             <div class="[ data ]">
                                                 <p>Gig</p>
@@ -279,30 +283,31 @@
                                         --sm-cols: 3fr 0.3fr;
                                     ">
                                     <div class="[ head stick_to_top ]">
-                                        <form class="[ filters ]" method="post" action="<?php echo URLROOT ?>/dashboard/test1">
+                                        <!-- <form class="[ filters ]" action="<?php echo URLROOT ?>/dashboard/myrequests" method="POST">
                                             <div class="[ options ]">
                                                 <div class="[ input__control ]">
-                                                    <label for="from">From :</label>
-                                                    <input id="from" name="fromDate" type="date">
+                                                    <label for="fromDate">From</label>
+                                                    <input id="fromDate" name="fromDate" tag="fromDate" type="date">
                                                 </div>
                                                 <div class="[ input__control ]">
-                                                    <label for="to">To :</label>
-                                                    <input id="to" name="toDate" type="date">
+                                                    <label for="toDate">To</label>
+                                                    <input id="toDate" name="toDate" tag="toDate" type="date">
                                                 </div>
                                                 <div class="[ input__control ]">
-                                                    <label for="city">City :</label>
-                                                    <select id="city" name="city">
+                                                    <label for="district">District</label>
+                                                    <select id="district" name="district">
                                                         <option value="all">All</option>
-                                                        <option value="colombo">Colombo</option>
-                                                        <option value="galle">Galle</option>
-                                                        <option value="kandy">Kandy</option>
-                                                        <option value="matara">Matara</option>
-                                                        <option value="nuwaraeliya">Nuwara Eliya</option>
-                                                        <option value="trincomalee">Trincomalee</option>
+                                                        <?php
+                                                        foreach (DISTRICTS as $key => $value) {
+                                                        ?>
+                                                            <option value="<?php echo $key ?>"><?php echo $value ?></option>
+                                                        <?php
+                                                        }
+                                                        ?>
                                                     </select>
                                                 </div>
                                                 <div class="[ input__control ]">
-                                                    <label for="category">Category :</label>
+                                                    <label for="category">Category</label>
                                                     <select id="category" name="category">
                                                         <option value="all">All</option>
                                                         <option value="vegetable">Vegetable</option>
@@ -312,16 +317,16 @@
                                                     </select>
                                                 </div>
                                                 <div class="[ input__control ]">
-                                                    <button type="submit" name="apply">Apply</button>
+                                                    <button type="submit" name="submit" class="button__primary">Apply</button>
                                                 </div>
 
                                             </div>
-                                            <div class="[ search ]">
+                                         <div class="[ search ]">
                                                 <input type="text" placeholder="Search">
                                                 <button type="button">
                                                     <i class="bi bi-search"></i>
                                                 </button>
-                                            </div>
+                                            </div> -->
                                         </form>
                                         <div class="[ row ]">
                                             <div class="[ data ]">
@@ -415,7 +420,7 @@
                                                         } ?>
                                                         <br>
                                                         <div class="[ flex gap-1 mt-1 ]">
-                                                            <button onclick="openDeleteAlert('<?php echo $request['requestId'] ?>')" class="[ button__danger ]">Cancel Request</button>
+                                                            <button onclick="openDeleteAlert('<?php echo $request['requestId'] ?>')" class="[ button__danger ]">Delete Request</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -451,32 +456,33 @@
                                         --md-cols: 2fr 1fr 0.3fr;
                                         --sm-cols: 3fr 0.3fr;
                                     ">
-                                    <div class="[ head ]">
-                                        <form class="[ filters ]">
+                                    <div class="[ head stick_to_top ]">
+                                        <!-- <form class="[ filters ]" action="<?php echo URLROOT ?>/dashboard/myrequests" method="POST">
                                             <div class="[ options ]">
                                                 <div class="[ input__control ]">
-                                                    <label for="from">From :</label>
-                                                    <input id="from" type="date">
+                                                    <label for="fromDate">From</label>
+                                                    <input id="fromDate" type="date" tag="fromDate" name="fromDate">
                                                 </div>
                                                 <div class="[ input__control ]">
-                                                    <label for="to">To :</label>
-                                                    <input id="to" type="date">
+                                                    <label for="toDate">To</label>
+                                                    <input id="toDate" type="date" tag="toDate" name="toDate">
                                                 </div>
                                                 <div class="[ input__control ]">
-                                                    <label for="location">City :</label>
-                                                    <select id="location">
+                                                    <label for="district">District</label>
+                                                    <select id="district" name="district">
                                                         <option value="all">All</option>
-                                                        <option value="colombo">Colombo</option>
-                                                        <option value="galle">Galle</option>
-                                                        <option value="kandy">Kandy</option>
-                                                        <option value="matara">Matara</option>
-                                                        <option value="nuwaraeliya">Nuwara Eliya</option>
-                                                        <option value="trincomalee">Trincomalee</option>
+                                                        <?php
+                                                        foreach (DISTRICTS as $key => $value) {
+                                                        ?>
+                                                            <option value="<?php echo $key ?>"><?php echo $value ?></option>
+                                                        <?php
+                                                        }
+                                                        ?>
                                                     </select>
                                                 </div>
                                                 <div class="[ input__control ]">
-                                                    <label for="category">Category :</label>
-                                                    <select id="category">
+                                                    <label for="category">Category</label>
+                                                    <select id="category" name="category">
                                                         <option value="all">All</option>
                                                         <option value="vegetable">Vegetable</option>
                                                         <option value="fruit">Fruit</option>
@@ -485,16 +491,16 @@
                                                     </select>
                                                 </div>
                                                 <div class="[ input__control ]">
-                                                    <button type="button">Apply</button>
+                                                    <button type="submit" name="submit" class="button__primary">Apply</button>
                                                 </div>
 
                                             </div>
                                             <div class="[ search ]">
-                                                <input type="text" placeholder="Search">
+                                                <input type="text" name="searchRr" placeholder="Search">
                                                 <button type="button">
                                                     <i class="bi bi-search"></i>
                                                 </button>
-                                            </div>
+                                            </div> -->
                                         </form>
                                         <div class="[ row ]">
                                             <div class="[ data ]">
@@ -610,6 +616,8 @@
     ?>
     <script src="<?php echo JS ?>/tabs.js"></script>
     <script src="<?php echo JS ?>/gridTable.js"></script>
+    <script src="<?php echo JS ?>/filter/toDateFromDate-multiple.js"></script>
+
     <script>
         function openDeleteAlert(id) {
             const deleteModal = document.getElementById("deleteModal")
