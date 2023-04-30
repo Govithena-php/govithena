@@ -194,7 +194,7 @@ function highlight($active, $link)
             </li>
         </ul>
         <div class="[ grow ]"></div>
-        <ulv class="bottom__links">
+        <ul class="bottom__links">
             <li>
                 <a href="<?php echo URLROOT ?>/farmer/myaccount" class="<?php highlight($active, "myaccount") ?>">
                     <i class="bi bi-person"></i>
@@ -213,7 +213,7 @@ function highlight($active, $link)
                     <p>Settings</p>
                 </a>
             </li>
-            </ul>
+        </ul>
 
     </div>
 </aside>
