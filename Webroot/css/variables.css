@@ -6,8 +6,10 @@
     --clr-primary: #1d9a5f;
     --clr-danger: #DC3545;
     --clr-primary-light: #22ac6b;
-    --clr-secondary: #01058a;
-    --clr-secondary-light: #0c12ae;
+    --clr-primary-dark: #10824d;
+    --clr-secondary: #27438e;
+    --clr-secondary-light: #3370ad;
+    --clr-secondary-dark: #203775;
     --clr-text-gray: #535353;
     --clr-text: #404145;
 

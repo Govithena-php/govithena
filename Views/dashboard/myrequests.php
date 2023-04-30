@@ -181,7 +181,7 @@
                                                 <div class="[ data ]">
                                                     <div class="[ item__card ]">
                                                         <div class="[ img ]">
-                                                            <img width="50" src="<?php echo UPLOADS . $request['thumbnail'] ?>" />
+                                                            <img src="<?php echo UPLOADS . $request['thumbnail'] ?>" />
                                                         </div>
                                                         <div class="[ content ]">
                                                             <a href="<?php echo URLROOT . "/gig/" . $request['gigId'] ?>">
@@ -196,7 +196,7 @@
                                                     <p class="[ tag ]"><?php echo $request['category'] ?></p>
                                                 </div>
                                                 <div class="[ data ]" hideIn="sm">
-                                                    <h3>LKR <?php echo number_format($request['offer'], 2, '.', ',') ?></h3>
+                                                    <h3 class="LKR"><?php echo number_format($request['offer'], 2, '.', ',') ?></h3>
                                                 </div>
                                                 <div class="[ data ]" hideIn="lg">
                                                     <h3><?php echo $request['cropCycle'] ?> Days</h3>
@@ -219,7 +219,7 @@
                                                     </div>
                                                     <div class="[ data ]" showIn="sm">
                                                         <h4>Offer :</h4>
-                                                        <p>LKR <?php echo number_format($request['offer'], 2, '.', ',') ?></p>
+                                                        <p class="LKR"><?php echo number_format($request['offer'], 2, '.', ',') ?></p>
                                                     </div>
                                                     <div class="[ data ]" showIn="lg">
                                                         <h4>Crop Cycle :</h4>
@@ -235,15 +235,14 @@
                                                     </div>
 
                                                     <div class="[ data ]" always>
-                                                        <div class="expand__container">
-                                                            <?php if (!empty($request['message'])) {
-                                                            ?>
-                                                                <h4>Your Message :</h4>
-                                                                <p><?php echo $request['message'] ?></p>
-                                                            <?php
-                                                            } ?>
-                                                            <a href="<?php echo URLROOT ?>/checkout/<?php echo $request['requestId'] ?>" class="[ button__primary ]">Pay Now</a>
-                                                        </div>
+                                                        <?php if (!empty($request['message'])) {
+                                                        ?>
+                                                            <h4>Your Message :</h4>
+                                                            <p><?php echo $request['message'] ?></p>
+                                                        <?php
+                                                        } ?>
+                                                        <br>
+                                                        <a href="<?php echo URLROOT ?>/checkout/<?php echo $request['requestId'] ?>" class="[ button__primary ]">Pay Now</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -274,7 +273,7 @@
                             <div class="[ requests__wrapper ]">
 
                                 <div class="[ grid__table ]" style="
-                                        --xl-cols: 1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.3fr;
+                                        --xl-cols: 2fr 1fr 1fr 1fr 1fr 1fr 0.3fr;
                                         --lg-cols: 1.5fr 1fr 1fr 1fr 0.3fr;
                                         --md-cols: 2fr 1fr 0.3fr;
                                         --sm-cols: 3fr 0.3fr;
@@ -320,7 +319,7 @@
                                             <div class="[ search ]">
                                                 <input type="text" placeholder="Search">
                                                 <button type="button">
-                                                    <i class="fas fa-search"></i>
+                                                    <i class="bi bi-search"></i>
                                                 </button>
                                             </div>
                                         </form>
@@ -354,7 +353,7 @@
                                                 <div class="[ data ]">
                                                     <div class="[ item__card ]">
                                                         <div class="[ img ]">
-                                                            <img width="50" src="<?php echo UPLOADS . $request['thumbnail'] ?>" />
+                                                            <img src="<?php echo UPLOADS . $request['thumbnail'] ?>" />
                                                         </div>
                                                         <div class="[ content ]">
                                                             <a href="<?php echo URLROOT . "/gig/" . $request['gigId'] ?>">
@@ -369,7 +368,7 @@
                                                     <p class="[ tag ]"><?php echo $request['category'] ?></p>
                                                 </div>
                                                 <div class="[ data ]" hideIn="sm">
-                                                    <h3>LKR <?php echo number_format($request['offer'], 2, '.', ',') ?></h3>
+                                                    <h3 class="LKR"><?php echo number_format($request['offer'], 2, '.', ',') ?></h3>
                                                 </div>
                                                 <div class="[ data ]" hideIn="lg">
                                                     <h3><?php echo $request['cropCycle'] ?> Days</h3>
@@ -382,7 +381,7 @@
                                                 </div>
                                                 <div class="[ data ]">
                                                     <div class="[ actions ]">
-                                                        <button for="<?php echo $request['requestId'] ?>"><i class="fa fa-chevron-circle-down"></i></button>
+                                                        <button for="<?php echo $request['requestId'] ?>"><i class="bi bi-three-dots-vertical"></i></button>
                                                     </div>
                                                 </div>
                                                 <div id="<?php echo $request['requestId'] ?>" class="[ expand ]">
@@ -392,7 +391,7 @@
                                                     </div>
                                                     <div class="[ data ]" showIn="sm">
                                                         <h4>Offer :</h4>
-                                                        <p>LKR <?php echo number_format($request['offer'], 2, '.', ',') ?></p>
+                                                        <p class="LKR"><?php echo number_format($request['offer'], 2, '.', ',') ?></p>
                                                     </div>
                                                     <div class="[ data ]" showIn="lg">
                                                         <h4>Crop Cycle :</h4>
@@ -408,10 +407,14 @@
                                                     </div>
 
                                                     <div class="[ data ]" always>
-                                                        <h4>Your Message :</h4>
-                                                        <p><?php echo $request['message'] ?></p>
+                                                        <?php if (!empty($request['message'])) {
+                                                        ?>
+                                                            <h4>Your Message :</h4>
+                                                            <p><?php echo $request['message'] ?></p>
+                                                        <?php
+                                                        } ?>
+                                                        <br>
                                                         <div class="[ flex gap-1 mt-1 ]">
-                                                            <!-- <button class="button__primary">Edit Message</button> -->
                                                             <button onclick="openDeleteAlert('<?php echo $request['requestId'] ?>')" class="[ button__danger ]">Cancel Request</button>
                                                         </div>
                                                     </div>
@@ -443,7 +446,7 @@
 
                             <div class="[ requests__wrapper ]">
                                 <div class="[ grid__table ]" style="
-                                        --xl-cols: 1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.3fr;
+                                        --xl-cols: 2fr 1fr 1fr 1fr 1fr 1fr 0.3fr;
                                         --lg-cols: 1.5fr 1fr 1fr 1fr 0.3fr;
                                         --md-cols: 2fr 1fr 0.3fr;
                                         --sm-cols: 3fr 0.3fr;
@@ -489,7 +492,7 @@
                                             <div class="[ search ]">
                                                 <input type="text" placeholder="Search">
                                                 <button type="button">
-                                                    <i class="fas fa-search"></i>
+                                                    <i class="bi bi-search"></i>
                                                 </button>
                                             </div>
                                         </form>
@@ -537,7 +540,7 @@
                                                     <p class="[ tag ]"><?php echo $request['category'] ?></p>
                                                 </div>
                                                 <div class="[ data ]" hideIn="sm">
-                                                    <h3>LKR <?php echo number_format($request['offer'], 2, '.', ',') ?></h3>
+                                                    <h3 class="LKR"><?php echo number_format($request['offer'], 2, '.', ',') ?></h3>
                                                 </div>
                                                 <div class="[ data ]" hideIn="lg">
                                                     <h3><?php echo $request['cropCycle'] ?> Days</h3>
@@ -550,7 +553,7 @@
                                                 </div>
                                                 <div class="[ data ]">
                                                     <div class="[ actions ]">
-                                                        <button for="<?php echo $request['requestId'] ?>"><i class="fa fa-chevron-circle-down"></i></button>
+                                                        <button for="<?php echo $request['requestId'] ?>"><i class="bi bi-three-dots-vertical"></i></button>
                                                     </div>
                                                 </div>
                                                 <div id="<?php echo $request['requestId'] ?>" class="[ expand ]">
@@ -560,7 +563,7 @@
                                                     </div>
                                                     <div class="[ data ]" showIn="sm">
                                                         <h4>Offer :</h4>
-                                                        <p>LKR <?php echo number_format($request['offer'], 2, '.', ',') ?></p>
+                                                        <p class="LKR"><?php echo number_format($request['offer'], 2, '.', ',') ?></p>
                                                     </div>
                                                     <div class="[ data ]" showIn="lg">
                                                         <h4>Crop Cycle :</h4>
@@ -576,10 +579,14 @@
                                                     </div>
 
                                                     <div class="[ data ]" always>
-                                                        <h4>Your Message :</h4>
-                                                        <p><?php echo $request['message'] ?></p>
+                                                        <?php if (!empty($request['message'])) {
+                                                        ?>
+                                                            <h4>Your Message :</h4>
+                                                            <p><?php echo $request['message'] ?></p>
+                                                        <?php
+                                                        } ?>
                                                         <br>
-                                                        <button onclick="openResendModal('<?php echo $request['requestId'] ?>')" class="[ button__primary-invert ]">Resend Request</button>
+                                                        <button onclick="openResendModal('<?php echo $request['requestId'] ?>')" class="[ button__primary ]">Resend Request</button>
                                                     </div>
                                                 </div>
                                             </div>

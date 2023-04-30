@@ -29,7 +29,7 @@ function highlight($active, $link)
         </div>
         <div class="[ open__btn ]">
             <button onclick="openSidebar()">
-                <i class="fa-solid fa-bars"></i>
+                <i class="bi bi-list"></i>
             </button>
         </div>
         <?php

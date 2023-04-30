@@ -31,7 +31,7 @@ function highlight($active, $link)
 
         <div class="[ open__btn ]">
             <button onclick="toggleSidebar()">
-                <i class="fa-solid fa-bars"></i>
+                <i class="bi bi-list"></i>
             </button>
         </div>
 
