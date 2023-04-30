@@ -19,9 +19,10 @@ class accountController extends Controller
             $this->redirect('/auth/signin');
         }
 
-        if (!$this->currentUser->hasAccess(ACTOR::INVESTOR)) {
+        if ($this->currentUser->hasAccess(ACTOR::ADMIN)) {
             $this->redirect('/error/dontHaveAccess');
         }
+
 
         $this->userModel = $this->model('user');
         $this->bankAccountModel = $this->model('bankAccount');
@@ -124,12 +125,13 @@ class accountController extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = [
-                'user' => new Input(POST, 'n-userId'),
+                'userId' => new Input(POST, 'n-userId'),
                 'bank' => new Input(POST, 'n-bank'),
                 'accountNumber' => new Input(POST, 'n-accountNumber'),
                 'branch' => new Input(POST, 'n-branch'),
                 'branchCode' => new Input(POST, 'n-branchCode'),
             ];
+
 
             $response = $this->bankAccountModel->add($data);
 

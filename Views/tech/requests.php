@@ -11,8 +11,12 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/table.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/tabs.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/gridTable.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/alertModal.css">
+
     <link rel="stylesheet" href="<?php echo CSS ?>/agrologist/requests.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/tech/requests.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/tech/myrequests.css">
 
     <title>Dashboard | Tech Assistant</title>
 </head>
@@ -23,67 +27,182 @@
     $active = "requests";
     $title = "Requests";
     require_once("navigator.php");
+
     ?>
 
+<dialog id="acceptModal" class="[ alertModal ]">
+        <div class="[ container ]">
+            <i class="fa fa-circle-xmark" aria-hidden="true"></i>
+            <div class="[ content ]">
+                <h2>Are you sure?</h2>
+                <p>Do you really want to accept the request.</p>
+            </div>
+            <form id="acceptForm" action="<?php echo URLROOT ?>/tech/accept_farmer_request" method="POST" class="[ buttons ]">
+                <button type="button" class="[ button__danger ]" onclick="closeAcceptModal()" data-dismiss="modal">Cancel</button>
+                <button id="confirmAcceptRequest" name="acceptRequest-confirm" type="submit" class="[ button__primary ]">Accept</button>
+            </form>
+        </div>
+    </dialog>
+
+<dialog id="rejectModal" class="[ alertModal ]">
+        <div class="[ container ]">
+            <i class="fa fa-circle-xmark" aria-hidden="true"></i>
+            <div class="[ content ]">
+                <h2>Are you sure?</h2>
+                <p>Do you really want to reject the request.</p>
+            </div>
+            <form id="acceptForm" action="<?php echo URLROOT ?>/tech/reject_farmer_request" method="POST" class="[ buttons ]">
+                <button type="button" class="[ button__primary ]" onclick="closeRejectModal()" data-dismiss="modal">Cancel</button>
+                <button id="confirmRejectRequest" name="rejectRequest-confirm" type="submit" class="[ button__danger ]">Reject</button>
+            </form>
+        </div>
+    </dialog>
     <div class="[ container ][ requests ]" container-type="dashboard-section">
-        <h1 class="[ page-heading-1 ]">requests</h1>
-        <!-- <h1><?php echo Session::get('user')->getUid(); ?></h1> -->
-        <div class="[ requests__continer ]">
-            <?php
-            if (!isset($ar) || empty($ar)) {
-            ?>
-                <div class="[ no_requests__card ]">
-                    <p class=''>No Requests</p>
-                </div>
-            <?php
-            } else {
-            ?>
-                <div class="[ requests__wrapper ]">
-                    <?php
-                    foreach ($ar as $request) {
-                    ?>
-
-                        <div class="[ request__card bg-light ]">
-                            <div class="[ request__img ]">
-                                <img src="<?php echo IMAGES ?>/farmer.jpeg" alt="">
-                            </div>
-                            <form action="<?php echo URLROOT . '/tech/requests' ?>" method="POST">
-                                <div class="flex flex-row " style="width: 600px">
-                                    <div class="[ request__content ]">
-
-                                        <h1>
-                                            <a class="[ text-dec-none  text-dark  ]" href="<?php echo URLROOT . "/agrologist/requests/" . $request['requestId'] ?>">
-                                                <?php echo ucwords($request['fullName']) ?>
-                                            </a>
-                                        </h1>
-                                        <h4>
-                                            <?php echo ucwords($request['city']) ?>
-                                        </h4>
-                                        <p class="flex flex-row">
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                        </p>
-
-                                    </div>
-                                    <div class="flex flex-row flex-c-c">
-                                        <button type="submit" value="<?php echo $request['requestId'] ?> " class="btn btn-primary mr-2 mt-2" name="accept">Accept</button>
-                                        <button class="btn btn-danger mt-2" name="decline">Decline</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    <?php
-                    }
-                    ?>
-                </div>
-            <?php
-            }
-            ?>
+        
+        <div class="[ caption ]">
+            <h3>Track all your investment requests in one place!</h3>
+            <p>Keep an eye on the status of your investments with our investor dashboard. Quickly see which requests are accepted, rejected, or still pending, and stay in the know about the progress of your investments.</p>
         </div>
 
+        <div class="tabs" tab="2">
+            <div class="controls">
+                <button class="control" for="1">Farmer Requests</button>
+                <button class="control" for="2">Rejected Farmer Requests</button>
+            </div>
+            <div class="wrapper">
+                <div class="tab" id="1" active="true">
+                <div class="[ caption ]">
+                    <h2>Farmer Requests</h2>
+                    <p>Track the progress of your investments with ease. See which projects have been accepted by farmers on our platform.</p>
+                </div>
+                <?php
+                if(!isset($farmerRequests) || empty($farmerRequests)){;
+                    require(COMPONENTS . "dashboard/noDataFound.php");
+                }else {
+                    ?>
+                    <div class="grid__table"
+                        style="
+                                --xl-cols: 1fr 0.7fr 0.7fr 2fr 1fr;
+                                --lg-cols: 1.5fr 1fr 1fr 1fr 0.3fr;
+                                --md-cols: 2fr 1fr 0.3fr;
+                                --sm-cols: 3fr 0.3fr;
+                            "
+                        >
+                        <div class="head">
+                            <div class="row">
+                                <div class="data">
+                                    <p>Farmer Name</p>
+                                </div>
+                                <div class="data">
+                                    <p>Offer</p>
+                                </div>
+                                <div class="data">
+                                    <p>RequestedDate</p>
+                                </div>
+                                <div class="data">
+                                    <p>Message</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="body">
+                            <?php
+                            foreach($farmerRequests as $row){
+                                ?>
+                            <div class="row">
+                                <div class="data farmer__">
+                                    <div class="farmer__image">
+                                        <img src="<?php echo UPLOADS . '/profilePictures/' . $row['image']?>" alt="<?php echo $row['image']?>">
+                                    </div>
+                                    <p><?php echo $row['firstName'] . " " . $row['lastName']?></p>
+                                </div>
+                                <div class="data">
+                                    <p class="LKR"><?php echo number_format($row['offer'], 2, '.', ',')?></p>
+                                </div>
+                                <div class="data">
+                                    <p><?php echo $row['requestedDate']?></p>
+                                </div>
+                                <div class="data">
+                                    <p><?php echo $row['message']?></p>
+                                </div>
+                                <div class="data flex-right">
+                                    <div class="actions">
+                                        <button onclick="openAcceptModal('<?php echo $row['requestId']?>')" class="button__primary">Accept</button>
+                                        <button onclick="openRejectModal('<?php echo $row['requestId']?>')" class="button__danger">Reject</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                    </div>
+                    <?php
+                }
+                ?>
+                </div>
+                <div class="tab" id="2">
+                <div class="[ caption ]">
+                    <h2>Rejected Farmer Requests</h2>
+                    <p>Track the progress of your investments with ease. See which projects have been accepted by farmers on our platform.</p>
+                </div>
+                <?php
+                if(!isset($rejectedFarmerRequests) || empty($rejectedFarmerRequests)){;
+                    require(COMPONENTS . "dashboard/noDataFound.php");
+                }else {
+                    ?>
+                    <div class="grid__table"
+                        style="
+                                --xl-cols: 1fr 0.7fr 0.7fr 2fr 1fr;
+                                --lg-cols: 1.5fr 1fr 1fr 1fr 0.3fr;
+                                --md-cols: 2fr 1fr 0.3fr;
+                                --sm-cols: 3fr 0.3fr;
+                            "
+                        >
+                        <div class="head">
+                            <div class="row">
+                                <div class="data">
+                                    <p>Farmer Name</p>
+                                </div>
+                                <div class="data">
+                                    <p>Offer</p>
+                                </div>
+                                <div class="data">
+                                    <p>RequestedDate</p>
+                                </div>
+                                <div class="data">
+                                    <p>Message</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="body">
+                            <?php
+                            foreach($rejectedFarmerRequests as $row){
+                                ?>
+                            <div class="row">
+                                <div class="data">
+                                    <p><?php echo $row['firstName'] . " " . $row['lastName']?></p>
+                                </div>
+                                <div class="data">
+                                    <p class="LKR"><?php echo number_format($row['offer'], 2, '.', ',')?></p>
+                                </div>
+                                <div class="data">
+                                    <p><?php echo $row['requestedDate']?></p>
+                                </div>
+                                <div class="data">
+                                    <p><?php echo $row['message']?></p>
+                                </div>
+                            </div>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                    </div>
+                    <?php
+                }
+                ?>
+                </div>
+            </div>
+        </div>
     </div>
 
     <?php
@@ -92,6 +211,48 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="<?php echo JS ?>/dashboard/chart.js"></script>
     <script src="<?php echo JS ?>/dashboard/dashboard.js"></script>
+    <script>
+        const controls = document.querySelectorAll(".controls>button");
+        const tabs = document.querySelectorAll(".tab");
+
+        Array.from(controls).forEach(control => {
+            control.addEventListener("click", () => {
+                let For = control.getAttribute("for")
+                Array.from(tabs).forEach(tab => {
+                    if (tab.id == For) {
+                        tab.setAttribute("active", true)
+                        control.toggleAttribute("active")
+                    } else {
+                        tab.setAttribute("active", false)
+                    }
+                })
+            })
+        })
+
+        function openAcceptModal(id) {
+            const acceptModal = document.getElementById("acceptModal")
+            const confirmAcceptRequest = document.getElementById("confirmAcceptRequest")
+            confirmAcceptRequest.value = id;
+            acceptModal.showModal()
+        }
+
+        function closeAcceptModal() {
+            const acceptModal = document.getElementById("acceptModal")
+            acceptModal.close()
+        }
+
+        function openRejectModal(id) {
+            const rejectModal = document.getElementById("rejectModal")
+            const confirmRejectRequest = document.getElementById("confirmRejectRequest")
+            confirmRejectRequest.value = id;
+            rejectModal.showModal()
+        }
+
+        function closeRejectModal() {
+            const rejectModal = document.getElementById("rejectModal")
+            rejectModal.close()
+        }
+    </script>
 </body>
 
 </html>

@@ -15,11 +15,18 @@ function highlight($active, $link)
 
 ?>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 
 <link rel="stylesheet" href="<?php echo CSS ?>/dashboard/navigator.css" type="text/css">
 
 <nav class="[ nav ]">
-    <div class="[ container ]" container-type="dashboard-section">
+    <div class="[ container ]" container-type="dashboard-navbar">
+        <div class="[ logo ]">
+            <a href="<?php echo URLROOT ?>/">
+                <img src="<?php echo IMAGES ?>/logo.svg" alt="logo">
+                <p>Govithena</p>
+            </a>
+        </div>
         <div class="[ open__btn ]">
             <button onclick="openSidebar()">
                 <i class="fa-solid fa-bars"></i>
@@ -38,7 +45,7 @@ function highlight($active, $link)
                 <div class="[ buttons ]">
                     <div class="[ notification ]">
                         <button>
-                            <i class="[ fa-solid fa-bell ]"></i>
+                            <i class="bi bi-bell"></i>
                             <?php
                             $notificationCount = 4;
                             if (isset($notificationCount)) {
@@ -66,16 +73,17 @@ function highlight($active, $link)
                     </div>
                     <ul>
                         <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/">
-                                <i class="[ fa-solid fa-gauge ]"></i>Dashboard
+                                <i class="bi bi-columns-gap"></i>
+                                Dashboard
                             </a></li>
                         <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/profile">
-                                <i class="[ fa-solid fa-user-tie ]"></i>Profile</a></li>
+                                <i class="bi bi-person"></i>Profile</a></li>
                         <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/signout">
-                                <i class="[ fa-solid fa-gear ]"></i>Settings</a>
+                                <i class="bi bi-gear-wide-connected"></i>Settings</a>
                         </li>
                     </ul>
                     <a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/auth/signout">
-                        <i class="fa-solid fa-right-from-bracket"></i>Sign Out</a>
+                        <i class="bi bi-box-arrow-right"></i>Sign Out</a>
                 </div>
 
             <?php } else { ?>
@@ -106,40 +114,52 @@ function highlight($active, $link)
         <ul>
             <li>
                 <a href="<?php echo URLROOT ?>/tech/dashboard" class="<?php highlight($active, "dashboard") ?>">
-                    <i class="fa-solid fa-gauge"></i>
+                    <i class="bi bi-columns-gap"></i>
                     <p>Dashboard</p>
                 </a>
             </li>
             <li>
                 <a href="<?php echo URLROOT ?>/tech/requests" class="<?php highlight($active, "requests") ?>">
-                    <i class="[ fa-solid fa-sack-dollar ]"></i>
+                    <i class="bi bi-card-heading"></i>
                     <p>Requests</p>
                 </a>
             </li>
             <li>
                 <a href="<?php echo URLROOT ?>/tech/farmers" class="<?php highlight($active, "farmers") ?>">
-                    <i class="[ fa-solid fa-sack-dollar ]"></i>
+                    <i class="bi bi-tree"></i>
                     <p>Farmers</p>
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo URLROOT ?>/tech/earnings" class="<?php highlight($active, "earnings") ?>">
+                    <i class="bi bi-currency-dollar"></i>
+                    <p>Earnings</p>
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo URLROOT ?>/tech/withdrawal" class="<?php highlight($active, "withdrawal") ?>">
+                    <i class="bi bi-wallet"></i>
+                    <p>Withdrawal</p>
                 </a>
             </li>
         </ul>
         <div class="[ grow ]"></div>
         <ul>
             <li>
-                <a href="<?php echo URLROOT ?>/tech/myaccount" class="<?php highlight($active, "myaccount") ?>">
-                    <i class="[ fa-solid fa-user-tie ]"></i>
+                <a href="<?php echo URLROOT ?>/account" class="<?php highlight($active, "myaccount") ?>">
+                    <i class="bi bi-person"></i>
                     <p>My Account</p>
                 </a>
             </li>
             <li>
                 <a href="<?php echo URLROOT ?>/help" class="<?php highlight($active, "help") ?>">
-                    <i class="[ fa-solid fa-circle-question ]"></i>
+                    <i class="bi bi-patch-question"></i>
                     <p>Help</p>
                 </a>
             </li>
             <li>
-                <a href="<?php echo URLROOT ?>/tech/settings" class="<?php highlight($active, "settings") ?>">
-                    <i class="[ fa-solid fa-gear ]"></i>
+                <a href="<?php echo URLROOT ?>/settings" class="<?php highlight($active, "settings") ?>">
+                    <i class="bi bi-gear-wide-connected"></i>
                     <p>Settings</p>
                 </a>
             </li>
