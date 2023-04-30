@@ -5,7 +5,7 @@ class techWithdrawal
     public function getWithdrawalByTechId($id)
     {
         try {
-            $sql = "SELECT amount, status, DATE(timestamp) AS wDate, TIME(timestamp) AS wTime FROM tech_withdrawal WHERE userId = :id";
+            $sql = "SELECT tw.amount, tw.status, tw.bankAccount, DATE(tw.timestamp) AS wDate, TIME(tw.timestamp) AS wTime, ba.bank, ba.branch FROM tech_withdrawal tw INNER JOIN bank_Account ba ON tw.bankAccount = ba.accountNumber AND tw.userId = ba.userId WHERE tw.userId = :id";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);

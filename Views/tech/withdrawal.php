@@ -13,12 +13,56 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/table.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/gridTable.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/alertModal.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/tech/withdrawal.css">
 
     <title>Dashboard | Tech</title>
 </head>
 
 <body>
+
+    <?php
+    ?>
+
+
+    <dialog id="withdrawalModal" class="[ Modal ]">
+        <div class="[ container ]">
+            <div class="[ caption ]">
+                <h3>Withdarw</h3>
+                <p>Withdarw your earnings to your bank account.</p>
+                <p>Please note that the withdrawal process may take up to 3 business days to complete. We appreciate your patience during this time and will notify you via email once your withdrawal has been processed.</p>
+            </div>
+            <form class="[ new__details_form ]" action="<?php echo URLROOT ?>/tech/process_withdrawal" method="post">
+                <div class="[ grid ]" lg="1">
+                    <div class="[ input__control ]">
+                        <label for="amount">Amount you wish to withdraw <small>(LKR)</small></label>
+                        <input type="number" id="amount" name="amount" placeholder="LKR">
+                    </div>
+
+                    <div class="[ input__control ]">
+                        <label for="account">Account Number</label>
+                        <select id="account" name="account">
+                            <?php
+                            if (isset($bankAccounts) && empty($bankAccounts)) {
+                                echo "<option value=''>No bank accounts found</option>";
+                            } else {
+                                foreach ($bankAccounts as $bankAccount) {
+                            ?>
+                                    <option value='<?php echo $bankAccount['accountNumber'] ?>'><?php echo $bankAccount['accountNumber'] ?> - <?php echo BANK[$bankAccount['bank']] ?></option>
+                            <?php
+                                }
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="[ control__buttons ]">
+                    <button type="button" onclick="closeWithdrawalModal()" class="[ button__danger ]" data-dismiss="modal">Cancel</button>
+                    <button type="submit" id="u-submitBtn" name="u-submitBtn" value="<?php echo $gig['gigId'] ?>" class="[ button__primary button__submit ]" data-dismiss="modal">Withdraw</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
 
     <?php
     $active = "withdrawal";
@@ -97,7 +141,7 @@
             </div>
 
             <div class="inv__new">
-                <button class="[ button__primary ]">Withdraw</button>
+                <button onclick="openWithdrawalModal()" class="[ button__primary ]">Withdraw</button>
             </div>
         </div>
         <?php
@@ -107,7 +151,7 @@
         } else {
         ?>
             <div class="[ grid__table ]" style="
-                --xl-cols: 1fr 1fr 1fr 1fr 1fr 1fr;
+                --xl-cols: 1fr 1fr 1.5fr 1.5fr 1.5fr 1fr;
                 --lg-cols: 1fr 1fr 1fr 1fr;
                 --md-cols: 1fr 1fr;
                 --sm-cols: 1fr;
@@ -149,10 +193,12 @@
                                 <p class="[ LKR ]"><?php echo number_format($withdrawl['amount'], 2, '.', ',') ?></p>
                             </div>
                             <div class="[ data ]">
-                                <p class="[ LKR ]"><?php echo number_format($withdrawl['amount'], 2, '.', ',') ?></p>
+                                <p><?php echo $withdrawl['bankAccount'] ?></p>
                             </div>
                             <div class="[ data ]">
-                                <p class="[ LKR ]"><?php echo number_format($withdrawl['amount'], 2, '.', ',') ?></p>
+                                <p><?php echo BANK[$withdrawl['bank']] ?>
+                                    <br><small><?php echo $withdrawl['branch'] ?></small>
+                                </p>
                             </div>
                             <div class="[ data ]">
                                 <p><?php echo $withdrawl['status'] ?></p>
@@ -173,6 +219,18 @@
     require_once("footer.php");
     ?>
     <script src="<?php echo JS ?>/dashboard/dashboard.js"></script>
+    <script>
+        function openWithdrawalModal() {
+            const withdrawalModal = document.getElementById("withdrawalModal")
+            withdrawalModal.showModal()
+        }
+
+        function closeWithdrawalModal() {
+            location.reload()
+            const withdrawalModal = document.getElementById("withdrawalModal")
+            withdrawalModal.close()
+        }
+    </script>
 </body>
 
 </html>

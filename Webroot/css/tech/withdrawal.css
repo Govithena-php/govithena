@@ -55,54 +55,6 @@
     align-items: flex-end;
 }
 
-.LKR::before {
-    content: "LKR ";
-    color: rgb(255, 38, 0);
-    font-size: 1rem;
-    font-weight: 600;
-    margin-right: 0.5rem;
-}
-
-.filters {
-    padding-top:1rem;
-    padding-bottom:2rem;
-    border-bottom: 1px solid #ccc;
-    align-items: end;
-    justify-items: end;
-}
-
-.filters .search {
-    display: flex;
-}
-
-.filters .search h4 {
-    font-size: 1.1rem;
-    font-weight: 400;
-    margin-bottom: 0.5rem;
-}
-
-.filters .search input {
-    padding: 0.5rem 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px 0 0 5px;
-}
-
-.filters .search input:focus {
-    outline: none;
-}
-
-.filters .search button {
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--clr-primary);
-    border-radius: 0 5px 5px 0;
-    background-color: var(--clr-primary);
-    color: var(--clr-light);
-    cursor: pointer;
-}
-
-.filters .search button:focus {
-    outline: none;
-}
 
 .options {
     align-items: end;
@@ -153,7 +105,6 @@
 }
 
 .caption p {
-    width: 60%;
     font-size: 0.8rem;
     font-weight: 400;
     color: var(--clr-text-gray, #535353);
@@ -164,6 +115,69 @@
 .stick_to_top{
     padding-top:1rem;
 }
+
+
+
+.Modal {
+    width: 450px;
+}
+
+.Modal .container {
+    margin: 1rem;
+}
+
+.Modal .caption {
+    margin-bottom: 2rem;
+}
+
+
+.new__details_form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.input__control {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 0rem;
+}
+
+.input__control label {
+    font-weight: 600;
+}
+
+.input__control input {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+.input__control input:focus {
+    outline: 1px solid var(--clr-primary);
+}
+
+.input__control select {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input__control select:focus {
+    outline: 1px solid var(--clr-primary);
+}
+
+
+.control__buttons {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
 
 
 @media screen and (max-width: 1200px) {

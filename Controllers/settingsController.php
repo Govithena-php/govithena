@@ -13,7 +13,7 @@ class settingsController extends Controller
             $this->redirect('/auth/signin');
         }
 
-        if (!$this->currentUser->hasAccess(ACTOR::INVESTOR)) {
+        if ($this->currentUser->hasAccess(ACTOR::ADMIN)) {
             $this->redirect('/error/dontHaveAccess');
         }
 

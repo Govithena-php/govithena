@@ -146,7 +146,7 @@ function highlight($active, $link)
         <div class="[ grow ]"></div>
         <ul>
             <li>
-                <a href="<?php echo URLROOT ?>/tech/myaccount" class="<?php highlight($active, "myaccount") ?>">
+                <a href="<?php echo URLROOT ?>/account" class="<?php highlight($active, "myaccount") ?>">
                     <i class="bi bi-person"></i>
                     <p>My Account</p>
                 </a>
@@ -158,7 +158,7 @@ function highlight($active, $link)
                 </a>
             </li>
             <li>
-                <a href="<?php echo URLROOT ?>/tech/settings" class="<?php highlight($active, "settings") ?>">
+                <a href="<?php echo URLROOT ?>/settings" class="<?php highlight($active, "settings") ?>">
                     <i class="bi bi-gear-wide-connected"></i>
                     <p>Settings</p>
                 </a>

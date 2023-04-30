@@ -10,6 +10,7 @@ class techController extends Controller
     private $progressModel;
     private $gigModel;
     private $techWithdrawalModel;
+    private $bankAccountModel;
 
 
     public function __construct()
@@ -31,6 +32,7 @@ class techController extends Controller
         $this->progressModel = $this->model('progress');
         $this->gigModel = $this->model('gig');
         $this->techWithdrawalModel = $this->model('techWithdrawal');
+        $this->bankAccountModel = $this->model('bankAccount');
     }
 
     public function index()
@@ -403,6 +405,11 @@ class techController extends Controller
         $techWithdrawal = $this->techWithdrawalModel->getWithdrawalByTechId($this->currentUser->getUid());
         if ($techWithdrawal['success']) {
             $props['techWithdrawal'] = $techWithdrawal['data'];
+        }
+
+        $bankAccounts = $this->bankAccountModel->getBankDetails($this->currentUser->getUid());
+        if ($bankAccounts['success']) {
+            $props['bankAccounts'] = $bankAccounts['data'];
         }
 
         $this->set($props);
