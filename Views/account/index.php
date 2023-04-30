@@ -338,12 +338,11 @@
                             <div class="[ body ]">
 
                                 <?php
-                                if (!isset($bankAccounts) && empty($bankAccounts)) {
+                                if (!isset($bankAccounts) || empty($bankAccounts)) {
                                 ?>
                                     <div class="no__details">
                                         <img src="<?php echo IMAGES ?>/svg/no_data.svg" alt="empty">
                                         <p>No Bank Accounts</p>
-                                        <button onclick="openNewBankAccountModal()" class="button__primary">Add New</button>
                                     </div>
                                     <?php
                                 } else {

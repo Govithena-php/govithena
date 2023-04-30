@@ -9,7 +9,7 @@ class dashboardController extends Controller
     private $userModel;
     private $fieldVisitModel;
     private $reviewByInvestorModel;
-    private $farmerProgressModel;
+    private $progressModel;
     private $requestFarmerModel;
     private $investmentModel;
     private $widthdrawModel;
@@ -34,7 +34,7 @@ class dashboardController extends Controller
         $this->userModel = $this->model('user');
         $this->fieldVisitModel = $this->model('fieldVisit');
         $this->reviewByInvestorModel = $this->model('reviewByInvestor');
-        $this->farmerProgressModel = $this->model('farmerProgress');
+        $this->progressModel = $this->model('progress');
         $this->requestFarmerModel = $this->model('requestFarmer');
         $this->investmentModel = $this->model('investment');
         $this->widthdrawModel = $this->model('widthrawl');
@@ -166,12 +166,12 @@ class dashboardController extends Controller
             $props['fieldVisits'] = $fieldVisits['data'];
         }
 
-        $progress = $this->farmerProgressModel->fetchAllByGig($gigId);
+        $progress = $this->progressModel->fetchAllByGig($gigId);
         $props['progress'] = [];
         if ($progress['success']) {
             foreach ($progress['data'] as $pg) {
                 $progressImages = [];
-                $temp = $this->farmerProgressModel->fetchImagesByProgressId($pg['progressId']);
+                $temp = $this->progressModel->fetchImagesByProgressId($pg['progressId']);
                 foreach ($temp['data'] as $key => $value) {
                     $progressImages[$key] = $value['imageName'];
                 }
