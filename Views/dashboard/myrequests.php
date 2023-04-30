@@ -6,8 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="<?php echo IMAGES ?>/favicon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
@@ -84,7 +83,7 @@
         </div>
         <div class="tabs" tab="3">
             <div class="controls">
-                <button class="control" for="1">Accepted Requests</button>
+                <button class="control" for="1" active>Accepted Requests</button>
                 <button class="control" for="2">Pending Requests</button>
                 <button class="control" for="3">Rejected Requests</button>
             </div>
@@ -102,7 +101,7 @@
                         ?>
                             <div class="[ requests__wrapper ]">
                                 <div class="[ grid__table ]" style="
-                                        --xl-cols: 1.2fr 0.35fr 0.35fr 0.35fr 0.35fr 0.4fr 0.3fr;
+                                        --xl-cols: 2fr 1fr 1fr 1fr 1fr 1fr 0.3fr;
                                         --lg-cols: 1.5fr 1fr 1fr 1fr 0.3fr;
                                         --md-cols: 2fr 1fr 0.3fr;
                                         --sm-cols: 3fr 0.3fr;
@@ -148,7 +147,7 @@
                                             <div class="[ search ]">
                                                 <input type="text" placeholder="Search">
                                                 <button type="button">
-                                                    <i class="fas fa-search"></i>
+                                                    <i class="bi bi-search"></i>
                                                 </button>
                                             </div>
                                         </form>
@@ -210,7 +209,7 @@
                                                 </div>
                                                 <div class="[ data ]">
                                                     <div class="[ actions ]">
-                                                        <button for="<?php echo $request['requestId'] ?>"><i class="fa fa-chevron-circle-down"></i></button>
+                                                        <button for="<?php echo $request['requestId'] ?>"><i class="bi bi-three-dots-vertical"></i></button>
                                                     </div>
                                                 </div>
                                                 <div id="<?php echo $request['requestId'] ?>" class="[ expand ]">
@@ -236,10 +235,15 @@
                                                     </div>
 
                                                     <div class="[ data ]" always>
-                                                        <h4>Your Message :</h4>
-                                                        <p><?php echo $request['message'] ?></p>
-                                                        <br>
-                                                        <a href="<?php echo URLROOT ?>/checkout/<?php echo $request['requestId'] ?>" class="[ button__primary ]">Pay Now</a>
+                                                        <div class="expand__container">
+                                                            <?php if (!empty($request['message'])) {
+                                                            ?>
+                                                                <h4>Your Message :</h4>
+                                                                <p><?php echo $request['message'] ?></p>
+                                                            <?php
+                                                            } ?>
+                                                            <a href="<?php echo URLROOT ?>/checkout/<?php echo $request['requestId'] ?>" class="[ button__primary ]">Pay Now</a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -593,104 +597,13 @@
                 </div>
             </div>
         </div>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
     </div>
     <?php
     require_once("footer.php");
     ?>
-    <script src="<?php echo JS ?>/dashboard/dashboard.js"></script>
+    <script src="<?php echo JS ?>/tabs.js"></script>
+    <script src="<?php echo JS ?>/gridTable.js"></script>
     <script>
-        const controls = document.querySelectorAll(".controls>button");
-        const tabs = document.querySelectorAll(".tab");
-
-        Array.from(controls).forEach(control => {
-            control.addEventListener("click", () => {
-                let For = control.getAttribute("for")
-                Array.from(tabs).forEach(tab => {
-                    if (tab.id == For) {
-                        tab.setAttribute("active", true)
-                        control.toggleAttribute("active")
-                    } else {
-                        tab.setAttribute("active", false)
-                    }
-                })
-            })
-        })
-
-
-        const expandBtns = document.querySelectorAll(".actions>button")
-        const expands = document.querySelectorAll(".expand")
-        const icons = document.querySelectorAll(".actions>button>i")
-        Array.from(expandBtns).forEach(expandBtn => {
-
-            expandBtn.addEventListener("click", () => {
-                let id = expandBtn.getAttribute("for")
-
-                Array.from(icons).forEach(icon => {
-                    icon.removeAttribute("show")
-                })
-
-                Array.from(expands).forEach(expand => {
-                    if (expand.id == id) {
-                        expand.toggleAttribute("show")
-                        if (expand.hasAttribute("show")) {
-                            expandBtn.children[0].setAttribute("show", null)
-                        }
-                    } else {
-                        expand.removeAttribute("show")
-                    }
-                })
-
-            })
-        })
-
         function openDeleteAlert(id) {
             const deleteModal = document.getElementById("deleteModal")
             const confirmDeleteBtn = document.getElementById("confirmDeleteBtn")

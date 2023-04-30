@@ -51,7 +51,16 @@
     --navbar-height: 4.5rem;
 
     --sidebar-width: clamp(220px, 70%, 400px);
-    --dashboard-sidebar-width: 15rem;
+    --dashboard-sidebar-width: 13rem;
+
+    /* --dashboard-sidebar-background-color: #001d2c;
+    --dashboard-sidebar-color: #fff;
+    --dashboard-sidebar-border-color: #001d2c; */
+
+    --dashboard-sidebar-background-color: var(--clr-light);
+    --dashboard-sidebar-color: var(--clr-dark);
+    --dashboard-sidebar-border-color: #ccc;
+
     --container-margin-left: calc(var(--dashboard-sidebar-width) + 4rem);
     --container-margin-right: 3rem;
     --topbar-margin: 3rem;

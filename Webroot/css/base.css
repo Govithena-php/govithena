@@ -152,7 +152,7 @@ dialog::backdrop {
 
 .stick_to_top{
     position: sticky;
-    padding-top: 2rem;
+    padding-top: 1rem;
     top: calc(var(--default-navbar-height) - 1rem);
     z-index: 100;
 }

@@ -171,7 +171,7 @@
 
         <div class="[ tabs ][ gigTabs ]" tab="2">
             <div class="controls">
-                <button class="control" for="1">Active Gigs</button>
+                <button class="control" for="1" active>Active Gigs</button>
                 <button class="control" for="2">To Review</button>
                 <button class="control" for="3">Completed Gigs</button>
             </div>
@@ -271,9 +271,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!-- <div class="[ data ]" hideIn="md">
-                                                    <p class="[ tag ]"><?php echo $gig['category'] ?></p>
-                                                </div> -->
                                                 <div class="[ data ]" hideIn="lg">
                                                     <div class="[ progress__bar ]">
                                                         <label>
@@ -283,15 +280,6 @@
                                                         <progress min="0" max="100" value="20"></progress>
                                                     </div>
                                                 </div>
-                                                <!-- <div class="[ data ]" hideIn="lg">
-                                                    <div class="[ progress__bar ]">
-                                                        <label>
-                                                            <span>overroll</span>
-                                                            <span>50%</span>
-                                                        </label>
-                                                        <progress min="0" max="100" value="50"></progress>
-                                                    </div>
-                                                </div> -->
                                                 <div class="[ data flex-center ]">
                                                     <div class="[ actions ]">
                                                         <a href="<?php echo URLROOT ?>/dashboard/gig/<?php echo $gig['gigId'] ?>" class="[ button__primary-invert ]">View More</a>
@@ -623,25 +611,9 @@
     require_once("footer.php");
     ?>
     <script src="<?php echo JS ?>/dashboard/dashboard.js"></script>
+    <script src="<?php echo JS ?>/tabs.js"></script>
+
     <script>
-        const controls = document.querySelectorAll(".controls>button");
-        const tabs = document.querySelectorAll(".tab");
-
-        Array.from(controls).forEach(control => {
-            control.addEventListener("click", () => {
-                let For = control.getAttribute("for")
-                Array.from(tabs).forEach(tab => {
-                    if (tab.id == For) {
-                        tab.setAttribute("active", true)
-                        control.toggleAttribute("active")
-                    } else {
-                        tab.setAttribute("active", false)
-                    }
-                })
-            })
-        })
-
-
         const expandBtns = document.querySelectorAll(".actions>button")
         const expands = document.querySelectorAll(".expand")
         const icons = document.querySelectorAll(".actions>button>i")

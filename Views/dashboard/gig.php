@@ -1,21 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php
-
-// var_dump($investments);
-// die();
-// foreach ($progress as $p) {
-//     foreach ($p as $i) {
-//         var_dump($i);
-//         echo "<br>";
-//     }
-//     echo "<br>";
-// }
-
-// die();
-
-
-?>
 
 <head>
     <meta charset="UTF-8">
@@ -41,8 +25,6 @@
     $title = "Gig";
     require_once("navigator.php");
     ?>
-
-    <?php $name = "Janith"; ?>
 
     <div class="[ container ]" container-type="dashboard-section">
 
@@ -207,7 +189,7 @@
             <div class="controls">
                 <button class="control" for="1">Analysis</button>
                 <button class="control" for="2">Investments</button>
-                <button class="control" for="3">Progress Updates</button>
+                <button class="control" for="3" active>Progress Updates</button>
                 <button class="control" for="4">Agrologist Updates</button>
                 <!-- <span class="[ whitespace ]"></span> -->
                 <button class="control" for="5">About Gig</button>
@@ -219,14 +201,6 @@
                             <h2>Analysis</h2>
                             <p>Get the most out of your data with our analysis section - the ultimate tool for unlocking valuable insights and making smarter decisions.</p>
                         </div>
-                        <?php
-                        // if (empty($ar)) {
-                        //     require(COMPONENTS . "dashboard/noDataFound.php");
-                        // } else {
-                        ?>
-                        <?php
-                        // }
-                        ?>
                     </div>
                 </div>
 
@@ -673,52 +647,9 @@
     <?php
     require_once("footer.php");
     ?>
-    <script src="<?php echo JS ?>/dashboard/dashboard.js"></script>
-    <script>
-        const controls = document.querySelectorAll(".controls>button");
-        const tabs = document.querySelectorAll(".tab");
-
-        Array.from(controls).forEach(control => {
-            control.addEventListener("click", () => {
-                let For = control.getAttribute("for")
-                Array.from(tabs).forEach(tab => {
-                    if (tab.id == For) {
-                        tab.setAttribute("active", true)
-                        control.toggleAttribute("active")
-                    } else {
-                        tab.setAttribute("active", false)
-                    }
-                })
-            })
-        })
-
-
-        const expandBtns = document.querySelectorAll(".actions>button")
-        const expands = document.querySelectorAll(".expand")
-        const icons = document.querySelectorAll(".actions>button>i")
-        Array.from(expandBtns).forEach(expandBtn => {
-
-            expandBtn.addEventListener("click", () => {
-                let id = expandBtn.getAttribute("for")
-
-                Array.from(icons).forEach(icon => {
-                    icon.removeAttribute("show")
-                })
-
-                Array.from(expands).forEach(expand => {
-                    if (expand.id == id) {
-                        expand.toggleAttribute("show")
-                        if (expand.hasAttribute("show")) {
-                            expandBtn.children[0].setAttribute("show", null)
-                        }
-                    } else {
-                        expand.removeAttribute("show")
-                    }
-                })
-
-            })
-        })
-    </script>
+    <script src="<?php echo JS ?>/main.js"></script>
+    <script src="<?php echo JS ?>/tabs.js"></script>
+    <script src="<?php echo JS ?>/gridTable.js"></script>
 </body>
 
 </html>

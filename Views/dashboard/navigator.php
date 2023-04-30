@@ -150,7 +150,7 @@ function highlight($active, $link)
             </li>
         </ul>
         <div class="[ grow ]"></div>
-        <ul>
+        <ul class="bottom__links">
             <li>
                 <a href="<?php echo URLROOT ?>/account" class="">
                     <i class="bi bi-person"></i>
@@ -173,3 +173,5 @@ function highlight($active, $link)
 
     </div>
 </aside>
+
+<script src="<?php echo JS ?>/navbar.js"></script>
