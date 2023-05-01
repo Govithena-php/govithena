@@ -227,4 +227,17 @@ class investorGig
             return ['success' => false, 'message' => $e->getMessage()];
         }
     }
+
+    public function getIdsByIGID($igId)
+    {
+        try {
+            $sql = "SELECT farmerId, gigId, investorId FROM investor_gig WHERE igId = :igId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['igId' => $igId]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $row];
+        } catch (PDOException $e) {
+            return ['success' => false, 'message' => $e->getMessage()];
+        }
+    }
 }

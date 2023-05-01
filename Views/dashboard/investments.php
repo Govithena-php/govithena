@@ -101,150 +101,167 @@
         </div>
         <?php
 
-        if (isset($error)) {
-            require(COMPONENTS . "dashboard/noDataFound.php");
-        } else {
-            if (empty($investments)) {
-                require(COMPONENTS . "dashboard/noDataFound.php");
-            } else {
+        if (empty($investments)) {
         ?>
 
-                <div class="[ requests__wrapper ]">
-                    <div class="[ grid__table ]" style="
-                                        --xl-cols:  2fr 1fr 1fr 1fr 1fr 1fr;
+            <form class="[ filters pt-1 ]" action="<?php echo URLROOT ?>/dashboard/investments" method="POST">
+                <div class="[ options ]">
+                    <div class="[ input__control ]">
+                        <label for="fromDate">From</label>
+                        <input id="fromDate" name="fromDate" tag="fromDate" type="date">
+                    </div>
+                    <div class="[ input__control ]">
+                        <label for="toDate">To</label>
+                        <input id="toDate" name="toDate" tag="toDate" type="date">
+                    </div>
+                    <div class="[ input__control ]">
+                        <label for="category">Category</label>
+                        <select id="category" name="category">
+                            <option value="all">All</option>
+                            <option value="vegetable">Vegetable</option>
+                            <option value="fruit">Fruit</option>
+                            <option value="grains">Grains</option>
+                            <option value="spices">Spices</option>
+                        </select>
+                    </div>
+                    <div class="[ input__control ]">
+                        <button type="submit" name="submit" class="button__primary">Apply</button>
+                    </div>
+
+                </div>
+            </form>
+            <hr>
+            <br>
+
+        <?php
+            require(COMPONENTS . "dashboard/noDataFound.php");
+        } else {
+        ?>
+
+            <div class="[ requests__wrapper ]">
+                <div class="[ grid__table ]" style="
+                                        --xl-cols:  2.5fr 1fr 1.5fr 1fr 2fr 1fr;
                                         --lg-cols: 1.5fr 0.5fr 0.5fr 1fr;
                                         --md-cols: 1fr 0.5fr;
                                         --sm-cols: 2fr;
                                     ">
-                        <div class="[ head stick_to_top ]">
-                            <form class="[ filters ]" method="post" action="<?php echo URLROOT ?>/dashboard/myinvestments">
-                                <div class="[ options ]">
-                                    <div class="[ input__control ]">
-                                        <label for="category">Category :</label>
-                                        <select id="category" name="category">
-                                            <option value="all">All</option>
-                                            <option value="vegetable">Vegetable</option>
-                                            <option value="fruit">Fruit</option>
-                                            <option value="grains">Grains</option>
-                                            <option value="spices">Spices</option>
-                                        </select>
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <label for="cropCycle">Crop Cycle :</label>
-                                        <select id="cropCycle" name="cropCycle">
-                                            <option value="all">Any</option>
-                                            <option value="30">30 Days</option>
-                                            <option value="60">60 Days</option>
-                                            <option value="90">90 Days</option>
-                                            <option value="120">120 Days</option>
-                                            <option value="150">150 Days</option>
-                                            <option value="200">More than 150 Days</option>
-                                        </select>
-                                    </div>
-                                    <div class="[ input__control ]">
-                                        <label for="city">City :</label>
-                                        <select id="city" name="city">
-                                            <option value="all">All</option>
-                                            <option value="Eppawala">Eppawala</option>
-                                            <option value="galle">Galle</option>
-                                            <option value="kandy">Kandy</option>
-                                            <option value="matara">Matara</option>
-                                            <option value="Nuwaraeliya">Nuwara Eliya</option>
-                                            <option value="trincomalee">Trincomalee</option>
-                                        </select>
-                                    </div>
+                    <div class="[ head stick_to_top ]">
+                        <form class="[ filters ]" action="<?php echo URLROOT ?>/dashboard/investments" method="POST">
+                            <div class="[ options ]">
+                                <div class="[ input__control ]">
+                                    <label for="fromDate">From</label>
+                                    <input id="fromDate" name="fromDate" tag="fromDate" type="date">
+                                </div>
+                                <div class="[ input__control ]">
+                                    <label for="toDate">To</label>
+                                    <input id="toDate" name="toDate" tag="toDate" type="date">
+                                </div>
+                                <div class="[ input__control ]">
+                                    <label for="category">Category</label>
+                                    <select id="category" name="category">
+                                        <option value="all">All</option>
+                                        <option value="vegetable">Vegetable</option>
+                                        <option value="fruit">Fruit</option>
+                                        <option value="grains">Grains</option>
+                                        <option value="spices">Spices</option>
+                                    </select>
+                                </div>
+                                <div class="[ input__control ]">
+                                    <button type="submit" name="submit" class="button__primary">Apply</button>
+                                </div>
 
-                                    <div class="[ input__control ]">
-                                        <button type="submit" name="apply">Apply</button>
-                                    </div>
-                                </div>
-                            </form>
-                            <div class="[ row ]">
-                                <div class="[ data ]">
-                                    <p>Gig</p>
-                                </div>
-                                <div class="[ data ]" hideIn="md">
-                                    <p>Category</p>
-                                </div>
-                                <div class="[ data ]" hideIn="sm">
-                                    <p>Amount</p>
-                                </div>
-                                <div class="[ data ]" hideIn="lg">
-                                    <p>Time Period</p>
-                                </div>
-                                <div class="[ data ]" hideIn="lg">
-                                    <p>Location</p>
-                                </div>
-                                <div class="[ data ]" hideIn="md">
-                                    <p>Invested Date</p>
-                                </div>
+                            </div>
+                        </form>
+                        <div class="[ row ]">
+                            <div class="[ data ]">
+                                <p>Gig</p>
+                            </div>
+                            <div class="[ data ]" hideIn="md">
+                                <p>Category</p>
+                            </div>
+                            <div class="[ data ]" hideIn="md">
+                                <p>Farmer</p>
+                            </div>
+                            <div class="[ data ]" hideIn="sm">
+                                <p>Amount</p>
+                            </div>
+                            <div class="[ data ]" hideIn="lg">
+                                <p>Description</p>
+                            </div>
+                            <div class="[ data ]" hideIn="md">
+                                <p>Invested Date</p>
                             </div>
                         </div>
-                        <div class="[ body ]">
-                            <?php
-                            foreach ($investments as $investment) {
-                            ?>
-                                <div class="[ row ]">
-                                    <div class="[ data ]">
-                                        <div class="[ item__card ]">
-                                            <div class="[ img ]">
-                                                <img src="<?php echo UPLOADS . $investment['thumbnail'] ?>" />
-                                            </div>
-                                            <div class="[ content ]">
-                                                <a href="<?php echo URLROOT . "/gig/" . $investment['gigId'] ?>">
-                                                    <h2 class="limit-text-2"><?php echo $investment['title'] ?></h2>
-                                                </a>
-                                            </div>
+                    </div>
+                    <div class="[ body ]">
+                        <?php
+                        foreach ($investments as $investment) {
+                        ?>
+                            <div class="[ row ]">
+                                <div class="[ data ]">
+                                    <div class="[ item__card ]">
+                                        <div class="[ img ]">
+                                            <img src="<?php echo UPLOADS . $investment['thumbnail'] ?>" />
                                         </div>
-                                    </div>
-                                    <div class="[ data ]" hideIn="md">
-                                        <p class="[ tag ]"><?php echo $investment['category'] ?></p>
-                                    </div>
-                                    <div class="[ data ]" hideIn="sm">
-                                        <p class="LKR"><?php echo number_format($investment['amount'], 2, '.', ',') ?></p>
-                                    </div>
-                                    <div class="[ data ]" hideIn="lg">
-                                        <p><?php echo $investment['cropCycle'] ?> Days</p>
-                                    </div>
-                                    <div class="[ data ]" hideIn="lg">
-                                        <p><?php echo $investment['city'] ?></p>
-                                    </div>
-                                    <div class="[ data ]" hideIn="md">
-                                        <p><?php echo $investment['investedDate'] ?></p>
-                                    </div>
-
-                                    <div id="<?php echo $investment['id'] ?>" class="[ expand ]">
-
-                                        <div class="[ data ]" showIn="md">
-                                            <p class="[ tag ]"><?php echo $investment['category'] ?></p>
-                                        </div>
-                                        <div class="[ data ]" showIn="sm">
-                                            <h4>Offer</h4>
-                                            <p class="LKR"><?php echo number_format($investment['offer'], 2, '.', ',') ?></p>
-                                        </div>
-                                        <div class="[ data ]" showIn="lg">
-                                            <h4>Time Periold :</h4>
-                                            <p><?php echo $investment['timePeriod'] ?> Months</p>
-                                        </div>
-                                        <div class="[ data ]" showIn="lg">
-                                            <h4>Location</h4>
-                                            <p><?php echo $investment['location'] ?></p>
-                                        </div>
-                                        <div class="[ data ]" showIn="md">
-                                            <h4>Invested Date</h4>
-                                            <p><?php echo $investment['investedDate'] ?></p>
+                                        <div class="[ content ]">
+                                            <a href="<?php echo URLROOT . "/gig/" . $investment['gigId'] ?>">
+                                                <h2 class="limit-text-2"><?php echo $investment['title'] ?></h2>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
-                            <?php
-                            }
-                            ?>
+                                <div class="[ data ]" hideIn="md">
+                                    <p class="[ tag ]"><?php echo $investment['category'] ?></p>
+                                </div>
+                                <div class="[ data ]" hideIn="lg">
+                                    <div class="table_farmer_image_and_name">
+                                        <div class="img"><img src="<?php echo UPLOADS . "/profilePictures/" . $investment['image'] ?>" /></div>
+                                        <p class="name limit-text-2"><?php echo $investment['firstName'] . " " . $investment['firstName'] ?></p>
+                                    </div>
+                                </div>
+                                <div class="[ data ]" hideIn="sm">
+                                    <p class="LKR"><?php echo number_format($investment['amount'], 2, '.', ',') ?></p>
+                                </div>
+                                <div class="[ data ]" hideIn="lg">
+                                    <p class="limit-text-2"><?php echo $investment['description'] ?></p>
+                                </div>
+                                <div class="[ data ]" hideIn="md">
+                                    <p><?php echo $investment['investedDate'] ?><br><?php echo $investment['investedTime'] ?></p>
 
-                        </div>
+                                    <p></p>
+                                </div>
+
+                                <div id="<?php echo $investment['id'] ?>" class="[ expand ]">
+
+                                    <div class="[ data ]" showIn="md">
+                                        <p class="[ tag ]"><?php echo $investment['category'] ?></p>
+                                    </div>
+                                    <div class="[ data ]" showIn="sm">
+                                        <h4>Offer</h4>
+                                        <p class="LKR"><?php echo number_format($investment['offer'], 2, '.', ',') ?></p>
+                                    </div>
+                                    <div class="[ data ]" showIn="lg">
+                                        <h4>Description</h4>
+                                        <p><?php echo $investment['description'] ?> Months</p>
+                                    </div>
+                                    <div class="[ data ]" showIn="lg">
+                                        <h4>Invested Date</h4>
+                                        <p><?php echo $investment['investedDate'] ?></p>
+                                    </div>
+                                    <div class="[ data ]" showIn="md">
+                                        <h4>Invested Time</h4>
+                                        <p><?php echo $investment['investedTime'] ?></p>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
+                        }
+                        ?>
+
                     </div>
                 </div>
+            </div>
         <?php
-            }
         }
         ?>
 
@@ -253,6 +270,8 @@
     require_once("footer.php");
     ?>
     <script src="<?php echo JS ?>/main.js"></script>
+    <script src="<?php echo JS ?>/filter/toDateFromDate.js"></script>
+
 </body>
 
 </html>

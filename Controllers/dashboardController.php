@@ -289,14 +289,14 @@ class dashboardController extends Controller
     {
         $props = [];
 
-        $filters = new Filter(['fromDate', 'toDate', 'city', 'category'], 'apply');
+        $filters = new Filter(['category'], ['fromDate', 'toDate']);
 
         $investments = $this->investmentModel->fetchAllByUsingFilters($this->currentUser->getUid(), $filters);
 
-        if (isset($investments)) {
-            $props['investments'] = $investments;
+        if ($investments['success']) {
+            $props['investments'] = $investments['data'];
         } else {
-            $this->redirect('/error/pageNotFound');
+            $this->redirect('/error/somethingWentWrong');
         }
 
         $totalInvestment = $this->investmentModel->getTotalInvestmentByInvestor($this->currentUser->getUid());
@@ -349,8 +349,33 @@ class dashboardController extends Controller
         $props = [];
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            var_dump($_POST);
-            die();
+
+            $igId = new Input(POST, 'igId');
+            $amount = new Input(POST, 'amount');
+            $description = new Input(POST, 'description');
+
+            $ids = $this->investorGigModel->getIdsByIGID($igId);
+            if ($ids['success']) {
+                $ids = $ids['data'];
+            } else {
+                $this->redirect('/error/somethingWentWrong');
+            }
+
+            $response = $this->investmentModel->save([
+                'id' => new UID(PREFIX::INVESTMENT),
+                'igId' => $igId,
+                'investorId' => $this->currentUser->getUid(),
+                'gigId' => $ids['gigId'],
+                'farmerId' => $ids['farmerId'],
+                'amount' => $amount,
+                'description' => $description
+            ]);
+
+            if ($response['success']) {
+                $this->redirect('/dashboard/investments');
+            } else {
+                $this->redirect('/error/somethingWentWrong');
+            }
         }
 
 

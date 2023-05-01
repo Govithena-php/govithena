@@ -18,17 +18,17 @@ class Investment extends Model
     public function fetchAllByUsingFilters($id, $filter)
     {
         try {
-            $sql = "SELECT investment.id, investment.investorId, investment.gigId, investment.amount, DATE(investment.timestamp) as investedDate, gig.title, gig.thumbnail, gig.category, gig.cropCycle, gig.city FROM investment INNER JOIN gig ON investment.gigId = gig.gigId";
+            $sql = "SELECT investment.id, investment.investorId, investment.gigId, investment.amount, DATE(investment.timestamp) as investedDate, TIME(investment.timestamp) as investedTime, investment.description, user.firstName, user.lastName, user.image, gig.title, gig.thumbnail, gig.category FROM investment INNER JOIN user ON investment.farmerId = user.uid INNER JOIN gig ON investment.gigId = gig.gigId ";
             $sql = $filter->apply($sql);
-            $sql .= " AND investment.investorId = :id";
+            $sql .= " AND investment.investorId = :id ORDER BY investment.timestamp DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            return $row;
+            return ['success' => true, 'data' => $row];
         } catch (PDOException $e) {
             echo $e->getMessage();
             die();
-            return null;
+            return ['success' => false, 'data' => $e->getMessage()];
         }
     }
 
@@ -125,6 +125,18 @@ class Investment extends Model
             } else {
                 return ['success' => false, 'data' => 'No investment found'];
             }
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function save($data)
+    {
+        try {
+            $sql = "INSERT INTO investment (id, igId, investorId, gigId, farmerId, amount, description) VALUES (:id, :igId, :investorId, :gigId, :farmerId, :amount, :description)";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute($data);
+            return ['success' => true, 'data' => true];
         } catch (PDOException $e) {
             return ['success' => false, 'data' => $e->getMessage()];
         }

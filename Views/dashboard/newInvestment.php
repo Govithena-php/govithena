@@ -38,7 +38,7 @@
                     <label for="gig">Select the gig you wish to make an investment</label>
 
                     <div class="custom__select">
-                        <input type="hidden" name="gig" />
+                        <input type="hidden" name="igId" />
                         <button type="button">Select the gig</button>
                         <div class="custom__options">
                             <?php
