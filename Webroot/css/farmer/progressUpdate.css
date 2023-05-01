@@ -1,0 +1,23 @@
+.btnposi{
+    display: flex !important;
+    justify-content: flex-end !important;
+}
+
+.proimgframe {
+   
+    width: 130px;
+    height: 130px;
+    /* border-radius: 50%; */
+    /* overflow: hidden; */
+    /* margin-left: 50px; */
+    /* margin: auto; */
+    display: block;
+    box-shadow: 0px 0px 5px 5px #0101012c;
+    margin: 5px 5px 0px 0px;
+
+}
+.proimgframe>img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}

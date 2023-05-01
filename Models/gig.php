@@ -46,7 +46,7 @@ class Gig extends Model
     public function All($id)
     {
         try {
-            $sql = "SELECT * FROM gig WHERE farmerId = :id ORDER BY createdAt DESC";
+            $sql = "SELECT * FROM gig WHERE farmerId = :id ORDER BY createdAt DESC";           
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $gigs = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -57,6 +57,39 @@ class Gig extends Model
             return null;
         }
     }
+
+    public function Allgig($id)
+    {
+        try {
+            $sql = "SELECT gig.gigId, gig.farmerId, gig.title, gig.thumbnail, gig.capital, gig.city, gig.category, gig.status, gig.landArea, gig.description, investor_gig.investorId, user.firstName as fName, user.lastName as lName FROM gig INNER JOIN investor_gig ON gig.farmerId = investor_gig.farmerId INNER JOIN user ON user.uid = investor_gig.investorId WHERE gig.farmerId = :id ORDER BY createdAt DESC";
+            // $sql = "SELECT * FROM gig WHERE farmerId = :id ORDER BY createdAt DESC";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['id' => $id]);
+            $gigs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            // var_dump($gigs);
+            // die;
+            return $gigs;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+        }
+    }
+    // public function Investorgig($id)
+    // {
+    //     try {
+    //         $sql = "SELECT * FROM gig_progress WHERE farmerId = :id ORDER BY createdAt DESC";
+    //         $stmt = Database::getBdd()->prepare($sql);
+    //         $stmt->execute(['id' => $id]);
+    //         $gigs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    //         return $gigs;
+    //     } catch (PDOException $e) {
+    //         echo $e->getMessage();
+    //         die();
+    //         return null;
+    //     }
+    // }
+
 
 
     public function create($data)
@@ -87,6 +120,38 @@ class Gig extends Model
             return null;
         }
     }
+    public function viewProimg($gigId)
+    {
+        try {
+            $sql = "SELECT * FROM gig_progress_image WHERE gigId = :gigId ";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId]);
+            $gig = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $gig;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+        }
+    }
+
+    public function viewPro($gigId)
+    {
+        try {
+            $sql = "SELECT gig_progress.progressId, gig_progress.userId, gig_progress.gigId, gig_progress.subject, gig_progress.description, gig_progress_image.imageName FROM gig_progress RIGHT JOIN gig_progress_image ON gig_progress.progressId = gig_progress_image.progressId WHERE gigId = :gigId";
+            // SELECT gig_progress.progressId, gig_progress.userId, gig_progress.gigId, gig_progress.subject, gig_progress.description, gig_progress_image.imageName FROM gig_progress RIGHT JOIN gig_progress_image ON gig_progress.progressId = gig_progress_image.progressId WHERE gigId = :gigId
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId]);
+            $gig = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $gig;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+        }
+    }
+
+
 
     public function updateGigStatusToReserved($id)
     {

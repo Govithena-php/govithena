@@ -320,7 +320,7 @@
                                         <div class="data">
                                             <div class="namecol">
                                                 <h1><p><?php echo $reqinvestor['firstName'] ?></p></h1>
-                                                <h3><p><?php echo $reqinvestor['lastName']?></p></h3>
+                                                <h2><p><?php echo $reqinvestor['lastName']?></p></h2>
                                             </div>
                                         </div>
                                         <!-- <div class="data">

@@ -36,11 +36,11 @@
 
             <div>
                 <div class="[ cards ]">
-                    <img src="<?php echo UPLOADS . $gig['image']; ?>" />
+                    <img src="<?php echo UPLOADS . $gig['thumbnail']; ?>" />
                     <div class="[ gig__title ]">
                         <div>
                             <h3><?php echo $gig['title']; ?></h3>
-                            <p><?php echo $gig['location'] ?></p>
+                            <p><?php echo $gig['city']; ?></p>
                         </div>
                         <div class="[ category__tag ]">
                             <p><?php echo $gig['category']; ?></p>
@@ -231,46 +231,46 @@
                     </div>
                     <div class="[ body ]">
                         <?php
-                        foreach ($gigs as $gig) {
+                        foreach ($gigs as $onegig) {
                         ?>
                             <div class="[ row ]">
                                 <div class="[ data ]">
                                     <div class="[ item__card ]">
                                         <div class="[ img ]">
-                                            <img width="50" src="<?php echo UPLOADS . $gig['gimage'] ?>" />
+                                            <img width="50" src="<?php echo UPLOADS . $onegig['gimage'] ?>" />
                                         </div>
                                         <div class="[ content ]">
-                                            <h2><?php echo $gig['title'] ?></h2>
-                                            <p><?php echo $gig['location'] ?></p>
-                                            <!-- <p><?php echo $gig['category'] ?></p> -->
+                                            <h2><?php echo $onegig['title'] ?></h2>
+                                            <p><?php echo $onegig['location'] ?></p>
+                                            <!-- <p><?php echo $onegig['category'] ?></p> -->
                                         </div>
                                     </div>
                                 </div>
                                 <div class="[ data ]" hideIn="sm">
                                     <div class="[ profile__card ]">
                                         <div class="[ img ]">
-                                            <img width="50" src="<?php echo UPLOADS . $gig['uimage'] ?>" />
+                                            <img width="50" src="<?php echo UPLOADS . $onegig['gimage'] ?>" />
                                         </div>
                                         <div class="[ content ]">
-                                            <a href="<?php echo URLROOT . '/profile/' . $gig['investorId']; ?>"><?php echo $gig['firstName'] . " " . $gig['lastName'] ?></a>
-                                            <p><?php echo $gig['city'] ?></p>
+                                            <a href="<?php echo URLROOT . '/profile/' . $onegig['investorId']; ?>"><?php echo $onegig['firstName'] . " " . $onegig['lastName'] ?></a>
+                                            <p><?php echo $onegig['city'] ?></p>
 
                                         </div>
                                     </div>
                                 </div>
                                 <div class="[ data ]" hideIn="md">
-                                    <p><?php echo $gig['category'] ?></p>
+                                    <p><?php echo $onegig['category'] ?></p>
                                 </div>
                                 <div class="[ data ]" hideIn="lg">
-                                    <p><?php echo $gig['timestamp'] ?></p>
+                                    <p><?php echo $onegig['timestamp'] ?></p>
                                 </div>
                                 <div class="[ data ]" hideIn="lg">
-                                    <p><?php echo $gig['timestamp'] ?></p>
+                                    <p><?php echo $onegig['timestamp'] ?></p>
                                 </div>
                                 <div class="[ data ]">
                                     <div class="[ actions ]">
-                                        <!-- <button for="<?php echo $gig['gigId'] ?>"><i class="fa fa-chevron-circle-down"></i></button> -->
-                                        <a href="<?php echo URLROOT ?>/farmer/progress/<?php echo $gig['gigId'] ?>" class="btn btn-primary">View More</a>
+                                        <!-- <button for="<?php echo $onegig['gigId'] ?>"><i class="fa fa-chevron-circle-down"></i></button> -->
+                                        <a href="<?php echo URLROOT ?>/farmer/progress/<?php echo $onegig['gigId'] ?>" class="btn btn-primary">View More</a>
                                     </div>
                                 </div>
                                 <!-- <div id="<?php echo $gig['gigId'] ?>" class="[ expand ]">

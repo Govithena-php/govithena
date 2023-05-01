@@ -136,6 +136,62 @@ class farmerController extends Controller
         $this->set($props);
         $this->render("index");
     }
+    function gigprogress()
+    {
+
+        $props = [];
+
+        $id = $this->currentUser->getUid(); //session eken user id eka gannawa activeUser.php file eke tiyenne
+        $products = $this->gigModel->Allgig($id);
+        $props['products'] = $products;
+     
+
+
+        $notifications = $this->farmerModel->getnotifications();
+
+        $props['notifications'] = $notifications;
+
+
+        $this->set($props);
+        $this->render("gigprogress");
+    }
+
+    function progressUpdate($params = [])
+    {
+        // require(ROOT . 'Models/gig.php');
+        //require(ROOT . 'Models/farmer.php');
+        // $gig = new $this->gigModel();
+        $props = [];
+        if (isset($params[0]) && !empty($params[0])) {
+            $gigId = $params[0];
+            $gig = $this->gigModel->fetchBy($gigId);
+            $props['gig'] = $gig;
+            // $progimgs = $this->gigModel->viewProimg($gigId);
+            $progs = $this->gigModel->viewPro($gigId);
+            // var_dump($progs);
+            // die();
+            if (!empty($progs)){
+                $props['progs'] = $progs;
+                // $props['progimgs'] = $progimgs;
+            }
+
+        }
+
+        // $id = $this->currentUser->getUid(); //session eken user id eka gannawa activeUser.php file eke tiyenne
+        // $products = $this->gigModel->fetchBy($id);
+        // $props['products'] = $products;
+
+
+        // $farmer = new Farmer();
+        $notifications = $this->farmerModel->getnotifications();
+        //echo json_encode($notifications);
+
+        $props['notifications'] = $notifications;
+
+
+        $this->set($props);
+        $this->render("progressUpdate");
+    }
 
 
     // view eke abc.php page eka
@@ -284,6 +340,7 @@ class farmerController extends Controller
 
             $gig = $this->gigModel->viewGig($gigId);
             $props['gig'] = $gig;
+
 
             $investor = $this->investorGigModel->fetchInvestorByGig($gigId);
             if ($investor['success']) {
