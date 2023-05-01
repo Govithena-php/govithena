@@ -310,6 +310,7 @@ class agrologistController extends Controller
 
         $d['agrologist'] = $agrologist->getAgrologistDetails();
         $d['account'] = $agrologist->getAccountDetails();
+        $d['qualifications'] = $agrologist->getQualificationDetails();
         //var_dump($d['agrologist']);
         // die();
 
@@ -330,7 +331,7 @@ class agrologistController extends Controller
                 //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'> file uploaded  </h1>";
                 Session::get('user')->setImage(basename($_FILES['profile_img']['name']));
 
-                $agrologist->edit_user_details([
+               $edit_user  = $agrologist->edit_user_details([
                     'uid' => $uid,
                     'firstName' => $firstName->get(),
                     'lastName' => $lastName->get(),
@@ -345,7 +346,7 @@ class agrologistController extends Controller
                 ]);
                 // echo "file uploaded";
             } else {
-                $agrologist->edit_user_details([
+                $edit_user = $agrologist->edit_user_without_image([
                     'uid' => $uid,
                     'firstName' => $firstName->get(),
                     'lastName' => $lastName->get(),
@@ -355,13 +356,20 @@ class agrologistController extends Controller
                     'addressLine1' => $addressLine1->get(),
                     'addressLine2' => $addressLine2->get(),
                     'district' => $district->get(),
-                    'postalCode' => $postalCode->get(),
-                    'profileImage' => "null"
+                    'postalCode' => $postalCode->get()
                 ]);
                 //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'> file not uploaded  </h1>";
 
                 //echo "file not uploaded";
             }
+
+            if ($edit_user) {
+                $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully Submitted!');
+            } else {
+                $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong!');
+            }
+
+            Session::set(['edit_user_details_alert' => $alert]);
 
         }
 
@@ -409,7 +417,55 @@ class agrologistController extends Controller
             Session::set(['edit_account_details_alert' => $alert]);
         }
 
+        if (isset($_POST['add_qualification_details_btn'])) {
+            $gnCertificate = new Input(POST, 'gn_certificate');
+            $description = new Input(POST, 'description');
 
+
+            if (move_uploaded_file($_FILES['gn_certificate']['tmp_name'], "Uploads/" . basename($_FILES['gn_certificate']['name']))) {
+                Session::get('user')->setImage(basename($_FILES['gn_certificate']['name']));
+                $insert_qualifications = $agrologist->insertQualificationDetails([
+                    'gnCertificate' => basename($_FILES['gn_certificate']['name']),
+                    'description' => $description->get()
+                ]);
+
+                if ($insert_qualifications) {
+                    $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully Submitted!');
+                } else {
+                    $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong!');
+                }
+
+                Session::set(['add_qualification_details_alert' => $alert]);
+            }
+
+
+        }
+
+        if (isset($_POST['edit_qualification_details_btn'])) {
+            $gnCertificate = new Input(POST, 'gn_certificate');
+            $description = new Input(POST, 'description');
+
+
+            if (move_uploaded_file($_FILES['gn_certificate']['tmp_name'], "Uploads/" . basename($_FILES['gn_certificate']['name']))) {
+                Session::get('user')->setImage(basename($_FILES['gn_certificate']['name']));
+                $edit_qualifications = $agrologist->updateQualificationDetails([
+                    'gnCertificate' => basename($_FILES['gn_certificate']['name']),
+                    'description' => $description->get()
+                ]);
+
+            }else{
+                $edit_qualifications = $agrologist->updateQualificationDescription([
+                    'description' => $description->get()
+                ]);
+            }
+            if ($edit_qualifications) {
+                $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully Submitted!');
+            } else {
+                $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong!');
+            }
+            Session::set(['edit_qualification_details_alert' => $alert]);
+
+        }
 
 
 

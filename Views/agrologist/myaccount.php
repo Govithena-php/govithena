@@ -21,6 +21,11 @@
     $active = "myaccount";
     require_once("navigator.php");
 
+    if (Session::has('edit_user_details_alert')) {
+        $alert = Session::pop('edit_user_details_alert');
+        $alert->show_default_alert();
+    }
+
     if (Session::has('add_account_details_alert')) {
         $alert = Session::pop('add_account_details_alert');
         $alert->show_default_alert();
@@ -28,6 +33,16 @@
 
     if (Session::has('edit_account_details_alert')) {
         $alert = Session::pop('edit_account_details_alert');
+        $alert->show_default_alert();
+    }
+
+    if (Session::has('add_qualification_details_alert')) {
+        $alert = Session::pop('add_qualification_details_alert');
+        $alert->show_default_alert();
+    }
+
+    if (Session::has('edit_qualification_details_alert')) {
+        $alert = Session::pop('edit_qualification_details_alert');
         $alert->show_default_alert();
     }
     ?>
@@ -156,10 +171,9 @@
                                     <div class="flex flex-row flex-sb-c">
                                         <input type="text" name="postalCode" placeholder="Postal Code"
                                             value="<?php echo $agrologist[0]['postalCode'] ?>">
-                                        <input type='file' name="profile_img">
+                                        <input type='file' name="profile_img" accept="image/*">
                                     </div>
-                                    <button type="submit" name="edit_details_btn" class="btn uppercase"
-                                        onclick="alert('Succesffully updated');">Edit details</button>
+                                    <button type="submit" name="edit_details_btn" class="btn uppercase">Edit details</button>
                                 </form>
                             </div>
 
@@ -171,10 +185,84 @@
                 <div class="tab" id="2">
                     <div class="[ requests__continer ]"
                         style="background-color: white; margin-bottom: 100px; padding: 30px">
-                        <div class="[ caption ]">
-                            <h2>Qualification Details</h2>
+                        <form action="<?php echo URLROOT . '/agrologist/requests/' . $request['requestId'] . '/' ?>"
+                            method="POST">
+                            <div class="flex flex-row flex-sb-c ">
+                                <div>
+                                    <h2>Qualification Details</h2>
 
+                                </div>
+                                <?php
+                                if (!empty($qualifications)) {
+                                    ?>
+                                    <div>
+                                        <a href="#" class="btn uppercase fs-4 btn-primary "
+                                            id="edit_qualification_details">Edit
+                                            Qualification Details</a>
+                                    </div>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <div>
+                                        <a href="#" class="btn uppercase fs-4 btn-primary "
+                                            id="add_qualification_details">Add
+                                            Qualification Details</a>
+                                    </div>
+
+                                    <?php
+                                }
+                                ?>
+                            </div>
+                            <hr>
+                        </form>
+
+                        <?php
+                        if (!isset($qualifications) || empty($qualifications)) {
+                            require(COMPONENTS . "dashboard/noDataFound.php");
+                        } else {
+                            ?>
+                            
+                            <div style="color: grey" class="pt-1">Grama Niladhari Certificate</div>
+                            <a href="<?php echo UPLOADS; ?><?php echo $qualifications[0]['gnCertificate']?>" target="_blank">Click to View the Certificate</a>
+                            <div style="color: grey" class="pt-1">Qualification Description</div>
+                            <?php echo "<div>" . $qualifications[0]['description'] . "</div>"; ?>
+                            
+                            <?php
+                        }
+                        ?>
+
+                        <div id="add_qualification_detials_modal" class="modal">
+
+                            <div class="modal-content">
+                                <span class="close close_modal_add_qualifications">&times;</span>
+                                <h3>Add Qualifications Details</h3>
+                                <form class="form pt-1" action="<?php echo URLROOT ?>/agrologist/myaccount"
+                                    method="post" enctype="multipart/form-data">
+                                    <input type="file" name="gn_certificate" class="" ><br>
+                                    <input type="text" name="description" class="" placeholder="Description"><br>
+                                    <button type="submit" name="add_qualification_details_btn"
+                                        class="btn uppercase">Submit</button>
+                                </form>
+                            </div>
                         </div>
+
+                        <div id="edit_qualification_detials_modal" class="modal">
+
+                            <div class="modal-content">
+                                <span class="close close_modal_edit_qualifications">&times;</span>
+                                <h3>Edit Qualifications Details</h3>
+                                <form class="form pt-1" action="<?php echo URLROOT ?>/agrologist/myaccount"
+                                    method="post" enctype="multipart/form-data">
+                                    <input type="file" name="gn_certificate" class="" 
+                                    value="<?php echo $qualifications[0]['gnCertificate'] ?>"><br>
+                                    <input type="text" name="description" placeholder="Description"
+                                    value="<?php echo $qualifications[0]['description'] ?>"><br>
+                                    <button type="submit" name="edit_qualification_details_btn"
+                                        class="btn uppercase">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="tab" id="3">
@@ -252,13 +340,13 @@
                                 <form class="form pt-1" action="<?php echo URLROOT ?>/agrologist/myaccount"
                                     method="post" enctype="multipart/form-data">
                                     <input type="text" name="bank_name" class="" placeholder="Bank Name"
-                                    value="<?php echo $account[0]['bank'] ?>"><br>
+                                        value="<?php echo $account[0]['bank'] ?>"><br>
                                     <input type="text" name="account_number" class="" placeholder="Account Number"
-                                    value="<?php echo $account[0]['accountNumber'] ?>"><br>
+                                        value="<?php echo $account[0]['accountNumber'] ?>"><br>
                                     <input type="text" name="branch" class="" placeholder="Branch"
-                                    value="<?php echo $account[0]['branch'] ?>"><br>
+                                        value="<?php echo $account[0]['branch'] ?>"><br>
                                     <input type="text" name="branch_code" class="" placeholder="Branch Code"
-                                    value="<?php echo $account[0]['branchCode'] ?>"><br>
+                                        value="<?php echo $account[0]['branchCode'] ?>"><br>
                                     <button type="submit" name="edit_account_details_btn"
                                         class="btn uppercase">Submit</button>
                                 </form>
@@ -322,14 +410,20 @@
         var edit_detials_modal = document.getElementById("edit_detials_modal");
         var add_account_detials_modal = document.getElementById("add_account_detials_modal");
         var edit_account_detials_modal = document.getElementById("edit_account_detials_modal");
+        var add_qualification_detials_modal = document.getElementById("add_qualification_detials_modal");
+        var edit_qualification_detials_modal = document.getElementById("edit_qualification_detials_modal");
 
         var edit_details_btn = document.getElementById("edit_details");
         var add_account_details_btn = document.getElementById("add_account_details");
         var edit_account_details_btn = document.getElementById("edit_account_details");
+        var add_qualification_details_btn = document.getElementById("add_qualification_details");
+        var edit_qualification_details_btn = document.getElementById("edit_qualification_details");
 
         var span1 = document.getElementsByClassName("close_modal1")[0];
         var span2 = document.getElementsByClassName("close_modal_add_account")[0];
         var span3 = document.getElementsByClassName("close_modal_edit_account")[0];
+        var span4 = document.getElementsByClassName("close_modal_add_qualifications")[0];
+        var span5 = document.getElementsByClassName("close_modal_edit_qualifications")[0];
 
         edit_details_btn.onclick = function () {
             edit_detials_modal.style.display = "block";
@@ -345,6 +439,16 @@
             edit_account_detials_modal.style.display = "block";
         }
 
+        if (add_qualification_details_btn != null) {
+            add_qualification_details_btn.onclick = function () {
+                add_qualification_detials_modal.style.display = "block";
+            }
+        }
+
+        edit_qualification_details_btn.onclick = function () {
+            edit_qualification_detials_modal.style.display = "block";
+        }
+
         span1.onclick = function () {
             edit_detials_modal.style.display = "none";
         }
@@ -357,11 +461,21 @@
             edit_account_detials_modal.style.display = "none";
         }
 
+        span4.onclick = function () {
+            add_qualification_detials_modal.style.display = "none";
+        }
+
+        span5.onclick = function () {
+            edit_qualification_detials_modal.style.display = "none";
+        }
+
         window.onclick = function (event) {
             if (event.target == modal) {
                 edit_detials_modal.style.display = "none";
                 add_account_detials_modal.display = "none";
                 edit_account_detials_modal.display = "none";
+                add_qualification_detials_modal.display = "none";
+                edit_qualification_detials_modal.display = "none";
             }
         }
 

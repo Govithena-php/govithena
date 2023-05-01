@@ -146,6 +146,33 @@ class Agrologist extends Model
         return $req->fetch();
     }
 
+    public function edit_user_without_image($data)
+    {
+
+        try {
+            $sql = "UPDATE user SET firstName=:firstName, lastName=:lastName, phoneNumber=:phoneNumber, city=:city, NIC=:nic, addressLine1=:addressLine1, addressLine2=:addressLine2, district=:district, postalCode=:postalCode WHERE uid=:uid";
+            $req = Database::getBdd()->prepare($sql);
+            $req->execute([
+                'uid' => $data['uid'],
+                'firstName' => $data['firstName'],
+                'lastName' => $data['lastName'],
+                'city' => $data['city'],
+                'phoneNumber' => $data['phoneNumber'],
+                'nic' => $data['nic'],
+                'addressLine1' => $data['addressLine1'],
+                'addressLine2' => $data['addressLine2'],
+                'district' => $data['district'],
+                'postalCode' => $data['postalCode']
+            ]);
+            return true;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+
+        }
+    }
+
     public function getFarmers()
     {
         try {
@@ -594,6 +621,77 @@ class Agrologist extends Model
                 'bank' => $data['bank'],
                 'branch' => $data['branch'],
                 'branchCode' => $data['branchCode']
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+        }
+    }
+
+    public function getQualificationDetails()
+    {
+        try {
+            $sql = "SELECT gnCertificate, description FROM agrologist_qualifications WHERE uid=:userId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'userId' => Session::get('user')->getUid()
+            ]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+
+        }
+    }
+
+    public function insertQualificationDetails($data)
+    {
+        try {
+            $sql = "INSERT INTO  agrologist_qualifications (uid, gnCertificate, description) VALUES (:uid, :gnCertificate, :description)";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'uid' => Session::get('user')->getUid(),
+                'gnCertificate' => $data['gnCertificate'],
+                'description' => $data['description']
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+        }
+    }
+
+    public function updateQualificationDetails($data)
+    {
+        try {
+            $sql = "UPDATE agrologist_qualifications SET gnCertificate=:gnCertificate, description=:description WHERE uid=:uid";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'uid' => Session::get('user')->getUid(),
+                'gnCertificate' => $data['gnCertificate'],
+                'description' => $data['description']
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+        }
+    }
+
+    public function updateQualificationDescription($data)
+    {
+        try {
+            $sql = "UPDATE agrologist_qualifications SET description=:description WHERE uid=:uid";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'uid' => Session::get('user')->getUid(),
+                'description' => $data['description']
             ]);
             return true;
         } catch (PDOException $e) {
