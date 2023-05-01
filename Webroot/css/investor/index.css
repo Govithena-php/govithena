@@ -1,4 +1,3 @@
-
 .dashboard .header {
     min-height: 10rem;
     border: 1px solid #e5e5e5;
@@ -91,10 +90,46 @@
 }
 
 .charts .chart {
-    /* min-height: 20rem; */
-    padding: 2rem 1rem;
-    border: 1px solid #e5e5e5;
-    background: var(--clr-light, #fff);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    border: 1px solid #ccc;
+}
+
+.charts .chart h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--clr-text, #000);
+}
+
+.table__data {
+    min-height: 200px;
+    height: 100%;
+    display: grid;
+    place-items: center;
+}
+
+.chart__no_data {
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.chart__no_data i {
+    font-size: 2rem;
+    color: var(--clr-danger, #f00);
+}
+
+.chart__no_data p {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--clr-text, #000);
 }
 
 .charts .chart canvas {
@@ -102,7 +137,9 @@
 }
 
 .charts #myChart {
-    width: 100%
+    width: 100%;
+    height: clamp(20rem, 30vw, 30rem);
+
 }
 
 .charts #pieChart {
@@ -228,7 +265,12 @@
         padding: 1rem 2rem;
         flex-direction: column;
         align-items: center;
+        text-align: center;
         gap: 2rem;
+    }
+
+    .cards .card {
+        text-align: center;
     }
 
     .dashboard .charts {

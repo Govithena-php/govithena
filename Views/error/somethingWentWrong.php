@@ -24,11 +24,11 @@
         </div>
         <div class="[ row ]">
             <div class="[ img ]">
-                <img src="<?php echo IMAGES; ?>/svg/page_not_found.svg" alt="404">
+                <img src="<?php echo IMAGES; ?>/svg/disconnect.svg" alt="404">
             </div>
-            <h1>Page Not Found</h1>
+            <h1>Oops! Something went wrong.</h1>
             <div class="details">
-                <p>It looks like the page you were trying to access doesn't exist or may have been moved. We apologize for the inconvenience. </p>
+                <p>We apologize for the inconvenience, but it looks like something unexpected happened. Our team has been notified, and we're working to resolve the issue as quickly as possible.</p>
             </div>
             <button onclick="history.back()">Go Back</button>
         </div>

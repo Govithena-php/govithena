@@ -570,6 +570,10 @@ progress::-webkit-progress-value {
 }
 
 
+.modal .input__control textarea {
+    min-height: 150px !important;
+}
+
 
 @media screen and (max-width: 1024px) {
     .images__details {

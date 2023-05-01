@@ -24,13 +24,11 @@
     require_once("navigator.php");
     ?>
 
-    <?php $name = "Janith"; ?>
-
     <div class="[ container ][ dashboard ]" container-type="dashboard-section">
         <div class="[ header ]">
             <div class="[ flex-col center-x ][ title ]">
                 <h3>Welcome Back,</h3>
-                <h1><?php echo $name; ?></h1>
+                <h1><?php echo $currentUser->getFirstName() . " " . $currentUser->getLastName(); ?></h1>
                 <p>Welcome to the Agriculture Investment Dashboard.</p>
             </div>
             <div class="[ flex-col center-x ][ balance ]">
@@ -87,10 +85,34 @@
 
         <div class="[ charts ]">
             <div class="[ chart ]">
-                <canvas id="myChart"></canvas>
+                <h3 class="chart__title">Investments vs Profits</h3>
+                <?php
+                if (!isset($data)) {
+                    echo '<canvas id="myChart"></canvas>';
+                } else {
+                ?>
+                    <div class="chart__no_data">
+                        <i class="bi bi-x-circle"></i>
+                        <p>No data to display.</p>
+                    </div>
+                <?php
+                }
+                ?>
             </div>
             <div class="[ chart ]">
-                <canvas id="pieChart"></canvas>
+                <h3 class="chart__title">Gigs</h3>
+                <?php
+                if (!isset($data)) {
+                    echo '<canvas id="pieChart"></canvas>';
+                } else {
+                ?>
+                    <div class="chart__no_data">
+                        <i class="bi bi-x-circle"></i>
+                        <p>No data to display.</p>
+                    </div>
+                <?php
+                }
+                ?>
             </div>
         </div>
 
@@ -159,7 +181,14 @@
                 </div>
                 <?php
                 if (!isset($investments) || empty($investments)) {
-                    echo '<h3>No data found</h3>';
+                ?>
+                    <div class="table__data">
+                        <div class="chart__no_data">
+                            <i class="bi bi-x-circle"></i>
+                            <p>No data to display.</p>
+                        </div>
+                    </div>
+                <?php
                 } else {
                 ?>
                     <table class="[ ]">
@@ -212,7 +241,14 @@
 
                 <?php
                 if (!isset($profits) || empty($profits)) {
-                    echo '<h3>No data found</h3>';
+                ?>
+                    <div class="table__data">
+                        <div class="chart__no_data">
+                            <i class="bi bi-x-circle"></i>
+                            <p>No data to display.</p>
+                        </div>
+                    </div>
+                <?php
                 } else {
                 ?>
                     <table class="[ ]">
@@ -251,7 +287,14 @@
                 </div>
                 <?php
                 if (!isset($widthdrawals) || empty($widthdrawals)) {
-                    echo '<h3>No data found</h3>';
+                ?>
+                    <div class="table__data">
+                        <div class="chart__no_data">
+                            <i class="bi bi-x-circle"></i>
+                            <p>No data to display.</p>
+                        </div>
+                    </div>
+                <?php
                 } else {
                 ?>
                     <table class="[ ]">
@@ -295,6 +338,87 @@
     ?>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="<?php echo JS ?>/main.js"></script>
+    <script>
+        const data = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [{
+                    label: 'Investments',
+                    data: [65, 59, 80, 81, 56, 55, 40],
+                    fill: false,
+                    borderColor: 'rgb(255, 99, 132)',
+                    tension: 0.1,
+                    yAxisID: 'y'
+
+                },
+                {
+                    label: 'Gain',
+                    data: [75, 20, 23, 31, 46, 95, 50],
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1,
+                    yAxisID: 'y1'
+                }
+            ],
+        };
+
+        const config = {
+            type: 'line',
+            data: data,
+            options: {
+                responsive: true,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                stacked: false,
+                plugins: {},
+                scales: {
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        grid: {
+                            drawOnChartArea: true,
+                        },
+                    },
+                }
+            },
+        };
+
+        const pieData = {
+            labels: ['Fruits', 'Grains', 'Other', 'Vegetable', 'Spices'],
+            datasets: [{
+                label: 'Dataset 1',
+                data: [300, 50, 100, 40, 120],
+                backgroundColor: ['rgb(255, 99, 132)', 'rgb(255, 159, 64)', 'rgb(255, 205, 86)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)'],
+            }]
+        };
+
+        const pieConfig = {
+            type: 'pie',
+            data: pieData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                }
+            },
+        };
+
+        const ctx = document.getElementById('myChart');
+        const pieChart = document.getElementById('pieChart');
+
+        new Chart(ctx, config);
+        new Chart(pieChart, pieConfig);
+    </script>
 </body>
 
 </html>

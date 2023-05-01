@@ -9,11 +9,9 @@ class Investment extends Model
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            return $row;
+            return ['success' => true, 'data' => $row];
         } catch (PDOException $e) {
-            echo $e->getMessage();
-            die();
-            return null;
+            return ['success' => false, 'data' => $e->getMessage()];
         }
     }
 
@@ -37,14 +35,12 @@ class Investment extends Model
     public function add($data)
     {
         try {
-            $sql = "INSERT INTO investment (id, investorId, gigId, farmerId, amount) VALUES (:id, :investorId, :gigId, :farmerId, :amount)";
+            $sql = "INSERT INTO investment (id, igId, investorId, gigId, farmerId, amount) VALUES (:id, :igId, :investorId, :gigId, :farmerId, :amount)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
-            return true;
+            return ['success' => true, 'data' => true];
         } catch (PDOException $e) {
-            echo $e->getMessage();
-            die();
-            return false;
+            return ['success' => false, 'data' => $e->getMessage()];
         }
     }
 

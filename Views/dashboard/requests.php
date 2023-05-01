@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/formModal.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/filters.css">
 
-    <link rel="stylesheet" href="<?php echo CSS ?>/investor/myrequests.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/investor/requests.css">
 
     <title>Dashboard | Investor</title>
 </head>
@@ -59,12 +59,12 @@
             </div>
             <form action="<?php echo URLROOT ?>/dashboard/resend_request" method="POST" class="[ content ]">
                 <div class="[ input__control ]">
-                    <label class="LKR" for="resendOffer">New Offer :</label>
-                    <input name="resendOffer" id="resendOffer"></input>
+                    <label for="resendOffer">New Offer (LKR)</label>
+                    <input type="number" name="resendOffer" id="resendOffer" required></input>
                 </div>
                 <div class="[ input__control ]">
-                    <label for="resendMessage">New Message :</label>
-                    <textarea name="resendMessage" id="resendMessage"></textarea>
+                    <label for="resendMessage">New Message</label>
+                    <textarea name="resendMessage" id="resendMessage" required></textarea>
                 </div>
                 <div class="[ buttons ]">
                     <button type="button" class="[ button__danger ]" onclick="closeResendModal()" data-dismiss="modal">Cancel</button>
@@ -74,8 +74,8 @@
     </dialog>
 
     <?php
-    $active = "myrequests";
-    $title = "My Requests";
+    $active = "requests";
+    $title = "Requests";
     require_once("navigator.php");
     ?>
     <div class="[ container ]" container-type="dashboard-section">
@@ -241,7 +241,7 @@
                                                     <div class="[ data ]" always>
                                                         <?php if (!empty($request['message'])) {
                                                         ?>
-                                                            <h4>Your Message :</h4>
+                                                            <h4>Your Message</h4>
                                                             <p><?php echo $request['message'] ?></p>
                                                         <?php
                                                         } ?>
@@ -414,7 +414,7 @@
                                                     <div class="[ data ]" always>
                                                         <?php if (!empty($request['message'])) {
                                                         ?>
-                                                            <h4>Your Message :</h4>
+                                                            <h4>Your Message</h4>
                                                             <p><?php echo $request['message'] ?></p>
                                                         <?php
                                                         } ?>
@@ -587,7 +587,7 @@
                                                     <div class="[ data ]" always>
                                                         <?php if (!empty($request['message'])) {
                                                         ?>
-                                                            <h4>Your Message :</h4>
+                                                            <h4>Your Message</h4>
                                                             <p><?php echo $request['message'] ?></p>
                                                         <?php
                                                         } ?>

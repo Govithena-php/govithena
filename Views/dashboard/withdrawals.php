@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/table.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/gridTable.css">
-    <link rel="stylesheet" href="<?php echo CSS ?>/investor/mywithdraw.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/investor/withdrawals.css">
 
     <title>Dashboard | Investor</title>
 </head>
@@ -21,12 +21,10 @@
 <body>
 
     <?php
-    $active = "mywithdraw";
-    $title = "Withdrawal";
+    $active = "withdrawals";
+    $title = "Withdrawals";
     require_once("navigator.php");
     ?>
-
-    <?php $name = "Janith"; ?>
 
     <div class="[ container ][ investments ]" container-type="dashboard-section">
         <div class="[ caption ]">

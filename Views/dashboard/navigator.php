@@ -119,9 +119,9 @@ function highlight($active, $link)
                 </a>
             </li>
             <li>
-                <a href="<?php echo URLROOT ?>/dashboard/myrequests" class="<?php highlight($active, "myrequests") ?>">
+                <a href="<?php echo URLROOT ?>/dashboard/requests" class="<?php highlight($active, "requests") ?>">
                     <i class="bi bi-card-heading"></i>
-                    <p>My Requests</p>
+                    <p>Requests</p>
                 </a>
             </li>
             <li>
@@ -131,7 +131,7 @@ function highlight($active, $link)
                 </a>
             </li>
             <li>
-                <a href="<?php echo URLROOT ?>/dashboard/myinvestments" class="<?php highlight($active, "myinvestments") ?>">
+                <a href="<?php echo URLROOT ?>/dashboard/investments" class="<?php highlight($active, "investments") ?>">
                     <i class="bi bi-coin"></i>
                     <p>Investments</p>
                 </a>
@@ -143,7 +143,7 @@ function highlight($active, $link)
                 </a>
             </li>
             <li>
-                <a href="<?php echo URLROOT ?>/dashboard/withdraw" class="<?php highlight($active, "mywithdraw") ?>">
+                <a href="<?php echo URLROOT ?>/dashboard/withdrawals " class="<?php highlight($active, "withdrawals") ?>">
                     <i class="bi bi-wallet"></i>
                     <p>Withdrawals</p>
                 </a>

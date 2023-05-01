@@ -1,110 +1,3 @@
-/* body{
-    background-color:var(--clr-gray, #fff);
-} */
-.filters {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    width: 100%;
-    padding-top: 1rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid #ccc;
-}
-
-.filters .search {
-    display: flex;
-}
-
-.filters .search h4 {
-    font-size: 1.1rem;
-    font-weight: 400;
-    margin-bottom: 0.5rem;
-}
-
-.filters .search input {
-    padding: 0.5rem 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px 0 0 5px;
-}
-
-.filters .search input:focus {
-    outline: none;
-}
-
-.filters .search button {
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--clr-primary);
-    border-radius: 0 5px 5px 0;
-    background-color: var(--clr-primary);
-    color: var(--clr-light);
-    cursor: pointer;
-}
-
-.filters .search button:focus {
-    outline: none;
-}
-
-.options {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 1rem;
-}
-
-.options .input__control {
-    display: flex;
-    flex-direction: column;
-}
-
-.options .input__control label {
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-
-.options .input__control input[type="date"] {
-    font-size: 0.8rem;
-    padding: 0.3rem 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.options .input__control select {
-    font-size: 0.8rem;
-    padding: 0.4rem 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.options .input__control button {
-    font-size: 0.8rem;
-    padding: 0.4rem 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: var(--clr-primary);
-    color: var(--clr-light);
-    cursor: pointer;
-}
-.caption {
-    /* width: 60%; */
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-    margin-inline: 0;
-}
-
-.caption h3 {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-
-.caption p {
-    width: 60%;
-    font-size: 0.8rem;
-    font-weight: 400;
-    color: var(--clr-text-gray, #535353);
-    margin-bottom: 0.5rem;
-}
-
 .tag {
     width: fit-content;
     display: block;
@@ -115,8 +8,7 @@
 }
 
 .item__card {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
+    display: flex;
     gap: 1rem;
 }
 
@@ -127,6 +19,8 @@
 }
 
 .item__card>.img {
+    width: 50%;
+    aspect-ratio: 1;
     overflow: hidden;
 }
 
@@ -138,6 +32,7 @@
 }
 
 .item__card>.content a>h2 {
+    font-size: 1rem;
     font-weight: 600;
 }
 

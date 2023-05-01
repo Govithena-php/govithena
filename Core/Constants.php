@@ -11,6 +11,7 @@ class PREFIX
     const INVESTMENT = 'INV';
     const PROGRESS = 'PRG';
     const CATEGORY = 'CAT';
+    const INVESTOR_GIG = 'ING';
 }
 
 class PRODUCT

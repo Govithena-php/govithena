@@ -9,11 +9,9 @@ class Gig extends Model
             $stmt =  Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $gig = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $gig;
+            return ['success' => true, 'data' => $gig];
         } catch (PDOException $e) {
-            echo $e->getMessage();
-            die();
-            return null;
+            return ['success' => false, 'data' => $e->getMessage()];
         }
     }
 

@@ -445,6 +445,54 @@ dialog::backdrop {
 }
 
 
+.input__control {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.input__control label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--clr-text);
+}
+
+.input__control input {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    position: arelative;
+}
+
+.input__control input:focus {
+    outline: 1px solid var(--clr-primary);
+}
+
+.input__control textarea {
+    resize: none;
+    min-height: 200px;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input__control textarea:focus {
+    outline: 1px solid var(--clr-primary);
+}
+
+.input__control select {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input__control select:focus {
+    outline: 1px solid var(--clr-primary);
+}
+
+
+
+
 @media (prefers-reduced-motion:reduce) {
 
     *,

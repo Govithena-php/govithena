@@ -15,8 +15,6 @@ class dashboardController extends Controller
     private $widthdrawModel;
     private $profitModel;
 
-    private $profilePictureHandler;
-
     public function __construct()
     {
         $this->currentUser = Session::get('user');
@@ -26,7 +24,7 @@ class dashboardController extends Controller
         }
 
         if (!$this->currentUser->hasAccess(ACTOR::INVESTOR)) {
-            $this->redirect('/error/dontHaveAccess');
+            $this->redirect('/error/accessDenied');
         }
 
         $this->investorGigModel = $this->model('investorGig');
@@ -39,13 +37,6 @@ class dashboardController extends Controller
         $this->investmentModel = $this->model('investment');
         $this->widthdrawModel = $this->model('widthrawl');
         $this->profitModel = $this->model('profit');
-
-        $this->profilePictureHandler = new ImageHandler($folder = 'Uploads/profilePictures');
-    }
-
-
-    public function test1()
-    {
     }
 
     public function index()
@@ -53,19 +44,27 @@ class dashboardController extends Controller
         $props = [];
 
         $totalInvestment = $this->investmentModel->getTotalInvestmentByInvestor($this->currentUser->getUid());
+
         if ($totalInvestment['success']) {
             $props['totalInvestment'] = $totalInvestment['data']['totalInvestment'];
+        } else {
+            $props['totalInvestment'] = 0;
         }
 
         $totalWithdrawn = $this->widthdrawModel->getTotalWithdrawnByInvestor($this->currentUser->getUid());
         if ($totalWithdrawn['success']) {
             $props['totalWithdrawn'] = $totalWithdrawn['data']['totalWithdrawn'];
+        } else {
+            $props['totalWithdrawn'] = 0;
         }
 
         $totalProfit = $this->profitModel->getTotalProfitByInvestor($this->currentUser->getUid());
         if ($totalProfit['success']) {
             $props['totalProfit'] = $totalProfit['data']['totalProfit'];
+        } else {
+            $props['totalProfit'] = 0;
         }
+
         $totalGain = $props['totalInvestment'] + $props['totalProfit'];
         $totalBalance = $totalGain - $props['totalWithdrawn'];
         $props['totalGain'] = $totalGain;
@@ -75,15 +74,24 @@ class dashboardController extends Controller
         $widthdrawals = $this->widthdrawModel->fetchAllBy($this->currentUser->getUid());
         if ($widthdrawals['success']) {
             $props['widthdrawals'] = $widthdrawals['data'];
+        } else {
+            $props['widthdrawals'] = [];
         }
 
         $profits = $this->profitModel->fetchAllBy($this->currentUser->getUid());
         if ($profits['success']) {
             $props['profits'] = $profits['data'];
+        } else {
+            $props['profits'] = [];
         }
 
 
-        $props['investments'] = $this->investmentModel->fetchAllBy($this->currentUser->getUid());
+        $investments = $this->investmentModel->fetchAllBy($this->currentUser->getUid());
+        if ($investments['success']) {
+            $props['investments'] = $investments['data'];
+        } else {
+            $props['investments'] = [];
+        }
 
 
         $this->set($props);
@@ -123,8 +131,6 @@ class dashboardController extends Controller
 
             $props['totalInvestmentPerGig'] = $temp;
         }
-        // print_r($props['totalInvestmentPerGig']);
-        // die();
 
         $activeGigs = $this->investorGigModel->fetchAllActiveGigByInvestor($this->currentUser->getUid());
 
@@ -279,7 +285,7 @@ class dashboardController extends Controller
         $this->render('review');
     }
 
-    public function myinvestments()
+    public function investments()
     {
         $props = [];
 
@@ -290,7 +296,7 @@ class dashboardController extends Controller
         if (isset($investments)) {
             $props['investments'] = $investments;
         } else {
-            $props['error'] = "no investments found";
+            $this->redirect('/error/pageNotFound');
         }
 
         $totalInvestment = $this->investmentModel->getTotalInvestmentByInvestor($this->currentUser->getUid());
@@ -318,7 +324,7 @@ class dashboardController extends Controller
                 if ($lastMonth == 0) {
                     $lastMonth = 1;
                 }
-                $precentage = round(((intval($thisMonth) - intval($lastMonth)) / intval($lastMonth) * 100), 2);
+                $precentage = min("100", round(((intval($thisMonth) - intval($lastMonth)) / intval($lastMonth) * 100), 2));
                 $props['precentage'] = $precentage;
                 $props['lastMonthInvestment'] = $lastMonth;
             }
@@ -334,15 +340,32 @@ class dashboardController extends Controller
             }
         }
 
-
-
-
-
         $this->set($props);
-        $this->render('myinvestments');
+        $this->render('investments');
     }
 
-    public function withdraw()
+    public function newInvestment()
+    {
+        $props = [];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            var_dump($_POST);
+            die();
+        }
+
+
+        $investmentGigs = $this->investorGigModel->fetchAllActiveGigByInvestor($this->currentUser->getUid());
+        if ($investmentGigs['success']) {
+            $props['investmentGigs'] = $investmentGigs['data'];
+        } else {
+            $this->redirect('/error/somethingWentWrong');
+        }
+
+        $this->set($props);
+        $this->render('newInvestment');
+    }
+
+    public function withdrawals()
     {
         $props = [];
 
@@ -354,11 +377,11 @@ class dashboardController extends Controller
 
 
         $this->set($props);
-        $this->render('withdraw');
+        $this->render('withdrawals');
     }
 
 
-    public function myrequests()
+    public function requests()
     {
         $uid = Session::get('user')->getUid();
 
@@ -384,8 +407,10 @@ class dashboardController extends Controller
         }
 
 
-        $this->render('myrequests');
+        $this->render('requests');
     }
+
+
 
     public function myrequest_delete()
     {

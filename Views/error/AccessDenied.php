@@ -24,11 +24,13 @@
         </div>
         <div class="[ row ]">
             <div class="[ img ]">
-                <img src="<?php echo IMAGES; ?>/svg/page_not_found.svg" alt="404">
+                <img src="<?php echo IMAGES; ?>/svg/warning.svg" alt="404">
             </div>
-            <h1>Page Not Found</h1>
+            <h1>Access Denied</h1>
             <div class="details">
-                <p>It looks like the page you were trying to access doesn't exist or may have been moved. We apologize for the inconvenience. </p>
+                <p>We're sorry, but you don't have access to view this page. This could be for a number of reasons, including:
+                    You haven't logged in yet, You don't have the necessary permissions, This page is restricted to a certain user group.</p><br>
+                <p>If you believe you should have access to this page, please contact our support team for assistance.</p>
             </div>
             <button onclick="history.back()">Go Back</button>
         </div>
