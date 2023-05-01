@@ -103,3 +103,78 @@
 .dashboard {
   min-height: 100vh;
 }
+
+.image__uploader input {
+  display: none;
+}
+
+.image__uploader .title p {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.image__uploader .title span {
+  color: red;
+  font-size: 1.5rem;
+}
+
+.image__uploader .text__box {
+  min-height: 150px;
+  padding: 2rem;
+  border: 2px dashed #ccc;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+}
+
+.image__uploader .upload__svg {
+  width: 150px;
+  margin-left: 2rem;
+}
+
+.image__uploader .text__box p {
+  color: #3c3c3c;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.image__uploader .text__box_dragover {
+  border: 2px solid var(--clr-primary, #ff6b00);
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/*css to have two input fieds in same line*/  
+.form-inline { 
+  display: flex; 
+  direction: row;
+  /* flex-flow: row wrap;  */
+  /* align-items: center;  */
+}
+
+.form-inline label { 
+  margin: 5px 10px 5px 0; 
+}
+
+.form-inline input { 
+  width: 100%;
+  vertical-align: middle; 
+  margin: 5px 10px 5px 0; 
+  padding: 10px; 
+  background-color: #fff; 
+  border: 1px solid #ddd; 
+}
+
+
+
+

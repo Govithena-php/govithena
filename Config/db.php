@@ -16,7 +16,7 @@ class Database
     {
 
         if (is_null(self::$bdd)) {
-            self::$bdd = new PDO("mysql:host=localhost;dbname=govithenadatabase", "root", "");
+            self::$bdd = new PDO("mysql:host=localhost;dbname=gpd", "root", "");
             // self::$bdd = new PDO("mysql:host=us-cdbr-east-06.cleardb.net;dbname=heroku_c3eec8327e81f84", "b6ccb3c6eba504", "6d1b0706");
         }
         return self::$bdd;
