@@ -1,5 +1,12 @@
 body {font-family: Arial, Helvetica, sans-serif;}
 
+.center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
@@ -19,10 +26,14 @@ body {font-family: Arial, Helvetica, sans-serif;}
 /* Modal Content */
 .modal-content {
   background-color: #fefefe;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 50%;
 }
 
 /* The Close Button */
@@ -50,9 +61,9 @@ body {
 
 
 .form {
-    width: 90%;
+    width: 80%;
     /* max-width: 1000px;  */
-    padding-left: 20px; 
+    /* padding-left: 20px;  */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -104,7 +115,7 @@ body {
 
 .profile_card {
   display: grid;
-  grid-template-columns: 1fr 2fr 2fr;
+  grid-template-columns: 1fr 4fr ;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.5rem;
   height: 150px;

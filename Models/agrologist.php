@@ -529,7 +529,7 @@ class Agrologist extends Model
     public function getPaymentDetails($farmerId)
     {
         try {
-            $sql = "SELECT p.payment, p.paidDate FROM agrologist_payment p WHERE p.agrologistId=:agrologistId AND p.farmerId=:farmerId"; 
+            $sql = "SELECT p.payment, p.paidDate FROM agrologist_payment p WHERE p.agrologistId=:agrologistId AND p.farmerId=:farmerId";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
                 'agrologistId' => Session::get('user')->getUid(),
@@ -542,6 +542,64 @@ class Agrologist extends Model
             die();
             return null;
 
+        }
+    }
+
+    public function getAccountDetails()
+    {
+        try {
+            $sql = "SELECT accountNumber, bank, branch, branchCode FROM bank_account WHERE user=:userId AND status='ACTIVE'";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'userId' => Session::get('user')->getUid()
+            ]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+
+        }
+    }
+
+    public function insertAccountDetails($data)
+    {
+        try {
+            $sql = "INSERT INTO  bank_account (accountNumber, user, bank, branch, branchCode, status) VALUES (:accountNumber, :userId, :bank, :branch, :branchCode, 'ACTIVE')";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'accountNumber' => $data['accountNumber'],
+                'userId' => Session::get('user')->getUid(),
+                'bank' => $data['bank'],
+                'branch' => $data['branch'],
+                'branchCode' => $data['branchCode']
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+        }
+    }
+
+    public function updateAccountDetails($data)
+    {
+        try {
+            $sql = "UPDATE bank_account SET accountNumber=:accountNumber, bank=:bank, branch=:branch, branchCode=:branchCode WHERE user=:userId";
+            $req = Database::getBdd()->prepare($sql);
+            $req->execute([
+                'accountNumber' => $data['accountNumber'],
+                'userId' => Session::get('user')->getUid(),
+                'bank' => $data['bank'],
+                'branch' => $data['branch'],
+                'branchCode' => $data['branchCode']
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
         }
     }
 }

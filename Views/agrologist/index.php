@@ -40,7 +40,15 @@
                 <div class="[ amount ]">
                     <span class="[ LKRBadge ]"></span>
                     <h1>
-                        <?php echo number_format($agrologistMonthlyIncome[0]['total_income']) ?>
+                        <?php
+                        if ($agrologistMonthlyIncome == null) {
+                            echo "0";
+                        } else if ($agrologistMonthlyIncome[0]['total_income'] >= 0) {
+                            echo number_format($agrologistMonthlyIncome[0]['total_income']);
+                        } else {
+                            echo "0";
+                        }
+                        ?>
                     </h1>
                 </div>
             </div>
@@ -51,22 +59,20 @@
                 <h3>No. of Farmers</h3>
                 <div class="[ amount ]">
                     <!-- <span class="[ LKRBadge ]"></span> -->
-                   
+
 
                     <?php
-                       echo  "<h1>" . $farmerCount[0]['farmerCount'] . "</h1>";
-                       $farmer_diff = $farmerCount[0]['farmerCount'] - $farmerCountLastMonh[0]['farmerCount'];
-                          if($farmerCountLastMonh[0]['farmerCount'] == 0){
-                            echo "<h4> No farmers last month </h4>";
-                          }
-                          elseif($farmer_diff > 0){
-                            echo "<h4>" . $farmer_diff / $farmerCountLastMonh[0]['farmerCount'] * 100 . "% <i class='fa-solid fa-arrow-up'></i></h4>" . "<br>" .
+                    echo "<h1>" . $farmerCount[0]['farmerCount'] . "</h1>";
+                    $farmer_diff = $farmerCount[0]['farmerCount'] - $farmerCountLastMonh[0]['farmerCount'];
+                    if ($farmerCountLastMonh[0]['farmerCount'] == 0) {
+                        echo "<h4> No farmers last month </h4>";
+                    } elseif ($farmer_diff > 0) {
+                        echo "<h4>" . $farmer_diff / $farmerCountLastMonh[0]['farmerCount'] * 100 . "% <i class='fa-solid fa-arrow-up'></i></h4>" . "<br>" .
                             "<p>Compared to (" . $farmerCountLastMonh[0]['farmerCount'] . " last month)</p>";
-                          }
-                          else{
-                            echo "<h4>" . $farmer_diff / $farmerCountLastMonh[0]['farmerCount'] * 100 . "% <i class='fa-solid fa-arrow-down'></i></h4>" . "<br>" .
+                    } else {
+                        echo "<h4>" . $farmer_diff / $farmerCountLastMonh[0]['farmerCount'] * 100 . "% <i class='fa-solid fa-arrow-down'></i></h4>" . "<br>" .
                             "<p>Compared to (" . $farmerCountLastMonh[0]['farmerCount'] . " last month)</p>";
-                          }
+                    }
                     ?>
 
 
@@ -84,19 +90,16 @@
                     if ($gigCount[0]['gigCount'] > 0) {
                         echo "<h1>" . $gigCount[0]['gigCount'] . "</h1>";
                         $gig_diff = $gigCount[0]['gigCount'] - $gigCountLastMonth[0]['gigCount'];
-                        if($gigCountLastMonth[0]['gigCount'] == 0){
+                        if ($gigCountLastMonth[0]['gigCount'] == 0) {
                             echo "<h4> No gigs last month </h4>";
-                        }
-                        elseif($gig_diff > 0){
+                        } elseif ($gig_diff > 0) {
                             echo "<h4>" . $gig_diff / $gigCountLastMonth[0]['gigCount'] * 100 . "% <i class='fa-solid fa-arrow-up'></i></h4>" . "<br>" .
-                            "<p>Compared to (" . $gigCountLastMonth[0]['gigCount'] . " last month)</p>";
-                        }
-                        else{
+                                "<p>Compared to (" . $gigCountLastMonth[0]['gigCount'] . " last month)</p>";
+                        } else {
                             echo "<h4>" . $gig_diff / $gigCountLastMonth[0]['gigCount'] * 100 . "% <i class='fa-solid fa-arrow-down'></i></h4>" . "<br>" .
-                            "<p>Compared to (" . $gigCountLastMonth[0]['gigCount'] . " last month)</p>";
+                                "<p>Compared to (" . $gigCountLastMonth[0]['gigCount'] . " last month)</p>";
                         }
-                    }
-                    else{
+                    } else {
                         echo "<h1>0</h1>";
                     }
                     ?>
@@ -160,7 +163,7 @@
 
         </div>
 
-  
+
 
         <div class="[ chart-pie ] grid" xs="1" sm="1" md="2" lg="3">
             <!-- <div class="[ chart ]">

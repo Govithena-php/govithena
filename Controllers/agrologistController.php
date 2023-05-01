@@ -76,65 +76,62 @@ class agrologistController extends Controller
 
             if (count($params) == 1) {
                 $this->farmergigs($agrologist, $params[0]);
-            } 
-            else if($params[1]=="payments"){
+            } else if ($params[1] == "payments") {
                 $this->payments($agrologist, $params[0]);
-            }
-            else {
+            } else {
                 $uid = Session::get('user')->getUid();
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     if (isset($_POST['update_details_btn'])) {
-        
+
                         $fieldVisitId = new UID(PREFIX::FEILDVISIT);
-        
+
                         $week = new Input(POST, 'week');
                         $date = new Input(POST, 'date');
                         $description = new Input(POST, 'description');
-        
+
 
 
                         // if ($update) {
-                              try {
-                                $images = $this->imageHandler->upload('images');
-        
-                                if(!empty($images)){
-                                    $update = $agrologist->insertFieldVisit([
-                                        'visitId' => $fieldVisitId,
-                                        'week' => $week->get(),
-                                        'gigId' => $params[1],
-                                        'agrologistId' => $uid,
-                                        'farmerId' => $params[0],
-                                        'fieldVisitDetails' => $description->get(),
-                                        'fieldVisitImage' => $images[0],
-                                        'visitDate' => $date->get(),
-                                    ]);
-                                    $images = array_slice($images, 1);
-                                    if(!empty($images)){
-                                        foreach($images as $image){
-                                            $updateimages = $agrologist->insertFieldVisitImage([
-                                                'visitId' => $fieldVisitId,
-                                                'image' => $image,
-                                            ]);
-                                        }
+                        try {
+                            $images = $this->imageHandler->upload('images');
+
+                            if (!empty($images)) {
+                                $update = $agrologist->insertFieldVisit([
+                                    'visitId' => $fieldVisitId,
+                                    'week' => $week->get(),
+                                    'gigId' => $params[1],
+                                    'agrologistId' => $uid,
+                                    'farmerId' => $params[0],
+                                    'fieldVisitDetails' => $description->get(),
+                                    'fieldVisitImage' => $images[0],
+                                    'visitDate' => $date->get(),
+                                ]);
+                                $images = array_slice($images, 1);
+                                if (!empty($images)) {
+                                    foreach ($images as $image) {
+                                        $updateimages = $agrologist->insertFieldVisitImage([
+                                            'visitId' => $fieldVisitId,
+                                            'image' => $image,
+                                        ]);
                                     }
-                                    
                                 }
 
-                                if($update){
-                                    $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully Updated!');
-                                }
-                                else{
-                                    $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong.');
-                                }
-
-                                Session::set(['update_field_visit_alert' => $alert]);
-
-                            } catch (Exception $e) {
-                                echo $e->getMessage();
-                                die();
                             }
+
+                            if ($update) {
+                                $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully Updated!');
+                            } else {
+                                $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong.');
+                            }
+
+                            Session::set(['update_field_visit_alert' => $alert]);
+
+                        } catch (Exception $e) {
+                            echo $e->getMessage();
+                            die();
+                        }
                         // }
-        
+
                     }
                 }
 
@@ -312,6 +309,7 @@ class agrologistController extends Controller
         $uid = Session::get('user')->getUid();
 
         $d['agrologist'] = $agrologist->getAgrologistDetails();
+        $d['account'] = $agrologist->getAccountDetails();
         //var_dump($d['agrologist']);
         // die();
 
@@ -366,6 +364,54 @@ class agrologistController extends Controller
             }
 
         }
+
+        if (isset($_POST['add_account_details_btn'])) {
+            $accountNumber = new Input(POST, 'account_number');
+            $bankName = new Input(POST, 'bank_name');
+            $branch = new Input(POST, 'branch');
+            $branchCode = new Input(POST, 'branch_code');
+
+            $insert_account = $agrologist->insertAccountDetails([
+                'accountNumber' => $accountNumber->get(),
+                'bank' => $bankName->get(),
+                'branch' => $branch->get(),
+                'branchCode' => $branchCode->get()
+            ]);
+
+            if ($insert_account) {
+                $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully Submitted!');
+            } else {
+                $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong!');
+            }
+
+            Session::set(['add_account_details_alert' => $alert]);
+        }
+
+        if (isset($_POST['edit_account_details_btn'])) {
+            $accountNumber = new Input(POST, 'account_number');
+            $bankName = new Input(POST, 'bank_name');
+            $branch = new Input(POST, 'branch');
+            $branchCode = new Input(POST, 'branch_code');
+
+            $edit_account = $agrologist->updateAccountDetails([
+                'accountNumber' => $accountNumber->get(),
+                'bank' => $bankName->get(),
+                'branch' => $branch->get(),
+                'branchCode' => $branchCode->get()
+            ]);
+
+            if ($edit_account) {
+                $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully Updated!');
+            } else {
+                $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong!');
+            }
+
+            Session::set(['edit_account_details_alert' => $alert]);
+        }
+
+
+
+
 
         $this->set($d);
         $this->render('myaccount');
@@ -442,8 +488,8 @@ class agrologistController extends Controller
 
 
 
-        
-       
+
+
 
         $this->set($d);
         return $this->render('farmerdetails');
