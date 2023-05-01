@@ -27,6 +27,9 @@
                 <img src="<?php echo IMAGES; ?>/svg/page_not_found.svg" alt="404">
             </div>
             <h1>Page Not Found</h1>
+            <div class="details">
+                <p>It looks like the page you were trying to access doesn't exist or may have been moved. We apologize for the inconvenience. </p>
+            </div>
             <button onclick="history.back()">Go Back</button>
         </div>
     </div>

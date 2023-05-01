@@ -1,0 +1,43 @@
+.input__control {
+    margin-bottom: 1rem;
+}
+
+.select__data_box {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.select__data_box .img {
+    width: 5rem;
+    height: 5rem;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.select__data_box .img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.select__data_box h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--clr-text);
+}
+
+.select__data_box p {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--clr-text-gray);
+}
+
+.select__data_box:hover h4,
+.select__data_box:hover p {
+    color: var(--clr-light);
+}
+
+.descrip {
+    min-height: 150px !important;
+}

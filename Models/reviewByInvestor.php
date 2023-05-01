@@ -63,8 +63,20 @@ class ReviewByInvestor extends Model
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['uid' => $uid]);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            var_dump($result);
-            die();
+            return ['success' => true, 'data' => $result];
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function getQuestionsCountsByFarmer($uid)
+    {
+        try {
+            $sql = "SELECT COUNT(CASE WHEN q3 = 1 THEN 1 END) AS q3Count, COUNT(CASE WHEN q4 = 1 THEN 1 END) AS q4Count, COUNT(CASE WHEN q5 = 1 THEN 1 END) AS q5Count, COUNT(CASE WHEN q6 = 1 THEN 1 END) AS q6Count, COUNT(CASE WHEN q7 = 1 THEN 1 END) AS q7Count, COUNT(CASE WHEN q8 = 1 THEN 1 END) AS q8Count FROM review_by_investor WHERE farmerId = :uid";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['uid' => $uid]);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $result];
         } catch (PDOException $e) {
             return ['success' => false, 'data' => $e->getMessage()];
         }

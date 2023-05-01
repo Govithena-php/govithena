@@ -7,8 +7,13 @@ class errorController extends Controller
         $this->render('error');
     }
 
-    public function pageNotFound()
+    public function accessDenied()
     {
-        $this->render('pageNotFound');
+        $this->render('accessDenied');
+    }
+
+    public function somethingWentWrong()
+    {
+        $this->render('somethingWentWrong');
     }
 }

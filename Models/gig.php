@@ -9,11 +9,9 @@ class Gig extends Model
             $stmt =  Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $gig = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $gig;
+            return ['success' => true, 'data' => $gig];
         } catch (PDOException $e) {
-            echo $e->getMessage();
-            die();
-            return null;
+            return ['success' => false, 'data' => $e->getMessage()];
         }
     }
 
@@ -109,6 +107,48 @@ class Gig extends Model
             $stmt->execute(['gigId' => $gigId]);
             $gigImages = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return ['success' => true, 'data' => $gigImages];
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
+
+    public function updateGigDetails($data)
+    {
+        try {
+            $sql = "UPDATE gig SET title = :title, category = :category, capital = :initialInvestment, cropCycle = :cropCycle, landArea = :landArea, profitMargin =:profitMargin WHERE gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute($data);
+            return ['success' => true];
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
+
+    public function updateGigLocation($data)
+    {
+        try {
+            $sql = "UPDATE gig SET addressLine1 = :addressLine1, addressLine2 = :addressLine2, city = :city, district = :district WHERE gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute($data);
+            return ['success' => true];
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
+
+    public function updateGigDescription($data)
+    {
+        try {
+            $sql = "UPDATE gig SET description = :description WHERE gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute($data);
+            return ['success' => true];
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
         } catch (PDOException $e) {
             return ['success' => false, 'error' => $e->getMessage()];
         }

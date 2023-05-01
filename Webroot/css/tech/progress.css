@@ -1,0 +1,178 @@
+.caption {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-inline: 0;
+}
+
+.caption h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.caption h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.caption p {
+    width: 60%;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--clr-text-gray, #535353);
+    margin-bottom: 0.5rem;
+}
+
+.strong {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.pt-1 {
+    padding-top: 1rem;
+}
+
+.flex-space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.image_name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.image_name img {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+}
+
+.image_name p {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--clr-text, #535353);
+    margin-bottom: 0.5rem;
+}
+
+.progress__content {
+    padding: 1rem;
+    margin: 0.5rem;
+}
+
+.progress__content h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--clr-dark);
+    margin-bottom: 0.5rem;
+}
+
+.progress__content p {
+    font-size: 0.9rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+}
+
+.progress__images {
+
+    border-top: 1px solid #ccc;
+    padding-top: 2rem;
+    margin: 2rem 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.progress__images .img {
+    height: 250px;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background-color: #ccc;
+}
+
+.progress__images .img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.Modal {
+    min-width: 650px;
+}
+
+.Modal .container {
+    margin: 1rem;
+}
+
+.Modal .caption {
+    margin-bottom: 2rem;
+}
+
+
+.new__details_form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.input__control {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.input__control label {
+    font-weight: 600;
+}
+
+.input__control input {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input__control input:focus {
+    outline: 1px solid var(--clr-primary);
+}
+
+.input__control select {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input__control select:focus {
+    outline: 1px solid var(--clr-primary);
+}
+
+.input__control textarea {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 200px;
+    resize: none;
+}
+
+.input__control textarea:focus {
+    outline: 1px solid var(--clr-primary);
+}
+
+
+.control__buttons {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.upload__svg {
+    width: 50px !important;
+}

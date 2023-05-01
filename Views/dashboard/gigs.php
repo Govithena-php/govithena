@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/tabs.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/gridTable.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/progressBar.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/investor/gigs.css">
 
     <title>Dashboard | Investor</title>
@@ -98,7 +99,6 @@
                         <p>Our platform is currently undergoing maintenance. We will be back online shortly. Thank you for your patience.</p>
                     </div>
                 </div>
-                <!-- <p class="[ freespace__text ]">Track your investment journey with ease by accessing all your active and completed gigs in one convenient location, where you can also generate detailed reports on your progress and achievements.</p> -->
             </div>
             <div class="[ activities ]">
                 <div class="[ title ]">
@@ -171,7 +171,7 @@
 
         <div class="[ tabs ][ gigTabs ]" tab="2">
             <div class="controls">
-                <button class="control" for="1">Active Gigs</button>
+                <button class="control" for="1" active>Active Gigs</button>
                 <button class="control" for="2">To Review</button>
                 <button class="control" for="3">Completed Gigs</button>
             </div>
@@ -187,122 +187,75 @@
                             require(COMPONENTS . "dashboard/noDataFound.php");
                         } else {
                         ?>
-                            <div class="[  ]">
-                                <div class="[ grid__table ]" style="
-                                        --xl-cols:  2fr 1fr 0.5fr;
-                                        --lg-cols: 4fr 1fr;
-                                        --md-cols: 5fr 1fr;
-                                        --sm-cols: 3fr 1fr;
-                                    ">
-                                    <div class="[ head stick_to_top ]">
-                                        <div class="[ grid ][ filters ]" md="1" lg="2" gap="2">
-                                            <div class="[ grid ][ options ]" sm="1" md="6" lg="6" gap="1">
-                                                <div class="[ input__control ]">
-                                                    <label for="from">From :</label>
-                                                    <input id="from" type="date">
+                            <div class="active__gigs">
+                                <?php
+                                foreach ($activeGigs as $activeGig) {
+                                ?>
+                                    <div class="active__gig">
+                                        <div class="active__gig_img">
+                                            <img src="<?php echo UPLOADS . $activeGig['thumbnail'] ?>" />
+                                            <div class="active__gig_farmer">
+                                                <div class="img">
+                                                    <img src="<?php echo UPLOADS . $activeGig['image'] ?>" />
                                                 </div>
-                                                <div class="[ input__control ]">
-                                                    <label for="to">To :</label>
-                                                    <input id="to" type="date">
+                                                <div class="details">
+                                                    <a href="<?php echo URLROOT . "/profile/" . $activeGig['farmerId'] ?>"><?php echo $activeGig['firstName'] . " " . $activeGig['lastName'] ?></a>
                                                 </div>
-                                                <div class="[ input__control ]">
-                                                    <label for="location">Location :</label>
-                                                    <select id="location">
-                                                        <option value="all">All</option>
-                                                        <option value="colombo">Colombo</option>
-                                                        <option value="galle">Galle</option>
-                                                        <option value="kandy">Kandy</option>
-                                                        <option value="matara">Matara</option>
-                                                        <option value="nuwaraeliya">Nuwara Eliya</option>
-                                                        <option value="trincomalee">Trincomalee</option>
-                                                    </select>
-                                                </div>
-                                                <div class="[ input__control ]">
-                                                    <label for="category">Category :</label>
-                                                    <select id="category">
-                                                        <option value="all">All</option>
-                                                        <option value="vegetable">Vegetable</option>
-                                                        <option value="fruit">Fruit</option>
-                                                        <option value="grains">Grains</option>
-                                                        <option value="spices">Spices</option>
-                                                    </select>
-                                                </div>
-                                                <div class="[ input__control ]">
-                                                    <button type="button">Apply</button>
-                                                </div>
-
-                                            </div>
-                                            <div class="[ search ]">
-                                                <input type="text" placeholder="Search">
-                                                <button type="button">
-                                                    <i class="fas fa-search"></i>
-                                                </button>
                                             </div>
                                         </div>
-                                        <div class="[ row ]">
-                                            <div class="[ data ]">
-                                                <p>Gig</p>
+                                        <div class="active__gig_content">
+
+                                            <div class="active__gig_title">
+                                                <h3 class=""><?php echo $activeGig['title'] ?></h3>
+                                                <p><?php echo $activeGig['city'] ?></p>
                                             </div>
-                                            <!-- <div class="[ data ]" hideIn="md">
-                                                <p>Category</p>
-                                            </div> -->
-                                            <div class="[ data ]" hideIn="lg">
-                                                <p>Prograss</p>
+
+                                            <div class="grid active__gig_progress_bars" lg="2" gap="1">
+                                                <div class="progress__bar">
+                                                    <div class="progress__details">
+                                                        <p>20 Days out of 100 Days</p>
+                                                    </div>
+                                                    <div class="bar">
+                                                        <div class="fill" style="--value: 50%;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="progress__bar">
+                                                    <div class="progress__details">
+                                                        <p>Progress</p>
+                                                        <p>5 / 10</p>
+                                                    </div>
+                                                    <div class="bar">
+                                                        <div class="fill" style="--value: 50%;"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="active__gig_other">
+                                                <div class="item">
+                                                    <small>Total Investments</small>
+                                                    <p class="LKR"><?php
+                                                                    if (isset($totalInvestmentPerGig[$activeGig['gigId']])) {
+                                                                        echo number_format($totalInvestmentPerGig[$activeGig['gigId']], 2, '.', ',');
+                                                                    }
+                                                                    ?></p>
+                                                </div>
+                                                <div class="item">
+                                                    <small>Progress Updates</small>
+                                                    <p>50</p>
+                                                </div>
+                                                <div class="item">
+                                                    <small>Agrologist updates</small>
+                                                    <p>50</p>
+                                                </div>
+                                                <span class="grow"></span>
+                                                <a href="<?php echo URLROOT . "/dashboard/gig/" . $activeGig['gigId'] ?>" class="button__primary">View More</a>
+
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="[ body ]">
-                                        <?php
-                                        foreach ($activeGigs as $gig) {
-                                        ?>
-                                            <div class="[ row ]">
-                                                <div class="[ data ]">
-                                                    <div class="[ item__card ]">
-                                                        <div class="[ img ]">
-                                                            <img width="50" src="<?php echo UPLOADS . $gig['thumbnail'] ?>" />
-                                                        </div>
-                                                        <div class="[ content ]">
-                                                            <a href="<?php echo URLROOT . "/gig/" . $gig['gigId'] ?>">
-                                                                <h2><?php echo $gig['title'] ?></h2>
-                                                            </a>
-                                                            <!-- <p><small>by </small> <a href="<?php echo URLROOT . "/profile/" . $request['uid'] ?>"><?php echo $request['firstName'] . " " . $request['lastName'] ?></p></a> -->
-                                                            <h3><?php echo $gig['city'] ?></h3>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- <div class="[ data ]" hideIn="md">
-                                                    <p class="[ tag ]"><?php echo $gig['category'] ?></p>
-                                                </div> -->
-                                                <div class="[ data ]" hideIn="lg">
-                                                    <div class="[ progress__bar ]">
-                                                        <label>
-                                                            <span>Days</span>
-                                                            <span>20 days out of 100 days</span>
-                                                        </label>
-                                                        <progress min="0" max="100" value="20"></progress>
-                                                    </div>
-                                                </div>
-                                                <!-- <div class="[ data ]" hideIn="lg">
-                                                    <div class="[ progress__bar ]">
-                                                        <label>
-                                                            <span>overroll</span>
-                                                            <span>50%</span>
-                                                        </label>
-                                                        <progress min="0" max="100" value="50"></progress>
-                                                    </div>
-                                                </div> -->
-                                                <div class="[ data flex-center ]">
-                                                    <div class="[ actions ]">
-                                                        <a href="<?php echo URLROOT ?>/dashboard/gig/<?php echo $gig['gigId'] ?>" class="[ button__primary-invert ]">View More</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <?php
-                                        }
-                                        ?>
-                                    </div>
-                                </div>
+                                <?php
+                                }
+                                ?>
                             </div>
                         <?php
                         }
@@ -623,25 +576,9 @@
     require_once("footer.php");
     ?>
     <script src="<?php echo JS ?>/dashboard/dashboard.js"></script>
+    <script src="<?php echo JS ?>/tabs.js"></script>
+
     <script>
-        const controls = document.querySelectorAll(".controls>button");
-        const tabs = document.querySelectorAll(".tab");
-
-        Array.from(controls).forEach(control => {
-            control.addEventListener("click", () => {
-                let For = control.getAttribute("for")
-                Array.from(tabs).forEach(tab => {
-                    if (tab.id == For) {
-                        tab.setAttribute("active", true)
-                        control.toggleAttribute("active")
-                    } else {
-                        tab.setAttribute("active", false)
-                    }
-                })
-            })
-        })
-
-
         const expandBtns = document.querySelectorAll(".actions>button")
         const expands = document.querySelectorAll(".expand")
         const icons = document.querySelectorAll(".actions>button>i")

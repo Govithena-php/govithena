@@ -62,11 +62,9 @@ class requestFarmer extends Model
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $row;
+            return ['success' => true, 'data' => $row];
         } catch (PDOException $e) {
-            echo $e->getMessage();
-            die();
-            return null;
+            return ['success' => false, 'error' => $e->getMessage()];
         }
     }
 

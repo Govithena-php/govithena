@@ -11,8 +11,9 @@ class PREFIX
     const INVESTMENT = 'INV';
     const PROGRESS = 'PRG';
     const CATEGORY = 'CAT';
-
     const FEILDVISIT = 'FVT';
+    const INVESTOR_GIG = 'ING';
+
 }
 
 class PRODUCT
@@ -91,31 +92,31 @@ define("DISTRICTS_ARRAY", array(
 ));
 
 define("DISTRICTS", array(
-    "AMPARA" => "Ampara",
-    "ANURADHAPURA" => "Anuradhapura",
-    "BADULLA" => "Badulla",
-    "BATTICALOA" => "Batticaloa",
-    "COLOMBO" => "Colombo",
-    "GALLE" => "Galle",
-    "GAMPAHA" => "Gampaha",
-    "HAMBANTOTA" => "Hambantota",
-    "JAFFNA" => "Jaffna",
-    "KALUTARA" => "Kalutara",
-    "KANDY" => "Kandy",
-    "KEGALLE" => "Kegalle",
-    "KILINOCHCHI" => "Kilinochchi",
-    "KURUNEGALA" => "Kurunegala",
-    "MANNAR" => "Mannar",
-    "MATALE" => "Matale",
-    "MATARA" => "Matara",
-    "MONARAGALA" => "Monaragala",
-    "MULLAITIVU" => "Mullaitivu",
-    "NUWARA_ELIYA" => "Nuwara Eliya",
-    "POLONNARUWA" => "Polonnaruwa",
-    "PUTTALAM" => "Puttalam",
-    "RATNAPURA" => "Ratnapura",
-    "TRINCOMALEE" => "Trincomalee",
-    "VAVUNIYA" => "Vavuniya"
+    "ampara" => "Ampara",
+    "anuradhapura" => "Anuradhapura",
+    "badulla" => "Badulla",
+    "batticaloa" => "Batticaloa",
+    "colombo" => "Colombo",
+    "galle" => "Galle",
+    "gampaha" => "Gampaha",
+    "hambanthota" => "Hambantota",
+    "jaffna" => "Jaffna",
+    "kalutara" => "Kalutara",
+    "kandy" => "Kandy",
+    "kegalle" => "Kegalle",
+    "kilinichchi" => "Kilinochchi",
+    "kurunegala" => "Kurunegala",
+    "mannar" => "Mannar",
+    "matale" => "Matale",
+    "matara" => "Matara",
+    "monaragala" => "Monaragala",
+    "mullaitivu" => "Mullaitivu",
+    "nuwara eliya" => "Nuwara Eliya",
+    "polonnaruwa" => "Polonnaruwa",
+    "puttalam" => "Puttalam",
+    "rathnapura" => "Ratnapura",
+    "trincomalee" => "Trincomalee",
+    "vavuniya" => "Vavuniya"
 ));
 
 
