@@ -67,6 +67,12 @@
                             </select>
                         </div>
                     </div>
+                    <div class="row2">
+                        <div class="form__control">
+                            <label>Profit Margin: </label>
+                            <input type="text" name="profitMargin" placeholder="Profit Margin">
+                        </div>
+                    </div>
                     <div>
                         <label>Description : </label>
                         <textarea id="w3review" name="description" rows="4" cols="72" placeholder="Description..." style="background-color: rgba(189, 189, 189, 0.16);"></textarea>

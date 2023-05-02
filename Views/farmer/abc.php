@@ -20,17 +20,25 @@
 }
 
 </style>
-
+ 
 
 </head>
 <body>
 <div class="card_wrapper">
     <?php  
+
+    // foreach(list as item){
+
+    // }
+
+
     foreach($gigs as $gig){
         ?>
             <div class="card">
+                <button sdfjdslfjl><?php echo $gig['title']?></button>
                 <h1><?php echo $gig['title']?></h1>
                 <p><?php echo $gig['description']?></p>
+                <!-- /webroot/uploads/1.jpg -->
                 <img width="100" src="<?php echo UPLOADS . "/" . $gig['image']?>" />
             </div>
         

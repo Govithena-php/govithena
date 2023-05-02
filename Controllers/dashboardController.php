@@ -410,8 +410,6 @@ class dashboardController extends Controller
         if ($withdrawls['success']) {
             $props['withdrawls'] = $withdrawls['data'];
         }
-
-
         $this->set($props);
         $this->render('withdrawals');
     }

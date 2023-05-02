@@ -108,13 +108,66 @@
                 foreach ($techAssistants as $techAssistant) {
             ?>
 
-                    <div class="[ requestcard bg-light ]">
+                    <!-- <div class="[ requestcard bg-light ]">
                         <div class="[ requestimg ]">
                             <img class="img" src="<?php echo UPLOADS . $techAssistant['image'] ?>" alt="profile">
                         </div>
                         <div class="flex flex-row ">
                             <div class="[ requestcont ]">
                                 <a href="<?php echo URLROOT . "/profile/" . $techAssistant['uid'] ?>">
+                                    <p><b><?php echo $techAssistant['firstName'] . " " . $techAssistant['lastName']; ?></b></p>
+                                </a>
+          
+                            </div>
+                        </div>
+                        <div class=" flex-c-c">
+                            <a class="request__btn" href="<?php echo URLROOT . "/farmer/request/" . $techAssistant['uid'] ?>">Send Request</a>
+                        </div>
+
+                    </div> -->
+                    <div class="requestcardn">
+                        <div class=" requestimg1 ">
+                            <img class="img" src="<?php echo UPLOADS . $techAssistant['image'] ?>" alt=" profile">
+
+                        </div>
+                        <div class="flex flex-row ">
+                            <div class=" requestlist ">
+                                <a class="namebox" href="<?php echo URLROOT . "/profile/" . $techAssistant['uid'] ?>">
+                                    <?php echo $techAssistant['firstName'] . " " . $techAssistant['lastName']; ?>
+                                </a>
+                                <!-- <p class="flex flex-row">
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                </p> -->
+                            </div>
+                        </div>
+                        <div class=" flex-c-c">
+                            <a class="requestbtn" href="<?php echo URLROOT . "/farmer/send/" . $techAssistant['uid'] ?>">Send Request</a>
+
+                        </div>
+
+                 </div>
+
+   
+
+            <?php
+                }
+            }
+
+
+            ?>
+
+            <!-- <div class="requestcardn">
+                        <div class=" requestimg1 ">
+                            <img class="img" src="<?php echo UPLOADS . $techAssistant['image'] ?>" alt=" profile">
+
+                        </div>
+                        <div class="flex flex-row ">
+                            <div class=" requestlist ">
+                                <a class="namebox" href="<?php echo URLROOT . "/profile/" . $techAssistant['uid'] ?>">
                                     <p><b><?php echo $techAssistant['firstName'] . " " . $techAssistant['lastName']; ?></b></p>
                                 </a>
                                 <p class="flex flex-row">
@@ -127,17 +180,13 @@
                             </div>
                         </div>
                         <div class=" flex-c-c">
-                            <a class="request__btn" href="<?php echo URLROOT . "/farmer/request/" . $techAssistant['uid'] ?>">Send Request</a>
+                            <a class="requestbtn" href="<?php echo URLROOT . "/farmer/send/" . $techAssistant['uid'] ?>">Send Request</a>
+
                         </div>
 
-                    </div>
+                 </div>
+             -->
 
-            <?php
-                }
-            }
-
-
-            ?>
         </div>
 
 

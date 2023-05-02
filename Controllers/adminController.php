@@ -18,6 +18,7 @@ class adminController extends Controller
         if (!$this->currentUser->hasAccess(ACTOR::ADMIN)) {
             $this->redirect('/error/dontHaveAccess');
         }
+        
         $this->categoryImageHander = new ImageHandler($folder = 'Uploads/categories');
 
         $this->adminModel = $this->model('admin');

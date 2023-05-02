@@ -2,7 +2,11 @@
 class farmerController extends Controller
 {
     private $currentUser;
-    private $imageHandler;
+
+    private $progressImageHandler;
+
+    private $gigImageHandler;
+
     private $farmerModel;
     private $investorGigModel;
     private $gigModel;
@@ -14,11 +18,19 @@ class farmerController extends Controller
     public function __construct()
     {
         $this->currentUser = Session::get('user');
-        $this->imageHandler = new ImageHandler($folder = 'Uploads3');
+
+
+        // <input type="file" name="name eke"
+        //image ekk upload kranna imsgeHandler->upload('name eka')
+
+        $this->progressImageHandler = new ImageHandler($folder = 'Uploads/progress');
+        $this->gigImageHandler = new ImageHandler($folder = "Uploads/gigs");
 
         $this->farmerModel = $this->model('farmer');
         $this->investorGigModel = $this->model('investorGig');
         $this->gigModel = $this->model('gig');
+        $this->progressModel = $this->model('progress');
+
         $this->progressModel = $this->model('progress');
 
         $this->abcModel = $this->model('abc'); //model eka import krann ('abc' file eke name)
@@ -37,17 +49,18 @@ class farmerController extends Controller
     {
         if (isset($_POST['createGig'])) {
 
-            $gigId = uniqid();
-            $title = $_POST['title'];
-            $landArea = $_POST['landArea'];
-            $capital = $_POST['capital'];
-            $timePeriod = $_POST['timePeriod'];
-            $location = $_POST['location'];
-            $category = $_POST['category'];
 
-            var_dump($_POST);
-            var_dump($_FILES);
-            die();
+
+            $gigId = new UID(PREFIX::GIG);
+
+            $title = new Input(POST, 'title');
+            $landArea = new Input(POST, 'landArea');
+            $capital = new Input(POST, 'capital');
+            $profitMargin = new Input(POST, 'profitMargin');
+            $timePeriod = new Input(POST, 'timePeriod');
+            $location = new Input(POST, 'location');
+            $category = new Input(POST, 'category');
+
 
             $file_name = $_FILES['image']['name'];
             $file_size = $_FILES['image']['size'];
@@ -82,6 +95,7 @@ class farmerController extends Controller
                 'category' => $category,
                 'image' => $new_img_name,
                 'capital' => $capital,
+                'profitMargin' => $profitMargin,
                 'timePeriod' => $timePeriod,
                 'location' => $location,
                 'landArea' => $landArea,
@@ -107,21 +121,100 @@ class farmerController extends Controller
         // require(ROOT . 'Models/gig.php');
         //require(ROOT . 'Models/farmer.php');
         // $gig = new $this->gigModel();
+        $props = [];
 
-        $id = Session::get('user')->getUid(); //session eken user id eka gannawa
+        $id = $this->currentUser->getUid(); //session eken user id eka gannawa activeUser.php file eke tiyenne
         $products = $this->gigModel->All($id);
-        $d['products'] = $products;
-        $this->set($d);
+        $props['products'] = $products;
 
 
         // $farmer = new Farmer();
         $notifications = $this->farmerModel->getnotifications();
         //echo json_encode($notifications);
-        $this->set(['notifications' => $notifications]);
+
+        $props['notifications'] = $notifications;
 
 
-
+        $this->set($props);
         $this->render("index");
+    }
+    function gigprogress()
+    {
+
+        $props = [];
+
+        $id = $this->currentUser->getUid(); //session eken user id eka gannawa activeUser.php file eke tiyenne
+        $products = $this->gigModel->Allgig($id);
+        $props['products'] = $products;
+
+
+
+        $notifications = $this->farmerModel->getnotifications();
+
+        $props['notifications'] = $notifications;
+
+
+        $this->set($props);
+        $this->render("gigprogress");
+    }
+
+    function progressUpdate($params = [])
+    {
+        // require(ROOT . 'Models/gig.php');
+        //require(ROOT . 'Models/farmer.php');
+        // $gig = new $this->gigModel();
+        $props = [];
+        if (isset($params[0]) && !empty($params[0])) {
+            $gigId = $params[0];
+            $gig = $this->gigModel->fetchBy($gigId);
+            $props['gig'] = $gig;
+           
+            // $progs = $this->gigModel->viewPro($gigId);
+            
+            // foreach($progs as $pro){
+
+            //      $progimgs = $this->gigModel->viewProimg($pro['progressId']);
+            //      $props['progimgs'] = $progimgs;
+            // }
+         
+            // if (!empty($progs)){
+            //     $props['progs'] = $progs;
+            // }
+
+            
+        $progress = $this->progressModel->fetchAllByGig($gigId);
+    // var_dump($progress); die();
+
+        $props['progress'] = [];
+        if ($progress['success']) {
+            foreach ($progress['data'] as $pg) {
+                $progressImages = [];
+                $temp = $this->progressModel->fetchImagesByProgressId($pg['progressId']);
+                foreach ($temp['data'] as $key => $value) {
+                    $progressImages[$key] = $value['imageName'];
+                }
+                $pg['images'] = $progressImages;
+                $props['progress'][] = $pg;
+            
+
+           }
+        }
+        }
+
+        // $id = $this->currentUser->getUid(); //session eken user id eka gannawa activeUser.php file eke tiyenne
+        // $products = $this->gigModel->fetchBy($id);
+        // $props['products'] = $products;
+
+
+        // $farmer = new Farmer();
+        $notifications = $this->farmerModel->getnotifications();
+        //echo json_encode($notifications);
+
+        $props['notifications'] = $notifications;
+
+
+        $this->set($props);
+        $this->render("progressUpdate");
     }
 
 
@@ -136,23 +229,25 @@ class farmerController extends Controller
         $id = Session::get('user')->getUid(); //session eken data ganne mehema
         $gigslist = $this->abcModel->getAllGigs($id); // model eke thiyana adala funciton eka call krla output eka
         $props['gigs'] = $gigslist; //view ekata yawann one data tika props kiyal hri d kiyala hri passkrann one
-
+        $props['aaaa'] = 1233;
 
         //insert=======================
 
         // forms adunragann vidiya
 
         // if ($_SERVER['REQUEST_METHOD'] == 'POST'){ // submit button ekak click krlad kiyla --> POST method
+        // <input type="submit" name="form1">
 
         //     if(isset($_POST['form1'])){ // mona sumbit button eked click kale ---> mona form ekada
         //         echo "form 1";
         //     }
 
+        // <button type="submit" name="form2">click</button>
+
         //     if(isset($_POST['form2'])){
         //         echo "form 2";
-        //     }  
+        //     }
         // }
-
         //=====================
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -176,7 +271,7 @@ class farmerController extends Controller
 
 
         $this->set($props); // view ekata set kranne
-        $this->render('abc');
+        $this->render('abc'); // file eke nama denn one () athule
     }
 
 
@@ -191,9 +286,18 @@ class farmerController extends Controller
             'farmerId' => $this->currentUser->getUid(),
             'state' => STATUS::PENDING
         ]);
+
+        $reqinvestors = $this->farmerModel->reqinvestors([
+            'farmerId' => $this->currentUser->getUid(),
+            'state' => STATUS::ACCEPTED
+        ]);
+
+        // var_dump($investors); die();
+
+
         if ($investors['status']) {
             $props['investors'] = $investors['data'];
-            $this->set($props);
+            $props['reqinvestors'] = $reqinvestors['data'];
         }
         $this->set($props);
         $this->render('investors');
@@ -262,6 +366,7 @@ class farmerController extends Controller
             $gig = $this->gigModel->viewGig($gigId);
             $props['gig'] = $gig;
 
+
             $investor = $this->investorGigModel->fetchInvestorByGig($gigId);
             if ($investor['success']) {
                 $props['investor'] = $investor['data'];
@@ -306,7 +411,7 @@ class farmerController extends Controller
             if ($response['success']) {
 
                 try {
-                    $images = $this->imageHandler->upload('images');
+                    $images = $this->progressImageHandler->upload('images');
                     if (!empty($images)) {
                         foreach ($images as $image) {
                             $data = [
