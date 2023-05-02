@@ -102,7 +102,7 @@
         
         <div class="grid__table"
                         style="
-                                --xl-cols: 0.7fr 1.3fr 0.9fr 0.9fr 0.5fr 0.5fr 1.7fr 1fr;
+                                --xl-cols: 0.7fr 1.3fr 0.9fr 0.9fr 0.5fr 0.5fr 1.8fr 1.1fr;
                                 --lg-cols: 1.5fr 1fr 1fr 1fr 0.3fr;
                                 --md-cols: 2fr 1fr 0.3fr;
                                 --sm-cols: 3fr 0.3fr;
@@ -168,7 +168,7 @@
                                     <div class="actions">
                                         <a href="#" class="btn btn-primary">Edit</a>
                                         <!-- <button onclick="openAcceptModal('<?php echo $p['gigId']?>')" class="button__primary">Accept</button> -->
-                                        <button onclick="openRejectModal('<?php echo $p['gigId']?>')" class="button__danger">Reject</button>
+                                        <button onclick="openRejectModal('<?php echo $p['gigId']?>')" class="button__danger">Delete</button>
                                         <!-- <a href="<?php echo URLROOT . "/farmer/deleteGig/" . $p['gigId'] ?>" class="btn btn-danger">Delete</a> -->
                                     </div>
                                 </div>

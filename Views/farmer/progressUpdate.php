@@ -177,18 +177,19 @@
                         </div>
                     </div>
                     <div class="btn_wrapper btnposi">
-                    <a class="btn btn-primary" href="<?php echo URLROOT ?>/farmer/newProgress">Add New</a>
+                    <a class="btn btn-primary" href="<?php echo URLROOT ?>/farmer/newProgress/<?php echo $gig['gigId']?>">Add New</a>
                     </div>
                     <?php
                         foreach ($progress as $pr) {
                         ?>
+                        <h3><p><?php echo $pr['date']?></p></h3>
 
                             <div class="imgrow">
                             <?php
                                 foreach ($pr['images'] as $img) {
                             ?>
                                     <div class="proimgframe">
-                                        <img src="<?php echo UPLOADS . $img ?>">
+                                        <img src="<?php echo UPLOADS .'/progress/' . $img ?>">
                                     </div>
                             <?php
                                 }

@@ -23,7 +23,7 @@ class farmerController extends Controller
         // <input type="file" name="name eke"
         //image ekk upload kranna imsgeHandler->upload('name eka')
 
-        $this->progressImageHandler = new ImageHandler($folder = 'Uploads3');
+        $this->progressImageHandler = new ImageHandler($folder = 'Uploads/progress');
         $this->gigImageHandler = new ImageHandler($folder = "Uploads/gigs");
 
         $this->farmerModel = $this->model('farmer');
