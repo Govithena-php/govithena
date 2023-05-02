@@ -48,7 +48,7 @@
                     <div class="buttons">
                         <a class="button__primary">Read more</a>
                         <a class="button__primary">Edit gig</a>
-                        <a class="button__primary">Update progress</a>
+                        <a class="button__primary" href="<?php echo URLROOT?>/tech/updateProgress">Update progress</a>
                     </div>
                 </div>
            </div>

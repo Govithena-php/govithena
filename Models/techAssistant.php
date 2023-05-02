@@ -121,4 +121,5 @@ class TechAssistant extends Model
             die();
         }
     }
+
 }

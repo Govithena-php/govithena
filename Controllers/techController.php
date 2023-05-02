@@ -114,4 +114,9 @@ class techController extends Controller
         $this->render('assignedGigs');
     }
 
+    public function updateProgress()
+    {
+        $this->render('updateProgress');
+    }
+
 }
