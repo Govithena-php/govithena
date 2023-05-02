@@ -14,6 +14,8 @@ class PREFIX
     const FEILDVISIT = 'FVT';
     const INVESTOR_GIG = 'ING';
 
+
+    const WITHDRAWAL = 'WTH';
 }
 
 class PRODUCT

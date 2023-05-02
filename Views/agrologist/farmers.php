@@ -123,28 +123,28 @@
 
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </form>
                             <div id="edit_detials_modal" class="modal">
 
-                                        <div class="modal-content">
-                                            <span class="close close_modal1">&times;</span>
-                                            <h3 class="fw-6">Complete</h3>
-                                            <p class="pt-1">Are you sure you want to complete?</p>
-                                            <form class="form pt-1" action="<?php echo URLROOT . '/agrologist/farmers' ?>"
-                                                method="post" enctype="multipart/form-data">
+                                <div class="modal-content">
+                                    <span class="close close_modal1">&times;</span>
+                                    <h3 class="fw-6">Complete</h3>
+                                    <p class="pt-1">Are you sure you want to complete?</p>
+                                    <form class="form pt-1" action="<?php echo URLROOT . '/agrologist/farmers' ?>" method="post"
+                                        enctype="multipart/form-data">
 
-                                                <!-- <input type="text" name="firstName" class="" placeholder="First Name"
+                                        <!-- <input type="text" name="firstName" class="" placeholder="First Name"
                                                     value=""><br>
                                                 <input type="text" name="lastName" class="" placeholder="Last Name"
                                                     value=""><br> -->
-                                                <button type="submit" name="complete_btn" class="btn uppercase"
-                                                value="<?php echo $request['requestId'] ?> ">Complete</button>
-                                            </form>
-                                        </div>
+                                        <button type="submit" name="complete_btn" class="btn uppercase"
+                                            value="<?php echo $request['requestId'] ?> ">Complete</button>
+                                    </form>
+                                </div>
 
-                                    </div>
+                            </div>
                         </div>
                         <?php
                     }
