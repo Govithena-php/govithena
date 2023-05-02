@@ -25,7 +25,7 @@
     <?php
     $datadata = $notifications;
 
-    var_dump($progress); die();
+    // var_dump($progress); die();
 
     $active = "gigs";
     $title = "Gigs";
@@ -188,7 +188,7 @@
                                 foreach ($pr['images'] as $img) {
                             ?>
                                     <div class="[ img ]">
-                                        <img src="<?php echo UPLOADS3 . $img ?>">
+                                        <img src="<?php echo UPLOADS . $img ?>">
                                     </div>
                             <?php
                                 }

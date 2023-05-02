@@ -183,7 +183,7 @@ class farmerController extends Controller
 
             
         $progress = $this->progressModel->fetchAllByGig($gigId);
-    var_dump($progress); die();
+    // var_dump($progress); die();
 
         $props['progress'] = [];
         if ($progress['success']) {
