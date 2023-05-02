@@ -509,6 +509,10 @@
     background-color: rgb(17, 118, 225);
 }
 
+.about__gig_container {
+    margin-right: 5rem;
+}
+
 .about__gig {
     border-top: 1px solid #ccc;
     display: flex;
@@ -519,7 +523,8 @@
 
 .about__gig h3 {
     font-weight: 600;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
 }
 
 .about__gig p {
@@ -529,7 +534,7 @@
 
 .about__gig_images_title {
     font-weight: 600;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     color: var(--clr-text);
     margin-top: 1rem;
     margin-bottom: 2rem;
@@ -540,14 +545,14 @@
 
 .about__gig_images {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
 }
 
 .gig__image {
     width: 100%;
     overflow: hidden;
-    border-radius: 1rem;
+    border-radius: 5px;
 }
 
 .gig__image img {

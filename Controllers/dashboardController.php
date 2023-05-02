@@ -159,18 +159,17 @@ class dashboardController extends Controller
         $props = [];
 
         if (!empty($params)) {
-            $igId = $params[0];
-            $props['igId'] = $igId;
+            $gigId = $params[0];
+            $props['gigId'] = $gigId;
         } else {
             $this->redirect('/error/pageNotFound');
         }
 
-        $gigIdFarmerId = $this->gigModel->getGigIdFarmerIdByIgIdAndInvestorId($igId, $this->currentUser->getUid());
+        $farmerId = $this->investorGigModel->getfarmerIdByGigId($gigId);
 
-        if ($gigIdFarmerId['success']) {
-            if ($gigIdFarmerId['data']) {
-                $gigId = $gigIdFarmerId['data']['gigId'];
-                $farmerId = $gigIdFarmerId['data']['farmerId'];
+        if ($farmerId['success']) {
+            if ($farmerId['data']) {
+                $farmerId = $farmerId['data']['farmerId'];
 
                 $gig = $this->gigModel->fetchBy($gigId);
                 if ($gig['success']) {
@@ -193,10 +192,11 @@ class dashboardController extends Controller
                     $this->redirect('/error/somethingWentWrong/3');
                 }
 
-                $fieldVisits = $this->fieldVisitModel->fetchAllByIgId($igId);
+                $fieldVisits = $this->fieldVisitModel->fetchAllByGigId($gigId);
                 if ($fieldVisits['success']) {
                     $props['fieldVisits'] = $fieldVisits['data'];
                 }
+
                 $totalInvestment = $this->investorGigModel->getTotalInvestmentForGigByInvestor($this->currentUser->getUid(), $gigId);
                 if ($totalInvestment['success']) {
                     $props['totalInvestment'] = $totalInvestment['data']['totalInvestment'];
@@ -211,12 +211,12 @@ class dashboardController extends Controller
 
                 $filter = new Filter([], ['fromDate', 'toDate']);
 
-                $investments = $this->investmentModel->getInvestmentsByIgId($igId, $filter);
+                $investments = $this->investmentModel->getInvestmentsByGigId($gigId, $filter);
                 if ($investments['success']) {
                     $props['investments'] = $investments['data'];
                 }
 
-                $progress = $this->progressModel->fetchAllByIgId($igId);
+                $progress = $this->progressModel->fetchAllByGigId($gigId);
 
                 $props['progress'] = [];
                 if ($progress['success']) {
@@ -236,7 +236,7 @@ class dashboardController extends Controller
                 $this->redirect('/error/accessDenied');
             }
         } else {
-            $this->redirect('/error/somethingWentWrong');
+            $this->redirect('/error/somethingWentWrong/6');
         }
 
         $this->set($props);
@@ -361,23 +361,23 @@ class dashboardController extends Controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $igId = new Input(POST, 'igId');
+            $gigId = new Input(POST, 'gigId');
             $amount = new Input(POST, 'amount');
             $description = new Input(POST, 'description');
 
-            $ids = $this->investorGigModel->getIdsByIGID($igId);
-            if ($ids['success']) {
-                $ids = $ids['data'];
+            $farmerId = $this->investorGigModel->getfarmerIdByGigId($gigId);
+
+            if ($farmerId['success']) {
+                $farmerId = $farmerId['data'];
             } else {
-                $this->redirect('/error/somethingWentWrong');
+                $this->redirect('/error/somethingWentWrong/1');
             }
 
             $response = $this->investmentModel->save([
                 'id' => new UID(PREFIX::INVESTMENT),
-                'igId' => $igId,
                 'investorId' => $this->currentUser->getUid(),
-                'gigId' => $ids['gigId'],
-                'farmerId' => $ids['farmerId'],
+                'gigId' => $gigId,
+                'farmerId' => $farmerId['farmerId'],
                 'amount' => $amount,
                 'description' => $description
             ]);
@@ -385,7 +385,7 @@ class dashboardController extends Controller
             if ($response['success']) {
                 $this->redirect('/dashboard/investments');
             } else {
-                $this->redirect('/error/somethingWentWrong');
+                $this->redirect('/error/somethingWentWrong/2');
             }
         }
 
@@ -394,7 +394,7 @@ class dashboardController extends Controller
         if ($investmentGigs['success']) {
             $props['investmentGigs'] = $investmentGigs['data'];
         } else {
-            $this->redirect('/error/somethingWentWrong');
+            $this->redirect('/error/somethingWentWrong/3');
         }
 
         $this->set($props);

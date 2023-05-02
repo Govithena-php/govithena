@@ -38,13 +38,13 @@
                     <label for="gig">Select the gig you wish to make an investment</label>
 
                     <div class="custom__select">
-                        <input type="hidden" name="igId" />
+                        <input type="hidden" name="gigId" />
                         <button type="button">Select the gig</button>
                         <div class="custom__options">
                             <?php
                             foreach ($investmentGigs as $gig) {
                             ?>
-                                <div class="custom__option" Value="<?php echo $gig['igId'] ?>" Label="<?php echo $gig['title'] ?>">
+                                <div class="custom__option" Value="<?php echo $gig['gigId'] ?>" Label="<?php echo $gig['title'] ?>">
                                     <div class="select__data_box">
                                         <div class="img">
                                             <img width="30" src="<?php echo UPLOADS . $gig['thumbnail'] ?>" alt="">

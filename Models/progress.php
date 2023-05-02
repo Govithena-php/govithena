@@ -2,12 +2,12 @@
 
 class Progress
 {
-    public function fetchAllByIgId($igId)
+    public function fetchAllByGigId($gigId)
     {
         try {
-            $sql = "SELECT gp.progressId, gp.userId, gp.gigId, gp.subject, gp.description, gp.userType, DATE(gp.timestamp) as date, TIME(gp.timestamp) as time, u.firstName, u.lastName, u.image FROM gig_progress as gp INNER JOIN user u on u.uid = gp.userId WHERE gp.igId = :igId";
+            $sql = "SELECT gp.progressId, gp.userId, gp.subject, gp.description, gp.userType, DATE(gp.timestamp) as date, TIME(gp.timestamp) as time, u.firstName, u.lastName, u.image FROM gig_progress as gp INNER JOIN user u on u.uid = gp.userId WHERE gp.gigId = :gigId ORDER BY gp.timestamp DESC";
             $stmt = Database::getBdd()->prepare($sql);
-            $stmt->execute(['igId' => $igId]);
+            $stmt->execute(['gigId' => $gigId]);
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return ['success' => true, 'data' => $data];
         } catch (PDOException $e) {
