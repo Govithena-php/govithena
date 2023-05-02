@@ -154,79 +154,90 @@ class dashboardController extends Controller
         $this->render('gigs');
     }
 
-    public function gig($params)
+    public function gig($params = [])
     {
         $props = [];
-        if (!isset($params[0]) || empty($params[0])) {
-            $this->redirect('/error/dontHaveAccess/1');
-        }
-        $gigId = $params[0];
 
-        $props['gig'] = $gig = $this->gigModel->fetchBy($gigId);
-        if (!$props['gig']) {
-            $this->redirect('/error/dontHaveAccess/2');
+        if (!empty($params)) {
+            $igId = $params[0];
+            $props['igId'] = $igId;
+        } else {
+            $this->redirect('/error/pageNotFound');
         }
 
-        $gigImages  = $this->gigModel->fetchGigImages($gigId);
-        if ($gigImages['success']) {
-            $props['gigImages'] = $gigImages['data'];
-        }
+        $gigIdFarmerId = $this->gigModel->getGigIdFarmerIdByIgIdAndInvestorId($igId, $this->currentUser->getUid());
 
-        $props['farmer'] = $this->userModel->fetchBy($gig['farmerId']);
-        if (!$props['farmer']) {
-            $this->redirect('/error/dontHaveAccess/3');
-        }
+        if ($gigIdFarmerId['success']) {
+            if ($gigIdFarmerId['data']) {
+                $gigId = $gigIdFarmerId['data']['gigId'];
+                $farmerId = $gigIdFarmerId['data']['farmerId'];
 
-        $fieldVisits = $this->fieldVisitModel->fetchAllByGig($gigId);
-        if ($fieldVisits['success']) {
-            $props['fieldVisits'] = $fieldVisits['data'];
-        }
-
-        $progress = $this->progressModel->fetchAllByGig($gigId);
-        $props['progress'] = [];
-        if ($progress['success']) {
-            foreach ($progress['data'] as $pg) {
-                $progressImages = [];
-                $temp = $this->progressModel->fetchImagesByProgressId($pg['progressId']);
-                foreach ($temp['data'] as $key => $value) {
-                    $progressImages[$key] = $value['imageName'];
+                $gig = $this->gigModel->fetchBy($gigId);
+                if ($gig['success']) {
+                    $props['gig'] = $gig['data'];
+                } else {
+                    $this->redirect('/error/somethingWentWrong/1');
                 }
-                $pg['images'] = $progressImages;
-                $props['progress'][] = $pg;
+
+                $gigImages  = $this->gigModel->fetchGigImages($gigId);
+                if ($gigImages['success']) {
+                    $props['gigImages'] = $gigImages['data'];
+                } else {
+                    $this->redirect('/error/somethingWentWrong/2');
+                }
+
+                $farmer = $this->userModel->fetchBy($farmerId);
+                if ($farmer['success']) {
+                    $props['farmer'] = $farmer['data'];
+                } else {
+                    $this->redirect('/error/somethingWentWrong/3');
+                }
+
+                $fieldVisits = $this->fieldVisitModel->fetchAllByIgId($igId);
+                if ($fieldVisits['success']) {
+                    $props['fieldVisits'] = $fieldVisits['data'];
+                }
+                $totalInvestment = $this->investorGigModel->getTotalInvestmentForGigByInvestor($this->currentUser->getUid(), $gigId);
+                if ($totalInvestment['success']) {
+                    $props['totalInvestment'] = $totalInvestment['data']['totalInvestment'];
+                }
+
+                $startedDate = $this->investorGigModel->getStartedDate($gigId);
+                if ($startedDate['success']) {
+                    $start = new DateTime($startedDate['data']['startDate']);
+                    $end = new DateTime();
+                    $props['numberOfDaysLeft'] = $start->diff($end)->days;
+                }
+
+                $filter = new Filter([], ['fromDate', 'toDate']);
+
+                $investments = $this->investmentModel->getInvestmentsByIgId($igId, $filter);
+                if ($investments['success']) {
+                    $props['investments'] = $investments['data'];
+                }
+
+                $progress = $this->progressModel->fetchAllByIgId($igId);
+
+                $props['progress'] = [];
+                if ($progress['success']) {
+                    foreach ($progress['data'] as $pg) {
+                        $progressImages = [];
+                        $temp = $this->progressModel->fetchImagesByProgressId($pg['progressId']);
+                        foreach ($temp['data'] as $key => $value) {
+                            $progressImages[$key] = $value['image'];
+                        }
+                        $pg['images'] = $progressImages;
+                        $props['progress'][] = $pg;
+                    }
+                } else {
+                    $this->redirect('/error/somethingWentWrong/5');
+                }
+            } else {
+                $this->redirect('/error/accessDenied');
             }
+        } else {
+            $this->redirect('/error/somethingWentWrong');
         }
-
-        $totalInvestment = $this->investorGigModel->getTotalInvestmentForGigByInvestor($this->currentUser->getUid(), $gigId);
-        if ($totalInvestment['success']) {
-            $props['totalInvestment'] = $totalInvestment['data']['totalInvestment'];
-        }
-
-        $startedDate = $this->investorGigModel->getStartedDate($gigId);
-
-        if ($startedDate['success']) {
-            $start = new DateTime($startedDate['data']['startDate']);
-            $end = new DateTime();
-            $props['numberOfDaysLeft'] = $start->diff($end)->days;
-        }
-
-        $investments = $this->investmentModel->fetchByInvestorAndGig($this->currentUser->getUid(), $gigId);
-        if ($investments['success']) {
-            $props['investments'] = $investments['data'];
-        }
-
-        // accpted data
-        // gig
-        // farmer
-        // progress
-        // investment
-        // expreses
-        // profit
-        // agrologist reports
-        // messsages
-
-
-
-
 
         $this->set($props);
         $this->render('gig');

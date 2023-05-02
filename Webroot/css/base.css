@@ -305,6 +305,13 @@ hr {
 }
 
 
+.limit-text-1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
 .limit-text-2 {
     overflow: hidden;
     text-overflow: ellipsis;

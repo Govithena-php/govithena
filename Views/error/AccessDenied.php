@@ -29,8 +29,7 @@
             <h1>Access Denied</h1>
             <div class="details">
                 <p>We're sorry, but you don't have access to view this page. This could be for a number of reasons, including:
-                    You haven't logged in yet, You don't have the necessary permissions, This page is restricted to a certain user group.</p><br>
-                <p>If you believe you should have access to this page, please contact our support team for assistance.</p>
+                    You haven't logged in yet, You don't have the necessary permissions or this page is restricted to a certain user group.</p><br>
             </div>
             <button onclick="history.back()">Go Back</button>
         </div>
