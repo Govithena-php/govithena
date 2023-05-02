@@ -183,20 +183,22 @@
                         foreach ($progress as $pr) {
                         ?>
 
-
+                            <div class="imgrow">
                             <?php
                                 foreach ($pr['images'] as $img) {
                             ?>
-                                    <div class="[ img ]">
+                                    <div class="proimgframe">
                                         <img src="<?php echo UPLOADS . $img ?>">
                                     </div>
                             <?php
                                 }
                             ?>
+                            </div>
 
                         <br>
                        <h3><p><?php echo $pr['subject']?></p></h3>
                         <p><?php echo $pr['description']?></p>
+                        <hr>
                         <?php
                         }
                         ?>
