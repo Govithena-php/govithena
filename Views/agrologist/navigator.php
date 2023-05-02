@@ -175,7 +175,7 @@ function highlight($active, $link)
             </li>
             <li>
                 <a href="<?php echo URLROOT . "/agrologist/farmers" ?>" class="<?php highlight($active, "farmers") ?>">
-                    <i class="[ fa-solid fa-sack-dollar ]"></i>
+                    <i class="[ fa-solid fa-tractor ]"></i>
                     <p>Farmers</p>
                 </a>
             </li>
@@ -186,12 +186,12 @@ function highlight($active, $link)
                     <p>Requests</p>
                 </a>
             </li>
-            <!-- <li>
-                <a href="<?php echo URLROOT . "/agrologist/reviews" ?>" class="<?php highlight($active, "reviews") ?>">
-                    <i class="[ fa-solid fa-tractor ]"></i>
-                    <p>Reviews</p>
+            <li>
+                <a href="<?php echo URLROOT . "/agrologist/withdrawals" ?>" class="<?php highlight($active, "withdrawals") ?>">
+                    <i class="[ fa-solid fa-sack-dollar ]"></i>
+                    <p>Withdrawals</p>
                 </a>
-            </li> -->
+            </li>
         </ul>
         <div class="[ grow ]"></div>
         <ul>
@@ -199,7 +199,7 @@ function highlight($active, $link)
                 <a href="<?php echo URLROOT . "/agrologist/myaccount" ?>"
                     class="<?php highlight($active, "myaccount") ?>">
                     <i class="[ fa-solid fa-user-tie ]"></i>
-                    <p>My Account</p>
+                    <p>Account</p>
                 </a>
             </li>
             <li>
