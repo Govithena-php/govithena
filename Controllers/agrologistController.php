@@ -163,9 +163,10 @@ class agrologistController extends Controller
                     } else {
                         $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong.');
                     }
+                    Session::set(['complete_farmer_alert' => $alert]);
                 }
                 // echo json_encode($complete);
-                Session::set(['complete_farmer_alert' => $alert]);
+                
 
 
             }
@@ -220,6 +221,7 @@ class agrologistController extends Controller
                     'q8' => new Input(POST, 'q8'),
                     'q9' => new Input(POST, 'q9'),
                 ];
+                var_dump($data);die;
 
                 $agr->save($data);
 

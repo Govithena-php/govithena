@@ -1,80 +1,87 @@
 .result__card {
-    min-height: 300px;
-    border-radius: 0.5rem;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  min-height: 300px;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .card__img {
-    position: relative;
-    width: 100%;
-    height: 200px;
+  position: relative;
+  width: 100%;
+  height: 200px;
 }
 
-.card__img>img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 0.5rem 0.5rem 0 0;
+.card__img > img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 0.5rem 0.5rem 0 0;
 }
 
 .location_name {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding-block: 1rem;
-    display: flex;
-    background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-block: 1rem;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
-.location_name>p {
-    padding-left: 0.5rem;
-    color: #fff;
+.location_name > p {
+  padding-left: 0.5rem;
+  color: #fff;
 }
 
 .card__content {
-    padding: 1rem;
-} 
+  padding: 1rem;
+}
 
 .search {
-    display: flex;
+  display: flex;
 }
 
 .search h4 {
-    font-size: 1.1rem;
-    font-weight: 400;
-    margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
 }
 
 .search input {
-    padding: 0.7rem 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px 0 0 5px;
-    width: 50%;
+  padding: 0.7rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+  width: 50%;
 }
 
 .search input:focus {
-    outline: none;
+  outline: none;
 }
 
 .search button {
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--clr-primary);
-    border-radius: 0 5px 5px 0;
-    background-color: var(--clr-primary);
-    color: var(--clr-light);
-    cursor: pointer;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--clr-primary);
+  border-radius: 0 5px 5px 0;
+  background-color: var(--clr-primary);
+  color: var(--clr-light);
+  cursor: pointer;
+}
+
+.search button:hover {
+  background-color: #136941;
 }
 
 .search button:focus {
-    outline: none;
+  outline: none;
 }
 
+.is-hidden {
+  display: none;
+}
 
-.is-hidden { 
-    display: none; 
+.btn-primary:hover {
+    background-color: #136941;
 }
