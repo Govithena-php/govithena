@@ -141,7 +141,7 @@
                         <span class="close close_modal1">&times;</span>
                         <h3 class="fw-6">Transfer</h3>
                         <p class="pt-1">Are you sure you want to transfer?</p>
-                        <form class="form pt-1" action="<?php echo URLROOT . '/agrologist/withdrawals' ?>" method="post"
+                        <form class="form pt-1" action="<?php echo URLROOT . '/agrologist/withdrawals?withdraw=confirm' ?>" method="post"
                             enctype="multipart/form-data">
                             <button type="submit" name="transfer_confirm_btn" class="btn uppercase">Transfer</button>
                         </form>
