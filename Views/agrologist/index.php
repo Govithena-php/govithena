@@ -183,6 +183,15 @@
             </div> -->
         </div>
 
+        <div class="[ charts ]">
+            <div class="[ chart ]">
+                <canvas id="myChart"></canvas>
+            </div>
+            <div class="[ chart ]">
+                <canvas id="pieChart"></canvas>
+            </div>
+        </div>
+
 
         <!-- ================================================================ -->
 
@@ -416,6 +425,9 @@
             .then((response) => response.json())
             .then((datadata) => console.log(datadata));
     //}
+    </script>
+    <script>
+
     </script>
 
 </body>

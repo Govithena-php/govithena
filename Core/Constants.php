@@ -13,6 +13,8 @@ class PREFIX
     const CATEGORY = 'CAT';
 
     const FEILDVISIT = 'FVT';
+
+    const WITHDRAWAL = 'WTH';
 }
 
 class PRODUCT

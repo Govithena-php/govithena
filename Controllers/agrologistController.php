@@ -331,7 +331,7 @@ class agrologistController extends Controller
                 //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'> file uploaded  </h1>";
                 Session::get('user')->setImage(basename($_FILES['profile_img']['name']));
 
-               $edit_user  = $agrologist->edit_user_details([
+                $edit_user = $agrologist->edit_user_details([
                     'uid' => $uid,
                     'firstName' => $firstName->get(),
                     'lastName' => $lastName->get(),
@@ -453,7 +453,7 @@ class agrologistController extends Controller
                     'description' => $description->get()
                 ]);
 
-            }else{
+            } else {
                 $edit_qualifications = $agrologist->updateQualificationDescription([
                     'description' => $description->get()
                 ]);
@@ -596,6 +596,50 @@ class agrologistController extends Controller
         $d['paymentDetails'] = $agrologist->getPaymentDetails($fid);
         $this->set($d);
         return $this->render('payments');
+    }
+
+    public function withdrawals()
+    {
+        require(ROOT . 'Models/agrologist.php');
+        $agrologist = new Agrologist();
+
+        $d['withdrawal'] = $agrologist->getAgrologistTotalWithrawal();
+        $d['income'] = $agrologist->getAgrologistTotalIncome();
+        $d['monthly_withdrawal'] = $agrologist->getAgrologistMonthlyWithrawal();
+        $d['account'] = $agrologist->getAccountDetails();
+        $d['income_list'] = $agrologist->getIncome();
+        $d['withdrawal_list'] = $agrologist->getWithdrawals();
+        // $d['paymentDetails'] = $agrologist->getPaymentDetails($fid);
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($_GET['withdraw'] == 'confirm') {
+                $withdrawal = new INPUT(POST, 'withdraw_amount');
+                // var_dump($withdrawal);
+                // die;
+
+            }
+            if (isset($_POST['transfer_confirm_btn'])) {
+                $withdraw = $agrologist->insertWithdrawals([
+                    'withdrawalId' => new UID(PREFIX::WITHDRAWAL),
+                    'withdrawal' => $withdrawal,
+                ]);
+
+                if ($withdraw) {
+                    $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully Submitted!');
+                } else {
+                    $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong!');
+                }
+                Session::set(['agrologist_withdraw_alert' => $alert]);
+            }
+
+        }
+
+
+
+
+
+        $this->set($d);
+        return $this->render('withdrawals');
     }
 
 

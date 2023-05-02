@@ -700,4 +700,94 @@ class Agrologist extends Model
             return null;
         }
     }
+
+    public function getAgrologistTotalWithrawal()
+    {
+        try {
+            $sql = "SELECT SUM(w.withdrawal) AS total_withdrawal FROM agrologist_withdrawal w WHERE w.agrologistId=:agrologistId GROUP BY w.agrologistId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'agrologistId' => Session::get('user')->getUid()
+            ]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+
+        }
+    }
+
+    public function getAgrologistMonthlyWithrawal()
+    {
+        try {
+            $sql = "SELECT SUM(w.withdrawal) AS total_withdrawal FROM agrologist_withdrawal w WHERE w.agrologistId=:agrologistId AND MONTH(w.withdrawalDate) = MONTH(CURDATE()) GROUP BY w.agrologistId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'agrologistId' => Session::get('user')->getUid()
+            ]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+
+        }
+    }
+
+    public function insertWithdrawals($data)
+    {
+        try {
+            $sql = "INSERT INTO  agrologist_withdrawal (withdrawalId, agrologistId, withdrawal) VALUES (:withdrawalId, :agrologistId, :withdrawal)";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'withdrawalId' => $data['withdrawalId'],
+                'agrologistId' => Session::get('user')->getUid(),
+                'withdrawal' => $data['withdrawal']
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+        }
+    }
+
+    public function getIncome()
+    {
+        try {
+            $sql = "SELECT p.payment, p.paidDate, CONCAT(u.firstName , ' ', u.lastName) AS fullName FROM agrologist_payment p LEFT JOIN user u ON u.uid=p.farmerId WHERE p.agrologistId=:agrologistId ORDER BY p.paidDate DESC";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'agrologistId' => Session::get('user')->getUid()
+            ]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+
+        }
+    }
+
+    public function getWithdrawals()
+    {
+        try {
+            $sql = "SELECT withdrawal, withdrawalDate FROM agrologist_withdrawal WHERE agrologistId=:agrologistId ORDER BY withdrawalDate DESC";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'agrologistId' => Session::get('user')->getUid()
+            ]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+
+        }
+    }
 }
