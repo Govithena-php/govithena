@@ -61,6 +61,8 @@ class accountController extends Controller
             $props['totalInvestment'] = $totalInvestment['data']['totalInvestment'];
         }
 
+        
+
         $this->set($props);
         $this->render('index');
     }

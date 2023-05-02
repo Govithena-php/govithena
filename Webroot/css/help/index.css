@@ -1,0 +1,12 @@
+nav {
+    background-color: var(--clr-dark, #000);
+}
+
+.container[container-type="section"] {
+    margin-block: 5rem;
+}
+
+.help{
+    margin-block: 2rem;
+    min-height: 100dvh;
+}
