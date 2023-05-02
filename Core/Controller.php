@@ -60,4 +60,8 @@ class Controller
                 break;
         }
     }
+
+    public function error(){
+        
+    }
 }

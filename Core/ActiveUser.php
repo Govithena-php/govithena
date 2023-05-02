@@ -84,7 +84,7 @@ class ActiveUser
         return $this->img;
     }
 
-    public function isLogeddIn()
+    public function isLoggedIn()
     {
         return $this->logeddIn;
     }

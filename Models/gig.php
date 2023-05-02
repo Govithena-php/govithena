@@ -9,11 +9,9 @@ class Gig extends Model
             $stmt =  Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $gig = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $gig;
+            return ['success' => true, 'data' => $gig];
         } catch (PDOException $e) {
-            echo $e->getMessage();
-            die();
-            return null;
+            return ['success' => false, 'data' => $e->getMessage()];
         }
     }
 
@@ -113,11 +111,24 @@ class Gig extends Model
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['gigId' => $gigId]);
             $gig = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $gig;
+            return ['success' => true, 'data' => $gig];
         } catch (PDOException $e) {
             echo $e->getMessage();
             die();
-            return null;
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
+
+    public function getGigIdFarmerIdByIgIdAndInvestorId($igId, $investorId)
+    {
+        try {
+            $sql = "SELECT gigId, farmerId FROM investor_gig WHERE igId = :igId AND investorId = :investorId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['igId' => $igId, 'investorId' => $investorId]);
+            $gig = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $gig];
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
         }
     }
     public function viewProimg($gigId)

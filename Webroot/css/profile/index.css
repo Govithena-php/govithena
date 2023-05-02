@@ -152,6 +152,8 @@ nav {
     gap: 1rem;
 }
 
+
+
 .preformance .cards .card {
     padding: 1.25rem 1rem;
     border-radius: 5px;
@@ -167,6 +169,10 @@ nav {
     font-size: 2.5rem;
     color: var(--clr-text);
     font-weight: 600;
+}
+
+.accequerdOver{
+    font-size:2rem !important;
 }
 
 .progress h1 {

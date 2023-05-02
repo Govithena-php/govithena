@@ -100,7 +100,7 @@
                     if (isset($gigDetails)) {
                         // print_r($searchResult);
                         foreach ($gigDetails as $gigDetail) {
-                            $imageURL = UPLOADS . $gigDetail["image"];
+                            $imageURL = UPLOADS . $gigDetail["thumbnail"];
 
                             // echo $imageURL;
                             // die();
@@ -115,12 +115,12 @@
                                     <div class="location_name">
 
                                         <p class="ml-1">
-                                            <?php echo ucwords($gigDetail['location']) ?>
+                                            <?php echo ucwords($gigDetail['city']) ?>
                                         </p>
                                     </div>
                                 </div>
                                 <div class="card__content">
-                                    <a class="text-dec-none mb-1 fs-5 text-dark fw-6"
+                                    <a class="text-dec-none mb-1  text-dark fw-6 limit-text-2"
                                         href="">
                                         <?php echo ucwords($gigDetail['title']) ?>
                                     </a>
@@ -129,7 +129,7 @@
                                             <?php echo ucwords($gigDetail['category']) ?>
                                         </p>
                                         <p>
-                                            <?php echo $gigDetail['timePeriod'] ?> days
+                                            <?php echo $gigDetail['cropCycle'] ?> days
                                         </p>
                                     </div>
                                 </div>

@@ -1,5 +1,12 @@
 body {font-family: Arial, Helvetica, sans-serif;}
 
+.center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
@@ -13,15 +20,20 @@ body {font-family: Arial, Helvetica, sans-serif;}
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  /* margin-bottom: 30px; */
 }
 
 /* Modal Content */
 .modal-content {
   background-color: #fefefe;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 50%;
 }
 
 /* The Close Button */
@@ -49,9 +61,9 @@ body {
 
 
 .form {
-    width: 90%;
+    width: 80%;
     /* max-width: 1000px;  */
-    padding-left: 20px; 
+    /* padding-left: 20px;  */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -103,7 +115,7 @@ body {
 
 .profile_card {
   display: grid;
-  grid-template-columns: 1fr 2fr 2fr;
+  grid-template-columns: 1fr 4fr ;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.5rem;
   height: 150px;
@@ -153,5 +165,29 @@ body {
 
 .rating_checked {
   color: orange;
+}
+
+.average-rating {
+  position: relative;
+  appearance: none;
+  color: transparent;
+  width: auto;
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+.average-rating::before {
+  /* --percent: calc(4.3/5*100%); */
+  content: '★★★★★';
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 25px;
+  /* font-weight: 500; */
+  color: rgba(0,0,0,0.2);
+  background:
+    linear-gradient(90deg, gold var(--percent), rgba(0,0,0,0.2) var(--percent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 

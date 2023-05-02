@@ -9,7 +9,7 @@ $currentUser = Session::get('user');
     <div class="[ container navbar ]" continer-type="navbar">
         <div class="[ toggle__icon ]">
             <button onclick="openSidebar()">
-                <i class="fas fa-bars"></i>
+                <i class="bi bi-list"></i>
             </button>
         </div>
 
@@ -90,7 +90,7 @@ $currentUser = Session::get('user');
 <div open="false" class="[ mobile__sidebar ]">
     <div class="[ close__btn ]">
         <button onclick="closeSidebar()">
-            <i class="fas fa-times"></i>
+            <i class="bi bi-x"></i>
         </button>
     </div>
     <div class="[ menu ]">
@@ -115,3 +115,5 @@ $currentUser = Session::get('user');
         <?php } ?>
     </div>
 </div>
+
+<script src="<?php echo JS ?>/navbar/navbar.js"></script>
