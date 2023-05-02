@@ -120,14 +120,14 @@ class Gig extends Model
             return null;
         }
     }
-    public function viewProimg($gigId)
+    public function viewProimg($progressId)
     {
         try {
-            $sql = "SELECT * FROM gig_progress_image WHERE gigId = :gigId ";
+            $sql = "SELECT * FROM gig_progress_image WHERE progressId = :progressId ";
             $stmt = Database::getBdd()->prepare($sql);
-            $stmt->execute(['gigId' => $gigId]);
-            $gig = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $gig;
+            $stmt->execute(['progressId' => $progressId]);
+            $progressimg = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $progressimg;
         } catch (PDOException $e) {
             echo $e->getMessage();
             die();
@@ -138,8 +138,9 @@ class Gig extends Model
     public function viewPro($gigId)
     {
         try {
-            $sql = "SELECT gig_progress.progressId, gig_progress.userId, gig_progress.gigId, gig_progress.subject, gig_progress.description, gig_progress_image.imageName FROM gig_progress RIGHT JOIN gig_progress_image ON gig_progress.progressId = gig_progress_image.progressId WHERE gigId = :gigId";
+            // $sql = "SELECT gig_progress.progressId, gig_progress.userId, gig_progress.gigId, gig_progress.subject, gig_progress.description, gig_progress_image.imageName FROM gig_progress RIGHT JOIN gig_progress_image ON gig_progress.progressId = gig_progress_image.progressId WHERE gigId = :gigId";
             // SELECT gig_progress.progressId, gig_progress.userId, gig_progress.gigId, gig_progress.subject, gig_progress.description, gig_progress_image.imageName FROM gig_progress RIGHT JOIN gig_progress_image ON gig_progress.progressId = gig_progress_image.progressId WHERE gigId = :gigId
+            $sql = "SELECT * FROM gig_progress WHERE gigId = :gigId ";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['gigId' => $gigId]);
             $gig = $stmt->fetch(PDO::FETCH_ASSOC);

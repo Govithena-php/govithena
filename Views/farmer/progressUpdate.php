@@ -24,6 +24,9 @@
 
     <?php
     $datadata = $notifications;
+
+    var_dump($progress); die();
+
     $active = "gigs";
     $title = "Gigs";
     require_once("navigator.php");
@@ -177,19 +180,27 @@
                         <a class="btn btn-primary" href="<?php echo URLROOT ?>">Add New</a>
                     </div>
                     <?php
-                            foreach($progs as $prog){
-                                ?>
+                        foreach ($progress as $pr) {
+                        ?>
 
-                        <div class="proimgframe">
-                            <!-- <img class="img" src="<?php echo UPLOADS . $agrologist['image'] ?>" alt=" profile"> -->
-                            <img src="<?php echo UPLOADS . '/profilePictures/' . $prog['imageName']?>" alt="Picture">
 
-                        </div>
-                       <h3><p><?php echo $progs['subject']?></p></h3>
-                        <p><?php echo $progs['description']?></p>
-                    <?php
-                    }
-                    ?>
+                            <?php
+                                foreach ($pr['images'] as $img) {
+                            ?>
+                                    <div class="[ img ]">
+                                        <img src="<?php echo UPLOADS3 . $img ?>">
+                                    </div>
+                            <?php
+                                }
+                            ?>
+
+                        <br>
+                       <h3><p><?php echo $pr['subject']?></p></h3>
+                        <p><?php echo $pr['description']?></p>
+                        <?php
+                        }
+                        ?>
+              
     
     </div>
     <?php

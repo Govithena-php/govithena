@@ -5,7 +5,7 @@ class Progress
     public function fetchAllByGig($gigId)
     {
         try {
-            $sql = "SELECT fp.progressId, fp.farmerId, fp.gigId, fp.subject, fp.description, DATE(fp.timestamp) as date, TIME(fp.timestamp) as time FROM gig_progress as fp WHERE fp.gigId = :gigId";
+            $sql = "SELECT fp.progressId, fp.userId, fp.gigId, fp.subject, fp.description, DATE(fp.timestamp) as date, TIME(fp.timestamp) as time FROM gig_progress as fp WHERE fp.gigId = :gigId";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['gigId' => $gigId]);
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);

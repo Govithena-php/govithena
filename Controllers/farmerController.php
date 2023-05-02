@@ -29,7 +29,7 @@ class farmerController extends Controller
         $this->farmerModel = $this->model('farmer');
         $this->investorGigModel = $this->model('investorGig');
         $this->gigModel = $this->model('gig');
-        $this->progressModel = $this->model('fprogress');
+        $this->progressModel = $this->model('progress');
 
         $this->progressModel = $this->model('progress');
 
@@ -168,14 +168,37 @@ class farmerController extends Controller
             $gigId = $params[0];
             $gig = $this->gigModel->fetchBy($gigId);
             $props['gig'] = $gig;
-            // $progimgs = $this->gigModel->viewProimg($gigId);
-            $progs = $this->gigModel->viewPro($gigId);
-         
-            if (!empty($progs)){
-                $props['progs'] = $progs;
-                // $props['progimgs'] = $progimgs;
-            }
+           
+            // $progs = $this->gigModel->viewPro($gigId);
+            
+            // foreach($progs as $pro){
 
+            //      $progimgs = $this->gigModel->viewProimg($pro['progressId']);
+            //      $props['progimgs'] = $progimgs;
+            // }
+         
+            // if (!empty($progs)){
+            //     $props['progs'] = $progs;
+            // }
+
+            
+        $progress = $this->progressModel->fetchAllByGig($gigId);
+    var_dump($progress); die();
+
+        $props['progress'] = [];
+        if ($progress['success']) {
+            foreach ($progress['data'] as $pg) {
+                $progressImages = [];
+                $temp = $this->progressModel->fetchImagesByProgressId($pg['progressId']);
+                foreach ($temp['data'] as $key => $value) {
+                    $progressImages[$key] = $value['imageName'];
+                }
+                $pg['images'] = $progressImages;
+                $props['progress'][] = $pg;
+            
+
+           }
+        }
         }
 
         // $id = $this->currentUser->getUid(); //session eken user id eka gannawa activeUser.php file eke tiyenne
