@@ -193,13 +193,10 @@ class dashboardController extends Controller
                     $this->redirect('/error/somethingWentWrong/3');
                 }
 
-                // $fieldVisits = $this->fieldVisitModel->fetchAllByGig($gigId);
-                // if ($fieldVisits['success']) {
-                //     $props['fieldVisits'] = $fieldVisits['data'];
-                // } else {
-                //     $this->redirect('/error/somethingWentWrong/4');
-                // }
-
+                $fieldVisits = $this->fieldVisitModel->fetchAllByIgId($igId);
+                if ($fieldVisits['success']) {
+                    $props['fieldVisits'] = $fieldVisits['data'];
+                }
                 $totalInvestment = $this->investorGigModel->getTotalInvestmentForGigByInvestor($this->currentUser->getUid(), $gigId);
                 if ($totalInvestment['success']) {
                     $props['totalInvestment'] = $totalInvestment['data']['totalInvestment'];
