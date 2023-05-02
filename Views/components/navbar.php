@@ -1,6 +1,8 @@
 <?php
 $currentUser = Session::get('user');
 ?>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+
 <link rel="stylesheet" href="<?php echo CSS ?>/navbar/navbar.css">
 
 <nav>
@@ -30,7 +32,7 @@ $currentUser = Session::get('user');
                 <div class="[ buttons ]">
                     <div class="[ notification ]">
                         <button>
-                            <i class="[ fa-solid fa-bell ]"></i>
+                            <i class="bi bi-bell"></i>
                             <?php
                             $notificationCount = 4;
                             if (isset($notificationCount)) {
@@ -60,16 +62,16 @@ $currentUser = Session::get('user');
                     </div>
                     <ul>
                         <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/">
-                                <i class="[ fa-solid fa-gauge ]"></i>Dashboard
+                                <i class="bi bi-columns-gap"></i>Dashboard
                             </a></li>
                         <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/account">
-                                <i class="[ fa-solid fa-user-tie ]"></i>My Account</a></li>
+                                <i class="bi bi-person"></i>My Account</a></li>
                         <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/settings">
-                                <i class="[ fa-solid fa-gear ]"></i>Settings</a>
+                                <i class="bi bi-gear"></i>Settings</a>
                         </li>
                     </ul>
                     <a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/auth/signout">
-                        <i class="fa-solid fa-right-from-bracket"></i>Sign Out</a>
+                        <i class="bi bi-box-arrow-right"></i>Sign Out</a>
                 </div>
 
             <?php } else { ?>

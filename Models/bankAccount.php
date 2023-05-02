@@ -5,11 +5,11 @@ class bankAccount
     public function add($data)
     {
         try {
-            $sql = "INSERT INTO bank_account (accountNumber, user, bank, branch, branchCode) VALUES (:accountNumber, :user, :bank, :branch, :branchCode)";
+            $sql = "INSERT INTO bank_account (accountNumber, userId, bank, branch, branchCode) VALUES (:accountNumber, :userId, :bank, :branch, :branchCode)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
                 'accountNumber' => $data['accountNumber'],
-                'user' => $data['user'],
+                'userId' => $data['userId'],
                 'bank' => $data['bank'],
                 'branch' => $data['branch'],
                 'branchCode' => $data['branchCode']
@@ -23,7 +23,7 @@ class bankAccount
     public function getBankDetails($id)
     {
         try {
-            $sql = "SELECT * FROM bank_account WHERE user = :id AND status = 'ACTIVE' ORDER BY timestamp DESC";
+            $sql = "SELECT * FROM bank_account WHERE userId = :id AND status = 'ACTIVE' ORDER BY timestamp DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $res = $stmt->fetchAll(PDO::FETCH_ASSOC);

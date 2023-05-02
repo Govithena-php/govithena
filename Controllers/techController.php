@@ -9,6 +9,8 @@ class techController extends Controller
     private $techModel;
     private $progressModel;
     private $gigModel;
+    private $techWithdrawalModel;
+    private $bankAccountModel;
 
 
     public function __construct()
@@ -29,6 +31,8 @@ class techController extends Controller
         $this->techModel = $this->model('techAssistant');
         $this->progressModel = $this->model('progress');
         $this->gigModel = $this->model('gig');
+        $this->techWithdrawalModel = $this->model('techWithdrawal');
+        $this->bankAccountModel = $this->model('bankAccount');
     }
 
     public function index()
@@ -290,27 +294,12 @@ class techController extends Controller
                 'description' => $description
             ]);
 
-
             if ($response['success']) {
-
-                $images = $this->progressImageHandler->upload('images');
-                if (!empty($images)) {
-                    foreach ($images as $image) {
-                        $res = $this->progressModel->updateProgressImage([
-                            'progressId' => $progressId,
-                            'imageName' => $image
-                        ]);
-
-                        if ($res['success']) {
-                            $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully updated progress.');
-                        } else {
-                            $alert = new Alert($type = 'success', $icon = "", $message = 'Failed to update progress.');
-                        }
-                    }
-                }
+                $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully updated progress.');
             } else {
                 $alert = new Alert($type = 'success', $icon = "", $message = 'Failed to update progress.');
             }
+            Session::set(['gig_update_progress_alert' => $alert]);
         }
         $this->redirect('/tech/progress/' . $gigId);
     }
@@ -364,7 +353,6 @@ class techController extends Controller
                 } else {
                     $alert = new Alert($type = 'success', $icon = "", $message = 'Failed to update location details.');
                 }
-
                 Session::set(['gig_update_location_details_alert' => $alert]);
             }
         }
@@ -393,5 +381,38 @@ class techController extends Controller
             }
         }
         $this->redirect('/tech/editGig/' . $gigId);
+    }
+
+    public function earnings()
+    {
+        $this->render('earnings');
+    }
+
+    public function withdrawal()
+    {
+        $props = [];
+
+        $thisMonthTotalWithdrawals = $this->techWithdrawalModel->getThisMonthTotalWithdrawalsTechId($this->currentUser->getUid());
+        if ($thisMonthTotalWithdrawals['success']) {
+            $props['thisMonthTotalWithdrawals'] = $thisMonthTotalWithdrawals['data']['totalWithdrawal'];
+        }
+
+        $thisMonthTotalWithdrawals = $this->techWithdrawalModel->getTotalWithdrawalsTechId($this->currentUser->getUid());
+        if ($thisMonthTotalWithdrawals['success']) {
+            $props['totalWithdrawals'] = $thisMonthTotalWithdrawals['data']['totalWithdrawal'];
+        }
+
+        $techWithdrawal = $this->techWithdrawalModel->getWithdrawalByTechId($this->currentUser->getUid());
+        if ($techWithdrawal['success']) {
+            $props['techWithdrawal'] = $techWithdrawal['data'];
+        }
+
+        $bankAccounts = $this->bankAccountModel->getBankDetails($this->currentUser->getUid());
+        if ($bankAccounts['success']) {
+            $props['bankAccounts'] = $bankAccounts['data'];
+        }
+
+        $this->set($props);
+        $this->render('withdrawal');
     }
 }

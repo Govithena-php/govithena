@@ -2,11 +2,11 @@
 class farmerController extends Controller
 {
     private $currentUser;
-
+    
     private $progressImageHandler;
 
     private $gigImageHandler;
-
+    
     private $farmerModel;
     private $investorGigModel;
     private $gigModel;
@@ -18,7 +18,7 @@ class farmerController extends Controller
     public function __construct()
     {
         $this->currentUser = Session::get('user');
-
+        
 
         // <input type="file" name="name eke"
         //image ekk upload kranna imsgeHandler->upload('name eka')
@@ -29,6 +29,8 @@ class farmerController extends Controller
         $this->farmerModel = $this->model('farmer');
         $this->investorGigModel = $this->model('investorGig');
         $this->gigModel = $this->model('gig');
+        $this->progressModel = $this->model('fprogress');
+
         $this->progressModel = $this->model('progress');
 
         $this->abcModel = $this->model('abc'); //model eka import krann ('abc' file eke name)
@@ -124,15 +126,15 @@ class farmerController extends Controller
         $id = $this->currentUser->getUid(); //session eken user id eka gannawa activeUser.php file eke tiyenne
         $products = $this->gigModel->All($id);
         $props['products'] = $products;
-
-
+        
+        
         // $farmer = new Farmer();
         $notifications = $this->farmerModel->getnotifications();
         //echo json_encode($notifications);
 
         $props['notifications'] = $notifications;
-
-
+        
+        
         $this->set($props);
         $this->render("index");
     }
@@ -168,8 +170,7 @@ class farmerController extends Controller
             $props['gig'] = $gig;
             // $progimgs = $this->gigModel->viewProimg($gigId);
             $progs = $this->gigModel->viewPro($gigId);
-            // var_dump($progs);
-            // die();
+         
             if (!empty($progs)){
                 $props['progs'] = $progs;
                 // $props['progimgs'] = $progimgs;
@@ -212,6 +213,7 @@ class farmerController extends Controller
         // forms adunragann vidiya
 
         // if ($_SERVER['REQUEST_METHOD'] == 'POST'){ // submit button ekak click krlad kiyla --> POST method
+                // <input type="submit" name="form1">
 
         //     if(isset($_POST['form1'])){ // mona sumbit button eked click kale ---> mona form ekada
         //         echo "form 1";
@@ -266,7 +268,7 @@ class farmerController extends Controller
             'farmerId' => $this->currentUser->getUid(),
             'state' => STATUS::ACCEPTED
         ]);
-
+        
         // var_dump($investors); die();
 
 

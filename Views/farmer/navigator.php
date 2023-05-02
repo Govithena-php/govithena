@@ -14,6 +14,7 @@ function highlight($active, $link)
 }
 
 ?>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 
 
 <link rel="stylesheet" href="<?php echo CSS ?>/dashboard/navigator.css" type="text/css">
@@ -36,11 +37,11 @@ function highlight($active, $link)
 
         <?php
         if (isset($title)) {
-            ?>
+        ?>
             <p class="[ page__title ]">
                 <?php echo $title; ?>
             </p>
-            <?php
+        <?php
         }
         ?>
 
@@ -49,15 +50,15 @@ function highlight($active, $link)
                 <div class="[ buttons ]">
                     <div class="[ notification ]">
                         <button onclick="toggleNotificationMenu()">
-                            <i class="[ fa-solid fa-bell ]"></i>
+                            <i class="bi bi-bell"></i>
                             <?php
                             $notificationCount = 4;
                             if (isset($notificationCount)) {
-                                ?>
+                            ?>
                                 <span>
                                     <?php echo $notificationCount ?>
                                 </span>
-                                <?php
+                            <?php
                             }
                             ?>
                         </button>
@@ -78,13 +79,13 @@ function highlight($active, $link)
                     <div class="[ notification_message ]">
                         <?php
                         foreach ($notifications as $notification) {
-                            ?>
+                        ?>
                             <a>
                                 <?php echo $notification['message']; ?>
 
                             </a>
                             <hr>
-                            <?php
+                        <?php
                         }
                         ?>
                         <!-- <small>
@@ -119,16 +120,16 @@ function highlight($active, $link)
                     </div>
                     <ul>
                         <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/">
-                                <i class="[ fa-solid fa-gauge ]"></i>Dashboard
+                                <i class="bi bi-columns-gap"></i>Dashboard
                             </a></li>
-                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/profile">
-                                <i class="[ fa-solid fa-user-tie ]"></i>Profile</a></li>
-                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/signout">
-                                <i class="[ fa-solid fa-gear ]"></i>Settings</a>
+                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/account">
+                                <i class="bi bi-person"></i>My Account</a></li>
+                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/settings">
+                                <i class="bi bi-gear"></i>Settings</a>
                         </li>
                     </ul>
                     <a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/auth/signout">
-                        <i class="fa-solid fa-right-from-bracket"></i>Sign Out</a>
+                        <i class="bi bi-box-arrow-right"></i>Sign Out</a>
                 </div>
 
             <?php } else { ?>
@@ -157,38 +158,37 @@ function highlight($active, $link)
         <ul>
             <li>
                 <a href="<?php echo URLROOT ?>/farmer/" class="<?php highlight($active, "dashboard") ?>">
-                    <i class="fa-solid fa-gauge"></i>
+                    <i class="bi bi-columns-gap"></i>
                     <p>Dashboard</p>
                 </a>
             </li>
             <li>
                 <a href="<?php echo URLROOT ?>/farmer/" class="<?php highlight($active, "gigs") ?>">
-                    <i class="[ fa-solid fa-sack-dollar ]"></i>
+                    <i class="bi bi-egg-fried"></i>
                     <p>Gigs</p>
                 </a>
             </li>
             <li>
                 <a href="<?php echo URLROOT ?>/farmer/investors" class="<?php highlight($active, "investors") ?>">
-                    <i class="[ fa-solid fa-tractor ]"></i>
+                    <i class="bi bi-card-heading"></i>
                     <p>Investment Requests</p>
                 </a>
             </li>
             <li>
                 <a href="<?php echo URLROOT ?>/farmer/agrologist" class="<?php highlight($active, "agrologist") ?>">
-                    <i class="[ fa-solid fa-sack-dollar ]"></i>
+                    <i class="bi bi-universal-access-circle"></i>
                     <p>Agrologists</p>
                 </a>
             </li>
 
             <li>
-                <a href="<?php echo URLROOT ?>/farmer/techassistantfirst"
-                    class="<?php highlight($active, "techassistantfirst") ?>">
-                    <i class="[ fa-solid fa-tractor ]"></i>
+                <a href="<?php echo URLROOT ?>/farmer/techassistantfirst" class="<?php highlight($active, "techassistantfirst") ?>">
+                    <i class="bi bi-people"></i>
                     <p>Tech Assistants</p>
                 </a>
             <li>
                 <a href="<?php echo URLROOT ?>/farmer/progress" class="<?php highlight($active, "progress") ?>">
-                    <i class="[ fa-solid fa-tractor ]"></i>
+                    <i class="bi bi-bar-chart"></i>
                     <p>Progress</p>
                 </a>
             </li>
@@ -197,19 +197,19 @@ function highlight($active, $link)
         <ul>
             <li>
                 <a href="<?php echo URLROOT ?>/farmer/myaccount" class="<?php highlight($active, "myaccount") ?>">
-                    <i class="[ fa-solid fa-user-tie ]"></i>
+                    <i class="bi bi-person"></i>
                     <p>My Account</p>
                 </a>
             </li>
             <li>
                 <a href="<?php echo URLROOT ?>/help" class="<?php highlight($active, "help") ?>">
-                    <i class="[ fa-solid fa-circle-question ]"></i>
+                    <i class="bi bi-patch-question"></i>
                     <p>Help</p>
                 </a>
             </li>
             <li>
                 <a href="<?php echo URLROOT ?>/farmer/settings" class="<?php highlight($active, "settings") ?>">
-                    <i class="[ fa-solid fa-gear ]"></i>
+                    <i class="bi bi-gear"></i>
                     <p>Settings</p>
                 </a>
             </li>
