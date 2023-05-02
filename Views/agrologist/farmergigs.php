@@ -31,7 +31,7 @@
             </h1>
             <form action="" method="post">
                 <div class="" style="width: 200px;">
-                    <a href="<?php echo URLROOT . '/agrologist/farmers/' .  $gigDetails[0]['farmerId']  . '/payments' ?>" class="btn uppercase fs-4 btn-primary " id="edit_details">Payment Details</a>
+                    <a href="<?php echo URLROOT . '/agrologist/farmers/' .  $gigDetails[0]['farmerId']  . '/payments' ?>" class="btn uppercase fs-4 btn-primary" id="edit_details">Payment Details</a>
                 </div>
             </form>
             

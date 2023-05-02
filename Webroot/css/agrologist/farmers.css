@@ -247,8 +247,20 @@
     cursor: pointer;
 }
 
+/* .form button:hover {
+    background-color: v#1d1d1d;
+} */
+
 
 .is-hidden { 
     display: none; 
+}
+
+.btn-primary:hover {
+    background-color: #136941;
+}
+
+.btn-danger:hover {
+    background-color: #832029;
 }
 

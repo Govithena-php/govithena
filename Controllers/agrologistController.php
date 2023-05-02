@@ -163,9 +163,10 @@ class agrologistController extends Controller
                     } else {
                         $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong.');
                     }
+                    Session::set(['complete_farmer_alert' => $alert]);
                 }
                 // echo json_encode($complete);
-                Session::set(['complete_farmer_alert' => $alert]);
+                
 
 
             }
@@ -220,6 +221,7 @@ class agrologistController extends Controller
                     'q8' => new Input(POST, 'q8'),
                     'q9' => new Input(POST, 'q9'),
                 ];
+                var_dump($data);die;
 
                 $agr->save($data);
 
@@ -242,7 +244,6 @@ class agrologistController extends Controller
     public function requests($params)
     {
         if (!empty($params)) {
-            //echo "<h1 style='color: black; margin-top: 1500px; margin-left: 1000px'>". $params[0]. "</h1>";
             $this->requestdetails($params[0]);
         } else {
             require(ROOT . 'Models/agrologist.php');
@@ -258,9 +259,14 @@ class agrologistController extends Controller
 
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if (isset($_POST['accept'])) {
-                    //var_dump($_POST['accept']);
-                    //echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>" . $_POST['accept'] . "</h1>";
-                    $agr->acceptRequest($_POST['accept']);
+                    $accept = $agr->acceptRequest($_POST['accept']);
+
+                    if ($accept) {
+                        $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully Accepted Request!');
+
+                    } else {
+                        $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong.');
+                    }
 
                     $data = [
                         'reviewId' => new UID(PREFIX::REVIEW),
@@ -278,21 +284,24 @@ class agrologistController extends Controller
                     ];
 
                     $agr->save($data);
-                    //$this->redirect("/agrologist/farmers");
                 } elseif (isset($_POST['decline'])) {
-                    //var_dump($_POST['accept']);
-                    //echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>" . $_POST['accept'] . "</h1>";
-                    $agr->declineRequest($_POST['decline']);
+                    $decline = $agr->declineRequest($_POST['decline']);
                     $farmerId = $agr->getFarmerId($_POST['decline']);
-                    // echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $farmerId[0] . "</h1>";
-                    echo json_encode($farmerId[0]['farmerId']);
 
-                    $agr->declineNotificationFarmer($farmerId[0]['farmerId']);
-                    //$this->redirect("/agrologist/farmers");
+                    if ($decline) {
+                        $alert = new Alert($type = 'success', $icon = "", $message = 'Declined Request.');
+
+                    } else {
+                        $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong.');
+                    }
+
+                    
+
                 } else {
                     echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>nope</h1>";
 
                 }
+                Session::set(['farmer_request_alert' => $alert]);
             }
 
             $this->render('requests');
@@ -614,8 +623,7 @@ class agrologistController extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($_GET['withdraw'] == 'confirm') {
                 $withdrawal = new INPUT(POST, 'withdraw_amount');
-                // var_dump($withdrawal);
-                // die;
+            
 
             }
             if (isset($_POST['transfer_confirm_btn'])) {

@@ -18,6 +18,12 @@
     <?php
     $active = "requests";
     require_once("navigator.php");
+
+    if (Session::has('farmer_request_alert')) {
+        $alert = Session::pop('farmer_request_alert');
+        $alert->show_default_alert();
+    }
+
     ?>
     <div class="[ container ][ dashboard ]" container-type="dashboard-section">
         <h1 class="[ page-heading-1 ]">requests</h1>
@@ -78,10 +84,9 @@
 
                                     </div>
                                     <div class="flex flex-row flex-c-c">
-                                        <button type="submit" value="<?php echo $request['requestId'] ?> "
-                                            class="btn btn-primary mr-2 mt-2" name="accept">Accept</button>
-                                        <button type="submit" value="<?php echo $request['requestId'] ?> "
-                                            class="btn btn-danger mt-2" id="edit_details" >Decline</button>
+                                        <a href="#" value="<?php echo $request['requestId'] ?> "
+                                            class="btn btn-primary mr-2 mt-2" id="accept_btn" name="accept">Accept</a>
+                                        <a href="#" class="btn btn-danger mt-2" id="edit_details" >Decline</a>
                                             <!-- by adding namebelow and removing id for decline button the decline will work -->
                                             <!-- name="decline" -->
                                         <!-- <div class="flex flex-row flex-c-c" style="width: 200px;margin-top: 30px">
@@ -90,6 +95,47 @@
                                     </div>
                                 </div>
                             </form>
+
+                            <div id="edit_detials_modal" class="modal">
+
+                                <div class="modal-content">
+                                    <span class="close close_modal1">&times;</span>
+                                    <h3 class="fw-6">Decline Request</h3>
+                                    <p class="pt-1">Are you sure you want to decline?</p>
+                                    <form class="form pt-1" action="<?php echo URLROOT . '/agrologist/requests' ?>" method="post"
+                                        enctype="multipart/form-data">
+
+                                        <!-- <input type="text" name="firstName" class="" placeholder="First Name"
+                                                    value=""><br>
+                                                <input type="text" name="lastName" class="" placeholder="Last Name"
+                                                    value=""><br> -->
+                                        <button type="submit" name="decline" style="width:30%; margin-left: 250px;" class="btn uppercase"
+                                        value="<?php echo $request['requestId'] ?> ">Decline</button>
+                                    </form>
+                                </div>
+
+                            </div>
+
+                            <div id="accept_modal" class="modal">
+
+                                <div class="modal-content">
+                                    <span class="close close_accept_modal">&times;</span>
+                                    <h3 class="fw-6">Accept Request</h3>
+                                    <p class="pt-1">Are you sure you want to accept?</p>
+                                    <form class="form pt-1" action="<?php echo URLROOT . '/agrologist/requests' ?>" method="post"
+                                        enctype="multipart/form-data">
+
+                                        <!-- <input type="text" name="firstName" class="" placeholder="First Name"
+                                                    value=""><br>
+                                                <input type="text" name="lastName" class="" placeholder="Last Name"
+                                                    value=""><br> -->
+                                        <button type="submit" name="accept" style="width:30%; margin-left: 250px;" class="btn uppercase"
+                                        value="<?php echo $request['requestId'] ?> ">Accept</button>
+                                    </form>
+                                </div>
+
+                            </div>
+
                         </div>
                         <?php
                     }
@@ -99,54 +145,43 @@
             }
             ?>
         </div>
-        <div id="edit_detials_modal" class="modal">
-
-            <div class="modal-content">
-                <span class="close close_modal1">&times;</span>
-                <h3>Edit Details</h3>
-                <form class="form pt-1" action="<?php echo URLROOT ?>/agrologist/myaccount" method="post"
-                    enctype="multipart/form-data">
-
-                    <input type="text" name="firstName" class="" placeholder="First Name" value=""><br>
-                    <input type="text" name="lastName" class="" placeholder="Last Name" value=""><br>
-                    <input type="text" name="phoneNumber" class="" placeholder="Mobile" value=""><br>
-                    <input type="text" name="NIC" class="" placeholder="NIC" value=""><br>
-                    <input type="text" name="addressLine1" class="" placeholder="Address Line1" value=""><br>
-                    <input type="text" name="addressLine2" class="" placeholder="Address Line2" value=""><br>
-                    <input type="text" name="city" class="" placeholder="City" value=""><br>
-                    <input type="text" name="district" class="" placeholder="District" value=""><br>
-                    <input type="text" name="postalCode" class="" placeholder="Postal Code" value=""><br>
-                    <input type='file' name="profile_img"><br />
-                    <button type="submit" name="edit_details_btn" class="btn uppercase"
-                        onclick="alert('Succesffully updated');">Edit details</button>
-                </form>
-            </div>
-
-        </div>
+        
     </div>
 
 
     <?php require "footer.php"; ?>
     <script src="<?php echo JS ?>/agrologist.js"></script>
     <script>
-            var modal = document.getElementById("myModal");
+            // var modal = document.getElementById("myModal");
             var edit_detials_modal = document.getElementById("edit_detials_modal");
+            var accept_modal = document.getElementById("accept_modal");
 
             var edit_details_btn = document.getElementById("edit_details");
+            var accept_btn = document.getElementById("accept_btn");
 
             var span1 = document.getElementsByClassName("close_modal1")[0];
+            var span2 = document.getElementsByClassName("close_accept_modal")[0];
 
             edit_details_btn.onclick = function () {
                 edit_detials_modal.style.display = "block";
+            }
+
+            accept_btn.onclick = function () {
+                accept_modal.style.display = "block";
             }
 
             span1.onclick = function () {
                 edit_detials_modal.style.display = "none";
             }
 
+            span2.onclick = function () {
+                accept_modal.style.display = "none";
+            }
+
             window.onclick = function (event) {
                 if (event.target == modal) {
                     edit_detials_modal.style.display = "none";
+                    accept_modal.style.display = "none";
                 }
             }
 
