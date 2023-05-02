@@ -17,6 +17,23 @@ class Investment extends Model
         }
     }
 
+    public function fetchAllByUsingFilters($id, $filter)
+    {
+        try {
+            $sql = "SELECT investment.id, investment.investorId, investment.gigId, investment.amount, DATE(investment.timestamp) as investedDate, gig.title, gig.thumbnail, gig.category, gig.cropCycle, gig.city FROM investment INNER JOIN gig ON investment.gigId = gig.gigId";
+            $sql = $filter->apply($sql);
+            $sql .= " AND investment.investorId = :id";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['id' => $id]);
+            $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $row;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+        }
+    }
+
     public function add($data)
     {
         try {
