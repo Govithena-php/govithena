@@ -44,12 +44,12 @@ class Investment extends Model
         }
     }
 
-    public function fetchByInvestorAndGig($investorId, $gigId)
+    public function getInvestmentsByIgId($igId)
     {
         try {
-            $sql = "SELECT DATE(timestamp) as date, TIME(timestamp) as time, amount FROM investment WHERE investorId = :investorId AND gigId = :gigId";
+            $sql = "SELECT DATE(timestamp) as date, TIME(timestamp) as time, amount, description FROM investment WHERE igId = :igId";
             $stmt = Database::getBdd()->prepare($sql);
-            $stmt->execute(['investorId' => $investorId, 'gigId' => $gigId]);
+            $stmt->execute(['igId' => $igId]);
             $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
             if ($res) {
                 return ['success' => true, 'data' => $res];

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="<?php echo IMAGES ?>/favicon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
@@ -41,7 +41,7 @@
                 <div class="[ grid ][ cards ]" sm="1" md="2" gap="1">
                     <div class="[ card ]">
                         <div class="[ icon ]">
-                            <i class="[ fa fa-bell ]"></i>
+                            <i class="bi bi-bell"></i>
                         </div>
                         <div class="[ details ]">
                             <h2><?php
@@ -53,7 +53,7 @@
                     </div>
                     <div class="[ card ]">
                         <div class="[ icon ]">
-                            <i class="[ fa fa-bell ]"></i>
+                            <i class="bi bi-bell"></i>
                         </div>
                         <div class="[ details ]">
                             <h2><?php
@@ -65,7 +65,7 @@
                     </div>
                     <div class="[ card ]">
                         <div class="[ icon ]">
-                            <i class="[ fa fa-bell ]"></i>
+                            <i class="bi bi-bell"></i>
                         </div>
                         <div class="[ details ]">
                             <h2><small>LKR</small><br>
@@ -78,7 +78,7 @@
                     </div>
                     <div class="[ card ]">
                         <div class="[ icon ]">
-                            <i class="[ fa fa-bell ]"></i>
+                            <i class="bi bi-bell"></i>
                         </div>
                         <div class="[ details ]">
                             <h2><small>LKR</small><br>
@@ -92,7 +92,7 @@
                 </div>
                 <div class="[ special__announcment ]">
                     <div class="[ icon ]">
-                        <i class="[ fa fa-bell ]"></i>
+                        <i class="bi bi-bell"></i>
                     </div>
                     <div class="[ details ]">
                         <h3>Special Announcment</h3>
@@ -107,7 +107,7 @@
 
                 <div class="[ activity ]">
                     <div class="[ icon ]">
-                        <i class="[ fa fa-bell ]"></i>
+                        <i class="bi bi-bell"></i>
                     </div>
                     <div class="[ details ]">
                         <h5>Investment</h5>
@@ -119,7 +119,7 @@
                 </div>
                 <div class="[ activity ]">
                     <div class="[ icon ]">
-                        <i class="[ fa fa-bell ]"></i>
+                        <i class="bi bi-bell"></i>
                     </div>
                     <div class="[ details ]">
                         <h5>Investment</h5>
@@ -131,7 +131,7 @@
                 </div>
                 <div class="[ activity ]">
                     <div class="[ icon ]">
-                        <i class="[ fa fa-bell ]"></i>
+                        <i class="bi bi-bell"></i>
                     </div>
                     <div class="[ details ]">
                         <h5>Investment</h5>
@@ -143,7 +143,7 @@
                 </div>
                 <div class="[ activity ]">
                     <div class="[ icon ]">
-                        <i class="[ fa fa-bell ]"></i>
+                        <i class="bi bi-bell"></i>
                     </div>
                     <div class="[ details ]">
                         <h5>Investment</h5>
@@ -155,7 +155,7 @@
                 </div>
                 <div class="[ activity ]">
                     <div class="[ icon ]">
-                        <i class="[ fa fa-bell ]"></i>
+                        <i class="bi bi-bell"></i>
                     </div>
                     <div class="[ details ]">
                         <h5>Investment</h5>
@@ -248,7 +248,7 @@
                                                     <p>50</p>
                                                 </div>
                                                 <span class="grow"></span>
-                                                <a href="<?php echo URLROOT . "/dashboard/gig/" . $activeGig['gigId'] ?>" class="button__primary">View More</a>
+                                                <a href="<?php echo URLROOT . "/dashboard/gig/" . $activeGig['igId'] ?>" class="button__primary">View More</a>
 
                                             </div>
                                         </div>

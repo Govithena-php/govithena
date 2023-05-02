@@ -6,13 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="<?php echo IMAGES ?>/favicon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/tabs.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/gridTable.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/filters.css">
+
     <link rel="stylesheet" href="<?php echo CSS ?>/investor/gig.css">
 
     <title>Dashboard | Investor</title>
@@ -29,6 +31,7 @@
     <div class="[ container ]" container-type="dashboard-section">
 
         <div class="[ caption ]">
+            
             <h3>Track your gig's progress with ease!</h3>
             <p>With progress page, you can monitor every step of your gig's progress and stay in control of the outcome.</p>
         </div>
@@ -59,7 +62,7 @@
                     <div class="[ grid ]" sm="1" md="2" gap="1">
                         <div class="[ card ]">
                             <div class="[ icon ]">
-                                <i class="[ fa fa-bell ]"></i>
+                                <i class="bi bi-bell"></i>
                             </div>
                             <div class="[ details ]">
                                 <h2><small>LKR</small><br>
@@ -72,7 +75,7 @@
                         </div>
                         <div class="[ card ]">
                             <div class="[ icon ]">
-                                <i class="[ fa fa-bell ]"></i>
+                                <i class="bi bi-bell"></i>
                             </div>
                             <div class="[ details ]">
                                 <h2><?php echo $gig['profitMargin'] ?> %</h2>
@@ -81,7 +84,7 @@
                         </div>
                         <div class="[ card ]">
                             <div class="[ icon ]">
-                                <i class="[ fa fa-bell ]"></i>
+                                <i class="bi bi-bell"></i>
                             </div>
                             <div class="[ details ]">
                                 <h2><?php
@@ -93,7 +96,7 @@
                         </div>
                         <div class="[ card ]">
                             <div class="[ icon ]">
-                                <i class="[ fa fa-bell ]"></i>
+                                <i class="bi bi-bell"></i>
                             </div>
                             <div class="[ details ]">
                                 <h2><?php echo $gig['landArea'] ?> Hectare</h2>
@@ -104,14 +107,13 @@
                 </div>
                 <div class="[ special__announcment ]">
                     <div class="[ icon ]">
-                        <i class="[ fa fa-bell ]"></i>
+                        <i class="bi bi-bell"></i>
                     </div>
                     <div class="[ details ]">
                         <h3>Special Announcment</h3>
                         <p>Our platform is currently undergoing maintenance. We will be back online shortly. Thank you for your patience.</p>
                     </div>
                 </div>
-                <!-- <p class="[ freespace__text ]">Track your investment journey with ease by accessing all your active and completed gigs in one convenient location, where you can also generate detailed reports on your progress and achievements.</p> -->
             </div>
             <div>
                 <div class="[ messages ]">
@@ -121,7 +123,7 @@
 
                     <div class="[ activity ]">
                         <div class="[ icon ]">
-                            <i class="[ fa fa-bell ]"></i>
+                            <i class="bi bi-bell"></i>
                         </div>
                         <div class="[ details ]">
                             <h5>Investment</h5>
@@ -133,7 +135,7 @@
                     </div>
                     <div class="[ activity ]">
                         <div class="[ icon ]">
-                            <i class="[ fa fa-bell ]"></i>
+                            <i class="bi bi-bell"></i>
                         </div>
                         <div class="[ details ]">
                             <h5>Investment</h5>
@@ -145,7 +147,7 @@
                     </div>
                     <div class="[ activity ]">
                         <div class="[ icon ]">
-                            <i class="[ fa fa-bell ]"></i>
+                            <i class="bi bi-bell"></i>
                         </div>
                         <div class="[ details ]">
                             <h5>Investment</h5>
@@ -157,7 +159,7 @@
                     </div>
                     <div class="[ activity ]">
                         <div class="[ icon ]">
-                            <i class="[ fa fa-bell ]"></i>
+                            <i class="bi bi-bell"></i>
                         </div>
                         <div class="[ details ]">
                             <h5>Investment</h5>
@@ -169,7 +171,7 @@
                     </div>
                     <div class="[ activity ]">
                         <div class="[ icon ]">
-                            <i class="[ fa fa-bell ]"></i>
+                            <i class="bi bi-bell"></i>
                         </div>
                         <div class="[ details ]">
                             <h5>Investment</h5>
@@ -217,43 +219,41 @@
                         ?>
                             <div class="[ requests__wrapper ]">
                                 <div class="[ grid__table ]" style="
-                                        --xl-cols: 1fr 1fr 1fr;
+                                        --xl-cols: 2fr 1fr 1fr 1fr;
                                         --lg-cols: 1fr 1fr 1fr;
                                         --md-cols: 1fr 1fr 1fr;
                                         --sm-cols: 1fr 1fr 1fr;
                                     ">
                                     <div class="[ head stick_to_top ]">
-                                        <div class="[ grid ][ filters ]" md="1" lg="2" gap="2">
-                                            <div class="[ grid ][ options ]" sm="1" md="6" lg="6" gap="1">
-                                                <div class="[ input__control ]">
-                                                    <label for="from">Visit Date :</label>
-                                                    <input id="from" type="date">
-                                                </div>
-                                                <div class="[ input__control ]">
-                                                    <label for="to">Entry Date :</label>
-                                                    <input id="to" type="date">
-                                                </div>
-                                                <div class="[ input__control ]">
-                                                    <button type="button">Apply</button>
-                                                </div>
 
+                                        <!-- <form class="[ filters ]" action="<?php echo URLROOT . '/dashboard/gig/' . $igId ?>" method="POST">
+                                            <div class="[ options ]">
+                                                <div class="[ input__control ]">
+                                                    <label for="fromDate">From</label>
+                                                    <input id="fromDate" name="fromDate" tag="fromDate" type="date">
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <label for="toDate">To</label>
+                                                    <input id="toDate" name="toDate" tag="toDate" type="date">
+                                                </div>
+                                                <div class="[ input__control ]">
+                                                    <button type="submit" name="submit" class="button__primary">Apply</button>
+                                                </div>
                                             </div>
-                                            <div class="[ search ]">
-                                                <input type="text" placeholder="Search">
-                                                <button type="button">
-                                                    <i class="fas fa-search"></i>
-                                                </button>
-                                            </div>
-                                        </div>
+                                        </form> -->
+
                                         <div class="[ row ]">
+                                            <div class="[ data ]">
+                                                <p>Description</p>
+                                            </div>
+                                            <div class="[ data ]">
+                                                <p>Amount</p>
+                                            </div>
                                             <div class="[ data ]">
                                                 <p>Date</p>
                                             </div>
                                             <div class="[ data ]" hideIn="md">
                                                 <p>Time</p>
-                                            </div>
-                                            <div class="[ data ]" hideIn="md">
-                                                <p>Amount</p>
                                             </div>
                                         </div>
                                     </div>
@@ -263,13 +263,16 @@
                                         ?>
                                             <div class="[ row ]">
                                                 <div class="[ data ]" hideIn="md">
-                                                    <h3><?php echo $investment['date'] ?></h3>
+                                                    <p><?php echo $investment['description'] ?></p>
                                                 </div>
                                                 <div class="[ data ]" hideIn="md">
-                                                    <h3><?php echo $investment['time'] ?></h3>
+                                                    <p class="[ LKR ]"><?php echo number_format($investment['amount'], 2, '.', ',') ?></p>
                                                 </div>
                                                 <div class="[ data ]" hideIn="md">
-                                                    <h3 class="[ LKR ]"><?php echo number_format($investment['amount'], 2, '.', ',') ?></h3>
+                                                    <p><?php echo $investment['date'] ?></p>
+                                                </div>
+                                                <div class="[ data ]" hideIn="md">
+                                                    <p><?php echo $investment['time'] ?></p>
                                                 </div>
                                             </div>
                                         <?php
@@ -285,7 +288,7 @@
                     </div>
                 </div>
 
-                <div class="tab" id="3" active="true">
+                <div class="tab" id="3">
                     <div class="[ requests__continer ]">
                         <div class="[ caption ]">
                             <h2>Progress Updates</h2>
@@ -299,43 +302,28 @@
 
                             <div class="[ requests__wrapper ]">
                                 <div class="[ grid__table ]" style="
-                                        --xl-cols:  2fr 1fr 1fr 0.5fr;
+                                        --xl-cols:  2.5fr 1.5fr 1fr 1fr 1.5fr 0.2fr;
                                         --lg-cols: 1.5fr 0.75fr 0.75fr 0.3fr;
                                         --md-cols: 2fr 0.5fr;
                                         --sm-cols: 2fr 1fr;
                                     ">
                                     <div class="[ head stick_to_top ]">
-                                        <div class="[ grid ][ filters ]" md="1" lg="2" gap="2">
-                                            <div class="[ grid ][ options ]" sm="1" md="6" lg="6" gap="1">
-                                                <div class="[ input__control ]">
-                                                    <label for="from">Visit Date :</label>
-                                                    <input id="from" type="date">
-                                                </div>
-                                                <div class="[ input__control ]">
-                                                    <label for="to">Entry Date :</label>
-                                                    <input id="to" type="date">
-                                                </div>
-                                                <div class="[ input__control ]">
-                                                    <button type="button">Apply</button>
-                                                </div>
 
-                                            </div>
-                                            <div class="[ search ]">
-                                                <input type="text" placeholder="Search">
-                                                <button type="button">
-                                                    <i class="fas fa-search"></i>
-                                                </button>
-                                            </div>
-                                        </div>
                                         <div class="[ row ]">
                                             <div class="[ data ]">
                                                 <p>Title</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="md">
+                                                <p>By</p>
                                             </div>
                                             <div class="[ data ]" hideIn="md">
                                                 <p>Updated Date</p>
                                             </div>
                                             <div class="[ data ]" hideIn="md">
                                                 <p>Updated Time</p>
+                                            </div>
+                                            <div class="[ data ]" hideIn="md">
+                                                <p>Short Description</p>
                                             </div>
                                         </div>
                                     </div>
@@ -345,36 +333,41 @@
                                         ?>
                                             <div class="[ row ]">
                                                 <div class="[ data ]">
-                                                    <div class="[ item__card ]">
-                                                        <div class="[ img ]">
-                                                            <img width="50" src="<?php echo UPLOADS3 . $pr['images'][0]  ?>" />
+                                                    <p><?php echo $pr['subject'] ?></p>
+                                                </div>
+                                                <div class="[ data ]">
+                                                    <div class="table_farmer_image_and_name">
+                                                        <div class="img">
+                                                            <img src="<?php echo UPLOADS . '/profilePictures/' . $pr['image'] ?>" alt="">
                                                         </div>
-                                                        <div class="[ content ]">
-                                                            <p><?php echo $pr['subject'] ?></p>
-
+                                                        <div class="name">
+                                                            <p><?php echo $pr['firstName'] . ' ' . $pr['lastName'] ?></p>
+                                                            <small><?php echo ucwords($pr['userType']) ?></small>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="[ data ]" hideIn="md">
-                                                    <h3><?php echo $pr['date'] ?></h3>
+                                                    <p><?php echo $pr['date'] ?></p>
                                                 </div>
                                                 <div class="[ data ]" hideIn="md">
-                                                    <h3><?php echo $pr['time'] ?></h3>
+                                                    <p><?php echo $pr['time'] ?></p>
+                                                </div>
+                                                <div class="[ data ]" hideIn="md">
+                                                    <p class="limit-text-1"><?php echo $pr['description'] ?></p>
                                                 </div>
                                                 <div class="[ actions ]">
-                                                    <button for="<?php echo $pr['progressId'] ?>"><i class="fa fa-chevron-circle-down"></i></button>
-                                                    <!-- <a href="<?php echo URLROOT ?>/<?php echo $pr['progressId'] ?>" class="btn btn-primary">Cancel Request</a> -->
+                                                    <button for="<?php echo $pr['progressId'] ?>"><i class="bi bi-three-dots-vertical"></i></button>
                                                 </div>
                                                 <div id="<?php echo $pr['progressId'] ?>" class="[ expand progress__more ]">
 
                                                     <div class="[ data ]" showIn="md">
                                                         <div class="[ progress__date_time ]">
                                                             <div class="[ date ]">
-                                                                <h4>Updated Date :</h4>
+                                                                <h4>Updated Date</h4>
                                                                 <h3><?php echo $pr['date'] ?></h3>
                                                             </div>
                                                             <div class="[ time ]">
-                                                                <h4>Updated Time :</h4>
+                                                                <h4>Updated Time</h4>
                                                                 <h3><?php echo $pr['time'] ?></h3>
                                                             </div>
                                                         </div>
@@ -385,30 +378,25 @@
                                                             <h4>Description</h4>
                                                             <p><?php echo $pr['description'] ?></p>
                                                         </div>
+
+
                                                         <div class="[ progress__images ]">
                                                             <?php
                                                             foreach ($pr['images'] as $img) {
                                                             ?>
                                                                 <div class="[ img ]">
-                                                                    <img src="<?php echo UPLOADS3 . $img ?>">
+                                                                    <img src="<?php echo UPLOADS . '/progress/' . $img ?>">
                                                                 </div>
                                                             <?php
                                                             }
                                                             ?>
                                                         </div>
-                                                        <div class="[ progress__actions ]">
-                                                            <a href="<?php echo URLROOT ?>/<?php echo $pr['progressId'] ?>" class="[ feedback__btn ]">Give some feedback</a>
-                                                        </div>
-
                                                     </div>
-
                                                 </div>
                                             </div>
-
                                         <?php
                                         }
                                         ?>
-
                                     </div>
                                 </div>
                             </div>
@@ -418,7 +406,7 @@
                     </div>
                 </div>
 
-                <div class="tab" id="4">
+                <div class="tab" id="4" active="true">
                     <div class="[ requests__continer ]">
                         <div class="[ caption ]">
                             <h2>Agrologist Updates</h2>
@@ -432,34 +420,13 @@
 
                             <div class="[ ]">
                                 <div class="[ grid__table ]" style="
-                                        --xl-cols: 3fr 1.5fr 1fr 1fr 1fr 0.5fr;
+                                        --xl-cols: 2fr 1.5fr 1fr 1fr 2.5fr 0.3fr;
                                         --lg-cols: 2fr 1fr 1fr 0.5fr;
                                         --md-cols: 3fr 1fr 0.5fr;
                                         --sm-cols: 1fr 0.2fr;
                                 ">
                                     <div class="[ head stick_to_top ]">
-                                        <div class="[ grid ][ filters ]" md="1" lg="2" gap="2">
-                                            <div class="[ grid ][ options ]" sm="1" md="6" lg="6" gap="1">
-                                                <div class="[ input__control ]">
-                                                    <label for="from">Visit Date :</label>
-                                                    <input id="from" type="date">
-                                                </div>
-                                                <div class="[ input__control ]">
-                                                    <label for="to">Entry Date :</label>
-                                                    <input id="to" type="date">
-                                                </div>
-                                                <div class="[ input__control ]">
-                                                    <button type="button">Apply</button>
-                                                </div>
 
-                                            </div>
-                                            <div class="[ search ]">
-                                                <input type="text" placeholder="Search">
-                                                <button type="button">
-                                                    <i class="fas fa-search"></i>
-                                                </button>
-                                            </div>
-                                        </div>
                                         <div class="[ row ]">
                                             <div class="[ data ]">
                                                 <p>Week</p>
@@ -471,10 +438,10 @@
                                                 <p>Visit Date</p>
                                             </div>
                                             <div class="[ data ]" hideIn="lg">
-                                                <p>Entry Date</p>
+                                                <p>Visit Time</p>
                                             </div>
                                             <div class="[ data ]" hideIn="lg">
-                                                <p>Entry Time</p>
+                                                <p>Visit Details</p>
                                             </div>
                                         </div>
                                     </div>
@@ -489,59 +456,58 @@
                                                             <img width="50" src="<?php echo UPLOADS . $fieldVisit['fimage'] ?>" />
                                                         </div>
                                                         <div class="[ content ]">
-                                                            <h2><?php echo $fieldVisit['week'] ?></h2>
+                                                            <p><?php echo $fieldVisit['week'] ?></p>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="[ data ]" hideIn="sm">
-                                                    <div class="[ profile__card ]">
-                                                        <div class="[ img ]">
-                                                            <img width="50" src="<?php echo UPLOADS . $fieldVisit['uimage'] ?>" />
+                                                    <div class="table_farmer_image_and_name">
+                                                        <div class="img">
+                                                            <img src="<?php echo UPLOADS . '/profilePictures/' . $fieldVisit['uimage'] ?>" alt="">
                                                         </div>
-                                                        <div class="[ content ]">
-                                                            <a href="<?php echo URLROOT . '/profile/' . $fieldVisit['agrologistId']; ?>"><?php echo $fieldVisit['firstName'] . " " . $fieldVisit['lastName'] ?></a>
+                                                        <div class="name">
+                                                            <p><?php echo $fieldVisit['firstName'] . ' ' . $fieldVisit['lastName'] ?></p>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="[ data ]" hideIn="md">
                                                     <p><?php echo $fieldVisit['visitDate'] ?></p>
                                                 </div>
-                                                <div class="[ data ]" hideIn="lg">
-                                                    <p><?php echo $fieldVisit['entryDate'] ?></p>
+                                                <div class="[ data ]" hideIn="md">
+                                                    <p><?php echo $fieldVisit['visitTime'] ?></p>
                                                 </div>
-                                                <div class="[ data ]" hideIn="lg">
-                                                    <p><?php echo $fieldVisit['entryTime'] ?></p>
+                                                <div class="[ data ]" hideIn="md">
+                                                    <p class="limit-text-1"><?php echo $fieldVisit['fieldVisitDetails'] ?></p>
                                                 </div>
                                                 <div class="[ actions ]">
-                                                    <button for="<?php echo $fieldVisit['visitId'] ?>"><i class="fa fa-chevron-circle-down"></i></button>
+                                                    <button for="<?php echo $fieldVisit['visitId'] ?>"><i class="bi bi-three-dots-vertical"></i></button>
                                                 </div>
                                                 <div id="<?php echo $fieldVisit['visitId'] ?>" class="[ expand ]">
                                                     <div class="[ expand__card ]" showIn="sm">
-                                                        <h4>Agrologist :</h4>
-                                                        <div class="[ profile__card ]">
-                                                            <div class="[ img ]">
-                                                                <img width="50" src="<?php echo UPLOADS . $fieldVisit['uimage'] ?>" />
+                                                        <h3>Agrologist</h3>
+                                                        <div class="table_farmer_image_and_name">
+                                                            <div class="img">
+                                                                <img src="<?php echo UPLOADS . '/profilePictures/' . $fieldVisit['uimage'] ?>" alt="">
                                                             </div>
-                                                            <div class="[ content ]">
-                                                                <a href="<?php echo URLROOT . '/profile/' . $fieldVisit['agrologistId']; ?>"><?php echo $fieldVisit['firstName'] . " " . $fieldVisit['lastName'] ?></a>
+                                                            <div class="name">
+                                                                <p><?php echo $fieldVisit['firstName'] . ' ' . $fieldVisit['lastName'] ?></p>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="[ expand__card ]" showIn="md">
-                                                        <h4>Visited Date :</h4>
+                                                        <h3>Visited Dat</h3>
                                                         <p><?php echo $fieldVisit['visitDate'] ?></p>
                                                     </div>
                                                     <div class="[ expand__card ]" showIn="lg">
-                                                        <h4>Entry Date :</h4>
-                                                        <p><?php echo $fieldVisit['entryDate'] ?></p>
+                                                        <h3>visited Time Date :</h3>
+                                                        <p><?php echo $fieldVisit['visitTime'] ?></p>
                                                     </div>
-                                                    <div class="[ expand__card ]" showIn="lg">
-                                                        <h4>Entry Time :</h4>
-                                                        <p><?php echo $fieldVisit['entryTime'] ?></p>
-                                                    </div>
-                                                    <div class="[ expand__card ]" always>
-                                                        <h4>Agrologist Message :</h4>
-                                                        <p class="[ text__width ]"><?php echo $fieldVisit['fieldVisitDetails'] ?></p>
+
+                                                    <div class="[ data ]" always>
+                                                        <div class="[ progress__content ]">
+                                                            <h4>Visit Details</h4>
+                                                            <p><?php echo $fieldVisit['fieldVisitDetails'] ?></p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -650,6 +616,7 @@
     <script src="<?php echo JS ?>/main.js"></script>
     <script src="<?php echo JS ?>/tabs.js"></script>
     <script src="<?php echo JS ?>/gridTable.js"></script>
+    <script src="<?php echo JS ?>/filter/toDateFromDate.js"></script>
 </body>
 
 </html>
