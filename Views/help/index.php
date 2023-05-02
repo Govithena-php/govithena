@@ -15,26 +15,34 @@
 </head>
 
 <body>
+
+    <?php
+    if (Session::has('ask_question_alert')) {
+        $alert = Session::pop('ask_question_alert');
+        $alert->show_default_alert();
+    }
+    ?>
+
     <dialog id="questionModal" class="[ modal ]">
         <div class="[ container ]">
             <div class="[ caption ]">
                 <h3>Ask your Question</h3>
                 <p>We will contact you through your email address as soon as possible.</p>
             </div>
-            <form action="<?php echo URLROOT ?>/dashboard/resend_request" method="POST" class="[ content ]">
+            <form action="<?php echo URLROOT ?>/help" method="POST" class="[ content ]">
                 <?php
                 if (!Session::get('user')->isLoggedIn()) {
                 ?>
                     <div class="[ input__control ]">
-                        <label for="resendOffer">Email Address</label>
-                        <input type="number" name="resendOffer" id="resendOffer" required></input>
+                        <label for="email">Email Address</label>
+                        <input type="number" name="email" id="email" required></input>
                     </div>
                 <?php
                 }
                 ?>
                 <div class="[ input__control ]">
-                    <label for="resendMessage">Your Question</label>
-                    <textarea name="resendMessage" id="resendMessage" required></textarea>
+                    <label for="question">Your Question</label>
+                    <textarea name="question" id="question" required></textarea>
                 </div>
                 <div class="[ buttons ]">
                     <button type="button" class="[ button__danger ]" onclick="closeQuestionModal()" data-dismiss="modal">Cancel</button>
@@ -42,6 +50,7 @@
                 </div>
             </form>
     </dialog>
+
 
     <?php require_once(COMPONENTS . 'navbar.php'); ?>
 

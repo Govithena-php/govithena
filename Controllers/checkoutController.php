@@ -111,10 +111,8 @@ class checkoutController extends Controller
                 $this->redirect('/error/somethingWentWrong');
             }
 
-            $igId = new UID(PREFIX::INVESTOR_GIG);
 
             $response = $this->investorGigModel->add([
-                'igId' => $igId,
                 'investorId' => $this->currentUser->getUid(),
                 'gigId' => $request['gigId'],
                 'farmerId' => $request['farmerId'],
@@ -123,7 +121,6 @@ class checkoutController extends Controller
             if ($response['success']) {
                 $response = $this->investmentModel->add([
                     'id' => new UID(PREFIX::INVESTMENT),
-                    'igId' => $igId,
                     'investorId' => $this->currentUser->getUid(),
                     'gigId' => $request['gigId'],
                     'farmerId' => $request['farmerId'],
@@ -141,30 +138,6 @@ class checkoutController extends Controller
             } else {
                 $this->redirect('/error/someThingWentWrong');
             }
-
-
-
-            // $res = $this->requestFarmerModel->getRequestById($id);
-            // $investment = new $this->investmentModel();
-            // $response = $investment->add([
-            //     'id' =>  new UID(PREFIX::INVESTMENT),
-            //     'investorId' => $this->currentUser->getUid(),
-            //     'gigId' => $res['gigId'],
-            //     'farmerId' => $res['farmerId'],
-            //     'amount' => $res['capital']
-            // ]);
-
-            // $response = $this->investorGigModel->add([
-            //     'investorId' => $this->currentUser->getUid(),
-            //     'gigId' => $res['gigId'],
-            //     'farmerId' => $res['farmerId'],
-            // ]);
-
-            // $this->requestFarmerModel->updateStatus($id, 'PAID');
-
-            // $res = $this->gigModel->updateGigStatusToReserved($res['gigId']);
-
-
             $this->redirect('/dashboard');
         }
     }
