@@ -20,11 +20,13 @@ function render_stars($stars, $outof)
     <title>Govithena | Search</title>
     <link rel="icon" type="image/x-icon" href="<?php echo IMAGES ?>/favicon.png">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS ?>/sidebar.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/base.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/grid.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/modal.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/formModal.css">
+
     <link rel="stylesheet" href="<?php echo CSS ?>gig/index.css">
 
 </head>
@@ -318,39 +320,25 @@ function render_stars($stars, $outof)
     </div>
 
 
-    <dialog id="modal">
+    <dialog id="modal" class="modal">
         <div class="[ modal__container ]">
             <div class="[ modal__header ]">
                 <h2>Make Your Offer</h2>
-                <!-- <button onclick="closeModal()">&times;</button> -->
             </div>
             <div class="[ modal__body ]">
-                <p class="[ fs-6 my-1 fw-5 ]"><?php echo $gig['title'] ?></p>
-                <small>by</small>
-                <p><?php echo $farmer['firstName'] . " " . $farmer['lastName'] ?></p>
-                <div class="[ flex flex-sb-c my-05 ]">
-                    <div>
-                        <small>Initial Investment</small>
-                        <p class="[ LKR ]"><?php echo number_format($gig['capital'], 2, '.', ',') ?></p>
-                    </div>
-                    <div>
-                        <small>Profit Margin</small>
-                        <p class="[ profit__precentage ]"><?php echo $gig['profitMargin'] ?><span class="[ precentage ]">%</span></p>
-                    </div>
-                </div>
+                <p class="[ fs-4 my-1 fw-5 ]"><?php echo $gig['title'] ?></p>
                 <form class="[ modal__form ]" method="post" action="<?php echo URLROOT ?>/gig/request">
-                    <h3>Your Offer</h3>
-                    <div class="[ form__control ]">
-                        <label for="offerAmount">Offer Amount</label>
-                        <input type="text" name="offerAmount" id="offerAmount" placeholder="Offer Amount" value="<?php echo $gig['capital'] ?>" />
+                    <div class="[ input__control ]">
+                        <label for="offerAmount">Offer Amount (LKR)</label>
+                        <input type="number" name="offerAmount" id="offerAmount" placeholder="Offer Amount" value="<?php echo $gig['capital'] ?>" required />
                     </div>
-                    <div class="[ form__control ]">
-                        <label for="message">Message (Optional)</label>
-                        <textarea name="message" id="message"></textarea>
+                    <div class="[ input__control ]">
+                        <label for="message">Message</label>
+                        <textarea name="message" id="message" required></textarea>
                     </div>
                     <div class="[ flexsb ]">
-                        <button type="submit" name="submit_request" class="[ button__primary ]">Send</button>
                         <button type="button" class="[ button__danger ] " onclick="closeModal()">Cancel</button>
+                        <button type="submit" name="submit_request" class="[ button__primary ]">Send</button>
                     </div>
                 </form>
 

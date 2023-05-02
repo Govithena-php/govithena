@@ -55,9 +55,13 @@ class Controller
             case ACTOR::AGROLOGIST:
                 $this->redirect('/agrologist');
                 break;
-            case ACTOR::TECH_ASSISTANT:
+            case ACTOR::TECH:
                 $this->redirect('/tech');
                 break;
         }
+    }
+
+    public function error(){
+        
     }
 }

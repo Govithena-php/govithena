@@ -1,8 +1,3 @@
-.requests__continer {
-    margin-bottom: 2rem;
-    padding-top: 1rem;
-    border-top: 1px solid #ccc;
-}
 
 .caption {
     /* width: 60%; */
@@ -36,8 +31,22 @@
     margin-bottom: 0.5rem;
 }
 
-.requests__continer:first-child {
-    border-top: none;
+.flex-right{
+    justify-content: center !important;
+}
+
+.farmer__{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+}
+
+.farmer__image{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    overflow: hidden;
 }
 
 .no_requests__card {
@@ -163,33 +172,6 @@
 .item__card>.content small {
     color: var(--clr-text-gray);
     font-weight: 400;
-}
-
-.actions {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    align-items: center;
-}
-
-.actions>button {
-    border: none;
-    background: transparent;
-    cursor: pointer;
-}
-
-.actions>button>i {
-    font-size: 1.3rem;
-    rotate: 0deg;
-    transition: all 0.2s ease-in-out;
-}
-
-.actions>button>i[show] {
-    rotate: 180deg;
-}
-
-.actions>button:hover>i {
-    color: var(--clr-primary, #1d1d1d);
 }
 
 

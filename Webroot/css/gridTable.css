@@ -6,8 +6,11 @@
     --lg-cols: repeat(auto-fit, 1fr);
     --md-cols: repeat(auto-fit, 1fr);
     --sm-cols: repeat(auto-fit, 1fr);
-}
 
+    --table-head-background-color: var(--clr-secondary-light);
+    --table-head-color: var(--clr-light);
+    --table-head-border-color: var(--clr-secondary-light, #ccc);
+}
 
 .grid__table {
     margin-top: 1rem;
@@ -23,54 +26,46 @@
     grid-template-columns: var(--xl-cols);
 }
 
-
 .grid__table>.head>.row {
-    min-height: 3rem;
-    border-bottom: 1px solid #ccc;
-    margin-bottom: 0.5rem;
-    border-inline: 1px solid #ccc;
+    min-height: 3.5rem;
+    border: 1px solid var(--table-head-border-color);
+    background-color: var(--table-head-background-color);
+    box-shadow: 0 1px 0px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 5px 5px 0 0;
+
 }
 
 .grid__table>.head>.row>.data {
-    padding-left: 0.5rem;
+    padding-left: 1rem;
+    margin-block: 0.5rem;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-bottom: 0.25rem;
     border-left: 1px solid #ccc;
 }
 
-
-
-
-.grid__table>.head>.data>p {
-    flex-grow: 1;
-    color: var(--clr-text-gray);
-    font-size: 1rem;
-    font-weight: 600;
+.grid__table>.head>.row>.data:first-of-type {
+    border-left: none;
 }
 
-/* .grid__table>.body {
-    margin-top: 1rem;
-} */
+.grid__table>.head>.row>.data>p {
+    color: var(--table-head-color);
+    font-size: 1rem;
+    font-weight: 400;
+}
 
 .grid__table>.body>.row {
     position: relative;
-    /* margin-block: 0.75rem; */
-    padding: 0.75rem;
+    padding: 1rem 0.5rem;
     min-height: 2rem;
     border-bottom: 1px solid #ccc;
-    border-radius: 0.5rem;
     transition: all 0.2s ease-in-out;
     border-inline: 1px solid #ccc;
-
-    /* background-color: #eaeaea; */
 }
 
-.grid__table>.body>.row:hover {
-    /* background-color: #fff; */
+.grid__table>.body>.row:nth-of-type(2n) {
+    background-color: #f3f3f3;
 }
-
 
 .grid__table>.body>.row>.data {
     text-transform: capitalize;
@@ -80,7 +75,7 @@
     justify-content: flex-start;
     align-items: center;
     margin-bottom: 0.25rem;
-    font-size: 0.8rem;
+    font-size: 1rem;
 }
 
 .grid__table>.body>.row>.actions {
@@ -114,8 +109,6 @@
 .grid__table>.body>.row>.actions>button:hover>i {
     color: var(--clr-primary, #1d1d1d);
 }
-
-
 
 .grid__table>.body>.row>.data>h2 {
     width: 90%;
@@ -168,11 +161,11 @@
     align-items: center;
 }
 
-.grid__table>.body>.row>.flex-end-x{
+.grid__table>.body>.row>.flex-end-x {
     justify-content: flex-end;
 }
 
-.grid__table>.body>.row>.flex-end-y{
+.grid__table>.body>.row>.flex-end-y {
     align-items: flex-end;
 }
 

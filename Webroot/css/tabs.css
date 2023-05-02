@@ -42,6 +42,11 @@
     transition: all 0.2s ease-in-out;
 }
 
+.tabs>.controls>.control[active]{
+    color: var(--clr-light);
+    background-color: var(--clr-primary);
+}
+
 .tabs>.controls>.control:hover {
     color: var(--clr-light);
     background-color: var(--clr-primary);

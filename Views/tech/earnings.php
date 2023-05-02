@@ -12,16 +12,16 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/gridTable.css">
-    <link rel="stylesheet" href="<?php echo CSS ?>/investor/myinvestments.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/tech/earnings.css">
 
-    <title>Dashboard | Investor</title>
+    <title>Dashboard | Tech</title>
 </head>
 
 <body>
 
     <?php
-    $active = "myinvestments";
-    $title = "My Investments";
+    $active = "earnings";
+    $title = "Earnings";
     require_once("navigator.php");
     ?>
 
@@ -29,13 +29,13 @@
 
     <div class="[ container ][ investments ]" container-type="dashboard-section">
         <div class="[ caption ]">
-            <h3>View all your investment activity in one place.</h3>
+            <h3>View all your earnings activity in one place.</h3>
             <p>Easily track your investments and see how your portfolio has grown over time.</p>
         </div>
         <div class="inv__cards">
             <div class="inv__card">
                 <div class="inv__card__header">
-                    <h3>Total Investment</h3>
+                    <h3>This Month Earning</h3>
                 </div>
                 <div class="inv__card__body">
                     <h1 class="[ LKR ]">
@@ -57,7 +57,7 @@
 
             <div class="inv__card">
                 <div class="inv__card__header">
-                    <h3>This Month Investment</h3>
+                    <h3>Total Earning</h3>
                 </div>
                 <div class="inv__card__body">
                     <h1 class="[ LKR ]">
@@ -73,32 +73,6 @@
                     }
                     ?>
                 </div>
-            </div>
-
-            <div class="inv__card">
-                <div class="inv__card__header">
-                    <h3>Total Gigs</h3>
-                </div>
-                <div class="inv__card__body">
-                    <?php
-                    if (isset($totalGigs)) echo "<h1>" . $totalGigs . "</h1>";
-                    else echo "<h1>0</h1>";
-                    ?>
-                    <p>
-                        <?php
-                        if (isset($activeGigs)) {
-                            echo $activeGigs;
-                            if ($activeGigs > 1) echo " Active gigs";
-                            else echo " Active gig";
-                        } else echo "0 Active gigs";
-                        ?>
-
-                    </p>
-                </div>
-            </div>
-
-            <div class="inv__new">
-                <button class="[ button__primary ]">Invest More</button>
             </div>
         </div>
         <?php

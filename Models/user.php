@@ -11,11 +11,9 @@ class User extends Model
             $stmt =  Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $farmer = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $farmer;
+            return ['success' => true, 'data' => $farmer];
         } catch (PDOException $e) {
-            echo $e->getMessage();
-            die();
-            return null;
+            return ['success' => false, 'data' => $e->getMessage()];
         }
     }
 

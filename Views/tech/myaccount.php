@@ -24,7 +24,7 @@
     ?>
     <!-- <?php include 'sidebar.php'; ?> -->
     <div class="dashboard-container h-screen" style="margin-bottom: 200px">
-        <div class="[ profile_continer ]">
+        <div class="[ profile_container ]">
 
             <div class="[ profile_wrapper ]">
 
