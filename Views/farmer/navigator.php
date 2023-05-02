@@ -187,7 +187,7 @@ function highlight($active, $link)
                     <p>Tech Assistants</p>
                 </a>
             <li>
-                <a href="<?php echo URLROOT ?>/farmer/progress" class="<?php highlight($active, "progress") ?>">
+                <a href="<?php echo URLROOT ?>/farmer/gigprogress" class="<?php highlight($active, "progress") ?>">
                     <i class="bi bi-bar-chart"></i>
                     <p>Progress</p>
                 </a>

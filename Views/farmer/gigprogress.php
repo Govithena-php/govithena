@@ -23,8 +23,8 @@
 
     <?php
     $datadata = $notifications;
-    $active = "gigs";
-    $title = "Gigs";
+    $active = "progress";
+    $title = "Progress";
     require_once("navigator.php");
     ?>
 

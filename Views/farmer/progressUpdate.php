@@ -177,7 +177,7 @@
                         </div>
                     </div>
                     <div class="btn_wrapper btnposi">
-                        <a class="btn btn-primary" href="<?php echo URLROOT ?>">Add New</a>
+                    <a class="btn btn-primary" href="<?php echo URLROOT ?>/farmer/newProgress">Add New</a>
                     </div>
                     <?php
                         foreach ($progress as $pr) {
