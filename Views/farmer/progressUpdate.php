@@ -24,6 +24,9 @@
 
     <?php
     $datadata = $notifications;
+
+    // var_dump($progress); die();
+
     $active = "gigs";
     $title = "Gigs";
     require_once("navigator.php");
@@ -174,22 +177,33 @@
                         </div>
                     </div>
                     <div class="btn_wrapper btnposi">
-                        <a class="btn btn-primary" href="<?php echo URLROOT ?>">Add New</a>
+                    <a class="btn btn-primary" href="<?php echo URLROOT ?>/farmer/newProgress/<?php echo $gig['gigId']?>">Add New</a>
                     </div>
                     <?php
-                            foreach($progs as $prog){
-                                ?>
+                        foreach ($progress as $pr) {
+                        ?>
+                        <h3><p><?php echo $pr['date']?></p></h3>
 
-                        <div class="proimgframe">
-                            <!-- <img class="img" src="<?php echo UPLOADS . $agrologist['image'] ?>" alt=" profile"> -->
-                            <img src="<?php echo UPLOADS . '/profilePictures/' . $prog['imageName']?>" alt="Picture">
+                            <div class="imgrow">
+                            <?php
+                                foreach ($pr['images'] as $img) {
+                            ?>
+                                    <div class="proimgframe">
+                                        <img src="<?php echo UPLOADS .'/progress/' . $img ?>">
+                                    </div>
+                            <?php
+                                }
+                            ?>
+                            </div>
 
-                        </div>
-                       <h3><p><?php echo $progs['subject']?></p></h3>
-                        <p><?php echo $progs['description']?></p>
-                    <?php
-                    }
-                    ?>
+                        <br>
+                       <h3><p><?php echo $pr['subject']?></p></h3>
+                        <p><?php echo $pr['description']?></p>
+                        <hr>
+                        <?php
+                        }
+                        ?>
+              
     
     </div>
     <?php

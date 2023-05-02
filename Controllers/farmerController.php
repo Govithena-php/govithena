@@ -23,7 +23,7 @@ class farmerController extends Controller
         // <input type="file" name="name eke"
         //image ekk upload kranna imsgeHandler->upload('name eka')
 
-        $this->progressImageHandler = new ImageHandler($folder = 'Uploads3');
+        $this->progressImageHandler = new ImageHandler($folder = 'Uploads/progress');
         $this->gigImageHandler = new ImageHandler($folder = "Uploads/gigs");
 
         $this->farmerModel = $this->model('farmer');
@@ -168,13 +168,37 @@ class farmerController extends Controller
             $gigId = $params[0];
             $gig = $this->gigModel->fetchBy($gigId);
             $props['gig'] = $gig;
-            // $progimgs = $this->gigModel->viewProimg($gigId);
-            $progs = $this->gigModel->viewPro($gigId);
+           
+            // $progs = $this->gigModel->viewPro($gigId);
+            
+            // foreach($progs as $pro){
 
-            if (!empty($progs)) {
-                $props['progs'] = $progs;
-                // $props['progimgs'] = $progimgs;
-            }
+            //      $progimgs = $this->gigModel->viewProimg($pro['progressId']);
+            //      $props['progimgs'] = $progimgs;
+            // }
+         
+            // if (!empty($progs)){
+            //     $props['progs'] = $progs;
+            // }
+
+            
+        $progress = $this->progressModel->fetchAllByGig($gigId);
+    // var_dump($progress); die();
+
+        $props['progress'] = [];
+        if ($progress['success']) {
+            foreach ($progress['data'] as $pg) {
+                $progressImages = [];
+                $temp = $this->progressModel->fetchImagesByProgressId($pg['progressId']);
+                foreach ($temp['data'] as $key => $value) {
+                    $progressImages[$key] = $value['imageName'];
+                }
+                $pg['images'] = $progressImages;
+                $props['progress'][] = $pg;
+            
+
+           }
+        }
         }
 
         // $id = $this->currentUser->getUid(); //session eken user id eka gannawa activeUser.php file eke tiyenne
