@@ -226,6 +226,8 @@ class authController extends Controller
             $response = $this->userModel->fetchByEmail($email);
 
             if ($response['status'] == false) {
+                echo $response['data'];
+                die();
                 $this->redirect('/auth/signin/error/server-error');
                 return;
             }
