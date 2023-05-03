@@ -167,38 +167,36 @@ class farmerController extends Controller
         if (isset($params[0]) && !empty($params[0])) {
             $gigId = $params[0];
             $gig = $this->gigModel->fetchBy($gigId);
-            $props['gig'] = $gig;
-           
+            $props['gig'] = $gig['data'];
+
             // $progs = $this->gigModel->viewPro($gigId);
-            
+
             // foreach($progs as $pro){
 
             //      $progimgs = $this->gigModel->viewProimg($pro['progressId']);
             //      $props['progimgs'] = $progimgs;
             // }
-         
+
             // if (!empty($progs)){
             //     $props['progs'] = $progs;
             // }
 
-            
-        $progress = $this->progressModel->fetchAllByGig($gigId);
-    // var_dump($progress); die();
 
-        $props['progress'] = [];
-        if ($progress['success']) {
-            foreach ($progress['data'] as $pg) {
-                $progressImages = [];
-                $temp = $this->progressModel->fetchImagesByProgressId($pg['progressId']);
-                foreach ($temp['data'] as $key => $value) {
-                    $progressImages[$key] = $value['imageName'];
+            $progress = $this->progressModel->fetchAllByGigId($gigId);
+            // var_dump($progress); die();
+
+            $props['progress'] = [];
+            if ($progress['success']) {
+                foreach ($progress['data'] as $pg) {
+                    $progressImages = [];
+                    $temp = $this->progressModel->fetchImagesByProgressId($pg['progressId']);
+                    foreach ($temp['data'] as $key => $value) {
+                        $progressImages[$key] = $value['imageName'];
+                    }
+                    $pg['images'] = $progressImages;
+                    $props['progress'][] = $pg;
                 }
-                $pg['images'] = $progressImages;
-                $props['progress'][] = $pg;
-            
-
-           }
-        }
+            }
         }
 
         // $id = $this->currentUser->getUid(); //session eken user id eka gannawa activeUser.php file eke tiyenne
@@ -416,7 +414,7 @@ class farmerController extends Controller
                         foreach ($images as $image) {
                             $data = [
                                 'progressId' => $progressId,
-                                'imageName' => $image
+                                'image' => $image
                             ];
                             $res = $this->progressModel->saveProgressImage($data);
                             if (!$res['success']) {

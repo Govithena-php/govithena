@@ -52,10 +52,10 @@ class Progress
     public function saveProgressImage($data)
     {
         try {
-            $sql = "INSERT INTO gig_progress_image (imageName, progressId) VALUES (:imageName, :progressId)";
+            $sql = "INSERT INTO gig_progress_image (image, progressId) VALUES (:image, :progressId)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
-                'imageName' => $data['imageName'],
+                'image' => $data['image'],
                 'progressId' => $data['progressId']
             ]);
             return ['success' => true];

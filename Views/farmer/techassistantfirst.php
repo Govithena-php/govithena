@@ -16,11 +16,11 @@
     <link rel="stylesheet" href="<?php echo CSS ?>/farmer/farmerrequest.css">
 
 
-    <title>Dashboard | Technical Assistant</title>
+    <title>Dashboard | Farmer</title>
 </head>
 
 
-<body class="bg-gray h-screen">
+<body class="h-screen">
 
     <?php
     $active = "techassistantfirst";
@@ -149,9 +149,9 @@
 
                         </div>
 
-                 </div>
+                    </div>
 
-   
+
 
             <?php
                 }
