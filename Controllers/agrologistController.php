@@ -37,12 +37,21 @@ class agrologistController extends Controller
         $notifications = $agrologist->getnotifications();
         $farmerCount = $agrologist->getFarmerCount();
         $farmerCountLastMonh = $agrologist->getFarmerCountLastMonh();
+        $farmerCountTwoMonthsBefore = $agrologist->getFarmerCountTwoMonthsBefore();
+        $farmerCountThreeMonthsBefore = $agrologist->getFarmerCountThreeMonthsBefore();
+        $farmerCountFourMonthsBefore = $agrologist->getFarmerCountFourMonthsBefore();
+        $farmerCountFiveMonthsBefore = $agrologist->getFarmerCountFiveMonthsBefore();
         $AgrologistTotalIncome = $agrologist->getAgrologistTotalIncome();
         $AgrologistMonthlyIncome = $agrologist->getAgrologistMonthlyIncome();
         $AgrologistFieldVisits = $agrologist->getAgrologistFieldVisits();
         $AgrologistFieldVisitsLastMonth = $agrologist->getAgrologistFieldVisitsLastMonth();
         $GigCount = $agrologist->getGigCount();
         $GigCountLastMonth = $agrologist->getGigCountLastMonth();
+        $GigCountTwoMonthsBefore = $agrologist->getGigCountTwoMonthsBefore();
+        $GigCountThreeMonthsBefore = $agrologist->getGigCountThreeMonthsBefore();
+        $GigCountFourMonthsBefore = $agrologist->getGigCountFourMonthsBefore();
+        $GigCountFiveMonthsBefore = $agrologist->getGigCountFiveMonthsBefore();
+
         // echo json_encode($notifications);
         //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>". $notifications . "</h1>";
 
@@ -58,12 +67,20 @@ class agrologistController extends Controller
             'notifications' => $notifications,
             'farmerCount' => $farmerCount,
             'farmerCountLastMonh' => $farmerCountLastMonh,
+            'farmerCountTwoMonthsBefore' => $farmerCountTwoMonthsBefore,
+            'farmerCountThreeMonthsBefore' => $farmerCountThreeMonthsBefore,
+            'farmerCountFourMonthsBefore' => $farmerCountFourMonthsBefore,
+            'farmerCountFiveMonthsBefore' => $farmerCountFiveMonthsBefore,
             'agrologistTotalIncome' => $AgrologistTotalIncome,
             'agrologistMonthlyIncome' => $AgrologistMonthlyIncome,
             'agrologistFieldVisits' => $AgrologistFieldVisits,
             'agrologistFieldVisitsLastMonth' => $AgrologistFieldVisitsLastMonth,
             'gigCount' => $GigCount,
-            'gigCountLastMonth' => $GigCountLastMonth
+            'gigCountLastMonth' => $GigCountLastMonth,
+            'gigCountTwoMonthsBefore' => $GigCountTwoMonthsBefore,
+            'gigCountThreeMonthsBefore' => $GigCountThreeMonthsBefore,
+            'gigCountFourMonthsBefore' => $GigCountFourMonthsBefore,
+            'gigCountFiveMonthsBefore' => $GigCountFiveMonthsBefore,
         ]);
         $this->render('index');
     }
