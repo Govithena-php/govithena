@@ -346,11 +346,30 @@ class farmerController extends Controller
             $props['message'] = $params[0];
         }
 
-        $techAssistants = $this->farmerModel->techAssistants();
-        if ($techAssistants['status']) {
-            $props['techAssistants'] = $techAssistants['data'];
-            $this->set($props);
+        $location = new Input(GET, 'location');
+        $search = new Input(GET, 'term');
+
+        if ($search != "") {
+            $techAssistants = $this->farmerModel->searchTechAssistant($search);
+            if ($techAssistants['status']) {
+                $props['techAssistants'] = $techAssistants['data'];
+            }
+        } else if ($location != "") {
+            $techAssistants = $this->farmerModel->searchTechAssistantsByLocation($location);
+            var_dump($techAssistants);
+            // die();
+            if ($techAssistants['status']) {
+                $props['techAssistants'] = $techAssistants['data'];
+            }
+        } else {
+            $techAssistants = $this->farmerModel->techAssistants();
+            if ($techAssistants['status']) {
+                $props['techAssistants'] = $techAssistants['data'];
+            }
         }
+
+
+
         $this->set($props);
         $this->render('techassistantfirst');
     }
@@ -439,18 +458,35 @@ class farmerController extends Controller
         $this->render('progressform');
     }
 
+
     function agrologist($params = [])
     {
+        $props = [];
 
         if (!empty($params)) {
             $props['message'] = $params[0];
         }
 
-        $agrologists = $this->farmerModel->agrologists();
-        if ($agrologists['status']) {
-            $props['agrologists'] = $agrologists['data'];
-            $this->set($props);
+        $location = new Input(GET, 'location');
+        $search = new Input(GET, 'term');
+
+        if ($search != "") {
+            $agrologists = $this->farmerModel->searchAgrologists($search);
+            if ($agrologists['status']) {
+                $props['agrologists'] = $agrologists['data'];
+            }
+        } else if ($location != "") {
+            $agrologists = $this->farmerModel->searchAgrologistsByLocation($location);
+            if ($agrologists['status']) {
+                $props['agrologists'] = $agrologists['data'];
+            }
+        } else {
+            $agrologists = $this->farmerModel->agrologists();
+            if ($agrologists['status']) {
+                $props['agrologists'] = $agrologists['data'];
+            }
         }
+
         $this->set($props);
         $this->render('agrologist');
     }

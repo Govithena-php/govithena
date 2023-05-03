@@ -78,20 +78,12 @@
     <div class="container" container-type="dashboard-section">
         <h1 class="page__heading">Search Agrologist</h1>
 
-        <form class="[ filters ]" action="<?php echo URLROOT ?>/dashboard/investments" method="POST">
+        <form class="[ filters ]" action="<?php echo URLROOT ?>/farmer/agrologist/" method="GET">
             <div class="[ options ]">
-                <!-- <div class="[ input__control ]">
-                    <label for="fromDate">From</label>
-                    <input id="fromDate" name="fromDate" tag="fromDate" type="date">
-                </div>
-                <div class="[ input__control ]">
-                    <label for="toDate">To</label>
-                    <input id="toDate" name="toDate" tag="toDate" type="date">
-                </div> -->
                 <div class="[ input__control ]">
                     <label for="location">Location</label>
                     <select id="location" name="location">
-                        <option value="all">All</option>
+                        <option value="">All</option>
                         <?php
                         foreach (DISTRICTS as $key => $value) {
                             echo "<option value='$key'>$value</option>";
@@ -100,18 +92,18 @@
                     </select>
                 </div>
                 <div class="[ input__control ]">
-                    <button type="submit" name="submit" class="button__primary">Apply</button>
+                    <button type="submit" name="apply" value="true" class="button__primary">Apply</button>
                 </div>
             </div>
             <div class="search">
-                <input type="text" name="search" placeholder="Search">
-                <button type="submit" name="submit" class="button__primary"><i class="bi bi-search"></i></button>
+                <input type="text" name="term" placeholder="Search">
+                <button type="submit" name="search" value="true" class="button__primary"><i class="bi bi-search"></i></button>
             </div>
         </form>
 
         <div class="[ grid ]" gap="1" sm="1" md="2" lg="3">
             <?php
-            if (isset($agrologists)) {
+            if (isset($agrologists) && !empty($agrologists)) {
                 foreach ($agrologists as $agrologist) {
             ?>
 
@@ -162,38 +154,11 @@
 
             <?php
                 }
+            } else {
+                echo "<br>";
+                require(COMPONENTS . "dashboard/noDataFound.php");
             }
-
-
-
             ?>
-            <!-- <div class="requestcardn">
-                        <div class="[ requestimg1 ]">
-                            <img class="img" src="<?php echo UPLOADS . $agrologist['image'] ?>" alt=" profile">
-                            <img class="img" src="<?php echo IMAGES ?>/21.jpg" alt=" profile">
-
-                        </div>
-                        <div class="flex flex-row ">
-                            <div class=" requestlist ">
-                                <a class="namebox" href="<?php echo URLROOT . "/profile/" . $agrologist['uid'] ?>">
-                                    <p><b><?php echo $agrologist['firstName'] . " " . $agrologist['lastName']; ?></b></p>
-                                </a>
-                                <p class="flex flex-row">
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                </p>
-                            </div>
-                        </div>
-                        <div class=" flex-c-c">
-                            <a class="request__btn" href="<?php echo URLROOT . "/farmer/send/" . $agrologist['uid'] ?>">Send Request</a>
-                            <a class="requestbtn" href="<?php echo URLROOT . "/farmer/send/" . $agrologist['uid'] ?>">Send Request</a>
-
-                        </div>
-
-                 </div> -->
         </div>
 
 

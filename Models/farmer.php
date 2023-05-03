@@ -14,6 +14,31 @@ class Farmer extends Model
             return ['status' => false, 'data' => $e->getMessage()];
         }
     }
+    public function searchAgrologists($term)
+    {
+        try {
+            $sql = "SELECT LG.uid, user.firstName, user.lastName, user.image FROM login_credential LG INNER JOIN user ON LG.uid = user.uid WHERE LG.userType = :userType AND ";
+            $sql .= "(user.firstName LIKE :search OR user.lastName LIKE :search OR LG.username LIKE :search OR user.district LIKE :search OR user.city LIKE :search OR user.addressLine1 LIKE :search OR user.addressLine2 LIKE :search)";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['userType' => ACTOR::AGROLOGIST, 'search' => '%' . $term . '%']);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['status' => true, 'data' => $req];
+        } catch (Exception $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+    public function searchAgrologistsByLocation($location)
+    {
+        try {
+            $sql = "SELECT LG.uid, user.firstName, user.lastName, user.image FROM login_credential LG INNER JOIN user ON LG.uid = user.uid WHERE LG.userType = :userType AND user.district = :location ";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['userType' => ACTOR::AGROLOGIST, 'location' => $location]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['status' => true, 'data' => $req];
+        } catch (Exception $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
 
 
     public function techAssistants()
@@ -22,6 +47,33 @@ class Farmer extends Model
             $sql = "SELECT LG.uid, user.firstName, user.lastName, user.image FROM login_credential LG INNER JOIN user ON LG.uid = user.uid WHERE LG.userType = :userType";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['userType' => ACTOR::TECH]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['status' => true, 'data' => $req];
+        } catch (Exception $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function searchTechAssistant($term)
+    {
+        try {
+            $sql = "SELECT LG.uid, user.firstName, user.lastName, user.image FROM login_credential LG INNER JOIN user ON LG.uid = user.uid WHERE LG.userType = :userType AND ";
+            $sql .= "(user.firstName LIKE :search OR user.lastName LIKE :search OR LG.username LIKE :search OR user.district LIKE :search OR user.city LIKE :search OR user.addressLine1 LIKE :search OR user.addressLine2 LIKE :search)";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['userType' => ACTOR::TECH, 'search' => '%' . $term . '%']);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['status' => true, 'data' => $req];
+        } catch (Exception $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function searchTechAssistantsByLocation($location)
+    {
+        try {
+            $sql = "SELECT LG.uid, user.firstName, user.lastName, user.image FROM login_credential LG INNER JOIN user ON LG.uid = user.uid WHERE LG.userType = :userType AND user.district = :location ";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['userType' => ACTOR::TECH, 'location' => $location]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return ['status' => true, 'data' => $req];
         } catch (Exception $e) {
@@ -148,7 +200,8 @@ class Farmer extends Model
         }
     }
 
-    public function getnotifications(){
+    public function getnotifications()
+    {
         try {
             $sql = "SELECT n.id, n.notified_to, n.title, n.message, n.link, n.saved_time, n.published_time FROM notification n WHERE n.notified_to = :notified_to ORDER BY n.saved_time DESC";
             $stmt =  Database::getBdd()->prepare($sql);
