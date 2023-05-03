@@ -191,7 +191,7 @@ class farmerController extends Controller
                     $progressImages = [];
                     $temp = $this->progressModel->fetchImagesByProgressId($pg['progressId']);
                     foreach ($temp['data'] as $key => $value) {
-                        $progressImages[$key] = $value['imageName'];
+                        $progressImages[$key] = $value['image'];
                     }
                     $pg['images'] = $progressImages;
                     $props['progress'][] = $pg;
