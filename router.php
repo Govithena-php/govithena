@@ -7,13 +7,13 @@ class Router
     {
         $url = trim($url);
 
-        if ($url == "/") {
+        if ($url == "/govithena/") {
             $request->controller = "home";
             $request->action = "index";
             $request->params = [];
         } else {
             $explode_url = explode('/', $url);
-            $explode_url = array_slice($explode_url, 1);
+            $explode_url = array_slice($explode_url, 2);
             // die();
             $request->controller = $explode_url[0];
 

@@ -2,7 +2,7 @@
 
 define('WEBROOT', str_replace("Webroot/index.php", "", $_SERVER["SCRIPT_NAME"])); // /govithena/
 define('ROOT', str_replace("Webroot/index.php", "", $_SERVER["SCRIPT_FILENAME"])); // C:/xampp/htdocs/govithena/
-define('URLROOT', 'http://localhost'); // http://localhost/govithena
+define('URLROOT', 'http://localhost/govithena'); // http://localhost/govithena
 
 define('COMPONENTS', ROOT . 'Views/components/'); // C:/xampp/htdocs/govithena/Views/components/
 define('IMAGES', URLROOT . '/Webroot/images/'); // http://localhost/govithena/Webroot/images/
