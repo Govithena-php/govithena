@@ -157,7 +157,7 @@ function highlight($active, $link)
     <div class="[ links ]">
         <ul>
             <li>
-                <a href="<?php echo URLROOT ?>/farmer/" class="<?php highlight($active, "dashboard") ?>">
+                <a href="<?php echo URLROOT ?>/farmer" class="<?php highlight($active, "dashboard") ?>">
                     <i class="bi bi-columns-gap"></i>
                     <p>Dashboard</p>
                 </a>
@@ -187,7 +187,7 @@ function highlight($active, $link)
                     <p>Tech Assistants</p>
                 </a>
             <li>
-                <a href="<?php echo URLROOT ?>/farmer/progress" class="<?php highlight($active, "progress") ?>">
+                <a href="<?php echo URLROOT ?>/farmer/gigprogress" class="<?php highlight($active, "progress") ?>">
                     <i class="bi bi-bar-chart"></i>
                     <p>Progress</p>
                 </a>
@@ -196,7 +196,7 @@ function highlight($active, $link)
         <div class="[ grow ]"></div>
         <ul class="bottom__links">
             <li>
-                <a href="<?php echo URLROOT ?>/farmer/myaccount" class="<?php highlight($active, "myaccount") ?>">
+                <a href="<?php echo URLROOT ?>/account" class="<?php highlight($active, "account") ?>">
                     <i class="bi bi-person"></i>
                     <p>My Account</p>
                 </a>
@@ -208,7 +208,7 @@ function highlight($active, $link)
                 </a>
             </li>
             <li>
-                <a href="<?php echo URLROOT ?>/farmer/settings" class="<?php highlight($active, "settings") ?>">
+                <a href="<?php echo URLROOT ?>/settings" class="<?php highlight($active, "settings") ?>">
                     <i class="bi bi-gear"></i>
                     <p>Settings</p>
                 </a>

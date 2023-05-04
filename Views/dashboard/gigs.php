@@ -248,7 +248,7 @@
                                                     <p>50</p>
                                                 </div>
                                                 <span class="grow"></span>
-                                                <a href="<?php echo URLROOT . "/dashboard/gig/" . $activeGig['igId'] ?>" class="button__primary">View More</a>
+                                                <a href="<?php echo URLROOT . "/dashboard/gig/" . $activeGig['gigId'] ?>" class="button__primary">View More</a>
 
                                             </div>
                                         </div>

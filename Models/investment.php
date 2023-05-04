@@ -35,7 +35,7 @@ class Investment extends Model
     public function add($data)
     {
         try {
-            $sql = "INSERT INTO investment (id, igId, investorId, gigId, farmerId, amount) VALUES (:id, :igId, :investorId, :gigId, :farmerId, :amount)";
+            $sql = "INSERT INTO investment (id, investorId, gigId, farmerId, amount) VALUES (:id, :investorId, :gigId, :farmerId, :amount)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
             return ['success' => true, 'data' => true];
@@ -44,12 +44,12 @@ class Investment extends Model
         }
     }
 
-    public function getInvestmentsByIgId($igId)
+    public function getInvestmentsByGigId($gigId)
     {
         try {
-            $sql = "SELECT DATE(timestamp) as date, TIME(timestamp) as time, amount, description FROM investment WHERE igId = :igId";
+            $sql = "SELECT DATE(timestamp) as date, TIME(timestamp) as time, amount, description FROM investment WHERE gigId = :gigId ORDER BY timestamp DESC";
             $stmt = Database::getBdd()->prepare($sql);
-            $stmt->execute(['igId' => $igId]);
+            $stmt->execute(['gigId' => $gigId]);
             $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
             if ($res) {
                 return ['success' => true, 'data' => $res];
@@ -133,7 +133,7 @@ class Investment extends Model
     public function save($data)
     {
         try {
-            $sql = "INSERT INTO investment (id, igId, investorId, gigId, farmerId, amount, description) VALUES (:id, :igId, :investorId, :gigId, :farmerId, :amount, :description)";
+            $sql = "INSERT INTO investment (id, investorId, gigId, farmerId, amount, description) VALUES (:id, :investorId, :gigId, :farmerId, :amount, :description)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
             return ['success' => true, 'data' => true];

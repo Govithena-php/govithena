@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
 
     <link rel="stylesheet" href="<?php echo CSS ?>/farmer/gigs.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/farmer/progressUpdate.css">
 
     <title>Dashboard | Farmer</title>
 </head>
@@ -23,23 +24,26 @@
 
     <?php
     $datadata = $notifications;
+
+    // var_dump($progress); die();
+
     $active = "gigs";
     $title = "Gigs";
     require_once("navigator.php");
     ?>
 
-    <!-- <?php $name = "Janith"; ?> -->
+    <?php $name = "Janith"; ?>
 
     <div class="[ container ][ gigs ]" container-type="dashboard-section">
         <div class="btn_wrapper">
-            <h2>My Gigs</h2>
-            <a class="btn btn-primary" href="<?php echo URLROOT ?>/farmer/createGig">Add New</a>
+            <h2>Progress</h2>
+            <!-- <a class="btn btn-primary" href="<?php echo URLROOT ?>/farmer/createGig">Add New</a> -->
         </div>
         <!-- <div class="gig_wrapper">
 
             <?php
 
-            if (empty($products)) {
+            if (empty($gigroducts)) {
             ?>
                 <div class="no_products">
                     <h1>No Products...</h1>
@@ -47,26 +51,26 @@
                 </div>
                 <?php
             } else {
-                foreach ($products as $p) {
-                    $imageURL = UPLOADS . $p["thumbnail"];
+                foreach ($gigroducts as $gig) {
+                    $imageURL = UPLOADS . $gig["thumbnail"];
                 ?>
                     <div class="card">
                         <div class="img_wrapper">
                             <img width="100" alt="test" src="<?php echo $imageURL ?>" />
                         </div>
                         <div class="card_content">
-                            <h1><?php echo ucwords($p['title']) ?></h1>
-                            <h4><?php echo ucwords($p['category']) ?></h4>
+                            <h1><?php echo ucwords($gig['title']) ?></h1>
+                            <h4><?php echo ucwords($gig['category']) ?></h4>
                             <div style="color: grey">Initial Investment</div>
-                            <h2 class="LKR"><?php echo $p['capital'] ?></h2>
+                            <h2 class="LKR"><?php echo $gig['capital'] ?></h2>
                             <div style="color: grey">Location</div>
-                            <p><?php echo ucwords($p['city']) ?></p>
+                            <p><?php echo ucwords($gig['city']) ?></p>
                             <div style="color: grey">Land Area</div>
-                            <p><?php echo $p['landArea'] ?> Hectare</p>
-                            <p><?php echo $p['description'] ?></p>
+                            <p><?php echo $gig['landArea'] ?> Hectare</p>
+                            <p><?php echo $gig['description'] ?></p>
                             <div class="actions">
                                 <a href="#" class="btn btn-primary">Edit</a>
-                                <a href="<?php echo URLROOT . "/farmer/deleteGig/" . $p['gigId'] ?>" class="btn btn-danger">Delete</a>
+                                <a href="<?php echo URLROOT . "/farmer/deleteGig/" . $gig['gigId'] ?>" class="btn btn-danger">Delete</a>
                             </div>
                         </div>
                     </div>
@@ -102,7 +106,7 @@
         
         <div class="grid__table"
                         style="
-                                --xl-cols: 0.7fr 1.3fr 0.9fr 0.9fr 0.5fr 0.5fr 1.8fr 1.1fr;
+                                --xl-cols: 0.7fr 1.5fr 0.9fr 0.7fr 0.5fr 0.5fr;
                                 --lg-cols: 1.5fr 1fr 1fr 1fr 0.3fr;
                                 --md-cols: 2fr 1fr 0.3fr;
                                 --sm-cols: 3fr 0.3fr;
@@ -128,56 +132,79 @@
                                 <div class="data">
                                     <p>Land Area</p>
                                 </div>
-                                <div class="data">
+                                <!-- <div class="data">
                                     <p>Description</p>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="body">
-                            <?php
-                            foreach($products as $p){
-                                ?>
                             <div class="row">
                                 <div class="data farmer__">
                                     <div class="farmerimg">
-                                        <img src="<?php echo UPLOADS . '/profilePictures/' . $p['thumbnail']?>" alt="Picture">
+                                        <img src="<?php echo UPLOADS . '/profilePictures/' . $gig['thumbnail']?>" alt="Picture">
                                     </div>
                                 </div>
                                 <div class="data ">
                                     <div class="namecol">
-                                        <h1><p><?php echo $p['title'] ?></p></h1>
-                                        <p><?php echo $p['category']?></p>
+                                        <h1><p><?php echo $gig['title'] ?></p></h1>
+                                        <p><?php echo $gig['category']?></p>
                                     </div>
                                 </div>
                                 <div class="data">
-                                    <p class="LKR"><?php echo number_format($p['capital'], 2, '.', ',')?></p>
+                                    <p class="LKR"><?php echo number_format($gig['capital'], 2, '.', ',')?></p>
                                 </div>
                                 <div class="data">
-                                    <p><?php echo $p['city']?></p>
+                                    <p><?php echo $gig['city']?></p>
                                 </div>
                                 <div class="data">
-                                    <p><?php echo $p['status']?></p>
+                                    <p><?php echo $gig['status']?></p>
                                 </div>
                                 <div class="data">
-                                    <p><?php echo $p['landArea']?></p>
+                                    <p><?php echo $gig['landArea']?></p>
                                 </div>
-                                <div class="data">
-                                    <p><?php echo $p['description']?></p>
-                                </div>
+                                <!-- <div class="data">
+                                    <p><?php echo $gig['description']?></p>
+                                </div> -->
                                 <div class="data flex-right">
                                     <div class="actions">
-                                        <a href="#" class="btn btn-primary">Edit</a>
-                                        <!-- <button onclick="openAcceptModal('<?php echo $p['gigId']?>')" class="button__primary">Accept</button> -->
-                                        <button onclick="openRejectModal('<?php echo $p['gigId']?>')" class="button__danger">Delete</button>
-                                        <!-- <a href="<?php echo URLROOT . "/farmer/deleteGig/" . $p['gigId'] ?>" class="btn btn-danger">Delete</a> -->
+                                        <!-- <a href="#" class="btn btn-primary">View Progress</a> -->
+                                        <!-- <button onclick="openAcceptModal('<?php echo $gig['gigId']?>')" class="button__primary">Accept</button> -->
+                                        <!-- <button onclick="openRejectModal('<?php echo $gig['gigId']?>')" class="button__danger">Reject</button> -->
+                                        <!-- <a href="<?php echo URLROOT . "/farmer/deleteGig/" . $gig['gigId'] ?>" class="btn btn-danger">Delete</a> -->
                                     </div>
                                 </div>
                             </div>
-                            <?php
-                            }
-                            ?>
                         </div>
                     </div>
+                    <div class="btn_wrapper btnposi">
+                    <a class="btn btn-primary" href="<?php echo URLROOT ?>/farmer/newProgress/<?php echo $gig['gigId']?>">Add New</a>
+                    </div>
+                    <?php
+                        foreach ($progress as $pr) {
+                        ?>
+                        <h3><p><?php echo $pr['date']?></p></h3>
+
+                            <div class="imgrow">
+                            <?php
+                                foreach ($pr['images'] as $img) {
+                            ?>
+                                    <div class="proimgframe">
+                                        <img src="<?php echo UPLOADS .'/progress/' . $img ?>">
+                                    </div>
+                            <?php
+                                }
+                            ?>
+                            </div>
+
+                        <br>
+                       <h3><p><?php echo $pr['subject']?></p></h3>
+                        <p><?php echo $pr['description']?></p>
+                        <hr>
+                        <?php
+                        }
+                        ?>
+              
+    
     </div>
     <?php
     require_once("footer.php");

@@ -180,6 +180,14 @@ form>div {
     justify-content: stretch;
 }
 
+.row2 {
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+    justify-content: stretch;
+    width: 50%;
+}
+
 form>.form__control {
     /* width: 100%; */
     display: flex;
@@ -324,3 +332,29 @@ input[type="select"] {
 .itemlst {
     padding: 12px 0px;
 }
+
+.farmerimg {
+   
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    /* margin-right: 30px; */
+
+
+}
+.farmerimg>img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.namecol{
+    display: flex;
+    flex-direction: column;
+}
+
+.remove-border{
+    border-left:  none !important;
+  }
+  

@@ -21,7 +21,7 @@ class Abc {
             $sql = "SELECT * FROM gig WHERE farmerId = :abcid";
             $stmt =  Database::getBdd()->prepare($sql); //a widiytama
             $stmt->execute([
-                'abcid' => $id,
+                'abcid' => $id
             ]); //parmeters pass kranne mehema
             
             // ekak gannwanm $stmt->fetch
@@ -48,7 +48,7 @@ class Abc {
             // $stmt->execute($data); // okkonm names tik $data object eke edan table column name ekata ankna ekama namanm dala tyenne, execute eka athule kelinma $data kiyl pass krann puluwan,
 
         }
-        catch(PDOException $e){
+        catch(PDOException $e){ //catch eka me tikamyi. wens krann oni na
             echo $e->getMessage();
             return null;
         }

@@ -56,11 +56,14 @@
 .custom__select .custom__options .custom__option {
     padding: 1rem;
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
 }
 
 .custom__select .custom__options .custom__option:hover {
     background-color: var(--clr-primary-light);
+    color: #fff;
+}
+
+.custom__select .custom__options .custom__option:hover :is(h1, h2, h3, h4, h5, h6, p, span, a, li, i, small) {
     color: #fff;
 }
 

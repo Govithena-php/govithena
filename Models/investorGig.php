@@ -2,10 +2,24 @@
 
 class investorGig
 {
+    public function getfarmerIdByGigId($gigId)
+    {
+        try {
+            $sql = "SELECT farmerId FROM investor_gig WHERE gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId]);
+            $gig = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $gig];
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
+
+
     public function fetchAllActiveGigByInvestor($id)
     {
         try {
-            $sql = "SELECT ig.igId, ig.gigId, ig.farmerId, g.title, g.city, g.thumbnail, u.firstName, u.lastName, u.image, u.city as FCity FROM investor_gig ig INNER JOIN gig g ON ig.gigId = g.gigId INNER JOIN user u ON ig.farmerId = u.uid WHERE ig.investorId = :id AND ig.status = 'ACTIVE' ORDER BY timestamp DESC";
+            $sql = "SELECT ig.gigId, ig.farmerId, g.title, g.city, g.thumbnail, u.firstName, u.lastName, u.image, u.city as FCity FROM investor_gig ig INNER JOIN gig g ON ig.gigId = g.gigId INNER JOIN user u ON ig.farmerId = u.uid WHERE ig.investorId = :id AND ig.status = 'ACTIVE' ORDER BY timestamp DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -164,7 +178,7 @@ class investorGig
     public function add($data)
     {
         try {
-            $sql = "INSERT INTO investor_gig (igId, investorId, gigId, farmerId) VALUES (:igId, :investorId, :gigId, :farmerId)";
+            $sql = "INSERT INTO investor_gig (investorId, gigId, farmerId) VALUES (:investorId, :gigId, :farmerId)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
             return ['success' => true, 'data' => true];

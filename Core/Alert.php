@@ -14,7 +14,7 @@ class Alert
 
     switch (strtolower($this->type)) {
       case ALERT_TYPE::SUCCESS:
-        $this->if_empty_Set_icon_to("<i class='fa fa-check'></i>");
+        $this->if_empty_Set_icon_to("<i class='bi bi-check'></i>");
         $this->if_empty_Set_message_to("successful");
         break;
       case ALERT_TYPE::INFO:
@@ -61,7 +61,7 @@ class Alert
           right: calc(-100% - 1rem);
           background-color: rgb(48, 48, 48);
           color: #fff;
-          padding: 1rem 1.5rem;
+          padding: 0.75rem 1.25rem;
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -88,12 +88,17 @@ class Alert
           border-bottom: 1px solid #ccc;
         }
 
+        .alert_contnet{
+          padding-left: 1rem;
+          border-left: 1px solid #fff;
+        }
+        
         .alert p {
           font-size: 0.9rem;
           padding-top: 0.2rem;
         }
         .success {
-          background: #00b894;
+          background: #1d9a5f;
         }
         .error {
           background: #d63031;
