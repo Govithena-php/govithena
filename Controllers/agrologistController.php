@@ -51,6 +51,10 @@ class agrologistController extends Controller
         $GigCountThreeMonthsBefore = $agrologist->getGigCountThreeMonthsBefore();
         $GigCountFourMonthsBefore = $agrologist->getGigCountFourMonthsBefore();
         $GigCountFiveMonthsBefore = $agrologist->getGigCountFiveMonthsBefore();
+        $GigCountPerCategory = $agrologist->getGigsPerCategory();
+        $incomeLimit = $agrologist->getIncomeLimit();
+        $withdrawalsLimit = $agrologist->getWithdrawalsLimit();
+
 
         // echo json_encode($notifications);
         //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>". $notifications . "</h1>";
@@ -81,6 +85,9 @@ class agrologistController extends Controller
             'gigCountThreeMonthsBefore' => $GigCountThreeMonthsBefore,
             'gigCountFourMonthsBefore' => $GigCountFourMonthsBefore,
             'gigCountFiveMonthsBefore' => $GigCountFiveMonthsBefore,
+            'gigCountPerCategory' => $GigCountPerCategory,
+            'incomeLimit' => $incomeLimit,
+            'withdrawalsLimit' => $withdrawalsLimit,
         ]);
         $this->render('index');
     }

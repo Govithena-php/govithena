@@ -107,6 +107,7 @@ body{
 
 .charts .chart canvas {
     width: 100%;
+    margin-right: 0px;
 }
 
 .charts #myChart {

@@ -933,10 +933,65 @@ class Agrologist extends Model
         }
     }
 
+    public function getIncomeLimit()
+    {
+        try {
+            $sql = "SELECT p.payment, p.paidDate, CONCAT(u.firstName , ' ', u.lastName) AS fullName FROM agrologist_payment p LEFT JOIN user u ON u.uid=p.farmerId WHERE p.agrologistId=:agrologistId ORDER BY p.paidDate DESC LIMIT 5";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'agrologistId' => Session::get('user')->getUid()
+            ]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+
+        }
+    }
+
+
     public function getWithdrawals()
     {
         try {
             $sql = "SELECT withdrawal, withdrawalDate FROM agrologist_withdrawal WHERE agrologistId=:agrologistId ORDER BY withdrawalDate DESC";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'agrologistId' => Session::get('user')->getUid()
+            ]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+
+        }
+    }
+
+    public function getWithdrawalsLimit()
+    {
+        try {
+            $sql = "SELECT withdrawal, withdrawalDate FROM agrologist_withdrawal WHERE agrologistId=:agrologistId ORDER BY withdrawalDate DESC LIMIT 5";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'agrologistId' => Session::get('user')->getUid()
+            ]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+
+        }
+    }
+
+    public function getGigsPerCategory()
+    {
+        try {
+            $sql = "SELECT g.category, COUNT(g.gigId) AS gigCount FROM gig g LEFT JOIN agrologist_request a ON a.farmerId=g.farmerId WHERE a.agrologistId=:agrologistId GROUP BY g.category";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
                 'agrologistId' => Session::get('user')->getUid()

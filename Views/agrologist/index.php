@@ -165,10 +165,8 @@
 
 
 
-        <div class="[ chart-pie ] grid" xs="1" sm="1" md="2" lg="3">
-            <!-- <div class="[ chart ]">
-                <canvas id="myChart1"></canvas>
-            </div> -->
+        <!-- <div class="[ chart-pie ] grid" xs="1" sm="1" md="2" lg="3">
+            
             <div class="[ chart ]">
                 <canvas id="pieChart"></canvas>
             </div>
@@ -178,10 +176,8 @@
             <div class="[ chart ]">
                 <canvas id="pieChart2"></canvas>
             </div>
-            <!-- <div class="[ chart ]">
-                <canvas id="pieChart3"></canvas>
-            </div> -->
-        </div>
+          
+        </div> -->
 
         <div class="[ charts ]">
             <div class="[ chart ]">
@@ -195,7 +191,7 @@
 
         <!-- ================================================================ -->
 
-        <div class="[ progress__inestments ]">
+        <!-- <div class="[ progress__inestments ]">
             <div class="[ block progress ]">
 
                 <div class="[ heading ]">
@@ -300,107 +296,92 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> -->
 
 
-        <!-- <div class="[ grid ][ profit__widthdrawal ]" gap="2" md="2">
+        <div class="[ grid ][ profit__widthdrawal ]" gap="2" md="2">
             <div class="[ block Profits ]">
                 <div class="[ heading ]">
-                    <h4>Profits</h4>
-                    <a href="">View All</a href="">
+                    <h4>Income</h4>
+                    <a href="<?php echo URLROOT . "/agrologist/withdrawals" ?>">View All</a href="">
                 </div>
-                <table class="[ ]">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Farmer name</th>
-                            <th>Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer nameFarmer name</td>
-                            <td>150000.00</td>
-                        </tr>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer name</td>
-                            <td>150000.00</td>
-                        </tr>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer name</td>
-                            <td>150000.00</td>
-                        </tr>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer nameFarmer name</td>
-                            <td>150000.00</td>
-                        </tr>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer name</td>
-                            <td>150000.00</td>
-                        </tr>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer name</td>
-                            <td>150000.00</td>
-                        </tr>
+                <?php
+                if ($incomeLimit == null) {
+                    require(COMPONENTS . "dashboard/noDataFound.php");
+                } else {
+                    ?>
+                    <table class="[ ]">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Farmer name</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            foreach ($incomeLimit as $income) {
 
-                    </tbody>
-                </table>
+                                ?>
+
+                                <tr>
+                                    <td>
+                                        <?php echo date('Y-m-d', strtotime($income['paidDate'])) ?>
+                                    </td>
+                                    <td>
+                                        <?php echo ucwords($income['fullName']) ?>
+                                    </td>
+                                    <td>
+                                        <?php echo number_format($income['payment'], 2, '.', ',') ?>
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                    <?php
+                }
+                ?>
             </div>
             <div class="[ block widthdrawal ]">
                 <div class="[ heading ]">
                     <h4>Widthdrawal</h4>
-                    <a href="">View All</a href="">
+                    <a href="<?php echo URLROOT . "/agrologist/withdrawals" ?>">View All</a href="">
                 </div>
-                <table class="[ ]">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Farmer name</th>
-                            <th>Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer nameFarmer name</td>
-                            <td>150000.00</td>
-                        </tr>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer name</td>
-                            <td>150000.00</td>
-                        </tr>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer name</td>
-                            <td>150000.00</td>
-                        </tr>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer nameFarmer name</td>
-                            <td>150000.00</td>
-                        </tr>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer name</td>
-                            <td>150000.00</td>
-                        </tr>
-                        <tr>
-                            <td>20/02/2022</td>
-                            <td>Farmer name</td>
-                            <td>150000.00</td>
-                        </tr>
+                <?php
+                if ($incomeLimit == null) {
+                    require(COMPONENTS . "dashboard/noDataFound.php");
+                } else {
+                    ?>
+                    <table class="[ ]">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            foreach ($withdrawalsLimit as $withdraw) {
 
-                    </tbody>
+                                ?>
+
+                                <tr>
+                                    <td><?php echo date('Y-m-d', strtotime($withdraw['withdrawalDate'])) ?></td>
+                                    <td><?php echo number_format($withdraw['withdrawal'], 2, '.', ',') ?></td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
+
+                        </tbody>
+                        <?php
+                }
+                ?>
                 </table>
             </div>
-        </div> -->
+        </div>
     </div>
     <?php
     require_once("footer.php");
@@ -475,7 +456,7 @@
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Chart.js Line Chart - Multi Axis'
+                        text: 'Gig and Farmer count per month'
                     }
                 },
                 scales: {
@@ -497,6 +478,51 @@
         };
         const ctx = document.getElementById('myChart');
         new Chart(ctx, config);
+
+
+    </script>
+    <script>
+        const gigs = <?PHP echo json_encode($gigCountPerCategory) ?>;
+
+        const category = gigs.map((item) => item.category);
+
+        const gigCount = gigs.map((item) => item.gigCount);
+
+        const pieProfitCrop = {
+            labels: category,
+            datasets: [
+                {
+                    label: 'gig count',
+                    data: gigCount,
+                    backgroundColor: ['rgb(255, 99, 132)', 'rgb(255, 159, 64)', 'rgb(255, 205, 86)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)'],
+                }
+            ]
+        };
+
+        const pieConfigProfitCrop = {
+            type: 'pie',
+            data: pieProfitCrop,
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Gigs per Category'
+                    }
+                }
+            },
+        };
+
+
+
+
+        const pieChart = document.getElementById('pieChart');
+        new Chart(pieChart, pieConfigProfitCrop);
+
 
 
     </script>

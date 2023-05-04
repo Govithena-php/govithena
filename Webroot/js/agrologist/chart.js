@@ -57,16 +57,16 @@
 //   };
 
 
-  const pieProfitCrop = {
-    labels: ['Papaya', 'Brinjal', 'Greengrams', 'Rice', 'Pumpkin'],
-    datasets: [
-      {
-        label: 'Dataset 1',
-        data: [300, 50, 100, 40, 120],
-        backgroundColor: ['rgb(255, 99, 132)', 'rgb(255, 159, 64)', 'rgb(255, 205, 86)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)'],
-      }
-    ]
-  };
+  // const pieProfitCrop = {
+  //   labels: ['Papaya', 'Brinjal', 'Greengrams', 'Rice', 'Pumpkin'],
+  //   datasets: [
+  //     {
+  //       label: 'Dataset 1',
+  //       data: [300, 50, 100, 40, 120],
+  //       backgroundColor: ['rgb(255, 99, 132)', 'rgb(255, 159, 64)', 'rgb(255, 205, 86)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)'],
+  //     }
+  //   ]
+  // };
 
   const pieCropSuccess = {
     labels: ['Papaya', 'Brinjal', 'Ladies Fingers', 'Rice', 'Pumpkin'],
@@ -91,23 +91,23 @@
   };
 
 
-  const pieConfigProfitCrop = {
-    type: 'pie',
-    data: pieProfitCrop,
-    options: {
-      responsive: true,
-      maintainAspectRatio: true,
-      plugins: {
-        legend: {
-          position: 'top',
-        },
-        title: {
-          display: true,
-          text: 'Profit per Crop'
-        }
-      }
-    },
-  };
+  // const pieConfigProfitCrop = {
+  //   type: 'pie',
+  //   data: pieProfitCrop,
+  //   options: {
+  //     responsive: true,
+  //     maintainAspectRatio: true,
+  //     plugins: {
+  //       legend: {
+  //         position: 'top',
+  //       },
+  //       title: {
+  //         display: true,
+  //         text: 'Profit per Crop'
+  //       }
+  //     }
+  //   },
+  // };
 
   const pieConfigCropSuccess = {
     type: 'pie',
@@ -146,7 +146,7 @@
   };
 
 // const ctx = document.getElementById('myChart');
-const pieChart = document.getElementById('pieChart');
+// const pieChart = document.getElementById('pieChart');
 
 const ctx1 = document.getElementById('myChart1');
 const pieChart1 = document.getElementById('pieChart1');
@@ -157,7 +157,7 @@ const pieChart3 = document.getElementById('pieChart3');
 
 // new Chart(ctx, config);
 
-new Chart(pieChart, pieConfigProfitCrop);
+// new Chart(pieChart, pieConfigProfitCrop);
 //new Chart(ctx1, config);
 new Chart(pieChart1, pieConfigCropSuccess);
 
