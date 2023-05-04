@@ -1,60 +1,60 @@
 
-const data = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  datasets: [
-    {
-        label: 'My First Dataset',
-        data: [65, 59, 80, 81, 56, 55, 40],
-        fill: false,
-        borderColor: 'rgb(255, 99, 132)',
-        tension: 0.1,
-        yAxisID: 'y'
+// const data = {
+//   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+//   datasets: [
+//     {
+//         label: 'My First Dataset',
+//         data: [65, 59, 80, 81, 56, 55, 40],
+//         fill: false,
+//         borderColor: 'rgb(255, 99, 132)',
+//         tension: 0.1,
+//         yAxisID: 'y'
 
-    },
-    {
-        label: 'My Second Dataset',
-        data: [75, 20, 23, 31, 46, 95, 50],
-        fill: false,
-        borderColor: 'rgb(75, 192, 192)',
-        tension: 0.1,
-        yAxisID: 'y1'
-    }
-],
-};
+//     },
+//     {
+//         label: 'My Second Dataset',
+//         data: [75, 20, 23, 31, 46, 95, 50],
+//         fill: false,
+//         borderColor: 'rgb(75, 192, 192)',
+//         tension: 0.1,
+//         yAxisID: 'y1'
+//     }
+// ],
+// };
 
-const config = {
-    type: 'line',
-    data: data,
-    options: {
-      responsive: true,
-      interaction: {
-        mode: 'index',
-        intersect: false,
-      },
-      stacked: false,
-      plugins: {
-        title: {
-          display: true,
-          text: 'Chart.js Line Chart - Multi Axis'
-        }
-      },
-      scales: {
-        y: {
-          type: 'linear',
-          display: true,
-          position: 'left',
-        },
-        y1: {
-          type: 'linear',
-          display: true,
-          position: 'right',
-            grid: {
-            drawOnChartArea: true,
-          },
-        },
-      }
-    },
-  };
+// const config = {
+//     type: 'line',
+//     data: data,
+//     options: {
+//       responsive: true,
+//       interaction: {
+//         mode: 'index',
+//         intersect: false,
+//       },
+//       stacked: false,
+//       plugins: {
+//         title: {
+//           display: true,
+//           text: 'Chart.js Line Chart - Multi Axis'
+//         }
+//       },
+//       scales: {
+//         y: {
+//           type: 'linear',
+//           display: true,
+//           position: 'left',
+//         },
+//         y1: {
+//           type: 'linear',
+//           display: true,
+//           position: 'right',
+//             grid: {
+//             drawOnChartArea: true,
+//           },
+//         },
+//       }
+//     },
+//   };
 
 
   const pieProfitCrop = {
@@ -145,7 +145,7 @@ const config = {
     },
   };
 
-const ctx = document.getElementById('myChart');
+// const ctx = document.getElementById('myChart');
 const pieChart = document.getElementById('pieChart');
 
 const ctx1 = document.getElementById('myChart1');
@@ -155,7 +155,7 @@ const pieChart2 = document.getElementById('pieChart2');
 
 const pieChart3 = document.getElementById('pieChart3');
 
-new Chart(ctx, config);
+// new Chart(ctx, config);
 
 new Chart(pieChart, pieConfigProfitCrop);
 //new Chart(ctx1, config);
