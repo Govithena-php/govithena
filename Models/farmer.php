@@ -15,6 +15,29 @@ class Farmer extends Model
         }
     }
 
+    public function sendAgrologistRequest($data)
+    {
+        try {
+            $sql = "INSERT INTO agrologist_request (requestId, farmerId, agrologistId, offer, timePeriod, message) VALUES (:requestId, :farmerId, :agrologistId, :offer, :timePeriod, :message)";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'requestId' => $data['requestId'],
+                'farmerId' => $data['farmerId'],
+                'agrologistId' => $data['agrologistId'],
+                'offer' => $data['offer'],
+                'timePeriod' => $data['timePeriod'],
+                'message' => $data['message'],
+            ]);
+            if ($stmt->rowCount() > 0) {
+                return ['status' => true, 'data' => true];
+            } else {
+                return ['status' => true, 'data' => false];
+            }
+        } catch (Exception $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+
 
     public function getAcceptedAgrologistByFarmer($id)
     {
@@ -93,6 +116,19 @@ class Farmer extends Model
         }
     }
 
+    public function cancelTechRequest($id)
+    {
+        try {
+            $sql = "DELETE FROM techassistant_request WHERE requestId = :requestId";
+
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['requestId' => $id]);
+            return ['status' => true, 'data' => true];
+        } catch (Exception $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+
 
     public function techAssistants()
     {
@@ -134,25 +170,41 @@ class Farmer extends Model
         }
     }
 
-    public function sendAgrologistRequest($data)
+
+    public function getAcceptedTechByFarmer($id)
     {
         try {
-            $sql = "INSERT INTO agrologist_request (requestId, farmerId, agrologistId, offer, timePeriod, message) VALUES (:requestId, :farmerId, :agrologistId, :offer, :timePeriod, :message)";
+            $sql = "SELECT tr.technicalAssistantId, u.firstName, u.lastName, u.city, u.image from techassistant_request tr INNER JOIN user u ON tr.technicalAssistantId = u.uid WHERE tr.farmerId = :farmerId AND tr.status = 'accepted' ORDER BY tr.requestedDate DESC";
             $stmt = Database::getBdd()->prepare($sql);
-            $stmt->execute([
-                'requestId' => $data['requestId'],
-                'farmerId' => $data['farmerId'],
-                'agrologistId' => $data['agrologistId'],
-                'offer' => $data['offer'],
-                'timePeriod' => $data['timePeriod'],
-                'message' => $data['message'],
-            ]);
-            if ($stmt->rowCount() > 0) {
-                return ['status' => true, 'data' => true];
-            } else {
-                return ['status' => true, 'data' => false];
-            }
-        } catch (Exception $e) {
+            $stmt->execute(['farmerId' => $id]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['status' => true, 'data' => $req];
+        } catch (PDOException $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+    public function getPendingTechByFarmer($id)
+    {
+        try {
+            $sql = "SELECT tr.requestId, tr.technicalAssistantId, DATE(tr.requestedDate) as requestedDate, tr.offer, tr.message, u.firstName, u.lastName, u.city, u.image from techassistant_request tr INNER JOIN user u ON tr.technicalAssistantId = u.uid WHERE tr.farmerId = :farmerId AND tr.status = 'Pending' ORDER BY tr.requestedDate DESC";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['farmerId' => $id]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['status' => true, 'data' => $req];
+        } catch (PDOException $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function getDeclinedTechByFarmer($id)
+    {
+        try {
+            $sql = "SELECT tr.requestId, tr.technicalAssistantId, DATE(tr.requestedDate) as requestedDate, tr.offer, tr.message, u.firstName, u.lastName, u.city, u.image from techassistant_request tr INNER JOIN user u ON tr.technicalAssistantId = u.uid WHERE tr.farmerId = :farmerId AND tr.status = 'Declined' ORDER BY tr.requestedDate DESC";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['farmerId' => $id]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['status' => true, 'data' => $req];
+        } catch (PDOException $e) {
             return ['status' => false, 'data' => $e->getMessage()];
         }
     }

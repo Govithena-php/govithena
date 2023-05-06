@@ -25,18 +25,12 @@
 <body class="h-screen">
 
     <?php
-    $active = "techassistantfirst";
+    $active = "techassistant";
     $title = "Tech Assistants";
     require_once("navigator.php");
     ?>
 
     <?php
-
-    if (Session::has('techassitant_request_alert')) {
-        $alert = Session::pop('techassitant_request_alert');
-        $alert->show_default_alert();
-    }
-
     if (isset($message)) {
         if ($message == 'ok') {
     ?>
@@ -96,7 +90,7 @@
                 </div>
                 <div class="[ buttons ]">
                     <button type="button" class="[ button__danger ]" onclick="closeRequestModal()" data-dismiss="modal">Cancel</button>
-                    <button type="submit" id="sendBtn" name="techassistantId" class="[ button__primary ]">Send</button>
+                    <button type="submit" id="sendBtn" name="technicalAssistantId" class="[ button__primary ]">Send</button>
                 </div>
             </form>
     </dialog>

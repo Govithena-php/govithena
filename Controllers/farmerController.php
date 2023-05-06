@@ -336,6 +336,24 @@ class farmerController extends Controller
 
     function techassistant()
     {
+        $props = [];
+        $myTech = $this->farmerModel->getAcceptedTechByFarmer($this->currentUser->getUId());
+        if ($myTech['status']) {
+            $props['myTech'] = $myTech['data'];
+        }
+
+        $pendingTech = $this->farmerModel->getPendingTechByFarmer($this->currentUser->getUId());
+
+        if ($pendingTech['status']) {
+            $props['pendingTech'] = $pendingTech['data'];
+        }
+
+        $declinedTech = $this->farmerModel->getDeclinedTechByFarmer($this->currentUser->getUId());
+        if ($declinedTech['status']) {
+            $props['declinedTech'] = $declinedTech['data'];
+        }
+
+        $this->set($props);
         $this->render('techassistant');
     }
 
@@ -356,8 +374,6 @@ class farmerController extends Controller
             }
         } else if ($location != "") {
             $techAssistants = $this->farmerModel->searchTechAssistantsByLocation($location);
-            var_dump($techAssistants);
-            // die();
             if ($techAssistants['status']) {
                 $props['techAssistants'] = $techAssistants['data'];
             }
@@ -367,9 +383,6 @@ class farmerController extends Controller
                 $props['techAssistants'] = $techAssistants['data'];
             }
         }
-
-
-
         $this->set($props);
         $this->render('techassistantfirst');
     }
@@ -536,6 +549,26 @@ class farmerController extends Controller
         }
     }
 
+    function cancel_techassistant_request()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $requestId = new Input(POST, 'requestId');
+            $response = $this->farmerModel->cancelTechRequest($requestId);
+            if ($response['status']) {
+
+                if ($response['data']) {
+                    $alert = new Alert($type = 'success', $icon = "", $message = "Request cancelled successfully");
+                } else {
+                    $alert = new Alert($type = 'error', $icon = "", $message = "Request cancelled failed");
+                }
+            } else {
+                $alert = new Alert($type = 'error', $icon = "", $message = "Request cancelled failed");
+            }
+            Session::set(['cancel_techassitant_request_alert' => $alert]);
+            $this->redirect('/farmer/techassistant');
+        }
+    }
+
     function agrologistprofile()
     {
         $this->render('agrologistprofile');
@@ -578,7 +611,6 @@ class farmerController extends Controller
                 'offer' => new Input(POST, 'offer'),
                 'message' => new Input(POST, 'message'),
             ];
-
             $response = $this->farmerModel->sendTechRequest($data);
 
             if ($response['status']) {
@@ -587,14 +619,10 @@ class farmerController extends Controller
                 $alert = new Alert($type = 'error', $icon = "", $message = "Request sent failed");
             }
             Session::set(['techassitant_request_alert' => $alert]);
-            $this->redirect('/farmer/techassistantfirst');
+            $this->redirect('/farmer/techassistant');
         }
     }
 
-    function techassistantfirstcopy()
-    {
-        $this->render('techassistantfirstcopy');
-    }
     function settings()
     {
         $this->render('settings');
