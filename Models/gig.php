@@ -56,7 +56,6 @@ class Gig extends Model
         }
     }
 
-<<<<<<< Updated upstream
     public function Allgig($id)
     {
         try {
@@ -81,18 +80,6 @@ class Gig extends Model
     //         $stmt = Database::getBdd()->prepare($sql);
     //         $stmt->execute(['id' => $id]);
     //         $gigs = $stmt->fetchAll(PDO::FETCH_ASSOC);
-=======
-    // public function Allgig($id)
-    // {
-    //     try {
-    //         $sql = "SELECT gig.gigId, gig.farmerId, gig.title, gig.thumbnail, gig.capital, gig.city, gig.category, gig.status, gig.landArea, gig.description, investor_gig.investorId, user.firstName as fName, user.lastName as lName FROM gig INNER JOIN investor_gig ON gig.farmerId = investor_gig.farmerId INNER JOIN user ON user.uid = investor_gig.investorId WHERE gig.farmerId = :id ORDER BY createdAt DESC";
-    //         // $sql = "SELECT * FROM gig WHERE farmerId = :id ORDER BY createdAt DESC";
-    //         $stmt = Database::getBdd()->prepare($sql);
-    //         $stmt->execute(['id' => $id]);
-    //         $gigs = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //         // var_dump($gigs);
-    //         // die;
->>>>>>> Stashed changes
     //         return $gigs;
     //     } catch (PDOException $e) {
     //         echo $e->getMessage();
@@ -100,11 +87,8 @@ class Gig extends Model
     //         return null;
     //     }
     // }
-<<<<<<< Updated upstream
 
 
-=======
->>>>>>> Stashed changes
 
     public function create($data)
     {
