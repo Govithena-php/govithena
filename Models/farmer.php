@@ -14,6 +14,46 @@ class Farmer extends Model
             return ['status' => false, 'data' => $e->getMessage()];
         }
     }
+
+
+    public function getAcceptedAgrologistByFarmer($id)
+    {
+        try {
+            $sql = "SELECT ar.agrologistId, u.firstName, u.lastName, u.city, u.image from agrologist_request ar INNER JOIN user u ON ar.agrologistId = u.uid WHERE ar.farmerId = :farmerId AND ar.status = 'accepted' ORDER BY ar.statusChangeDate DESC";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['farmerId' => $id]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['status' => true, 'data' => $req];
+        } catch (PDOException $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+    public function getPendingAgrologistByFarmer($id)
+    {
+        try {
+            $sql = "SELECT ar.requestId, ar.agrologistId, DATE(ar.requestedDate) as requestedDate, ar.timePeriod, ar.offer, ar.message, u.firstName, u.lastName, u.city, u.image from agrologist_request ar INNER JOIN user u ON ar.agrologistId = u.uid WHERE ar.farmerId = :farmerId AND ar.status = 'Pending' ORDER BY ar.statusChangeDate DESC";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['farmerId' => $id]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['status' => true, 'data' => $req];
+        } catch (PDOException $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function getDeclinedAgrologistByFarmer($id)
+    {
+        try {
+            $sql = "SELECT ar.requestId, ar.agrologistId, DATE(ar.requestedDate) as requestedDate, ar.timePeriod, ar.offer, ar.message, u.firstName, u.lastName, u.city, u.image from agrologist_request ar INNER JOIN user u ON ar.agrologistId = u.uid WHERE ar.farmerId = :farmerId AND ar.status = 'Declined' ORDER BY ar.statusChangeDate DESC";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['farmerId' => $id]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['status' => true, 'data' => $req];
+        } catch (PDOException $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+
     public function searchAgrologists($term)
     {
         try {
@@ -35,6 +75,19 @@ class Farmer extends Model
             $stmt->execute(['userType' => ACTOR::AGROLOGIST, 'location' => $location]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return ['status' => true, 'data' => $req];
+        } catch (Exception $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function cancelAgrologistRequest($id)
+    {
+        try {
+            $sql = "DELETE FROM agrologist_request WHERE requestId = :requestId";
+
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['requestId' => $id]);
+            return ['status' => true, 'data' => true];
         } catch (Exception $e) {
             return ['status' => false, 'data' => $e->getMessage()];
         }
@@ -84,14 +137,15 @@ class Farmer extends Model
     public function sendAgrologistRequest($data)
     {
         try {
-            $sql = "INSERT INTO agrologist_request (requestId, farmerId, agrologistId, message, status) VALUES (:requestId, :farmerId, :agrologistId, :message, :status)";
+            $sql = "INSERT INTO agrologist_request (requestId, farmerId, agrologistId, offer, timePeriod, message) VALUES (:requestId, :farmerId, :agrologistId, :offer, :timePeriod, :message)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
                 'requestId' => $data['requestId'],
                 'farmerId' => $data['farmerId'],
                 'agrologistId' => $data['agrologistId'],
+                'offer' => $data['offer'],
+                'timePeriod' => $data['timePeriod'],
                 'message' => $data['message'],
-                'status' => $data['status']
             ]);
             if ($stmt->rowCount() > 0) {
                 return ['status' => true, 'data' => true];
@@ -106,14 +160,14 @@ class Farmer extends Model
     public function sendTechRequest($data)
     {
         try {
-            $sql = "INSERT INTO techassistant_request (requestId, farmerId, technicalAssistantId, message, status) VALUES (:requestId, :farmerId, :technicalAssistantId, :message, :status)";
+            $sql = "INSERT INTO techassistant_request (requestId, farmerId, technicalAssistantId, message, offer) VALUES (:requestId, :farmerId, :technicalAssistantId, :message, :offer)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
                 'requestId' => $data['requestId'],
                 'farmerId' => $data['farmerId'],
                 'technicalAssistantId' => $data['technicalAssistantId'],
                 'message' => $data['message'],
-                'status' => $data['status']
+                'offer' => $data['offer']
             ]);
             if ($stmt->rowCount() > 0) {
                 return ['status' => true, 'data' => true];

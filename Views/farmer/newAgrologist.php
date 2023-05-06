@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="<?php echo IMAGES ?>/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
@@ -25,15 +26,15 @@
 <body class="h-screen">
 
     <?php
-    $active = "techassistantfirst";
-    $title = "Tech Assistants";
+    $active = "agrologist";
+    $title = "Agrologists";
     require_once("navigator.php");
     ?>
 
     <?php
 
-    if (Session::has('techassitant_request_alert')) {
-        $alert = Session::pop('techassitant_request_alert');
+    if (Session::has('agrologist_request_alert')) {
+        $alert = Session::pop('agrologist_request_alert');
         $alert->show_default_alert();
     }
 
@@ -80,15 +81,20 @@
     }
 
     ?>
+
     <dialog id="requestModal" class="[ modal ]">
         <div class="[ container ]">
             <div class="[ head ]">
                 <h3>Send A Request</h3>
             </div>
-            <form action="<?php echo URLROOT ?>/farmer/tech_assistant_request" method="POST" class="[ content ]">
+            <form action="<?php echo URLROOT ?>/farmer/agrologist_request" method="POST" class="[ content ]">
                 <div class="[ input__control ]">
                     <label for="offer">Offer (LKR)</label>
                     <input type="number" name="offer" id="offer" required></input>
+                </div>
+                <div class="[ input__control ]">
+                    <label for="timePeriod">Time Period (Days)</label>
+                    <input type="number" name="timePeriod" id="timePeriod" required></input>
                 </div>
                 <div class="[ input__control ]">
                     <label for="message">Description</label>
@@ -96,15 +102,15 @@
                 </div>
                 <div class="[ buttons ]">
                     <button type="button" class="[ button__danger ]" onclick="closeRequestModal()" data-dismiss="modal">Cancel</button>
-                    <button type="submit" id="sendBtn" name="techassistantId" class="[ button__primary ]">Send</button>
+                    <button type="submit" id="sendBtn" name="agrologistId" class="[ button__primary ]">Send</button>
                 </div>
             </form>
     </dialog>
 
     <div class="container" container-type="dashboard-section">
-        <h1 class="page__heading">Search Technical Assistant</h1>
+        <h1 class="page__heading">Search Agrologist</h1>
 
-        <form class="[ filters ]" action="<?php echo URLROOT ?>/farmer/techassistantfirst/" method="GET">
+        <form class="[ filters ]" action="<?php echo URLROOT ?>/farmer/agrologist/" method="GET">
             <div class="[ options ]">
                 <div class="[ input__control ]">
                     <label for="location">Location</label>
@@ -129,36 +135,31 @@
 
         <div class="[ grid ]" gap="1" sm="1" md="2" lg="3">
             <?php
-            if (isset($techAssistants) && !empty($techAssistants)) {
-                foreach ($techAssistants as $techAssistant) {
+            if (isset($agrologists) && !empty($agrologists)) {
+                foreach ($agrologists as $agrologist) {
             ?>
+
                     <div class="requestcardn">
                         <div class=" requestimg1 ">
-                            <img class="img" src="<?php echo UPLOADS . $techAssistant['image'] ?>" alt=" profile">
+                            <img class="img" src="<?php echo UPLOADS . $agrologist['image'] ?>" alt=" profile">
+                            <!-- <img class="img" src="<?php echo IMAGES ?>/21.jpg" alt=" profile"> -->
 
                         </div>
                         <div class="flex flex-row ">
                             <div class=" requestlist ">
-                                <a class="namebox" href="<?php echo URLROOT . "/profile/" . $techAssistant['uid'] ?>">
-                                    <?php echo $techAssistant['firstName'] . " " . $techAssistant['lastName']; ?>
+                                <a class="namebox" href="<?php echo URLROOT . "/profile/" . $agrologist['uid'] ?>">
+                                    <p><?php echo $agrologist['firstName'] . " " . $agrologist['lastName']; ?></p>
                                 </a>
-                                <!-- <p class="flex flex-row">
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                </p> -->
+
                             </div>
                         </div>
                         <div class=" flex-c-c">
-                            <button onclick="openRequestModal('<?php echo $techAssistant['uid'] ?>')" class="requestbtn">Send Request</button>
+                            <button onclick="openRequestModal('<?php echo $agrologist['uid'] ?>')" class="requestbtn">Send Request</button>
+                            <!-- <a class="requestbtn" href="<?php echo URLROOT . "/farmer/send/" . $agrologist['uid'] ?>">Send Request</a> -->
 
                         </div>
 
                     </div>
-
-
 
             <?php
                 }
@@ -166,10 +167,7 @@
                 echo "<br>";
                 require(COMPONENTS . "dashboard/noDataFound.php");
             }
-
-
             ?>
-
         </div>
 
 
@@ -182,13 +180,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="<?php echo JS ?>/dashboard/chart.js"></script>
     <script src="<?php echo JS ?>/dashboard/dashboard.js"></script>
-
-    <script>
-        setTimeout(() => {
-            document.querySelector(".alert").style.display = "none";
-        }, 5000);
-    </script>
-
     <script>
         function openRequestModal(id) {
             document.getElementById('requestModal').showModal()
@@ -199,7 +190,6 @@
             document.getElementById('requestModal').close()
         }
     </script>
-
 </body>
 
 </html>

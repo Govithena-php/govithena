@@ -13,9 +13,12 @@
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/search.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/filters.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/formModal.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/alertModal.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/tabs.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/gridTable.css">
 
     <link rel="stylesheet" href="<?php echo CSS ?>/farmer/agrologist.css">
-    <link rel="stylesheet" href="<?php echo CSS ?>/farmer/farmerrequest.css">
 
 
     <title>Dashboard | Farmer</title>
@@ -31,154 +34,291 @@
     ?>
 
     <?php
-    if (isset($message)) {
-        if ($message == 'ok') {
-    ?>
 
-            <div class="[ alert alert-success ]">
-                <i class="fas fa-check"></i>
-                <div>
-                    <h4>Success</h4>
-                    <p>Your request has been sent to the Agrologist</p>
-                </div>
-            </div>
-
-        <?php
-        }
-        if ($message == 'already') {
-        ?>
-
-            <div class="[ alert alert-error ]">
-                <i class="fas fa-times"></i>
-                <div>
-                    <h4>Error</h4>
-                    <p>Request alredy sent.</p>
-                </div>
-            </div>
-
-        <?php
-        }
-        if ($message == 'error') {
-        ?>
-
-            <div class="[ alert alert-error ]">
-                <i class="fas fa-times"></i>
-                <div>
-                    <h4>Error</h4>
-                    <p>Something went wrong.</p>
-                </div>
-            </div>
-
-    <?php
-        }
+    if (Session::has('agrologist_request_alert')) {
+        $alert = Session::pop('agrologist_request_alert');
+        $alert->show_default_alert();
     }
-
+    if (Session::has('cancel_agrologist_request_alert')) {
+        $alert = Session::pop('cancel_agrologist_request_alert');
+        $alert->show_default_alert();
+    }
     ?>
+
+    <dialog id="cancelRequestModal" class="[ alertModal ]">
+        <div class="[ container ]">
+            <i class="bi bi-x-circle"></i>
+            <div class="[ content ]">
+                <h2>Are you sure?</h2>
+                <p>Do you really want to cancel these request? This process cannot be undone.</p>
+            </div>
+            <form id="deleteForm" action="<?php echo URLROOT ?>/farmer/cancel_agrologist_request" method="POST" class="[ buttons ]">
+                <button type="button" class="[ button__primary ]" onclick="closeCancelRequestModal()" data-dismiss="modal">No</button>
+                <button id="requestId" name="requestId" type="submit" class="[ button__danger ]">Yes</button>
+            </form>
+        </div>
+    </dialog>
+
+
+    <dialog id="requestModal" class="[ modal ]">
+        <div class="[ container ]">
+            <div class="[ head ]">
+                <h3>Send A Request</h3>
+            </div>
+            <form action="<?php echo URLROOT ?>/farmer/agrologist_request" method="POST" class="[ content ]">
+                <div class="[ input__control ]">
+                    <label for="offer">Offer (LKR)</label>
+                    <input type="number" name="offer" id="offer" required></input>
+                </div>
+                <div class="[ input__control ]">
+                    <label for="timePeriod">Time Period (Days)</label>
+                    <input type="number" name="timePeriod" id="timePeriod" required></input>
+                </div>
+                <div class="[ input__control ]">
+                    <label for="message">Description</label>
+                    <textarea name="message" id="message" required></textarea>
+                </div>
+                <div class="[ buttons ]">
+                    <button type="button" class="[ button__danger ]" onclick="closeRequestModal()" data-dismiss="modal">Cancel</button>
+                    <button type="submit" id="sendBtn" name="agrologistId" class="[ button__primary ]">Send</button>
+                </div>
+            </form>
+    </dialog>
 
     <div class="container" container-type="dashboard-section">
-        <h1 class="page__heading">Search Agrologist</h1>
+        <br>
 
-        <form class="[ filters ]" action="<?php echo URLROOT ?>/farmer/agrologist/" method="GET">
-            <div class="[ options ]">
-                <div class="[ input__control ]">
-                    <label for="location">Location</label>
-                    <select id="location" name="location">
-                        <option value="">All</option>
+        <div class="[ tabs ]" tab="2">
+            <div class="controls">
+                <button class="control" for="1" active>My Agrologists</button>
+                <button class="control" for="2">Pending Agrologist Requests</button>
+                <button class="control" for="3">Rejected Agrologist Requests</button>
+            </div>
+            <div class="wrapper">
+                <div class="tab" id="1" active="true">
+                    <div class="head_title">
+                        <div class="caption">
+                            <h3>My Agrologists</h3>
+                        </div>
+                        <div class="find_new">
+                            <a href="<?php echo URLROOT ?>/farmer/newAgrologist" class="button__primary">Find New Agrologist</a>
+                        </div>
+                    </div>
+                    <div class="myagrologists">
                         <?php
-                        foreach (DISTRICTS as $key => $value) {
-                            echo "<option value='$key'>$value</option>";
+                        if (!isset($myagrologists) || empty($myagrologists)) {
+                            require(COMPONENTS . "dashboard/noDataFound.php");
+                        } else {
+                            foreach ($myagrologists as $myagrologist) {
+                        ?>
+                                <div class="agro__card">
+
+                                    <div class="image__name">
+                                        <div class="agro__image">
+                                            <img src="<?php echo UPLOADS . '/profilePictures/' . $myagrologist['image'] ?>" alt="">
+                                        </div>
+                                        <div class="name">
+                                            <h3><?php echo $myagrologist['firstName'] . " " . $myagrologist['lastName'] ?></h3>
+                                            <h4><?php echo $myagrologist['city'] ?></h4>
+                                        </div>
+                                    </div>
+                                    <div class="actions">
+                                        <a href="<?php echo URLROOT . "/profile/" . $myagrologist['agrologistId'] ?>" class="button__primary">View Profile</a>
+                                        <a href="<?php echo URLROOT . "/profile/" . $myagrologist['agrologistId'] ?>" class="button__primary">Pay</a>
+                                    </div>
+
+                                </div>
+                        <?php
+                            }
                         }
                         ?>
-                    </select>
-                </div>
-                <div class="[ input__control ]">
-                    <button type="submit" name="apply" value="true" class="button__primary">Apply</button>
-                </div>
-            </div>
-            <div class="search">
-                <input type="text" name="term" placeholder="Search">
-                <button type="submit" name="search" value="true" class="button__primary"><i class="bi bi-search"></i></button>
-            </div>
-        </form>
-
-        <div class="[ grid ]" gap="1" sm="1" md="2" lg="3">
-            <?php
-            if (isset($agrologists) && !empty($agrologists)) {
-                foreach ($agrologists as $agrologist) {
-            ?>
-
-                    <!-- <div class="[ requestcard bg-light ]">
-                        <div class="[ requestimg ]">
-                            <img class="img" src="<?php echo UPLOADS . $agrologist['image'] ?>" alt=" profile">
-                        </div>
-                        <div class="flex flex-row ">
-                            <div class="[ requestcont ]">
-                                <a href="<?php echo URLROOT . "/profile/" . $agrologist['uid'] ?>">
-                                    <p><b><?php echo $agrologist['firstName'] . " " . $agrologist['lastName']; ?></b></p>
-                                </a>
-                                <p class="flex flex-row">
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                </p>
-                            </div>
-                        </div>
-                        <div class=" flex-c-c">
-                            <a class="request__btn" href="<?php echo URLROOT . "/farmer/send/" . $agrologist['uid'] ?>">Send Request</a>
-                        </div>
-
-                    </div> -->
-                    <div class="requestcardn">
-                        <div class=" requestimg1 ">
-                            <img class="img" src="<?php echo UPLOADS . $agrologist['image'] ?>" alt=" profile">
-                            <!-- <img class="img" src="<?php echo IMAGES ?>/21.jpg" alt=" profile"> -->
-
-                        </div>
-                        <div class="flex flex-row ">
-                            <div class=" requestlist ">
-                                <a class="namebox" href="<?php echo URLROOT . "/profile/" . $agrologist['uid'] ?>">
-                                    <p><?php echo $agrologist['firstName'] . " " . $agrologist['lastName']; ?></p>
-                                </a>
-
-                            </div>
-                        </div>
-                        <div class=" flex-c-c">
-                            <!-- <a class="request__btn" href="<?php echo URLROOT . "/farmer/send/" . $agrologist['uid'] ?>">Send Request</a> -->
-                            <a class="requestbtn" href="<?php echo URLROOT . "/farmer/send/" . $agrologist['uid'] ?>">Send Request</a>
-
-                        </div>
-
                     </div>
+                </div>
+                <div class="tab" id="2">
+                    <div class="caption">
+                        <h3>Pending Agrologist Requests</h3>
+                    </div>
+                    <?php
+                    if (!isset($pendingAgrologists) || empty($pendingAgrologists)) {
+                        require(COMPONENTS . "dashboard/noDataFound.php");
+                    } else {
+                    ?>
 
-            <?php
-                }
-            } else {
-                echo "<br>";
-                require(COMPONENTS . "dashboard/noDataFound.php");
-            }
-            ?>
+                        <div class="grid__table" style="
+                                    --xl-cols: 0.75fr 1.25fr 1fr 0.75fr 1fr 2fr 0.75fr;
+                                ">
+                            <div class="head">
+                                <div class="row">
+                                    <div class="data">
+                                        <p>Agrologist</p>
+                                    </div>
+                                    <div class="data">
+                                        <p>Agrologist Name</p>
+                                    </div>
+                                    <div class="data">
+                                        <p>Offer</p>
+                                    </div>
+                                    <div class="data">
+                                        <p>Time Period</p>
+                                    </div>
+                                    <div class="data">
+                                        <p>Location</p>
+                                    </div>
+                                    <div class="data">
+                                        <p>Message</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="body">
+                                <?php
+                                foreach ($pendingAgrologists as $apr) {
+                                ?>
+                                    <div class="row">
+                                        <div class="data">
+                                            <div class="investorimg">
+                                                <img src="<?php echo UPLOADS . "/profilePictures/" . $apr['image']; ?>" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="data">
+                                            <div class="namecol">
+                                                <h3><?php echo $apr['firstName'] . " " . $apr['lastName'] ?></h3>
+                                            </div>
+                                        </div>
+                                        <div class="data">
+                                            <p class="LKR"><?php echo number_format($apr['offer'], 2, '.', ',') ?></p>
+                                        </div>
+                                        <div class="data">
+                                            <p><?php echo $apr['timePeriod'] ?> Days</p>
+                                        </div>
+                                        <div class="data">
+                                            <p><?php echo $apr['city'] ?></p>
+                                        </div>
+                                        <div class="data">
+                                            <p><?php echo $apr['message'] ?></p>
+                                        </div>
+                                        <div class="data">
+                                            <div class="actions">
+                                                <button onclick="openCancelRequestModal('<?php echo $apr['requestId'] ?>')" class="button__danger">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+                            </div>
+                        </div>
+
+                    <?php
+                    }
+                    ?>
+                </div>
+                <div class="tab" id="3">
+                    <div class="caption">
+                        <h3>Declined Agrologist Requests</h3>
+                    </div>
+                    <?php
+                    if (!isset($declinedAgrologists) || empty($declinedAgrologists)) {
+                        require(COMPONENTS . "dashboard/noDataFound.php");
+                    } else {
+                    ?>
+
+                        <div class="grid__table" style="
+                                    --xl-cols: 0.75fr 1.25fr 1fr 0.75fr 1fr 2fr;
+                                ">
+                            <div class="head">
+                                <div class="row">
+                                    <div class="data">
+                                        <p>Agrologist</p>
+                                    </div>
+                                    <div class="data">
+                                        <p>Agrologist Name</p>
+                                    </div>
+                                    <div class="data">
+                                        <p>Offer</p>
+                                    </div>
+                                    <div class="data">
+                                        <p>Time Period</p>
+                                    </div>
+                                    <div class="data">
+                                        <p>Location</p>
+                                    </div>
+                                    <div class="data">
+                                        <p>Message</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="body">
+                                <?php
+                                foreach ($declinedAgrologists as $adr) {
+                                ?>
+                                    <div class="row">
+                                        <div class="data">
+                                            <div class="investorimg">
+                                                <img src="<?php echo UPLOADS . "/profilePictures/" . $adr['image']; ?>" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="data">
+                                            <div class="namecol">
+                                                <h3><?php echo $adr['firstName'] . " " . $adr['lastName'] ?></h3>
+                                            </div>
+                                        </div>
+                                        <div class="data">
+                                            <p class="LKR"><?php echo number_format($adr['offer'], 2, '.', ',') ?></p>
+                                        </div>
+                                        <div class="data">
+                                            <p><?php echo $adr['timePeriod'] ?> Days</p>
+                                        </div>
+                                        <div class="data">
+                                            <p><?php echo $adr['city'] ?></p>
+                                        </div>
+                                        <div class="data">
+                                            <p><?php echo $adr['message'] ?></p>
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+                            </div>
+                        </div>
+
+                    <?php
+                    }
+                    ?>
+                </div>
+
+            </div>
         </div>
-
-
-
 
     </div>
     <?php
     require_once("footer.php");
     ?>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="<?php echo JS ?>/dashboard/chart.js"></script>
-    <script src="<?php echo JS ?>/dashboard/dashboard.js"></script>
-
+    <script src="<?php echo JS ?>/main.js"></script>
+    <script src="<?php echo JS ?>/tabs.js"></script>
+    <script src="<?php echo JS ?>/gridTable.js"></script>
     <script>
-        setTimeout(() => {
-            document.querySelector(".alert").style.display = "none";
-        }, 5000);
+        function openRequestModal(id) {
+            document.getElementById('requestModal').showModal()
+            document.getElementById('sendBtn').value = id
+        }
+
+        function closeRequestModal() {
+            document.getElementById('requestModal').close()
+        }
+
+        function openCancelRequestModal(id) {
+            const cancelRequestModal = document.getElementById('cancelRequestModal')
+            const requestId = document.getElementById('requestId')
+            requestId.value = id
+            cancelRequestModal.showModal()
+        }
+
+        function closeCancelRequestModal() {
+            const cancelRequestModal = document.getElementById('cancelRequestModal')
+            cancelRequestModal.close()
+        }
     </script>
-
-
 </body>
 
 </html>

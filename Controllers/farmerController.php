@@ -458,8 +458,32 @@ class farmerController extends Controller
         $this->render('progressform');
     }
 
+    function agrologist()
+    {
+        $props = [];
 
-    function agrologist($params = [])
+        $myagrologists = $this->farmerModel->getAcceptedAgrologistByFarmer($this->currentUser->getUId());
+        if ($myagrologists['status']) {
+            $props['myagrologists'] = $myagrologists['data'];
+        }
+
+        $pendingAgrologists = $this->farmerModel->getPendingAgrologistByFarmer($this->currentUser->getUId());
+        if ($pendingAgrologists['status']) {
+            $props['pendingAgrologists'] = $pendingAgrologists['data'];
+        }
+
+        $declinedAgrologists = $this->farmerModel->getDeclinedAgrologistByFarmer($this->currentUser->getUId());
+        if ($declinedAgrologists['status']) {
+            $props['declinedAgrologists'] = $declinedAgrologists['data'];
+        }
+
+        $this->set($props);
+        $this->render('agrologist');
+    }
+
+
+
+    function newAgrologist($params = [])
     {
         $props = [];
 
@@ -488,7 +512,28 @@ class farmerController extends Controller
         }
 
         $this->set($props);
-        $this->render('agrologist');
+        $this->render('newAgrologist');
+    }
+
+
+    function cancel_agrologist_request()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $requestId = new Input(POST, 'requestId');
+            $response = $this->farmerModel->cancelAgrologistRequest($requestId);
+            if ($response['status']) {
+
+                if ($response['data']) {
+                    $alert = new Alert($type = 'success', $icon = "", $message = "Request cancelled successfully");
+                } else {
+                    $alert = new Alert($type = 'error', $icon = "", $message = "Request cancelled failed");
+                }
+            } else {
+                $alert = new Alert($type = 'error', $icon = "", $message = "Request cancelled failed");
+            }
+            Session::set(['cancel_agrologist_request_alert' => $alert]);
+            $this->redirect('/farmer/agrologist');
+        }
     }
 
     function agrologistprofile()
@@ -496,44 +541,53 @@ class farmerController extends Controller
         $this->render('agrologistprofile');
     }
 
-    public function send($params)
+    public function agrologist_request()
     {
 
-        list($agrologistId) = $params;
-        $data = [
-            'requestId' => new UID(PREFIX::REQUEST),
-            'agrologistId' => $agrologistId,
-            'farmerId' => $this->currentUser->getUid(),
-            'message' => 'This is test message',
-            'status' => 'Pending'
-        ];
-        $response = $this->farmerModel->sendAgrologistRequest($data);
-        if ($response['status']) {
-            if ($response['data']) $this->redirect('/farmer/agrologist/ok');
-            else $this->redirect('/farmer/agrologist/already');
-        } else {
-            $this->redirect('/farmer/agrologist/error');
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data = [
+                'requestId' => new UID(PREFIX::REQUEST),
+                'agrologistId' => new Input(POST, 'agrologistId'),
+                'farmerId' => $this->currentUser->getUid(),
+                'offer' => new Input(POST, 'offer'),
+                'timePeriod' => new Input(POST, 'timePeriod'),
+                'message' => new Input(POST, 'message'),
+            ];
+
+            $response = $this->farmerModel->sendAgrologistRequest($data);
+
+            if ($response['status']) {
+                $alert = new Alert($type = 'success', $icon = "", $message = "Request sent successfully");
+            } else {
+                $alert = new Alert($type = 'error', $icon = "", $message = "Request sent failed");
+            }
+            Session::set(['agrologist_request_alert' => $alert]);
+            $this->redirect('/farmer/agrologist');
         }
     }
 
-    public function request($params)
+    public function tech_assistant_request()
     {
 
-        list($technicalAssistantId) = $params;
-        $data = [
-            'requestId' => new UID(PREFIX::REQUEST),
-            'technicalAssistantId' => $technicalAssistantId,
-            'farmerId' => $this->currentUser->getUid(),
-            'message' => 'This is test message',
-            'status' => 'Pending'
-        ];
-        $response = $this->farmerModel->sendTechRequest($data);
-        if ($response['status']) {
-            if ($response['data']) $this->redirect('/farmer/techassistantfirst/ok');
-            else $this->redirect('/farmer/techassistantfirst/already');
-        } else {
 
-            $this->redirect('/farmer/techassistantfirst/error');
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data = [
+                'requestId' => new UID(PREFIX::REQUEST),
+                'technicalAssistantId' => new Input(POST, 'technicalAssistantId'),
+                'farmerId' => $this->currentUser->getUid(),
+                'offer' => new Input(POST, 'offer'),
+                'message' => new Input(POST, 'message'),
+            ];
+
+            $response = $this->farmerModel->sendTechRequest($data);
+
+            if ($response['status']) {
+                $alert = new Alert($type = 'success', $icon = "", $message = "Request sent successfully");
+            } else {
+                $alert = new Alert($type = 'error', $icon = "", $message = "Request sent failed");
+            }
+            Session::set(['techassitant_request_alert' => $alert]);
+            $this->redirect('/farmer/techassistantfirst');
         }
     }
 
