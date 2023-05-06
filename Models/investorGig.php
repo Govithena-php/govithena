@@ -2,6 +2,27 @@
 
 class investorGig
 {
+
+
+    public function complete($id)
+    {
+        try {
+            $sql = "UPDATE investor_gig SET status = 'PENDING_COMPLETION' WHERE gigId = :id AND farmerId = :farmerId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $res = $stmt->execute(['id' => $id, 'farmerId' => Session::get('user')->getUid()]);
+            if ($res) {
+                return ['status' => true, 'data' => true];
+            } else {
+                return ['status' => false, 'data' => false];
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+
     public function getfarmerIdByGigId($gigId)
     {
         try {

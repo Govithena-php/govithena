@@ -73,22 +73,6 @@ class Gig extends Model
             return null;
         }
     }
-    // public function Investorgig($id)
-    // {
-    //     try {
-    //         $sql = "SELECT * FROM gig_progress WHERE farmerId = :id ORDER BY createdAt DESC";
-    //         $stmt = Database::getBdd()->prepare($sql);
-    //         $stmt->execute(['id' => $id]);
-    //         $gigs = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //         return $gigs;
-    //     } catch (PDOException $e) {
-    //         echo $e->getMessage();
-    //         die();
-    //         return null;
-    //     }
-    // }
-
-
 
     public function create($data)
     {

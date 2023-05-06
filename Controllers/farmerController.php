@@ -116,6 +116,30 @@ class farmerController extends Controller
         $this->render("gigs");
     }
 
+
+    function complete_gig()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $gigId = new Input(POST, 'gigId');
+            $confirm = new Input(POST, 'confirm');
+
+            if ($confirm == "on") {
+                $response = $this->investorGigModel->complete($gigId);
+                if ($response['status']) {
+                    if ($response['data']) {
+                        $alert = new Alert($type = 'success', $icon = '', $message = 'Gig completed successfully');
+                    } else {
+                        $alert = new Alert($type = 'error', $icon = '', $message = 'Something went wrong');
+                    }
+                    Session::set(['compelete_gig_alert' =>  $alert]);
+                    $this->redirect('/farmer/');
+                } else {
+                    $this->redirect('/error/somethingWentWrong');
+                }
+            }
+        }
+    }
+
     function index()
     {
         // require(ROOT . 'Models/gig.php');
