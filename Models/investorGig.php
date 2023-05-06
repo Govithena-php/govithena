@@ -2,6 +2,7 @@
 
 class investorGig
 {
+<<<<<<< Updated upstream
     public function getfarmerIdByGigId($gigId)
     {
         try {
@@ -60,6 +61,28 @@ class investorGig
             return ['success' => true, 'data' => $e->getMessage()];
         }
     }
+=======
+
+
+    public function complete($id)
+    {
+        try {
+            $sql = "UPDATE investor_gig SET status = 'PENDING_COMPLETION' WHERE gigId = :id AND farmerId = :farmerId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $res = $stmt->execute(['id' => $id, 'farmerId' => Session::get('user')->getUid()]);
+            if ($res) {
+                return ['status' => true, 'data' => true];
+            } else {
+                return ['status' => false, 'data' => false];
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+>>>>>>> Stashed changes
 
     public function markAsCompleted($gigId)
     {
@@ -73,31 +96,6 @@ class investorGig
         }
     }
 
-    public function countActiveGigByInvestor($investorId)
-    {
-        try {
-            $sql = "SELECT COUNT(*) as count FROM investor_gig WHERE investorId = :investorId AND status = 'ACTIVE'";
-            $stmt = Database::getBdd()->prepare($sql);
-            $stmt->execute(['investorId' => $investorId]);
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            return ['success' => true, 'data' => $row];
-        } catch (PDOException $e) {
-            return ['success' => false, 'data' => $e->getMessage()];
-        }
-    }
-
-    public function countCompletedGigByInvestor($investorId)
-    {
-        try {
-            $sql = "SELECT COUNT(*) as count FROM investor_gig WHERE investorId = :investorId AND status = 'COMPLETED'";
-            $stmt = Database::getBdd()->prepare($sql);
-            $stmt->execute(['investorId' => $investorId]);
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            return ['success' => true, 'data' => $row];
-        } catch (PDOException $e) {
-            return ['success' => false, 'data' => $e->getMessage()];
-        }
-    }
 
     public function getTotalInvestmentForGigByInvestor($investorId, $gigId)
     {
@@ -189,32 +187,6 @@ class investorGig
         }
     }
 
-
-    public function getActiveGigCount($investorId)
-    {
-        try {
-            $sql = "SELECT count(*) as gigCount FROM investor_gig WHERE investorId = :investorId AND status = 'ACTIVE' ";
-            $stmt = Database::getBdd()->prepare($sql);
-            $stmt->execute(['investorId' => $investorId]);
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            return ['success' => true, 'data' => $row];
-        } catch (PDOException $e) {
-            return ['success' => false, 'message' => $e->getMessage()];
-        }
-    }
-
-    public function getCompletedGigCount($investorId)
-    {
-        try {
-            $sql = "SELECT count(*) as gigCount FROM investor_gig WHERE investorId = :investorId AND status = 'COMPLETED'";
-            $stmt = Database::getBdd()->prepare($sql);
-            $stmt->execute(['investorId' => $investorId]);
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            return ['success' => true, 'data' => $row];
-        } catch (PDOException $e) {
-            return ['success' => false, 'message' => $e->getMessage()];
-        }
-    }
 
     public function getWorkedWith($uid)
     {

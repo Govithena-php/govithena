@@ -35,7 +35,7 @@ class Investment extends Model
     public function add($data)
     {
         try {
-            $sql = "INSERT INTO investment (id, investorId, gigId, farmerId, amount) VALUES (:id, :investorId, :gigId, :farmerId, :amount)";
+            $sql = "INSERT INTO investment (id, investorId, gigId, farmerId, amount, description) VALUES (:id, :investorId, :gigId, :farmerId, :amount, :description)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
             return ['success' => true, 'data' => true];
