@@ -141,4 +141,22 @@ class Investment extends Model
             return ['success' => false, 'data' => $e->getMessage()];
         }
     }
+
+
+    public function getTotalInvestmentForGigByInvestor($investorId, $gigId)
+    {
+        try {
+            $sql = "SELECT sum(amount) as totalInvestment FROM investment WHERE investorId = :investorId AND gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['investorId' => $investorId, 'gigId' => $gigId]);
+            $res = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($res) {
+                return ['success' => true, 'data' => $res];
+            } else {
+                return ['success' => false, 'data' => 'No investment found'];
+            }
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
 }

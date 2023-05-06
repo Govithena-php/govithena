@@ -4,7 +4,6 @@ class dashboardController extends Controller
 {
     private $currentUser;
 
-    private $investorGigModel;
     private $gigModel;
     private $userModel;
     private $fieldVisitModel;
@@ -27,7 +26,6 @@ class dashboardController extends Controller
             $this->redirect('/error/accessDenied');
         }
 
-        $this->investorGigModel = $this->model('investorGig');
         $this->gigModel = $this->model('gig');
         $this->userModel = $this->model('user');
         $this->fieldVisitModel = $this->model('fieldVisit');
@@ -189,12 +187,12 @@ class dashboardController extends Controller
                     $props['fieldVisits'] = $fieldVisits['data'];
                 }
 
-                $totalInvestment = $this->investorGigModel->getTotalInvestmentForGigByInvestor($this->currentUser->getUid(), $gigId);
+                $totalInvestment = $this->investmentModel->getTotalInvestmentForGigByInvestor($this->currentUser->getUid(), $gigId);
                 if ($totalInvestment['success']) {
                     $props['totalInvestment'] = $totalInvestment['data']['totalInvestment'];
                 }
 
-                $startedDate = $this->investorGigModel->getStartedDate($gigId);
+                $startedDate = $this->gigModel->getStartedDate($gigId);
                 if ($startedDate['success']) {
                     $start = new DateTime($startedDate['data']['startDate']);
                     $end = new DateTime();
@@ -274,7 +272,7 @@ class dashboardController extends Controller
 
                 $response = $this->reviewByInvestorModel->save($data);
                 if ($response['success']) {
-                    $res = $this->investorGigModel->markAsCompleted($gigId);
+                    $res = $this->gigModel->markAsCompleted($gigId);
                     if ($res['success']) {
                         $this->redirect('/dashboard/gigs/');
                     }

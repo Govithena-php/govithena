@@ -348,4 +348,33 @@ class Gig extends Model
             return ['success' => false, 'message' => $e->getMessage()];
         }
     }
+
+    public function getStartedDate($gigId)
+    {
+        try {
+            $sql = "SELECT DATE(reservedDate) as startDate FROM gig WHERE gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId]);
+            $res = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($res) {
+                return ['success' => true, 'data' => $res];
+            } else {
+                return ['success' => false, 'data' => 'No investment found'];
+            }
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function markAsCompleted($gigId)
+    {
+        try {
+            $sql = "UPDATE gig SET status = 'COMPLETED' WHERE gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId]);
+            return ['success' => true];
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
 }
