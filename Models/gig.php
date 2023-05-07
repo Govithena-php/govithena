@@ -268,7 +268,7 @@ class Gig extends Model
     public function fetchAllReservedGigByInvestor($id)
     {
         try {
-            $sql = "SELECT g.gigId, g.farmerId, g.title, g.city, g.cropCycle, g.thumbnail, u.firstName, u.lastName, u.image, u.city as FCity, DATE(g.reservedDate) as reservedDate, g.status FROM gig g INNER JOIN user u ON g.farmerId = u.uid WHERE g.investorId = :id AND g.status = 'RESERVED' OR g.status = 'UNDER_COMPLETION' ORDER BY g.reservedDate DESC";
+            $sql = "SELECT g.gigId, g.farmerId, g.title, g.city, g.cropCycle, g.thumbnail, u.firstName, u.lastName, u.image, u.city as FCity, DATE(g.reservedDate) as reservedDate, g.status FROM gig g INNER JOIN user u ON g.farmerId = u.uid WHERE g.investorId = :id AND g.status = 'RESERVED' OR g.status = 'UNDER_COMPLETION'  OR g.status = 'UNDER_REVIEW' ORDER BY g.reservedDate DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $row = $stmt->fetchAll(PDO::FETCH_ASSOC);

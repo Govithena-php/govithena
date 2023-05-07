@@ -142,7 +142,48 @@
                             <p>The gig has been marked as completed by the farmer. Confirm to proceed with the next steps.</p>
                         </div>
                         <button onclick="openConfirmModal()" class="button__primary">Confirm</button>
+                    </div>
+                <?php
+                } else if ($gig['status'] == "UNDER_REVIEW") {
+                ?>
+                    <div class="[ special__announcment special__announcment-secondary ]">
+                        <div class="[ icon ]">
+                            <i class="bi bi-bell"></i>
+                        </div>
+                        <div class="[ details grow ]">
+                            <h3>Tell us how you feel.</h3>
+                            <p>Please take time to write your feedback about the farmer and gig and help us to provide better services.</p>
+                        </div>
+                        <div class="actions"><a href="<?php echo URLROOT . '/dashboard/review/' . $gig['gigId'] ?>" class="button__primary">Write a review</a></div>
+                    </div>
 
+                <?php
+                } else {
+
+                    $latestAr = $recentActivities[0];
+                ?>
+                    <div class="[ special__announcment ]">
+                        <div class="[ icon ]">
+                            <i class="bi bi-bell"></i>
+                        </div>
+                        <div class="[ details grow ]">
+                            <h3><?php echo $latestAr['type'] ?></h3>
+                            <?php
+                            if ($latestAr['type'] == 'INVESTMENT') {
+                            ?>
+                                <p>You have invested <strong class="LKR"><?php echo number_format($latestAr['amount'], 2, '.', ',') ?></strong></p>
+                            <?php
+                            } else if ($latestAr['type'] == 'PROGRESS') {
+                            ?>
+                                <p class="">New progress update record has been created.</p>
+                            <?php
+                            } else if ($latestAr['type'] == 'FIELD_VISIT') {
+                            ?>
+                                <p class="">New Field visit record has been created.</p>
+                            <?php
+                            }
+                            ?>
+                        </div>
                     </div>
                 <?php
                 }
@@ -153,68 +194,43 @@
                     <div class="[ title ]">
                         <h3>Recent Activities</h3>
                     </div>
+                    <?php
+                    if (!isset($recentActivities) || empty($recentActivities)) {
+                        require(COMPONENTS . "dashboard/noDataFound.php");
+                    } else {
+                        foreach ($recentActivities as $ra) {
+                    ?>
+                            <div class="[ activity ]">
+                                <!-- <div class="[ icon ]">
+                                <i class="bi bi-bell"></i>
+                            </div> -->
+                                <div class="[ details ]">
+                                    <h5><?php echo ucwords($ra['type']) ?></h5>
+                                    <?php
+                                    if ($ra['type'] == 'INVESTMENT') {
+                                    ?>
+                                        <p>You have invested <strong class="LKR"><?php echo number_format($ra['amount'], 2, '.', ',') ?></strong></p>
+                                    <?php
+                                    } else if ($ra['type'] == 'PROGRESS') {
+                                    ?>
+                                        <p class="">New progress update record has been created.</p>
+                                    <?php
+                                    } else if ($ra['type'] == 'FIELD_VISIT') {
+                                    ?>
+                                        <p class="">New Field visit record has been created.</p>
+                                    <?php
+                                    }
+                                    ?>
+                                    <div class="[ time ]">
+                                        <p><?php echo $ra['timestamp'] ?></p>
+                                    </div>
+                                </div>
+                            </div>
 
-                    <div class="[ activity ]">
-                        <div class="[ icon ]">
-                            <i class="bi bi-bell"></i>
-                        </div>
-                        <div class="[ details ]">
-                            <h5>Investment</h5>
-                            <p>You have invested <strong>LKR 100,000.00</strong> in <strong>gig title</strong></p>
-                            <div class="[ time ]">
-                                <p>2 hours ago</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="[ activity ]">
-                        <div class="[ icon ]">
-                            <i class="bi bi-bell"></i>
-                        </div>
-                        <div class="[ details ]">
-                            <h5>Investment</h5>
-                            <p>You have invested <strong>LKR 100,000.00</strong> in <strong>gig title</strong></p>
-                            <div class="[ time ]">
-                                <p>2 hours ago</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="[ activity ]">
-                        <div class="[ icon ]">
-                            <i class="bi bi-bell"></i>
-                        </div>
-                        <div class="[ details ]">
-                            <h5>Investment</h5>
-                            <p>You have invested <strong>LKR 100,000.00</strong> in <strong>gig title</strong></p>
-                            <div class="[ time ]">
-                                <p>2 hours ago</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="[ activity ]">
-                        <div class="[ icon ]">
-                            <i class="bi bi-bell"></i>
-                        </div>
-                        <div class="[ details ]">
-                            <h5>Investment</h5>
-                            <p>You have invested <strong>LKR 100,000.00</strong> in <strong>gig title</strong></p>
-                            <div class="[ time ]">
-                                <p>2 hours ago</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="[ activity ]">
-                        <div class="[ icon ]">
-                            <i class="bi bi-bell"></i>
-                        </div>
-                        <div class="[ details ]">
-                            <h5>Investment</h5>
-                            <p>You have invested <strong>LKR 100,000.00</strong> in <strong>gig title</strong></p>
-                            <div class="[ time ]">
-                                <p>2 hours ago</p>
-                            </div>
-                        </div>
-                    </div>
-
+                    <?php
+                        }
+                    }
+                    ?>
                 </div>
             </div>
 

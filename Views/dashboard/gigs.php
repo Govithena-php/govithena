@@ -147,6 +147,14 @@
                                 ?>
                                     <p>You have invested <strong class="LKR"><?php echo number_format($ra['amount'], 2, '.', ',') ?></strong> in <strong class="limit-text-1"><?php echo $gigTitles[$ra['gigId']] ?></strong></p>
                                 <?php
+                                } else if ($ra['type'] == 'PROGRESS') {
+                                ?>
+                                    <p class="limit-text-3">Progress of <strong><?php echo $gigTitles[$ra['gigId']] ?> </strong>has been updated</p>
+                                <?php
+                                } else if ($ra['type'] == 'FIELD_VISIT') {
+                                ?>
+                                    <p class="limit-text-3">Field visit details of <strong><?php echo $gigTitles[$ra['gigId']] ?> </strong>has been updated</p>
+                                <?php
                                 }
 
                                 ?>
@@ -168,7 +176,7 @@
         <div class="[ tabs ][ gigTabs ]" tab="2">
             <div class="controls">
                 <button class="control" for="1" active>Active Gigs</button>
-                <button class="control" for="2">To Review</button>
+                <!-- <button class="control" for="2">To Review</button> -->
                 <button class="control" for="3">Completed Gigs</button>
             </div>
             <div class="wrapper">
@@ -204,9 +212,16 @@
                                             <?php
                                             if ($activeGig['status'] == "UNDER_COMPLETION") {
                                             ?>
-                                                <div class="completion__msg">
+                                                <div class="active__gig_card_floating_msg active__gig_card_floating_msg-danger">
                                                     <p>The gig has been marked as completed by the farmer. Confirm to proceed with the next steps.</p>
                                                     <button onclick="openConfirmModal('<?php echo $activeGig['gigId'] ?>')" class="button__primary">Confirm</button>
+                                                </div>
+                                            <?php
+                                            } else if ($activeGig['status'] == "UNDER_REVIEW") {
+                                            ?>
+                                                <div class="active__gig_card_floating_msg active__gig_card_floating_msg-secondary">
+                                                    <p>The gig is completed. please take a moment to give your feedback.</p>
+                                                    <a href="<?php echo URLROOT . '/dashboard/review/' . $activeGig['gigId'] ?>" class="button__primary">Write a review</a>
                                                 </div>
                                             <?php
                                             }
@@ -267,7 +282,7 @@
                         ?>
                     </div>
                 </div>
-                <div class="tab" id="2">
+                <!-- <div class="tab" id="2">
                     <div class="[ requests__continer ]">
                         <div class="[ caption ]">
                             <h2>To Review</h2>
@@ -332,7 +347,7 @@
                         }
                         ?>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="tab" id="3">
                     <div class="[ requests__continer ]">

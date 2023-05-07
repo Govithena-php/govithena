@@ -60,6 +60,19 @@
     color: var(--clr-light);
 }
 
+.special__announcment-secondary {
+    background-color: var(--clr-secondary);
+    color: var(--clr-light);
+}
+
+.special__announcment-secondary p {
+    color: var(--clr-light);
+}
+
+.special__announcment-secondary .icon {
+    color: var(--clr-light);
+}
+
 
 
 

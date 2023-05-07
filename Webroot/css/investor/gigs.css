@@ -204,8 +204,7 @@
     filter: brightness(1);
 }
 
-.completion__msg {
-    background-color: #cd2b5c;
+.active__gig_card_floating_msg {
     color: var(--clr-light);
     padding: 0.75rem 1rem;
     display: flex;
@@ -216,6 +215,20 @@
     font-size: 0.9rem;
     font-weight: 400;
 }
+
+.active__gig_card_floating_msg-danger {
+    background-color: #cd2b5c;
+}
+
+.active__gig_card_floating_msg-secondary {
+    background-color: var(--clr-secondary);
+}
+
+.active__gig_card_floating_msg- {
+    background-color: #f5a623;
+}
+
+
 
 
 .active__gig_img {

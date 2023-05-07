@@ -167,10 +167,10 @@ class dashboardController extends Controller
 
 
 
-        $toReviewGigs = $this->gigModel->fetchAllToReviewGigByInvestor($this->currentUser->getUid());
-        if ($toReviewGigs['success']) {
-            $props['toReviewGigs'] = $toReviewGigs['data'];
-        }
+        // $toReviewGigs = $this->gigModel->fetchAllToReviewGigByInvestor($this->currentUser->getUid());
+        // if ($toReviewGigs['success']) {
+        //     $props['toReviewGigs'] = $toReviewGigs['data'];
+        // }
 
         $completedGigs = $this->gigModel->getCompletedGigsByInvestor($this->currentUser->getUid());
         if ($completedGigs['success']) {
@@ -299,6 +299,18 @@ class dashboardController extends Controller
                     }
                 } else {
                     $this->redirect('/error/somethingWentWrong/5');
+                }
+                $recentActivities = $this->recentActivityModel->getRecentActivityByGigId($gigId);
+                // var_dump($recentActivities);
+                // die();
+                if ($recentActivities['success']) {
+                    if ($recentActivities['data']) {
+                        $props['recentActivities'] = $recentActivities['data'];
+                    } else {
+                        $props['recentActivities'] = [];
+                    }
+                } else {
+                    $props['recentActivities'] = [];
                 }
             } else {
                 $this->redirect('/error/accessDenied');
