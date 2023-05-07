@@ -25,7 +25,7 @@
             <div class="[ box ]">
                 <h3>Support</h3>
                 <ul>
-                    <li><a href="<?php echo URLROOT ?>/">Help center</a></li>
+                    <li><a href="<?php echo URLROOT ?>/help">Help center</a></li>
                     <li><a href="<?php echo URLROOT ?>/">Trust and safety</a></li>
                 </ul>
             </div>

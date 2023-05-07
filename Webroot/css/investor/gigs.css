@@ -197,11 +197,26 @@
     border: 1px solid #ccc;
     border-radius: 0.5rem;
     box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
 .active__gig:hover .active__gig_img img {
     filter: brightness(1);
 }
+
+.completion__msg {
+    background-color: #cd2b5c;
+    color: var(--clr-light);
+    padding: 0.75rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.2);
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
 
 .active__gig_img {
     width: 100%;
@@ -374,6 +389,19 @@
 
 .actions>button:hover>i {
     color: var(--clr-primary, #1d1d1d);
+}
+
+.review__card {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 0.5rem;
+}
+
+.review__card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 @media screen and (max-width: 1200px) {}

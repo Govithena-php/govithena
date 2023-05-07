@@ -38,6 +38,29 @@
     margin-bottom: 0.5rem;
 }
 
+.special__announcment-success {
+    background-color: rgba(0, 98, 255, 0.179);
+}
+
+.special__announcment-success .icon {
+    background-color: var(--clr-primary);
+    color: var(--clr-light);
+}
+
+.special__announcment-danger {
+    background-color: #cd2b5c;
+    color: var(--clr-light);
+}
+
+.special__announcment-danger p {
+    color: var(--clr-light);
+}
+
+.special__announcment-danger .icon {
+    color: var(--clr-light);
+}
+
+
 
 
 .gigs {

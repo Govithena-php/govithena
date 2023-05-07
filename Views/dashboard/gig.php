@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/tabs.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/gridTable.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/filters.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/alertModal.css">
 
     <link rel="stylesheet" href="<?php echo CSS ?>/investor/gig.css">
 
@@ -21,7 +22,19 @@
 </head>
 
 <body>
-
+    <dialog id="confirmModal" class="[ alertModal ]">
+        <div class="[ container ]">
+            <i class="bi bi-x-circle"></i>
+            <div class="[ content ]">
+                <h2>Are you sure?</h2>
+                <p>Do you really want to mark this gig as completed? This process can't be undone.</p>
+            </div>
+            <form id="deleteForm" action="<?php echo URLROOT ?>/dashboard/gig_mark_as_under_review" method="POST" class="[ buttons ]">
+                <button type="button" class="[ button__primary ]" onclick="closeConfirmModal()" data-dismiss="modal">No, Cancel</button>
+                <button id="" name="gigId" value="<?php echo $gigId ?>" type="submit" class="[ button__danger ]">Yes, Confirm</button>
+            </form>
+        </div>
+    </dialog>
     <?php
     $active = "gigs";
     $title = "Gig";
@@ -29,13 +42,25 @@
     ?>
 
     <div class="[ container ]" container-type="dashboard-section">
-
         <div class="[ caption ]">
-
             <h3>Track your gig with ease!</h3>
             <p>You can monitor every step of your gig's progress and stay in control of the outcome.</p>
         </div>
-
+        <?php
+        if ($gig['status'] == 'COMPLETED') {
+        ?>
+            <div class="floating__message">
+                <div class="icon">
+                    <i class="bi bi-check-circle"></i>
+                </div>
+                <div class="content">
+                    <h2>This gig is completed!</h2>
+                    <p>Explore your past investments, stay updated with progress reports, and receive valuable insights from our agrologists. However, for this gig, no new investments can sprout. Stay tuned for exciting opportunities ahead!</p>
+                </div>
+            </div>
+        <?php
+        }
+        ?>
         <div class="[ gigs ]">
 
             <div>
@@ -105,15 +130,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="[ special__announcment ]">
-                    <div class="[ icon ]">
-                        <i class="bi bi-bell"></i>
+                <?php
+                if ($gig['status'] == "UNDER_COMPLETION") {
+                ?>
+                    <div class="[ special__announcment special__announcment-danger ]">
+                        <div class="[ icon ]">
+                            <i class="bi bi-bell"></i>
+                        </div>
+                        <div class="[ details grow ]">
+                            <h3>Gig has been marked as completed</h3>
+                            <p>The gig has been marked as completed by the farmer. Confirm to proceed with the next steps.</p>
+                        </div>
+                        <button onclick="openConfirmModal()" class="button__primary">Confirm</button>
+
                     </div>
-                    <div class="[ details ]">
-                        <h3>Special Announcment</h3>
-                        <p>Our platform is currently undergoing maintenance. We will be back online shortly. Thank you for your patience.</p>
-                    </div>
-                </div>
+                <?php
+                }
+                ?>
             </div>
             <div>
                 <div class="[ messages ]">
@@ -187,7 +220,7 @@
 
         </div>
 
-        <div class="[ tabs ][ gigTabs ]" tab="2">
+        <div class="[ tabs ][ gigTabs ]" tab="4">
             <div class="controls">
                 <!-- <button class="control" for="1">Analysis</button> -->
                 <button class="control" for="2" active>Progress Updates</button>
@@ -205,7 +238,7 @@
                     </div>
                 </div> -->
 
-                <div class="tab" id="2">
+                <div class="tab" id="2" active="true">
                     <div class="[ requests__continer ]">
                         <div class="[ caption ]">
                             <h2>Progress Updates</h2>
@@ -522,7 +555,7 @@
                     </div>
                 </div>
 
-                <div class="tab" id="5" active="true">
+                <div class="tab" id="5">
                     <div class="[ about__gig_container ]">
                         <div class="[ caption ]">
                             <h2>About Gig</h2>
@@ -616,6 +649,17 @@
     <script src="<?php echo JS ?>/tabs.js"></script>
     <script src="<?php echo JS ?>/gridTable.js"></script>
     <script src="<?php echo JS ?>/filter/toDateFromDate.js"></script>
+    <script>
+        function openConfirmModal() {
+            const confirmModal = document.getElementById("confirmModal")
+            confirmModal.showModal()
+        }
+
+        function closeConfirmModal() {
+            const confirmModal = document.getElementById("confirmModal")
+            confirmModal.close()
+        }
+    </script>
 </body>
 
 </html>

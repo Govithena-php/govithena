@@ -31,7 +31,7 @@
             </div>
             <form action="<?php echo URLROOT ?>/help" method="POST" class="[ content ]">
                 <?php
-                if (!Session::get('user')->isLoggedIn()) {
+                if (!Session::has('user')) {
                 ?>
                     <div class="[ input__control ]">
                         <label for="email">Email Address</label>

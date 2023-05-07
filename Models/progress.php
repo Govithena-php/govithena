@@ -126,4 +126,18 @@ class Progress
     //         return ['success' => false, 'error' => $e->getMessage()];
     //     }
     // }
+
+
+    public function countByGigId($gigId)
+    {
+        try {
+            $sql = "SELECT COUNT(*) as count FROM gig_progress WHERE gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId]);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $data];
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
 }

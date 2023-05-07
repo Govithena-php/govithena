@@ -242,7 +242,7 @@ class Gig extends Model
     public function countActiveGigByInvestor($investorId)
     {
         try {
-            $sql = "SELECT COUNT(*) as count FROM gig WHERE investorId = :investorId AND status = 'RESERVED'";
+            $sql = "SELECT COUNT(*) as count FROM gig WHERE investorId = :investorId AND status = 'RESERVED' OR status = 'UNDER_COMPLETION' OR status='UNDER_REVIEW'";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['investorId' => $investorId]);
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -268,7 +268,7 @@ class Gig extends Model
     public function fetchAllReservedGigByInvestor($id)
     {
         try {
-            $sql = "SELECT g.gigId, g.farmerId, g.title, g.city, g.thumbnail, u.firstName, u.lastName, u.image, u.city as FCity, DATE(g.reservedDate) as reservedDate FROM gig g INNER JOIN user u ON g.farmerId = u.uid WHERE g.investorId = :id AND g.status = 'RESERVED' ORDER BY g.reservedDate DESC";
+            $sql = "SELECT g.gigId, g.farmerId, g.title, g.city, g.cropCycle, g.thumbnail, u.firstName, u.lastName, u.image, u.city as FCity, DATE(g.reservedDate) as reservedDate, g.status FROM gig g INNER JOIN user u ON g.farmerId = u.uid WHERE g.investorId = :id AND g.status = 'RESERVED' OR g.status = 'UNDER_COMPLETION' ORDER BY g.reservedDate DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -283,7 +283,7 @@ class Gig extends Model
     public function fetchAllToReviewGigByInvestor($id)
     {
         try {
-            $sql = "SELECT * FROM investor_gig INNER JOIN gig ON investor_gig.gigId = gig.gigId WHERE investorId = :id AND investor_gig.status = 'TO_REVIEW' ORDER BY timestamp DESC";
+            $sql = "SELECT g.gigId, g.title, g.city, g.thumbnail, g.farmerId, u.firstName, u.lastName, u.image FROM gig g INNER JOIN user u ON g.farmerId = u.uid WHERE g.investorId = :id AND g.status = 'UNDER_REVIEW' ORDER BY g.reservedDate DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -298,7 +298,7 @@ class Gig extends Model
     public function getCompletedGigsByInvestor($id)
     {
         try {
-            $sql = "SELECT * FROM investor_gig INNER JOIN gig ON investor_gig.gigId = gig.gigId WHERE investorId = :id AND investor_gig.status = 'COMPLETED' ORDER BY timestamp DESC";
+            $sql = "SELECT g.gigId, g.title, g.city, g.thumbnail, g.farmerId, u.firstName, u.lastName, u.image FROM gig g INNER JOIN user u ON g.farmerId = u.uid WHERE g.investorId = :id AND g.status = 'COMPLETED' ORDER BY g.reservedDate DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -373,6 +373,35 @@ class Gig extends Model
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['gigId' => $gigId]);
             return ['success' => true];
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function markAsUnderReview($gigId)
+    {
+        try {
+            $sql = "UPDATE gig SET status = 'UNDER_REVIEW' WHERE gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId]);
+            return ['success' => true, 'data' => true];
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function checkBeforeReview($gigId, $userId)
+    {
+        try {
+            $sql = "SELECT farmerId FROM gig WHERE gigId = :gigId AND investorId = :userId AND status = 'UNDER_REVIEW'";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId, 'userId' => $userId]);
+            $res = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($res) {
+                return ['success' => true, 'data' => $res];
+            } else {
+                return ['success' => false, 'data' => false];
+            }
         } catch (PDOException $e) {
             return ['success' => false, 'data' => $e->getMessage()];
         }
