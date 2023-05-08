@@ -100,88 +100,61 @@ class checkoutController extends Controller
 
     public function pay()
     {
-
         if (isset($_POST['pay'])) {
-            $id = $_POST['pay'];
-            $res = $this->requestFarmerModel->getRequestById($id);
-            $investment = new $this->investmentModel();
-            $response = $investment->add([
-                'id' =>  new UID(PREFIX::INVESTMENT),
-                'investorId' => $this->currentUser->getUid(),
-                'gigId' => $res['gigId'],
-                'amount' => $res['capital']
-            ]);
 
+            $id = new Input(POST, 'pay');
 
-            // if payment success
-
-            // investor__gig ekta add wenn one ✔️
-            // request eke paid accepted -> paid . ✔️
-            // gig eke active -> reserved ✔️
-            // investmet table ekeata gana add wenn one
-            // recent activites walta add wenawa
+            $request = $this->requestFarmerModel->getRequestById($id);
+            if ($request['success']) {
+                $request = $request['data'];
+            } else {
+                $this->redirect('/error/somethingWentWrong');
+            }
 
 
             $response = $this->investorGigModel->add([
                 'investorId' => $this->currentUser->getUid(),
-                'gigId' => $res['gigId'],
-                'farmerId' => $res['farmerId'],
+                'gigId' => $request['gigId'],
+                'farmerId' => $request['farmerId'],
             ]);
 
-            $this->requestFarmerModel->updateStatus($id, 'PAID');
+            if ($response['success']) {
+                $response = $this->investmentModel->add([
+                    'id' => new UID(PREFIX::INVESTMENT),
+                    'investorId' => $this->currentUser->getUid(),
+                    'gigId' => $request['gigId'],
+                    'farmerId' => $request['farmerId'],
+                    'amount' => $request['capital'],
+                ]);
 
-            $res = $this->gigModel->updateGigStatusToReserved($res['gigId']);
+                if ($response['success']) {
 
-
+                    $this->requestFarmerModel->updateStatus($id, 'PAID');
+                    $this->gigModel->updateGigStatusToReserved($request['gigId']);
+                    $this->redirect('/dashboard');
+                } else {
+                    $this->redirect('/error/someThingWentWrong');
+                }
+            } else {
+                $this->redirect('/error/someThingWentWrong');
+            }
             $this->redirect('/dashboard');
         }
     }
 
     public function index($params)
     {
-        list($id) = $params;
-        $res = $this->requestFarmerModel->getRequestById($id);
-        if (isset($res)) {
-            $this->set(['res' => $res]);
-            $payment = [
-                "sandbox" => true,
-                "merchant_id" => $this->header['merchant_id'],
-                "return_url" => $this->header['return_url'],
-                "cancel_url" => $this->header['cancel_url'],
-                "notify_url" => $this->header['notify_url'],
-                "order_id" => $res['requestId'],
-                "items" => $res['title'],
-                "amount" => $res['capital'],
-                "currency" => $this->header['currency'],
-                "first_name" => $res['firstName'],
-                "last_name" => $res['lastName'],
-                "email" => $this->header['email'],
-                "phone" => "0412345678",
-                "address" => "No.1, Galle Road",
-                "city" => $res['city'],
-                "country" => "Sri Lanka",
-            ];
-            $this->set(['payment' => $payment]);
+        $props = [];
+
+        if (!empty($params)) $reId = $params[0];
+
+        $response = $this->requestFarmerModel->getRequestById($reId);
+        if ($response['success']) {
+            $props['res'] = $response['data'];
+            $this->set($props);
+            $this->render('index');
         } else {
-            $this->set(['error' => "no requests found"]);
+            $this->redirect('/error');
         }
-        $this->render('index');
-    }
-
-
-
-    public function return()
-    {
-        echo "return";
-    }
-
-    public function cancel()
-    {
-        $this->redirect('/checkout');
-    }
-
-    public function notify()
-    {
-        echo "notify";
     }
 }

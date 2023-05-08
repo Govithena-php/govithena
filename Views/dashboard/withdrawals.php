@@ -6,14 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="<?php echo IMAGES ?>/favicon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/table.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/gridTable.css">
-    <link rel="stylesheet" href="<?php echo CSS ?>/investor/mywithdraw.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/investor/withdrawals.css">
 
     <title>Dashboard | Investor</title>
 </head>
@@ -21,12 +20,10 @@
 <body>
 
     <?php
-    $active = "mywithdraw";
-    $title = "Withdrawal";
+    $active = "withdrawals";
+    $title = "Withdrawals";
     require_once("navigator.php");
     ?>
-
-    <?php $name = "Janith"; ?>
 
     <div class="[ container ][ investments ]" container-type="dashboard-section">
         <div class="[ caption ]">
@@ -163,16 +160,16 @@
                         </div>
                         <div class="[ row ]">
                             <div class="[ data ]">
-                                <h3>Date</h3>
+                                <p>Date</p>
                             </div>
                             <div class="[ data ]">
-                                <h3>Time</h3>
+                                <p>Time</p>
                             </div>
                             <div class="[ data ]">
-                                <h3>Amount</h3>
+                                <p>Amount</p>
                             </div>
                             <div class="[ data ]">
-                                <h3>Status</h3>
+                                <p>Status</p>
                             </div>
                         </div>
                     </div>

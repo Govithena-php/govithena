@@ -11,19 +11,21 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/search.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/filters.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/formModal.css">
 
     <link rel="stylesheet" href="<?php echo CSS ?>/farmer/agrologist.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/farmer/farmerrequest.css">
 
 
-    <title>Dashboard | Technical Assistant</title>
+    <title>Dashboard | Farmer</title>
 </head>
 
 
-<body class="bg-gray h-screen">
+<body class="h-screen">
 
     <?php
-    $active = "techassistantfirst";
+    $active = "techassistant";
     $title = "Tech Assistants";
     require_once("navigator.php");
     ?>
@@ -72,59 +74,58 @@
     }
 
     ?>
+    <dialog id="requestModal" class="[ modal ]">
+        <div class="[ container ]">
+            <div class="[ head ]">
+                <h3>Send A Request</h3>
+            </div>
+            <form action="<?php echo URLROOT ?>/farmer/tech_assistant_request" method="POST" class="[ content ]">
+                <div class="[ input__control ]">
+                    <label for="offer">Offer (LKR)</label>
+                    <input type="number" name="offer" id="offer" required></input>
+                </div>
+                <div class="[ input__control ]">
+                    <label for="message">Description</label>
+                    <textarea name="message" id="message" required></textarea>
+                </div>
+                <div class="[ buttons ]">
+                    <button type="button" class="[ button__danger ]" onclick="closeRequestModal()" data-dismiss="modal">Cancel</button>
+                    <button type="submit" id="sendBtn" name="technicalAssistantId" class="[ button__primary ]">Send</button>
+                </div>
+            </form>
+    </dialog>
 
     <div class="container" container-type="dashboard-section">
         <h1 class="page__heading">Search Technical Assistant</h1>
 
-        <div class="cardspace">
-
-            <select name="type" id="type" disabled>
-                <option value="croptype">Crop Type</option>
-            </select>
-
-            <select name="type" id="type" disabled>
-                <option value="landarea">Land Area</option>
-            </select>
-
-            <select name="type" id="type" disabled>
-                <option value="budget">Budget</option>
-            </select>
-
-            <select name="type" id="type" disabled>
-                <option value="location">Location</option>
-            </select>
-
-
-            <form class="[ fs-3 ][ search__form ]" action="<?php echo URLROOT . "/search/" ?>" method="get">
-                <input class="" type="text" name="terms" placeholder="Search by: name / location" disabled>
-                <button class="[ btn btn-primary ] [ search_button ]" type="submit" disabled>Search</button>
-            </form>
-
-        </div>
+        <form class="[ filters ]" action="<?php echo URLROOT ?>/farmer/techassistantfirst/" method="GET">
+            <div class="[ options ]">
+                <div class="[ input__control ]">
+                    <label for="location">Location</label>
+                    <select id="location" name="location">
+                        <option value="">All</option>
+                        <?php
+                        foreach (DISTRICTS as $key => $value) {
+                            echo "<option value='$key'>$value</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="[ input__control ]">
+                    <button type="submit" name="apply" value="true" class="button__primary">Apply</button>
+                </div>
+            </div>
+            <div class="search">
+                <input type="text" name="term" placeholder="Search">
+                <button type="submit" name="search" value="true" class="button__primary"><i class="bi bi-search"></i></button>
+            </div>
+        </form>
 
         <div class="[ grid ]" gap="1" sm="1" md="2" lg="3">
             <?php
-            if (isset($techAssistants)) {
+            if (isset($techAssistants) && !empty($techAssistants)) {
                 foreach ($techAssistants as $techAssistant) {
             ?>
-
-                    <!-- <div class="[ requestcard bg-light ]">
-                        <div class="[ requestimg ]">
-                            <img class="img" src="<?php echo UPLOADS . $techAssistant['image'] ?>" alt="profile">
-                        </div>
-                        <div class="flex flex-row ">
-                            <div class="[ requestcont ]">
-                                <a href="<?php echo URLROOT . "/profile/" . $techAssistant['uid'] ?>">
-                                    <p><b><?php echo $techAssistant['firstName'] . " " . $techAssistant['lastName']; ?></b></p>
-                                </a>
-          
-                            </div>
-                        </div>
-                        <div class=" flex-c-c">
-                            <a class="request__btn" href="<?php echo URLROOT . "/farmer/request/" . $techAssistant['uid'] ?>">Send Request</a>
-                        </div>
-
-                    </div> -->
                     <div class="requestcardn">
                         <div class=" requestimg1 ">
                             <img class="img" src="<?php echo UPLOADS . $techAssistant['image'] ?>" alt=" profile">
@@ -145,47 +146,23 @@
                             </div>
                         </div>
                         <div class=" flex-c-c">
-                            <a class="requestbtn" href="<?php echo URLROOT . "/farmer/send/" . $techAssistant['uid'] ?>">Send Request</a>
+                            <button onclick="openRequestModal('<?php echo $techAssistant['uid'] ?>')" class="requestbtn">Send Request</button>
 
                         </div>
 
-                 </div>
+                    </div>
 
-   
+
 
             <?php
                 }
+            } else {
+                echo "<br>";
+                require(COMPONENTS . "dashboard/noDataFound.php");
             }
 
 
             ?>
-
-            <!-- <div class="requestcardn">
-                        <div class=" requestimg1 ">
-                            <img class="img" src="<?php echo UPLOADS . $techAssistant['image'] ?>" alt=" profile">
-
-                        </div>
-                        <div class="flex flex-row ">
-                            <div class=" requestlist ">
-                                <a class="namebox" href="<?php echo URLROOT . "/profile/" . $techAssistant['uid'] ?>">
-                                    <p><b><?php echo $techAssistant['firstName'] . " " . $techAssistant['lastName']; ?></b></p>
-                                </a>
-                                <p class="flex flex-row">
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                </p>
-                            </div>
-                        </div>
-                        <div class=" flex-c-c">
-                            <a class="requestbtn" href="<?php echo URLROOT . "/farmer/send/" . $techAssistant['uid'] ?>">Send Request</a>
-
-                        </div>
-
-                 </div>
-             -->
 
         </div>
 
@@ -206,6 +183,16 @@
         }, 5000);
     </script>
 
+    <script>
+        function openRequestModal(id) {
+            document.getElementById('requestModal').showModal()
+            document.getElementById('sendBtn').value = id
+        }
+
+        function closeRequestModal() {
+            document.getElementById('requestModal').close()
+        }
+    </script>
 
 </body>
 

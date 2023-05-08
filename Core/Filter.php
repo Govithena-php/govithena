@@ -3,9 +3,10 @@
 class Filter
 {
     private $inputs = [];
-    private $submit;
+    private $fromDate;
+    private $toDate;
 
-    public function __construct($names = [], $submit)
+    public function __construct($names = [], $date = [])
     {
         foreach ($names as $name) {
             $temp = new Input(POST, $name);
@@ -15,12 +16,25 @@ class Filter
                 $this->inputs[$name] = $temp->get();
             }
         }
-        $this->submit = $submit;
+
+        $fd =  new Input(POST, $date[0]);
+        $td =  new Input(POST, $date[1]);
+
+        if (strtotime($fd)) {
+            $this->fromDate = $fd;
+        } else {
+            $this->fromDate = "1970-01-01 00:00:00";
+        }
+        if (strtotime($td)) {
+            $this->toDate = $td;
+        } else {
+            $this->toDate = "2050-01-01 00:00:00";
+        }
     }
 
     public function noFilters()
     {
-        return empty(array_filter(array_values($this->inputs)));
+        return empty(array_filter(array_values($this->inputs))) && empty($this->fromDate) && empty($this->toDate);
     }
 
 
@@ -35,7 +49,9 @@ class Filter
                 $sql .= $key . " LIKE '%" . $value . "%' AND ";
             }
         }
-        $sql = substr($sql, 0, -4);
+
+        $sql .= "timestamp BETWEEN '" . $this->fromDate . "' AND '" . $this->toDate . "' ";
+
         return $sql;
     }
 

@@ -31,7 +31,7 @@ function highlight($active, $link)
 
         <div class="[ open__btn ]">
             <button onclick="toggleSidebar()">
-                <i class="fa-solid fa-bars"></i>
+                <i class="bi bi-list"></i>
             </button>
         </div>
 
@@ -157,7 +157,7 @@ function highlight($active, $link)
     <div class="[ links ]">
         <ul>
             <li>
-                <a href="<?php echo URLROOT ?>/farmer/" class="<?php highlight($active, "dashboard") ?>">
+                <a href="<?php echo URLROOT ?>/farmer" class="<?php highlight($active, "dashboard") ?>">
                     <i class="bi bi-columns-gap"></i>
                     <p>Dashboard</p>
                 </a>
@@ -182,7 +182,7 @@ function highlight($active, $link)
             </li>
 
             <li>
-                <a href="<?php echo URLROOT ?>/farmer/techassistantfirst" class="<?php highlight($active, "techassistantfirst") ?>">
+                <a href="<?php echo URLROOT ?>/farmer/techassistant" class="<?php highlight($active, "techassistant") ?>">
                     <i class="bi bi-people"></i>
                     <p>Tech Assistants</p>
                 </a>
@@ -194,9 +194,9 @@ function highlight($active, $link)
             </li>
         </ul>
         <div class="[ grow ]"></div>
-        <ul>
+        <ul class="bottom__links">
             <li>
-                <a href="<?php echo URLROOT ?>/farmer/myaccount" class="<?php highlight($active, "myaccount") ?>">
+                <a href="<?php echo URLROOT ?>/account" class="<?php highlight($active, "account") ?>">
                     <i class="bi bi-person"></i>
                     <p>My Account</p>
                 </a>
@@ -208,7 +208,7 @@ function highlight($active, $link)
                 </a>
             </li>
             <li>
-                <a href="<?php echo URLROOT ?>/farmer/settings" class="<?php highlight($active, "settings") ?>">
+                <a href="<?php echo URLROOT ?>/settings" class="<?php highlight($active, "settings") ?>">
                     <i class="bi bi-gear"></i>
                     <p>Settings</p>
                 </a>
@@ -217,3 +217,5 @@ function highlight($active, $link)
 
     </div>
 </aside>
+
+<script src="<?php echo JS ?>/navbar.js"></script>

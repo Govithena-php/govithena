@@ -15,8 +15,6 @@ class dashboardController extends Controller
     private $widthdrawModel;
     private $profitModel;
 
-    private $profilePictureHandler;
-
     public function __construct()
     {
         $this->currentUser = Session::get('user');
@@ -26,7 +24,7 @@ class dashboardController extends Controller
         }
 
         if (!$this->currentUser->hasAccess(ACTOR::INVESTOR)) {
-            $this->redirect('/error/dontHaveAccess');
+            $this->redirect('/error/accessDenied');
         }
 
         $this->investorGigModel = $this->model('investorGig');
@@ -39,13 +37,6 @@ class dashboardController extends Controller
         $this->investmentModel = $this->model('investment');
         $this->widthdrawModel = $this->model('widthrawl');
         $this->profitModel = $this->model('profit');
-
-        $this->profilePictureHandler = new ImageHandler($folder = 'Uploads/profilePictures');
-    }
-
-
-    public function test1()
-    {
     }
 
     public function index()
@@ -53,19 +44,27 @@ class dashboardController extends Controller
         $props = [];
 
         $totalInvestment = $this->investmentModel->getTotalInvestmentByInvestor($this->currentUser->getUid());
+
         if ($totalInvestment['success']) {
             $props['totalInvestment'] = $totalInvestment['data']['totalInvestment'];
+        } else {
+            $props['totalInvestment'] = 0;
         }
 
         $totalWithdrawn = $this->widthdrawModel->getTotalWithdrawnByInvestor($this->currentUser->getUid());
         if ($totalWithdrawn['success']) {
             $props['totalWithdrawn'] = $totalWithdrawn['data']['totalWithdrawn'];
+        } else {
+            $props['totalWithdrawn'] = 0;
         }
 
         $totalProfit = $this->profitModel->getTotalProfitByInvestor($this->currentUser->getUid());
         if ($totalProfit['success']) {
             $props['totalProfit'] = $totalProfit['data']['totalProfit'];
+        } else {
+            $props['totalProfit'] = 0;
         }
+
         $totalGain = $props['totalInvestment'] + $props['totalProfit'];
         $totalBalance = $totalGain - $props['totalWithdrawn'];
         $props['totalGain'] = $totalGain;
@@ -75,15 +74,24 @@ class dashboardController extends Controller
         $widthdrawals = $this->widthdrawModel->fetchAllBy($this->currentUser->getUid());
         if ($widthdrawals['success']) {
             $props['widthdrawals'] = $widthdrawals['data'];
+        } else {
+            $props['widthdrawals'] = [];
         }
 
         $profits = $this->profitModel->fetchAllBy($this->currentUser->getUid());
         if ($profits['success']) {
             $props['profits'] = $profits['data'];
+        } else {
+            $props['profits'] = [];
         }
 
 
-        $props['investments'] = $this->investmentModel->fetchAllBy($this->currentUser->getUid());
+        $investments = $this->investmentModel->fetchAllBy($this->currentUser->getUid());
+        if ($investments['success']) {
+            $props['investments'] = $investments['data'];
+        } else {
+            $props['investments'] = [];
+        }
 
 
         $this->set($props);
@@ -93,10 +101,6 @@ class dashboardController extends Controller
     public function gigs()
     {
         $props = [];
-        // $investorGig = new $this->investorGigModel();
-        // $gigs = $investorGig->fetchAllByInvestor($this->currentUser->getUid());
-        // $this->set(['gigs' => $gigs]);
-
 
         $activeGigCount = $this->investorGigModel->countActiveGigByInvestor($this->currentUser->getUid());
 
@@ -114,6 +118,18 @@ class dashboardController extends Controller
 
         if ($totalInvestment['success']) {
             $props['totalInvestment'] = $totalInvestment['data']['totalInvestment'];
+        }
+
+        $totalInvestmentPerGig = $this->investmentModel->getTotalInvestmentPerGigByInvestor($this->currentUser->getUid());
+
+
+        if ($totalInvestmentPerGig['success']) {
+            $temp = [];
+            foreach ($totalInvestmentPerGig['data'] as $key => $value) {
+                $temp[$value['gigId']] = $value['totalInvestment'];
+            }
+
+            $props['totalInvestmentPerGig'] = $temp;
         }
 
         $activeGigs = $this->investorGigModel->fetchAllActiveGigByInvestor($this->currentUser->getUid());
@@ -138,79 +154,90 @@ class dashboardController extends Controller
         $this->render('gigs');
     }
 
-    public function gig($params)
+    public function gig($params = [])
     {
         $props = [];
-        if (!isset($params[0]) || empty($params[0])) {
-            $this->redirect('/error/dontHaveAccess/1');
-        }
-        $gigId = $params[0];
 
-        $props['gig'] = $gig = $this->gigModel->fetchBy($gigId);
-        if (!$props['gig']) {
-            $this->redirect('/error/dontHaveAccess/2');
+        if (!empty($params)) {
+            $gigId = $params[0];
+            $props['gigId'] = $gigId;
+        } else {
+            $this->redirect('/error/pageNotFound');
         }
 
-        $gigImages  = $this->gigModel->fetchGigImages($gigId);
-        if ($gigImages['success']) {
-            $props['gigImages'] = $gigImages['data'];
-        }
+        $farmerId = $this->investorGigModel->getfarmerIdByGigId($gigId);
 
-        $props['farmer'] = $this->userModel->fetchBy($gig['farmerId']);
-        if (!$props['farmer']) {
-            $this->redirect('/error/dontHaveAccess/3');
-        }
+        if ($farmerId['success']) {
+            if ($farmerId['data']) {
+                $farmerId = $farmerId['data']['farmerId'];
 
-        $fieldVisits = $this->fieldVisitModel->fetchAllByGig($gigId);
-        if ($fieldVisits['success']) {
-            $props['fieldVisits'] = $fieldVisits['data'];
-        }
-
-        $progress = $this->progressModel->fetchAllByGig($gigId);
-        $props['progress'] = [];
-        if ($progress['success']) {
-            foreach ($progress['data'] as $pg) {
-                $progressImages = [];
-                $temp = $this->progressModel->fetchImagesByProgressId($pg['progressId']);
-                foreach ($temp['data'] as $key => $value) {
-                    $progressImages[$key] = $value['imageName'];
+                $gig = $this->gigModel->fetchBy($gigId);
+                if ($gig['success']) {
+                    $props['gig'] = $gig['data'];
+                } else {
+                    $this->redirect('/error/somethingWentWrong/1');
                 }
-                $pg['images'] = $progressImages;
-                $props['progress'][] = $pg;
+
+                $gigImages  = $this->gigModel->fetchGigImages($gigId);
+                if ($gigImages['success']) {
+                    $props['gigImages'] = $gigImages['data'];
+                } else {
+                    $this->redirect('/error/somethingWentWrong/2');
+                }
+
+                $farmer = $this->userModel->fetchBy($farmerId);
+                if ($farmer['success']) {
+                    $props['farmer'] = $farmer['data'];
+                } else {
+                    $this->redirect('/error/somethingWentWrong/3');
+                }
+
+                $fieldVisits = $this->fieldVisitModel->fetchAllByGigId($gigId);
+                if ($fieldVisits['success']) {
+                    $props['fieldVisits'] = $fieldVisits['data'];
+                }
+
+                $totalInvestment = $this->investorGigModel->getTotalInvestmentForGigByInvestor($this->currentUser->getUid(), $gigId);
+                if ($totalInvestment['success']) {
+                    $props['totalInvestment'] = $totalInvestment['data']['totalInvestment'];
+                }
+
+                $startedDate = $this->investorGigModel->getStartedDate($gigId);
+                if ($startedDate['success']) {
+                    $start = new DateTime($startedDate['data']['startDate']);
+                    $end = new DateTime();
+                    $props['numberOfDaysLeft'] = $start->diff($end)->days;
+                }
+
+                $filter = new Filter([], ['fromDate', 'toDate']);
+
+                $investments = $this->investmentModel->getInvestmentsByGigId($gigId, $filter);
+                if ($investments['success']) {
+                    $props['investments'] = $investments['data'];
+                }
+
+                $progress = $this->progressModel->fetchAllByGigId($gigId);
+
+                $props['progress'] = [];
+                if ($progress['success']) {
+                    foreach ($progress['data'] as $pg) {
+                        $progressImages = [];
+                        $temp = $this->progressModel->fetchImagesByProgressId($pg['progressId']);
+                        foreach ($temp['data'] as $key => $value) {
+                            $progressImages[$key] = $value['image'];
+                        }
+                        $pg['images'] = $progressImages;
+                        $props['progress'][] = $pg;
+                    }
+                } else {
+                    $this->redirect('/error/somethingWentWrong/5');
+                }
+            } else {
+                $this->redirect('/error/accessDenied');
             }
+        } else {
+            $this->redirect('/error/somethingWentWrong/6');
         }
-
-        $totalInvestment = $this->investorGigModel->getTotalInvestmentForGigByInvestor($this->currentUser->getUid(), $gigId);
-        if ($totalInvestment['success']) {
-            $props['totalInvestment'] = $totalInvestment['data']['totalInvestment'];
-        }
-
-        $startedDate = $this->investorGigModel->getStartedDate($gigId);
-
-        if ($startedDate['success']) {
-            $start = new DateTime($startedDate['data']['startDate']);
-            $end = new DateTime();
-            $props['numberOfDaysLeft'] = $start->diff($end)->days;
-        }
-
-        $investments = $this->investmentModel->fetchByInvestorAndGig($this->currentUser->getUid(), $gigId);
-        if ($investments['success']) {
-            $props['investments'] = $investments['data'];
-        }
-
-        // accpted data
-        // gig
-        // farmer
-        // progress
-        // investment
-        // expreses
-        // profit
-        // agrologist reports
-        // messsages
-
-
-
-
 
         $this->set($props);
         $this->render('gig');
@@ -269,18 +296,18 @@ class dashboardController extends Controller
         $this->render('review');
     }
 
-    public function myinvestments()
+    public function investments()
     {
         $props = [];
 
-        $filters = new Filter(['fromDate', 'toDate', 'city', 'category'], 'apply');
+        $filters = new Filter(['category'], ['fromDate', 'toDate']);
 
         $investments = $this->investmentModel->fetchAllByUsingFilters($this->currentUser->getUid(), $filters);
 
-        if (isset($investments)) {
-            $props['investments'] = $investments;
+        if ($investments['success']) {
+            $props['investments'] = $investments['data'];
         } else {
-            $props['error'] = "no investments found";
+            $this->redirect('/error/somethingWentWrong');
         }
 
         $totalInvestment = $this->investmentModel->getTotalInvestmentByInvestor($this->currentUser->getUid());
@@ -308,7 +335,7 @@ class dashboardController extends Controller
                 if ($lastMonth == 0) {
                     $lastMonth = 1;
                 }
-                $precentage = round(((intval($thisMonth) - intval($lastMonth)) / intval($lastMonth) * 100), 2);
+                $precentage = min("100", round(((intval($thisMonth) - intval($lastMonth)) / intval($lastMonth) * 100), 2));
                 $props['precentage'] = $precentage;
                 $props['lastMonthInvestment'] = $lastMonth;
             }
@@ -324,15 +351,57 @@ class dashboardController extends Controller
             }
         }
 
-
-
-
-
         $this->set($props);
-        $this->render('myinvestments');
+        $this->render('investments');
     }
 
-    public function withdraw()
+    public function newInvestment()
+    {
+        $props = [];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $gigId = new Input(POST, 'gigId');
+            $amount = new Input(POST, 'amount');
+            $description = new Input(POST, 'description');
+
+            $farmerId = $this->investorGigModel->getfarmerIdByGigId($gigId);
+
+            if ($farmerId['success']) {
+                $farmerId = $farmerId['data'];
+            } else {
+                $this->redirect('/error/somethingWentWrong/1');
+            }
+
+            $response = $this->investmentModel->save([
+                'id' => new UID(PREFIX::INVESTMENT),
+                'investorId' => $this->currentUser->getUid(),
+                'gigId' => $gigId,
+                'farmerId' => $farmerId['farmerId'],
+                'amount' => $amount,
+                'description' => $description
+            ]);
+
+            if ($response['success']) {
+                $this->redirect('/dashboard/investments');
+            } else {
+                $this->redirect('/error/somethingWentWrong/2');
+            }
+        }
+
+
+        $investmentGigs = $this->investorGigModel->fetchAllActiveGigByInvestor($this->currentUser->getUid());
+        if ($investmentGigs['success']) {
+            $props['investmentGigs'] = $investmentGigs['data'];
+        } else {
+            $this->redirect('/error/somethingWentWrong/3');
+        }
+
+        $this->set($props);
+        $this->render('newInvestment');
+    }
+
+    public function withdrawals()
     {
         $props = [];
 
@@ -341,20 +410,17 @@ class dashboardController extends Controller
         if ($withdrawls['success']) {
             $props['withdrawls'] = $withdrawls['data'];
         }
-
-
         $this->set($props);
-        $this->render('withdraw');
+        $this->render('withdrawals');
     }
 
 
-    public function myrequests()
+    public function requests()
     {
-
         $uid = Session::get('user')->getUid();
 
-
         $requests = $this->requestFarmerModel->getRequestsByInvestor($uid);
+
         $pendingRequests = [];
         $acceptedRequests = [];
         $rejectedRequests = [];
@@ -375,8 +441,10 @@ class dashboardController extends Controller
         }
 
 
-        $this->render('myrequests');
+        $this->render('requests');
     }
+
+
 
     public function myrequest_delete()
     {

@@ -164,3 +164,7 @@ new Chart(pieChart1, pieConfigCropSuccess);
 new Chart(pieChart2, pieConfigCropFailure);
 
 new Chart(pieChart3, pieConfig);
+
+
+const ctx5 = document.getElementById('mylineChart');
+new Chart(ctx5, config);

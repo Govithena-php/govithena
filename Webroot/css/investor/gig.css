@@ -1,103 +1,3 @@
-.filters {
-    padding-top: 1rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid #ccc;
-    align-items: end;
-    justify-items: end;
-}
-
-.filters .search {
-    display: flex;
-}
-
-.filters .search h4 {
-    font-size: 1.1rem;
-    font-weight: 400;
-    margin-bottom: 0.5rem;
-}
-
-.filters .search input {
-    padding: 0.5rem 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px 0 0 5px;
-}
-
-.filters .search input:focus {
-    outline: none;
-}
-
-.filters .search button {
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--clr-primary);
-    border-radius: 0 5px 5px 0;
-    background-color: var(--clr-primary);
-    color: var(--clr-light);
-    cursor: pointer;
-}
-
-.filters .search button:focus {
-    outline: none;
-}
-
-.options {
-    align-items: end;
-}
-
-.options .input__control {
-    display: flex;
-    flex-direction: column;
-}
-
-.options .input__control label {
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-
-.options .input__control input[type="date"] {
-    font-size: 0.8rem;
-    padding: 0.3rem 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.options .input__control select {
-    font-size: 0.8rem;
-    padding: 0.4rem 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.options .input__control button {
-    font-size: 0.8rem;
-    padding: 0.4rem 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: var(--clr-primary);
-    color: var(--clr-light);
-    cursor: pointer;
-}
-
-.caption {
-    /* width: 60%; */
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-    margin-inline: 0;
-}
-
-.caption h3 {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-
-.caption p {
-    width: 60%;
-    font-size: 0.8rem;
-    font-weight: 400;
-    color: var(--clr-text-gray, #535353);
-    margin-bottom: 0.5rem;
-}
-
 .freespace__text {
     font-size: 1rem;
     font-weight: 400;
@@ -335,7 +235,9 @@
 }
 
 .progress__content {
-    margin: 0.5rem;
+    border-top: 1px solid #ccc;
+    margin: 1rem;
+    padding-top: 1rem;
 }
 
 .progress__content h4 {
@@ -352,17 +254,14 @@
 }
 
 .progress__images {
-
-    border-top: 1px solid #ccc;
-    padding-top: 2rem;
     margin: 2rem 0.5rem;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1rem;
 }
 
 .progress__images .img {
-    height: 250px;
+    height: 200px;
     border-radius: 0.5rem;
     overflow: hidden;
     background-color: #ccc;
@@ -469,62 +368,6 @@
     font-weight: 400;
     color: var(--clr-text-gray, #535353);
 }
-
-/* 
-.gig__wrapper {
-    padding: 0.5rem 1rem;
-    margin-bottom: 1rem;
-}
-
-.progress__bar {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1rem;
-}
-
-.progress__bar label {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.progress__bar span {
-    font-weight: 500;
-}
-
-.progress__bar progress {
-    width: 100%;
-    height: 1rem;
-    border-radius: 1rem;
-}
-
-.progress__bar progress::-webkit-progress-bar {
-    border-radius: 1rem;
-    border: 1px solid #ccc;
-    background-color: var(--clr-light);
-}
-
-.progress__bar progress::-webkit-progress-value {
-    border-radius: 1rem;
-    background-color: rgb(17, 118, 225);
-}
-
-.progress__bar label {
-    font-size: 0.8rem;
-    font-weight: 300;
-    color: var(--clr-text-gray, #535353);
-} */
-
-
-.LKR::before {
-    content: "LKR ";
-    color: rgb(220, 38, 10);
-    font-weight: 600;
-    font-size: 1rem;
-    margin-right: 0.5rem;
-}
-
-
 
 .tag {
     width: fit-content;
@@ -666,6 +509,10 @@
     background-color: rgb(17, 118, 225);
 }
 
+.about__gig_container {
+    margin-right: 5rem;
+}
+
 .about__gig {
     border-top: 1px solid #ccc;
     display: flex;
@@ -676,7 +523,8 @@
 
 .about__gig h3 {
     font-weight: 600;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
 }
 
 .about__gig p {
@@ -686,7 +534,7 @@
 
 .about__gig_images_title {
     font-weight: 600;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     color: var(--clr-text);
     margin-top: 1rem;
     margin-bottom: 2rem;
@@ -697,14 +545,14 @@
 
 .about__gig_images {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
 }
 
 .gig__image {
     width: 100%;
     overflow: hidden;
-    border-radius: 1rem;
+    border-radius: 5px;
 }
 
 .gig__image img {

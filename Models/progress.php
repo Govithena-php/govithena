@@ -2,15 +2,17 @@
 
 class Progress
 {
-    public function fetchAllByGig($gigId)
+    public function fetchAllByGigId($gigId)
     {
         try {
-            $sql = "SELECT fp.progressId, fp.userId, fp.gigId, fp.subject, fp.description, DATE(fp.timestamp) as date, TIME(fp.timestamp) as time FROM gig_progress as fp WHERE fp.gigId = :gigId";
+            $sql = "SELECT gp.progressId, gp.userId, gp.subject, gp.description, gp.userType, DATE(gp.timestamp) as date, TIME(gp.timestamp) as time, u.firstName, u.lastName, u.image FROM gig_progress as gp INNER JOIN user u on u.uid = gp.userId WHERE gp.gigId = :gigId ORDER BY gp.timestamp DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['gigId' => $gigId]);
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return ['success' => true, 'data' => $data];
         } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
             return ['success' => false, 'error' => $e->getMessage()];
         }
     }
@@ -19,7 +21,7 @@ class Progress
     public function fetchImagesByProgressId($progressId)
     {
         try {
-            $sql = "SELECT fpi.imageName FROM gig_progress_image as fpi WHERE progressId = :progressId";
+            $sql = "SELECT fpi.image FROM gig_progress_image as fpi WHERE progressId = :progressId";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['progressId' => $progressId]);
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -51,10 +53,10 @@ class Progress
     public function saveProgressImage($data)
     {
         try {
-            $sql = "INSERT INTO gig_progress_image (imageName, progressId) VALUES (:imageName, :progressId)";
+            $sql = "INSERT INTO gig_progress_image (image, progressId) VALUES (:image, :progressId)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
-                'imageName' => $data['imageName'],
+                'image' => $data['image'],
                 'progressId' => $data['progressId']
             ]);
             return ['success' => true];

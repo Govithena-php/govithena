@@ -19,6 +19,7 @@ class apiController extends Controller
     public function gigPieChart()
     {
         $gigsCount = $this->adminModel->getGigsCount();
+        
         echo json_encode($gigsCount);
     }
 }

@@ -6,6 +6,7 @@ class gigController extends Controller
     private $gigModel;
     private $requestModel;
     private $reviewByInvestorModel;
+    private $userModel;
 
     public function __construct()
     {
@@ -14,6 +15,7 @@ class gigController extends Controller
         $this->gigModel = $this->model('gig');
         $this->requestModel = $this->model('requestFarmer');
         $this->reviewByInvestorModel = $this->model('reviewByInvestor');
+        $this->userModel = $this->model('user');
 
         if (!Session::isLoggedIn()) {
             $this->redirect('/auth/signin');
@@ -24,32 +26,25 @@ class gigController extends Controller
         }
     }
 
-    function index($params)
+    function index($params = [])
     {
-        $gigId = $params[0];
-        isset($params[1]) ? $state = $params[1] : "";
 
-        if (isset($state)) $props['state'] = $state;
-
+        $props = [];
+        if (isset($params[0])) $gigId = $params[0];
 
         $gig = $this->gigModel->viewGig($gigId);
+        if ($gig['success'] && $gig['data'] != false) {
 
-        if (isset($gig)) {
+            $props['gig'] = $gig['data'];
 
-            $farmerId = $gig['farmerId'];
-            Session::set([
-                'farmerId' => $farmerId,
-                'gigId' => $gigId
-            ]);
+            $farmerId = $gig['data']['farmerId'];
+            Session::set(['farmerId' => $farmerId, 'gigId' => $gigId]);
 
-            require(ROOT . 'Models/user.php');
-            $f = new User();
-            $farmer = $f->fetchBy($farmerId);
+            $farmer = $this->userModel->fetchBy($farmerId);
 
-            if (isset($farmer)) {
-                $props['farmer'] = $farmer;
+            if ($farmer['success']) {
+                $props['farmer'] = $farmer['data'];
             }
-
 
             $reviews = $this->reviewByInvestorModel->fetchAllByGig($gigId);
             if ($reviews['success']) {
@@ -80,11 +75,8 @@ class gigController extends Controller
 
                 $props['gigAvgStars'] = floatval($gigTotalStars / $count);
             }
-
-
-            $props['gig'] = $gig;
         } else {
-            $props['error'] = "no gig found";
+            $this->redirect('/error/pageNotFound');
         }
         $this->set($props);
         $this->render('index');

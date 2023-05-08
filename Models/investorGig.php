@@ -2,10 +2,24 @@
 
 class investorGig
 {
+    public function getfarmerIdByGigId($gigId)
+    {
+        try {
+            $sql = "SELECT farmerId FROM investor_gig WHERE gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId]);
+            $gig = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $gig];
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
+
+
     public function fetchAllActiveGigByInvestor($id)
     {
         try {
-            $sql = "SELECT * FROM investor_gig INNER JOIN gig ON investor_gig.gigId = gig.gigId WHERE investorId = :id AND investor_gig.status = 'ACTIVE' ORDER BY timestamp DESC";
+            $sql = "SELECT ig.gigId, ig.farmerId, g.title, g.city, g.thumbnail, u.firstName, u.lastName, u.image, u.city as FCity FROM investor_gig ig INNER JOIN gig g ON ig.gigId = g.gigId INNER JOIN user u ON ig.farmerId = u.uid WHERE ig.investorId = :id AND ig.status = 'ACTIVE' ORDER BY timestamp DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -167,11 +181,11 @@ class investorGig
             $sql = "INSERT INTO investor_gig (investorId, gigId, farmerId) VALUES (:investorId, :gigId, :farmerId)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
-            return true;
+            return ['success' => true, 'data' => true];
         } catch (PDOException $e) {
             echo $e->getMessage();
             die();
-            return false;
+            return ['success' => false, 'data' => $e->getMessage()];
         }
     }
 
@@ -195,6 +209,45 @@ class investorGig
             $sql = "SELECT count(*) as gigCount FROM investor_gig WHERE investorId = :investorId AND status = 'COMPLETED'";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['investorId' => $investorId]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $row];
+        } catch (PDOException $e) {
+            return ['success' => false, 'message' => $e->getMessage()];
+        }
+    }
+
+    public function getWorkedWith($uid)
+    {
+        try {
+            $sql = "SELECT COUNt(investorId) as investorCount FROM investor_gig WHERE farmerId = :uid";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['uid' => $uid]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $row];
+        } catch (PDOException $e) {
+            return ['success' => false, 'message' => $e->getMessage()];
+        }
+    }
+
+    public function getInvestmentsSumByFarmer($uid)
+    {
+        try {
+            $sql = "SELECT SUM(amount) as totalInvestment FROM investment WHERE farmerId = :uid";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['uid' => $uid]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $row];
+        } catch (PDOException $e) {
+            return ['success' => false, 'message' => $e->getMessage()];
+        }
+    }
+
+    public function getIdsByIGID($igId)
+    {
+        try {
+            $sql = "SELECT farmerId, gigId, investorId FROM investor_gig WHERE igId = :igId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['igId' => $igId]);
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             return ['success' => true, 'data' => $row];
         } catch (PDOException $e) {

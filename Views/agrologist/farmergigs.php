@@ -23,13 +23,23 @@
     require_once("navigator.php");
     ?>
     <div class="[ container ][ dashboard ]" container-type="dashboard-section">
-        <h1 class="[ page-heading-1 ]">
-            <?php echo $gigDetails[0]['firstName'] . " " . $gigDetails[0]['lastName'] ?>
-        </h1>
 
+
+        <div class="flex flex-row flex-sb-c">
+            <h1>
+                <?php echo $gigDetails[0]['firstName'] . " " . $gigDetails[0]['lastName'] ?>
+            </h1>
+            <form action="" method="post">
+                <div class="" style="width: 200px;">
+                    <a href="<?php echo URLROOT . '/agrologist/farmers/' .  $gigDetails[0]['farmerId']  . '/payments' ?>" class="btn uppercase fs-4 btn-primary" id="edit_details">Payment Details</a>
+                </div>
+            </form>
+            
+        </div>
+        <hr>
         <!-- <?php print_r($gigDetails) ?> -->
 
-        <div class="search">
+        <div class="search pt-1">
             <input type="text" placeholder="Search by: location/ category/ title/ time period" oninput="liveSearch()"
                 id="searchbox">
             <button type="button">
@@ -43,7 +53,7 @@
             if (isset($gigDetails)) {
                 // print_r($searchResult);
                 foreach ($gigDetails as $gigDetail) {
-                    $imageURL = UPLOADS . $gigDetail["image"];
+                    $imageURL = UPLOADS . $gigDetail["thumbnail"];
 
                     // echo $imageURL;
                     // die();
@@ -58,7 +68,7 @@
                             <div class="location_name">
 
                                 <p class="ml-1">
-                                    <?php echo ucwords($gigDetail['location']) ?>
+                                    <?php echo ucwords($gigDetail['city']) ?>
                                 </p>
                             </div>
                         </div>
@@ -72,7 +82,7 @@
                                     <?php echo ucwords($gigDetail['category']) ?>
                                 </p>
                                 <p>
-                                    <?php echo $gigDetail['timePeriod'] ?> days
+                                    <?php echo $gigDetail['cropCycle'] ?> days
                                 </p>
                             </div>
                         </div>
