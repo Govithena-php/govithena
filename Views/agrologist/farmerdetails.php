@@ -56,12 +56,20 @@
 
 
                         <div style="color: grey" class="pt-1">Images</div>
-
-                        <!-- <?php echo "<div>" . ucwords($week['fieldVisitDetails']) . "</div>"; ?> -->
+                        <!-- <div>
+                            <?php echo json_encode($week['image']) ?>
+                            <?php echo json_encode($week['thumbnail']) ?>
+                        </div> -->
                         <div class="details_img">
-                            <!-- <img src="<?php echo UPLOADS . $week['image']; ?>" alt="Hi" /> -->
-                            <!-- <img src="<?php echo UPLOADS . $week['image[1]']; ?>" alt="Hi" /> -->
-                            <img src="<?php echo UPLOADS . $week['thumbnail']; ?>" alt="Hi" />
+                            <ul>
+                            <?php if ($week['image'] != null) { ?>
+                                <li><img src="<?php echo UPLOADS . $week['image']; ?>" alt="image" /></li>
+                            <?php
+                            }
+                            ?>
+                            <!-- <img src="<?php echo UPLOADS . $week['image']; ?>" alt="image" /> -->
+                            <li><img src="<?php echo UPLOADS . $week['thumbnail']; ?>" alt="thumbnail" /></li>
+                        </ul>
                         </div>
                     </div>
 

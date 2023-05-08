@@ -175,6 +175,12 @@
   border: 1px solid #ddd; 
 }
 
+.details_img li {
+  float: left;
+  list-style: none;
+  /* padding-right:10px;  */
+}
+
 
 
 

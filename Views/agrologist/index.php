@@ -368,8 +368,12 @@
                                 ?>
 
                                 <tr>
-                                    <td><?php echo date('Y-m-d', strtotime($withdraw['withdrawalDate'])) ?></td>
-                                    <td><?php echo number_format($withdraw['withdrawal'], 2, '.', ',') ?></td>
+                                    <td>
+                                        <?php echo date('Y-m-d', strtotime($withdraw['withdrawalDate'])) ?>
+                                    </td>
+                                    <td>
+                                        <?php echo number_format($withdraw['withdrawal'], 2, '.', ',') ?>
+                                    </td>
                                 </tr>
                                 <?php
                             }
@@ -426,7 +430,7 @@
                     label: 'Gig count per month',
                     data: [<?php echo $gigCountFiveMonthsBefore[0]['gigCount'] ?>, <?php echo $gigCountFourMonthsBefore[0]['gigCount'] ?>, <?php echo $gigCountThreeMonthsBefore[0]['gigCount'] ?>, <?php echo $gigCountTwoMonthsBefore[0]['gigCount'] ?>, <?php echo $gigCountLastMonth[0]['gigCount'] ?>, <?php echo $gigCount[0]['gigCount'] ?>],
                     fill: false,
-                    borderColor: 'rgb(255, 99, 132)',
+                    backgroundColor: 'rgb(255, 99, 132)',
                     tension: 0.1,
                     yAxisID: 'y'
 
@@ -435,16 +439,16 @@
                     label: 'No of Farmers per month',
                     data: [<?php echo $farmerCountFiveMonthsBefore[0]['farmerCount'] ?>, <?php echo $farmerCountFourMonthsBefore[0]['farmerCount'] ?>, <?php echo $farmerCountThreeMonthsBefore[0]['farmerCount'] ?>, <?php echo $farmerCountTwoMonthsBefore[0]['farmerCount'] ?>, <?php echo $farmerCountLastMonh[0]['farmerCount'] ?>, <?php echo $farmerCount[0]['farmerCount'] ?>],
                     fill: false,
-                    borderColor: 'rgb(75, 192, 192)',
+                    backgroundColor: 'rgb(75, 192, 192)',
                     tension: 0.1,
-                    yAxisID: 'y1'
+                    yAxisID: 'y'
 
                 }
             ],
         };
 
         const config = {
-            type: 'line',
+            type: 'bar',
             data: data,
             options: {
                 responsive: true,
@@ -464,15 +468,16 @@
                         type: 'linear',
                         display: true,
                         position: 'left',
+                        text: 'Gig count',
                     },
-                    y1: {
-                        type: 'linear',
-                        display: true,
-                        position: 'right',
-                        grid: {
-                            drawOnChartArea: true,
-                        },
-                    },
+                    // y: {
+                    //     type: 'linear',
+                    //     display: true,
+                    //     position: 'right',
+                    //     grid: {
+                    //         drawOnChartArea: true,
+                    //     },
+                    // },
                 }
             },
         };

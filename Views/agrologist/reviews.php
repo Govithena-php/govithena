@@ -20,6 +20,12 @@
     <?php
     $active = "farmers";
     require_once("navigator.php");
+
+    if (Session::has('review_agrologist_alert')) {
+        $alert = Session::pop('review_agrologist_alert');
+        $alert->show_default_alert();
+    }
+    
     ?>
     <div class="[ container ] " container-type="dashboard-section">
         <?php $farmerName = $farmerName[0]['fullName'] ?>
@@ -57,20 +63,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- <?php
-            if (!empty($_POST['q1'])) {
-                // Counting number of checked checkboxes.
-                $checked_count = count($_POST['q1']);
-                echo "You have selected following " . $checked_count . " option(s): <br/>";
-                // Loop to store and display values of individual checked checkbox.
-                foreach ($_POST['check_list'] as $selected) {
-                    echo "<p>" . $selected . "</p>";
-                }
-            } else {
-                echo "<b>Please Select at least One Option.</b>";
-            }
-            ?> -->
             
             <div class="[ question__wrapper rating__question ]">
                 <div class="[ counter ]"></div>

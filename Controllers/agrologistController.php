@@ -245,9 +245,17 @@ class agrologistController extends Controller
                     'q8' => new Input(POST, 'q8'),
                     'q9' => new Input(POST, 'q9'),
                 ];
-                var_dump($data);die;
+                // var_dump($data);die;
 
-                $agr->save($data);
+                $review = $agr->save($data);
+
+                if ($review) {
+                    $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully updated!.');
+
+                } else {
+                    $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong.');
+                }
+                Session::set(['review_agrologist_alert' => $alert]);
 
                 echo json_encode($farmerName);
 
