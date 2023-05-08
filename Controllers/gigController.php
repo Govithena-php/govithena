@@ -96,10 +96,10 @@ class gigController extends Controller
             $offer = new Input(POST, 'offerAmount');
 
             $result = $this->requestModel->createFarmerRequest([
+                'requestId' => $reqId,
                 'gigId' => $gigId,
-                'farmerId' => $farmerId,
                 'investorId' => $this->currentUser->getUid(),
-                'state' => 'PENDING',
+                'status' => 'PENDING',
                 'offer' => $offer,
                 'message' => $message
             ]);

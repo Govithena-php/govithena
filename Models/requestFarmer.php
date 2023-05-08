@@ -6,7 +6,7 @@ class requestFarmer extends Model
     public function getRequestsByInvestor($id)
     {
         try {
-            $sql = "SELECT farmer_request.requestId, gig.gigId, gig.title, gig.thumbnail, gig.category, gig.subCategory, gig.cropCycle, gig.city, gig.district, user.uid, user.firstName, user.lastName, DATE(farmer_request.requestedDate) as requestedDate, farmer_request.offer, farmer_request.state, farmer_request.message FROM farmer_request INNER JOIN gig ON farmer_request.gigId = gig.gigId INNER JOIN user ON farmer_request.farmerId = user.uid WHERE investorId = :id ORDER BY requestedDate DESC";
+            $sql = "SELECT gig_request.requestId, gig.gigId, gig.title, gig.thumbnail, gig.category, gig.subCategory, gig.cropCycle, gig.city, gig.district, user.uid, user.firstName, user.lastName, DATE(gig_request.requestedDate) as requestedDate, gig_request.offer, gig_request.status, gig_request.message FROM gig_request INNER JOIN gig ON gig_request.gigId = gig.gigId INNER JOIN user ON gig_request.farmerId = user.uid WHERE investorId = :id ORDER BY requestedDate DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -22,7 +22,7 @@ class requestFarmer extends Model
     function getFarmerRequest()
     {
         try {
-            $sql = "SELECT * FROM farmer_request WHERE farmerId = :farmerId";
+            $sql = "SELECT * FROM gig_request WHERE farmerId = :farmerId";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['farmerId' => Session::get('uid')]);
             $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -37,13 +37,14 @@ class requestFarmer extends Model
     function createFarmerRequest($data)
     {
         try {
-            $sql = "INSERT INTO farmer_request (gigId, farmerId, investorId, state, offer, message) VALUES (:gigId, :farmerId, :investorId, :state, :offer, :message)";
+            $sql = "INSERT INTO gig_request (requestId, gigId, farmerId, investorId, status, offer, message) VALUES (:requestId, :gigId, :farmerId, :investorId, :status, :offer, :message)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
+                'requestId' => $data['requestId'],
                 'gigId' => $data['gigId'],
                 'farmerId' => $data['farmerId'],
                 'investorId' => $data['investorId'],
-                'state' => $data['state'],
+                'status' => $data['status'],
                 'offer' => $data['offer'],
                 'message' => $data['message']
             ]);
@@ -58,7 +59,7 @@ class requestFarmer extends Model
     public function getRequestById($id)
     {
         try {
-            $sql = "SELECT * FROM farmer_request INNER JOIN gig ON farmer_request.gigId = gig.gigId INNER JOIN user ON farmer_request.farmerId = user.uid WHERE farmer_request.requestId = :id";
+            $sql = "SELECT * FROM gig_request INNER JOIN gig ON gig_request.gigId = gig.gigId INNER JOIN user ON gig_request.farmerId = user.uid WHERE gig_request.requestId = :id";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -71,7 +72,7 @@ class requestFarmer extends Model
     public function updateStatus($id, $status)
     {
         try {
-            $sql = "UPDATE farmer_request SET state = :status WHERE requestId = :id";
+            $sql = "UPDATE gig_request SET status = :status WHERE requestId = :id";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id, 'status' => $status]);
             return true;
@@ -85,7 +86,7 @@ class requestFarmer extends Model
     public function delete($id)
     {
         try {
-            $sql = "DELETE FROM farmer_request WHERE requestId = :id";
+            $sql = "DELETE FROM gig_request WHERE requestId = :id";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             return ['success' => true];
@@ -98,7 +99,7 @@ class requestFarmer extends Model
     public function resend($data)
     {
         try {
-            $sql = "UPDATE farmer_request SET state = 'PENDING', offer = :offer, message = :message WHERE requestId = :id";
+            $sql = "UPDATE gig_request SET status = 'PENDING', offer = :offer, message = :message WHERE requestId = :id";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
                 'id' => $data['id'],
