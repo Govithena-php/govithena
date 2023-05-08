@@ -131,6 +131,7 @@ class Gig extends Model
             return ['success' => false, 'error' => $e->getMessage()];
         }
     }
+
     public function viewProimg($progressId)
     {
         try {
@@ -149,8 +150,6 @@ class Gig extends Model
     public function viewPro($gigId)
     {
         try {
-            // $sql = "SELECT gig_progress.progressId, gig_progress.userId, gig_progress.gigId, gig_progress.subject, gig_progress.description, gig_progress_image.imageName FROM gig_progress RIGHT JOIN gig_progress_image ON gig_progress.progressId = gig_progress_image.progressId WHERE gigId = :gigId";
-            // SELECT gig_progress.progressId, gig_progress.userId, gig_progress.gigId, gig_progress.subject, gig_progress.description, gig_progress_image.imageName FROM gig_progress RIGHT JOIN gig_progress_image ON gig_progress.progressId = gig_progress_image.progressId WHERE gigId = :gigId
             $sql = "SELECT * FROM gig_progress WHERE gigId = :gigId ";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['gigId' => $gigId]);
@@ -163,19 +162,24 @@ class Gig extends Model
         }
     }
 
-
-
-    public function updateGigStatusToReserved($id)
+    public function ReserveGig($data)
     {
         try {
-            $sql = "UPDATE gig SET status = 'RESERVED' WHERE gigId = :id";
+            $sql = "UPDATE gig SET status = 'RESERVED', investorId = :investorId, reservedDate = CURRENT_TIMESTAMP WHERE gigId = :id";
             $stmt = Database::getBdd()->prepare($sql);
-            $stmt->execute(['id' => $id]);
-            return ['success' => true];
+            $stmt->execute(
+                [
+                    'id' => $data['gigId'],
+                    'investorId' => $data['investorId']
+                ]
+            );
+            return ['success' => true, 'data' => true];
         } catch (PDOException $e) {
             return ['success' => false, 'error' => $e->getMessage()];
         }
     }
+
+
 
 
     public function fetchGigImages($gigId)
@@ -230,6 +234,233 @@ class Gig extends Model
             return ['success' => false, 'error' => $e->getMessage()];
         } catch (PDOException $e) {
             return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
+
+    //gigs page =================================================================
+
+    public function countActiveGigByInvestor($investorId)
+    {
+        try {
+            $sql = "SELECT COUNT(*) as count FROM gig WHERE investorId = :investorId AND status = 'RESERVED' OR status = 'UNDER_COMPLETION' OR status='UNDER_REVIEW'";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['investorId' => $investorId]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $row];
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function countCompletedGigByInvestor($investorId)
+    {
+        try {
+            $sql = "SELECT COUNT(*) as count FROM gig WHERE investorId = :investorId AND status = 'COMPLETED'";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['investorId' => $investorId]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $row];
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function fetchAllReservedGigByInvestor($id)
+    {
+        try {
+            $sql = "SELECT g.gigId, g.farmerId, g.title, g.city, g.cropCycle, g.thumbnail, u.firstName, u.lastName, u.image, u.city as FCity, DATE(g.reservedDate) as reservedDate, g.status FROM gig g INNER JOIN user u ON g.farmerId = u.uid WHERE g.investorId = :id AND g.status = 'RESERVED' OR g.status = 'UNDER_COMPLETION'  OR g.status = 'UNDER_REVIEW' ORDER BY g.reservedDate DESC";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['id' => $id]);
+            $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $row];
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return ['success' => true, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function fetchAllToReviewGigByInvestor($id)
+    {
+        try {
+            $sql = "SELECT g.gigId, g.title, g.city, g.thumbnail, g.farmerId, u.firstName, u.lastName, u.image FROM gig g INNER JOIN user u ON g.farmerId = u.uid WHERE g.investorId = :id AND g.status = 'UNDER_REVIEW' ORDER BY g.reservedDate DESC";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['id' => $id]);
+            $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $row];
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return ['success' => true, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function getCompletedGigsByInvestor($id)
+    {
+        try {
+            $sql = "SELECT g.gigId, g.title, g.city, g.thumbnail, g.farmerId, u.firstName, u.lastName, u.image FROM gig g INNER JOIN user u ON g.farmerId = u.uid WHERE g.investorId = :id AND g.status = 'COMPLETED' ORDER BY g.reservedDate DESC";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['id' => $id]);
+            $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $row];
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return ['success' => true, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function getfarmerIdByGigId($gigId)
+    {
+        try {
+            $sql = "SELECT farmerId FROM gig WHERE gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId]);
+            $gig = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $gig];
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
+
+    public function getReservedGigCount($investorId)
+    {
+        try {
+            $sql = "SELECT count(*) as gigCount FROM gig WHERE investorId = :investorId AND status = 'RESERVED' OR status='UNDER_COMPLETION'";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['investorId' => $investorId]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $row];
+        } catch (PDOException $e) {
+            return ['success' => false, 'message' => $e->getMessage()];
+        }
+    }
+
+    public function getCompletedGigCount($investorId)
+    {
+        try {
+            $sql = "SELECT count(*) as gigCount FROM gig WHERE investorId = :investorId AND status = 'COMPLETED' OR status = 'UNDER_REVIEW'";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['investorId' => $investorId]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $row];
+        } catch (PDOException $e) {
+            return ['success' => false, 'message' => $e->getMessage()];
+        }
+    }
+
+    public function getStartedDate($gigId)
+    {
+        try {
+            $sql = "SELECT DATE(reservedDate) as startDate FROM gig WHERE gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId]);
+            $res = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($res) {
+                return ['success' => true, 'data' => $res];
+            } else {
+                return ['success' => false, 'data' => 'No investment found'];
+            }
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function markAsCompleted($gigId)
+    {
+        try {
+            $sql = "UPDATE gig SET status = 'COMPLETED' WHERE gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId]);
+            return ['success' => true];
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function markAsUnderReview($gigId)
+    {
+        try {
+            $sql = "UPDATE gig SET status = 'UNDER_REVIEW' WHERE gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId]);
+            return ['success' => true, 'data' => true];
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function checkBeforeReview($gigId, $userId)
+    {
+        try {
+            $sql = "SELECT farmerId FROM gig WHERE gigId = :gigId AND investorId = :userId AND status = 'UNDER_REVIEW'";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId, 'userId' => $userId]);
+            $res = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($res) {
+                return ['success' => true, 'data' => $res];
+            } else {
+                return ['success' => false, 'data' => false];
+            }
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function checkGigBelongToInvestor($gigId, $investorId)
+    {
+        try {
+            $sql = "SELECT gigId, title, city, thumbnail FROM gig WHERE gigId = :gigId AND investorId = :investorId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId, 'investorId' => $investorId]);
+            $res = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($res) {
+                return ['success' => true, 'data' => $res];
+            } else {
+                return ['success' => true, 'data' => false];
+            }
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function getCompletedGigsByFarmer($id)
+    {
+        try {
+            $sql = "SELECT ig.investorId, ig.gigId, ig.timestamp, gig.title, gig.category, gig.thumbnail as gimage, gig.city as gcity, user.firstName, user.lastName, user.city as ucity, user.image as uimage FROM investor_gig as ig INNER JOIN gig ON ig.gigId = gig.gigId INNER JOIN user ON ig.investorId = user.uid WHERE ig.farmerId = :id AND ig.status='COMPLETED' ORDER BY timestamp DESC";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['id' => $id]);
+            $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $row];
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function getWorkedWith($uid)
+    {
+        try {
+            $sql = "SELECT COUNt(investorId) as investorCount FROM gig WHERE farmerId = :uid";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['uid' => $uid]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $row];
+        } catch (PDOException $e) {
+            return ['success' => false, 'message' => $e->getMessage()];
+        }
+    }
+
+    public function getInvestmentsSumByFarmer($uid)
+    {
+        try {
+            $sql = "SELECT SUM(amount) as totalInvestment FROM investment WHERE farmerId = :uid";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['uid' => $uid]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $row];
+        } catch (PDOException $e) {
+            return ['success' => false, 'message' => $e->getMessage()];
         }
     }
 }

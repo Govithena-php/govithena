@@ -35,31 +35,54 @@
         <form action="<?php echo URLROOT ?>/dashboard/newInvestment" method="post">
             <div class="top">
                 <div class="input__control">
-                    <label for="gig">Select the gig you wish to make an investment</label>
 
-                    <div class="custom__select">
-                        <input type="hidden" name="gigId" />
-                        <button type="button">Select the gig</button>
-                        <div class="custom__options">
-                            <?php
-                            foreach ($investmentGigs as $gig) {
-                            ?>
-                                <div class="custom__option" Value="<?php echo $gig['gigId'] ?>" Label="<?php echo $gig['title'] ?>">
-                                    <div class="select__data_box">
-                                        <div class="img">
-                                            <img width="30" src="<?php echo UPLOADS . $gig['thumbnail'] ?>" alt="">
-                                        </div>
-                                        <div>
-                                            <h4><?php echo $gig['title'] ?></h4>
-                                            <p><?php echo $gig['city'] ?></p>
+                    <?php
+                    if (isset($oneGigId)) {
+                    ?>
+                        <!-- <label for="gig">Selected gig</label> -->
+                        <div class="gig__card">
+                            <div class="img">
+                                <img src="<?php echo UPLOADS . $oneGigId['thumbnail'] ?>" alt="">
+                            </div>
+                            <div class="gig__details">
+                                <input type="hidden" name="gigId" value="<?php echo $oneGigId['gigId'] ?>" />
+                                <h4><?php echo $oneGigId['title'] ?></h4>
+                                <p><?php echo $oneGigId['city'] ?></p>
+                            </div>
+                        </div>
+
+                    <?php
+                    } else {
+                    ?>
+                        <label for="gig">Select the gig you wish to make an investment</label>
+                        <div class="custom__select">
+                            <input type="hidden" name="gigId" />
+                            <button type="button">Select the gig</button>
+                            <div class="custom__options">
+                                <?php
+                                foreach ($investmentGigs as $gig) {
+                                ?>
+                                    <div class="custom__option" Value="<?php echo $gig['gigId'] ?>" Label="<?php echo $gig['title'] ?>">
+                                        <div class="select__data_box">
+                                            <div class="img">
+                                                <img width="30" src="<?php echo UPLOADS . $gig['thumbnail'] ?>" alt="">
+                                            </div>
+                                            <div>
+                                                <h4><?php echo $gig['title'] ?></h4>
+                                                <p><?php echo $gig['city'] ?></p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php
-                            }
-                            ?>
+                                <?php
+                                }
+                                ?>
+                            </div>
                         </div>
-                    </div>
+
+                    <?php
+                    }
+                    ?>
+
                     <br>
                     <div class="input__control">
                         <label for="amount">Amount (LKR)</label>

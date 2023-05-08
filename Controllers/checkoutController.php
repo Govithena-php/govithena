@@ -6,7 +6,7 @@ class checkoutController extends Controller
 {
     private $investorGigModel;
     private $investmentModel;
-    private $requestFarmerModel;
+    private $gigRequestModel;
     private $currentUser;
     private $gigModel;
 
@@ -32,7 +32,7 @@ class checkoutController extends Controller
         $this->currentUser = Session::get('user');
         $this->investorGigModel = $this->model('investorGig');
         $this->investmentModel = $this->model('investment');
-        $this->requestFarmerModel = $this->model('requestFarmer');
+        $this->gigRequestModel = $this->model('gigRequest');
         $this->gigModel = $this->model('gig');
     }
 
@@ -53,7 +53,7 @@ class checkoutController extends Controller
         // echo phpversion();
         if (isset($_POST['pay'])) {
             $id = $_POST['pay'];
-            $res = $this->requestFarmerModel->getRequestById($id);
+            $res = $this->gigRequestModel->getRequestById($id);
 
             if (isset($res)) {
 
@@ -104,18 +104,16 @@ class checkoutController extends Controller
 
             $id = new Input(POST, 'pay');
 
-            $request = $this->requestFarmerModel->getRequestById($id);
+            $request = $this->gigRequestModel->getRequestById($id);
             if ($request['success']) {
                 $request = $request['data'];
             } else {
                 $this->redirect('/error/somethingWentWrong');
             }
 
-
-            $response = $this->investorGigModel->add([
-                'investorId' => $this->currentUser->getUid(),
+            $response = $this->gigModel->ReserveGig([
                 'gigId' => $request['gigId'],
-                'farmerId' => $request['farmerId'],
+                'investorId' => $this->currentUser->getUid(),
             ]);
 
             if ($response['success']) {
@@ -125,12 +123,11 @@ class checkoutController extends Controller
                     'gigId' => $request['gigId'],
                     'farmerId' => $request['farmerId'],
                     'amount' => $request['capital'],
+                    'description' => "Initial Investment",
                 ]);
 
                 if ($response['success']) {
-
-                    $this->requestFarmerModel->updateStatus($id, 'PAID');
-                    $this->gigModel->updateGigStatusToReserved($request['gigId']);
+                    $this->gigRequestModel->updateStatus($id, 'PAID');
                     $this->redirect('/dashboard');
                 } else {
                     $this->redirect('/error/someThingWentWrong');
@@ -148,7 +145,7 @@ class checkoutController extends Controller
 
         if (!empty($params)) $reId = $params[0];
 
-        $response = $this->requestFarmerModel->getRequestById($reId);
+        $response = $this->gigRequestModel->getRequestById($reId);
         if ($response['success']) {
             $props['res'] = $response['data'];
             $this->set($props);
