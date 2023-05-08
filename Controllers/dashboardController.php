@@ -440,9 +440,23 @@ class dashboardController extends Controller
         $this->render('investments');
     }
 
-    public function newInvestment()
+    public function newInvestment($params = [])
     {
         $props = [];
+
+        if (isset($params[0]) && !empty($params[0])) {
+            $gigId = $params[0];
+            $response = $this->gigModel->checkGigBelongToInvestor($gigId, $this->currentUser->getUid());
+            if ($response['success']) {
+                if ($response['data']) {
+                    $props['oneGigId'] = $response['data'];
+                } else {
+                    $this->redirect('/error/pageNotFound');
+                }
+            } else {
+                $this->redirect('/error/pageNotFound');
+            }
+        }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 

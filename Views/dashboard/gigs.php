@@ -67,7 +67,7 @@
                 <div class="[ grid ][ cards ]" sm="1" md="2" gap="1">
                     <div class="[ card ]">
                         <div class="[ icon ]">
-                            <i class="bi bi-bell"></i>
+                            <i class="bi bi-activity"></i>
                         </div>
                         <div class="[ details ]">
                             <h2><?php
@@ -79,7 +79,7 @@
                     </div>
                     <div class="[ card ]">
                         <div class="[ icon ]">
-                            <i class="bi bi-bell"></i>
+                            <i class="bi bi-award"></i>
                         </div>
                         <div class="[ details ]">
                             <h2><?php
@@ -91,7 +91,7 @@
                     </div>
                     <div class="[ card ]">
                         <div class="[ icon ]">
-                            <i class="bi bi-bell"></i>
+                            <i class="bi bi-piggy-bank"></i>
                         </div>
                         <div class="[ details ]">
                             <h2><small>LKR</small><br>
@@ -104,7 +104,7 @@
                     </div>
                     <div class="[ card ]">
                         <div class="[ icon ]">
-                            <i class="bi bi-bell"></i>
+                            <i class="bi bi-currency-dollar"></i>
                         </div>
                         <div class="[ details ]">
                             <h2><small>LKR</small><br>
@@ -137,11 +137,23 @@
                     foreach ($recentActivities as $ra) {
                 ?>
                         <div class="[ activity ]">
-                            <!-- <div class="[ icon ]">
-                                <i class="bi bi-bell"></i>
-                            </div> -->
                             <div class="[ details ]">
-                                <h5><?php echo ucwords($ra['type']) ?></h5>
+                                <div class="icon_and_type">
+                                    <div class="[ icon ]">
+                                        <?php
+                                        if ($ra['type'] == 'INVESTMENT') {
+                                            echo "<i class='bi bi-coin'></i>";
+                                        } else if ($ra['type'] == 'PROGRESS') {
+                                            echo "<i class='bi bi-graph-up-arrow'></i>";
+                                        } else if ($ra['type'] == 'FIELD_VISIT') {
+                                            echo "<i class='bi bi-tree'></i>";
+                                        } else {
+                                            echo "<i class='bi bi-bell'></i>";
+                                        }
+                                        ?>
+                                    </div>
+                                    <h5><?php echo str_replace("_", " ", ucwords($ra['type'])) ?></h5>
+                                </div>
                                 <?php
                                 if ($ra['type'] == 'INVESTMENT') {
                                 ?>
@@ -149,11 +161,11 @@
                                 <?php
                                 } else if ($ra['type'] == 'PROGRESS') {
                                 ?>
-                                    <p class="limit-text-3">Progress of <strong><?php echo $gigTitles[$ra['gigId']] ?> </strong>has been updated</p>
+                                    <p class="limit-text-3">Progress of <strong><?php echo $gigTitles[$ra['gigId']] ?> </strong>has been updated.</p>
                                 <?php
                                 } else if ($ra['type'] == 'FIELD_VISIT') {
                                 ?>
-                                    <p class="limit-text-3">Field visit details of <strong><?php echo $gigTitles[$ra['gigId']] ?> </strong>has been updated</p>
+                                    <p class="limit-text-3">Field visit details of <strong><?php echo $gigTitles[$ra['gigId']] ?> </strong>has been updated.</p>
                                 <?php
                                 }
 

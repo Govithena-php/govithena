@@ -87,7 +87,7 @@
                     <div class="[ grid ]" sm="1" md="2" gap="1">
                         <div class="[ card ]">
                             <div class="[ icon ]">
-                                <i class="bi bi-bell"></i>
+                                <i class="bi bi-coin"></i>
                             </div>
                             <div class="[ details ]">
                                 <h2><small>LKR</small><br>
@@ -100,7 +100,7 @@
                         </div>
                         <div class="[ card ]">
                             <div class="[ icon ]">
-                                <i class="bi bi-bell"></i>
+                                <i class="bi bi-currency-dollar"></i>
                             </div>
                             <div class="[ details ]">
                                 <h2><?php echo $gig['profitMargin'] ?> %</h2>
@@ -109,7 +109,7 @@
                         </div>
                         <div class="[ card ]">
                             <div class="[ icon ]">
-                                <i class="bi bi-bell"></i>
+                                <i class="bi bi-calendar2-week"></i>
                             </div>
                             <div class="[ details ]">
                                 <h2><?php
@@ -121,7 +121,7 @@
                         </div>
                         <div class="[ card ]">
                             <div class="[ icon ]">
-                                <i class="bi bi-bell"></i>
+                                <i class="bi bi-tree"></i>
                             </div>
                             <div class="[ details ]">
                                 <h2><?php echo $gig['landArea'] ?> Hectare</h2>
@@ -167,7 +167,7 @@
                             <i class="bi bi-bell"></i>
                         </div>
                         <div class="[ details grow ]">
-                            <h3><?php echo $latestAr['type'] ?></h3>
+                            <h3><?php echo str_replace("_", " ", $latestAr['type']) ?></h3>
                             <?php
                             if ($latestAr['type'] == 'INVESTMENT') {
                             ?>
@@ -201,11 +201,23 @@
                         foreach ($recentActivities as $ra) {
                     ?>
                             <div class="[ activity ]">
-                                <!-- <div class="[ icon ]">
-                                <i class="bi bi-bell"></i>
-                            </div> -->
                                 <div class="[ details ]">
-                                    <h5><?php echo ucwords($ra['type']) ?></h5>
+                                    <div class="icon_and_type">
+                                        <div class="[ icon ]">
+                                            <?php
+                                            if ($ra['type'] == 'INVESTMENT') {
+                                                echo "<i class='bi bi-coin'></i>";
+                                            } else if ($ra['type'] == 'PROGRESS') {
+                                                echo "<i class='bi bi-graph-up-arrow'></i>";
+                                            } else if ($ra['type'] == 'FIELD_VISIT') {
+                                                echo "<i class='bi bi-tree'></i>";
+                                            } else {
+                                                echo "<i class='bi bi-bell'></i>";
+                                            }
+                                            ?>
+                                        </div>
+                                        <h5><?php echo str_replace("_", " ", ucwords($ra['type'])) ?></h5>
+                                    </div>
                                     <?php
                                     if ($ra['type'] == 'INVESTMENT') {
                                     ?>
@@ -220,13 +232,13 @@
                                         <p class="">New Field visit record has been created.</p>
                                     <?php
                                     }
+
                                     ?>
                                     <div class="[ time ]">
                                         <p><?php echo $ra['timestamp'] ?></p>
                                     </div>
                                 </div>
                             </div>
-
                     <?php
                         }
                     }
@@ -491,9 +503,20 @@
 
                 <div class="tab" id="4">
                     <div class="[ requests__continer ]">
-                        <div class="[ caption ]">
-                            <h2>Investments</h2>
-                            <p>Get the most out of your data with our analysis section - the ultimate tool for unlocking valuable insights and making smarter decisions.</p>
+                        <div class="flex-row-space-between align-items-end">
+                            <div class="[ caption ]">
+                                <h2>Investments</h2>
+                                <p>Get the most out of your data with our analysis section - the ultimate tool for unlocking valuable insights and making smarter decisions.</p>
+                            </div>
+                            <?php
+                            if ($gig['status'] == 'RESERVED') {
+                            ?>
+                                <div class="inv__new">
+                                    <a href="<?php echo URLROOT ?>/dashboard/newInvestment/<?php echo $gig['gigId'] ?>" class="[ button__primary ]">Invest More</a>
+                                </div>
+                            <?php
+                            }
+                            ?>
                         </div>
                         <?php
                         if (!isset($investments)) {

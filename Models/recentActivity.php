@@ -5,7 +5,7 @@ class recentActivity
     public function getRecentActivityByInvestor($id)
     {
         try {
-            $sql = "SELECT * FROM recent_activity_investor WHERE investorId = :id ORDER BY timestamp DESC LIMIT 5";
+            $sql = "SELECT * FROM recent_activity_investor WHERE investorId = :id ORDER BY timestamp DESC LIMIT 10";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -21,7 +21,7 @@ class recentActivity
     public function getRecentActivityByGigId($id)
     {
         try {
-            $sql = "SELECT * FROM recent_activity_investor WHERE gigId = :id ORDER BY timestamp DESC LIMIT 7";
+            $sql = "SELECT * FROM recent_activity_investor WHERE gigId = :id ORDER BY timestamp DESC LIMIT 10";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);

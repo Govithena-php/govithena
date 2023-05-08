@@ -406,4 +406,21 @@ class Gig extends Model
             return ['success' => false, 'data' => $e->getMessage()];
         }
     }
+
+    public function checkGigBelongToInvestor($gigId, $investorId)
+    {
+        try {
+            $sql = "SELECT gigId, title, city, thumbnail FROM gig WHERE gigId = :gigId AND investorId = :investorId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId, 'investorId' => $investorId]);
+            $res = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($res) {
+                return ['success' => true, 'data' => $res];
+            } else {
+                return ['success' => true, 'data' => false];
+            }
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
 }
