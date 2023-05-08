@@ -13,7 +13,7 @@ class gigController extends Controller
         $this->currentUser = Session::get('user');
 
         $this->gigModel = $this->model('gig');
-        $this->requestModel = $this->model('requestFarmer');
+        $this->requestModel = $this->model('gigRequest');
         $this->reviewByInvestorModel = $this->model('reviewByInvestor');
         $this->userModel = $this->model('user');
 
@@ -87,7 +87,6 @@ class gigController extends Controller
     {
         $farmerId = Session::pop('farmerId');
         $gigId = Session::pop('gigId');
-
 
         if (isset($_POST['offerAmount']) && isset($_POST['message'])) {
 

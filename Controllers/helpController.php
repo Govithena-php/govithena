@@ -12,6 +12,7 @@ class helpController extends Controller
 
     public function index()
     {
+        
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $question = new Input(POST, 'question');
 

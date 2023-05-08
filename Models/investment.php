@@ -35,7 +35,7 @@ class Investment extends Model
     public function add($data)
     {
         try {
-            $sql = "INSERT INTO investment (id, investorId, gigId, farmerId, amount) VALUES (:id, :investorId, :gigId, :farmerId, :amount)";
+            $sql = "INSERT INTO investment (id, investorId, gigId, farmerId, amount, description) VALUES (:id, :investorId, :gigId, :farmerId, :amount, :description)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
             return ['success' => true, 'data' => true];
@@ -137,6 +137,24 @@ class Investment extends Model
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
             return ['success' => true, 'data' => true];
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+
+    public function getTotalInvestmentForGigByInvestor($investorId, $gigId)
+    {
+        try {
+            $sql = "SELECT sum(amount) as totalInvestment FROM investment WHERE investorId = :investorId AND gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['investorId' => $investorId, 'gigId' => $gigId]);
+            $res = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($res) {
+                return ['success' => true, 'data' => $res];
+            } else {
+                return ['success' => false, 'data' => 'No investment found'];
+            }
         } catch (PDOException $e) {
             return ['success' => false, 'data' => $e->getMessage()];
         }

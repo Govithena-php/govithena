@@ -13,8 +13,21 @@ class FieldVisit extends Model
             if ($fieldVisits) {
                 return ['success' => true, 'data' => $fieldVisits];
             } else {
-                return ['success' => false, 'data' => null];
+                    return ['success' => false, 'data' => null];
             }
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function countByGigId($gigId)
+    {
+        try {
+            $sql = "SELECT COUNT(visitId) as count FROM field_visit WHERE gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId]);
+            $count = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $count];
         } catch (PDOException $e) {
             return ['success' => false, 'data' => $e->getMessage()];
         }

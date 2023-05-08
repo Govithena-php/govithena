@@ -428,6 +428,77 @@
     </script>
     <script>
 
+        const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+        const d = new Date();
+        let sixth = month[(d.getMonth() + 12) % 12];
+        let fifth = month[(d.getMonth() - 1 + 12) % 12];
+        let fouth = month[(d.getMonth() - 2 + 12) % 12];
+        let third = month[(d.getMonth() - 3 + 12) % 12];
+        let second = month[(d.getMonth() - 4 + 12) % 12];
+        let first = month[(d.getMonth() - 5 + 12) % 12];
+
+        const data = {
+            labels: [first, second, third, fouth, fifth, sixth],
+            datasets: [
+                {
+                    label: 'Gig count per month',
+                    data: [<?php echo $gigCountFiveMonthsBefore[0]['gigCount'] ?>, <?php echo $gigCountFourMonthsBefore[0]['gigCount'] ?>, <?php echo $gigCountThreeMonthsBefore[0]['gigCount'] ?>, <?php echo $gigCountTwoMonthsBefore[0]['gigCount'] ?>, <?php echo $gigCountLastMonth[0]['gigCount'] ?>, <?php echo $gigCount[0]['gigCount'] ?>],
+                    fill: false,
+                    borderColor: 'rgb(255, 99, 132)',
+                    tension: 0.1,
+                    yAxisID: 'y'
+
+                },
+                {
+                    label: 'No of Farmers per month',
+                    data: [<?php echo $farmerCountFiveMonthsBefore[0]['farmerCount'] ?>, <?php echo $farmerCountFourMonthsBefore[0]['farmerCount'] ?>, <?php echo $farmerCountThreeMonthsBefore[0]['farmerCount'] ?>, <?php echo $farmerCountTwoMonthsBefore[0]['farmerCount'] ?>, <?php echo $farmerCountLastMonh[0]['farmerCount'] ?>, <?php echo $farmerCount[0]['farmerCount'] ?>],
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1,
+                    yAxisID: 'y1'
+
+                }
+            ],
+        };
+
+        const config = {
+            type: 'line',
+            data: data,
+            options: {
+                responsive: true,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                stacked: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Chart.js Line Chart - Multi Axis'
+                    }
+                },
+                scales: {
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        grid: {
+                            drawOnChartArea: true,
+                        },
+                    },
+                }
+            },
+        };
+        const ctx = document.getElementById('myChart');
+        new Chart(ctx, config);
+
+
     </script>
 
 </body>

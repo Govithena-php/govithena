@@ -1,12 +1,12 @@
 <?php
 
-class requestFarmer extends Model
+class gigRequest extends Model
 {
 
     public function getRequestsByInvestor($id)
     {
         try {
-            $sql = "SELECT gig_request.requestId, gig.gigId, gig.title, gig.thumbnail, gig.category, gig.subCategory, gig.cropCycle, gig.city, gig.district, user.uid, user.firstName, user.lastName, DATE(gig_request.requestedDate) as requestedDate, gig_request.offer, gig_request.status, gig_request.message FROM gig_request INNER JOIN gig ON gig_request.gigId = gig.gigId INNER JOIN user ON gig_request.farmerId = user.uid WHERE investorId = :id ORDER BY requestedDate DESC";
+            $sql = "SELECT gig_request.requestId, gig.gigId, gig.title, gig.thumbnail, gig.category, gig.subCategory, gig.cropCycle, gig.city, gig.district, user.uid, user.firstName, user.lastName, DATE(gig_request.requestedDate) as requestedDate, gig_request.offer, gig_request.status, gig_request.message FROM gig_request INNER JOIN gig ON gig_request.gigId = gig.gigId INNER JOIN user ON gig_request.farmerId = user.uid WHERE gig_request.investorId = :id ORDER BY requestedDate DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $row = $stmt->fetchAll(PDO::FETCH_ASSOC);

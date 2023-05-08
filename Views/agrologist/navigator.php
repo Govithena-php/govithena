@@ -218,4 +218,4 @@ function highlight($active, $link)
 
     </div>
 </aside>
-<script src="<?php echo JS ?>/dashboard/dashboard.js"></script>
+<script src="<?php echo JS ?>/agrologist/navigator.js"></script>
