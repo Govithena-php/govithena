@@ -100,6 +100,8 @@ class Farmer extends Model
         }
     }
 
+    
+
     public function acceptInvestor($data)
     {
         try {
@@ -115,6 +117,21 @@ class Farmer extends Model
             return ['status' => false, 'data' => $e->getMessage()];
         }
     }
+    // public function acceptInvestor($data)
+    // {
+    //     try {
+    //         $sql = "UPDATE farmer_request SET state = :state WHERE farmer_request.requestId = :requestId";
+    //         $stmt = Database::getBdd()->prepare($sql);
+    //         $stmt->execute($data);
+    //         if ($stmt->rowCount() > 0) {
+    //             return ['status' => true, 'data' => true];
+    //         } else {
+    //             return ['status' => true, 'data' => false];
+    //         }
+    //     } catch (Exception $e) {
+    //         return ['status' => false, 'data' => $e->getMessage()];
+    //     }
+    // }
 
     public function declineInvestor($data)
     {

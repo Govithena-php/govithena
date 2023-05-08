@@ -252,8 +252,10 @@
                                     <div class="data">
                                         <div class="actions">
                                             <!-- <a href="#" class="btn btn-primary">Edit</a> -->
-                                            <button onclick="openAcceptModal('<?php echo $investor['requestId']?>')" class="button__primary">Accept</button>
-                                            <button onclick="openRejectModal('<?php echo $investor['requestId']?>')" class="button__danger">Reject</button>
+                                            <form action="<?php echo URLROOT . '/farmer/investors'?>" method="POST">
+                                            <button type="submit" name="form1" class="button__primary">Accept</button>
+                                            <button class="button__danger">Reject</button>
+                                            </form>
                                             <!-- <a href="<?php echo URLROOT . "/farmer/deleteGig/" . $investor['gigId'] ?>" class="btn btn-danger">Delete</a> -->
                                         </div>
                                     </div>

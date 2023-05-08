@@ -14,6 +14,7 @@ class Progress
             return ['success' => false, 'error' => $e->getMessage()];
         }
     }
+    
 
     public function fetchImagesByProgressId($progressId)
     {

@@ -299,26 +299,50 @@ class farmerController extends Controller
             $props['investors'] = $investors['data'];
             $props['reqinvestors'] = $reqinvestors['data'];
         }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (isset($_POST['form1'])){
+            if (isset($params)) {
+                list($requestId) = $params;
+                $res = $this->farmerModel->acceptInvestor([
+                    'requestId' => $requestId,
+                    'state' => STATUS::ACCEPTED
+                ]);
+                
+    
+                if ($res['status']) {
+                    $this->redirect('/farmer/investors');
+                } else {
+                    $this->redirect('/farmer/investors/' . $res['message']);
+                }
+            }
+            }
+            }
         $this->set($props);
         $this->render('investors');
     }
 
-    public function acceptInvestor($params)
-    {
-        if (isset($params)) {
-            list($requestId) = $params;
-            $res = $this->farmerModel->acceptInvestor([
-                'requestId' => $requestId,
-                'state' => STATUS::ACCEPTED
-            ]);
+    // public function acceptInvestor($params)
+    // {
+    //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    //     if (isset($_POST['form1'])){
+    //     if (isset($params)) {
+    //         list($requestId) = $params;
+    //         $res = $this->farmerModel->acceptInvestor([
+    //             'requestId' => $requestId,
+    //             'state' => STATUS::ACCEPTED
+    //         ]);
+            
 
-            if ($res['status']) {
-                $this->redirect('/farmer/investors');
-            } else {
-                $this->redirect('/farmer/investors/' . $res['message']);
-            }
-        }
-    }
+    //         if ($res['status']) {
+    //             $this->redirect('/farmer/investors');
+    //         } else {
+    //             $this->redirect('/farmer/investors/' . $res['message']);
+    //         }
+    //     }
+    //     }
+    //     }
+
+    // }
     public function declineInvestor($params)
     {
         if (isset($params)) {
