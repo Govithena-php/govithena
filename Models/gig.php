@@ -119,18 +119,18 @@ class Gig extends Model
         }
     }
 
-    // public function getGigIdFarmerIdByIgIdAndInvestorId($igId, $investorId)
-    // {
-    //     try {
-    //         $sql = "SELECT gigId, farmerId FROM investor_gig WHERE igId = :igId AND investorId = :investorId";
-    //         $stmt = Database::getBdd()->prepare($sql);
-    //         $stmt->execute(['igId' => $igId, 'investorId' => $investorId]);
-    //         $gig = $stmt->fetch(PDO::FETCH_ASSOC);
-    //         return ['success' => true, 'data' => $gig];
-    //     } catch (PDOException $e) {
-    //         return ['success' => false, 'error' => $e->getMessage()];
-    //     }
-    // }
+    public function getGigIdFarmerIdByIgIdAndInvestorId($igId, $investorId)
+    {
+        try {
+            $sql = "SELECT gigId, farmerId FROM investor_gig WHERE igId = :igId AND investorId = :investorId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['igId' => $igId, 'investorId' => $investorId]);
+            $gig = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $gig];
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
 
     public function viewProimg($progressId)
     {
@@ -421,6 +421,46 @@ class Gig extends Model
             }
         } catch (PDOException $e) {
             return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function getCompletedGigsByFarmer($id)
+    {
+        try {
+            $sql = "SELECT ig.investorId, ig.gigId, ig.timestamp, gig.title, gig.category, gig.thumbnail as gimage, gig.city as gcity, user.firstName, user.lastName, user.city as ucity, user.image as uimage FROM investor_gig as ig INNER JOIN gig ON ig.gigId = gig.gigId INNER JOIN user ON ig.investorId = user.uid WHERE ig.farmerId = :id AND ig.status='COMPLETED' ORDER BY timestamp DESC";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['id' => $id]);
+            $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $row];
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function getWorkedWith($uid)
+    {
+        try {
+            $sql = "SELECT COUNt(investorId) as investorCount FROM gig WHERE farmerId = :uid";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['uid' => $uid]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $row];
+        } catch (PDOException $e) {
+            return ['success' => false, 'message' => $e->getMessage()];
+        }
+    }
+
+    public function getInvestmentsSumByFarmer($uid)
+    {
+        try {
+            $sql = "SELECT SUM(amount) as totalInvestment FROM investment WHERE farmerId = :uid";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['uid' => $uid]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $row];
+        } catch (PDOException $e) {
+            return ['success' => false, 'message' => $e->getMessage()];
         }
     }
 }

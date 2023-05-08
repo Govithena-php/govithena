@@ -6,7 +6,7 @@ class profileController extends Controller
     private $userModel;
     private $gigModel;
     private $reviewByInvestorModel;
-    private $investorGigModel;
+    // private $investorGigModel;
 
     public function __construct()
     {
@@ -14,7 +14,7 @@ class profileController extends Controller
         $this->userModel = $this->model('user');
         $this->gigModel = $this->model('gig');
         $this->reviewByInvestorModel = $this->model('reviewByInvestor');
-        $this->investorGigModel = $this->model('investorGig');
+        // $this->investorGigModel = $this->model('investorGig');
 
 
         if (!Session::isLoggedIn()) {
@@ -29,21 +29,21 @@ class profileController extends Controller
         if (isset($params) && !empty($params[0])) {
             list($uid) = $params;
 
-            $previousWorks = $this->investorGigModel->getCompletedGigsByFarmer($uid);
+            $previousWorks = $this->gigModel->getCompletedGigsByFarmer($uid);
             if ($previousWorks['success']) {
                 $props['previousWorks'] = $previousWorks['data'];
             }
 
             $user = $this->userModel->getUserById($uid);
 
-            $WorkedWith = $this->investorGigModel->getWorkedWith($uid);
+            $WorkedWith = $this->gigModel->getWorkedWith($uid);
             if ($WorkedWith['success']) {
                 $props['WorkedWith'] = $WorkedWith['data']['investorCount'];
             } else {
                 $props['WorkedWith'] = 0;
             }
 
-            $investmentsSum = $this->investorGigModel->getInvestmentsSumByFarmer($uid);
+            $investmentsSum = $this->gigModel->getInvestmentsSumByFarmer($uid);
             if ($investmentsSum['success']) {
                 $sum = $investmentsSum['data']['totalInvestment'];
             } else {
