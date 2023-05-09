@@ -258,6 +258,9 @@ class dashboardController extends Controller
                 }
 
                 $farmer = $this->userModel->fetchBy($farmerId);
+
+                // var_dump($farmer);
+                // die();
                 if ($farmer['success']) {
                     $props['farmer'] = $farmer['data'];
                 } else {

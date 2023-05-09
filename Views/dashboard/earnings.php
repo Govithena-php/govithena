@@ -234,7 +234,7 @@
                                 </div>
                                 <div class="[ data ]" hideIn="lg">
                                     <div class="table_farmer_image_and_name">
-                                        <div class="img"><img src="<?php echo UPLOADS . "/profilePictures/" . $earning['image'] ?>" /></div>
+                                        <div class="img"><img src="<?php echo UPLOADS . "/profilePictures/" . $earning['image'] ?>" <?php echo DEFAULT_PROFILE_PICTURE ?> /></div>
                                         <p class="name limit-text-2"><?php echo $earning['firstName'] . " " . $earning['firstName'] ?></p>
                                     </div>
                                 </div>

@@ -63,8 +63,10 @@
         </div>
 
         <div class="[ gigs ]">
+
             <div>
                 <div class="[ grid ][ cards ]" sm="1" md="2" gap="1">
+                    <!-- <img class="bg__svg" src="<?php echo IMAGES ?>/svg/bg.svg" alt="empty"> -->
                     <div class="[ card ]">
                         <div class="[ icon ]">
                             <i class="bi bi-activity"></i>
@@ -240,7 +242,7 @@
                                             <img src="<?php echo UPLOADS . $activeGig['thumbnail'] ?>" />
                                             <div class="active__gig_farmer">
                                                 <div class="img">
-                                                    <img src="<?php echo UPLOADS . $activeGig['image'] ?>" />
+                                                    <img src="<?php echo UPLOADS . $activeGig['image'] ?>" <?php echo DEFAULT_PROFILE_PICTURE ?> />
                                                 </div>
                                                 <div class="details">
                                                     <a href="<?php echo URLROOT . "/profile/" . $activeGig['farmerId'] ?>"><?php echo $activeGig['firstName'] . " " . $activeGig['lastName'] ?></a>
@@ -321,73 +323,6 @@
                         ?>
                     </div>
                 </div>
-                <!-- <div class="tab" id="2">
-                    <div class="[ requests__continer ]">
-                        <div class="[ caption ]">
-                            <h2>To Review</h2>
-                            <p>Keep your eyes on the prize by tracking progress with ease.</p>
-                        </div>
-                        <?php
-                        if (!isset($toReviewGigs) || empty($toReviewGigs)) {
-                            require(COMPONENTS . "dashboard/noDataFound.php");
-                        } else {
-                        ?>
-                            <div class="mt-1">
-                                <div class="[ grid__table ]" style="
-                                    --xl-cols: 0.75fr 3fr 1.5fr 1fr;
-                                ">
-                                    <div class="head">
-                                        <div class="[ row ]">
-                                            <div class="[ data ]">
-                                                <p>Gig</p>
-                                            </div>
-                                            <div class="[ data ]" hideIn="md">
-                                                <p>Title</p>
-                                            </div>
-                                            <div class="[ data ]" hideIn="lg">
-                                                <p>Farmer</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="body">
-                                        <?php
-                                        foreach ($toReviewGigs as $gig) {
-                                        ?>
-                                            <div class="row">
-                                                <div class="data">
-                                                    <div class="review__card">
-                                                        <img src="<?php echo UPLOADS . $gig['thumbnail'] ?>" />
-                                                    </div>
-                                                </div>
-                                                <div class="data">
-                                                    <h3><?php echo $gig['title'] ?></h3>
-                                                </div>
-                                                <div class="data">
-                                                    <div class="table_farmer_image_and_name">
-                                                        <div class="img">
-                                                            <img src="<?php echo UPLOADS . '/profilePictures/' . $gig['image'] ?>" alt="">
-                                                        </div>
-                                                        <div class="name">
-                                                            <p><?php echo $gig['firstName'] . ' ' . $gig['lastName'] ?></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="data">
-                                                    <div class="actions"><a href="<?php echo URLROOT . '/dashboard/review/' . $gig['gigId'] ?>" class="button__primary">Write a review</a></div>
-                                                </div>
-                                            </div>
-                                        <?php
-                                        }
-                                        ?>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php
-                        }
-                        ?>
-                    </div>
-                </div> -->
-
                 <div class="tab" id="3">
                     <div class="[ requests__continer ]">
                         <div class="[ caption ]">
@@ -457,40 +392,6 @@
             </div>
         </div>
     </div>
-    <?php
-
-    if (isset($error)) {
-        // require_once(COMPONENTS . "dashboard/noDataFound.php");
-    } else {
-        if (empty($withdrawls)) {
-            // require_once(COMPONENTS . "dashboard/noDataFound.php");
-        } else {
-    ?>
-            <div class="[ investments__container ]">
-                <div class="[ investment__heading ]">
-                    <h3>Title</h3>
-                    <h3>Amount</h3>
-                    <h3>Timestamp</h3>
-                    <h3>Category</h3>
-                </div>
-                <?php
-                foreach ($withdrawls as $withdrawl) {
-                ?>
-                    <div class="[ investment ]">
-                        <h3><?php echo $withdrawl['title'] ?></h3>
-                        <p><?php echo $withdrawl['amount'] ?></p>
-                        <p><?php echo $withdrawl['timestamp'] ?></p>
-                        <p><?php echo $withdrawl['category'] ?></p>
-                    </div>
-                <?php
-                }
-                ?>
-            </div>
-    <?php
-        }
-    }
-    ?>
-
     </div>
     <?php
     require_once("footer.php");

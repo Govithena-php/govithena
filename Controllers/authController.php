@@ -228,12 +228,12 @@ class authController extends Controller
             if ($response['status'] == false) {
                 echo $response['data'];
                 die();
-                $this->redirect('/auth/signin/error/server-error');
+                $this->redirect('/auth/signin/error');
                 return;
             }
 
             if ($response['data'] == false) {
-                $this->redirect('/auth/signin/error/user-does-not-exist');
+                $this->redirect('/auth/signin/error');
                 return;
             }
 
@@ -256,7 +256,7 @@ class authController extends Controller
 
                 $this->goto($data['userType']);
             } else {
-                $this->redirect('/auth/signin/error/password-mismatch');
+                $this->redirect('/auth/signin/error');
             }
         }
 
