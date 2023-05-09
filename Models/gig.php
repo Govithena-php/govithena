@@ -104,9 +104,10 @@ class Gig extends Model
         }
     }
 
-    public function updateDetails($data){
-    // var_dump($data);
-    // die();
+    public function updateDetails($data)
+    {
+        // var_dump($data);
+        // die();
         try {
             // $sql = "UPDATE gig SET status = 'RESERVED', investorId = :investorId, reservedDate = CURRENT_TIMESTAMP WHERE gigId = :id";
             $sql = "UPDATE gig SET title = :title, description = :description, category = :category, capital = :capital, profitMargin = :profitMargin, cropCycle = :cropCycle, city = :city, landArea = :landArea WHERE gigId = :id";
@@ -115,12 +116,14 @@ class Gig extends Model
             $stmt->execute($data);
             return ['success' => true, 'data' => true];
         } catch (PDOException $e) {
-            echo $e->getMessage();die();
+            echo $e->getMessage();
+            die();
             return ['success' => false, 'error' => $e->getMessage()];
         }
     }
 
-    public function editGig($gigId){
+    public function editGig($gigId)
+    {
         try {
             $sql = "SELECT * FROM gig WHERE gigId = :gigId";
             $stmt = Database::getBdd()->prepare($sql);
