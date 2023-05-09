@@ -97,6 +97,7 @@ class gigController extends Controller
             $result = $this->requestModel->createFarmerRequest([
                 'requestId' => $reqId,
                 'gigId' => $gigId,
+                'farmerId' => $farmerId,
                 'investorId' => $this->currentUser->getUid(),
                 'status' => 'PENDING',
                 'offer' => $offer,

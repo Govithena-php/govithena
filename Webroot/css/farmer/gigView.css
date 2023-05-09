@@ -1,0 +1,11 @@
+.gigpic{
+    width:80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.card  {
+    border: 1px solid black;
+    min-height: 300px;
+    background-color: white;
+  }

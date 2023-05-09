@@ -8,7 +8,6 @@ class farmerController extends Controller
     private $gigImageHandler;
 
     private $farmerModel;
-    private $investorGigModel;
     private $gigModel;
     private $progressModel;
 
@@ -27,7 +26,6 @@ class farmerController extends Controller
         $this->gigImageHandler = new ImageHandler($folder = "Uploads/gigs");
 
         $this->farmerModel = $this->model('farmer');
-        $this->investorGigModel = $this->model('investorGig');
         $this->gigModel = $this->model('gig');
         $this->progressModel = $this->model('progress');
 
@@ -145,6 +143,7 @@ class farmerController extends Controller
 
         $id = $this->currentUser->getUid(); //session eken user id eka gannawa activeUser.php file eke tiyenne
         $products = $this->gigModel->Allgig($id);
+        // var_dump($products);die();
         $props['products'] = $products;
 
 
@@ -284,63 +283,62 @@ class farmerController extends Controller
             'farmerId' => $this->currentUser->getUid(),
             'state' => STATUS::PENDING
         ]);
+        if ($investors['status']) {
+            $props['investors'] = $investors['data'];
+        }
+        
 
+        
         $reqinvestors = $this->farmerModel->reqinvestors([
             'farmerId' => $this->currentUser->getUid(),
             'state' => STATUS::ACCEPTED
         ]);
-
-        // var_dump($investors); die();
-
-
-        if ($investors['status']) {
-            $props['investors'] = $investors['data'];
+        if ($reqinvestors['status']) {
             $props['reqinvestors'] = $reqinvestors['data'];
         }
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (isset($_POST['form1'])){
-            if (isset($params)) {
-                list($requestId) = $params;
-                $res = $this->farmerModel->acceptInvestor([
-                    'requestId' => $requestId,
-                    'state' => STATUS::ACCEPTED
-                ]);
-                
-    
-                if ($res['status']) {
-                    $this->redirect('/farmer/investors');
-                } else {
-                    $this->redirect('/farmer/investors/' . $res['message']);
-                }
-            }
-            }
-            }
+
+        $investorlist = $this->farmerModel->investorlist([
+            'farmerId' => $this->currentUser->getUid(),
+            'state' => STATUS::PAID
+        ]);
+        if ($investorlist['status']) {
+            $props['investorlists'] = $investorlist['data'];
+        }
+        
+        // var_dump($reqinvestors); die();
+
+
+        
+
+        // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        //     if (isset($_POST['accept_investor'])) {
+        //         $this->acceptInvestor($params[0]);
+        //     }
+        // }
+
+
         $this->set($props);
         $this->render('investors');
     }
 
-    // public function acceptInvestor($params)
-    // {
-    //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    //     if (isset($_POST['form1'])){
-    //     if (isset($params)) {
-    //         list($requestId) = $params;
-    //         $res = $this->farmerModel->acceptInvestor([
-    //             'requestId' => $requestId,
-    //             'state' => STATUS::ACCEPTED
-    //         ]);
+    public function acceptInvestor($params = [])
+    {
+        if (isset($params[0]) && !empty($params[0])) {
+            $requestId = $params[0];
             
+            $res = $this->farmerModel->acceptInvestor([
+                'requestId' => $requestId,
+                'status' => STATUS::ACCEPTED
+            ]);
+            if ($res['status']) {
+                $this->redirect('/farmer/investors');
+            } else {
+                $this->redirect('/error/somethingWentWrong');
+            }
+        }
+        
 
-    //         if ($res['status']) {
-    //             $this->redirect('/farmer/investors');
-    //         } else {
-    //             $this->redirect('/farmer/investors/' . $res['message']);
-    //         }
-    //     }
-    //     }
-    //     }
-
-    // }
+    }
     public function declineInvestor($params)
     {
         if (isset($params)) {
@@ -421,7 +419,7 @@ class farmerController extends Controller
             $props['gig'] = $gig;
 
 
-            $investor = $this->investorGigModel->fetchInvestorByGig($gigId);
+            $investor = $this->gigModel->fetchInvestorByGig($gigId);
             if ($investor['success']) {
                 $props['investor'] = $investor['data'];
             }
@@ -429,7 +427,7 @@ class farmerController extends Controller
             $this->render('viewProgress');
         } else {
 
-            $gigs = $this->investorGigModel->fetchAllByFarmer($this->currentUser->getUid());
+            $gigs = $this->gigModel->fetchAllByFarmer($this->currentUser->getUid());
             if ($gigs['success']) {
                 $props['gigs'] = $gigs['data'];
             }
@@ -482,6 +480,7 @@ class farmerController extends Controller
                     echo $e->getMessage();
                     die();
                 }
+                $this->redirect('/farmer/progressUpdate/' . $gigId);
             } else {
                 $this->redirect('/farmer/newprogress/' . $response['error']);
             }
