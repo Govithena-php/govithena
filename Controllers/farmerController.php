@@ -121,9 +121,25 @@ class farmerController extends Controller
             $gigId = $params[0];
             $gig = $this->gigModel->fetchBy($gigId);
             $props['gig'] = $gig['data'];
-            $gigimg=$this->gigModel->gigimg($gigId);
-            $props['gigimgs'] = $gigimg['data'];
+            // $gigimg=$this->gigModel->gigimg($gigId);
+            // $props['gigimgs'] = $gigimg['data'];
+
+
+
+                
+            $progressImages = [];
+            $temp = $this->gigModel->gigimg($gigId);
+            // die();
+            foreach ($temp['data'] as $key => $value) {
+                $progressImages[$key] = $value['image'];
+            }
+            // var_dump($progressImages);
+            // die();
+
+            $props['gigimgs'] = $progressImages;
+    
         }
+
 
         $this->set($props);
         $this->render("gigView");

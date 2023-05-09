@@ -137,15 +137,21 @@
                             foreach($products as $p){
                                 ?>
                             <div class="row">
+                                
                                 <div class="data farmer__">
                                     <div class="farmerimg">
-                                        <img src="<?php echo UPLOADS . '/profilePictures/' . $p['thumbnail']?>" alt="Picture">
+                                    <a class="underlinetext" href="<?php echo URLROOT ?>/farmer/gigView/<?php echo $p['gigId']?>">
+                                        <!-- <img src="<?php echo UPLOADS . '/profilePictures/' . $p['thumbnail']?>" alt="Picture"> -->
+                                        <img src="<?php echo UPLOADS .'/' .$p['thumbnail']?>" alt="Picture">
+                                    </a>
                                     </div>
                                 </div>
                                 <div class="data ">
                                     <div class="namecol">
+                                    <a class="underlinetext" href="<?php echo URLROOT ?>/farmer/gigView/<?php echo $p['gigId']?>">
                                         <h1><p><?php echo $p['title'] ?></p></h1>
                                         <p><?php echo $p['category']?></p>
+                                    </a>
                                     </div>
                                 </div>
                                 <div class="data">

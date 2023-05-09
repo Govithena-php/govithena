@@ -95,35 +95,42 @@
                 </form>
             </div> -->
             <div class="card">
-                <?php
-                    foreach ($gigimgs as $gigimg) {
-                ?>
+                <div class="namerow">
+                
                 <div class ="gigpic">
-                    <img src="<?php echo UPLOADS . '/profilePictures/' . $gigimg?>" alt="Picture">
+                    <img src="<?php echo UPLOADS .'/' .$gig['thumbnail']?>" alt="Picture">
+                    <?php
+                        foreach ($gigimgs as $gigimg) {
+                    ?>
+                    
+                    <img src="<?php echo UPLOADS .'/' .$gigimg?>" alt="Picture">
                     <!-- <img src="<?php echo UPLOADS . '/progress/' . $img ?>"> -->
-                </div>
-                <?php
+                    <?php
                     }
-                ?>
-                <div class="namecol">
-                    <p>Title :</p>
-                    <p><?php echo $gig['title']?></p>
-
-                    <p>Initial Investment :</p>
-                    <p class="LKR"><?php echo number_format($p['capital'], 2, '.', ',')?></p>
-
-                    <p>Location :</p>
-                    <p><?php echo $gig['city']?></p>
-
-                    <p>Status :</p>
-                    <p><?php echo $gig['status']?></p>
-
-                    <p>Land Area :</p>
-                    <p><?php echo $gig['landArea']?></p>
+                    ?>
+                </div>
 
                 </div>
-                <p>Description :</p>
-                    <p><?php echo $gig['description']?></p>
+                <div class="namecol">
+                    <h3><b>Title :</b></h3>
+                    <p class="pname"><?php echo $gig['title']?></p>
+
+                    <h3><b>Initial Investment :</b></h3>
+                    <p class="LKR pname"><?php echo number_format($gig['capital'], 2, '.', ',')?></p>
+
+                    <h3><b>Location :</b></h3>
+                    <p class="pname"><?php echo $gig['city']?></p>
+
+                    <h3><b>Status :</b></h3>
+                    <p class="pname"><?php echo $gig['status']?></p>
+
+                    <h3><b>Land Area :</b></h3>
+                    <p class="pname"><?php echo $gig['landArea']?></p>
+
+                    <h3><b>Description :</b></h3>
+                    <p class="pname"><?php echo $gig['description']?></p>
+                </div>
+
             </div>
 
         
