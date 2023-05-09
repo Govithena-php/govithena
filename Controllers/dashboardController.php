@@ -589,9 +589,9 @@ class dashboardController extends Controller
     public function earnings()
     {
         $props = [];
+        $filters = new Filter(['status'], ['fromDate', 'toDate']);
 
         $earnings = $this->earningsModel->getEarningsByInvestor($this->currentUser->getUid());
-
         if ($earnings['success']) {
             $props['earnings'] = $earnings['data'];
         }
