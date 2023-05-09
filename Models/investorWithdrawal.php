@@ -53,7 +53,7 @@ class investorWithdrawal
     public function getTotalWithdrawnByInvestor($id)
     {
         try {
-            $sql = "SELECT SUM(amount) AS totalWithdrawn FROM investor_withdrawal WHERE user = :id";
+            $sql = "SELECT SUM(amount) AS totalWithdrawn FROM investor_withdrawal WHERE investorId = :id";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $res = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -137,6 +137,19 @@ class investorWithdrawal
             } else {
                 return ['success' => false, 'error' => true];
             }
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
+
+    public function fetchAllByForDashboard($id)
+    {
+        try {
+            $sql = "SELECT iw.amount, DATE(iw.timestamp) AS wDate, iw.status, ba.bank  FROM investor_withdrawal iw INNER JOIN bank_account ba ON iw.bankAccount = ba.accountNumber WHERE iw.investorId = :id ORDER BY iw.timestamp DESC LIMIT 5";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['id' => $id]);
+            $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $res];
         } catch (PDOException $e) {
             return ['success' => false, 'error' => $e->getMessage()];
         }

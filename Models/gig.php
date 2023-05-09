@@ -463,4 +463,31 @@ class Gig extends Model
             return ['success' => false, 'message' => $e->getMessage()];
         }
     }
+
+    public function getCategoryVsGigsByInvestor($id)
+    {
+        try {
+            $sql = "SELECT count(roi.roiId) as count, g.category FROM return_of_investment roi INNER JOIN gig g ON roi.gigId = g.gigId WHERE roi.investorId = :investorId AND (roi.status = 'APPROVED' OR roi.status = 'CLEARING') GROUP BY g.category";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['investorId' => $id]);
+            $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $res];
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
+
+    public function fetchReservedGigsForDashboard($id)
+    {
+        try {
+            $sql = "SELECT gig.gigId, gig.title, gig.city, gig.thumbnail, gig.status, user.firstName, user.lastName, user.city FROM gig INNER JOIN user ON gig.farmerId = user.uid WHERE gig.investorId = :id AND gig.status = 'RESERVED' OR gig.status = 'UNDER_COMPLETION' ORDER BY gig.createdAt DESC";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['id' => $id]);
+            $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $row];
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
 }

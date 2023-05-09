@@ -88,4 +88,47 @@ class Earnings
             return ['success' => false, 'error' => $e->getMessage()];
         }
     }
+
+    public function getMonthlyEarningsByInvestor($id)
+    {
+        try {
+            $sql = "SELECT MONTHNAME(timestamp) as month, YEAR(timestamp) as year, SUM(amount) as totalEarnings FROM return_of_investment WHERE investorId = :investorId AND (status = 'APPROVED' OR status = 'CLEARING') GROUP BY MONTH(timestamp), YEAR(timestamp) ORDER BY YEAR(timestamp), MONTH(timestamp)";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['investorId' => $id]);
+            $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $res];
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
+
+    public function getCategoryVsEarningsByInvestor($id)
+    {
+        try {
+            $sql = "SELECT g.category, SUM(amount) as totalEarnings FROM return_of_investment roi INNER JOIN gig g ON roi.gigId = g.gigId WHERE roi.investorId = :investorId AND (roi.status = 'APPROVED' OR roi.status = 'CLEARING') GROUP BY g.category ORDER BY SUM(roi.amount) DESC";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['investorId' => $id]);
+            $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $res];
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
+
+    public function fetchEarningsByForDashboard($id)
+    {
+        try {
+            $sql = "SELECT gig.title, roi.amount, DATE(roi.timestamp) as eDate, roi.status FROM return_of_investment roi INNER JOIN gig ON roi.gigId = gig.gigId WHERE roi.investorId = :id AND roi.status = 'APPROVED' OR roi.status = 'CLEARING'  ORDER BY roi.timestamp DESC LIMIT 5";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['id' => $id]);
+            $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $res];
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
 }

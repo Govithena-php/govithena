@@ -5,7 +5,7 @@ class Investment extends Model
     public function fetchAllBy($id)
     {
         try {
-            $sql = "SELECT investment.id, investment.investorId, investment.gigId, investment.amount, DATE(investment.timestamp) as investedDate, gig.title, gig.thumbnail, gig.category, gig.cropCycle, gig.city FROM investment INNER JOIN gig ON investment.gigId = gig.gigId WHERE investorId = :id ORDER BY timestamp DESC";
+            $sql = "SELECT investment.id, investment.investorId, investment.gigId, investment.amount, DATE(investment.timestamp) as investedDate, gig.title, gig.thumbnail, gig.category, gig.cropCycle, gig.city FROM investment INNER JOIN gig ON investment.gigId = gig.gigId WHERE investment.investorId = :id ORDER BY timestamp DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -171,6 +171,51 @@ class Investment extends Model
             } else {
                 return ['success' => false, 'data' => 'No investment found'];
             }
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function getMonthlyInvestmentByInvestor($id)
+    {
+        try {
+            $sql = "SELECT MONTHNAME(timestamp) as month, sum(amount) as totalInvestment FROM investment WHERE investorId = :investorId GROUP BY MONTH(timestamp), YEAR(timestamp) ORDER BY YEAR(timestamp), MONTH(timestamp)";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['investorId' => $id]);
+            $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if ($res) {
+                return ['success' => true, 'data' => $res];
+            } else {
+                return ['success' => false, 'data' => 'No investment found'];
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function getCategoryVsInvestmentsByInvestor($id)
+    {
+        try {
+            $sql = "SELECT category, sum(amount) as totalInvestment FROM investment INNER JOIN gig ON investment.gigId = gig.gigId WHERE investment.investorId = :investorId GROUP BY category";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['investorId' => $id]);
+            $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $res];
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function fetchByInvestoIdFroDashboard($id)
+    {
+        try {
+            $sql = "SELECT investment.id, investment.gigId, investment.amount, DATE(investment.timestamp) as investedDate, gig.title FROM investment INNER JOIN gig ON investment.gigId = gig.gigId WHERE investment.investorId = :id ORDER BY timestamp DESC LIMIT 5";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['id' => $id]);
+            $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $row];
         } catch (PDOException $e) {
             return ['success' => false, 'data' => $e->getMessage()];
         }

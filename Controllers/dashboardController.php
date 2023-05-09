@@ -51,11 +51,17 @@ class dashboardController extends Controller
         $props = [];
 
         $totalInvestment = $this->investmentModel->getTotalInvestmentByInvestor($this->currentUser->getUid());
-
         if ($totalInvestment['success']) {
             $props['totalInvestment'] = $totalInvestment['data']['totalInvestment'];
         } else {
             $props['totalInvestment'] = 0;
+        }
+
+        $totalEarnings = $this->earningsModel->getTotalEarningsByInvestor($this->currentUser->getUid());
+        if ($totalEarnings['success']) {
+            $props['totalEarnings'] = $totalEarnings['data']['totalEarnings'];
+        } else {
+            $props['totalEarnings'] = 0;
         }
 
         $totalWithdrawn = $this->investorWidthdrawModel->getTotalWithdrawnByInvestor($this->currentUser->getUid());
@@ -65,39 +71,39 @@ class dashboardController extends Controller
             $props['totalWithdrawn'] = 0;
         }
 
-        $totalProfit = $this->profitModel->getTotalProfitByInvestor($this->currentUser->getUid());
-        if ($totalProfit['success']) {
-            $props['totalProfit'] = $totalProfit['data']['totalProfit'];
+        $withdrawableBalance = $this->investorBalanceModel->getBalanceByInvestor($this->currentUser->getUid());
+        if ($withdrawableBalance['success']) {
+            $props['withdrawableBalance'] = $withdrawableBalance['data'];
         } else {
-            $props['totalProfit'] = 0;
+            $props['withdrawableBalance'] = 0;
         }
 
-        $totalGain = $props['totalInvestment'] + $props['totalProfit'];
-        $totalBalance = $totalGain - $props['totalWithdrawn'];
-        $props['totalGain'] = $totalGain;
-        $props['totalBalance'] = $totalBalance;
+        $investments = $this->investmentModel->fetchByInvestoIdFroDashboard($this->currentUser->getUid());
+        if ($investments['success']) {
+            $props['investments'] = $investments['data'];
+        } else {
+            $props['investments'] = [];
+        }
 
-
-        $widthdrawals = $this->investorWidthdrawModel->fetchAllBy($this->currentUser->getUid());
+        $widthdrawals = $this->investorWidthdrawModel->fetchAllByForDashboard($this->currentUser->getUid());
         if ($widthdrawals['success']) {
             $props['widthdrawals'] = $widthdrawals['data'];
         } else {
             $props['widthdrawals'] = [];
         }
 
-        $profits = $this->profitModel->fetchAllBy($this->currentUser->getUid());
-        if ($profits['success']) {
-            $props['profits'] = $profits['data'];
+        $earnings = $this->earningsModel->fetchEarningsByForDashboard($this->currentUser->getUid());
+        if ($earnings['success']) {
+            $props['earnings'] = $earnings['data'];
         } else {
-            $props['profits'] = [];
+            $props['earnings'] = [];
         }
 
-
-        $investments = $this->investmentModel->fetchAllBy($this->currentUser->getUid());
-        if ($investments['success']) {
-            $props['investments'] = $investments['data'];
+        $reservedGigs = $this->gigModel->fetchReservedGigsForDashboard($this->currentUser->getUid());
+        if ($reservedGigs['success']) {
+            $props['reservedGigs'] = $reservedGigs['data'];
         } else {
-            $props['investments'] = [];
+            $props['reservedGigs'] = [];
         }
 
 

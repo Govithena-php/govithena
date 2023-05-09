@@ -320,7 +320,7 @@
                     const categories = result.data.map(item => item.category)
                     const counts = result.data.map(item => item.numberOfGigs)
 
-                    const pieChart = new Char  t(document.getElementById('pieChart'), {
+                    const pieChart = new Chart(document.getElementById('pieChart'), {
                         type: 'pie',
                         data: {
                             labels: categories,
@@ -332,7 +332,6 @@
                 }
             })
             .catch(error => console.log(error))
-            
     </script>
 
 
