@@ -30,7 +30,7 @@ $currentUser = Session::get('user');
         <div class="[ profile ]">
             <?php if (isset($currentUser)) { ?>
                 <div class="[ buttons ]">
-                    <div class="[ notification ]">
+                    <!-- <div class="[ notification ]">
                         <button>
                             <i class="bi bi-bell"></i>
                             <?php
@@ -44,7 +44,7 @@ $currentUser = Session::get('user');
                         </button>
                     </div>
 
-                    <span></span>
+                    <span></span> -->
 
                     <button onclick="toggleProfileMenu()">
                         <div class="[ image ]">
