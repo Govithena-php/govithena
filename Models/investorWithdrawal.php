@@ -34,6 +34,7 @@ class investorWithdrawal
                 $data['toDate'] = $toDate;
             }
 
+            $sql .= " ORDER BY iw.timestamp DESC";
 
             // echo $sql;
             // print_r($data);
