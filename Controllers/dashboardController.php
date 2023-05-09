@@ -136,8 +136,14 @@ class dashboardController extends Controller
             foreach ($totalInvestmentPerGig['data'] as $key => $value) {
                 $temp[$value['gigId']] = $value['totalInvestment'];
             }
-
             $props['totalInvestmentPerGig'] = $temp;
+        }
+
+        $withdrawableBalance = $this->investorBalanceModel->getBalanceByInvestor($this->currentUser->getUid());
+        if ($withdrawableBalance['success']) {
+            $props['withdrawableBalance'] = $withdrawableBalance['data'];
+        } else {
+            $props['withdrawableBalance'] = 0;
         }
 
         $activeGigs = $this->gigModel->fetchAllReservedGigByInvestor($this->currentUser->getUid());
@@ -175,21 +181,13 @@ class dashboardController extends Controller
             $props['daysSinceStarted'] = $temp;
         }
 
-
-
-        // $toReviewGigs = $this->gigModel->fetchAllToReviewGigByInvestor($this->currentUser->getUid());
-        // if ($toReviewGigs['success']) {
-        //     $props['toReviewGigs'] = $toReviewGigs['data'];
-        // }
-
         $completedGigs = $this->gigModel->getCompletedGigsByInvestor($this->currentUser->getUid());
         if ($completedGigs['success']) {
             $props['completedGigs'] = $completedGigs['data'];
         }
 
         $recentActivities = $this->recentActivityModel->getRecentActivityByInvestor($this->currentUser->getUid());
-        // var_dump($recentActivities);
-        // die();
+
         if ($recentActivities['success']) {
             if ($recentActivities['data']) {
                 $props['recentActivities'] = $recentActivities['data'];
