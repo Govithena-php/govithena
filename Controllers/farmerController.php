@@ -120,8 +120,11 @@ class farmerController extends Controller
         if (isset($params[0]) && !empty($params[0])) {
             $gigId = $params[0];
             $gig = $this->gigModel->fetchBy($gigId);
-            $props['gig'] = $gig;
+            $props['gig'] = $gig['data'];
+            $gigimg=$this->gigModel->gigimg($gigId);
+            $props['gigimgs'] = $gigimg['data'];
         }
+
         $this->set($props);
         $this->render("gigView");
     }

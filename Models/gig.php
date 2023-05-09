@@ -119,6 +119,22 @@ class Gig extends Model
         }
     }
 
+
+    public function gigimg($gigId)
+    {
+        try {
+            $sql = "SELECT * FROM gig_image WHERE gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId]);
+            $gig = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $gig];
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
+
     public function getGigIdFarmerIdByIgIdAndInvestorId($igId, $investorId)
     {
         try {

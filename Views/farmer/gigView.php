@@ -95,28 +95,35 @@
                 </form>
             </div> -->
             <div class="card">
+                <?php
+                    foreach ($gigimgs as $gigimg) {
+                ?>
                 <div class ="gigpic">
-                    <img src="<?php echo UPLOADS . '/profilePictures/' . $p['thumbnail']?>" alt="Picture">
+                    <img src="<?php echo UPLOADS . '/profilePictures/' . $gigimg?>" alt="Picture">
+                    <!-- <img src="<?php echo UPLOADS . '/progress/' . $img ?>"> -->
                 </div>
+                <?php
+                    }
+                ?>
                 <div class="namecol">
                     <p>Title :</p>
-                    <p><?php echo $p['status']?></p>
+                    <p><?php echo $gig['title']?></p>
 
                     <p>Initial Investment :</p>
-                    <p><?php echo $p['status']?></p>
+                    <p class="LKR"><?php echo number_format($p['capital'], 2, '.', ',')?></p>
 
                     <p>Location :</p>
-                    <p><?php echo $p['status']?></p>
+                    <p><?php echo $gig['city']?></p>
 
                     <p>Status :</p>
-                    <p><?php echo $p['status']?></p>
+                    <p><?php echo $gig['status']?></p>
 
                     <p>Land Area :</p>
-                    <p><?php echo $p['status']?></p>
+                    <p><?php echo $gig['landArea']?></p>
 
                 </div>
                 <p>Description :</p>
-                    <p><?php echo $p['status']?></p>
+                    <p><?php echo $gig['description']?></p>
             </div>
 
         
