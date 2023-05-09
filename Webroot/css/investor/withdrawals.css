@@ -33,6 +33,7 @@
 }
 
 .inv__card__body {
+    text-align: center;
     color: var(--clr-text);
 }
 
@@ -46,8 +47,14 @@
     font-size: 0.75rem;
     font-weight: 400;
     text-align: center;
-    margin-top: 0.5rem;
 }
+
+.inv__card__body small {
+    font-size: 0.65rem;
+    font-weight: 400;
+    text-align: center;
+}
+
 
 .inv__new {
     display: flex;
@@ -163,6 +170,15 @@
 
 .stick_to_top{
     padding-top:1rem;
+}
+
+.modal{
+    max-width: 600px;
+}
+
+.red_p{
+    font-size:0.75rem;
+    color: red;
 }
 
 

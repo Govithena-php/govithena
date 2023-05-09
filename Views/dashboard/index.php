@@ -31,12 +31,8 @@
                 <h1><?php echo $currentUser->getFirstName() . " " . $currentUser->getLastName(); ?></h1>
                 <p>Welcome to the Agriculture Investment Dashboard.</p>
             </div>
-            <div class="[ flex-col center-x ][ balance ]">
-                <h3>Balance</h3>
-                <div class="[ amount ]">
-                    <span class="[ LKRBadge ]"></span>
-                    <h1><?php echo number_format($totalBalance, 2, '.', ',') ?></h1>
-                </div>
+            <div class="[ flex-col center-x top__svg ]">
+                <img class="" src="<?php echo IMAGES ?>/svg/nature.svg" />
             </div>
         </div>
 
@@ -46,52 +42,61 @@
                 <div class="[ amount ]">
                     <span class="[ LKRBadge ]"></span>
                     <h1><?php echo number_format($totalInvestment, 2, '.', ',') ?></h1>
-                    <h4>12% <i class="fa-solid fa-arrow-down"></i></h4>
                 </div>
-                <p>Compared to (LKR 21340 last month)</p>
             </div>
 
             <div class="[ card ]">
-                <h3>Total Income</h3>
+                <h3>Total Earnings</h3>
                 <div class="[ amount ]">
                     <span class="[ LKRBadge ]"></span>
-                    <h1><?php echo number_format($totalGain, 2, '.', ',') ?></h1>
-                    <h4>12% <i class="fa-solid fa-arrow-up"></i></h4>
+                    <h1><?php echo number_format($totalEarnings, 2, '.', ',') ?></h1>
                 </div>
-                <p>Compared to (LKR 21340 last month)</p>
             </div>
 
             <div class="[ card ]">
-                <h3>Profilt</h3>
-                <div class="[ amount ]">
-                    <span class="[ LKRBadge ]"></span>
-                    <h1><?php echo number_format($totalProfit, 2, '.', ',') ?></h1>
-                    <h4>12% <i class="fa-solid fa-arrow-down"></i></h4>
-                </div>
-                <p>Compared to (LKR 21340 last month)</p>
-            </div>
-
-            <div class="[ card ]">
-                <h3>Widthdraw</h3>
+                <h3>Total Widthdrawal</h3>
                 <div class="[ amount ]">
                     <span class="[ LKRBadge ]"></span>
                     <h1><?php echo number_format($totalWithdrawn, 2, '.', ',') ?></h1>
-                    <h4>12% <i class="fa-solid fa-arrow-up"></i></h4>
                 </div>
-                <p>Compared to (LKR 21340 last month)</p>
+            </div>
+
+            <div class="[ card ]">
+                <h3>Withdrawable Balance</h3>
+                <div class="[ amount ]">
+                    <span class="[ LKRBadge ]"></span>
+                    <h1><?php echo number_format($withdrawableBalance['balance'], 2, '.', ',') ?></h1>
+                </div>
             </div>
 
         </div>
 
-        <div class="[ charts ]">
+        <div class="[ charts charts-mb-3 ]">
             <div class="[ chart ]">
-                <h3 class="chart__title">Investments vs Profits</h3>
                 <?php
                 if (!isset($data)) {
-                    echo '<canvas id="myChart"></canvas>';
+                    echo '<canvas id="lineChart"></canvas>';
                 } else {
                 ?>
                     <div class="chart__no_data">
+                        <h3 class="chart__title">Investments vs Earnings</h3>
+                        <i class="bi bi-x-circle"></i>
+                        <p>No data to display.</p>
+                    </div>
+                <?php
+                }
+                ?>
+            </div>
+        </div>
+        <div class="[ grid charts-mb-3 ]" lg="3" gap="2">
+            <div class="[ chart ]">
+                <?php
+                if (!isset($data)) {
+                    echo '<canvas id="categoryVsGigsChart"></canvas>';
+                } else {
+                ?>
+                    <div class="chart__no_data">
+                        <h3 class="chart__title">Category vs Gigs</h3>
                         <i class="bi bi-x-circle"></i>
                         <p>No data to display.</p>
                     </div>
@@ -100,13 +105,28 @@
                 ?>
             </div>
             <div class="[ chart ]">
-                <h3 class="chart__title">Gigs</h3>
                 <?php
                 if (!isset($data)) {
-                    echo '<canvas id="pieChart"></canvas>';
+                    echo '<canvas id="categoryVsInvestment"></canvas>';
                 } else {
                 ?>
                     <div class="chart__no_data">
+                        <h3 class="chart__title">Category VS Investments</h3>
+                        <i class="bi bi-x-circle"></i>
+                        <p>No data to display.</p>
+                    </div>
+                <?php
+                }
+                ?>
+            </div>
+            <div class="[ chart ]">
+                <?php
+                if (!isset($data)) {
+                    echo '<canvas id="categoryVsEarnings"></canvas>';
+                } else {
+                ?>
+                    <div class="chart__no_data">
+                        <h3 class="chart__title">Category VS Earnings</h3>
                         <i class="bi bi-x-circle"></i>
                         <p>No data to display.</p>
                     </div>
@@ -121,63 +141,49 @@
             <div class="[ block progress ]">
 
                 <div class="[ heading ]">
-                    <h4>Progress</h4>
+                    <h4>Active Gigs</h4>
                     <a href="<?php echo URLROOT ?>/dashboard/gigs">View All</a>
                 </div>
-
-                <div class="[ card ]">
-                    <div class="[ image ]">
-                        <img src="<?php echo IMAGES ?>/temp/2.jpg" alt="">
-                    </div>
-                    <div class="[ details ]">
-                        <div class="[ flex-row-space-between grow ]">
-                            <div class="[ flex-col ]">
-                                <h3>title</h3>
-                                <h5>Farmer name</h5>
-                            </div>
-                            <div class="[ flex-col ]">
-                                <h3>150000.00</h3>
-                                <h5>3 months</h5>
-                            </div>
-                        </div>
-                        <label>50%</label>
-                        <progress value="50" max="100"></progress>
-                        <div class="[ flex-row-end ]">
-                            <button class="[ btn ]">View</button>
-                            <button class="[ btn ]">View</button>
+                <?php
+                if (!isset($reservedGigs) || empty($reservedGigs)) {
+                ?>
+                    <div class="table__data">
+                        <div class="chart__no_data">
+                            <i class="bi bi-x-circle"></i>
+                            <p>No data to display.</p>
                         </div>
                     </div>
-                </div>
-                <div class="[ card ]">
-                    <div class="[ image ]">
-                        <img src="<?php echo IMAGES ?>/temp/2.jpg" alt="">
-                    </div>
-                    <div class="[ details ]">
-                        <div class="[ flex-row-space-between grow ]">
-                            <div class="[ flex-col ]">
-                                <h3>title</h3>
-                                <h5>Farmer name</h5>
+                    <?php
+                } else {
+                    foreach ($reservedGigs as $reservedGig) {
+                    ?>
+                        <div class="[ card ]">
+                            <div class="[ image ]">
+                                <img src="<?php echo UPLOADS . $reservedGig['thumbnail'] ?>" alt="">
                             </div>
-                            <div class="[ flex-col ]">
-                                <h3>150000.00</h3>
-                                <h5>3 months</h5>
+                            <div class="[ details ]">
+                                <div class="[ flex-column-space-between ]">
+                                    <div class="">
+                                        <h1 class="limit-text-2"><?php echo $reservedGig['title'] ?></h1>
+                                        <h5><?php echo $reservedGig['firstName'] . " " . $reservedGig['lastName'] ?></h5>
+                                    </div>
+                                </div>
+                                <div class="[ flex-row-space-between align-items-end ]">
+                                    <h3 class="tag"><?php echo str_replace("_", " ", $reservedGig['status']) ?></h3>
+                                    <a href="<?php echo URLROOT ?>/dashboard/gig/<?php echo $reservedGig['gigId'] ?>" class="[ button__primary ]">View</a>
+                                </div>
                             </div>
                         </div>
-                        <label>50%</label>
-                        <progress value="50" max="100"></progress>
-                        <div class="[ flex-row-end ]">
-                            <button class="[ btn ]">View</button>
-                            <button class="[ btn ]">View</button>
-                        </div>
-                    </div>
-                </div>
-
+                <?php
+                    }
+                }
+                ?>
             </div>
 
             <div class="[ block investments ]">
                 <div class="[ heading ]">
                     <h4>Investments</h4>
-                    <a href="<?php echo URLROOT ?>/dashboard/myinvestments">View All</a>
+                    <a href="<?php echo URLROOT ?>/dashboard/investments">View All</a>
                 </div>
                 <?php
                 if (!isset($investments) || empty($investments)) {
@@ -194,20 +200,14 @@
                     <table class="[ ]">
                         <thead>
                             <tr>
-                                <th>Date</th>
-                                <th>Farmer name</th>
+                                <th>Gig</th>
                                 <th>Amount</th>
+                                <th>Date</th>
                             </tr>
                         </thead>
                         <tbody>
-
                             <?php
-                            $limit = 5;
                             foreach ($investments as $investment) {
-                                if ($limit == 0) {
-                                    break;
-                                }
-                                $limit--;
                             ?>
                                 <tr>
                                     <td><?php echo $investment['title'] ?></td>
@@ -235,12 +235,12 @@
         <div class="[ grid ][ profit__widthdrawal ]" gap="2" md="2">
             <div class="[ block Profits ]">
                 <div class="[ heading ]">
-                    <h4>Profits</h4>
-                    <a href="<?php echo URLROOT ?>/dashboard/profits">View All</a>
+                    <h4>Earnings</h4>
+                    <a href="<?php echo URLROOT ?>/dashboard/earnings">View All</a>
                 </div>
 
                 <?php
-                if (!isset($profits) || empty($profits)) {
+                if (!isset($earnings) || empty($earnings)) {
                 ?>
                     <div class="table__data">
                         <div class="chart__no_data">
@@ -254,19 +254,21 @@
                     <table class="[ ]">
                         <thead>
                             <tr>
-                                <th>Date</th>
-                                <th>Farmer name</th>
+                                <th>Gig</th>
                                 <th>Amount</th>
+                                <th>Date</th>
+                                <th>status</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            foreach ($profits as $profit) {
+                            foreach ($earnings as $earning) {
                             ?>
                                 <tr>
-                                    <td><?php echo $profit['wDate'] ?></td>
-                                    <td><?php echo $profit['wTime'] ?></td>
-                                    <td class="[ LKR ]"><?php echo number_format($profit['amount'], 2, '.', ',') ?></td>
+                                    <td><?php echo $earning['title'] ?></td>
+                                    <td class="[ LKR ]"><?php echo number_format($earning['amount'], 2, '.', ',') ?></td>
+                                    <td><?php echo $earning['eDate'] ?></td>
+                                    <td><?php echo $earning['status'] ?></td>
                                 </tr>
 
                             <?php
@@ -300,9 +302,10 @@
                     <table class="[ ]">
                         <thead>
                             <tr>
-                                <th>Date</th>
-                                <th>Farmer name</th>
+                                <th>Bank</th>
                                 <th>Amount</th>
+                                <th>Date</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -311,9 +314,10 @@
                             foreach ($widthdrawals as $widthdrawal) {
                             ?>
                                 <tr>
-                                    <td><?php echo $widthdrawal['wDate'] ?></td>
-                                    <td><?php echo $widthdrawal['wTime'] ?></td>
+                                    <td><?php echo BANK[$widthdrawal['bank']] ?></td>
                                     <td class="[ LKR ]"><?php echo number_format($widthdrawal['amount'], 2, '.', ',') ?></td>
+                                    <td><?php echo $widthdrawal['wDate'] ?></td>
+                                    <td><?php echo $widthdrawal['status'] ?></td>
                                 </tr>
 
                             <?php
@@ -322,12 +326,7 @@
 
                         </tbody>
                     </table>
-
-
                 <?php
-
-
-
                 } ?>
 
             </div>
@@ -339,85 +338,121 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="<?php echo JS ?>/main.js"></script>
     <script>
-        const data = {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            datasets: [{
-                    label: 'Investments',
-                    data: [65, 59, 80, 81, 56, 55, 40],
-                    fill: false,
-                    borderColor: 'rgb(255, 99, 132)',
-                    tension: 0.1,
-                    yAxisID: 'y'
-
-                },
-                {
-                    label: 'Gain',
-                    data: [75, 20, 23, 31, 46, 95, 50],
-                    fill: false,
-                    borderColor: 'rgb(75, 192, 192)',
-                    tension: 0.1,
-                    yAxisID: 'y1'
-                }
-            ],
-        };
-
-        const config = {
-            type: 'line',
-            data: data,
-            options: {
-                responsive: true,
-                interaction: {
-                    mode: 'index',
-                    intersect: false,
-                },
-                stacked: false,
-                plugins: {},
-                scales: {
-                    y: {
-                        type: 'linear',
-                        display: true,
-                        position: 'left',
-                    },
-                    y1: {
-                        type: 'linear',
-                        display: true,
-                        position: 'right',
-                        grid: {
-                            drawOnChartArea: true,
+        fetch('<?php echo URLROOT ?>/api/investmentsVsEarningsLineChart')
+            .then(response => response.json())
+            .then(result => {
+                const lineChart = new Chart(document.getElementById('lineChart'), {
+                    type: 'line',
+                    data: result,
+                    options: {
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Investments vs Earnings (LKR)'
+                            }
                         },
-                    },
-                }
-            },
-        };
-
-        const pieData = {
-            labels: ['Fruits', 'Grains', 'Other', 'Vegetable', 'Spices'],
-            datasets: [{
-                label: 'Dataset 1',
-                data: [300, 50, 100, 40, 120],
-                backgroundColor: ['rgb(255, 99, 132)', 'rgb(255, 159, 64)', 'rgb(255, 205, 86)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)'],
-            }]
-        };
-
-        const pieConfig = {
-            type: 'pie',
-            data: pieData,
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Month'
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Investments & Earnings (LKR)'
+                                }
+                            }
+                        }
                     }
-                }
-            },
-        };
+                })
+            })
+    </script>
 
-        const ctx = document.getElementById('myChart');
-        const pieChart = document.getElementById('pieChart');
+    <script>
+        fetch('<?php echo URLROOT ?>/api/categoryVsGigsChart')
+            .then(response => response.json())
+            .then($result => {
+                const color = Chart.defaults.parsing
+                const categoryVsGigsChart = new Chart(document.getElementById('categoryVsGigsChart'), {
+                    type: 'pie',
+                    data: {
+                        labels: $result.labels,
+                        datasets: [{
+                            label: 'Category vs Gig',
+                            data: $result.data,
+                            borderWidth: 1,
+                            backgroundColor: ['#1d9a5f', '#3464d3', 'rgb(255, 140, 0)', 'rgb(0, 77, 255)', 'rgb(117, 7, 135)', 'rgb(0, 128, 38)'],
+                        }]
+                    },
+                    options: {
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Category vs Gig'
+                            }
+                        }
+                    }
 
-        new Chart(ctx, config);
-        new Chart(pieChart, pieConfig);
+                })
+            })
+    </script>
+    <script>
+        fetch('<?php echo URLROOT ?>/api/categoryVsInvestments')
+            .then(response => response.json())
+            .then($result => {
+                const categoryVsInvestment = new Chart(document.getElementById('categoryVsInvestment'), {
+                    type: 'pie',
+                    data: {
+                        labels: $result.labels,
+                        datasets: [{
+                            label: 'Category vs Investments (LKR)',
+                            data: $result.data,
+                            borderWidth: 1,
+                            backgroundColor: ['#1d9a5f', '#3464d3', 'rgb(255, 140, 0)', 'rgb(0, 77, 255)', 'rgb(117, 7, 135)', 'rgb(0, 128, 38)'],
+                        }]
+                    },
+
+                    options: {
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Category vs Investments (LKR)'
+                            }
+                        }
+                    }
+
+                })
+            })
+    </script>
+    <script>
+        fetch('<?php echo URLROOT ?>/api/categoryVsEarnings')
+            .then(response => response.json())
+            .then($result => {
+                const categoryVsEarnings = new Chart(document.getElementById('categoryVsEarnings'), {
+                    type: 'pie',
+                    data: {
+                        labels: $result.labels,
+                        datasets: [{
+                            label: 'Category vs Eearnings (LKR)',
+                            data: $result.data,
+                            borderWidth: 1,
+                            backgroundColor: ['#1d9a5f', '#3464d3', 'rgb(255, 140, 0)', 'rgb(0, 77, 255)', 'rgb(117, 7, 135)', 'rgb(0, 128, 38)'],
+                        }]
+                    },
+
+                    options: {
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Category vs Earnings (LKR)'
+                            }
+                        }
+                    }
+
+                })
+            })
     </script>
 </body>
 

@@ -54,11 +54,11 @@ class User extends Model
                         return ['status' => true, 'data' => false];
                     }
                 } catch (PDOException $e) {
-                    return ['status' => false, 'data' => $e->getMessage()];
+                    return ['status' => false, 'table' => 'user', 'data' => $e->getMessage()];
                 }
             }
         } catch (PDOException $e) {
-            return ['status' => false, 'data' => $e->getMessage()];
+            return ['status' => false, 'table' => 'login', 'data' => $e->getMessage()];
         }
     }
 
