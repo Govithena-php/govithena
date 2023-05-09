@@ -111,10 +111,10 @@
                         <div class="[ details ]">
                             <h2><small>LKR</small><br>
                                 <?php
-                                if (isset($totalInvestment)) echo number_format($totalInvestment, 2, '.', ',');
+                                if (isset($withdrawableBalance)) echo number_format($withdrawableBalance['balance'], 2, '.', ',');
                                 else echo "0.00";
                                 ?></h2>
-                            <p>Total Profit</p>
+                            <p>Withdrawable Balance</p>
                         </div>
                     </div>
                 </div>
