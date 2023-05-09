@@ -321,6 +321,7 @@ class authController extends Controller
                         'password' => $password,
                         'userType' => ACTOR::get(strtoupper($actor)),
                     ]);
+
                     if ($response['data']) {
                         $this->redirect('/auth/signin/ok');
                     }

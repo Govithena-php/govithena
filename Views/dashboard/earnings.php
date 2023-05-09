@@ -31,14 +31,15 @@
             <p>Easily track your investments and see how your portfolio has grown over time.</p>
         </div>
         <div class="inv__cards">
+
             <div class="inv__card">
                 <div class="inv__card__header">
-                    <h3>Total Investment</h3>
+                    <h3>Total Earnings</h3>
                 </div>
                 <div class="inv__card__body">
                     <h1 class="[ LKR ]">
                         <?php
-                        if (isset($totalInvestment)) echo number_format($totalInvestment, 2, '.', ',');
+                        if (isset($totalEarnings)) echo number_format($totalEarnings, 2, '.', ',');
                         else echo "0.00";
                         ?></h1>
 
@@ -55,12 +56,12 @@
 
             <div class="inv__card">
                 <div class="inv__card__header">
-                    <h3>This Month Investment</h3>
+                    <h3>This Month Earnings</h3>
                 </div>
                 <div class="inv__card__body">
                     <h1 class="[ LKR ]">
                         <?php
-                        if (isset($thisMonthInvestment)) echo number_format($thisMonthInvestment, 2, '.', ',');
+                        if (isset($thisMonthEarnings)) echo number_format($thisMonthEarnings, 2, '.', ',');
                         else echo "0.00";
                         ?>
                     </h1>
@@ -72,31 +73,47 @@
                     ?>
                 </div>
             </div>
-
             <div class="inv__card">
                 <div class="inv__card__header">
-                    <h3>Total Gigs</h3>
+                    <h3>Total Clearings</h3>
                 </div>
                 <div class="inv__card__body">
-                    <?php
-                    if (isset($totalGigs)) echo "<h1>" . $totalGigs . "</h1>";
-                    else echo "<h1>0</h1>";
-                    ?>
-                    <p>
+                    <h1 class="[ LKR ]">
                         <?php
-                        if (isset($activeGigs)) {
-                            echo $activeGigs;
-                            if ($activeGigs > 1) echo " Active gigs";
-                            else echo " Active gig";
-                        } else echo "0 Active gigs";
-                        ?>
+                        if (isset($totalClearings)) echo number_format($totalClearings, 2, '.', ',');
+                        else echo "0.00";
+                        ?></h1>
 
-                    </p>
+                    <?php
+                    if (isset($monthSinceJoined)) {
+                        echo "<p>Within " . $monthSinceJoined + 1;
+                        if ($monthSinceJoined > 1) echo " months";
+                        else echo " month";
+                    }
+                    ?>
+
                 </div>
             </div>
 
-            <div class="inv__new">
-                <a href="<?php echo URLROOT ?>/dashboard/newInvestment" class="[ button__primary ]">Invest More</a>
+            <div class="inv__card">
+                <div class="inv__card__header">
+                    <h3>Withdrawable balance</h3>
+                </div>
+                <div class="inv__card__body">
+                    <?php
+                    if (isset($withdrawalBalance)) {
+                    ?>
+                        <h1 class="LKR"><?php echo number_format($withdrawalBalance['balance'], 2, '.', ','); ?></h1>
+                        <small>Last updated on</small>
+                        <p><?php echo $withdrawalBalance['updatedDate'] ?> at <?php echo $withdrawalBalance['updatedTime'] ?></p>
+                    <?php
+                    } else {
+                    ?>
+                        <h1 class="LKR">0.00</h1>
+                    <?php
+                    }
+                    ?>
+                </div>
             </div>
         </div>
         <?php
@@ -107,29 +124,22 @@
             <form class="[ filters pt-1 ]" action="<?php echo URLROOT ?>/dashboard/investments" method="POST">
                 <div class="[ options ]">
                     <div class="[ input__control ]">
-                        <label for="fromDate">From</label>
-                        <input id="fromDate" name="fromDate" tag="fromDate" type="date">
-                    </div>
-                    <div class="[ input__control ]">
-                        <label for="toDate">To</label>
-                        <input id="toDate" name="toDate" tag="toDate" type="date">
-                    </div>
-                    <div class="[ input__control ]">
-                        <label for="category">Category</label>
-                        <select id="category" name="category">
-                            <option value="all">All</option>
-                            <option value="vegetable">Vegetable</option>
-                            <option value="fruit">Fruit</option>
-                            <option value="grains">Grains</option>
-                            <option value="spices">Spices</option>
+                        <label for="status">Status</label>
+                        <select id="status" name="status">
+                            <option value="">Any</option>
+                            <option value="CLEARING">Clearing</option>
+                            <option value="APPROVED">Approved</option>
+                            <option value="DECLINED">Declined</option>
                         </select>
                     </div>
                     <div class="[ input__control ]">
-                        <button type="submit" name="submit" class="button__primary">Apply</button>
+                        <button type="submit" name="earnings_filter_Apply" class="button__primary">Apply</button>
                     </div>
-
                 </div>
             </form>
+            <div class="inv__new">
+                <a href="<?php echo URLROOT ?>/dashboard/newInvestment" class="[ button__primary ]">Invest More</a>
+            </div>
             <hr>
             <br>
 
@@ -146,31 +156,36 @@
                                         --sm-cols: 2fr;
                                     ">
                     <div class="[ head stick_to_top ]">
-                        <form class="[ filters ]" action="<?php echo URLROOT ?>/dashboard/investments" method="POST">
-                            <div class="[ options ]">
-                                <div class="[ input__control ]">
-                                    <label for="fromDate">From</label>
-                                    <input id="fromDate" name="fromDate" tag="fromDate" type="date">
+                        <div class="flex-row-space-between">
+                            <form class="[ filters ]" action="<?php echo URLROOT ?>/dashboard/earnings/" method="POST">
+                                <div class="[ options ]">
+                                    <!-- <div class="[ input__control ]">
+                                        <label for="fromDate">From</label>
+                                        <input id="fromDate" name="fromDate" tag="fromDate" type="date">
+                                    </div>
+                                    <div class="[ input__control ]">
+                                        <label for="toDate">To</label>
+                                        <input id="toDate" name="toDate" tag="toDate" type="date">
+                                    </div> -->
+                                    <div class="[ input__control ]">
+                                        <label for="status">Status</label>
+                                        <select id="status" name="status">
+                                            <option value="">Any</option>
+                                            <option value="CLEARING">Clearing</option>
+                                            <option value="APPROVED">Approved</option>
+                                            <option value="DECLINED">Declined</option>
+                                        </select>
+                                    </div>
+                                    <div class="[ input__control ]">
+                                        <button type="submit" name="earnings_filter_Apply" class="button__primary">Apply</button>
+                                    </div>
                                 </div>
-                                <div class="[ input__control ]">
-                                    <label for="toDate">To</label>
-                                    <input id="toDate" name="toDate" tag="toDate" type="date">
-                                </div>
-                                <div class="[ input__control ]">
-                                    <label for="status">Status</label>
-                                    <select id="status" name="status">
-                                        <option value="all">Any</option>
-                                        <option value="clearing">Clearing</option>
-                                        <option value="approved">Approved</option>
-                                        <option value="declined">Declined</option>
-                                    </select>
-                                </div>
-                                <div class="[ input__control ]">
-                                    <button type="submit" name="submit" class="button__primary">Apply</button>
-                                </div>
-
+                            </form>
+                            <div class="inv__new">
+                                <a href="<?php echo URLROOT ?>/dashboard/newInvestment" class="[ button__primary ]">Invest on another gig</a>
+                                <a href="<?php echo URLROOT ?>/dashboard/newInvestment" class="[ button__danger ]">Withdarw</a>
                             </div>
-                        </form>
+                        </div>
                         <div class="[ row ]">
                             <div class="[ data ]">
                                 <p>Gig</p>

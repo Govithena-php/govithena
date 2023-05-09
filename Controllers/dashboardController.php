@@ -11,10 +11,12 @@ class dashboardController extends Controller
     private $progressModel;
     private $gigRequestModel;
     private $investmentModel;
-    private $widthdrawModel;
+    private $investorWidthdrawModel;
     private $profitModel;
     private $recentActivityModel;
     private $earningsModel;
+    private $investorBalanceModel;
+    private $bankAccountModel;
 
 
     public function __construct()
@@ -36,10 +38,12 @@ class dashboardController extends Controller
         $this->progressModel = $this->model('progress');
         $this->gigRequestModel = $this->model('gigRequest');
         $this->investmentModel = $this->model('investment');
-        $this->widthdrawModel = $this->model('widthrawl');
+        $this->investorWidthdrawModel = $this->model('investorWithdrawal');
         $this->profitModel = $this->model('profit');
         $this->recentActivityModel = $this->model('recentActivity');
         $this->earningsModel = $this->model('earnings');
+        $this->investorBalanceModel = $this->model('investorBalance');
+        $this->bankAccountModel = $this->model('bankAccount');
     }
 
     public function index()
@@ -54,7 +58,7 @@ class dashboardController extends Controller
             $props['totalInvestment'] = 0;
         }
 
-        $totalWithdrawn = $this->widthdrawModel->getTotalWithdrawnByInvestor($this->currentUser->getUid());
+        $totalWithdrawn = $this->investorWidthdrawModel->getTotalWithdrawnByInvestor($this->currentUser->getUid());
         if ($totalWithdrawn['success']) {
             $props['totalWithdrawn'] = $totalWithdrawn['data']['totalWithdrawn'];
         } else {
@@ -74,7 +78,7 @@ class dashboardController extends Controller
         $props['totalBalance'] = $totalBalance;
 
 
-        $widthdrawals = $this->widthdrawModel->fetchAllBy($this->currentUser->getUid());
+        $widthdrawals = $this->investorWidthdrawModel->fetchAllBy($this->currentUser->getUid());
         if ($widthdrawals['success']) {
             $props['widthdrawals'] = $widthdrawals['data'];
         } else {
@@ -504,13 +508,77 @@ class dashboardController extends Controller
     {
         $props = [];
 
-        $withdrawls = $this->widthdrawModel->fetchAllBy($this->currentUser->getUid());
+        $withdrawls = $this->investorWidthdrawModel->fetchAllBy($this->currentUser->getUid());
 
         if ($withdrawls['success']) {
             $props['withdrawls'] = $withdrawls['data'];
+
+            $withdrawalBalance = $this->earningsModel->getWithdrawalBalance($this->currentUser->getUid());
+            if ($withdrawalBalance['success']) {
+                $props['withdrawalBalance'] = $withdrawalBalance['data']['withdrawalBalance'];
+            } else {
+                $props['withdrawalBalance'] = 0;
+            }
+
+            $totalWithdrawn = $this->investorWidthdrawModel->getTotalWithdrawn($this->currentUser->getUid());
+            if ($totalWithdrawn['success']) {
+                $props['totalWithdrawn'] = $totalWithdrawn['data']['totalWithdrawn'];
+            } else {
+                $props['totalWithdrawn'] = 0;
+            }
+
+            $thisMonthTotalWithdrawn = $this->investorWidthdrawModel->getThisMonthTotalWithdrawn($this->currentUser->getUid());
+            if ($thisMonthTotalWithdrawn['success']) {
+                $props['thisMonthTotalWithdrawn'] = $thisMonthTotalWithdrawn['data']['thisMonthTotalWithdrawn'];
+            } else {
+                $props['thisMonthTotalWithdrawn'] = 0;
+            }
+
+            $clearingWithdrawal = $this->investorWidthdrawModel->getclearingWithdrawal($this->currentUser->getUid());
+            if ($clearingWithdrawal['success']) {
+                $props['clearingWithdrawal'] = $clearingWithdrawal['data']['clearingWithdrawal'];
+            } else {
+                $props['clearingWithdrawal'] = 0;
+            }
+
+            $withdrawalBalance = $this->investorBalanceModel->getBalanceByInvestor($this->currentUser->getUid());
+            if ($withdrawalBalance['success']) {
+                $props['withdrawalBalance'] = $withdrawalBalance['data'];
+            } else {
+                $props['withdrawalBalance'] = 0;
+            }
+
+            $bankAccounts = $this->bankAccountModel->getBankDetails($this->currentUser->getUid());
+            if ($bankAccounts['success']) {
+                $props['bankAccounts'] = $bankAccounts['data'];
+            }
+        } else {
+            $this->redirect('/error/somethingWentWrong');
         }
         $this->set($props);
         $this->render('withdrawals');
+    }
+
+    public function process_withdrawal()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $amount = new Input(POST, 'amount');
+            $account = new Input(POST, 'account');
+
+            $response = $this->investorWidthdrawModel->newWithdrawal([
+                'id' => new UID(PREFIX::WITHDRAWAL),
+                'investorId' => $this->currentUser->getUid(),
+                'amount' => $amount,
+                'bankAccount' => $account
+            ]);
+            if ($response['success']) {
+                $this->redirect('/dashboard/withdrawals');
+                $alert = new Alert($type = "success", $icon = "", $message = "Withdrawal ongoing. Please wait for approval.");
+                Session::set(['withdrawal_request_alert' => $alert]);
+            } else {
+                $this->redirect('/error/somethingWentWrong');
+            }
+        }
     }
 
 
@@ -589,12 +657,44 @@ class dashboardController extends Controller
     public function earnings()
     {
         $props = [];
-        $filters = new Filter(['status'], ['fromDate', 'toDate']);
 
-        $earnings = $this->earningsModel->getEarningsByInvestor($this->currentUser->getUid());
+        $status = new Input(POST, 'status');
+        $earnings = $this->earningsModel->getEarningsByInvestor($this->currentUser->getUid(), $status);
         if ($earnings['success']) {
             $props['earnings'] = $earnings['data'];
+
+            $totalEarning = $this->earningsModel->getTotalEarningsByInvestor($this->currentUser->getUid());
+            if ($totalEarning['success']) {
+                $props['totalEarnings'] = $totalEarning['data']['totalEarnings'];
+            } else {
+                $props['totalEarnings'] = 0;
+            }
+
+            $thisMonthEarning = $this->earningsModel->getThisMonthEarningsByInvestor($this->currentUser->getUid());
+            if ($thisMonthEarning['success']) {
+                $props['thisMonthEarnings'] = $thisMonthEarning['data']['thisMonthTotalEarnings'];
+            } else {
+                $props['thisMonthEarnings'] = 0;
+            }
+
+            $totalClearing = $this->earningsModel->getTotalClearingByInvestor($this->currentUser->getUid());
+            if ($totalClearing['success']) {
+                $props['totalClearings'] = $totalClearing['data']['totalClearings'];
+            } else {
+                $props['totalClearings'] = 0;
+            }
+
+            $withdrawalBalance = $this->investorBalanceModel->getBalanceByInvestor($this->currentUser->getUid());
+            if ($withdrawalBalance['success']) {
+                $props['withdrawalBalance'] = $withdrawalBalance['data'];
+            } else {
+                $props['withdrawalBalance'] = 0;
+            }
+        } else {
+            $this->redirect('/error/somethingWentWrong');
         }
+
+
         $this->set($props);
         $this->render('earnings');
     }
