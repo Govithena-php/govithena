@@ -5,9 +5,42 @@ class investorWithdrawal
     public function fetchAllBy($id)
     {
         try {
-            $sql = "SELECT amount, DATE(timestamp) AS wDate, TIME(timestamp) AS wTime, status  FROM investor_withdrawal WHERE investorId = :id";
+            $sql = "SELECT iw.amount, iw.bankAccount, DATE(iw.timestamp) AS wDate, TIME(iw.timestamp) AS wTime, iw.status, ba.bank, ba.branch  FROM investor_withdrawal iw INNER JOIN bank_account ba ON iw.bankAccount = ba.accountNumber WHERE iw.investorId = :id";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
+            $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $res];
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
+
+    public function fetchAllByFilter($id, $status, $fromDate, $toDate)
+    {
+        try {
+            $data = ['id' => $id];
+            $sql = "SELECT iw.amount, iw.bankAccount, DATE(iw.timestamp) AS wDate, TIME(iw.timestamp) AS wTime, iw.status, ba.bank, ba.branch  FROM investor_withdrawal iw INNER JOIN bank_account ba ON iw.bankAccount = ba.accountNumber WHERE iw.investorId = :id ";
+            if ($status != '') {
+                $sql .= " AND iw.status = :status ";
+                $data['status'] = $status;
+            }
+            if ($fromDate != '') {
+                $sql .= " AND DATE(iw.timestamp) >= :fromDate ";
+                $data['fromDate'] = $fromDate;
+            }
+
+            if ($toDate != '') {
+                $sql .= " AND DATE(iw.timestamp) <= :toDate ";
+                $data['toDate'] = $toDate;
+            }
+
+
+            // echo $sql;
+            // print_r($data);
+            // die();
+
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute($data);
             $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return ['success' => true, 'data' => $res];
         } catch (PDOException $e) {

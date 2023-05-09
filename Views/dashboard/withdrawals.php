@@ -153,14 +153,14 @@
         if (!isset($withdrawls) || empty($withdrawls)) {
         ?>
             <div class="[ grid ][ filters ]" md="1" lg="2" gap="2">
-                <form method="POST" action="<?php echo URLROOT ?>/dashbaord/withdrawals" class="[ grid ][ options ]" sm="1" md="6" lg="6" gap="1">
+                <form method="POST" action="<?php echo URLROOT ?>/dashboard/withdrawals" class="[ grid ][ options ]" sm="1" md="6" lg="6" gap="1">
                     <div class="[ input__control ]">
-                        <label for="from">From</label>
-                        <input id="from" type="date" name="fromDate">
+                        <label for="fromDate">From</label>
+                        <input id="fromDate" type="date" name="fromDate">
                     </div>
                     <div class="[ input__control ]">
-                        <label for="to">To</label>
-                        <input id="to" type="date" name="toDate">
+                        <label for="toDate">To</label>
+                        <input id="toDate" type="date" name="toDate">
                     </div>
                     <div class="[ input__control ]">
                         <label for="status">Status</label>
@@ -187,55 +187,50 @@
         ?>
 
             <div class="[ grid__table ]" style="
-                --xl-cols: 1fr 1fr 1fr 1fr;
+                --xl-cols: 2fr 1.5fr 1fr 1fr 1fr 1.5fr 1fr;
                 --lg-cols: 1fr 1fr 1fr 1fr;
                 --md-cols: 1fr 1fr;
                 --sm-cols: 1fr;
                  ">
                 <div class="[ head stick_to_top ]">
                     <div class="[ grid ][ filters ]" md="1" lg="2" gap="2">
-                        <div class="[ grid ][ options ]" sm="1" md="6" lg="6" gap="1">
+                        <form method="POST" action="<?php echo URLROOT ?>/dashboard/withdrawals" class="[ grid ][ options ]" sm="1" md="6" lg="6" gap="1">
                             <div class="[ input__control ]">
-                                <label for="from">From :</label>
-                                <input id="from" type="date">
+                                <label for="fromDate">From</label>
+                                <input id="fromDate" type="date" name="fromDate">
                             </div>
                             <div class="[ input__control ]">
-                                <label for="to">To :</label>
-                                <input id="to" type="date">
+                                <label for="toDate">To</label>
+                                <input id="toDate" type="date" name="toDate">
                             </div>
                             <div class="[ input__control ]">
-                                <label for="location">Location :</label>
-                                <select id="location">
-                                    <option value="all">All</option>
-                                    <option value="colombo">Colombo</option>
-                                    <option value="galle">Galle</option>
-                                    <option value="kandy">Kandy</option>
-                                    <option value="matara">Matara</option>
-                                    <option value="nuwaraeliya">Nuwara Eliya</option>
-                                    <option value="trincomalee">Trincomalee</option>
+                                <label for="status">Status</label>
+                                <select id="status" name="status">
+                                    <option value="">All</option>
+                                    <option value="CLEARING">clearing</option>
+                                    <option value="APPROVED">Approved</option>
+                                    <option value="DECLINED">Declined</option>
                                 </select>
                             </div>
                             <div class="[ input__control ]">
-                                <label for="category">Category :</label>
-                                <select id="category">
-                                    <option value="all">All</option>
-                                    <option value="vegetable">Vegetable</option>
-                                    <option value="fruit">Fruit</option>
-                                    <option value="grains">Grains</option>
-                                    <option value="spices">Spices</option>
-                                </select>
+                                <button type="submit" name="apply">Apply</button>
                             </div>
-                            <div class="[ input__control ]">
-                                <button type="button">Apply</button>
-                            </div>
-
-                        </div>
+                        </form>
 
                         <div class="inv__new">
-                            <button onclick="openWithdrawalModal()" class="[ button__danger ]">Withdraw</button>
+                            <button type="button" onclick="openWithdrawalModal()" class="[ button__danger ]">Withdraw</button>
                         </div>
                     </div>
                     <div class="[ row ]">
+                        <div class="[ data ]">
+                            <p>Bank</p>
+                        </div>
+                        <div class="[ data ]">
+                            <p>Account Number</p>
+                        </div>
+                        <div class="[ data ]">
+                            <p>Branch</p>
+                        </div>
                         <div class="[ data ]">
                             <p>Date</p>
                         </div>
@@ -252,20 +247,29 @@
                 </div>
                 <div class="[ body ]">
                     <?php
-                    foreach ($withdrawls as $withdrawl) {
+                    foreach ($withdrawls as $withdrawal) {
                     ?>
                         <div class="[ row ]">
                             <div class="[ data ]">
-                                <p><?php echo $withdrawl['wDate'] ?></p>
+                                <p><?php echo BANK[$withdrawal['bank']] ?></p>
                             </div>
                             <div class="[ data ]">
-                                <p><?php echo $withdrawl['wTime'] ?></p>
+                                <p><?php echo $withdrawal['bankAccount'] ?></p>
                             </div>
                             <div class="[ data ]">
-                                <p class="[ LKR ]"><?php echo number_format($withdrawl['amount'], 2, '.', ',') ?></p>
+                                <p><?php echo $withdrawal['branch'] ?></p>
                             </div>
                             <div class="[ data ]">
-                                <p><?php echo $withdrawl['status'] ?></p>
+                                <p><?php echo $withdrawal['wDate'] ?></p>
+                            </div>
+                            <div class="[ data ]">
+                                <p><?php echo $withdrawal['wTime'] ?></p>
+                            </div>
+                            <div class="[ data ]">
+                                <p class="[ LKR ]"><?php echo number_format($withdrawal['amount'], 2, '.', ',') ?></p>
+                            </div>
+                            <div class="[ data ]">
+                                <p class="tag"><?php echo $withdrawal['status'] ?></p>
                             </div>
                         </div>
                     <?php
@@ -283,6 +287,7 @@
     require_once("footer.php");
     ?>
     <script src="<?php echo JS ?>/main.js"></script>
+    <script src="<?php echo JS ?>/filter/toDateFromDate.js"></script>
     <script>
         function openWithdrawalModal() {
             const withdrawalModal = document.getElementById("withdrawalModal")

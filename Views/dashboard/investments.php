@@ -96,7 +96,7 @@
             </div>
 
             <div class="inv__new">
-                <a href="<?php echo URLROOT ?>/dashboard/newInvestment" class="[ button__primary ]">Invest More</a>
+                <a href="<?php echo URLROOT ?>/dashboard/newInvestment" class="[ button__primary ]">Invest</a>
             </div>
         </div>
         <?php

@@ -508,9 +508,14 @@ class dashboardController extends Controller
     {
         $props = [];
 
-        $withdrawls = $this->investorWidthdrawModel->fetchAllBy($this->currentUser->getUid());
+        $status = new Input(POST, 'status');
+        $fromDate = new Input(POST, 'fromDate');
+        $toDate = new Input(POST, 'toDate');
+
+        $withdrawls = $this->investorWidthdrawModel->fetchAllByFilter($this->currentUser->getUid(), $status, $fromDate, $toDate);
 
         if ($withdrawls['success']) {
+
             $props['withdrawls'] = $withdrawls['data'];
 
             $withdrawalBalance = $this->earningsModel->getWithdrawalBalance($this->currentUser->getUid());
@@ -553,6 +558,8 @@ class dashboardController extends Controller
                 $props['bankAccounts'] = $bankAccounts['data'];
             }
         } else {
+            var_dump($withdrawls);
+            die();
             $this->redirect('/error/somethingWentWrong');
         }
         $this->set($props);
