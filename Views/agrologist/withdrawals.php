@@ -116,7 +116,7 @@
                         <div class="pt-1 flex flex-row flex-sb-c">
                             <div> <i class="fa fa-building-columns"></i> Bank</div>
                             <div style="color: grey;" class='fw-6'>
-                                <?php echo $account[0]['bank'] ?>
+                                <?php echo BANK[$account[0]['bank']] ?>
                             </div>
                         </div>
                         <div class="pt-1 flex flex-row flex-sb-c">

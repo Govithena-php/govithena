@@ -153,19 +153,19 @@
                                         </div>
                                         <div class="wrapper">
 
-                                        <input type="text" name="lastName" class="" placeholder="Last Name"
-                                            value="<?php echo $agrologist[0]['lastName'] ?>">
+                                            <input type="text" name="lastName" class="" placeholder="Last Name"
+                                                value="<?php echo $agrologist[0]['lastName'] ?>">
                                         </div>
                                         <!-- <div class="flex flex-row flex-sb-c"> -->
                                         <div class="wrapper">
 
-                                        <input type="text" name="phoneNumber" class="" placeholder="Mobile"
-                                            value="<?php echo $agrologist[0]['phoneNumber'] ?>">
-</div>
-<div class="wrapper">
+                                            <input type="text" name="phoneNumber" class="" placeholder="Mobile"
+                                                value="<?php echo $agrologist[0]['phoneNumber'] ?>">
+                                        </div>
+                                        <div class="wrapper">
 
                                             <input type="text" name="NIC" class="" placeholder="NIC"
-                                            value="<?php echo $agrologist[0]['NIC'] ?>">
+                                                value="<?php echo $agrologist[0]['NIC'] ?>">
                                         </div>
                                         <!-- <div class="flex flex-row flex-sb-c"> -->
                                         <input type="text" name="addressLine1" class="" placeholder="Address Line1"
@@ -252,7 +252,7 @@
                                 <form class="form pt-1" action="<?php echo URLROOT ?>/agrologist/myaccount"
                                     method="post" enctype="multipart/form-data">
                                     <div class="[ grid ]" sm="1" lg="1" gap="1">
-                                        <input type="file" name="gn_certificate" class="">
+                                        <input type="file" name="gn_certificate" class="" required>
                                         <input type="text" name="description" class="" placeholder="Description">
                                     </div>
                                     <button type="submit" name="add_qualification_details_btn"
@@ -317,7 +317,7 @@
                         } else {
                             ?>
                             <div style="color: grey" class="pt-1">Bank</div>
-                            <?php echo "<div>" . ucwords($account[0]['bank']) . "</div>"; ?>
+                            <?php echo "<div>" . BANK[$account[0]['bank']] . "</div>"; ?>
                             <div style="color: grey" class="pt-1">Account Number</div>
                             <?php echo "<div>" . $account[0]['accountNumber'] . "</div>"; ?>
                             <div style="color: grey" class="pt-1">Branch</div>
@@ -337,10 +337,15 @@
                                 <h3>Add Account Details</h3>
                                 <form class="form pt-1" action="<?php echo URLROOT ?>/agrologist/myaccount"
                                     method="post" enctype="multipart/form-data">
-                                    <input type="text" name="bank_name" class="" placeholder="Bank Name"><br>
-                                    <input type="text" name="account_number" class="" placeholder="Account Number"><br>
-                                    <input type="text" name="branch" class="" placeholder="Branch"><br>
-                                    <input type="text" name="branch_code" class="" placeholder="Branch Code"><br>
+                                    <select id="bank_name" name="bank_name" required>
+                                        <?php foreach (BANK as $key => $value)
+                                            echo "<option value='$key'>$value</option>";
+                                        ?>
+                                    </select><br>
+                                    <!-- <input type="text" name="bank_name" class="" placeholder="Bank Name"><br> -->
+                                    <input type="text" name="account_number" class="" placeholder="Account Number" required><br>
+                                    <input type="text" name="branch" class="" placeholder="Branch" required><br>
+                                    <input type="text" name="branch_code" class="" placeholder="Branch Code" required><br>
                                     <button type="submit" name="add_account_details_btn"
                                         class="btn uppercase">Submit</button>
                                 </form>
@@ -354,14 +359,20 @@
                                 <h3>Edit Account Details</h3>
                                 <form class="form pt-1" action="<?php echo URLROOT ?>/agrologist/myaccount"
                                     method="post" enctype="multipart/form-data">
-                                    <input type="text" name="bank_name" class="" placeholder="Bank Name"
-                                        value="<?php echo $account[0]['bank'] ?>"><br>
+                                    <!-- <input type="text" name="bank_name" class="" placeholder="Bank Name"
+                                        value="<?php echo $account[0]['bank'] ?>"><br> -->
+                                    <select id="bank_name" name="bank_name" required>
+                                        <?php foreach (BANK as $key => $value)
+                                            echo "<option value='$key'>$value</option>";
+                                        ?>
+                                    </select><br>
                                     <input type="text" name="account_number" class="" placeholder="Account Number"
-                                        value="<?php echo $account[0]['accountNumber'] ?>"><br>
+                                        value="<?php echo $account[0]['accountNumber'] ?>" required><br>
                                     <input type="text" name="branch" class="" placeholder="Branch"
-                                        value="<?php echo $account[0]['branch'] ?>"><br>
+                                        value="<?php echo $account[0]['branch'] ?>" required><br>
                                     <input type="text" name="branch_code" class="" placeholder="Branch Code"
-                                        value="<?php echo $account[0]['branchCode'] ?>"><br>
+                                        value="<?php echo $account[0]['branchCode'] ?>" requierd><br>
+
                                     <button type="submit" name="edit_account_details_btn"
                                         class="btn uppercase">Submit</button>
                                 </form>
