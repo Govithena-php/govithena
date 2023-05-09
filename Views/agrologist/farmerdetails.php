@@ -10,7 +10,8 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
-    <link rel="stylesheet" href="<?php echo CSS ?>/agrologist/myaccount.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/imageUploader.css">
+    <!-- <link rel="stylesheet" href="<?php echo CSS ?>/agrologist/myaccount.css"> -->
     <link rel="stylesheet" href="<?php echo CSS ?>/agrologist/farmerdetails.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
@@ -62,14 +63,14 @@
                         </div> -->
                         <div class="details_img">
                             <ul>
-                            <?php if ($week['image'] != null) { ?>
-                                <li><img src="<?php echo UPLOADS . $week['image']; ?>" alt="image" /></li>
-                            <?php
-                            }
-                            ?>
-                            <!-- <img src="<?php echo UPLOADS . $week['image']; ?>" alt="image" /> -->
-                            <li><img src="<?php echo UPLOADS . $week['thumbnail']; ?>" alt="thumbnail" /></li>
-                        </ul>
+                                <?php if ($week['image'] != null) { ?>
+                                    <li><img src="<?php echo UPLOADS . $week['image']; ?>" alt="image" /></li>
+                                    <?php
+                                }
+                                ?>
+                                <!-- <img src="<?php echo UPLOADS . $week['image']; ?>" alt="image" /> -->
+                                <li><img src="<?php echo UPLOADS . $week['thumbnail']; ?>" alt="thumbnail" /></li>
+                            </ul>
                         </div>
                     </div>
 
@@ -88,37 +89,46 @@
             <div class="modal-content">
                 <span class="close close_modal1">&times;</span>
                 <h3>Edit Details</h3>
-                <form class="form pt-1" action="<?php echo URLROOT . '/agrologist/farmers/' . $fid . '/' . $gid ?>"
+                <form class="pt-1" action="<?php echo URLROOT . '/agrologist/farmers/' . $fid . '/' . $gid ?>"
                     method="post" enctype="multipart/form-data">
-                    <div class="form-inline">
-                        <!-- <div class="flex flex-row form-inline"> -->
-                        <!-- <div class="flex flex-column title"> -->
-                        <label for="week" class="fw-5">Title</label>
-                        <input type='text' name="week" placeholder='Week 01'>
-                        <!-- </div> -->
-                        <!-- <div class="flex flex-column"> -->
-                        <label for="week" class="fw-5">Date</label>
-                        <input type="date" name="date" max="<?php echo date('Y-m-d', time()) ?>" id="date">
-                        <!-- </div> -->
-                        <!-- </div> -->
-                    </div>
+                    <div class="[ grid ]" sm="1" lg="2" gap="1">
+                        <div class="[ input__control ]">
 
-                    <div class="[ form__control image__uploader ]">
-                        <div class="[ title ]">
-                            <p>Upload Images <span>*</span></p>
+                            <label for="week" class="fw-5">Title</label>
+                            <input type='text' name="week" placeholder='Week 01'>
+                        </div>
+                        <div class="[ input__control ]">
+                            <label for="week" class="fw-5">Date</label>
+                            <input type="date" name="date" max="<?php echo date('Y-m-d', time()) ?>" id="date">
+                        </div>
+                        <!-- </div> -->
+                        <!-- </div> -->
+                        <div class="[ input__control ]">
+                            <label for="images[]" class="fw-5">Upload Images <span>*</span></label>
+
+                            <div class="[ form__control image__uploader ]">
+                                <!-- <div class="[ title ]"> -->
+                                <!-- </div> -->
+
+                                <div class="[ text__box ]">
+                                    <div class="[ text__box_preview ]"></div>
+                                    <img class="[ upload__svg ]" src="<?php echo IMAGES ?>svg/upload.svg" />
+                                    <p>Drag and drop your images here<br>or</p>
+                                    <label class="[ browse__btn ]" for="image-uploader">Browse</label>
+                                    <input id="image-uploader" class="text__box_input" type="file" name="images[]"
+                                        multiple>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="[ input__control ]">
+                            <label for="description" class="fw-5">Desciption</label>
+                            <textarea name="description" value='Description' placeholder='Description'></textarea>
                         </div>
 
-                        <div class="[ text__box ]">
-                            <div class="[ text__box_preview ]"></div>
-                            <img class="[ upload__svg ]" src="<?php echo IMAGES ?>svg/upload.svg" />
-                            <p>Drag and drop your images here<br>or</p>
-                            <label class="[ browse__btn ]" for="image-uploader">Browse</label>
-                            <input id="image-uploader" class="text__box_input" type="file" name="images[]" multiple>
-                        </div>
+
                     </div>
-                    <!-- </div> -->
-                    <textarea name="description" value='Description' placeholder='Description'></textarea>
-                    <button type="submit" name="update_details_btn" class="btn uppercase">Add details</button>
+                    <button type="submit" name="update_details_btn" class="btn uppercase btn-primary add_details_btn">Add
+                        details</button>
                 </form>
             </div>
 

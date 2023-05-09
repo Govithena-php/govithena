@@ -58,7 +58,7 @@
 .accordian .accordian-heading {
   position: relative;
   padding: 0 0;
-  font-size: 23px;
+  font-size: 18px;
   color: black;
   cursor: pointer;
 }
@@ -179,6 +179,95 @@
   float: left;
   list-style: none;
   /* padding-right:10px;  */
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 10000; /* Sit on top */
+  /* padding-top: 30px;  */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  /* margin-bottom: 30px; */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.input__control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.input__control label {
+  font-weight: 600;
+}
+
+.input__control input {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.input__control input:focus {
+  outline: 1px solid var(--clr-primary);
+}
+
+.input__control select {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.input__control select:focus {
+  outline: 1px solid var(--clr-primary);
+}
+
+.input__control textarea {
+  height: 270px;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.input__control textarea:focus {
+  outline: 1px solid var(--clr-primary);
+}
+
+.add_details_btn {
+  width: 100%;
 }
 
 
