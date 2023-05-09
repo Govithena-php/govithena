@@ -59,7 +59,7 @@ class Gig extends Model
     public function Allgig($id)
     {
         try {
-            $sql = "SELECT gig.gigId, gig.farmerId, gig.title, gig.thumbnail, gig.capital, gig.city, gig.category, gig.status, gig.landArea, gig.description, investor_gig.investorId, user.firstName as fName, user.lastName as lName FROM gig INNER JOIN investor_gig ON gig.farmerId = investor_gig.farmerId INNER JOIN user ON user.uid = investor_gig.investorId WHERE gig.farmerId = :id ORDER BY createdAt DESC";
+            $sql = "SELECT gig.gigId, gig.farmerId, gig.title, gig.thumbnail, gig.capital, gig.city, gig.category, gig.status, gig.landArea, gig.description, gig.investorId, user.firstName as fName, user.lastName as lName FROM gig INNER JOIN user ON gig.investorId = user.uid WHERE gig.farmerId = :id ORDER BY createdAt DESC";
             // $sql = "SELECT * FROM gig WHERE farmerId = :id ORDER BY createdAt DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);

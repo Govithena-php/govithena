@@ -6,7 +6,6 @@ class profileController extends Controller
     private $userModel;
     private $gigModel;
     private $reviewByInvestorModel;
-    // private $investorGigModel;
 
     public function __construct()
     {
@@ -14,7 +13,6 @@ class profileController extends Controller
         $this->userModel = $this->model('user');
         $this->gigModel = $this->model('gig');
         $this->reviewByInvestorModel = $this->model('reviewByInvestor');
-        // $this->investorGigModel = $this->model('investorGig');
 
 
         if (!Session::isLoggedIn()) {
@@ -29,10 +27,10 @@ class profileController extends Controller
         if (isset($params) && !empty($params[0])) {
             list($uid) = $params;
 
-            $previousWorks = $this->gigModel->getCompletedGigsByFarmer($uid);
-            if ($previousWorks['success']) {
-                $props['previousWorks'] = $previousWorks['data'];
-            }
+            // $previousWorks = $this->gigModel->getCompletedGigsByFarmer($uid);
+            // if ($previousWorks['success']) {
+            //     $props['previousWorks'] = $previousWorks['data'];
+            // }
 
             $user = $this->userModel->getUserById($uid);
 
@@ -59,6 +57,8 @@ class profileController extends Controller
 
             $reviewCount = $this->reviewByInvestorModel->getReviewCountByFarmer($uid);
             $qCounts = $this->reviewByInvestorModel->getQuestionsCountsByFarmer($uid);
+            // var_dump($reviewCount);
+            // die();
             if ($reviewCount['success']) {
                 $totalReviews = $reviewCount['data']['totalReviewCount'];
                 if ($qCounts['success']) {
