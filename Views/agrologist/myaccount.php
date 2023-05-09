@@ -144,7 +144,7 @@
                                 <h3>Edit Details</h3>
                                 <form class="form pt-1" action="<?php echo URLROOT ?>/agrologist/myaccount"
                                     method="post" enctype="multipart/form-data">
-                                    <div class="[ grid ]" sm="1" lg="2" gap="1">
+                                    <div class="[ grid ]" sm="1" lg="2" gap="2">
 
                                         <!-- <div class="flex flex-row" style="justify-content: space-between"> -->
                                         <div class="wrapper">
@@ -153,19 +153,19 @@
                                         </div>
                                         <div class="wrapper">
 
-                                        <input type="text" name="lastName" class="" placeholder="Last Name"
-                                            value="<?php echo $agrologist[0]['lastName'] ?>">
+                                            <input type="text" name="lastName" class="" placeholder="Last Name"
+                                                value="<?php echo $agrologist[0]['lastName'] ?>">
                                         </div>
                                         <!-- <div class="flex flex-row flex-sb-c"> -->
                                         <div class="wrapper">
 
-                                        <input type="text" name="phoneNumber" class="" placeholder="Mobile"
-                                            value="<?php echo $agrologist[0]['phoneNumber'] ?>">
-</div>
-<div class="wrapper">
+                                            <input type="text" name="phoneNumber" class="" placeholder="Mobile"
+                                                value="<?php echo $agrologist[0]['phoneNumber'] ?>">
+                                        </div>
+                                        <div class="wrapper">
 
                                             <input type="text" name="NIC" class="" placeholder="NIC"
-                                            value="<?php echo $agrologist[0]['NIC'] ?>">
+                                                value="<?php echo $agrologist[0]['NIC'] ?>">
                                         </div>
                                         <!-- <div class="flex flex-row flex-sb-c"> -->
                                         <input type="text" name="addressLine1" class="" placeholder="Address Line1"
