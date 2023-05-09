@@ -93,7 +93,7 @@ class Gig extends Model
     public function create($data)
     {
         try {
-            $sql = "INSERT INTO `gig` (`gigId`, `title`, `description`, `category`, `image`, `capital`, 'profitMargin', `timePeriod`, `location`, `landArea`, `farmerId`) VALUES (:gigId, :title, :description, :category, :image, :capital, :profitMargin, :timePeriod, :location, :landArea, :farmerId)";
+            $sql = "INSERT INTO `gig` (`gigId`, `title`, `description`, `category`, `image`, `capital`, 'profitMargin', `cropCycle`, `city`, `landArea`, `farmerId`) VALUES (:gigId, :title, :description, :category, :image, :capital, :profitMargin, :timePeriod, :location, :landArea, :farmerId)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
             return true;
@@ -101,6 +101,36 @@ class Gig extends Model
             echo $e->getMessage();
             die();
             return false;
+        }
+    }
+
+    public function updateDetails($data){
+    // var_dump($data);
+    // die();
+        try {
+            // $sql = "UPDATE gig SET status = 'RESERVED', investorId = :investorId, reservedDate = CURRENT_TIMESTAMP WHERE gigId = :id";
+            $sql = "UPDATE gig SET title = :title, description = :description, category = :category, capital = :capital, profitMargin = :profitMargin, cropCycle = :cropCycle, city = :city, landArea = :landArea WHERE gigId = :id";
+
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute($data);
+            return ['success' => true, 'data' => true];
+        } catch (PDOException $e) {
+            echo $e->getMessage();die();
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
+
+    public function editGig($gigId){
+        try {
+            $sql = "SELECT * FROM gig WHERE gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId]);
+            $gig = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $gig];
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return ['success' => false, 'error' => $e->getMessage()];
         }
     }
 
