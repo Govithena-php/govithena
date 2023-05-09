@@ -25,6 +25,10 @@
     aspect-ratio: 1;
 }
 
+.special__announcment .icon i {
+    font-size: 2rem;
+}
+
 .special__announcment h3 {
     font-size: 1.2rem;
     font-weight: 600;
