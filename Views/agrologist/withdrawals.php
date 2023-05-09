@@ -101,39 +101,47 @@
 
             </div>
             <div class="withdraw__card">
-                <form action="<?php echo URLROOT . '/agrologist/withdrawals' ?>" method='POST'>
-                    <div class="pt-1 flex flex-row flex-sb-c">
-                        <div> <i class=" fa fa-building-columns"></i> Account Number</div>
-                        <div style="color: grey;" class='fw-6'>
-                            <?php echo $account[0]['accountNumber'] ?>
+                <?php
+                if (!isset($account) || empty($account)) {
+                    require(COMPONENTS . "dashboard/noDataFound.php");
+                } else {
+                    ?>
+                    <form action="<?php echo URLROOT . '/agrologist/withdrawals' ?>" method='POST'>
+                        <div class="pt-1 flex flex-row flex-sb-c">
+                            <div> <i class=" fa fa-building-columns"></i> Account Number</div>
+                            <div style="color: grey;" class='fw-6'>
+                                <?php echo $account[0]['accountNumber'] ?>
+                            </div>
                         </div>
-                    </div>
-                    <div class="pt-1 flex flex-row flex-sb-c">
-                        <div> <i class="fa fa-building-columns"></i> Bank</div>
-                        <div style="color: grey;" class='fw-6'>
-                            <?php echo $account[0]['bank'] ?>
+                        <div class="pt-1 flex flex-row flex-sb-c">
+                            <div> <i class="fa fa-building-columns"></i> Bank</div>
+                            <div style="color: grey;" class='fw-6'>
+                                <?php echo $account[0]['bank'] ?>
+                            </div>
                         </div>
-                    </div>
-                    <div class="pt-1 flex flex-row flex-sb-c">
-                        <div> <i class="fa fa-building-columns"></i> Branch</div>
-                        <div style="color: grey;" class='fw-6'>
-                            <?php echo $account[0]['branch'] ?>
+                        <div class="pt-1 flex flex-row flex-sb-c">
+                            <div> <i class="fa fa-building-columns"></i> Branch</div>
+                            <div style="color: grey;" class='fw-6'>
+                                <?php echo $account[0]['branch'] ?>
+                            </div>
                         </div>
-                    </div>
-                    <div class="pt-1 flex flex-row flex-sb-c">
-                        <div> <i class="fa fa-building-columns"></i> Branch Code</div>
-                        <div style="color: grey;" class='fw-6'>
-                            <?php echo $account[0]['branchCode'] ?>
+                        <div class="pt-1 flex flex-row flex-sb-c">
+                            <div> <i class="fa fa-building-columns"></i> Branch Code</div>
+                            <div style="color: grey;" class='fw-6'>
+                                <?php echo $account[0]['branchCode'] ?>
+                            </div>
                         </div>
-                    </div>
-                    <div class="pt-2">
-                        <label for="withdraw_amount" class="pb-1">Amount <span class="LKR"></span></label>
-                        <input type="text" name="withdraw_amount" placeholder="Withdraw Amount"
-                            value="<?php echo $balance ?>">
-                        <a href="?withdraw=confirm" name="transfer_btn" id="transfer_btn"
-                            class="btn btn-primary uppercase mt-2">Transfer</a>
-                    </div>
-                </form>
+                        <div class="pt-2">
+                            <label for="withdraw_amount" class="pb-1">Amount <span class="LKR"></span></label>
+                            <input type="text" name="withdraw_amount" placeholder="Withdraw Amount"
+                                value="<?php echo $balance ?>">
+                            <a href="?withdraw=confirm" name="transfer_btn" id="transfer_btn"
+                                class="btn btn-primary uppercase mt-2">Transfer</a>
+                        </div>
+                    </form>
+                    <?php
+                }
+                ?>
 
                 <div id="edit_detials_modal" class="modal">
 
@@ -141,7 +149,8 @@
                         <span class="close close_modal1">&times;</span>
                         <h3 class="fw-6">Transfer</h3>
                         <p class="pt-1">Are you sure you want to transfer?</p>
-                        <form class="form pt-1" action="<?php echo URLROOT . '/agrologist/withdrawals?withdraw=confirm' ?>" method="post"
+                        <form class="form pt-1"
+                            action="<?php echo URLROOT . '/agrologist/withdrawals?withdraw=confirm' ?>" method="post"
                             enctype="multipart/form-data">
                             <button type="submit" name="transfer_confirm_btn" class="btn uppercase">Transfer</button>
                         </form>
@@ -246,7 +255,7 @@
                                 }
                                 ?>
                             </div>
-                        <?php
+                            <?php
                         }
                         ?>
                     </div>

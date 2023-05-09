@@ -735,7 +735,7 @@ class Agrologist extends Model
     public function getAccountDetails()
     {
         try {
-            $sql = "SELECT accountNumber, bank, branch, branchCode FROM bank_account WHERE user=:userId AND status='ACTIVE'";
+            $sql = "SELECT accountNumber, bank, branch, branchCode FROM bank_account WHERE userId=:userId AND status='ACTIVE'";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
                 'userId' => Session::get('user')->getUid()
@@ -753,7 +753,7 @@ class Agrologist extends Model
     public function insertAccountDetails($data)
     {
         try {
-            $sql = "INSERT INTO  bank_account (accountNumber, user, bank, branch, branchCode, status) VALUES (:accountNumber, :userId, :bank, :branch, :branchCode, 'ACTIVE')";
+            $sql = "INSERT INTO  bank_account (accountNumber, userId, bank, branch, branchCode, status) VALUES (:accountNumber, :userId, :bank, :branch, :branchCode, 'ACTIVE')";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
                 'accountNumber' => $data['accountNumber'],
@@ -773,7 +773,7 @@ class Agrologist extends Model
     public function updateAccountDetails($data)
     {
         try {
-            $sql = "UPDATE bank_account SET accountNumber=:accountNumber, bank=:bank, branch=:branch, branchCode=:branchCode WHERE user=:userId";
+            $sql = "UPDATE bank_account SET accountNumber=:accountNumber, bank=:bank, branch=:branch, branchCode=:branchCode WHERE userId=:userId";
             $req = Database::getBdd()->prepare($sql);
             $req->execute([
                 'accountNumber' => $data['accountNumber'],
