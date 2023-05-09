@@ -114,6 +114,18 @@ class farmerController extends Controller
         $this->render("gigs");
     }
 
+    public function gigView($params = [])
+    {
+        $props = [];
+        if (isset($params[0]) && !empty($params[0])) {
+            $gigId = $params[0];
+            $gig = $this->gigModel->fetchBy($gigId);
+            $props['gig'] = $gig;
+        }
+        $this->set($props);
+        $this->render("gigView");
+    }
+
     function index()
     {
         // require(ROOT . 'Models/gig.php');
@@ -339,6 +351,8 @@ class farmerController extends Controller
         
 
     }
+
+
     public function declineInvestor($params)
     {
         if (isset($params)) {

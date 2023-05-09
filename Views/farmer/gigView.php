@@ -98,7 +98,25 @@
                 <div class ="gigpic">
                     <img src="<?php echo UPLOADS . '/profilePictures/' . $p['thumbnail']?>" alt="Picture">
                 </div>
+                <div class="namecol">
+                    <p>Title :</p>
+                    <p><?php echo $p['status']?></p>
 
+                    <p>Initial Investment :</p>
+                    <p><?php echo $p['status']?></p>
+
+                    <p>Location :</p>
+                    <p><?php echo $p['status']?></p>
+
+                    <p>Status :</p>
+                    <p><?php echo $p['status']?></p>
+
+                    <p>Land Area :</p>
+                    <p><?php echo $p['status']?></p>
+
+                </div>
+                <p>Description :</p>
+                    <p><?php echo $p['status']?></p>
             </div>
 
         
