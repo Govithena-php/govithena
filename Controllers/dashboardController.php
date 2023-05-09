@@ -389,9 +389,11 @@ class dashboardController extends Controller
     {
         $props = [];
 
-        $filters = new Filter(['category'], ['fromDate', 'toDate']);
+        $category = new Input(POST, 'category');
+        $fromDate = new Input(POST, 'fromDate');
+        $toDate = new Input(POST, 'toDate');
 
-        $investments = $this->investmentModel->fetchAllByUsingFilters($this->currentUser->getUid(), $filters);
+        $investments = $this->investmentModel->fetchAllByUsingFilters($this->currentUser->getUid(), $category, $fromDate, $toDate);
 
         if ($investments['success']) {
             $props['investments'] = $investments['data'];
@@ -666,7 +668,10 @@ class dashboardController extends Controller
         $props = [];
 
         $status = new Input(POST, 'status');
-        $earnings = $this->earningsModel->getEarningsByInvestor($this->currentUser->getUid(), $status);
+        $fromDate = new Input(POST, 'fromDate');
+        $toDate = new Input(POST, 'toDate');
+
+        $earnings = $this->earningsModel->getEarningsByInvestorByFilter($this->currentUser->getUid(), $status, $fromDate, $toDate);
         if ($earnings['success']) {
             $props['earnings'] = $earnings['data'];
 

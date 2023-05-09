@@ -15,14 +15,30 @@ class Investment extends Model
         }
     }
 
-    public function fetchAllByUsingFilters($id, $filter)
+    public function fetchAllByUsingFilters($id, $category, $fromDate, $toDate)
     {
         try {
-            $sql = "SELECT investment.id, investment.investorId, investment.gigId, investment.amount, DATE(investment.timestamp) as investedDate, TIME(investment.timestamp) as investedTime, investment.description, user.firstName, user.lastName, user.image, gig.title, gig.thumbnail, gig.category FROM investment INNER JOIN user ON investment.farmerId = user.uid INNER JOIN gig ON investment.gigId = gig.gigId ";
-            $sql = $filter->apply($sql);
-            $sql .= " AND investment.investorId = :id ORDER BY investment.timestamp DESC";
+
+            $data = ["id" => $id];
+
+            $sql = "SELECT investment.id, investment.investorId, investment.gigId, investment.amount, DATE(investment.timestamp) as investedDate, TIME(investment.timestamp) as investedTime, investment.description, user.firstName, user.lastName, user.image, gig.title, gig.thumbnail, gig.category FROM investment INNER JOIN user ON investment.farmerId = user.uid INNER JOIN gig ON investment.gigId = gig.gigId WHERE investment.investorId = :id ";
+
+            if ($category != '') {
+                $sql .= "AND gig.category = :category ";
+                $data['category'] = $category;
+            }
+            if ($fromDate != '') {
+                $sql .= "AND DATE(investment.timestamp) >= :fromDate ";
+                $data['fromDate'] = $fromDate;
+            }
+            if ($toDate != '') {
+                $sql .= "AND DATE(investment.timestamp) <= :toDate ";
+                $data['toDate'] = $toDate;
+            }
+            $sql .= " ORDER BY investment.timestamp DESC";
+
             $stmt = Database::getBdd()->prepare($sql);
-            $stmt->execute(['id' => $id]);
+            $stmt->execute($data);
             $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return ['success' => true, 'data' => $row];
         } catch (PDOException $e) {

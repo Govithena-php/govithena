@@ -117,7 +117,7 @@
                     <div class="[ input__control ]">
                         <label for="category">Category</label>
                         <select id="category" name="category">
-                            <option value="all">All</option>
+                            <option value="">All</option>
                             <option value="vegetable">Vegetable</option>
                             <option value="fruit">Fruit</option>
                             <option value="grains">Grains</option>
@@ -159,7 +159,7 @@
                                 <div class="[ input__control ]">
                                     <label for="category">Category</label>
                                     <select id="category" name="category">
-                                        <option value="all">All</option>
+                                        <option value="">All</option>
                                         <option value="vegetable">Vegetable</option>
                                         <option value="fruit">Fruit</option>
                                         <option value="grains">Grains</option>

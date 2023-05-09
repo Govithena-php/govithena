@@ -124,6 +124,14 @@
             <form class="[ filters pt-1 ]" action="<?php echo URLROOT ?>/dashboard/investments" method="POST">
                 <div class="[ options ]">
                     <div class="[ input__control ]">
+                        <label for="fromDate">From</label>
+                        <input id="fromDate" name="fromDate" tag="fromDate" type="date">
+                    </div>
+                    <div class="[ input__control ]">
+                        <label for="toDate">To</label>
+                        <input id="toDate" name="toDate" tag="toDate" type="date">
+                    </div>
+                    <div class="[ input__control ]">
                         <label for="status">Status</label>
                         <select id="status" name="status">
                             <option value="">Any</option>
@@ -159,14 +167,14 @@
                         <div class="flex-row-space-between">
                             <form class="[ filters ]" action="<?php echo URLROOT ?>/dashboard/earnings/" method="POST">
                                 <div class="[ options ]">
-                                    <!-- <div class="[ input__control ]">
+                                    <div class="[ input__control ]">
                                         <label for="fromDate">From</label>
                                         <input id="fromDate" name="fromDate" tag="fromDate" type="date">
                                     </div>
                                     <div class="[ input__control ]">
                                         <label for="toDate">To</label>
                                         <input id="toDate" name="toDate" tag="toDate" type="date">
-                                    </div> -->
+                                    </div>
                                     <div class="[ input__control ]">
                                         <label for="status">Status</label>
                                         <select id="status" name="status">
