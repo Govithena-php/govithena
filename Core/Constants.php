@@ -47,6 +47,7 @@ class STATUS
     const COMPLETED = "COMPLETED";
     const ACCEPTED = "ACCEPTED";
     const REJECTED = "REJECTED";
+    const PAID = "PAID";
 }
 
 

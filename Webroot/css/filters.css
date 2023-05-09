@@ -72,7 +72,7 @@
 
 
 .filters .search button {
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1rem;
     border: 1px solid var(--clr-primary);
     border-radius: 0 5px 5px 0;
     background-color: var(--clr-primary);

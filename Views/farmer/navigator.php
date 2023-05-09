@@ -182,7 +182,7 @@ function highlight($active, $link)
             </li>
 
             <li>
-                <a href="<?php echo URLROOT ?>/farmer/techassistantfirst" class="<?php highlight($active, "techassistantfirst") ?>">
+                <a href="<?php echo URLROOT ?>/farmer/techassistant" class="<?php highlight($active, "techassistant") ?>">
                     <i class="bi bi-people"></i>
                     <p>Tech Assistants</p>
                 </a>

@@ -59,7 +59,7 @@ class Gig extends Model
     public function Allgig($id)
     {
         try {
-            $sql = "SELECT gig.gigId, gig.farmerId, gig.title, gig.thumbnail, gig.capital, gig.city, gig.category, gig.status, gig.landArea, gig.description, investor_gig.investorId, user.firstName as fName, user.lastName as lName FROM gig INNER JOIN investor_gig ON gig.farmerId = investor_gig.farmerId INNER JOIN user ON user.uid = investor_gig.investorId WHERE gig.farmerId = :id ORDER BY createdAt DESC";
+            $sql = "SELECT gig.gigId, gig.farmerId, gig.title, gig.thumbnail, gig.capital, gig.city, gig.category, gig.status, gig.landArea, gig.description, gig.investorId, user.firstName as fName, user.lastName as lName FROM gig INNER JOIN user ON user.uid = gig.investorId WHERE gig.farmerId = :id AND gig.status = 'RESERVED' ORDER BY gig.createdAt DESC";
             // $sql = "SELECT * FROM gig WHERE farmerId = :id ORDER BY createdAt DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
@@ -111,6 +111,22 @@ class Gig extends Model
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['gigId' => $gigId]);
             $gig = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $gig];
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
+
+
+    public function gigimg($gigId)
+    {
+        try {
+            $sql = "SELECT * FROM gig_image WHERE gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId]);
+            $gig = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return ['success' => true, 'data' => $gig];
         } catch (PDOException $e) {
             echo $e->getMessage();

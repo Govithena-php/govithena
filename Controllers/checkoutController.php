@@ -4,7 +4,6 @@ use function PHPSTORM_META\type;
 
 class checkoutController extends Controller
 {
-    private $investorGigModel;
     private $investmentModel;
     private $gigRequestModel;
     private $currentUser;
@@ -30,7 +29,6 @@ class checkoutController extends Controller
         $this->header['email'] = Session::get('username');
 
         $this->currentUser = Session::get('user');
-        $this->investorGigModel = $this->model('investorGig');
         $this->investmentModel = $this->model('investment');
         $this->gigRequestModel = $this->model('gigRequest');
         $this->gigModel = $this->model('gig');
