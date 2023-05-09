@@ -51,6 +51,10 @@ class agrologistController extends Controller
         $GigCountThreeMonthsBefore = $agrologist->getGigCountThreeMonthsBefore();
         $GigCountFourMonthsBefore = $agrologist->getGigCountFourMonthsBefore();
         $GigCountFiveMonthsBefore = $agrologist->getGigCountFiveMonthsBefore();
+        $GigCountPerCategory = $agrologist->getGigsPerCategory();
+        $incomeLimit = $agrologist->getIncomeLimit();
+        $withdrawalsLimit = $agrologist->getWithdrawalsLimit();
+
 
         // echo json_encode($notifications);
         //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>". $notifications . "</h1>";
@@ -81,6 +85,9 @@ class agrologistController extends Controller
             'gigCountThreeMonthsBefore' => $GigCountThreeMonthsBefore,
             'gigCountFourMonthsBefore' => $GigCountFourMonthsBefore,
             'gigCountFiveMonthsBefore' => $GigCountFiveMonthsBefore,
+            'gigCountPerCategory' => $GigCountPerCategory,
+            'incomeLimit' => $incomeLimit,
+            'withdrawalsLimit' => $withdrawalsLimit,
         ]);
         $this->render('index');
     }
@@ -238,9 +245,17 @@ class agrologistController extends Controller
                     'q8' => new Input(POST, 'q8'),
                     'q9' => new Input(POST, 'q9'),
                 ];
-                var_dump($data);die;
+                // var_dump($data);die;
 
-                $agr->save($data);
+                $review = $agr->save($data);
+
+                if ($review) {
+                    $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully updated!.');
+
+                } else {
+                    $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong.');
+                }
+                Session::set(['review_agrologist_alert' => $alert]);
 
                 echo json_encode($farmerName);
 

@@ -84,6 +84,10 @@ body {
 
 }
 
+.form > .input_wrapper {
+  width: 100%;
+}
+
 .form input:focus {
     outline: none;
     border-color: #707070;
@@ -189,5 +193,12 @@ body {
     linear-gradient(90deg, gold var(--percent), rgba(0,0,0,0.2) var(--percent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
