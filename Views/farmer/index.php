@@ -137,15 +137,21 @@
                             foreach($products as $p){
                                 ?>
                             <div class="row">
+                                
                                 <div class="data farmer__">
                                     <div class="farmerimg">
-                                        <img src="<?php echo UPLOADS . '/profilePictures/' . $p['thumbnail']?>" alt="Picture">
+                                    <a class="underlinetext" href="<?php echo URLROOT ?>/farmer/gigView/<?php echo $p['gigId']?>">
+                                        <!-- <img src="<?php echo UPLOADS . '/profilePictures/' . $p['thumbnail']?>" alt="Picture"> -->
+                                        <img src="<?php echo UPLOADS .'/' .$p['thumbnail']?>" alt="Picture">
+                                    </a>
                                     </div>
                                 </div>
                                 <div class="data ">
                                     <div class="namecol">
+                                    <a class="underlinetext" href="<?php echo URLROOT ?>/farmer/gigView/<?php echo $p['gigId']?>">
                                         <h1><p><?php echo $p['title'] ?></p></h1>
                                         <p><?php echo $p['category']?></p>
+                                    </a>
                                     </div>
                                 </div>
                                 <div class="data">
@@ -165,10 +171,9 @@
                                 </div>
                                 <div class="data flex-right">
                                     <div class="actions">
-                                        <a href="#" class="btn btn-primary">Edit</a>
+                                       <a href="<?php echo URLROOT . "/farmer/editGig/" . $p['gigId'] ?>" class="btn btn-primary">Edit</a>
                                         <!-- <button onclick="openAcceptModal('<?php echo $p['gigId']?>')" class="button__primary">Accept</button> -->
                                         <button onclick="openRejectModal('<?php echo $p['gigId']?>')" class="button__danger">Delete</button>
-                                        <!-- <a href="<?php echo URLROOT . "/farmer/deleteGig/" . $p['gigId'] ?>" class="btn btn-danger">Delete</a> -->
                                     </div>
                                 </div>
                             </div>

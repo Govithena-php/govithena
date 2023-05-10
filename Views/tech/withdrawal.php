@@ -218,7 +218,7 @@
     <?php
     require_once("footer.php");
     ?>
-    <script src="<?php echo JS ?>/dashboard/dashboard.js"></script>
+    <script src="<?php echo JS ?>/main.js"></script>
     <script>
         function openWithdrawalModal() {
             const withdrawalModal = document.getElementById("withdrawalModal")

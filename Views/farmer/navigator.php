@@ -69,7 +69,7 @@ function highlight($active, $link)
                     <button onclick="toggleProfileMenu()">
                         <div class="[ image ]">
                             <!-- locahost/webroot/Uploads/tharasara.png -->
-                            <img src="<?php echo UPLOADS . '/' . Session::get('user')->getImage(); ?>" alt="profile">
+                            <img src="<?php echo UPLOADS . '/profilePictures/' . Session::get('user')->getImage(); ?>" <?php echo DEFAULT_PROFILE_PICTURE ?>>
                         </div>
                     </button>
                 </div>

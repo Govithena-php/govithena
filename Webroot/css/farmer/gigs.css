@@ -357,4 +357,9 @@ input[type="select"] {
 .remove-border{
     border-left:  none !important;
   }
+
+  .underlinetext{
+    text-decoration: none;
+    color: #000;
+  }
   

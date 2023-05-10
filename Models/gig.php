@@ -19,7 +19,7 @@ class Gig extends Model
     public function fetchAll($order = "ASC", $limit = null)
     {
         try {
-            $sql = "SELECT gig.gigId, gig.farmerId, gig.title, gig.thumbnail, gig.capital, gig.city, gig.category, gig.cropCycle, user.firstName, user.lastName FROM gig INNER JOIN user ON gig.farmerId = user.uid";
+            $sql = "SELECT gig.gigId, gig.farmerId, gig.title, gig.thumbnail, gig.capital, gig.city, gig.category, gig.cropCycle, gig.profitMargin, user.firstName, user.lastName FROM gig INNER JOIN user ON gig.farmerId = user.uid WHERE gig.status = 'ACTIVE'";
             if ($order == "ASC") {
                 $sql .= " ORDER BY createdAt ASC";
             } else {
@@ -59,7 +59,7 @@ class Gig extends Model
     public function Allgig($id)
     {
         try {
-            $sql = "SELECT gig.gigId, gig.farmerId, gig.title, gig.thumbnail, gig.capital, gig.city, gig.category, gig.status, gig.landArea, gig.description, gig.investorId, user.firstName as fName, user.lastName as lName FROM gig INNER JOIN user ON user.uid = gig.investorId WHERE gig.farmerId = :id AND gig.status = 'RESERVED' ORDER BY gig.createdAt DESC";
+            $sql = "SELECT gig.gigId, gig.farmerId, gig.title, gig.thumbnail, gig.capital, gig.city, gig.category, gig.status, gig.landArea, gig.description, gig.investorId, user.firstName as fName, user.lastName as lName FROM gig INNER JOIN user ON gig.investorId = user.uid WHERE gig.farmerId = :id ORDER BY createdAt DESC";
             // $sql = "SELECT * FROM gig WHERE farmerId = :id ORDER BY createdAt DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
@@ -93,7 +93,7 @@ class Gig extends Model
     public function create($data)
     {
         try {
-            $sql = "INSERT INTO `gig` (`gigId`, `title`, `description`, `category`, `image`, `capital`, 'profitMargin', `timePeriod`, `location`, `landArea`, `farmerId`) VALUES (:gigId, :title, :description, :category, :image, :capital, :profitMargin, :timePeriod, :location, :landArea, :farmerId)";
+            $sql = "INSERT INTO `gig` (`gigId`, `title`, `description`, `category`, `image`, `capital`, 'profitMargin', `cropCycle`, `city`, `landArea`, `farmerId`) VALUES (:gigId, :title, :description, :category, :image, :capital, :profitMargin, :timePeriod, :location, :landArea, :farmerId)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
             return true;
@@ -101,6 +101,39 @@ class Gig extends Model
             echo $e->getMessage();
             die();
             return false;
+        }
+    }
+
+    public function updateDetails($data)
+    {
+        // var_dump($data);
+        // die();
+        try {
+            // $sql = "UPDATE gig SET status = 'RESERVED', investorId = :investorId, reservedDate = CURRENT_TIMESTAMP WHERE gigId = :id";
+            $sql = "UPDATE gig SET title = :title, description = :description, category = :category, capital = :capital, profitMargin = :profitMargin, cropCycle = :cropCycle, city = :city, landArea = :landArea WHERE gigId = :id";
+
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute($data);
+            return ['success' => true, 'data' => true];
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
+
+    public function editGig($gigId)
+    {
+        try {
+            $sql = "SELECT * FROM gig WHERE gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId]);
+            $gig = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $gig];
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return ['success' => false, 'error' => $e->getMessage()];
         }
     }
 
@@ -477,6 +510,33 @@ class Gig extends Model
             return ['success' => true, 'data' => $row];
         } catch (PDOException $e) {
             return ['success' => false, 'message' => $e->getMessage()];
+        }
+    }
+
+    public function getCategoryVsGigsByInvestor($id)
+    {
+        try {
+            $sql = "SELECT count(roi.roiId) as count, g.category FROM return_of_investment roi INNER JOIN gig g ON roi.gigId = g.gigId WHERE roi.investorId = :investorId AND (roi.status = 'APPROVED' OR roi.status = 'CLEARING') GROUP BY g.category";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['investorId' => $id]);
+            $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $res];
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
+
+    public function fetchReservedGigsForDashboard($id)
+    {
+        try {
+            $sql = "SELECT gig.gigId, gig.title, gig.city, gig.thumbnail, gig.status, user.firstName, user.lastName, user.city FROM gig INNER JOIN user ON gig.farmerId = user.uid WHERE gig.investorId = :id AND gig.status = 'RESERVED' OR gig.status = 'UNDER_COMPLETION' ORDER BY gig.createdAt DESC";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['id' => $id]);
+            $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $row];
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return ['success' => false, 'data' => $e->getMessage()];
         }
     }
 }
