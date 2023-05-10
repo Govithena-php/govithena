@@ -144,7 +144,7 @@
                                 <h3>Edit Details</h3>
                                 <form class="form pt-1" action="<?php echo URLROOT ?>/agrologist/myaccount"
                                     method="post" enctype="multipart/form-data">
-                                    <div class="[ grid ]" sm="1" lg="2" gap="1">
+                                    <div class="[ grid ]" sm="1" lg="2" gap="2">
 
                                         <!-- <div class="flex flex-row" style="justify-content: space-between"> -->
                                         <div class="wrapper">

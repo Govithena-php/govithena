@@ -2,7 +2,7 @@
 class testController extends Controller
 {
 
-    public function index($param)
+    public function t($param)
     {
 
         // echo $_GET['name'];

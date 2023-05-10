@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/table.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
 
-    <link rel="stylesheet" href="<?php echo CSS ?>/farmer/gigs.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/farmer/gigView.css">
 
     <title>Dashboard | Farmer</title>
 </head>
@@ -27,8 +27,7 @@
     ?>
 
     <div class="[ container ][ gigs ]" container-type="dashboard-section">
-        <div class="content">
-            <div class=" ff-poppins">
+            <!-- <div class=" ff-poppins">
                 <form class="form" action="" method="post" enctype="multipart/form-data">
                     <div class="row1">
                         <div class="form__control">
@@ -94,9 +93,40 @@
                     <button name="createGig" class="submitbtn" type="submit">Create</button>
 
                 </form>
+            </div> -->
+            <div class="card">
+                <?php
+                    foreach ($gigimgs as $gigimg) {
+                ?>
+                <div class ="gigpic">
+                    <img src="<?php echo UPLOADS . '/profilePictures/' . $gigimg?>" alt="Picture">
+                    <!-- <img src="<?php echo UPLOADS . '/progress/' . $img ?>"> -->
+                </div>
+                <?php
+                    }
+                ?>
+                <div class="namecol">
+                    <p>Title :</p>
+                    <p><?php echo $gig['title']?></p>
+
+                    <p>Initial Investment :</p>
+                    <p class="LKR"><?php echo number_format($p['capital'], 2, '.', ',')?></p>
+
+                    <p>Location :</p>
+                    <p><?php echo $gig['city']?></p>
+
+                    <p>Status :</p>
+                    <p><?php echo $gig['status']?></p>
+
+                    <p>Land Area :</p>
+                    <p><?php echo $gig['landArea']?></p>
+
+                </div>
+                <p>Description :</p>
+                    <p><?php echo $gig['description']?></p>
             </div>
 
-        </div>
+        
     </div>
 
     <?php

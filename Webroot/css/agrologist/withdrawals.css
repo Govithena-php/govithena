@@ -136,10 +136,10 @@
 } */
 
 .withdraw__card button {
-    width: 30%;
+    width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    margin-left: 250px;
+    /* margin-left: 250px; */
     margin-top: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
