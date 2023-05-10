@@ -747,7 +747,14 @@ class farmerController extends Controller
                 'message' => new Input(POST, 'message'),
             ];
 
+            $agrRequestReview = [
+                'reviewId' => new UID(PREFIX::REVIEW),
+                'agrologistId' => new Input(POST, 'agrologistId'),
+                'farmerId' => $this->currentUser->getUid()
+            ];
+
             $response = $this->farmerModel->sendAgrologistRequest($data);
+            $this->farmerModel->sendAgrologistRequestRating($agrRequestReview);
 
             if ($response['status']) {
                 $alert = new Alert($type = 'success', $icon = "", $message = "Request sent successfully");
