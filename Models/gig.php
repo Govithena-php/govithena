@@ -19,7 +19,7 @@ class Gig extends Model
     public function fetchAll($order = "ASC", $limit = null)
     {
         try {
-            $sql = "SELECT gig.gigId, gig.farmerId, gig.title, gig.thumbnail, gig.capital, gig.city, gig.category, gig.cropCycle, user.firstName, user.lastName FROM gig INNER JOIN user ON gig.farmerId = user.uid";
+            $sql = "SELECT gig.gigId, gig.farmerId, gig.title, gig.thumbnail, gig.capital, gig.city, gig.category, gig.cropCycle, gig.profitMargin, user.firstName, user.lastName FROM gig INNER JOIN user ON gig.farmerId = user.uid WHERE gig.status = 'ACTIVE'";
             if ($order == "ASC") {
                 $sql .= " ORDER BY createdAt ASC";
             } else {

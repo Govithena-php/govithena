@@ -133,9 +133,28 @@ nav {
     margin-top: 2rem;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 1rem;
-
 }
+
+.contact_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* width: fit-content; */
+    border: none;
+    outline: none;
+    text-decoration: none;
+    background-color: var(--clr-primary);
+    color: var(--clr-light);
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.9rem;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
 
 .email {
     text-transform: lowercase !important;

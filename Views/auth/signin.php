@@ -18,9 +18,9 @@
 <body>
     <div class="[ login ]">
         <div class="[ banner ]">
-            <img src="<?php echo URLROOT ?>/Webroot/images/bg.jpg" alt="banner" />
+            <img src="<?php echo IMAGES ?>/temp/fruits.jpg" alt="banner" />
             <div class="[ banner__content ]">
-                <h1>Sow the seeds of prosperity,<br>Invest in Farming for a Brighter Future</h1>
+                <h1>Sow the seeds of prosperity,<br>Invest in Farming for a Brighter Future.</h1>
             </div>
         </div>
         <div class="[ content ]">
