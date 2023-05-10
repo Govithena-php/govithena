@@ -119,7 +119,7 @@
 
             <div class="[ relative ][ card ]" order="1">
                 <div class="[ absolute ][ image ]">
-                    <img src="<?php echo IMAGES ?>/temp/18.jpg" alt="category" />
+                    <img src="<?php echo IMAGES ?>/temp/fruits.jpg" alt="category" />
                 </div>
                 <div class="[ content ]">
                     <h3>Fruits</h3>
@@ -149,21 +149,21 @@
 
             <div class="[ relative ][ card ]" order="5">
                 <div class="[ absolute ][ image ]">
-                    <img src="<?php echo IMAGES ?>/temp/15.jpg" alt="category" />
+                    <img src="<?php echo IMAGES ?>/temp/mushroom.jpg" alt="category" />
                 </div>
                 <div class="[ content ]">
-                    <h3>Category 1</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+                    <h3>Mushroom</h3>
+                    <p>Mushrooming profits: Dive into the fascinating world of mushroom cultivation and watch your investment multiply!</p>
                 </div>
             </div>
 
             <div class="[ relative ][ card ]" order="6">
                 <div class="[ absolute ][ image ]">
-                    <img src="<?php echo IMAGES ?>/temp/15.jpg" alt="category" />
+                    <img src="<?php echo IMAGES ?>/temp/flowers.jpg" alt="category" />
                 </div>
                 <div class="[ content ]">
-                    <h3>Category 1</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+                    <h3>Flowers</h3>
+                    <p>Blooming with opportunity: Invest in the vibrant beauty of flower farms and let your investments blossom with prosperity!ho</p>
                 </div>
             </div>
 
@@ -176,43 +176,47 @@
     ?>
         <div class="[ container ][ popular__gig ]" container-type="section">
             <div class="[ header ]">
-                <h1>Popular Gigs</h1>
+                <h2>Some of the Gigs available</h2>
             </div>
 
             <div class="[ grid ]" gap="1" sm="1" md="2" lg="4">
                 <?php
-                foreach ($gigs as $gig) {
-                    $imageURL = UPLOADS . $gig["thumbnail"];
+                foreach ($gigs as $result) {
+                    $imageURL = UPLOADS . $result["thumbnail"];
                 ?>
-                    <div class="[ result__card ]">
-                        <div class="[ card__img ]">
 
-                            <img src="<?php echo $imageURL ?>" alt="test" />
-                            <div class="[ farmer__name ]">
-                                <a class="famer_page_btn" href="<?php echo URLROOT . "/profile/" . $gig['farmerId'] ?>"><?php echo $gig['firstName'] . " " . $gig['lastName'] ?></a>
-                                <p><?php echo $gig['category'] ?></p>
+                    <div class="[ gig__card ]">
+                        <div class="[ top ]">
+                            <a href="<?php echo URLROOT . "/gig/" . $result['gigId'] ?>">
+                                <img src="<?php echo $imageURL ?>">
+                            </a>
+                            <div class="[ farmer__category ]">
+                                <a href="<?php echo URLROOT . "/profile/" . $result['farmerId'] ?>"><?php echo $result['firstName'] . " " . $result['lastName'] ?></a>
+                                <p><?php echo $result['category'] ?></p>
+                            </div>
+                            <div class="[ profit__margin ]">
+                                <p><?php echo $result['profitMargin'] ?>%</p>
+                                <small>Profit margin</small>
                             </div>
                         </div>
-                        <div class="[ card__content ]">
-                            <div class="[ flex ]">
-                                <a class="[ card__link text-dec-none mb-1 fs-5 text-dark fw-6 ]" href="<?php echo URLROOT . "/gig/" . $gig['gigId'] ?>">
-                                    <?php echo $gig['title'] ?>
+                        <div class="[ bottom ]">
+                            <div class="[ gig__title ]">
+                                <a class="[ gig__title_link limit-text-2 ]" href="<?php echo URLROOT . "/gig/" . $result['gigId'] ?>">
+                                    <?php echo $result['title'] ?>
                                 </a>
-                                <p class="[ sub-heading ]">LKR <?php echo $gig['capital'] ?></p>
                             </div>
-                            <div class="[ flex ]">
-                                <div>
-                                    <small>Location :</small>
-                                    <p><?php echo $gig['city'] ?></p>
+                            <div class="[ investmet__location ]">
+                                <div class="[ item ]">
+                                    <small>Initial investment :</small>
+                                    <p class="[ LKR ]"><?php echo number_format($result['capital'], 2, '.', ',') ?></p>
                                 </div>
-                                <div>
-                                    <small>Time Period :</small>
-                                    <p><?php echo $gig['cropCycle'] ?> Months</p>
+                                <div class="[ item ]">
+                                    <small>Location :</small>
+                                    <p><?php echo $result['city'] ?></p>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 <?php
                 }
 

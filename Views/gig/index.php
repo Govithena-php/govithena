@@ -99,7 +99,7 @@ function render_stars($stars, $outof)
                     <h3>About The Farmer</h3>
                     <div class="[ farmer__image_name ]">
                         <div class="[ farmer__image ]">
-                            <img src="<?php echo UPLOADS . $farmer['image']; ?>" />
+                            <img src="<?php echo UPLOADS . '/profilePictures/' . $farmer['image']; ?>" />
                         </div>
                         <a href="<?php echo URLROOT . "/profile/" .  $farmer['uid'] ?>" class="[ farmer__name ]">
                             <h3><?php echo $farmer['firstName'] . " " . $farmer['lastName'] ?></h3>

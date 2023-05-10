@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/table.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
 
-    <link rel="stylesheet" href="<?php echo CSS ?>/farmer/gigView.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/farmer/gigs.css">
 
     <title>Dashboard | Farmer</title>
 </head>
@@ -27,37 +27,43 @@
     ?>
 
     <div class="[ container ][ gigs ]" container-type="dashboard-section">
-            <!-- <div class=" ff-poppins">
-                <form class="form" action="" method="post" enctype="multipart/form-data">
+        <div class="content">
+            <div class=" ff-poppins">
+                <form class="form" action="<?php echo URLROOT ?>/farmer/updateGig"  method="post" enctype="multipart/form-data">
                     <div class="row1">
                         <div class="form__control">
                             <label>Title : </label>
-                            <input type="text" name="title" placeholder="Title">
+                            <input type="text" name="title" placeholder="Title" value="<?php echo $gig['title']?>">
+
+
+
+
+
                         </div>
                         <div class="form__control">
                             <label>Land Area (Hectare) : </label>
-                            <input type="text" name="landArea" placeholder="Land Area">
+                            <input type="text" name="landArea" placeholder="Land Area" value="<?php echo $gig['landArea']?>">
                         </div>
                     </div>
 
                     <div class="row1">
                         <div class="form__control">
                             <label>Amount (LKR): </label>
-                            <input type="text" name="capital" placeholder="Amount">
+                            <input type="text" name="capital" placeholder="Amount" value="<?php echo $gig['capital']?>">
                         </div>
                         <div class="form__control">
                             <label>Time Period (Months) : </label>
-                            <input type="text" name="timePeriod" placeholder="Time Period">
+                            <input type="text" name="timePeriod" placeholder="Time Period" value="<?php echo $gig['cropCycle']?>">
                         </div>
                     </div>
                     <div class="row1">
                         <div class="form__control">
                             <label>Location : </label>
-                            <input type="text" name="location" placeholder="Location">
+                            <input type="text" name="location" placeholder="Location" value="<?php echo $gig['city']?>">
                         </div>
                         <div class="form__control">
                             <label>category : </label>
-                            <select id="select-list" name="category" class="itemlst">
+                            <select id="select-list" name="category" class="itemlst" value="<?php echo $gig['category']?>" >
                                 <option value=''>What are you growing?</option>
                                 <option value='vegetable'>Vegetable</option>
                                 <option value='fruits'>Fruits</option>
@@ -69,14 +75,14 @@
                     <div class="row2">
                         <div class="form__control">
                             <label>Profit Margin: </label>
-                            <input type="text" name="profitMargin" placeholder="Profit Margin">
+                            <input type="text" name="profitMargin" placeholder="Profit Margin" value="<?php  echo $gig['profitMargin']?>">
                         </div>
                     </div>
                     <div>
                         <label>Description : </label>
-                        <textarea id="w3review" name="description" rows="4" cols="72" placeholder="Description..." style="background-color: rgba(189, 189, 189, 0.16);"></textarea>
+                        <textarea id="w3review" name="description" rows="4" cols="72" placeholder="Description..." style="background-color: rgba(189, 189, 189, 0.16);" ><?php  echo $gig['description']?></textarea>
                     </div>
-
+<!-- 
                     <div class="[ form__control image__uploader ]">
                         <div class="[ title ]">
                             <p>Upload Images <span>*</span></p>
@@ -89,51 +95,13 @@
                             <label class="[ browse__btn ]" for="image-uploader">Browse</label>
                             <input id="image-uploader" class="text__box_input" type="file" name="images[]" multiple>
                         </div>
-                    </div>
-                    <button name="createGig" class="submitbtn" type="submit">Create</button>
-
-                </form>
-            </div> -->
-            <div class="card">
-                <div class="namerow">
-                
-                <div class ="gigpic">
-                    <img src="<?php echo UPLOADS .'/' .$gig['thumbnail']?>" alt="Picture">
-                    <?php
-                        foreach ($gigimgs as $gigimg) {
-                    ?>
+                    </div> -->
+                    <button name="updateGig" class="submitbtn" type="submit" value="<?php  echo $gig['gigId']?>">Save</button>
                     
-                    <img src="<?php echo UPLOADS .'/' .$gigimg?>" alt="Picture">
-                    <!-- <img src="<?php echo UPLOADS . '/progress/' . $img ?>"> -->
-                    <?php
-                    }
-                    ?>
-                </div>
-
-                </div>
-                <div class="namecol">
-                    <h3><b>Title :</b></h3>
-                    <p class="pname"><?php echo $gig['title']?></p>
-
-                    <h3><b>Initial Investment :</b></h3>
-                    <p class="LKR pname"><?php echo number_format($gig['capital'], 2, '.', ',')?></p>
-
-                    <h3><b>Location :</b></h3>
-                    <p class="pname"><?php echo $gig['city']?></p>
-
-                    <h3><b>Status :</b></h3>
-                    <p class="pname"><?php echo $gig['status']?></p>
-
-                    <h3><b>Land Area :</b></h3>
-                    <p class="pname"><?php echo $gig['landArea']?></p>
-
-                    <h3><b>Description :</b></h3>
-                    <p class="pname"><?php echo $gig['description']?></p>
-                </div>
-
+                </form>
             </div>
 
-        
+        </div>
     </div>
 
     <?php
