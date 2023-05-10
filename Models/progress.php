@@ -29,20 +29,23 @@ class Progress
     }
 
 
-    public function create($data)
+    public function createNewProgress($data)
     {
         try {
-            $sql = "INSERT INTO gig_progress (`progressId`, `userId`, `gigId`, `subject`, `description`) VALUES (:progressId, :userId, :gigId, :subject, :description)";
+            $sql = "INSERT INTO gig_progress(progressId, userId, userType, gigId, subject, description) VALUES(:progressId, :userId, :userType, :gigId, :subject, :description)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
                 'progressId' => $data['progressId'],
                 'userId' => $data['userId'],
+                'userType' => $data['userType'],
                 'gigId' => $data['gigId'],
                 'subject' => $data['subject'],
                 'description' => $data['description']
             ]);
             return ['success' => true];
         } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
             return ['success' => false, 'error' => $e->getMessage()];
         }
     }

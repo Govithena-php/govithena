@@ -243,14 +243,19 @@ class techController extends Controller
                 $subject = new Input(POST, 'subject');
                 $description = new Input(POST, 'description');
 
-                $response = $this->progressModel->create([
+                $data = [
                     'progressId' => $progressId,
                     'gigId' => $gigId,
                     'userId' => $this->currentUser->getUid(),
+                    'userType' => 'TECHASSISTANT',
                     'subject' => $subject,
                     'description' => $description
-                ]);
+                ];
 
+                // var_dump($data);
+
+                $response = $this->progressModel->createNewProgress($data);
+                // var_dump($response);die();
                 if ($response['success']) {
                     $images = $this->progressImageHandler->upload('images');
                     if (!empty($images)) {
@@ -263,14 +268,14 @@ class techController extends Controller
                             if ($res['success']) {
                                 $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully added progress.');
                             } else {
-                                $alert = new Alert($type = 'success', $icon = "", $message = 'Failed to add progress.');
+                                $alert = new Alert($type = 'error', $icon = "", $message = 'Failed to add progress.');
                             }
                         }
                     } else {
                         $alert = new Alert($type = 'success', $icon = "", $message = 'Failed to add progress.');
                     }
                 } else {
-                    $alert = new Alert($type = 'success', $icon = "", $message = 'Failed to add progress.');
+                    $alert = new Alert($type = 'error', $icon = "", $message = 'Failed to add progress.');
                 }
                 Session::set(['progress_add_alert' => $alert]);
                 $this->redirect('/tech/progress/' . $gigId);
