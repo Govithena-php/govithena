@@ -72,7 +72,7 @@
                         </div>
                         <div class="[ farmer__profile ]">
                             <div class="[ profile__image ]">
-                                <img src="<?php echo UPLOADS . $farmer['image'] ?>" />
+                                <img src="<?php echo UPLOADS . '/profilePictures/' . $farmer['image'] ?>" <?php echo DEFAULT_PROFILE_PICTURE ?> />
                             </div>
                             <div class="[ profile__details ]">
                                 <a href="<?php echo URLROOT . '/profile/' . $farmer['uid'] ?>"><?php echo $farmer['firstName'] . " " . $farmer['lastName']; ?></a>
@@ -316,7 +316,7 @@
                                                 <div class="[ data ]">
                                                     <div class="table_farmer_image_and_name">
                                                         <div class="img">
-                                                            <img src="<?php echo UPLOADS . '/profilePictures/' . $pr['image'] ?>" alt="">
+                                                            <img src="<?php echo UPLOADS . '/profilePictures/' . $pr['image'] ?>" alt="" <?php echo DEFAULT_PROFILE_PICTURE ?>>
                                                         </div>
                                                         <div class="name">
                                                             <p><?php echo $pr['firstName'] . ' ' . $pr['lastName'] ?></p>
@@ -441,7 +441,7 @@
                                                 <div class="[ data ]" hideIn="sm">
                                                     <div class="table_farmer_image_and_name">
                                                         <div class="img">
-                                                            <img src="<?php echo UPLOADS . '/profilePictures/' . $fieldVisit['uimage'] ?>" alt="">
+                                                            <img src="<?php echo UPLOADS . '/profilePictures/' . $fieldVisit['uimage'] ?>" alt="" <?php echo DEFAULT_PROFILE_PICTURE ?>>
                                                         </div>
                                                         <div class="name">
                                                             <p><?php echo $fieldVisit['firstName'] . ' ' . $fieldVisit['lastName'] ?></p>
@@ -615,7 +615,11 @@
                             <?php
                             if (!isset($gigImages) || empty($gigImages)) {
                             ?>
-                                <h1>No other Images</h1>
+                                <div class="no__image_card">
+                                    <img src="<?php echo IMAGES ?>/svg/image_placeholder.svg" alt="empty">
+                                    <!-- <img src="<?php echo IMAGES ?>svg/image_placeholder.svg" alt="place holder"> -->
+                                    <h1>No other Images</h1>
+                                </div>
                             <?php
                             } else {
                             ?>

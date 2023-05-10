@@ -15,6 +15,13 @@
 }
 
 .modal .head h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--clr-text);
+}
+
+.modal .head h4 {
     font-size: 1rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
@@ -22,6 +29,29 @@
 }
 
 .modal .head p {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--clr-text);
+}
+.modal .foot {
+    margin-bottom: 1rem;
+}
+
+.modal .foot h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--clr-text);
+}
+
+.modal .foot h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--clr-text);
+}
+
+.modal .foot p {
     font-size: 0.9rem;
     font-weight: 400;
     color: var(--clr-text);
@@ -38,6 +68,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    margin-bottom: 0.75rem;
 }
 
 .modal .input__control label {

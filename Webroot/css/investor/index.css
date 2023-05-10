@@ -2,11 +2,9 @@
     min-height: 10rem;
     border: 1px solid #e5e5e5;
     border-radius: 0.5rem;
-    background: rgb(29, 139, 87);
-    background: linear-gradient(153deg, rgba(29, 139, 87, 1) 0%, rgba(28, 143, 143, 1) 100%);
+    background: #212121;
     color: var(--clr-light, white);
     padding: 1rem 4rem;
-    margin-bottom: 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -14,19 +12,12 @@
 
 }
 
-.dashboard .balance {
-    font-weight: 700;
-    margin-right: 5rem;
+.dashboard .top__svg img {
+    width: 100px;
+    height: 100px;
 }
 
-.dashboard .balance h3 {
-    font-size: 1.2rem;
-}
 
-.dashboard .balance h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-}
 
 .amount {
     /* display: flex; */
@@ -43,20 +34,28 @@
 .cards .card {
     min-height: 6rem;
     padding: 1.5rem 1rem;
-    border: 1px solid #e5e5e5;
+    border: 1px solid #ccc;
     border-radius: 0.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 0.5rem;
-    background: var(--clr-light, #fff);
+    text-align: center;
+    background: #212121;
+    color: #fff;
+    /* box-shadow: 0 0 10px 2px rgb(0, 0, 0, 0.05); */
 }
 
 .cards .card h3 {
     font-size: 1rem;
     font-weight: 500;
-    color: rgb(75, 75, 75);
 }
+
+.cards .card:last-of-type {
+    background: #bc3131;
+    color: #fff;
+}
+
 
 .cards .card h1 {
     font-size: clamp(1rem, 2vw, 2rem);
@@ -76,10 +75,18 @@
 
 
 .charts {
-    margin-block: 2rem;
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr;
     gap: 2rem;
+}
+
+.charts-mb-3 {
+    margin-block: 3rem;
+}
+
+.charts-border {
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
 }
 
 .chart-pie {
@@ -89,17 +96,23 @@
     gap: 2rem;
 }
 
-.charts .chart {
-    padding: 1.5rem;
+#lineChart {
+    max-height: 350px;
+}
+
+.chart {
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border-radius: 0.5rem;
     gap: 1rem;
     border: 1px solid #ccc;
+    box-shadow: 0 2px 10px 2px rgba(0, 0, 0, 0.05);
 }
 
-.charts .chart h3 {
+.chart h3 {
     font-size: 1.2rem;
     font-weight: 600;
     color: var(--clr-text, #000);
@@ -149,10 +162,11 @@
 
 
 .block {
-    border: 1px solid #e5e5e5;
+    border: 1px solid #ccc;
     padding: 1rem;
     border-radius: 0.5rem;
     background: var(--clr-light, #fff);
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.05);
 }
 
 .progress__inestments {
@@ -172,13 +186,21 @@
     padding: 0.5rem 0;
     border-bottom: 1px solid #e5e5e5;
     display: flex;
+    font-size: 1.1rem;
+    font-weight: 700;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
 }
 
+.heading h4 {
+    font-size: 1rem;
+    font-weight: 600;
+
+}
+
 .progress>.card {
-    min-height: 6rem;
+    min-height: 7rem;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid #e5e5e5;
     display: grid;
@@ -206,37 +228,43 @@
 .progress>.card>.details {
     padding: 0.5rem 0;
     display: flex;
+    gap: 1rem;
     flex-direction: column;
+    justify-content: space-between;
 }
 
-.progress>.card>.details>label {
-    margin-top: 0.5rem;
-}
-
-.progress>.card>.details>progress {
-    width: 100%;
-    height: 1.5rem;
+.progress .card h1 {
+    font-size: 1.2rem;
+    font-weight: 600;
     margin-bottom: 0.5rem;
+    color: var(--clr-text, #000);
 }
 
+.progress .card h3 {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--clr-text, #000);
+}
 
-
-.progress>.card>.details button {
-    margin-left: 0.5rem;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 0.5rem;
-    background: rgb(29, 139, 87);
-    color: var(--clr-light, white);
-    font-size: 0.75rem;
-    font-weight: 700;
-    cursor: pointer;
+.progress .card h5 {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--clr-text-gray, #000);
 }
 
 .profit__widthdrawal {
     margin-block: 2rem;
 }
 
+.tag {
+    padding: 0.3rem 0.7rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--clr-text, #000);
+    background: #e4e4e4;
+
+}
 
 @media screen and (max-width: 1024px) {
 

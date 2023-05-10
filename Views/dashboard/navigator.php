@@ -45,7 +45,7 @@ function highlight($active, $link)
         <div class="[ profile ]">
             <?php if (isset($currentUser)) { ?>
                 <div class="[ buttons ]">
-                    <div class="[ notification ]">
+                    <!-- <div class="[ notification ]">
                         <button>
                             <i class="bi bi-bell"></i>
                             <?php
@@ -57,9 +57,9 @@ function highlight($active, $link)
                             }
                             ?>
                         </button>
-                    </div>
+                    </div> -->
 
-                    <span></span>
+                    <!-- <span></span> -->
 
                     <button onclick="toggleProfileMenu()">
                         <div class="[ image ]">
