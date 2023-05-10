@@ -51,7 +51,7 @@ function render_stars($stars, $outof)
                 <div class="preformance">
                     <div class="cards">
                         <div class="card">
-                            <small>Had worked with </small>
+                            <small>Worked with </small>
                             <p><?php echo $WorkedWith; ?></p>
                             <small>Investors</small>
                         </div>
