@@ -34,6 +34,9 @@ class profileController extends Controller
 
             $user = $this->userModel->getUserById($uid);
 
+            // var_dump($user);
+            // die();
+
             $WorkedWith = $this->gigModel->getWorkedWith($uid);
             if ($WorkedWith['success']) {
                 $props['WorkedWith'] = $WorkedWith['data']['investorCount'];

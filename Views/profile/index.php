@@ -39,7 +39,7 @@ function render_stars($stars, $outof)
                 <div class="user__profile">
                     <div class="picture__name">
                         <div class="picture">
-                            <img src="<?php echo UPLOADS . $user['image'] ?>" alt="">
+                            <img src="<?php echo UPLOADS . '/profilePictures/' . $user['image'] ?>" alt="">
                         </div>
                         <div class="name">
                             <h1><?php echo $user['firstName'] . " " . $user['lastName'] ?></h1>
