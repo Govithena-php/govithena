@@ -171,10 +171,9 @@
                                 </div>
                                 <div class="data flex-right">
                                     <div class="actions">
-                                        <a href="#" class="btn btn-primary">Edit</a>
+                                       <a href="<?php echo URLROOT . "/farmer/editGig/" . $p['gigId'] ?>" class="btn btn-primary">Edit</a>
                                         <!-- <button onclick="openAcceptModal('<?php echo $p['gigId']?>')" class="button__primary">Accept</button> -->
                                         <button onclick="openRejectModal('<?php echo $p['gigId']?>')" class="button__danger">Delete</button>
-                                        <!-- <a href="<?php echo URLROOT . "/farmer/deleteGig/" . $p['gigId'] ?>" class="btn btn-danger">Delete</a> -->
                                     </div>
                                 </div>
                             </div>
