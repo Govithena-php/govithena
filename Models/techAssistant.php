@@ -114,7 +114,7 @@ class TechAssistant extends Model
     public function getAssignedGigs($techId)
     {
         try {
-            $sql = "SELECT tg.id, tg.status, tg.timestamp, tg.gigId, g.title, g.thumbnail, g.category from tech_gig tg INNER JOIN gig g ON tg.gigId = g.gigId WHERE tg.techId = :techId";
+            $sql = "SELECT gigId, gig.status, timestamp, gigId, title, thumbnail, category from gig INNER JOIN tech_farmer ON gig.farmerId = tech_farmer.farmerId  WHERE tech_farmer.techId = :techId AND gig.status ='RESERVED'";
             $stmt =  Database::getBdd()->prepare($sql);
             $stmt->execute(['techId' => $techId]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -175,7 +175,7 @@ class TechAssistant extends Model
     public function fetchImagesByProgressId($progressId)
     {
         try {
-            $sql = "SELECT imageName FROM gig_progress_image WHERE progressId = :progressId";
+            $sql = "SELECT image FROM gig_progress_image WHERE progressId = :progressId";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['progressId' => $progressId]);
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);

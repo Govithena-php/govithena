@@ -37,7 +37,8 @@ class techController extends Controller
 
     public function index()
     {
-        $this->render('index');
+        // $this->render('index');
+        $this->farmers();
     }
 
     public function farmers()
@@ -181,13 +182,12 @@ class techController extends Controller
                     if ($images['success']) {
                         $a = [];
                         foreach ($images['data'] as $i) {
-                            $a[] = $i['imageName'];
+                            $a[] = $i['image'];
                         }
 
                         $imagesArray[$t['progressId']] = $a;
                     }
                 }
-
                 $props['gigId'] = $gigId;
                 $props['progress'] = $temp;
                 $props['images'] = $imagesArray;
@@ -262,20 +262,22 @@ class techController extends Controller
                         foreach ($images as $image) {
                             $res = $this->progressModel->saveProgressImage([
                                 'progressId' => $progressId,
-                                'imageName' => $image
+                                'image' => $image
                             ]);
 
                             if ($res['success']) {
                                 $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully added progress.');
                             } else {
-                                $alert = new Alert($type = 'error', $icon = "", $message = 'Failed to add progress.');
+                                var_dump($res);die();
+
+                                $alert = new Alert($type = 'error', $icon = "", $message = 'Failed to add progress. 1');
                             }
                         }
                     } else {
                         $alert = new Alert($type = 'success', $icon = "", $message = 'Failed to add progress.');
                     }
                 } else {
-                    $alert = new Alert($type = 'error', $icon = "", $message = 'Failed to add progress.');
+                    $alert = new Alert($type = 'error', $icon = "", $message = 'Failed to add progress. 2');
                 }
                 Session::set(['progress_add_alert' => $alert]);
                 $this->redirect('/tech/progress/' . $gigId);
