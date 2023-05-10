@@ -37,12 +37,25 @@ class agrologistController extends Controller
         $notifications = $agrologist->getnotifications();
         $farmerCount = $agrologist->getFarmerCount();
         $farmerCountLastMonh = $agrologist->getFarmerCountLastMonh();
+        $farmerCountTwoMonthsBefore = $agrologist->getFarmerCountTwoMonthsBefore();
+        $farmerCountThreeMonthsBefore = $agrologist->getFarmerCountThreeMonthsBefore();
+        $farmerCountFourMonthsBefore = $agrologist->getFarmerCountFourMonthsBefore();
+        $farmerCountFiveMonthsBefore = $agrologist->getFarmerCountFiveMonthsBefore();
         $AgrologistTotalIncome = $agrologist->getAgrologistTotalIncome();
         $AgrologistMonthlyIncome = $agrologist->getAgrologistMonthlyIncome();
         $AgrologistFieldVisits = $agrologist->getAgrologistFieldVisits();
         $AgrologistFieldVisitsLastMonth = $agrologist->getAgrologistFieldVisitsLastMonth();
         $GigCount = $agrologist->getGigCount();
         $GigCountLastMonth = $agrologist->getGigCountLastMonth();
+        $GigCountTwoMonthsBefore = $agrologist->getGigCountTwoMonthsBefore();
+        $GigCountThreeMonthsBefore = $agrologist->getGigCountThreeMonthsBefore();
+        $GigCountFourMonthsBefore = $agrologist->getGigCountFourMonthsBefore();
+        $GigCountFiveMonthsBefore = $agrologist->getGigCountFiveMonthsBefore();
+        $GigCountPerCategory = $agrologist->getGigsPerCategory();
+        $incomeLimit = $agrologist->getIncomeLimit();
+        $withdrawalsLimit = $agrologist->getWithdrawalsLimit();
+
+
         // echo json_encode($notifications);
         //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>". $notifications . "</h1>";
 
@@ -58,12 +71,23 @@ class agrologistController extends Controller
             'notifications' => $notifications,
             'farmerCount' => $farmerCount,
             'farmerCountLastMonh' => $farmerCountLastMonh,
+            'farmerCountTwoMonthsBefore' => $farmerCountTwoMonthsBefore,
+            'farmerCountThreeMonthsBefore' => $farmerCountThreeMonthsBefore,
+            'farmerCountFourMonthsBefore' => $farmerCountFourMonthsBefore,
+            'farmerCountFiveMonthsBefore' => $farmerCountFiveMonthsBefore,
             'agrologistTotalIncome' => $AgrologistTotalIncome,
             'agrologistMonthlyIncome' => $AgrologistMonthlyIncome,
             'agrologistFieldVisits' => $AgrologistFieldVisits,
             'agrologistFieldVisitsLastMonth' => $AgrologistFieldVisitsLastMonth,
             'gigCount' => $GigCount,
-            'gigCountLastMonth' => $GigCountLastMonth
+            'gigCountLastMonth' => $GigCountLastMonth,
+            'gigCountTwoMonthsBefore' => $GigCountTwoMonthsBefore,
+            'gigCountThreeMonthsBefore' => $GigCountThreeMonthsBefore,
+            'gigCountFourMonthsBefore' => $GigCountFourMonthsBefore,
+            'gigCountFiveMonthsBefore' => $GigCountFiveMonthsBefore,
+            'gigCountPerCategory' => $GigCountPerCategory,
+            'incomeLimit' => $incomeLimit,
+            'withdrawalsLimit' => $withdrawalsLimit,
         ]);
         $this->render('index');
     }
@@ -221,9 +245,17 @@ class agrologistController extends Controller
                     'q8' => new Input(POST, 'q8'),
                     'q9' => new Input(POST, 'q9'),
                 ];
-                var_dump($data);die;
+                // var_dump($data);die;
 
-                $agr->save($data);
+                $review = $agr->save($data);
+
+                if ($review) {
+                    $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully updated!.');
+
+                } else {
+                    $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong.');
+                }
+                Session::set(['review_agrologist_alert' => $alert]);
 
                 echo json_encode($farmerName);
 

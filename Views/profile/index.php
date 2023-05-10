@@ -204,11 +204,8 @@ function render_stars($stars, $outof)
                             </div>
                         </li>
                     </ul>
-
-                    <div class="buttons">
-                        <button class="button__primary-invert">Contact Farmer</button>
-                        <button class="button__primary">Send a message</button>
-                    </div>
+                    <br>
+                    <a href="tel:<?php echo $user['phoneNumber'] ?>" class="contact_button">Contact Farmer</a>
                 </div>
             </div>
 

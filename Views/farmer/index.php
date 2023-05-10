@@ -28,7 +28,6 @@
     require_once("navigator.php");
     ?>
 
-    <!-- <?php $name = "Janith"; ?> -->
 
     <div class="[ container ][ gigs ]" container-type="dashboard-section">
         <div class="btn_wrapper">
@@ -102,7 +101,7 @@
         
         <div class="grid__table"
                         style="
-                                --xl-cols: 0.7fr 1.3fr 0.9fr 0.9fr 0.5fr 0.5fr 1.8fr 1.1fr;
+                                --xl-cols: 0.7fr 1.3fr 0.9fr 1.2fr 0.7fr 0.5fr 1.9fr 1.3fr;
                                 --lg-cols: 1.5fr 1fr 1fr 1fr 0.3fr;
                                 --md-cols: 2fr 1fr 0.3fr;
                                 --sm-cols: 3fr 0.3fr;
@@ -114,7 +113,7 @@
                                     <p></p>
                                 </div>
                                 <div class="data remove-border">
-                                    <p>Farmer Name</p>
+                                    <p>Title</p>
                                 </div>
                                 <div class="data">
                                     <p>Initial Investment</p>
@@ -138,15 +137,21 @@
                             foreach($products as $p){
                                 ?>
                             <div class="row">
+                                
                                 <div class="data farmer__">
                                     <div class="farmerimg">
-                                        <img src="<?php echo UPLOADS . '/profilePictures/' . $p['thumbnail']?>" alt="Picture">
+                                    <a class="underlinetext" href="<?php echo URLROOT ?>/farmer/gigView/<?php echo $p['gigId']?>">
+                                        <!-- <img src="<?php echo UPLOADS . '/profilePictures/' . $p['thumbnail']?>" alt="Picture"> -->
+                                        <img src="<?php echo UPLOADS .'/' .$p['thumbnail']?>" alt="Picture">
+                                    </a>
                                     </div>
                                 </div>
                                 <div class="data ">
                                     <div class="namecol">
+                                    <a class="underlinetext" href="<?php echo URLROOT ?>/farmer/gigView/<?php echo $p['gigId']?>">
                                         <h1><p><?php echo $p['title'] ?></p></h1>
                                         <p><?php echo $p['category']?></p>
+                                    </a>
                                     </div>
                                 </div>
                                 <div class="data">

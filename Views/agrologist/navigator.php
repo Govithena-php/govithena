@@ -203,13 +203,13 @@ function highlight($active, $link)
                 </a>
             </li>
             <li>
-                <a href="<?php echo URLROOT ?>/agrologist/help" class="<?php highlight($active, "help") ?>">
+                <a href="<?php echo URLROOT ?>/help" class="<?php highlight($active, "help") ?>">
                     <i class="[ fa-solid fa-circle-question ]"></i>
                     <p>Help</p>
                 </a>
             </li>
             <li>
-                <a href="<?php echo URLROOT ?>/agrologist/settings" class="<?php highlight($active, "settings") ?>">
+                <a href="<?php echo URLROOT ?>/settings" class="<?php highlight($active, "settings") ?>">
                     <i class="[ fa-solid fa-gear ]"></i>
                     <p>Settings</p>
                 </a>
@@ -218,4 +218,4 @@ function highlight($active, $link)
 
     </div>
 </aside>
-<script src="<?php echo JS ?>/dashboard/dashboard.js"></script>
+<script src="<?php echo JS ?>/agrologist/navigator.js"></script>

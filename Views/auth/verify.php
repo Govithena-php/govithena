@@ -16,7 +16,7 @@
 <body>
     <div class="[ signup ]">
         <div class="[ banner ]">
-            <img src="<?php echo URLROOT ?>/Webroot/images/bg.jpg" alt="banner" />
+            <img src="<?php echo IMAGES ?>/temp/carrots.jpg" alt="banner" />
             <div class="[ banner__content ]">
                 <h1>Invest in the agreculture of Sri Lanka.</h1>
             </div>

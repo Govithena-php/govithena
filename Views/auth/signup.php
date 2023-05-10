@@ -15,7 +15,7 @@
 <body>
     <div class="[ signup ]">
         <div class="[ banner ]">
-            <img src="<?php echo URLROOT ?>/Webroot/images/bg.jpg" alt="banner" />
+            <img src="<?php echo IMAGES ?>/temp/17.jpg" alt="banner" />
             <div class="[ banner__content ]">
                 <h1>Harvesting profits and hope,<br>Invest in Farming for a Better Tomorrow.</h1>
             </div>
@@ -64,7 +64,7 @@
                     <input class="<?php if (isset($error)) echo "error"; ?>" type="password" name="confirmPassword" class="" placeholder="Confirm Password">
 
                     <div class="terms_and_conditions">
-                        <input type="checkbox" id="terms_condtions" name="terms_condtions" value="accepted">
+                        <input type="checkbox" id="terms_condtions" name="terms_condtions" value="accepted" required>
                         <label class="terms_condtions" for="terms_condtions">
                             Yes, I understand and agree to the Govithena
                             <a href="">Terms of Service</a>, including the <a href="">User Agreement and Privacy Policy</a>.

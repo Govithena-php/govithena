@@ -8,7 +8,6 @@ class farmerController extends Controller
     private $gigImageHandler;
 
     private $farmerModel;
-    private $investorGigModel;
     private $gigModel;
     private $progressModel;
 
@@ -27,7 +26,6 @@ class farmerController extends Controller
         $this->gigImageHandler = new ImageHandler($folder = "Uploads/gigs");
 
         $this->farmerModel = $this->model('farmer');
-        $this->investorGigModel = $this->model('investorGig');
         $this->gigModel = $this->model('gig');
         $this->progressModel = $this->model('progress');
 
@@ -113,7 +111,144 @@ class farmerController extends Controller
             }
             $this->redirect('/farmer/');
         }
-        $this->render("gigs");
+        $this->render("createGig");
+    }
+
+    public function gigView($params = [])
+    {
+        $props = [];
+        if (isset($params[0]) && !empty($params[0])) {
+            $gigId = $params[0];
+            $gig = $this->gigModel->fetchBy($gigId);
+            $props['gig'] = $gig['data'];
+            // $gigimg=$this->gigModel->gigimg($gigId);
+            // $props['gigimgs'] = $gigimg['data'];
+
+
+
+                
+            $progressImages = [];
+            $temp = $this->gigModel->gigimg($gigId);
+            // die();
+            foreach ($temp['data'] as $key => $value) {
+                $progressImages[$key] = $value['image'];
+            }
+            // var_dump($progressImages);
+            // die();
+
+            $props['gigimgs'] = $progressImages;
+    
+        }
+
+
+        $this->set($props);
+        $this->render("gigView");
+    }
+
+    public function editGig($params = [])
+    {
+        $props = [];
+        if (isset($params[0]) && !empty($params[0])) {
+            $gigId = $params[0];
+            $gig = $this->gigModel->editGig($gigId);
+            $props['gig'] = $gig['data'];
+   
+        }
+
+
+        $this->set($props);
+        $this->render("editGig");
+    }
+
+    public function updateGig($params = [])
+    {
+        // if (isset($params[0]) && !empty($params[0])) {
+            
+        //     $res = $this->gigModel->updateGig($gigId);
+        //     if ($res['status']) {
+        //         $this->render("index");
+        //     } else {
+        //         $this->redirect('/error/somethingWentWrong');
+        //     }
+        // }
+
+
+
+        if (isset($_POST['updateGig'])) {
+
+
+
+            $gigId = new Input(POST, 'updateGig');
+
+            $title = new Input(POST, 'title');
+            $landArea = new Input(POST, 'landArea');
+            $capital = new Input(POST, 'capital');
+            $profitMargin = new Input(POST, 'profitMargin');
+            $timePeriod = new Input(POST, 'timePeriod');
+            $location = new Input(POST, 'location');
+            $category = new Input(POST, 'category');
+
+
+            // $file_name = $_FILES['image']['name'];
+            // $file_size = $_FILES['image']['size'];
+            // $tmp_name = $_FILES['image']['tmp_name'];
+            // $error = $_FILES['image']['error'];
+
+            // if ($error == 0) {
+
+            //     $fileType = pathinfo($file_name, PATHINFO_EXTENSION);
+            //     $fileType_lc = strtolower($fileType);
+
+            //     $allowedFileTypes = array("jpg", "jpeg", "png");
+
+            //     if (in_array($fileType, $allowedFileTypes)) {
+
+            //         $new_img_name = uniqid("IMG-", true) . '.' . $fileType_lc;
+            //         $img_upload_path = ROOT . 'Webroot/uploads/' . $new_img_name;
+
+            //         move_uploaded_file($tmp_name, $img_upload_path);
+            //     }
+            // }
+
+
+
+            $description = $_POST['description'];
+            $farmerId = Session::get('user')->getUid();
+
+
+            $data = [
+                'id' => $gigId,
+                'title' => $title,
+                'description' => $description,
+                'category' => $category,
+                // 'image' => $new_img_name,
+                'capital' => $capital,
+                'profitMargin' => $profitMargin,
+                'cropCycle' => $timePeriod,
+                'city' => $location,
+                'landArea' => $landArea,
+                // 'farmerId' => $farmerId
+            ];
+            // var_dump($data);
+            // die();
+
+
+            // $gig = new $this->gigModel();
+
+            // $res = $gig->create($data);
+            $res = $this->gigModel->updateDetails($data);
+            var_dump($res);
+            die();
+
+
+            if (!$res) {
+                $this->redirect('/farmer/editGig');
+                return;
+            }
+            $this->redirect('/farmer/');
+            // $this->redirect('/farmer/');
+        }
+        
     }
 
     function index()
@@ -145,6 +280,7 @@ class farmerController extends Controller
 
         $id = $this->currentUser->getUid(); //session eken user id eka gannawa activeUser.php file eke tiyenne
         $products = $this->gigModel->Allgig($id);
+        // var_dump($products);die();
         $props['products'] = $products;
 
 
@@ -167,38 +303,36 @@ class farmerController extends Controller
         if (isset($params[0]) && !empty($params[0])) {
             $gigId = $params[0];
             $gig = $this->gigModel->fetchBy($gigId);
-            $props['gig'] = $gig;
-           
+            $props['gig'] = $gig['data'];
+
             // $progs = $this->gigModel->viewPro($gigId);
-            
+
             // foreach($progs as $pro){
 
             //      $progimgs = $this->gigModel->viewProimg($pro['progressId']);
             //      $props['progimgs'] = $progimgs;
             // }
-         
+
             // if (!empty($progs)){
             //     $props['progs'] = $progs;
             // }
 
-            
-        $progress = $this->progressModel->fetchAllByGig($gigId);
-    // var_dump($progress); die();
 
-        $props['progress'] = [];
-        if ($progress['success']) {
-            foreach ($progress['data'] as $pg) {
-                $progressImages = [];
-                $temp = $this->progressModel->fetchImagesByProgressId($pg['progressId']);
-                foreach ($temp['data'] as $key => $value) {
-                    $progressImages[$key] = $value['imageName'];
+            $progress = $this->progressModel->fetchAllByGigId($gigId);
+            // var_dump($progress); die();
+
+            $props['progress'] = [];
+            if ($progress['success']) {
+                foreach ($progress['data'] as $pg) {
+                    $progressImages = [];
+                    $temp = $this->progressModel->fetchImagesByProgressId($pg['progressId']);
+                    foreach ($temp['data'] as $key => $value) {
+                        $progressImages[$key] = $value['image'];
+                    }
+                    $pg['images'] = $progressImages;
+                    $props['progress'][] = $pg;
                 }
-                $pg['images'] = $progressImages;
-                $props['progress'][] = $pg;
-            
-
-           }
-        }
+            }
         }
 
         // $id = $this->currentUser->getUid(); //session eken user id eka gannawa activeUser.php file eke tiyenne
@@ -286,39 +420,62 @@ class farmerController extends Controller
             'farmerId' => $this->currentUser->getUid(),
             'state' => STATUS::PENDING
         ]);
+        if ($investors['status']) {
+            $props['investors'] = $investors['data'];
+        }
+        
 
+        
         $reqinvestors = $this->farmerModel->reqinvestors([
             'farmerId' => $this->currentUser->getUid(),
             'state' => STATUS::ACCEPTED
         ]);
-
-        // var_dump($investors); die();
-
-
-        if ($investors['status']) {
-            $props['investors'] = $investors['data'];
+        if ($reqinvestors['status']) {
             $props['reqinvestors'] = $reqinvestors['data'];
         }
+
+        $investorlist = $this->farmerModel->investorlist([
+            'farmerId' => $this->currentUser->getUid(),
+            'state' => STATUS::PAID
+        ]);
+        if ($investorlist['status']) {
+            $props['investorlists'] = $investorlist['data'];
+        }
+        
+        // var_dump($reqinvestors); die();
+
+
+        
+
+        // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        //     if (isset($_POST['accept_investor'])) {
+        //         $this->acceptInvestor($params[0]);
+        //     }
+        // }
+
+
         $this->set($props);
         $this->render('investors');
     }
 
-    public function acceptInvestor($params)
+    public function acceptInvestor($params = [])
     {
-        if (isset($params)) {
-            list($requestId) = $params;
+        if (isset($params[0]) && !empty($params[0])) {
+            $requestId = $params[0];
+            
             $res = $this->farmerModel->acceptInvestor([
                 'requestId' => $requestId,
-                'state' => STATUS::ACCEPTED
+                'status' => STATUS::ACCEPTED
             ]);
-
             if ($res['status']) {
                 $this->redirect('/farmer/investors');
             } else {
-                $this->redirect('/farmer/investors/' . $res['message']);
+                $this->redirect('/error/somethingWentWrong');
             }
         }
     }
+
+
     public function declineInvestor($params)
     {
         if (isset($params)) {
@@ -338,6 +495,24 @@ class farmerController extends Controller
 
     function techassistant()
     {
+        $props = [];
+        $myTech = $this->farmerModel->getAcceptedTechByFarmer($this->currentUser->getUId());
+        if ($myTech['status']) {
+            $props['myTech'] = $myTech['data'];
+        }
+
+        $pendingTech = $this->farmerModel->getPendingTechByFarmer($this->currentUser->getUId());
+
+        if ($pendingTech['status']) {
+            $props['pendingTech'] = $pendingTech['data'];
+        }
+
+        $declinedTech = $this->farmerModel->getDeclinedTechByFarmer($this->currentUser->getUId());
+        if ($declinedTech['status']) {
+            $props['declinedTech'] = $declinedTech['data'];
+        }
+
+        $this->set($props);
         $this->render('techassistant');
     }
 
@@ -348,10 +523,24 @@ class farmerController extends Controller
             $props['message'] = $params[0];
         }
 
-        $techAssistants = $this->farmerModel->techAssistants();
-        if ($techAssistants['status']) {
-            $props['techAssistants'] = $techAssistants['data'];
-            $this->set($props);
+        $location = new Input(GET, 'location');
+        $search = new Input(GET, 'term');
+
+        if ($search != "") {
+            $techAssistants = $this->farmerModel->searchTechAssistant($search);
+            if ($techAssistants['status']) {
+                $props['techAssistants'] = $techAssistants['data'];
+            }
+        } else if ($location != "") {
+            $techAssistants = $this->farmerModel->searchTechAssistantsByLocation($location);
+            if ($techAssistants['status']) {
+                $props['techAssistants'] = $techAssistants['data'];
+            }
+        } else {
+            $techAssistants = $this->farmerModel->techAssistants();
+            if ($techAssistants['status']) {
+                $props['techAssistants'] = $techAssistants['data'];
+            }
         }
         $this->set($props);
         $this->render('techassistantfirst');
@@ -367,7 +556,7 @@ class farmerController extends Controller
             $props['gig'] = $gig;
 
 
-            $investor = $this->investorGigModel->fetchInvestorByGig($gigId);
+            $investor = $this->gigModel->fetchInvestorByGig($gigId);
             if ($investor['success']) {
                 $props['investor'] = $investor['data'];
             }
@@ -375,7 +564,7 @@ class farmerController extends Controller
             $this->render('viewProgress');
         } else {
 
-            $gigs = $this->investorGigModel->fetchAllByFarmer($this->currentUser->getUid());
+            $gigs = $this->gigModel->fetchAllByFarmer($this->currentUser->getUid());
             if ($gigs['success']) {
                 $props['gigs'] = $gigs['data'];
             }
@@ -416,7 +605,7 @@ class farmerController extends Controller
                         foreach ($images as $image) {
                             $data = [
                                 'progressId' => $progressId,
-                                'imageName' => $image
+                                'image' => $image
                             ];
                             $res = $this->progressModel->saveProgressImage($data);
                             if (!$res['success']) {
@@ -428,6 +617,7 @@ class farmerController extends Controller
                     echo $e->getMessage();
                     die();
                 }
+                $this->redirect('/farmer/progressUpdate/' . $gigId);
             } else {
                 $this->redirect('/farmer/newprogress/' . $response['error']);
             }
@@ -441,20 +631,102 @@ class farmerController extends Controller
         $this->render('progressform');
     }
 
-    function agrologist($params = [])
+    function agrologist()
     {
+        $props = [];
+
+        $myagrologists = $this->farmerModel->getAcceptedAgrologistByFarmer($this->currentUser->getUId());
+        if ($myagrologists['status']) {
+            $props['myagrologists'] = $myagrologists['data'];
+        }
+
+        $pendingAgrologists = $this->farmerModel->getPendingAgrologistByFarmer($this->currentUser->getUId());
+        if ($pendingAgrologists['status']) {
+            $props['pendingAgrologists'] = $pendingAgrologists['data'];
+        }
+
+        $declinedAgrologists = $this->farmerModel->getDeclinedAgrologistByFarmer($this->currentUser->getUId());
+        if ($declinedAgrologists['status']) {
+            $props['declinedAgrologists'] = $declinedAgrologists['data'];
+        }
+
+        $this->set($props);
+        $this->render('agrologist');
+    }
+
+
+
+    function newAgrologist($params = [])
+    {
+        $props = [];
 
         if (!empty($params)) {
             $props['message'] = $params[0];
         }
 
-        $agrologists = $this->farmerModel->agrologists();
-        if ($agrologists['status']) {
-            $props['agrologists'] = $agrologists['data'];
-            $this->set($props);
+        $location = new Input(GET, 'location');
+        $search = new Input(GET, 'term');
+
+        if ($search != "") {
+            $agrologists = $this->farmerModel->searchAgrologists($search);
+            if ($agrologists['status']) {
+                $props['agrologists'] = $agrologists['data'];
+            }
+        } else if ($location != "") {
+            $agrologists = $this->farmerModel->searchAgrologistsByLocation($location);
+            if ($agrologists['status']) {
+                $props['agrologists'] = $agrologists['data'];
+            }
+        } else {
+            $agrologists = $this->farmerModel->agrologists();
+            if ($agrologists['status']) {
+                $props['agrologists'] = $agrologists['data'];
+            }
         }
+
         $this->set($props);
-        $this->render('agrologist');
+        $this->render('newAgrologist');
+    }
+
+
+    function cancel_agrologist_request()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $requestId = new Input(POST, 'requestId');
+            $response = $this->farmerModel->cancelAgrologistRequest($requestId);
+            if ($response['status']) {
+
+                if ($response['data']) {
+                    $alert = new Alert($type = 'success', $icon = "", $message = "Request cancelled successfully");
+                } else {
+                    $alert = new Alert($type = 'error', $icon = "", $message = "Request cancelled failed");
+                }
+            } else {
+                $alert = new Alert($type = 'error', $icon = "", $message = "Request cancelled failed");
+            }
+            Session::set(['cancel_agrologist_request_alert' => $alert]);
+            $this->redirect('/farmer/agrologist');
+        }
+    }
+
+    function cancel_techassistant_request()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $requestId = new Input(POST, 'requestId');
+            $response = $this->farmerModel->cancelTechRequest($requestId);
+            if ($response['status']) {
+
+                if ($response['data']) {
+                    $alert = new Alert($type = 'success', $icon = "", $message = "Request cancelled successfully");
+                } else {
+                    $alert = new Alert($type = 'error', $icon = "", $message = "Request cancelled failed");
+                }
+            } else {
+                $alert = new Alert($type = 'error', $icon = "", $message = "Request cancelled failed");
+            }
+            Session::set(['cancel_techassitant_request_alert' => $alert]);
+            $this->redirect('/farmer/techassistant');
+        }
     }
 
     function agrologistprofile()
@@ -462,51 +734,55 @@ class farmerController extends Controller
         $this->render('agrologistprofile');
     }
 
-    public function send($params)
+    public function agrologist_request()
     {
 
-        list($agrologistId) = $params;
-        $data = [
-            'requestId' => new UID(PREFIX::REQUEST),
-            'agrologistId' => $agrologistId,
-            'farmerId' => $this->currentUser->getUid(),
-            'message' => 'This is test message',
-            'status' => 'Pending'
-        ];
-        $response = $this->farmerModel->sendAgrologistRequest($data);
-        if ($response['status']) {
-            if ($response['data']) $this->redirect('/farmer/agrologist/ok');
-            else $this->redirect('/farmer/agrologist/already');
-        } else {
-            $this->redirect('/farmer/agrologist/error');
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data = [
+                'requestId' => new UID(PREFIX::REQUEST),
+                'agrologistId' => new Input(POST, 'agrologistId'),
+                'farmerId' => $this->currentUser->getUid(),
+                'offer' => new Input(POST, 'offer'),
+                'timePeriod' => new Input(POST, 'timePeriod'),
+                'message' => new Input(POST, 'message'),
+            ];
+
+            $response = $this->farmerModel->sendAgrologistRequest($data);
+
+            if ($response['status']) {
+                $alert = new Alert($type = 'success', $icon = "", $message = "Request sent successfully");
+            } else {
+                $alert = new Alert($type = 'error', $icon = "", $message = "Request sent failed");
+            }
+            Session::set(['agrologist_request_alert' => $alert]);
+            $this->redirect('/farmer/agrologist');
         }
     }
 
-    public function request($params)
+    public function tech_assistant_request()
     {
 
-        list($technicalAssistantId) = $params;
-        $data = [
-            'requestId' => new UID(PREFIX::REQUEST),
-            'technicalAssistantId' => $technicalAssistantId,
-            'farmerId' => $this->currentUser->getUid(),
-            'message' => 'This is test message',
-            'status' => 'Pending'
-        ];
-        $response = $this->farmerModel->sendTechRequest($data);
-        if ($response['status']) {
-            if ($response['data']) $this->redirect('/farmer/techassistantfirst/ok');
-            else $this->redirect('/farmer/techassistantfirst/already');
-        } else {
 
-            $this->redirect('/farmer/techassistantfirst/error');
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data = [
+                'requestId' => new UID(PREFIX::REQUEST),
+                'technicalAssistantId' => new Input(POST, 'technicalAssistantId'),
+                'farmerId' => $this->currentUser->getUid(),
+                'offer' => new Input(POST, 'offer'),
+                'message' => new Input(POST, 'message'),
+            ];
+            $response = $this->farmerModel->sendTechRequest($data);
+
+            if ($response['status']) {
+                $alert = new Alert($type = 'success', $icon = "", $message = "Request sent successfully");
+            } else {
+                $alert = new Alert($type = 'error', $icon = "", $message = "Request sent failed");
+            }
+            Session::set(['techassitant_request_alert' => $alert]);
+            $this->redirect('/farmer/techassistant');
         }
     }
 
-    function techassistantfirstcopy()
-    {
-        $this->render('techassistantfirstcopy');
-    }
     function settings()
     {
         $this->render('settings');
