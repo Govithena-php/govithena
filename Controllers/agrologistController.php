@@ -653,15 +653,15 @@ class agrologistController extends Controller
         // $d['paymentDetails'] = $agrologist->getPaymentDetails($fid);
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if ($_GET['withdraw'] == 'confirm') {
-                $withdrawal = new INPUT(POST, 'withdraw_amount');
+            // if ($_GET['withdraw'] == 'confirm') {
+            //     $withdrawal = new INPUT(POST, 'withdraw_amount');
             
 
-            }
+            // }
             if (isset($_POST['transfer_confirm_btn'])) {
                 $withdraw = $agrologist->insertWithdrawals([
                     'withdrawalId' => new UID(PREFIX::WITHDRAWAL),
-                    'withdrawal' => $withdrawal,
+                    'withdrawal' => new INPUT(POST, 'withdraw_amount'),
                 ]);
 
                 if ($withdraw) {
