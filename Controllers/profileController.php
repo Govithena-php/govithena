@@ -34,6 +34,9 @@ class profileController extends Controller
 
             $user = $this->userModel->getUserById($uid);
 
+            // var_dump($user);
+            // die();
+
             $WorkedWith = $this->gigModel->getWorkedWith($uid);
             if ($WorkedWith['success']) {
                 $props['WorkedWith'] = $WorkedWith['data']['investorCount'];
@@ -57,13 +60,19 @@ class profileController extends Controller
 
             $reviewCount = $this->reviewByInvestorModel->getReviewCountByFarmer($uid);
             $qCounts = $this->reviewByInvestorModel->getQuestionsCountsByFarmer($uid);
-            // var_dump($reviewCount);
+            // var_dump($qCounts);
             // die();
             if ($reviewCount['success']) {
                 $totalReviews = $reviewCount['data']['totalReviewCount'];
-                if ($qCounts['success']) {
-                    foreach ($qCounts['data'] as $qKey => $qCount) {
-                        $props['qPrecentages'][$qKey] = ($qCount / $totalReviews) * 100;
+                if ($totalReviews > 0) {
+                    if ($qCounts['success']) {
+                        foreach ($qCounts['data'] as $qKey => $qCount) {
+                            $props['qPrecentages'][$qKey] = ($qCount / $totalReviews) * 100;
+                        }
+                    } else {
+                        foreach ($qCounts['data'] as $qKey => $qCount) {
+                            $props['qPrecentages'][$qKey] = 0;
+                        }
                     }
                 } else {
                     foreach ($qCounts['data'] as $qKey => $qCount) {
@@ -77,10 +86,6 @@ class profileController extends Controller
                 }
             }
 
-
-
-            // die(var_dump($props['qPrecentages']));
-            // die();
 
             if ($user['status']) {
                 $props['user'] = $user['data'];
@@ -123,6 +128,17 @@ class profileController extends Controller
                     $props['stars'] = $stars;
 
                     $props['farmerAvgStars'] = floatval($farmerAvgStars / $count);
+                } else {
+                    $props['noOfReviews'] = 0;
+                    $props['reviews'] = [];
+                    $props['stars'] = [
+                        '1' => 0,
+                        '2' => 0,
+                        '3' => 0,
+                        '4' => 0,
+                        '5' => 0
+                    ];
+                    $props['farmerAvgStars'] = 0;
                 }
 
 

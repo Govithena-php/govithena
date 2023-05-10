@@ -161,6 +161,12 @@ nav {
 }
 
 
+.bi-star-fill {
+    margin-inline: 0.5rem;
+    color: yellow;
+}
+
+
 .preformance {
     padding: 1rem;
 }
@@ -190,8 +196,8 @@ nav {
     font-weight: 600;
 }
 
-.accequerdOver{
-    font-size:2rem !important;
+.accequerdOver {
+    font-size: 2rem !important;
 }
 
 .progress h1 {
