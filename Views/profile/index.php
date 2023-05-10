@@ -56,20 +56,20 @@ function render_stars($stars, $outof)
                             <small>Investors</small>
                         </div>
                         <div class="card">
-                            <small>Acquired Over </small>
+                            <small>Recived Over </small>
                             <p class="[ LKR accequerdOver ]"><?php echo number_format($accequerdOver, 0, '', ',') ?>+</p>
                             <small>From the platform</small>
                         </div>
                         <div class="card">
                             <small>Overall Score </small>
                             <p><?php echo $farmerAvgStars ?></p>
-                            <small>out of 5</small>
+                            <small>out of 5<i class="bi bi-star-fill"></i></small>
                         </div>
                     </div>
                     <div class="progress">
                         <div class="[ caption ]">
-                            <h2>Preformance</h2>
-                            <p>Update your Personal Details.</p>
+                            <h2>Farmer Profile Evaluation</h2>
+                            <p>Explore the comprehensive evaluation of our farmers' performance, including their communication skills, quality of work, overall performance, and more.</p>
                         </div>
                         <div class="[ grid ]" sm="1" md="2" gap="1">
                             <div class="progress__bar">
@@ -128,7 +128,7 @@ function render_stars($stars, $outof)
                             </div>
                             <div class="progress__bar">
                                 <div class="progress__details">
-                                    <p>Easy to work with</p>
+                                    <p>Ease of Collaboration</p>
                                     <p><?php echo $qPrecentages['q7Count'] ?>%</p>
                                 </div>
                                 <div class="bar">
@@ -137,7 +137,7 @@ function render_stars($stars, $outof)
                             </div>
                             <div class="progress__bar">
                                 <div class="progress__details">
-                                    <p>Expertise</p>
+                                    <p>Financial Stewardship</p>
                                     <p><?php echo $qPrecentages['q7Count'] ?>%</p>
                                 </div>
                                 <div class="bar">
@@ -245,8 +245,8 @@ function render_stars($stars, $outof)
 
         <div class="reviews">
             <div class="[ caption ]">
-                <h2>Reviews</h2>
-                <p>Update your Personal Details.</p>
+                <h2>Investor Feedback and Experiences</h2>
+                <p>Explore investor feedback on our farmers' performance and success in sustainable farming investments.</p>
             </div>
             <div class="reviews__wrapper">
                 <?php
