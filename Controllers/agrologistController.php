@@ -282,7 +282,7 @@ class agrologistController extends Controller
             $agr = new Agrologist();
 
             $requests = $agr->farmerRequest();
-
+            // var_dump($requests);die();
             if (isset($requests)) {
                 $this->set(['ar' => $requests]);
             } else {

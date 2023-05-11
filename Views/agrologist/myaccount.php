@@ -122,21 +122,47 @@
                             </div>
                             <hr>
                         </form>
-                        <div style="color: grey" class="pt-1">Full Name</div>
-                        <?php echo "<div>" . ucwords($agrologist[0]['firstName']) . " " . ucwords($agrologist[0]['lastName']) . "</div>"; ?>
+                        <?php
+                        if ($agrologist[0]['firstName'] != null && $agrologist[0]['lastName'] != null) {
+                            echo "<div style='color: grey' class='pt-1'>Full Name</div>";
+                            echo "<div>" . ucwords($agrologist[0]['firstName']) . " " . ucwords($agrologist[0]['lastName']) . "</div>";
+                        }
+                        ?>
                         <div style="color: grey" class="pt-1">Email</div>
                         <?php echo "<div>" . strtolower($agrologist[0]['username']) . "</div>"; ?>
-                        <div style="color: grey" class="pt-1">NIC</div>
-                        <?php echo "<div>" . $agrologist[0]['NIC'] . "</div>"; ?>
-                        <div style="color: grey" class="pt-1">Mobile Number</div>
-                        <?php echo "<div>" . $agrologist[0]['phoneNumber'] . "</div>"; ?>
-                        <div style="color: grey" class="pt-1">Address</div>
-                        <?php echo "<div>" . ucwords($agrologist[0]['addressLine1']) . ",</div>"; ?>
-                        <?php echo "<div>" . ucwords($agrologist[0]['addressLine2']) . ",</div>"; ?>
-                        <?php echo "<div>" . ucwords($agrologist[0]['city']) . ",</div>"; ?>
-                        <?php echo "<div>" . ucwords($agrologist[0]['district']) . ".</div>"; ?>
-                        <?php echo "<div>" . ucwords($agrologist[0]['postalCode']) . "</div>"; ?>
+                        <?php
+                        if ($agrologist[0]['NIC'] != null) {
+                            echo "<div style='color: grey' class='pt-1'>NIC</div>";
+                            echo "<div>" . $agrologist[0]['NIC'] . "</div>";
+                        }
+                        ?>
+                        <?php 
+                        if($agrologist[0]['phoneNumber']){
+                            echo "<div style='color: grey' class='pt-1'>Mobile Number</div>";
+                            echo "<div>" . $agrologist[0]['phoneNumber'] . "</div>";
 
+                        }
+                        ?>
+                        <?php 
+                        if ($agrologist[0]['addressLine1'] || $agrologist[0]['addressLine2'] || $agrologist[0]['city'] || $agrologist[0]['district'] || $agrologist[0]['postalCode']) {
+                            echo "<div style='color: grey' class='pt-1'>Address</div>";
+                        }                      
+                        if ($agrologist[0]['addressLine1']) {
+                            echo "<div>" . ucwords($agrologist[0]['addressLine1']) . ",</div>";
+                        } 
+                        if ($agrologist[0]['addressLine2']) {
+                            echo "<div>" . ucwords($agrologist[0]['addressLine2']) . ",</div>";
+                        } 
+                        if ($agrologist[0]['city']) {
+                            echo "<div>" . ucwords($agrologist[0]['city']) . ",</div>";
+                        } 
+                        if ($agrologist[0]['district']) {
+                            echo "<div>" . ucwords($agrologist[0]['district']) . ".</div>";
+                        } 
+                        if ($agrologist[0]['postalCode']) {
+                            echo "<div>" . ucwords($agrologist[0]['postalCode']) . "</div>";
+                        }
+                        ?>
                         <div id="edit_detials_modal" class="modal">
 
                             <div class="modal-content">
@@ -343,9 +369,11 @@
                                         ?>
                                     </select><br>
                                     <!-- <input type="text" name="bank_name" class="" placeholder="Bank Name"><br> -->
-                                    <input type="text" name="account_number" class="" placeholder="Account Number" required><br>
+                                    <input type="text" name="account_number" class="" placeholder="Account Number"
+                                        required><br>
                                     <input type="text" name="branch" class="" placeholder="Branch" required><br>
-                                    <input type="text" name="branch_code" class="" placeholder="Branch Code" required><br>
+                                    <input type="text" name="branch_code" class="" placeholder="Branch Code"
+                                        required><br>
                                     <button type="submit" name="add_account_details_btn"
                                         class="btn uppercase">Submit</button>
                                 </form>

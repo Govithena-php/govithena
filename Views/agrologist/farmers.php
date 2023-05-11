@@ -55,7 +55,7 @@
 
                         <div class="farmer_card bg-light ">
                             <div class="farmer_img">
-                                <img src="<?php echo UPLOADS . '/' . $request['image'] ?>" alt="">
+                                <img src="<?php echo UPLOADS . '/profilePictures/' . $request['image'] ?>" alt="">
                             </div>
                             <form action="" method="POST">
                                 <div class="farmer_inner_card">

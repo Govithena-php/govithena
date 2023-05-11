@@ -103,7 +103,9 @@
             <div class="withdraw__card">
                 <?php
                 if (!isset($account) || empty($account)) {
+                    echo "<h3>Bank Account Details</h3><hr>";
                     require(COMPONENTS . "dashboard/noDataFound.php");
+
                 } else {
                     ?>
                     <form action="<?php echo URLROOT . '/agrologist/withdrawals' ?>" method='POST'>

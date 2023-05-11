@@ -191,5 +191,11 @@
     cursor: pointer;
   }
 
+  .no_data_found{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
 
   
