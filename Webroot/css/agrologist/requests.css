@@ -102,6 +102,11 @@
     max-height: 30px;
 } */
 
+.request__card .accept_buttton:hover {
+  background-color: #105f3a;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
 .requestdetails_img {
   height: 100%;
   /* height: 900px; */

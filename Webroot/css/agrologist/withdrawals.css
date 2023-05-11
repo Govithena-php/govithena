@@ -149,6 +149,11 @@
     cursor: pointer;
 }
 
+.withdraw__card button:hover {
+    background-color: #105f3a;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
 .modal {
     /* margin-top: 100px; */
     /* justify-content: center;

@@ -75,8 +75,8 @@
 
                                     </div>
                                     <div class="flex flex-row flex-c-c">
-                                        <a href="#" 
-                                            class="btn btn-primary mr-2 mt-2" onclick="accept_model_open('<?php echo $request['requestId'] ?>')"
+                                        <a
+                                            class="btn btn-primary mr-2 mt-2 accept_button" onclick="accept_model_open('<?php echo $request['requestId'] ?>')"
                                              name="accept_btn">Accept</a>
                                         <a href="#" class="btn btn-danger mt-2" onclick="decline_model_open('<?php echo $request['requestId'] ?>')"
                                             name="edit_details">Decline</a>
