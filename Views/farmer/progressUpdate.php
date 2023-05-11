@@ -27,12 +27,11 @@
 
     // var_dump($progress); die();
 
-    $active = "gigs";
-    $title = "Gigs";
+    $active = "progress";
+    $title = "Progress";
     require_once("navigator.php");
     ?>
 
-    <?php $name = "Janith"; ?>
 
     <div class="[ container ][ gigs ]" container-type="dashboard-section">
         <div class="btn_wrapper">

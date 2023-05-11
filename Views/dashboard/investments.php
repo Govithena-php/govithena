@@ -96,7 +96,7 @@
             </div>
 
             <div class="inv__new">
-                <a href="<?php echo URLROOT ?>/dashboard/newInvestment" class="[ button__primary ]">Invest More</a>
+                <a href="<?php echo URLROOT ?>/dashboard/newInvestment" class="[ button__primary ]">Invest</a>
             </div>
         </div>
         <?php
@@ -117,7 +117,7 @@
                     <div class="[ input__control ]">
                         <label for="category">Category</label>
                         <select id="category" name="category">
-                            <option value="all">All</option>
+                            <option value="">All</option>
                             <option value="vegetable">Vegetable</option>
                             <option value="fruit">Fruit</option>
                             <option value="grains">Grains</option>
@@ -159,7 +159,7 @@
                                 <div class="[ input__control ]">
                                     <label for="category">Category</label>
                                     <select id="category" name="category">
-                                        <option value="all">All</option>
+                                        <option value="">All</option>
                                         <option value="vegetable">Vegetable</option>
                                         <option value="fruit">Fruit</option>
                                         <option value="grains">Grains</option>
@@ -215,7 +215,7 @@
                                 </div>
                                 <div class="[ data ]" hideIn="lg">
                                     <div class="table_farmer_image_and_name">
-                                        <div class="img"><img src="<?php echo UPLOADS . "/profilePictures/" . $investment['image'] ?>" /></div>
+                                        <div class="img"><img src="<?php echo UPLOADS . "/profilePictures/" . $investment['image'] ?>" <?php echo DEFAULT_PROFILE_PICTURE ?> /></div>
                                         <p class="name limit-text-2"><?php echo $investment['firstName'] . " " . $investment['firstName'] ?></p>
                                     </div>
                                 </div>

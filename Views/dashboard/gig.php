@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/tabs.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/gridTable.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/filters.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/alertModal.css">
 
     <link rel="stylesheet" href="<?php echo CSS ?>/investor/gig.css">
 
@@ -21,7 +22,19 @@
 </head>
 
 <body>
-
+    <dialog id="confirmModal" class="[ alertModal ]">
+        <div class="[ container ]">
+            <i class="bi bi-x-circle"></i>
+            <div class="[ content ]">
+                <h2>Are you sure?</h2>
+                <p>Do you really want to mark this gig as completed? This process can't be undone.</p>
+            </div>
+            <form id="deleteForm" action="<?php echo URLROOT ?>/dashboard/gig_mark_as_under_review" method="POST" class="[ buttons ]">
+                <button type="button" class="[ button__primary ]" onclick="closeConfirmModal()" data-dismiss="modal">No, Cancel</button>
+                <button id="" name="gigId" value="<?php echo $gigId ?>" type="submit" class="[ button__danger ]">Yes, Confirm</button>
+            </form>
+        </div>
+    </dialog>
     <?php
     $active = "gigs";
     $title = "Gig";
@@ -29,13 +42,25 @@
     ?>
 
     <div class="[ container ]" container-type="dashboard-section">
-
         <div class="[ caption ]">
-
             <h3>Track your gig with ease!</h3>
             <p>You can monitor every step of your gig's progress and stay in control of the outcome.</p>
         </div>
-
+        <?php
+        if ($gig['status'] == 'COMPLETED') {
+        ?>
+            <div class="floating__message">
+                <div class="icon">
+                    <i class="bi bi-check-circle"></i>
+                </div>
+                <div class="content">
+                    <h2>This gig is completed!</h2>
+                    <p>Explore your past investments, stay updated with progress reports, and receive valuable insights from our agrologists. However, for this gig, no new investments can sprout. Stay tuned for exciting opportunities ahead!</p>
+                </div>
+            </div>
+        <?php
+        }
+        ?>
         <div class="[ gigs ]">
 
             <div>
@@ -47,7 +72,7 @@
                         </div>
                         <div class="[ farmer__profile ]">
                             <div class="[ profile__image ]">
-                                <img src="<?php echo UPLOADS . $farmer['image'] ?>" />
+                                <img src="<?php echo UPLOADS . '/profilePictures/' . $farmer['image'] ?>" <?php echo DEFAULT_PROFILE_PICTURE ?> />
                             </div>
                             <div class="[ profile__details ]">
                                 <a href="<?php echo URLROOT . '/profile/' . $farmer['uid'] ?>"><?php echo $farmer['firstName'] . " " . $farmer['lastName']; ?></a>
@@ -62,7 +87,7 @@
                     <div class="[ grid ]" sm="1" md="2" gap="1">
                         <div class="[ card ]">
                             <div class="[ icon ]">
-                                <i class="bi bi-bell"></i>
+                                <i class="bi bi-coin"></i>
                             </div>
                             <div class="[ details ]">
                                 <h2><small>LKR</small><br>
@@ -75,7 +100,7 @@
                         </div>
                         <div class="[ card ]">
                             <div class="[ icon ]">
-                                <i class="bi bi-bell"></i>
+                                <i class="bi bi-currency-dollar"></i>
                             </div>
                             <div class="[ details ]">
                                 <h2><?php echo $gig['profitMargin'] ?> %</h2>
@@ -84,7 +109,7 @@
                         </div>
                         <div class="[ card ]">
                             <div class="[ icon ]">
-                                <i class="bi bi-bell"></i>
+                                <i class="bi bi-calendar2-week"></i>
                             </div>
                             <div class="[ details ]">
                                 <h2><?php
@@ -96,7 +121,7 @@
                         </div>
                         <div class="[ card ]">
                             <div class="[ icon ]">
-                                <i class="bi bi-bell"></i>
+                                <i class="bi bi-tree"></i>
                             </div>
                             <div class="[ details ]">
                                 <h2><?php echo $gig['landArea'] ?> Hectare</h2>
@@ -105,89 +130,125 @@
                         </div>
                     </div>
                 </div>
-                <div class="[ special__announcment ]">
-                    <div class="[ icon ]">
-                        <i class="bi bi-bell"></i>
+                <?php
+                if ($gig['status'] == "UNDER_COMPLETION") {
+                ?>
+                    <div class="[ special__announcment special__announcment-danger ]">
+                        <div class="[ icon ]">
+                            <i class="bi bi-bell"></i>
+                        </div>
+                        <div class="[ details grow ]">
+                            <h3>Gig has been marked as completed</h3>
+                            <p>The gig has been marked as completed by the farmer. Confirm to proceed with the next steps.</p>
+                        </div>
+                        <button onclick="openConfirmModal()" class="button__primary">Confirm</button>
                     </div>
-                    <div class="[ details ]">
-                        <h3>Special Announcment</h3>
-                        <p>Our platform is currently undergoing maintenance. We will be back online shortly. Thank you for your patience.</p>
+                <?php
+                } else if ($gig['status'] == "UNDER_REVIEW") {
+                ?>
+                    <div class="[ special__announcment special__announcment-secondary ]">
+                        <div class="[ icon ]">
+                            <i class="bi bi-bell"></i>
+                        </div>
+                        <div class="[ details grow ]">
+                            <h3>Tell us how you feel.</h3>
+                            <p>Please take time to write your feedback about the farmer and gig and help us to provide better services.</p>
+                        </div>
+                        <div class="actions"><a href="<?php echo URLROOT . '/dashboard/review/' . $gig['gigId'] ?>" class="button__primary">Write a review</a></div>
                     </div>
-                </div>
+
+                <?php
+                } else {
+
+                    $latestAr = $recentActivities[0];
+                ?>
+                    <div class="[ special__announcment ]">
+                        <div class="[ icon ]">
+                            <i class="bi bi-bell"></i>
+                        </div>
+                        <div class="[ details grow ]">
+                            <h3><?php echo str_replace("_", " ", $latestAr['type']) ?></h3>
+                            <?php
+                            if ($latestAr['type'] == 'INVESTMENT') {
+                            ?>
+                                <p>You have invested <strong class="LKR"><?php echo number_format($latestAr['amount'], 2, '.', ',') ?></strong></p>
+                            <?php
+                            } else if ($latestAr['type'] == 'PROGRESS') {
+                            ?>
+                                <p class="">New progress update record has been created.</p>
+                            <?php
+                            } else if ($latestAr['type'] == 'FIELD_VISIT') {
+                            ?>
+                                <p class="">New Field visit record has been created.</p>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                    </div>
+                <?php
+                }
+                ?>
             </div>
             <div>
                 <div class="[ messages ]">
                     <div class="[ title ]">
                         <h3>Recent Activities</h3>
                     </div>
+                    <?php
+                    if (!isset($recentActivities) || empty($recentActivities)) {
+                        require(COMPONENTS . "dashboard/noDataFound.php");
+                    } else {
+                        foreach ($recentActivities as $ra) {
+                    ?>
+                            <div class="[ activity ]">
+                                <div class="[ details ]">
+                                    <div class="icon_and_type">
+                                        <div class="[ icon ]">
+                                            <?php
+                                            if ($ra['type'] == 'INVESTMENT') {
+                                                echo "<i class='bi bi-coin'></i>";
+                                            } else if ($ra['type'] == 'PROGRESS') {
+                                                echo "<i class='bi bi-graph-up-arrow'></i>";
+                                            } else if ($ra['type'] == 'FIELD_VISIT') {
+                                                echo "<i class='bi bi-tree'></i>";
+                                            } else {
+                                                echo "<i class='bi bi-bell'></i>";
+                                            }
+                                            ?>
+                                        </div>
+                                        <h5><?php echo str_replace("_", " ", ucwords($ra['type'])) ?></h5>
+                                    </div>
+                                    <?php
+                                    if ($ra['type'] == 'INVESTMENT') {
+                                    ?>
+                                        <p>You have invested <strong class="LKR"><?php echo number_format($ra['amount'], 2, '.', ',') ?></strong></p>
+                                    <?php
+                                    } else if ($ra['type'] == 'PROGRESS') {
+                                    ?>
+                                        <p class="">New progress update record has been created.</p>
+                                    <?php
+                                    } else if ($ra['type'] == 'FIELD_VISIT') {
+                                    ?>
+                                        <p class="">New Field visit record has been created.</p>
+                                    <?php
+                                    }
 
-                    <div class="[ activity ]">
-                        <div class="[ icon ]">
-                            <i class="bi bi-bell"></i>
-                        </div>
-                        <div class="[ details ]">
-                            <h5>Investment</h5>
-                            <p>You have invested <strong>LKR 100,000.00</strong> in <strong>gig title</strong></p>
-                            <div class="[ time ]">
-                                <p>2 hours ago</p>
+                                    ?>
+                                    <div class="[ time ]">
+                                        <p><?php echo $ra['timestamp'] ?></p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="[ activity ]">
-                        <div class="[ icon ]">
-                            <i class="bi bi-bell"></i>
-                        </div>
-                        <div class="[ details ]">
-                            <h5>Investment</h5>
-                            <p>You have invested <strong>LKR 100,000.00</strong> in <strong>gig title</strong></p>
-                            <div class="[ time ]">
-                                <p>2 hours ago</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="[ activity ]">
-                        <div class="[ icon ]">
-                            <i class="bi bi-bell"></i>
-                        </div>
-                        <div class="[ details ]">
-                            <h5>Investment</h5>
-                            <p>You have invested <strong>LKR 100,000.00</strong> in <strong>gig title</strong></p>
-                            <div class="[ time ]">
-                                <p>2 hours ago</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="[ activity ]">
-                        <div class="[ icon ]">
-                            <i class="bi bi-bell"></i>
-                        </div>
-                        <div class="[ details ]">
-                            <h5>Investment</h5>
-                            <p>You have invested <strong>LKR 100,000.00</strong> in <strong>gig title</strong></p>
-                            <div class="[ time ]">
-                                <p>2 hours ago</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="[ activity ]">
-                        <div class="[ icon ]">
-                            <i class="bi bi-bell"></i>
-                        </div>
-                        <div class="[ details ]">
-                            <h5>Investment</h5>
-                            <p>You have invested <strong>LKR 100,000.00</strong> in <strong>gig title</strong></p>
-                            <div class="[ time ]">
-                                <p>2 hours ago</p>
-                            </div>
-                        </div>
-                    </div>
-
+                    <?php
+                        }
+                    }
+                    ?>
                 </div>
             </div>
 
         </div>
 
-        <div class="[ tabs ][ gigTabs ]" tab="2">
+        <div class="[ tabs ][ gigTabs ]" tab="4">
             <div class="controls">
                 <!-- <button class="control" for="1">Analysis</button> -->
                 <button class="control" for="2" active>Progress Updates</button>
@@ -205,7 +266,7 @@
                     </div>
                 </div> -->
 
-                <div class="tab" id="2">
+                <div class="tab" id="2" active="true">
                     <div class="[ requests__continer ]">
                         <div class="[ caption ]">
                             <h2>Progress Updates</h2>
@@ -255,7 +316,7 @@
                                                 <div class="[ data ]">
                                                     <div class="table_farmer_image_and_name">
                                                         <div class="img">
-                                                            <img src="<?php echo UPLOADS . '/profilePictures/' . $pr['image'] ?>" alt="">
+                                                            <img src="<?php echo UPLOADS . '/profilePictures/' . $pr['image'] ?>" alt="" <?php echo DEFAULT_PROFILE_PICTURE ?>>
                                                         </div>
                                                         <div class="name">
                                                             <p><?php echo $pr['firstName'] . ' ' . $pr['lastName'] ?></p>
@@ -380,7 +441,7 @@
                                                 <div class="[ data ]" hideIn="sm">
                                                     <div class="table_farmer_image_and_name">
                                                         <div class="img">
-                                                            <img src="<?php echo UPLOADS . '/profilePictures/' . $fieldVisit['uimage'] ?>" alt="">
+                                                            <img src="<?php echo UPLOADS . '/profilePictures/' . $fieldVisit['uimage'] ?>" alt="" <?php echo DEFAULT_PROFILE_PICTURE ?>>
                                                         </div>
                                                         <div class="name">
                                                             <p><?php echo $fieldVisit['firstName'] . ' ' . $fieldVisit['lastName'] ?></p>
@@ -442,9 +503,20 @@
 
                 <div class="tab" id="4">
                     <div class="[ requests__continer ]">
-                        <div class="[ caption ]">
-                            <h2>Investments</h2>
-                            <p>Get the most out of your data with our analysis section - the ultimate tool for unlocking valuable insights and making smarter decisions.</p>
+                        <div class="flex-row-space-between align-items-end">
+                            <div class="[ caption ]">
+                                <h2>Investments</h2>
+                                <p>Get the most out of your data with our analysis section - the ultimate tool for unlocking valuable insights and making smarter decisions.</p>
+                            </div>
+                            <?php
+                            if ($gig['status'] == 'RESERVED') {
+                            ?>
+                                <div class="inv__new">
+                                    <a href="<?php echo URLROOT ?>/dashboard/newInvestment/<?php echo $gig['gigId'] ?>" class="[ button__primary ]">Invest More</a>
+                                </div>
+                            <?php
+                            }
+                            ?>
                         </div>
                         <?php
                         if (!isset($investments)) {
@@ -522,7 +594,7 @@
                     </div>
                 </div>
 
-                <div class="tab" id="5" active="true">
+                <div class="tab" id="5">
                     <div class="[ about__gig_container ]">
                         <div class="[ caption ]">
                             <h2>About Gig</h2>
@@ -543,7 +615,11 @@
                             <?php
                             if (!isset($gigImages) || empty($gigImages)) {
                             ?>
-                                <h1>No other Images</h1>
+                                <div class="no__image_card">
+                                    <img src="<?php echo IMAGES ?>/svg/image_placeholder.svg" alt="empty">
+                                    <!-- <img src="<?php echo IMAGES ?>svg/image_placeholder.svg" alt="place holder"> -->
+                                    <h1>No other Images</h1>
+                                </div>
                             <?php
                             } else {
                             ?>
@@ -616,6 +692,17 @@
     <script src="<?php echo JS ?>/tabs.js"></script>
     <script src="<?php echo JS ?>/gridTable.js"></script>
     <script src="<?php echo JS ?>/filter/toDateFromDate.js"></script>
+    <script>
+        function openConfirmModal() {
+            const confirmModal = document.getElementById("confirmModal")
+            confirmModal.showModal()
+        }
+
+        function closeConfirmModal() {
+            const confirmModal = document.getElementById("confirmModal")
+            confirmModal.close()
+        }
+    </script>
 </body>
 
 </html>

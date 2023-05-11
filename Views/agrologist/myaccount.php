@@ -144,36 +144,48 @@
                                 <h3>Edit Details</h3>
                                 <form class="form pt-1" action="<?php echo URLROOT ?>/agrologist/myaccount"
                                     method="post" enctype="multipart/form-data">
-                                    <div class="flex flex-row" style="justify-content: space-between">
-                                        <input type="text" name="firstName" class="" placeholder="First Name"
-                                            value="<?php echo $agrologist[0]['firstName'] ?>">
-                                        <input type="text" name="lastName" class="" placeholder="Last Name"
-                                            value="<?php echo $agrologist[0]['lastName'] ?>">
-                                    </div>
-                                    <div class="flex flex-row flex-sb-c">
-                                        <input type="text" name="phoneNumber" class="" placeholder="Mobile"
-                                            value="<?php echo $agrologist[0]['phoneNumber'] ?>">
-                                        <input type="text" name="NIC" class="" placeholder="NIC"
-                                            value="<?php echo $agrologist[0]['NIC'] ?>">
-                                    </div>
-                                    <div class="flex flex-row flex-sb-c">
+                                    <div class="[ grid ]" sm="1" lg="2" gap="2">
+
+                                        <!-- <div class="flex flex-row" style="justify-content: space-between"> -->
+                                        <div class="wrapper">
+                                            <input type="text" name="firstName" class="" placeholder="First Name"
+                                                value="<?php echo $agrologist[0]['firstName'] ?>">
+                                        </div>
+                                        <div class="wrapper">
+
+                                            <input type="text" name="lastName" class="" placeholder="Last Name"
+                                                value="<?php echo $agrologist[0]['lastName'] ?>">
+                                        </div>
+                                        <!-- <div class="flex flex-row flex-sb-c"> -->
+                                        <div class="wrapper">
+
+                                            <input type="text" name="phoneNumber" class="" placeholder="Mobile"
+                                                value="<?php echo $agrologist[0]['phoneNumber'] ?>">
+                                        </div>
+                                        <div class="wrapper">
+
+                                            <input type="text" name="NIC" class="" placeholder="NIC"
+                                                value="<?php echo $agrologist[0]['NIC'] ?>">
+                                        </div>
+                                        <!-- <div class="flex flex-row flex-sb-c"> -->
                                         <input type="text" name="addressLine1" class="" placeholder="Address Line1"
                                             value="<?php echo $agrologist[0]['addressLine1'] ?>">
                                         <input type="text" name="addressLine2" class="" placeholder="Address Line2"
                                             value="<?php echo $agrologist[0]['addressLine2'] ?>">
-                                    </div>
-                                    <div class="flex flex-row flex-sb-c">
+                                        <!-- </div> -->
+                                        <!-- <div class="flex flex-row flex-sb-c"> -->
                                         <input type="text" name="city" placeholder="City"
                                             value="<?php echo $agrologist[0]['city'] ?>">
                                         <input type="text" name="district" placeholder="District"
                                             value="<?php echo $agrologist[0]['district'] ?>">
-                                    </div>
-                                    <div class="flex flex-row flex-sb-c">
+                                        <!-- </div> -->
+                                        <!-- <div class="flex flex-row flex-sb-c"> -->
                                         <input type="text" name="postalCode" placeholder="Postal Code"
                                             value="<?php echo $agrologist[0]['postalCode'] ?>">
                                         <input type='file' name="profile_img" accept="image/*">
                                     </div>
-                                    <button type="submit" name="edit_details_btn" class="btn uppercase">Edit details</button>
+                                    <button type="submit" name="edit_details_btn" class="btn uppercase">Edit
+                                        details</button>
                                 </form>
                             </div>
 
@@ -221,12 +233,13 @@
                             require(COMPONENTS . "dashboard/noDataFound.php");
                         } else {
                             ?>
-                            
+
                             <div style="color: grey" class="pt-1">Grama Niladhari Certificate</div>
-                            <a href="<?php echo UPLOADS; ?><?php echo $qualifications[0]['gnCertificate']?>" target="_blank">Click to View the Certificate</a>
+                            <a href="<?php echo UPLOADS; ?><?php echo $qualifications[0]['gnCertificate'] ?>"
+                                target="_blank">Click to View the Certificate</a>
                             <div style="color: grey" class="pt-1">Qualification Description</div>
                             <?php echo "<div>" . $qualifications[0]['description'] . "</div>"; ?>
-                            
+
                             <?php
                         }
                         ?>
@@ -238,8 +251,10 @@
                                 <h3>Add Qualifications Details</h3>
                                 <form class="form pt-1" action="<?php echo URLROOT ?>/agrologist/myaccount"
                                     method="post" enctype="multipart/form-data">
-                                    <input type="file" name="gn_certificate" class="" ><br>
-                                    <input type="text" name="description" class="" placeholder="Description"><br>
+                                    <div class="[ grid ]" sm="1" lg="1" gap="1">
+                                        <input type="file" name="gn_certificate" class="">
+                                        <input type="text" name="description" class="" placeholder="Description">
+                                    </div>
                                     <button type="submit" name="add_qualification_details_btn"
                                         class="btn uppercase">Submit</button>
                                 </form>
@@ -253,10 +268,10 @@
                                 <h3>Edit Qualifications Details</h3>
                                 <form class="form pt-1" action="<?php echo URLROOT ?>/agrologist/myaccount"
                                     method="post" enctype="multipart/form-data">
-                                    <input type="file" name="gn_certificate" class="" 
-                                    value="<?php echo $qualifications[0]['gnCertificate'] ?>"><br>
+                                    <input type="file" name="gn_certificate" class=""
+                                        value="<?php echo $qualifications[0]['gnCertificate'] ?>"><br>
                                     <input type="text" name="description" placeholder="Description"
-                                    value="<?php echo $qualifications[0]['description'] ?>"><br>
+                                        value="<?php echo $qualifications[0]['description'] ?>"><br>
                                     <button type="submit" name="edit_qualification_details_btn"
                                         class="btn uppercase">Submit</button>
                                 </form>

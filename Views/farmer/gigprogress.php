@@ -28,7 +28,6 @@
     require_once("navigator.php");
     ?>
 
-    <?php $name = "Janith"; ?>
 
     <div class="[ container ][ gigs ]" container-type="dashboard-section">
         <div class="btn_wrapper">
@@ -102,7 +101,7 @@
         
         <div class="grid__table"
                         style="
-                                --xl-cols: 0.7fr 1.6fr 1fr 0.9fr 0.9fr 0.5fr 1.9fr 0.9fr;
+                                --xl-cols: 0.7fr 1.6fr 1fr 0.9fr 0.9fr 0.5fr 2.1fr 0.7fr;
                                 --lg-cols: 1.5fr 1fr 1fr 1fr 0.3fr;
                                 --md-cols: 2fr 1fr 0.3fr;
                                 --sm-cols: 3fr 0.3fr;
@@ -172,7 +171,7 @@
                                 </div>
                                 <div class="data flex-right">
                                     <div class="actions">
-                                        <a class="btn btn-primary" href="<?php echo URLROOT ?>/farmer/progressUpdate/<?php echo $p['gigId']?>">View Progress</a>
+                                        <a class="btn btn-primary" href="<?php echo URLROOT ?>/farmer/progressUpdate/<?php echo $p['gigId']?>">View</a>
                                         <!-- <button onclick="openAcceptModal('<?php echo $p['gigId']?>')" class="button__primary">Accept</button> -->
                                         <!-- <button onclick="openRejectModal('<?php echo $p['gigId']?>')" class="button__danger">Reject</button> -->
                                         <!-- <a href="<?php echo URLROOT . "/farmer/deleteGig/" . $p['gigId'] ?>" class="btn btn-danger">Delete</a> -->

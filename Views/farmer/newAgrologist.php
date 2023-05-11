@@ -110,7 +110,7 @@
     <div class="container" container-type="dashboard-section">
         <h1 class="page__heading">Search Agrologist</h1>
 
-        <form class="[ filters ]" action="<?php echo URLROOT ?>/farmer/agrologist/" method="GET">
+        <form class="[ filters ]" action="<?php echo URLROOT ?>/farmer/newAgrologist/" method="GET">
             <div class="[ options ]">
                 <div class="[ input__control ]">
                     <label for="location">Location</label>

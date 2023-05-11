@@ -69,7 +69,7 @@ function highlight($active, $link)
                     <button onclick="toggleProfileMenu()">
                         <div class="[ image ]">
                             <!-- locahost/webroot/Uploads/tharasara.png -->
-                            <img src="<?php echo UPLOADS . '/' . Session::get('user')->getImage(); ?>" alt="profile">
+                            <img src="<?php echo UPLOADS . '/profilePictures/' . Session::get('user')->getImage(); ?>" <?php echo DEFAULT_PROFILE_PICTURE ?>>
                         </div>
                     </button>
                 </div>
@@ -156,12 +156,12 @@ function highlight($active, $link)
 
     <div class="[ links ]">
         <ul>
-            <li>
+            <!-- <li>
                 <a href="<?php echo URLROOT ?>/farmer" class="<?php highlight($active, "dashboard") ?>">
                     <i class="bi bi-columns-gap"></i>
                     <p>Dashboard</p>
                 </a>
-            </li>
+            </li> -->
             <li>
                 <a href="<?php echo URLROOT ?>/farmer/" class="<?php highlight($active, "gigs") ?>">
                     <i class="bi bi-egg-fried"></i>
@@ -171,7 +171,7 @@ function highlight($active, $link)
             <li>
                 <a href="<?php echo URLROOT ?>/farmer/investors" class="<?php highlight($active, "investors") ?>">
                     <i class="bi bi-card-heading"></i>
-                    <p>Investment Requests</p>
+                    <p>Investors</p>
                 </a>
             </li>
             <li>

@@ -62,17 +62,30 @@
   height: 80px;
   border-radius: 50%;
   overflow: hidden;
-  /* margin-right: 30px; */
-  /* margin: auto; */
-  /* display: block; */
-  /* box-shadow: 0px 0px 5px 5px #0101012c; */
 
 }
+
+
 .investorimg>img {
 height: 100%;
 width: 100%;
 object-fit: cover;
 }
+
+.investorimgin {
+   
+  width:80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-left: 40px;
+}
+
+.investorimgin>img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  }
 
 .namecol{
   display: flex;
@@ -84,3 +97,7 @@ object-fit: cover;
   border-left:  none !important;
 }
 
+.table_button_flex {
+  display: flex;
+  gap: 1rem;
+}

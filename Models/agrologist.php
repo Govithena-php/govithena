@@ -420,6 +420,82 @@ class Agrologist extends Model
         }
     }
 
+    public function getFarmerCountTwoMonthsBefore()
+    {
+        try {
+            $sql = "SELECT COUNT(r.farmerId) AS farmerCount FROM agrologist_request r WHERE r.agrologistId=:agrologistId AND (r.status='Accepted' OR r.status='Completed') AND YEAR(r.statusChangeDate) = YEAR(CURRENT_DATE - INTERVAL 2 MONTH)
+            AND MONTH(r.statusChangeDate) = MONTH(CURRENT_DATE - INTERVAL 2 MONTH)";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'agrologistId' => Session::get('user')->getUid()
+            ]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+
+        }
+    }
+
+    public function getFarmerCountThreeMonthsBefore()
+    {
+        try {
+            $sql = "SELECT COUNT(r.farmerId) AS farmerCount FROM agrologist_request r WHERE r.agrologistId=:agrologistId AND (r.status='Accepted' OR r.status='Completed') AND YEAR(r.statusChangeDate) = YEAR(CURRENT_DATE - INTERVAL 3 MONTH)
+            AND MONTH(r.statusChangeDate) = MONTH(CURRENT_DATE - INTERVAL 3 MONTH)";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'agrologistId' => Session::get('user')->getUid()
+            ]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+
+        }
+    }
+
+    public function getFarmerCountFourMonthsBefore()
+    {
+        try {
+            $sql = "SELECT COUNT(r.farmerId) AS farmerCount FROM agrologist_request r WHERE r.agrologistId=:agrologistId AND (r.status='Accepted' OR r.status='Completed') AND YEAR(r.statusChangeDate) = YEAR(CURRENT_DATE - INTERVAL 4 MONTH)
+            AND MONTH(r.statusChangeDate) = MONTH(CURRENT_DATE - INTERVAL 4 MONTH)";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'agrologistId' => Session::get('user')->getUid()
+            ]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+
+        }
+    }
+
+    public function getFarmerCountFiveMonthsBefore()
+    {
+        try {
+            $sql = "SELECT COUNT(r.farmerId) AS farmerCount FROM agrologist_request r WHERE r.agrologistId=:agrologistId AND (r.status='Accepted' OR r.status='Completed') AND YEAR(r.statusChangeDate) = YEAR(CURRENT_DATE - INTERVAL 5 MONTH)
+            AND MONTH(r.statusChangeDate) = MONTH(CURRENT_DATE - INTERVAL 5 MONTH)";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'agrologistId' => Session::get('user')->getUid()
+            ]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+
+        }
+    }
+
     public function getGigCount()
     {
         try {
@@ -459,6 +535,90 @@ class Agrologist extends Model
         }
     }
 
+    public function getGigCountTwoMonthsBefore()
+    {
+        try {
+            $sql = "SELECT COUNT(g.gigId) AS gigCount FROM agrologist_request a LEFT JOIN gig g ON a.farmerId=g.farmerId  
+            WHERE a.agrologistId=:agrologistId AND (a.status='Accepted' OR a.status='Completed') AND 
+            (g.status='ACTIVE' OR g.status='COMPLETED') AND YEAR(g.statusChangeDate) = YEAR(CURRENT_DATE - INTERVAL 2 MONTH)
+            AND MONTH(g.statusChangeDate) = MONTH(CURRENT_DATE - INTERVAL 2 MONTH)";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'agrologistId' => Session::get('user')->getUid()
+            ]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+
+        }
+    }
+
+    public function getGigCountThreeMonthsBefore()
+    {
+        try {
+            $sql = "SELECT COUNT(g.gigId) AS gigCount FROM agrologist_request a LEFT JOIN gig g ON a.farmerId=g.farmerId  
+            WHERE a.agrologistId=:agrologistId AND (a.status='Accepted' OR a.status='Completed') AND 
+            (g.status='ACTIVE' OR g.status='COMPLETED') AND YEAR(g.statusChangeDate) = YEAR(CURRENT_DATE - INTERVAL 3 MONTH)
+            AND MONTH(g.statusChangeDate) = MONTH(CURRENT_DATE - INTERVAL 3 MONTH)";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'agrologistId' => Session::get('user')->getUid()
+            ]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+            
+        }
+    }
+
+    public function getGigCountFourMonthsBefore()
+    {
+        try {
+            $sql = "SELECT COUNT(g.gigId) AS gigCount FROM agrologist_request a LEFT JOIN gig g ON a.farmerId=g.farmerId  
+            WHERE a.agrologistId=:agrologistId AND (a.status='Accepted' OR a.status='Completed') AND 
+            (g.status='ACTIVE' OR g.status='COMPLETED') AND YEAR(g.statusChangeDate) = YEAR(CURRENT_DATE - INTERVAL 4 MONTH)
+            AND MONTH(g.statusChangeDate) = MONTH(CURRENT_DATE - INTERVAL 4 MONTH)";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'agrologistId' => Session::get('user')->getUid()
+            ]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+            
+        }
+    }
+
+    public function getGigCountFiveMonthsBefore()
+    {
+        try {
+            $sql = "SELECT COUNT(g.gigId) AS gigCount FROM agrologist_request a LEFT JOIN gig g ON a.farmerId=g.farmerId  
+            WHERE a.agrologistId=:agrologistId AND (a.status='Accepted' OR a.status='Completed') AND 
+            (g.status='ACTIVE' OR g.status='COMPLETED') AND YEAR(g.statusChangeDate) = YEAR(CURRENT_DATE - INTERVAL 5 MONTH)
+            AND MONTH(g.statusChangeDate) = MONTH(CURRENT_DATE - INTERVAL 5 MONTH)";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'agrologistId' => Session::get('user')->getUid()
+            ]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+            
+        }
+    }
+
     public function getAgrologistTotalIncome()
     {
         try {
@@ -480,7 +640,7 @@ class Agrologist extends Model
     public function getAgrologistMonthlyIncome()
     {
         try {
-            $sql = "SELECT SUM(p.payment) AS total_income FROM agrologist_payment p WHERE p.agrologistId=:agrologistId AND MONTH(p.paidDate) = MONTH(CURDATE()) GROUP BY p.agrologistId";
+            $sql = "SELECT SUM(p.payment) AS total_income FROM agrologist_payment p WHERE p.agrologistId=:agrologistId AND YEAR(p.paidDate) = YEAR(CURDATE()) AND MONTH(p.paidDate) = MONTH(CURDATE()) GROUP BY p.agrologistId";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
                 'agrologistId' => Session::get('user')->getUid()
@@ -575,7 +735,7 @@ class Agrologist extends Model
     public function getAccountDetails()
     {
         try {
-            $sql = "SELECT accountNumber, bank, branch, branchCode FROM bank_account WHERE user=:userId AND status='ACTIVE'";
+            $sql = "SELECT accountNumber, bank, branch, branchCode FROM bank_account WHERE userId=:userId AND status='ACTIVE'";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
                 'userId' => Session::get('user')->getUid()
@@ -593,7 +753,7 @@ class Agrologist extends Model
     public function insertAccountDetails($data)
     {
         try {
-            $sql = "INSERT INTO  bank_account (accountNumber, user, bank, branch, branchCode, status) VALUES (:accountNumber, :userId, :bank, :branch, :branchCode, 'ACTIVE')";
+            $sql = "INSERT INTO  bank_account (accountNumber, userId, bank, branch, branchCode, status) VALUES (:accountNumber, :userId, :bank, :branch, :branchCode, 'ACTIVE')";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
                 'accountNumber' => $data['accountNumber'],
@@ -613,7 +773,7 @@ class Agrologist extends Model
     public function updateAccountDetails($data)
     {
         try {
-            $sql = "UPDATE bank_account SET accountNumber=:accountNumber, bank=:bank, branch=:branch, branchCode=:branchCode WHERE user=:userId";
+            $sql = "UPDATE bank_account SET accountNumber=:accountNumber, bank=:bank, branch=:branch, branchCode=:branchCode WHERE userId=:userId";
             $req = Database::getBdd()->prepare($sql);
             $req->execute([
                 'accountNumber' => $data['accountNumber'],
@@ -773,10 +933,65 @@ class Agrologist extends Model
         }
     }
 
+    public function getIncomeLimit()
+    {
+        try {
+            $sql = "SELECT p.payment, p.paidDate, CONCAT(u.firstName , ' ', u.lastName) AS fullName FROM agrologist_payment p LEFT JOIN user u ON u.uid=p.farmerId WHERE p.agrologistId=:agrologistId ORDER BY p.paidDate DESC LIMIT 5";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'agrologistId' => Session::get('user')->getUid()
+            ]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+
+        }
+    }
+
+
     public function getWithdrawals()
     {
         try {
             $sql = "SELECT withdrawal, withdrawalDate FROM agrologist_withdrawal WHERE agrologistId=:agrologistId ORDER BY withdrawalDate DESC";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'agrologistId' => Session::get('user')->getUid()
+            ]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+
+        }
+    }
+
+    public function getWithdrawalsLimit()
+    {
+        try {
+            $sql = "SELECT withdrawal, withdrawalDate FROM agrologist_withdrawal WHERE agrologistId=:agrologistId ORDER BY withdrawalDate DESC LIMIT 5";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'agrologistId' => Session::get('user')->getUid()
+            ]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $req;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return null;
+
+        }
+    }
+
+    public function getGigsPerCategory()
+    {
+        try {
+            $sql = "SELECT g.category, COUNT(g.gigId) AS gigCount FROM gig g LEFT JOIN agrologist_request a ON a.farmerId=g.farmerId WHERE a.agrologistId=:agrologistId GROUP BY g.category";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
                 'agrologistId' => Session::get('user')->getUid()

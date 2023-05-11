@@ -47,6 +47,7 @@ class STATUS
     const COMPLETED = "COMPLETED";
     const ACCEPTED = "ACCEPTED";
     const REJECTED = "REJECTED";
+    const PAID = "PAID";
 }
 
 
@@ -202,8 +203,7 @@ define('SMTPACCOUNT', 'govithena.lk@gmail.com');
 define('SMTPPASSWORD', 'yxkyiewhrqotyyyf');
 define('SMTPNAME', 'Govithena LK');
 
-
-
+define('DEFAULT_PROFILE_PICTURE', 'onerror="this.src= `' . UPLOADS . '/profilePictures/default.jpg`"');
 
 // define("GIG_REQUEST"; 'greq');
 // define("AGROLOGIST_REQUEST", 'areq');

@@ -113,10 +113,11 @@
 }
 
 .agro__card .image__name .agro__image {
-  height: 150px;
-  width: 200px;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
   overflow: hidden;
-  border-radius: 0.5rem 0 0 0.5rem;
+  margin: 10px 0px 10px 10px;
 }
 
 .agro__card .image__name .agro__image img {
@@ -127,7 +128,7 @@
 
 
 .agro__card .image__name .name {
-  padding: 1rem;
+  padding: 2rem;
 }
 
 .agro__card .image__name .name h3 {

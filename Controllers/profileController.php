@@ -6,7 +6,6 @@ class profileController extends Controller
     private $userModel;
     private $gigModel;
     private $reviewByInvestorModel;
-    private $investorGigModel;
 
     public function __construct()
     {
@@ -14,7 +13,6 @@ class profileController extends Controller
         $this->userModel = $this->model('user');
         $this->gigModel = $this->model('gig');
         $this->reviewByInvestorModel = $this->model('reviewByInvestor');
-        $this->investorGigModel = $this->model('investorGig');
 
 
         if (!Session::isLoggedIn()) {
@@ -29,21 +27,24 @@ class profileController extends Controller
         if (isset($params) && !empty($params[0])) {
             list($uid) = $params;
 
-            $previousWorks = $this->investorGigModel->getCompletedGigsByFarmer($uid);
-            if ($previousWorks['success']) {
-                $props['previousWorks'] = $previousWorks['data'];
-            }
+            // $previousWorks = $this->gigModel->getCompletedGigsByFarmer($uid);
+            // if ($previousWorks['success']) {
+            //     $props['previousWorks'] = $previousWorks['data'];
+            // }
 
             $user = $this->userModel->getUserById($uid);
 
-            $WorkedWith = $this->investorGigModel->getWorkedWith($uid);
+            // var_dump($user);
+            // die();
+
+            $WorkedWith = $this->gigModel->getWorkedWith($uid);
             if ($WorkedWith['success']) {
                 $props['WorkedWith'] = $WorkedWith['data']['investorCount'];
             } else {
                 $props['WorkedWith'] = 0;
             }
 
-            $investmentsSum = $this->investorGigModel->getInvestmentsSumByFarmer($uid);
+            $investmentsSum = $this->gigModel->getInvestmentsSumByFarmer($uid);
             if ($investmentsSum['success']) {
                 $sum = $investmentsSum['data']['totalInvestment'];
             } else {
@@ -59,11 +60,19 @@ class profileController extends Controller
 
             $reviewCount = $this->reviewByInvestorModel->getReviewCountByFarmer($uid);
             $qCounts = $this->reviewByInvestorModel->getQuestionsCountsByFarmer($uid);
+            // var_dump($qCounts);
+            // die();
             if ($reviewCount['success']) {
                 $totalReviews = $reviewCount['data']['totalReviewCount'];
-                if ($qCounts['success']) {
-                    foreach ($qCounts['data'] as $qKey => $qCount) {
-                        $props['qPrecentages'][$qKey] = ($qCount / $totalReviews) * 100;
+                if ($totalReviews > 0) {
+                    if ($qCounts['success']) {
+                        foreach ($qCounts['data'] as $qKey => $qCount) {
+                            $props['qPrecentages'][$qKey] = ($qCount / $totalReviews) * 100;
+                        }
+                    } else {
+                        foreach ($qCounts['data'] as $qKey => $qCount) {
+                            $props['qPrecentages'][$qKey] = 0;
+                        }
                     }
                 } else {
                     foreach ($qCounts['data'] as $qKey => $qCount) {
@@ -77,10 +86,6 @@ class profileController extends Controller
                 }
             }
 
-
-
-            // die(var_dump($props['qPrecentages']));
-            // die();
 
             if ($user['status']) {
                 $props['user'] = $user['data'];
@@ -123,6 +128,17 @@ class profileController extends Controller
                     $props['stars'] = $stars;
 
                     $props['farmerAvgStars'] = floatval($farmerAvgStars / $count);
+                } else {
+                    $props['noOfReviews'] = 0;
+                    $props['reviews'] = [];
+                    $props['stars'] = [
+                        '1' => 0,
+                        '2' => 0,
+                        '3' => 0,
+                        '4' => 0,
+                        '5' => 0
+                    ];
+                    $props['farmerAvgStars'] = 0;
                 }
 
 

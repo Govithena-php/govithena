@@ -38,6 +38,19 @@ class Farmer extends Model
         }
     }
 
+    public function sendAgrologistRequestRating($data)
+    {
+        try {
+            $sql = "INSERT INTO review_by_agrologist (reviewId, agrologistId, farmerId, q1,q2,q3,q4,q5,q6,q7,q8,q9) VALUES (:reviewId, :agrologistId, :farmerId, 0,0,0,0,0,0,0,'', '')";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute($data);
+            return true;
+        } catch (Exception $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+
 
     public function getAcceptedAgrologistByFarmer($id)
     {
@@ -235,7 +248,7 @@ class Farmer extends Model
     public function investors($data)
     {
         try {
-            $sql = "SELECT fr.requestId, fr.requestedDate, fr.offer, fr.message, user.firstName, user.lastName,  gig.title, gig.thumbnail, gig.city from farmer_request fr INNER JOIN gig ON gig.gigId = fr.gigId INNER JOIN user ON user.uid = fr.investorId WHERE fr.farmerId = :farmerId AND fr.state = :state";
+            $sql = "SELECT fr.requestId, fr.requestedDate, fr.offer, fr.message, user.firstName, user.lastName,  gig.title, gig.thumbnail, gig.city from gig_request fr INNER JOIN gig ON gig.gigId = fr.gigId INNER JOIN user ON user.uid = fr.investorId WHERE fr.farmerId = :farmerId AND fr.status = :state";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -248,7 +261,7 @@ class Farmer extends Model
     public function reqinvestors($data)
     {
         try {
-            $sql = "SELECT fr.requestId, fr.requestedDate, fr.offer, fr.message, user.firstName, user.lastName,  gig.title, gig.thumbnail, gig.city from farmer_request fr INNER JOIN gig ON gig.gigId = fr.gigId INNER JOIN user ON user.uid = fr.investorId WHERE fr.farmerId = :farmerId AND fr.state = :state";
+            $sql = "SELECT fr.requestId, DATE(fr.requestedDate) as reqdate, fr.offer, fr.message, user.firstName, user.lastName,  gig.title, gig.thumbnail, gig.city from gig_request fr INNER JOIN gig ON gig.gigId = fr.gigId INNER JOIN user ON user.uid = fr.investorId WHERE fr.farmerId = :farmerId AND fr.status = :state";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -258,10 +271,25 @@ class Farmer extends Model
         }
     }
 
+    public function investorlist($data)
+    {
+        try {
+            $sql = "SELECT fr.requestId, fr.requestedDate, fr.offer, fr.message, user.firstName, user.lastName,  gig.title, gig.thumbnail, gig.city from gig_request fr INNER JOIN gig ON gig.gigId = fr.gigId INNER JOIN user ON user.uid = fr.investorId WHERE fr.farmerId = :farmerId AND fr.status = :state";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute($data);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['status' => true, 'data' => $req];
+        } catch (Exception $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    
+
     public function acceptInvestor($data)
     {
         try {
-            $sql = "UPDATE farmer_request SET state = :state WHERE farmer_request.requestId = :requestId";
+            $sql = "UPDATE gig_request SET status = :status WHERE gig_request.requestId = :requestId";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
             if ($stmt->rowCount() > 0) {
@@ -273,11 +301,11 @@ class Farmer extends Model
             return ['status' => false, 'data' => $e->getMessage()];
         }
     }
-
+    
     public function declineInvestor($data)
     {
         try {
-            $sql = "UPDATE farmer_request SET state = :state WHERE farmer_request.requestId = :requestId";
+            $sql = "UPDATE gig_request SET state = :state WHERE gig_request.requestId = :requestId";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
             if ($stmt->rowCount() > 0) {

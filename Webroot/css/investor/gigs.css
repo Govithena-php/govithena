@@ -25,6 +25,10 @@
     aspect-ratio: 1;
 }
 
+.special__announcment .icon i {
+    font-size: 2rem;
+}
+
 .special__announcment h3 {
     font-size: 1.2rem;
     font-weight: 600;
@@ -48,10 +52,21 @@
 
 
 .cards {
+    position: relative;
+    min-height: 300px;
     padding: 2rem;
-    background: #1d9a6041;
+    background: rgb(37, 37, 37);
     border-radius: 0.5rem;
 
+}
+
+.cards .bg__svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
 }
 
 .cards>.card {
@@ -72,7 +87,7 @@
 }
 
 .cards>.card .icon i {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     color: var(--clr-light);
 }
 
@@ -112,21 +127,41 @@
 
 
 .activities {
+    position: relative;
     border: 1px solid #ccc;
     border-radius: 0.5rem;
-    /* padding: 0.5rem; */
-    min-height: 300px;
-    height: fit-content;
+    height: 500px;
+    overflow-y: scroll;
 }
 
+.activities::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+.activities::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.activities::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 0.5rem;
+}
+
+.activities::-webkit-scrollbar-thumb:hover {
+    background: #1a9d5f;
+}
+
+
 .activities .title {
+    position: sticky;
+    top: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-radius: 0.5rem 0.5rem 0 0;
     border-bottom: 1px solid #ccc;
     background-color: var(--clr-primary);
     color: var(--clr-light);
+    box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.1);
 }
 
 .activities .title h3 {
@@ -143,21 +178,7 @@
     justify-content: flex-start;
     margin-top: 0.5rem;
     border-bottom: 1px solid #ccc;
-    padding: 0.5rem;
-}
-
-.activities .activity .icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--clr-primary);
-    border-radius: 0.5rem;
-    padding: 0.5rem;
-}
-
-.activities .activity .icon i {
-    color: var(--clr-light);
-    font-size: 1rem;
+    padding: 0.5rem 1rem;
 }
 
 .activities .activity .details {
@@ -165,6 +186,30 @@
     flex-direction: column;
     justify-content: center;
 }
+
+.activities .activity .icon_and_type {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.activities .activity .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--clr-primary);
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.activities .activity .icon i {
+    color: var(--clr-light);
+    font-size: 0.5rem;
+}
+
 
 .activities .activity .details h5 {
     font-size: 0.9rem;
@@ -174,10 +219,11 @@
 .activities .activity .details p {
     font-size: 0.8rem;
     font-weight: 400;
-    color: var(--clr-text-gray, #535353);
+    color: var(--clr-text, #535353);
 }
 
 .activities .activity .time {
+    margin-top: 0.5rem;
     font-size: 0.5rem;
     font-weight: 400;
     color: var(--clr-text-gray, #535353);
@@ -197,11 +243,39 @@
     border: 1px solid #ccc;
     border-radius: 0.5rem;
     box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
 .active__gig:hover .active__gig_img img {
     filter: brightness(1);
 }
+
+.active__gig_card_floating_msg {
+    color: var(--clr-light);
+    padding: 0.75rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.2);
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+.active__gig_card_floating_msg-danger {
+    background-color: #cd2b5c;
+}
+
+.active__gig_card_floating_msg-secondary {
+    background-color: var(--clr-secondary);
+}
+
+.active__gig_card_floating_msg- {
+    background-color: #f5a623;
+}
+
+
+
 
 .active__gig_img {
     width: 100%;
@@ -374,6 +448,19 @@
 
 .actions>button:hover>i {
     color: var(--clr-primary, #1d1d1d);
+}
+
+.review__card {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 0.5rem;
+}
+
+.review__card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 @media screen and (max-width: 1200px) {}
