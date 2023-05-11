@@ -93,28 +93,28 @@ function render_stars($stars, $outof)
                             <div class="progress__bar">
                                 <div class="progress__details">
                                     <p>Overall performance</p>
-                                    <p><?php echo $qPrecentages['q7Count'] ?>%</p>
+                                    <p><?php echo $qPrecentages['q4Count'] ?>%</p>
                                 </div>
                                 <div class="bar">
-                                    <div class="fill" style="--value: <?php echo $qPrecentages['q7Count'] ?>%;"></div>
+                                    <div class="fill" style="--value: <?php echo $qPrecentages['q4Count'] ?>%;"></div>
                                 </div>
                             </div>
                             <div class="progress__bar">
                                 <div class="progress__details">
                                     <p>Communication</p>
-                                    <p><?php echo $qPrecentages['q7Count'] ?>%</p>
+                                    <p><?php echo $qPrecentages['q5Count'] ?>%</p>
                                 </div>
                                 <div class="bar">
-                                    <div class="fill" style="--value: <?php echo $qPrecentages['q7Count'] ?>%;"></div>
+                                    <div class="fill" style="--value: <?php echo $qPrecentages['q5Count'] ?>%;"></div>
                                 </div>
                             </div>
                             <div class="progress__bar">
                                 <div class="progress__details">
                                     <p>Experties</p>
-                                    <p><?php echo $qPrecentages['q7Count'] ?>%</p>
+                                    <p><?php echo $qPrecentages['q6Count'] ?>%</p>
                                 </div>
                                 <div class="bar">
-                                    <div class="fill" style="--value: <?php echo $qPrecentages['q7Count'] ?>%;"></div>
+                                    <div class="fill" style="--value: <?php echo $qPrecentages['q6Count'] ?>%;"></div>
                                 </div>
                             </div>
                             <div class="progress__bar">
@@ -132,16 +132,16 @@ function render_stars($stars, $outof)
                                     <p><?php echo $qPrecentages['q7Count'] ?>%</p>
                                 </div>
                                 <div class="bar">
-                                    <div class="fill" style="--value: <?php echo $qPrecentages['q7Count'] ?>%;"></div>
+                                    <div class="fill" style="--value: <?php echo $qPrecentages['q6Count'] ?>%;"></div>
                                 </div>
                             </div>
                             <div class="progress__bar">
                                 <div class="progress__details">
-                                    <p>Financial Stewardship</p>
-                                    <p><?php echo $qPrecentages['q7Count'] ?>%</p>
+                                    <p>Financial Management.</p>
+                                    <p><?php echo $qPrecentages['q6Count'] ?>%</p>
                                 </div>
                                 <div class="bar">
-                                    <div class="fill" style="--value: <?php echo $qPrecentages['q7Count'] ?>%;"></div>
+                                    <div class="fill" style="--value: <?php echo $qPrecentages['q6Count'] ?>%;"></div>
                                 </div>
                             </div>
                         </div>
@@ -247,11 +247,18 @@ function render_stars($stars, $outof)
             </div>
             <div class="reviews__wrapper">
                 <?php
-                if (!isset($reviews) && empty($reviews)) {
-                    require(COMPONENTS . "dashboard/noDataFound.php");
+                if (!isset($reviews) || empty($reviews)) {
+                ?>
+                    <div class="no__reviews">
+                        <img src="<?php echo IMAGES ?>/svg/no_data.svg" alt="no reviews">
+                        <h3>No Reviews Yet</h3>
+                        <p>There are no reviews yet. Be the first to review.</p>
+                    </div>
+
+                    <?php
                 } else {
                     foreach ($reviews as $review) {
-                ?>
+                    ?>
                         <div class="review">
                             <div class="review__header">
                                 <div class="reviewer_image">

@@ -75,7 +75,7 @@ class dashboardController extends Controller
         if ($withdrawableBalance['success']) {
             $props['withdrawableBalance'] = $withdrawableBalance['data'];
         } else {
-            $props['withdrawableBalance'] = 0;
+            $props['withdrawableBalance'] = ['balance' => 0];
         }
 
         $investments = $this->investmentModel->fetchByInvestoIdFroDashboard($this->currentUser->getUid());
@@ -143,7 +143,7 @@ class dashboardController extends Controller
         if ($withdrawableBalance['success']) {
             $props['withdrawableBalance'] = $withdrawableBalance['data'];
         } else {
-            $props['withdrawableBalance'] = 0;
+            $props['withdrawableBalance'] = ['balance' => 0];
         }
 
         $activeGigs = $this->gigModel->fetchAllReservedGigByInvestor($this->currentUser->getUid());
@@ -559,7 +559,7 @@ class dashboardController extends Controller
             if ($withdrawalBalance['success']) {
                 $props['withdrawalBalance'] = $withdrawalBalance['data'];
             } else {
-                $props['withdrawalBalance'] = 0;
+                $props['withdrawalBalance'] = ['balance' => 0, 'updatedDate' => '--', 'updatedTime' => '--'];
             }
 
             $bankAccounts = $this->bankAccountModel->getBankDetails($this->currentUser->getUid());
@@ -707,7 +707,7 @@ class dashboardController extends Controller
             if ($withdrawalBalance['success']) {
                 $props['withdrawalBalance'] = $withdrawalBalance['data'];
             } else {
-                $props['withdrawalBalance'] = 0;
+                $props['withdrawalBalance'] = ['balance' => 0, 'updatedDate' => '--', 'updatedTime' => '--'];
             }
         } else {
             $this->redirect('/error/somethingWentWrong');

@@ -191,7 +191,7 @@
                             </form>
                             <div class="inv__new">
                                 <a href="<?php echo URLROOT ?>/dashboard/newInvestment" class="[ button__primary ]">Invest on another gig</a>
-                                <a href="<?php echo URLROOT ?>/dashboard/newInvestment" class="[ button__danger ]">Withdarw</a>
+                                <a href="<?php echo URLROOT ?>/dashboard/withdrawals" class="[ button__danger ]">Withdarw</a>
                             </div>
                         </div>
                         <div class="[ row ]">

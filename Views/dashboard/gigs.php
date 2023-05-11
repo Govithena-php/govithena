@@ -120,40 +120,48 @@
                 </div>
                 <div class="[ special__announcment ]">
                     <?php
-                    $firstRow = $recentActivities[0];
-                    unset($recentActivities[0]);
+
+                    if (isset($recentActivities) || empty($recentActivities)) {
+                    } else {
+                        $firstRow = $recentActivities[0];
+                        unset($recentActivities[0]);
                     ?>
-                    <div class="[ icon ]">
-                        <?php
-                        if ($firstRow['type'] == 'INVESTMENT') {
-                            echo "<i class='bi bi-coin'></i>";
-                        } else if ($firstRow['type'] == 'PROGRESS') {
-                            echo "<i class='bi bi-graph-up-arrow'></i>";
-                        } else if ($firstRow['type'] == 'FIELD_VISIT') {
-                            echo "<i class='bi bi-tree'></i>";
-                        } else {
-                            echo "<i class='bi bi-bell'></i>";
-                        }
-                        ?>
-                    </div>
-                    <div class="[ details ]">
-                        <h3><?php echo str_replace("_", " ", ucwords($firstRow['type'])) ?></h3>
-                        <?php
-                        if ($firstRow['type'] == 'INVESTMENT') {
-                        ?>
-                            <p>You have invested <strong class="LKR"><?php echo number_format($firstRow['amount'], 2, '.', ',') ?></strong> in <strong class="limit-text-1"><?php echo $gigTitles[$firstRow['gigId']] ?></strong></p>
-                        <?php
-                        } else if ($firstRow['type'] == 'PROGRESS') {
-                        ?>
-                            <p class="limit-text-3">Progress of <strong><?php echo $gigTitles[$firstRow['gigId']] ?> </strong>has been updated.</p>
-                        <?php
-                        } else if ($firstRow['type'] == 'FIELD_VISIT') {
-                        ?>
-                            <p class="limit-text-3">Field visit details of <strong><?php echo $gigTitles[$firstRow['gigId']] ?> </strong>has been updated.</p>
-                        <?php
-                        }
-                        ?>
-                    </div>
+                        <div class="[ icon ]">
+                            <?php
+                            if ($firstRow['type'] == 'INVESTMENT') {
+                                echo "<i class='bi bi-coin'></i>";
+                            } else if ($firstRow['type'] == 'PROGRESS') {
+                                echo "<i class='bi bi-graph-up-arrow'></i>";
+                            } else if ($firstRow['type'] == 'FIELD_VISIT') {
+                                echo "<i class='bi bi-tree'></i>";
+                            } else {
+                                echo "<i class='bi bi-bell'></i>";
+                            }
+                            ?>
+                        </div>
+
+                        <div class="[ details ]">
+                            <h3><?php echo str_replace("_", " ", ucwords($firstRow['type'])) ?></h3>
+                            <?php
+                            if ($firstRow['type'] == 'INVESTMENT') {
+                            ?>
+                                <p>You have invested <strong class="LKR"><?php echo number_format($firstRow['amount'], 2, '.', ',') ?></strong> in <strong class="limit-text-1"><?php echo $gigTitles[$firstRow['gigId']] ?></strong></p>
+                            <?php
+                            } else if ($firstRow['type'] == 'PROGRESS') {
+                            ?>
+                                <p class="limit-text-3">Progress of <strong><?php echo $gigTitles[$firstRow['gigId']] ?> </strong>has been updated.</p>
+                            <?php
+                            } else if ($firstRow['type'] == 'FIELD_VISIT') {
+                            ?>
+                                <p class="limit-text-3">Field visit details of <strong><?php echo $gigTitles[$firstRow['gigId']] ?> </strong>has been updated.</p>
+                            <?php
+                            }
+                            ?>
+                        </div>
+
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
             <div class="[ activities ]">
