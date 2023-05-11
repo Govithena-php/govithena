@@ -130,7 +130,7 @@ function highlight($active, $link)
                     <p>Farmers</p>
                 </a>
             </li>
-            <li>
+            <!--<li>
                 <a href="<?php echo URLROOT ?>/tech/earnings" class="<?php highlight($active, "earnings") ?>">
                     <i class="bi bi-currency-dollar"></i>
                     <p>Earnings</p>
@@ -141,7 +141,7 @@ function highlight($active, $link)
                     <i class="bi bi-wallet"></i>
                     <p>Withdrawal</p>
                 </a>
-            </li>
+            </li>-->
         </ul>
         <div class="[ grow ]"></div>
         <ul>

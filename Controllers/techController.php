@@ -1,11 +1,10 @@
 <?php
 
+
 class techController extends Controller
 {
     private $currentUser;
-
     private $progressImageHandler;
-
     private $techModel;
     private $progressModel;
     private $gigModel;
@@ -16,18 +15,14 @@ class techController extends Controller
     public function __construct()
     {
         $this->currentUser = Session::get('user');
-
         if (!Session::isLoggedIn()) {
             $this->redirect('/auth/signin');
         }
-
         if (!$this->currentUser->hasAccess(ACTOR::TECH)) {
             $this->redirect('/error/dontHaveAccess');
         }
 
         $this->progressImageHandler = new ImageHandler($folder = 'Uploads/progress');
-
-
         $this->techModel = $this->model('techAssistant');
         $this->progressModel = $this->model('progress');
         $this->gigModel = $this->model('gig');
@@ -37,7 +32,6 @@ class techController extends Controller
 
     public function index()
     {
-        // $this->render('index');
         $this->farmers();
     }
 
@@ -69,11 +63,7 @@ class techController extends Controller
         $this->render('requests');
     }
 
-    public function farmerdetails()
-    {
-        $this->render('farmerdetails');
-    }
-
+    
     public function myaccount()
     {
         $this->render('myaccount');

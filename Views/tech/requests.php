@@ -14,10 +14,8 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/tabs.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/gridTable.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/alertModal.css">
-
     <link rel="stylesheet" href="<?php echo CSS ?>/agrologist/requests.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/tech/myrequests.css">
-
     <title>Dashboard | Tech Assistant</title>
 </head>
 
