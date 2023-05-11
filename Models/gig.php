@@ -93,14 +93,28 @@ class Gig extends Model
     public function create($data)
     {
         try {
-            $sql = "INSERT INTO `gig` (`gigId`, `title`, `description`, `category`, `image`, `capital`, 'profitMargin', `cropCycle`, `city`, `landArea`, `farmerId`) VALUES (:gigId, :title, :description, :category, :image, :capital, :profitMargin, :timePeriod, :location, :landArea, :farmerId)";
+            $sql = "INSERT INTO `gig` (`gigId`, `title`, `description`, `category`, `thumbnail`, `capital`, `profitMargin`, `cropCycle`, `city`, `landArea`, `farmerId`) VALUES (:gigId, :title, :description, :category, :thumbnail, :capital, :profitMargin, :cropCycle, :city, :landArea, :farmerId)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
-            return true;
+            return ['success' => true, 'data' => true];
         } catch (PDOException $e) {
             echo $e->getMessage();
             die();
-            return false;
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+
+    public function saveGigImage($data){
+        try{
+            $sql = "INSERT INTO gig_image(image, gigId) VALUES(:image, :gigId)";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute($data);
+            return ['success' => true, 'data' => true];
+        }catch(PDOException $e){
+            echo $e->getMessage();
+            die();
+            return ['success' => false, 'data' => $e->getMessage()];
         }
     }
 

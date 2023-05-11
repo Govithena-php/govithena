@@ -23,7 +23,7 @@ class farmerController extends Controller
         //image ekk upload kranna imsgeHandler->upload('name eka')
 
         $this->progressImageHandler = new ImageHandler($folder = 'Uploads/progress');
-        $this->gigImageHandler = new ImageHandler($folder = "Uploads/gigs");
+        $this->gigImageHandler = new ImageHandler($folder = "Uploads");
 
         $this->farmerModel = $this->model('farmer');
         $this->gigModel = $this->model('gig');
@@ -46,11 +46,7 @@ class farmerController extends Controller
     function createGig()
     {
         if (isset($_POST['createGig'])) {
-
-
-
             $gigId = new UID(PREFIX::GIG);
-
             $title = new Input(POST, 'title');
             $landArea = new Input(POST, 'landArea');
             $capital = new Input(POST, 'capital');
@@ -58,47 +54,77 @@ class farmerController extends Controller
             $timePeriod = new Input(POST, 'timePeriod');
             $location = new Input(POST, 'location');
             $category = new Input(POST, 'category');
+            $description = $_POST['description'];
+            $farmerId = Session::get('user')->getUid();
 
+            $images = $this->gigImageHandler->upload('images');
+            // var_dump($images);die();
+            if(empty($images)){
+                $this->redirect('/farmer/createGig/error/1');
+            }else {
+                $thumbnail = $images[0];
+                unset($images[0]);
+                $data = [
+                    'gigId' => $gigId,
+                    'title' => $title,
+                    'description' => $description,
+                    'category' => $category,
+                    'thumbnail' => $thumbnail,
+                    'capital' => $capital,
+                    'profitMargin' => $profitMargin,
+                    'cropCycle' => $timePeriod,
+                    'city' => $location,
+                    'landArea' => $landArea,
+                    'farmerId' => $farmerId
+                ];
 
-            $file_name = $_FILES['image']['name'];
-            $file_size = $_FILES['image']['size'];
-            $tmp_name = $_FILES['image']['tmp_name'];
-            $error = $_FILES['image']['error'];
-
-            if ($error == 0) {
-
-                $fileType = pathinfo($file_name, PATHINFO_EXTENSION);
-                $fileType_lc = strtolower($fileType);
-
-                $allowedFileTypes = array("jpg", "jpeg", "png");
-
-                if (in_array($fileType, $allowedFileTypes)) {
-
-                    $new_img_name = uniqid("IMG-", true) . '.' . $fileType_lc;
-                    $img_upload_path = ROOT . 'Webroot/uploads/' . $new_img_name;
-
-                    move_uploaded_file($tmp_name, $img_upload_path);
+                $response = $this->gigModel->create($data);
+                if($response['success']){
+                    foreach($images as $image){
+                        $temp = [
+                            'image' => $image,
+                            'gigId' => $gigId
+                        ];
+                        $response = $this->gigModel->saveGigImage($temp);
+                        if(!$response['success']){
+                            $this->redirect('/farmer/createGig/error/2');
+                        }
+                    }
+                    $this->redirect('/farmer/');
+                }else{
+                    $this->redirect('/farmer/createGig/error/3');
                 }
+
             }
 
 
 
-            $description = $_POST['description'];
-            $farmerId = Session::get('user')->getUid();
 
-            $data = [
-                'gigId' => $gigId,
-                'title' => $title,
-                'description' => $description,
-                'category' => $category,
-                'image' => $new_img_name,
-                'capital' => $capital,
-                'profitMargin' => $profitMargin,
-                'timePeriod' => $timePeriod,
-                'location' => $location,
-                'landArea' => $landArea,
-                'farmerId' => $farmerId
-            ];
+            // $file_name = $_FILES['image']['name'];
+            // $file_size = $_FILES['image']['size'];
+            // $tmp_name = $_FILES['image']['tmp_name'];
+            // $error = $_FILES['image']['error'];
+
+            // if ($error == 0) {
+
+            //     $fileType = pathinfo($file_name, PATHINFO_EXTENSION);
+            //     $fileType_lc = strtolower($fileType);
+
+            //     $allowedFileTypes = array("jpg", "jpeg", "png");
+
+            //     if (in_array($fileType, $allowedFileTypes)) {
+
+            //         $new_img_name = uniqid("IMG-", true) . '.' . $fileType_lc;
+            //         $img_upload_path = ROOT . 'Webroot/uploads/' . $new_img_name;
+
+            //         move_uploaded_file($tmp_name, $img_upload_path);
+            //     }
+            // }
+
+
+
+
+            
 
 
             $gig = new $this->gigModel();
@@ -631,6 +657,15 @@ class farmerController extends Controller
         $this->render('progressform');
     }
 
+
+
+    // here
+    //============================
+    //============================
+    //============================
+    //============================
+    //============================
+
     function agrologist()
     {
         $props = [];
@@ -708,6 +743,41 @@ class farmerController extends Controller
             $this->redirect('/farmer/agrologist');
         }
     }
+
+
+
+// here
+// ==================================
+// ==================================
+// ==================================
+// ==================================
+
+    // function agrologist1($params = [])
+    // {
+    //     $props = [];
+    //     $agrologistId = $params[0];
+    //     $id = $this->currentUser->getUid();
+    //     $agroReq=///////////////////////////////////////////////////////////////////////////////
+     
+    //     $data = [
+    //         'paymentId' => new UID(),
+    //         'agrologistId' => $agrologistId,
+    //         'farmerId' => $id,
+    //         'Payment' => $agroReq['offer']
+    //     ];
+    //     $agrologists = $this->farmerModel->agropayment([
+
+    //     ]);
+
+
+
+
+
+    //     $this->set($props);
+    //     $this->render('agrologistPay');
+    // }
+
+
 
     function cancel_techassistant_request()
     {
