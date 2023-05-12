@@ -36,70 +36,7 @@
     <div class="[ container ][ gigs ]" container-type="dashboard-section">
         <div class="btn_wrapper">
             <h2>Progress</h2>
-            <!-- <a class="btn btn-primary" href="<?php echo URLROOT ?>/farmer/createGig">Add New</a> -->
         </div>
-        <!-- <div class="gig_wrapper">
-
-            <?php
-
-            if (empty($gigroducts)) {
-            ?>
-                <div class="no_products">
-                    <h1>No Products...</h1>
-                    <h3>Click the <a href="<?php echo URLROOT ?>/farmer/createGig">here</a> to add new products.</h3>
-                </div>
-                <?php
-            } else {
-                foreach ($gigroducts as $gig) {
-                    $imageURL = UPLOADS . $gig["thumbnail"];
-                ?>
-                    <div class="card">
-                        <div class="img_wrapper">
-                            <img width="100" alt="test" src="<?php echo $imageURL ?>" />
-                        </div>
-                        <div class="card_content">
-                            <h1><?php echo ucwords($gig['title']) ?></h1>
-                            <h4><?php echo ucwords($gig['category']) ?></h4>
-                            <div style="color: grey">Initial Investment</div>
-                            <h2 class="LKR"><?php echo $gig['capital'] ?></h2>
-                            <div style="color: grey">Location</div>
-                            <p><?php echo ucwords($gig['city']) ?></p>
-                            <div style="color: grey">Land Area</div>
-                            <p><?php echo $gig['landArea'] ?> Hectare</p>
-                            <p><?php echo $gig['description'] ?></p>
-                            <div class="actions">
-                                <a href="#" class="btn btn-primary">Edit</a>
-                                <a href="<?php echo URLROOT . "/farmer/deleteGig/" . $gig['gigId'] ?>" class="btn btn-danger">Delete</a>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-            <?php
-
-                }
-            }
-            ?>
-        </div> -->
-
-
-
 
 
 
@@ -138,7 +75,7 @@
                 <div class="row">
                     <div class="data farmer__">
                         <div class="farmerimg">
-                            <img src="<?php echo UPLOADS . '/profilePictures/' . $gig['thumbnail'] ?>" alt="Picture">
+                            <img src="<?php echo UPLOADS . $gig['thumbnail'] ?>" alt="Picture">
                         </div>
                     </div>
                     <div class="data ">

@@ -141,7 +141,7 @@
 
                     <div class="requestcardn">
                         <div class=" requestimg1 ">
-                            <img class="img" src="<?php echo UPLOADS . $agrologist['image'] ?>" alt=" profile">
+                            <img class="img" src="<?php echo UPLOADS . $agrologist['image'] ?>" alt=" profile" <?php echo DEFAULT_PROFILE_PICTURE ?>>
                             <!-- <img class="img" src="<?php echo IMAGES ?>/21.jpg" alt=" profile"> -->
 
                         </div>

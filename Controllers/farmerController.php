@@ -58,9 +58,9 @@ class farmerController extends Controller
             $farmerId = Session::get('user')->getUid();
 
             $images = $this->gigImageHandler->upload('images');
-            if(empty($images)){
+            if (empty($images)) {
                 $this->redirect('/farmer/createGig/error/1');
-            }else {
+            } else {
                 $thumbnail = $images[0];
                 unset($images[0]);
                 $data = [
@@ -78,22 +78,21 @@ class farmerController extends Controller
                 ];
 
                 $response = $this->gigModel->create($data);
-                if($response['success']){
-                    foreach($images as $image){
+                if ($response['success']) {
+                    foreach ($images as $image) {
                         $temp = [
                             'image' => $image,
                             'gigId' => $gigId
                         ];
                         $response = $this->gigModel->saveGigImage($temp);
-                        if(!$response['success']){
+                        if (!$response['success']) {
                             $this->redirect('/farmer/createGig/error/2');
                         }
                     }
                     $this->redirect('/farmer/');
-                }else{
+                } else {
                     $this->redirect('/farmer/createGig/error/3');
                 }
-
             }
         }
         $this->render("createGig");
@@ -111,7 +110,7 @@ class farmerController extends Controller
 
 
 
-                
+
             $progressImages = [];
             $temp = $this->gigModel->gigimg($gigId);
             // die();
@@ -122,7 +121,6 @@ class farmerController extends Controller
             // die();
 
             $props['gigimgs'] = $progressImages;
-    
         }
 
 
@@ -137,32 +135,14 @@ class farmerController extends Controller
             $gigId = $params[0];
             $gig = $this->gigModel->editGig($gigId);
             $props['gig'] = $gig['data'];
-   
         }
-
-
         $this->set($props);
         $this->render("editGig");
     }
 
     public function updateGig($params = [])
     {
-        // if (isset($params[0]) && !empty($params[0])) {
-            
-        //     $res = $this->gigModel->updateGig($gigId);
-        //     if ($res['status']) {
-        //         $this->render("index");
-        //     } else {
-        //         $this->redirect('/error/somethingWentWrong');
-        //     }
-        // }
-
-
-
         if (isset($_POST['updateGig'])) {
-
-
-
             $gigId = new Input(POST, 'updateGig');
 
             $title = new Input(POST, 'title');
@@ -172,30 +152,6 @@ class farmerController extends Controller
             $timePeriod = new Input(POST, 'timePeriod');
             $location = new Input(POST, 'location');
             $category = new Input(POST, 'category');
-
-
-            // $file_name = $_FILES['image']['name'];
-            // $file_size = $_FILES['image']['size'];
-            // $tmp_name = $_FILES['image']['tmp_name'];
-            // $error = $_FILES['image']['error'];
-
-            // if ($error == 0) {
-
-            //     $fileType = pathinfo($file_name, PATHINFO_EXTENSION);
-            //     $fileType_lc = strtolower($fileType);
-
-            //     $allowedFileTypes = array("jpg", "jpeg", "png");
-
-            //     if (in_array($fileType, $allowedFileTypes)) {
-
-            //         $new_img_name = uniqid("IMG-", true) . '.' . $fileType_lc;
-            //         $img_upload_path = ROOT . 'Webroot/uploads/' . $new_img_name;
-
-            //         move_uploaded_file($tmp_name, $img_upload_path);
-            //     }
-            // }
-
-
 
             $description = $_POST['description'];
             $farmerId = Session::get('user')->getUid();
@@ -222,10 +178,6 @@ class farmerController extends Controller
 
             // $res = $gig->create($data);
             $res = $this->gigModel->updateDetails($data);
-            var_dump($res);
-            die();
-
-
             if (!$res) {
                 $this->redirect('/farmer/editGig');
                 return;
@@ -233,7 +185,6 @@ class farmerController extends Controller
             $this->redirect('/farmer/');
             // $this->redirect('/farmer/');
         }
-        
     }
 
 
@@ -432,9 +383,9 @@ class farmerController extends Controller
         if ($investors['status']) {
             $props['investors'] = $investors['data'];
         }
-        
 
-        
+
+
         $reqinvestors = $this->farmerModel->reqinvestors([
             'farmerId' => $this->currentUser->getUid(),
             'state' => STATUS::ACCEPTED
@@ -450,11 +401,11 @@ class farmerController extends Controller
         if ($investorlist['status']) {
             $props['investorlists'] = $investorlist['data'];
         }
-        
+
         // var_dump($reqinvestors); die();
 
 
-        
+
 
         // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         //     if (isset($_POST['accept_investor'])) {
@@ -471,7 +422,7 @@ class farmerController extends Controller
     {
         if (isset($params[0]) && !empty($params[0])) {
             $requestId = $params[0];
-            
+
             $res = $this->farmerModel->acceptInvestor([
                 'requestId' => $requestId,
                 'status' => STATUS::ACCEPTED
@@ -697,6 +648,7 @@ class farmerController extends Controller
             }
         } else {
             $agrologists = $this->farmerModel->agrologists();
+
             if ($agrologists['status']) {
                 $props['agrologists'] = $agrologists['data'];
             }
@@ -729,11 +681,11 @@ class farmerController extends Controller
 
 
 
-// here
-// ==================================
-// ==================================
-// ==================================
-// ==================================
+    // here
+    // ==================================
+    // ==================================
+    // ==================================
+    // ==================================
 
     // function agrologist($params = [])
     // {
@@ -741,7 +693,7 @@ class farmerController extends Controller
     //     $agrologistId = $params[0];
     //     $id = $this->currentUser->getUid();
     //     $agroReq=///////////////////////////////////////////////////////////////////////////////
-     
+
     //     $data = [
     //         'paymentId' => new UID(),
     //         'agrologistId' => $agrologistId,
@@ -850,32 +802,30 @@ class farmerController extends Controller
 
     public function deleteGig($params)
     {
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $gigId = new Input(POST, 'deletegig-confirm');
 
             $res = $this->farmerModel->delete_gig($gigId);
-            if($res['success']){
+            if ($res['success']) {
                 $this->redirect('/farmer/');
-            }else {
+            } else {
                 $this->redirect('/farmer/');
             }
-
         }
     }
 
 
-    public function deposite_gig(){
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    public function deposite_gig()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $gigId = new Input(POST, 'gigId');
 
             $res = $this->gigModel->markedAsDeposited($gigId);
-            if($res['success']){
+            if ($res['success']) {
                 $this->redirect('/farmer/');
-            }else {
+            } else {
                 $this->redirect('/farmer/');
             }
-
         }
     }
-
 }

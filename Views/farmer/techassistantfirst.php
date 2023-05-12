@@ -128,7 +128,7 @@
             ?>
                     <div class="requestcardn">
                         <div class=" requestimg1 ">
-                            <img class="img" src="<?php echo UPLOADS . $techAssistant['image'] ?>" alt=" profile">
+                            <img class="img" src="<?php echo UPLOADS . $techAssistant['image'] ?>" alt=" profile" <?php echo DEFAULT_PROFILE_PICTURE ?>>
 
                         </div>
                         <div class="flex flex-row ">

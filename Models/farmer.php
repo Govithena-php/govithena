@@ -5,7 +5,7 @@ class Farmer extends Model
     public function agrologists()
     {
         try {
-            $sql = "SELECT LG.uid, user.firstName, user.lastName, user.image FROM login_credential LG INNER JOIN user ON LG.uid = user.uid WHERE LG.userType = :userType";
+            $sql = "SELECT LG.uid, user.firstName, user.lastName, user.image FROM login_credential LG INNER JOIN user ON LG.uid = user.uid WHERE LG.userType = :userType ORDER BY LG.createdAt DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['userType' => ACTOR::AGROLOGIST]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -93,8 +93,8 @@ class Farmer extends Model
     public function searchAgrologists($term)
     {
         try {
-            $sql = "SELECT LG.uid, user.firstName, user.lastName, user.image FROM login_credential LG INNER JOIN user ON LG.uid = user.uid WHERE LG.userType = :userType AND ";
-            $sql .= "(user.firstName LIKE :search OR user.lastName LIKE :search OR LG.username LIKE :search OR user.district LIKE :search OR user.city LIKE :search OR user.addressLine1 LIKE :search OR user.addressLine2 LIKE :search)";
+            $sql = "SELECT LG.uid, user.firstName, user.lastName, user.image FROM login_credential LG INNER JOIN user ON LG.uid = user.uid  WHERE LG.userType = :userType AND ";
+            $sql .= "(user.firstName LIKE :search OR user.lastName LIKE :search OR LG.username LIKE :search OR user.district LIKE :search OR user.city LIKE :search OR user.addressLine1 LIKE :search OR user.addressLine2 LIKE :search) ORDER BY LG.createdAt DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['userType' => ACTOR::AGROLOGIST, 'search' => '%' . $term . '%']);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -106,7 +106,7 @@ class Farmer extends Model
     public function searchAgrologistsByLocation($location)
     {
         try {
-            $sql = "SELECT LG.uid, user.firstName, user.lastName, user.image FROM login_credential LG INNER JOIN user ON LG.uid = user.uid WHERE LG.userType = :userType AND user.district = :location ";
+            $sql = "SELECT LG.uid, user.firstName, user.lastName, user.image FROM login_credential LG INNER JOIN user ON LG.uid = user.uid WHERE LG.userType = :userType AND user.district = :location ORDER BY LG.createdAt DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['userType' => ACTOR::AGROLOGIST, 'location' => $location]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -146,7 +146,7 @@ class Farmer extends Model
     public function techAssistants()
     {
         try {
-            $sql = "SELECT LG.uid, user.firstName, user.lastName, user.image FROM login_credential LG INNER JOIN user ON LG.uid = user.uid WHERE LG.userType = :userType";
+            $sql = "SELECT LG.uid, user.firstName, user.lastName, user.image FROM login_credential LG INNER JOIN user ON LG.uid = user.uid WHERE LG.userType = :userType ORDER BY LG.createdAt DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['userType' => ACTOR::TECH]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -160,7 +160,7 @@ class Farmer extends Model
     {
         try {
             $sql = "SELECT LG.uid, user.firstName, user.lastName, user.image FROM login_credential LG INNER JOIN user ON LG.uid = user.uid WHERE LG.userType = :userType AND ";
-            $sql .= "(user.firstName LIKE :search OR user.lastName LIKE :search OR LG.username LIKE :search OR user.district LIKE :search OR user.city LIKE :search OR user.addressLine1 LIKE :search OR user.addressLine2 LIKE :search)";
+            $sql .= "(user.firstName LIKE :search OR user.lastName LIKE :search OR LG.username LIKE :search OR user.district LIKE :search OR user.city LIKE :search OR user.addressLine1 LIKE :search OR user.addressLine2 LIKE :search) ORDER BY LG.createdAt DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['userType' => ACTOR::TECH, 'search' => '%' . $term . '%']);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -173,7 +173,7 @@ class Farmer extends Model
     public function searchTechAssistantsByLocation($location)
     {
         try {
-            $sql = "SELECT LG.uid, user.firstName, user.lastName, user.image FROM login_credential LG INNER JOIN user ON LG.uid = user.uid WHERE LG.userType = :userType AND user.district = :location ";
+            $sql = "SELECT LG.uid, user.firstName, user.lastName, user.image FROM login_credential LG INNER JOIN user ON LG.uid = user.uid WHERE LG.userType = :userType AND user.district = :location ORDER BY LG.createdAt DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['userType' => ACTOR::TECH, 'location' => $location]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -284,7 +284,7 @@ class Farmer extends Model
         }
     }
 
-    
+
 
     public function acceptInvestor($data)
     {
@@ -301,7 +301,7 @@ class Farmer extends Model
             return ['status' => false, 'data' => $e->getMessage()];
         }
     }
-    
+
     public function declineInvestor($data)
     {
         try {
