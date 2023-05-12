@@ -20,7 +20,7 @@ class TechAssistant extends Model
     public function getRejectedFarmerRequest()
     {
         try {
-            $sql = "SELECT tr.requestId, DATE(tr.requestedDate) as requestedDate, tr.farmerId, tr.offer, tr.message, tr.status, u.image, u.firstName, u.lastName, u.city FROM techassistant_request tr INNER JOIN user u ON tr.farmerId = u.uid WHERE tr.technicalAssistantId = :tid AND tr.status = 'Rejected' ORDER BY requestedDate DESC";
+            $sql = "SELECT tr.requestId, DATE(tr.requestedDate) as requestedDate, tr.farmerId, tr.offer, tr.message, tr.status, u.image, u.firstName, u.lastName, u.city FROM techassistant_request tr INNER JOIN user u ON tr.farmerId = u.uid WHERE tr.technicalAssistantId = :tid AND tr.status = 'Declined' ORDER BY requestedDate DESC";
             $stmt =  Database::getBdd()->prepare($sql);
             $stmt->execute(['tid' => Session::get('user')->getUid()]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
