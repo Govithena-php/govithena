@@ -20,8 +20,8 @@
 <body class="bg-gray h-screen">
 
     <?php
-    $active = "agrologist";
-    $title = "Agrologist";
+    $active = "techassistant";
+    $title = "Techassistants";
     require_once("navigator.php");
     ?>
 
