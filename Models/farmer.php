@@ -94,6 +94,28 @@ class Farmer extends Model
         }
     }
 
+    public function afterPaytechassistant($data)
+    {
+        try {
+            $sql = "INSERT INTO tech_income (incomeId, userId, farmerId, amount) VALUES (:incomeId, :userId, :farmerId, :amount)";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'incomeId' => $data['incomeId'],
+                'farmerId' => $data['farmerId'],
+                'userId' => $data['userId'],
+                'amount' => $data['amount']
+            ]);
+
+            if ($stmt->rowCount() > 0) {
+                return ['status' => true, 'data' => true];
+            } else {
+                return ['status' => true, 'data' => false];
+            }
+        } catch (Exception $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+
 
     // public function getPayAgrologistsUpdate($data)
     // {
@@ -282,7 +304,7 @@ class Farmer extends Model
     public function getAcceptedTechByFarmer($id)
     {
         try {
-            $sql = "SELECT tr.technicalAssistantId, u.firstName, u.lastName, u.city, u.image from techassistant_request tr INNER JOIN user u ON tr.technicalAssistantId = u.uid WHERE tr.farmerId = :farmerId AND tr.status = 'accepted' ORDER BY tr.requestedDate DESC";
+            $sql = "SELECT tr.technicalAssistantId, tr.status, u.firstName, u.lastName, u.city, u.image from techassistant_request tr INNER JOIN user u ON tr.technicalAssistantId = u.uid WHERE tr.farmerId = :farmerId AND tr.status = 'Accepted' OR tr.status = 'PAID' ORDER BY tr.requestedDate DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['farmerId' => $id]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);

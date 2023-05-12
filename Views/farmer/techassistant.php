@@ -125,7 +125,14 @@
                                     <div class="actions">
                                         <a href="<?php echo URLROOT . "/profile/" . $myt['technicalAssistantId'] ?>" class="button__primary">View Profile</a>
                                         <!-- <a href="<?php echo URLROOT . "/profile/" . $myt['technicalAssistantId'] ?>" class="button__primary">Pay</a> -->
+
+                                        <?php
+                                    if($myt['status'] != 'PAID'){ 
+                                        ?>
                                         <a href="<?php echo URLROOT . "/farmer/techassistantPay/" . $myt['technicalAssistantId'] ?>" class="button__primary">Pay</a>
+                                   <?php
+                                    }
+                                    ?>
 
                                     </div>
 

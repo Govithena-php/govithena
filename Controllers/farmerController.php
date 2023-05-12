@@ -552,6 +552,42 @@ class farmerController extends Controller
         $this->render('techassistantPay');
     }
 
+
+
+    function techassistantAftertPay($params = [])
+    {
+        
+        $props = [];
+        $technicalAssistantId = $params[0];
+        $id = $this->currentUser->getUid();
+
+        $dataone = [
+            'technicalAssistantId' => $technicalAssistantId,
+            'farmerId' => $id
+        ];
+        $techReqTwo=$this->farmerModel->getPayTechassistantstwo($dataone);
+
+
+        $data = [
+            'incomeId' => new UID(PREFIX::PAYMENT),
+            'userId' => $technicalAssistantId,
+            'farmerId' => $id,
+            'amount' =>  $techReqTwo['offer']
+        ];
+
+        $this->farmerModel->afterPaytechassistant($data);
+        // $this->farmerModel->afterPayAgrologistsUpdate($dataone);
+        // if($agroReqTwo['status']){
+        //     $props['payed'] = $agroReqTwo['data'];
+        // }
+        
+
+
+        // $this->set($props);
+        $this->render('techassistant');
+    }
+
+
     function techassistantfirst($params = [])
     {
 
