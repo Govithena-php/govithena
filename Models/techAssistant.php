@@ -51,7 +51,7 @@ class TechAssistant extends Model
     {
         try {
             // $sql = "SELECT tr.requestId, tr.requestedDate, tr.farmerId, tr.offer, tr.message, tr.status, u.firstName, u.lastName, u.city FROM techassistant_request tr INNER JOIN user u ON tr.technicalAssistantId = u.uid WHERE tr.technicalAssistantId = :id ORDER BY requestedDate DESC";
-            $sql = "UPDATE techassistant_request SET status = 'Rejected' WHERE requestId = :requestId";
+            $sql = "UPDATE techassistant_request SET status = 'Declined' WHERE requestId = :requestId";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['requestId' => $requestId]);
             return true;
