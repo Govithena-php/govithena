@@ -202,9 +202,17 @@ nav {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 2rem;
+    gap: 1rem;
     position: sticky;
     top: 9.75rem;
+}
+
+.result__content .notice{
+    padding: 0 1rem;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--clr-text-gray);
+    line-height: 1.5;
 }
 
 .card__top {

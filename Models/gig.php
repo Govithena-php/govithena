@@ -348,7 +348,7 @@ class Gig extends Model
     public function fetchAllToReviewGigByInvestor($id)
     {
         try {
-            $sql = "SELECT g.gigId, g.title, g.city, g.thumbnail, g.farmerId, u.firstName, u.lastName, u.image FROM gig g INNER JOIN user u ON g.farmerId = u.uid WHERE g.investorId = :id AND g.status = 'UNDER_REVIEW' ORDER BY g.reservedDate DESC";
+            $sql = "SELECT g.gigId, g.title, g.addressLine1, g.addressLine2, g.city, g.thumbnail, g.farmerId, u.firstName, u.lastName, u.image FROM gig g INNER JOIN user u ON g.farmerId = u.uid WHERE g.investorId = :id AND g.status = 'UNDER_REVIEW' ORDER BY g.reservedDate DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
