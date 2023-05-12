@@ -244,8 +244,8 @@ class farmerController extends Controller
             $confirm = new Input(POST, 'confirm');
 
             if ($confirm == "on") {
-                $response = $this->investorGigModel->complete($gigId);
-                if ($response['status']) {
+                $response = $this->gigModel->markAsCompleted($gigId);
+                if ($response['success']) {
                     if ($response['data']) {
                         $alert = new Alert($type = 'success', $icon = '', $message = 'Gig completed successfully');
                     } else {
@@ -850,17 +850,32 @@ class farmerController extends Controller
 
     public function deleteGig($params)
     {
-        if (isset($params)) {
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $gigId = new Input(POST, 'deletegig-confirm');
 
-            list($gigId) = $params;
-
-            $res = $this->farmerModel->delete_Gig($gigId);
-
-            if ($res['status']) {
+            $res = $this->farmerModel->delete_gig($gigId);
+            if($res['success']){
                 $this->redirect('/farmer/');
-            } else {
-                $this->redirect('/farmer/' . $res['message']);
+            }else {
+                $this->redirect('/farmer/');
             }
+
         }
     }
+
+
+    public function deposite_gig(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $gigId = new Input(POST, 'gigId');
+
+            $res = $this->gigModel->markedAsDeposited($gigId);
+            if($res['success']){
+                $this->redirect('/farmer/');
+            }else {
+                $this->redirect('/farmer/');
+            }
+
+        }
+    }
+
 }

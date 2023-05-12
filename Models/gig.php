@@ -416,7 +416,18 @@ class Gig extends Model
     public function markAsCompleted($gigId)
     {
         try {
-            $sql = "UPDATE gig SET status = 'COMPLETED' WHERE gigId = :gigId";
+            $sql = "UPDATE gig SET status = 'UNDER_COMPLETION' WHERE gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId]);
+            return ['success' => true];
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function markedAsDeposited($gigId){
+        try {
+            $sql = "UPDATE gig SET status = 'UNDER_REVIEW' WHERE gigId = :gigId";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['gigId' => $gigId]);
             return ['success' => true];
