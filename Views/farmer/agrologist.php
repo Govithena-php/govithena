@@ -88,7 +88,7 @@
     <div class="container" container-type="dashboard-section">
         <br>
 
-        <div class="[ tabs ]" tab="2">
+        <div class="[ tabs ]" tab="3">
             <div class="controls">
                 <button class="control" for="1" active>My Agrologists</button>
                 <button class="control" for="2">Pending Agrologist Requests</button>

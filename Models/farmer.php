@@ -38,6 +38,19 @@ class Farmer extends Model
         }
     }
 
+    public function sendAgrologistRequestRating($data)
+    {
+        try {
+            $sql = "INSERT INTO review_by_agrologist (reviewId, agrologistId, farmerId, q1,q2,q3,q4,q5,q6,q7,q8,q9) VALUES (:reviewId, :agrologistId, :farmerId, 0,0,0,0,0,0,0,'', '')";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute($data);
+            return true;
+        } catch (Exception $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+
 
     public function getAcceptedAgrologistByFarmer($id)
     {

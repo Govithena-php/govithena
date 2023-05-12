@@ -73,34 +73,32 @@ class Gig extends Model
             return null;
         }
     }
-    // public function Investorgig($id)
-    // {
-    //     try {
-    //         $sql = "SELECT * FROM gig_progress WHERE farmerId = :id ORDER BY createdAt DESC";
-    //         $stmt = Database::getBdd()->prepare($sql);
-    //         $stmt->execute(['id' => $id]);
-    //         $gigs = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //         return $gigs;
-    //     } catch (PDOException $e) {
-    //         echo $e->getMessage();
-    //         die();
-    //         return null;
-    //     }
-    // }
-
-
 
     public function create($data)
     {
         try {
-            $sql = "INSERT INTO `gig` (`gigId`, `title`, `description`, `category`, `image`, `capital`, 'profitMargin', `cropCycle`, `city`, `landArea`, `farmerId`) VALUES (:gigId, :title, :description, :category, :image, :capital, :profitMargin, :timePeriod, :location, :landArea, :farmerId)";
+            $sql = "INSERT INTO `gig` (`gigId`, `title`, `description`, `category`, `thumbnail`, `capital`, `profitMargin`, `cropCycle`, `city`, `landArea`, `farmerId`) VALUES (:gigId, :title, :description, :category, :thumbnail, :capital, :profitMargin, :cropCycle, :city, :landArea, :farmerId)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
-            return true;
+            return ['success' => true, 'data' => true];
         } catch (PDOException $e) {
             echo $e->getMessage();
             die();
-            return false;
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+
+    public function saveGigImage($data){
+        try{
+            $sql = "INSERT INTO gig_image(image, gigId) VALUES(:image, :gigId)";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute($data);
+            return ['success' => true, 'data' => true];
+        }catch(PDOException $e){
+            echo $e->getMessage();
+            die();
+            return ['success' => false, 'data' => $e->getMessage()];
         }
     }
 
@@ -418,7 +416,18 @@ class Gig extends Model
     public function markAsCompleted($gigId)
     {
         try {
-            $sql = "UPDATE gig SET status = 'COMPLETED' WHERE gigId = :gigId";
+            $sql = "UPDATE gig SET status = 'UNDER_COMPLETION' WHERE gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId]);
+            return ['success' => true];
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function markedAsDeposited($gigId){
+        try {
+            $sql = "UPDATE gig SET status = 'UNDER_REVIEW' WHERE gigId = :gigId";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['gigId' => $gigId]);
             return ['success' => true];

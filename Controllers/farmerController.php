@@ -23,7 +23,7 @@ class farmerController extends Controller
         //image ekk upload kranna imsgeHandler->upload('name eka')
 
         $this->progressImageHandler = new ImageHandler($folder = 'Uploads/progress');
-        $this->gigImageHandler = new ImageHandler($folder = "Uploads/gigs");
+        $this->gigImageHandler = new ImageHandler($folder = "Uploads");
 
         $this->farmerModel = $this->model('farmer');
         $this->gigModel = $this->model('gig');
@@ -46,11 +46,7 @@ class farmerController extends Controller
     function createGig()
     {
         if (isset($_POST['createGig'])) {
-
-
-
             $gigId = new UID(PREFIX::GIG);
-
             $title = new Input(POST, 'title');
             $landArea = new Input(POST, 'landArea');
             $capital = new Input(POST, 'capital');
@@ -58,58 +54,47 @@ class farmerController extends Controller
             $timePeriod = new Input(POST, 'timePeriod');
             $location = new Input(POST, 'location');
             $category = new Input(POST, 'category');
-
-
-            $file_name = $_FILES['image']['name'];
-            $file_size = $_FILES['image']['size'];
-            $tmp_name = $_FILES['image']['tmp_name'];
-            $error = $_FILES['image']['error'];
-
-            if ($error == 0) {
-
-                $fileType = pathinfo($file_name, PATHINFO_EXTENSION);
-                $fileType_lc = strtolower($fileType);
-
-                $allowedFileTypes = array("jpg", "jpeg", "png");
-
-                if (in_array($fileType, $allowedFileTypes)) {
-
-                    $new_img_name = uniqid("IMG-", true) . '.' . $fileType_lc;
-                    $img_upload_path = ROOT . 'Webroot/uploads/' . $new_img_name;
-
-                    move_uploaded_file($tmp_name, $img_upload_path);
-                }
-            }
-
-
-
             $description = $_POST['description'];
             $farmerId = Session::get('user')->getUid();
 
-            $data = [
-                'gigId' => $gigId,
-                'title' => $title,
-                'description' => $description,
-                'category' => $category,
-                'image' => $new_img_name,
-                'capital' => $capital,
-                'profitMargin' => $profitMargin,
-                'timePeriod' => $timePeriod,
-                'location' => $location,
-                'landArea' => $landArea,
-                'farmerId' => $farmerId
-            ];
+            $images = $this->gigImageHandler->upload('images');
+            if(empty($images)){
+                $this->redirect('/farmer/createGig/error/1');
+            }else {
+                $thumbnail = $images[0];
+                unset($images[0]);
+                $data = [
+                    'gigId' => $gigId,
+                    'title' => $title,
+                    'description' => $description,
+                    'category' => $category,
+                    'thumbnail' => $thumbnail,
+                    'capital' => $capital,
+                    'profitMargin' => $profitMargin,
+                    'cropCycle' => $timePeriod,
+                    'city' => $location,
+                    'landArea' => $landArea,
+                    'farmerId' => $farmerId
+                ];
 
+                $response = $this->gigModel->create($data);
+                if($response['success']){
+                    foreach($images as $image){
+                        $temp = [
+                            'image' => $image,
+                            'gigId' => $gigId
+                        ];
+                        $response = $this->gigModel->saveGigImage($temp);
+                        if(!$response['success']){
+                            $this->redirect('/farmer/createGig/error/2');
+                        }
+                    }
+                    $this->redirect('/farmer/');
+                }else{
+                    $this->redirect('/farmer/createGig/error/3');
+                }
 
-            $gig = new $this->gigModel();
-
-            $res = $gig->create($data);
-
-            if (!$res) {
-                $this->redirect('/farmer/createGig');
-                return;
             }
-            $this->redirect('/farmer/');
         }
         $this->render("createGig");
     }
@@ -249,6 +234,30 @@ class farmerController extends Controller
             // $this->redirect('/farmer/');
         }
         
+    }
+
+
+    function complete_gig()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $gigId = new Input(POST, 'gigId');
+            $confirm = new Input(POST, 'confirm');
+
+            if ($confirm == "on") {
+                $response = $this->gigModel->markAsCompleted($gigId);
+                if ($response['success']) {
+                    if ($response['data']) {
+                        $alert = new Alert($type = 'success', $icon = '', $message = 'Gig completed successfully');
+                    } else {
+                        $alert = new Alert($type = 'error', $icon = '', $message = 'Something went wrong');
+                    }
+                    Session::set(['compelete_gig_alert' =>  $alert]);
+                    $this->redirect('/farmer/');
+                } else {
+                    $this->redirect('/error/somethingWentWrong');
+                }
+            }
+        }
     }
 
     function index()
@@ -631,6 +640,15 @@ class farmerController extends Controller
         $this->render('progressform');
     }
 
+
+
+    // here
+    //============================
+    //============================
+    //============================
+    //============================
+    //============================
+
     function agrologist()
     {
         $props = [];
@@ -709,6 +727,41 @@ class farmerController extends Controller
         }
     }
 
+
+
+// here
+// ==================================
+// ==================================
+// ==================================
+// ==================================
+
+    // function agrologist($params = [])
+    // {
+    //     $props = [];
+    //     $agrologistId = $params[0];
+    //     $id = $this->currentUser->getUid();
+    //     $agroReq=///////////////////////////////////////////////////////////////////////////////
+     
+    //     $data = [
+    //         'paymentId' => new UID(),
+    //         'agrologistId' => $agrologistId,
+    //         'farmerId' => $id,
+    //         'Payment' => $agroReq['offer']
+    //     ];
+    //     $agrologists = $this->farmerModel->agropayment([
+
+    //     ]);
+
+
+
+
+
+    //     $this->set($props);
+    //     $this->render('agrologistPay');
+    // }
+
+
+
     function cancel_techassistant_request()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -747,7 +800,14 @@ class farmerController extends Controller
                 'message' => new Input(POST, 'message'),
             ];
 
+            $agrRequestReview = [
+                'reviewId' => new UID(PREFIX::REVIEW),
+                'agrologistId' => new Input(POST, 'agrologistId'),
+                'farmerId' => $this->currentUser->getUid()
+            ];
+
             $response = $this->farmerModel->sendAgrologistRequest($data);
+            $this->farmerModel->sendAgrologistRequestRating($agrRequestReview);
 
             if ($response['status']) {
                 $alert = new Alert($type = 'success', $icon = "", $message = "Request sent successfully");
@@ -790,17 +850,32 @@ class farmerController extends Controller
 
     public function deleteGig($params)
     {
-        if (isset($params)) {
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $gigId = new Input(POST, 'deletegig-confirm');
 
-            list($gigId) = $params;
-
-            $res = $this->farmerModel->delete_Gig($gigId);
-
-            if ($res['status']) {
+            $res = $this->farmerModel->delete_gig($gigId);
+            if($res['success']){
                 $this->redirect('/farmer/');
-            } else {
-                $this->redirect('/farmer/' . $res['message']);
+            }else {
+                $this->redirect('/farmer/');
             }
+
         }
     }
+
+
+    public function deposite_gig(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $gigId = new Input(POST, 'gigId');
+
+            $res = $this->gigModel->markedAsDeposited($gigId);
+            if($res['success']){
+                $this->redirect('/farmer/');
+            }else {
+                $this->redirect('/farmer/');
+            }
+
+        }
+    }
+
 }

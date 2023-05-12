@@ -35,7 +35,7 @@
 
         <div class="[ tabs ][ gigTabs ]" tab="3">
             <div class="controls">
-                <button class="control" for="1" active>Investors</button>
+                <button class="control" for="1" active>My Investors</button>
                 <button class="control" for="2">Pending Investment Requests</button>
                 <button class="control" for="3">Accepted Investment Requests</button>
             </div>

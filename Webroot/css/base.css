@@ -329,7 +329,6 @@ hr {
     -webkit-box-orient: vertical;
 }
 
-
 .button__primary {
     display: flex;
     align-items: center;
@@ -428,6 +427,10 @@ hr {
 
 .button__danger-invert:hover {
     background-color: #fcb8b8;
+}
+
+.button__disabled {
+    filter: grayscale(0.5);
 }
 
 
