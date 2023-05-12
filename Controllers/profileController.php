@@ -127,7 +127,7 @@ class profileController extends Controller
 
                     $props['stars'] = $stars;
 
-                    $props['farmerAvgStars'] = floatval($farmerAvgStars / $count);
+                    $props['farmerAvgStars'] = $farmerAvgStars / $count;
                 } else {
                     $props['noOfReviews'] = 0;
                     $props['reviews'] = [];

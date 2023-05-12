@@ -75,7 +75,7 @@ class dashboardController extends Controller
         if ($withdrawableBalance['success']) {
             $props['withdrawableBalance'] = $withdrawableBalance['data'];
         } else {
-            $props['withdrawableBalance'] = 0;
+            $props['withdrawableBalance'] = ['balance' => 0];
         }
 
         $investments = $this->investmentModel->fetchByInvestoIdFroDashboard($this->currentUser->getUid());
@@ -143,7 +143,7 @@ class dashboardController extends Controller
         if ($withdrawableBalance['success']) {
             $props['withdrawableBalance'] = $withdrawableBalance['data'];
         } else {
-            $props['withdrawableBalance'] = 0;
+            $props['withdrawableBalance'] = ['balance' => 0];
         }
 
         $activeGigs = $this->gigModel->fetchAllReservedGigByInvestor($this->currentUser->getUid());
@@ -211,11 +211,11 @@ class dashboardController extends Controller
         $this->render('gigs');
     }
 
-    public function gig_mark_as_under_review()
+    public function gig_mark_as_not_deposited()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $gigId = new Input('POST', 'gigId');
-            $response = $this->gigModel->markAsUnderReview($gigId);
+            $response = $this->gigModel->markAsNotDeposited($gigId);
             if ($response['success']) {
                 if ($response['data']) {
                     $alert = new Alert($type = "success", $icon = "", $message = "Successfully completed the gig. Please make sure to review the gig.");
@@ -559,7 +559,7 @@ class dashboardController extends Controller
             if ($withdrawalBalance['success']) {
                 $props['withdrawalBalance'] = $withdrawalBalance['data'];
             } else {
-                $props['withdrawalBalance'] = 0;
+                $props['withdrawalBalance'] = ['balance' => 0, 'updatedDate' => '--', 'updatedTime' => '--'];
             }
 
             $bankAccounts = $this->bankAccountModel->getBankDetails($this->currentUser->getUid());
@@ -707,7 +707,7 @@ class dashboardController extends Controller
             if ($withdrawalBalance['success']) {
                 $props['withdrawalBalance'] = $withdrawalBalance['data'];
             } else {
-                $props['withdrawalBalance'] = 0;
+                $props['withdrawalBalance'] = ['balance' => 0, 'updatedDate' => '--', 'updatedTime' => '--'];
             }
         } else {
             $this->redirect('/error/somethingWentWrong');

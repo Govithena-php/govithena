@@ -270,10 +270,42 @@
     background-color: var(--clr-secondary);
 }
 
+.active__gig_card_floating_msg-primary {
+    background-color: var(--clr-primary);
+}
+
 .active__gig_card_floating_msg- {
     background-color: #f5a623;
 }
 
+
+#confirmModal {
+    width:500px;
+}
+
+#confirmModal .caption {
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #ccc;
+}
+
+#confirmModal .body {
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ccc;
+}
+
+#confirmModal .check{
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
+#confirmModal .buttons{
+    flex-direction: row;
+}
 
 
 

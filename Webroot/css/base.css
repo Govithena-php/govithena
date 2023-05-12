@@ -455,7 +455,6 @@ hr {
 }
 
 .caption p {
-    width: 60%;
     font-size: 0.8rem;
     font-weight: 400;
     color: var(--clr-text-gray, #535353);

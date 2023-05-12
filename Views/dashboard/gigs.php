@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/gridTable.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/progressBar.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/alertModal.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/formModal.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/investor/gigs.css">
 
     <title>Dashboard | Investor</title>
@@ -35,18 +36,43 @@
 
 
 
-    <dialog id="confirmModal" class="[ alertModal ]">
+    <!-- <dialog id="confirmModal" class="[ alertModal ]">
         <div class="[ container ]">
             <i class="bi bi-x-circle"></i>
             <div class="[ content ]">
                 <h2>Are you sure?</h2>
                 <p>Do you really want to mark this gig as completed? This process can't be undone.</p>
             </div>
-            <form id="deleteForm" action="<?php echo URLROOT ?>/dashboard/gig_mark_as_under_review" method="POST" class="[ buttons ]">
+            <form id="deleteForm" action="<?php echo URLROOT ?>/dashboard/gig_mark_as_not_deposited" method="POST" class="[ buttons ]">
                 <button type="button" class="[ button__primary ]" onclick="closeConfirmModal()" data-dismiss="modal">No, Cancel</button>
                 <button id="confirmGigCompletionBtn" name="gigId" type="submit" class="[ button__danger ]">Yes, Confirm</button>
             </form>
         </div>
+    </dialog> -->
+
+    <dialog id="confirmModal" class="[ modal ]">
+        <div class="[ container ]">
+            <div class="[ caption ]">
+                <h3>Mark As Complete</h3>
+                <p>Please confirm if you really want to mark this gig as completed.</p>
+            </div>
+
+            <div class="[ body ]">
+                <p>Before proceeding, please ensure that the gig has been satisfactorily completed according to the agreed terms and deliverables. Once you mark the gig as completed, famer will be notified.</p>
+                <p>The payment process will be initiated only when both parties have confirmed the completion. This ensures fairness and transparency in the transaction.</p>
+            </div>
+
+            <form action="<?php echo URLROOT ?>/dashboard/gig_mark_as_not_deposited" method="POST" class="[ content ]">
+                <div class="check">
+                    <div class=""><input type="checkbox" name="confirm" id="confirm" required></div>
+                    <label for="confirm">I confirm that the gig has been completed.</label>
+                </div>
+                <br>
+                <div class="[ buttons ]">
+                    <button type="button" class="[ button__danger ]" onclick="closeConfirmModal()" data-dismiss="modal">Cancel</button>
+                    <button type="submit" id="confirmGigCompletionBtn" name="gigId" class="[ button__primary ]">Complete</button>
+                </div>
+            </form>
     </dialog>
 
     <?php
@@ -120,40 +146,48 @@
                 </div>
                 <div class="[ special__announcment ]">
                     <?php
-                    $firstRow = $recentActivities[0];
-                    unset($recentActivities[0]);
+
+                    if (isset($recentActivities) || empty($recentActivities)) {
+                    } else {
+                        $firstRow = $recentActivities[0];
+                        unset($recentActivities[0]);
                     ?>
-                    <div class="[ icon ]">
-                        <?php
-                        if ($firstRow['type'] == 'INVESTMENT') {
-                            echo "<i class='bi bi-coin'></i>";
-                        } else if ($firstRow['type'] == 'PROGRESS') {
-                            echo "<i class='bi bi-graph-up-arrow'></i>";
-                        } else if ($firstRow['type'] == 'FIELD_VISIT') {
-                            echo "<i class='bi bi-tree'></i>";
-                        } else {
-                            echo "<i class='bi bi-bell'></i>";
-                        }
-                        ?>
-                    </div>
-                    <div class="[ details ]">
-                        <h3><?php echo str_replace("_", " ", ucwords($firstRow['type'])) ?></h3>
-                        <?php
-                        if ($firstRow['type'] == 'INVESTMENT') {
-                        ?>
-                            <p>You have invested <strong class="LKR"><?php echo number_format($firstRow['amount'], 2, '.', ',') ?></strong> in <strong class="limit-text-1"><?php echo $gigTitles[$firstRow['gigId']] ?></strong></p>
-                        <?php
-                        } else if ($firstRow['type'] == 'PROGRESS') {
-                        ?>
-                            <p class="limit-text-3">Progress of <strong><?php echo $gigTitles[$firstRow['gigId']] ?> </strong>has been updated.</p>
-                        <?php
-                        } else if ($firstRow['type'] == 'FIELD_VISIT') {
-                        ?>
-                            <p class="limit-text-3">Field visit details of <strong><?php echo $gigTitles[$firstRow['gigId']] ?> </strong>has been updated.</p>
-                        <?php
-                        }
-                        ?>
-                    </div>
+                        <div class="[ icon ]">
+                            <?php
+                            if ($firstRow['type'] == 'INVESTMENT') {
+                                echo "<i class='bi bi-coin'></i>";
+                            } else if ($firstRow['type'] == 'PROGRESS') {
+                                echo "<i class='bi bi-graph-up-arrow'></i>";
+                            } else if ($firstRow['type'] == 'FIELD_VISIT') {
+                                echo "<i class='bi bi-tree'></i>";
+                            } else {
+                                echo "<i class='bi bi-bell'></i>";
+                            }
+                            ?>
+                        </div>
+
+                        <div class="[ details ]">
+                            <h3><?php echo str_replace("_", " ", ucwords($firstRow['type'])) ?></h3>
+                            <?php
+                            if ($firstRow['type'] == 'INVESTMENT') {
+                            ?>
+                                <p>You have invested <strong class="LKR"><?php echo number_format($firstRow['amount'], 2, '.', ',') ?></strong> in <strong class="limit-text-1"><?php echo $gigTitles[$firstRow['gigId']] ?></strong></p>
+                            <?php
+                            } else if ($firstRow['type'] == 'PROGRESS') {
+                            ?>
+                                <p class="limit-text-3">Progress of <strong><?php echo $gigTitles[$firstRow['gigId']] ?> </strong>has been updated.</p>
+                            <?php
+                            } else if ($firstRow['type'] == 'FIELD_VISIT') {
+                            ?>
+                                <p class="limit-text-3">Field visit details of <strong><?php echo $gigTitles[$firstRow['gigId']] ?> </strong>has been updated.</p>
+                            <?php
+                            }
+                            ?>
+                        </div>
+
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
             <div class="[ activities ]">
@@ -261,8 +295,15 @@
                                             } else if ($activeGig['status'] == "UNDER_REVIEW") {
                                             ?>
                                                 <div class="active__gig_card_floating_msg active__gig_card_floating_msg-secondary">
-                                                    <p>The gig is completed. please take a moment to give your feedback.</p>
+                                                    <p>The has been deposted the profit that you diserved. please take a moment to give your feedback.</p>
                                                     <a href="<?php echo URLROOT . '/dashboard/review/' . $activeGig['gigId'] ?>" class="button__primary">Write a review</a>
+                                                </div>
+                                            <?php
+                                            } else if ($activeGig['status'] == "NOT_DEPOSITED") {
+                                            ?>
+                                                <div class="active__gig_card_floating_msg active__gig_card_floating_msg-primary">
+                                                    <p>The gig is marked as completed. please wait till famer deposit profit that you earned.</p>
+                                                    <!-- <a href="<?php echo URLROOT . '/dashboard/review/' . $activeGig['gigId'] ?>" class="button__primary">Write a review</a> -->
                                                 </div>
                                             <?php
                                             }
