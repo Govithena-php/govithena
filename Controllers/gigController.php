@@ -38,6 +38,16 @@ class gigController extends Controller
             $props['gig'] = $gig['data'];
 
             $farmerId = $gig['data']['farmerId'];
+
+            $gigImages = $this->gigModel->viewGigImages($gigId);
+            if ($gigImages['success']) {
+                $props['gigImages'] = $gigImages['data'];
+            } else {
+                $props['gigImages'] = [];
+            }
+
+
+
             Session::set(['farmerId' => $farmerId, 'gigId' => $gigId]);
 
             $farmer = $this->userModel->fetchBy($farmerId);

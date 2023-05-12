@@ -56,6 +56,23 @@ class Gig extends Model
         }
     }
 
+    public function viewGigImages($gigId)
+    {
+        try {
+            $sql = "SELECT image FROM gig_image WHERE gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId]);
+            $images = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if ($images) {
+                return ['success' => true, 'data' => $images];
+            } else {
+                return ['success' => false, 'data' => 'false'];
+            }
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
     public function Allgig($id)
     {
         try {
@@ -89,13 +106,14 @@ class Gig extends Model
     }
 
 
-    public function saveGigImage($data){
-        try{
+    public function saveGigImage($data)
+    {
+        try {
             $sql = "INSERT INTO gig_image(image, gigId) VALUES(:image, :gigId)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
             return ['success' => true, 'data' => true];
-        }catch(PDOException $e){
+        } catch (PDOException $e) {
             echo $e->getMessage();
             die();
             return ['success' => false, 'data' => $e->getMessage()];
@@ -425,7 +443,8 @@ class Gig extends Model
         }
     }
 
-    public function markedAsDeposited($gigId){
+    public function markedAsDeposited($gigId)
+    {
         try {
             $sql = "UPDATE gig SET status = 'UNDER_REVIEW' WHERE gigId = :gigId";
             $stmt = Database::getBdd()->prepare($sql);
