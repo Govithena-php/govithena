@@ -648,7 +648,6 @@ class farmerController extends Controller
             }
         } else {
             $agrologists = $this->farmerModel->agrologists();
-
             if ($agrologists['status']) {
                 $props['agrologists'] = $agrologists['data'];
             }
