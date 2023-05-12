@@ -92,7 +92,6 @@ function render_stars($stars, $outof)
                 <div class="[ gig__description ]">
                     <h3>About Gig</h3>
                     <p class="mb-1"><?php echo $gig['description'] ?>.</p>
-                    <?php var_dump($farmer) ?>
                 </div>
 
                 <div class="[ about__farmer ]">
