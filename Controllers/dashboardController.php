@@ -211,11 +211,11 @@ class dashboardController extends Controller
         $this->render('gigs');
     }
 
-    public function gig_mark_as_under_review()
+    public function gig_mark_as_not_deposited()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $gigId = new Input('POST', 'gigId');
-            $response = $this->gigModel->markAsUnderReview($gigId);
+            $response = $this->gigModel->markAsNotDeposited($gigId);
             if ($response['success']) {
                 if ($response['data']) {
                     $alert = new Alert($type = "success", $icon = "", $message = "Successfully completed the gig. Please make sure to review the gig.");

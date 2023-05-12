@@ -29,7 +29,7 @@
                 <h2>Are you sure?</h2>
                 <p>Do you really want to mark this gig as completed? This process can't be undone.</p>
             </div>
-            <form id="deleteForm" action="<?php echo URLROOT ?>/dashboard/gig_mark_as_under_review" method="POST" class="[ buttons ]">
+            <form id="deleteForm" action="<?php echo URLROOT ?>/dashboard/gig_mark_as_not_deposited" method="POST" class="[ buttons ]">
                 <button type="button" class="[ button__primary ]" onclick="closeConfirmModal()" data-dismiss="modal">No, Cancel</button>
                 <button id="" name="gigId" value="<?php echo $gigId ?>" type="submit" class="[ button__danger ]">Yes, Confirm</button>
             </form>
@@ -143,6 +143,19 @@
                         </div>
                         <button onclick="openConfirmModal()" class="button__primary">Confirm</button>
                     </div>
+                <?php
+                } else if ($gig['status'] == "NOT_DEPOSITED") {
+                ?>
+                    <div class="[ special__announcment special__announcment-primary ]">
+                        <div class="[ icon ]">
+                            <i class="bi bi-bell"></i>
+                        </div>
+                        <div class="[ details grow ]">
+                            <h3>Wait for the deposit.</h3>
+                            <p>The gig is marked as completed. please wait till famer deposit profit that you earned.</p>
+                        </div>
+                    </div>
+
                 <?php
                 } else if ($gig['status'] == "UNDER_REVIEW") {
                 ?>

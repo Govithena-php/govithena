@@ -73,6 +73,19 @@
     color: var(--clr-light);
 }
 
+.special__announcment-primary {
+    background-color: var(--clr-primary);
+    color: var(--clr-light);
+}
+
+.special__announcment-primary p {
+    color: var(--clr-light);
+}
+
+.special__announcment-primary .icon {
+    color: var(--clr-light);
+}
+
 
 
 

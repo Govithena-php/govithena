@@ -291,7 +291,7 @@ class Gig extends Model
     public function countActiveGigByInvestor($investorId)
     {
         try {
-            $sql = "SELECT COUNT(*) as count FROM gig WHERE investorId = :investorId AND status = 'RESERVED' OR status = 'UNDER_COMPLETION' OR status='UNDER_REVIEW'";
+            $sql = "SELECT COUNT(*) as count FROM gig WHERE investorId = :investorId AND (status = 'RESERVED' OR status = 'UNDER_COMPLETION' OR status='NOT_DEPOSITED' OR status='UNDER_REVIEW')";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['investorId' => $investorId]);
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -317,7 +317,7 @@ class Gig extends Model
     public function fetchAllReservedGigByInvestor($id)
     {
         try {
-            $sql = "SELECT g.gigId, g.farmerId, g.title, g.city, g.cropCycle, g.thumbnail, u.firstName, u.lastName, u.image, u.city as FCity, DATE(g.reservedDate) as reservedDate, g.status FROM gig g INNER JOIN user u ON g.farmerId = u.uid WHERE g.investorId = :id AND g.status = 'RESERVED' OR g.status = 'UNDER_COMPLETION'  OR g.status = 'UNDER_REVIEW' ORDER BY g.reservedDate DESC";
+            $sql = "SELECT g.gigId, g.farmerId, g.title, g.city, g.cropCycle, g.thumbnail, u.firstName, u.lastName, u.image, u.city as FCity, DATE(g.reservedDate) as reservedDate, g.status FROM gig g INNER JOIN user u ON g.farmerId = u.uid WHERE g.investorId = :id AND g.status = 'RESERVED' OR g.status = 'UNDER_COMPLETION'  OR g.status = 'UNDER_REVIEW' OR g.status = 'NOT_DEPOSITED' ORDER BY g.statusChangeDate OR g.reservedDate DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -427,10 +427,10 @@ class Gig extends Model
         }
     }
 
-    public function markAsUnderReview($gigId)
+    public function markAsNotDeposited($gigId)
     {
         try {
-            $sql = "UPDATE gig SET status = 'UNDER_REVIEW' WHERE gigId = :gigId";
+            $sql = "UPDATE gig SET status = 'NOT_DEPOSITED' WHERE gigId = :gigId";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['gigId' => $gigId]);
             return ['success' => true, 'data' => true];

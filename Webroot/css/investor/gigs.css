@@ -270,6 +270,10 @@
     background-color: var(--clr-secondary);
 }
 
+.active__gig_card_floating_msg-primary {
+    background-color: var(--clr-primary);
+}
+
 .active__gig_card_floating_msg- {
     background-color: #f5a623;
 }

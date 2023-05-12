@@ -42,7 +42,7 @@
                 <h2>Are you sure?</h2>
                 <p>Do you really want to mark this gig as completed? This process can't be undone.</p>
             </div>
-            <form id="deleteForm" action="<?php echo URLROOT ?>/dashboard/gig_mark_as_under_review" method="POST" class="[ buttons ]">
+            <form id="deleteForm" action="<?php echo URLROOT ?>/dashboard/gig_mark_as_not_deposited" method="POST" class="[ buttons ]">
                 <button type="button" class="[ button__primary ]" onclick="closeConfirmModal()" data-dismiss="modal">No, Cancel</button>
                 <button id="confirmGigCompletionBtn" name="gigId" type="submit" class="[ button__danger ]">Yes, Confirm</button>
             </form>
@@ -269,8 +269,15 @@
                                             } else if ($activeGig['status'] == "UNDER_REVIEW") {
                                             ?>
                                                 <div class="active__gig_card_floating_msg active__gig_card_floating_msg-secondary">
-                                                    <p>The gig is completed. please take a moment to give your feedback.</p>
+                                                    <p>The has been deposted the profit that you diserved. please take a moment to give your feedback.</p>
                                                     <a href="<?php echo URLROOT . '/dashboard/review/' . $activeGig['gigId'] ?>" class="button__primary">Write a review</a>
+                                                </div>
+                                            <?php
+                                            } else if ($activeGig['status'] == "NOT_DEPOSITED") {
+                                            ?>
+                                                <div class="active__gig_card_floating_msg active__gig_card_floating_msg-primary">
+                                                    <p>The gig is marked as completed. please wait till famer deposit profit that you earned.</p>
+                                                    <!-- <a href="<?php echo URLROOT . '/dashboard/review/' . $activeGig['gigId'] ?>" class="button__primary">Write a review</a> -->
                                                 </div>
                                             <?php
                                             }
