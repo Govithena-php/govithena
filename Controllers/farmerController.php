@@ -58,7 +58,6 @@ class farmerController extends Controller
             $farmerId = Session::get('user')->getUid();
 
             $images = $this->gigImageHandler->upload('images');
-            // var_dump($images);die();
             if(empty($images)){
                 $this->redirect('/farmer/createGig/error/1');
             }else {
@@ -96,46 +95,6 @@ class farmerController extends Controller
                 }
 
             }
-
-
-
-
-            // $file_name = $_FILES['image']['name'];
-            // $file_size = $_FILES['image']['size'];
-            // $tmp_name = $_FILES['image']['tmp_name'];
-            // $error = $_FILES['image']['error'];
-
-            // if ($error == 0) {
-
-            //     $fileType = pathinfo($file_name, PATHINFO_EXTENSION);
-            //     $fileType_lc = strtolower($fileType);
-
-            //     $allowedFileTypes = array("jpg", "jpeg", "png");
-
-            //     if (in_array($fileType, $allowedFileTypes)) {
-
-            //         $new_img_name = uniqid("IMG-", true) . '.' . $fileType_lc;
-            //         $img_upload_path = ROOT . 'Webroot/uploads/' . $new_img_name;
-
-            //         move_uploaded_file($tmp_name, $img_upload_path);
-            //     }
-            // }
-
-
-
-
-            
-
-
-            $gig = new $this->gigModel();
-
-            $res = $gig->create($data);
-
-            if (!$res) {
-                $this->redirect('/farmer/createGig');
-                return;
-            }
-            $this->redirect('/farmer/');
         }
         $this->render("createGig");
     }
@@ -776,7 +735,7 @@ class farmerController extends Controller
 // ==================================
 // ==================================
 
-    // function agrologist1($params = [])
+    // function agrologist($params = [])
     // {
     //     $props = [];
     //     $agrologistId = $params[0];
