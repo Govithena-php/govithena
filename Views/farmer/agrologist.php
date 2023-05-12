@@ -124,8 +124,15 @@
                                     </div>
                                     <div class="actions">
                                         <a href="<?php echo URLROOT . "/profile/" . $myagrologist['agrologistId'] ?>" class="button__primary">View Profile</a>
-                                        <a href="<?php echo URLROOT . "/profile/" . $myagrologist['agrologistId'] ?>" class="button__primary">Pay</a>
-                                    </div>
+                                        
+                                    <?php
+                                    if($myagrologist['status'] != 'PAID'){ 
+                                        ?>
+                                        <a href="<?php echo URLROOT . "/farmer/agrologistPay/" . $myagrologist['agrologistId'] ?>" class="button__primary">Pay</a>
+                                   <?php
+                                    }
+                                    ?>
+                                        </div>
 
                                 </div>
                         <?php

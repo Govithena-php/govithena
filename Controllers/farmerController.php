@@ -525,6 +525,33 @@ class farmerController extends Controller
         $this->render('techassistant');
     }
 
+    function techassistantPay($params = [])
+    {
+        $props = [];
+        $techassistantId = $params[0];
+        $id = $this->currentUser->getUid();
+
+        $data = [
+            'technicalAssistantId' => $techassistantId,
+            'farmerId' => $id
+        ];
+        $techReqTwo=$this->farmerModel->getPayTechassistantsTwo($data);
+        
+        if($techReqTwo['status']){
+            $props['offer_techassistant'] = $techReqTwo['data'];
+        }
+
+
+        $techReqOne=$this->farmerModel->getPayTechassistantsone($techassistantId);
+        
+        if($techReqOne['status']){
+            $props['techassistant'] = $techReqOne['data'];
+        }
+     
+        $this->set($props);
+        $this->render('techassistantPay');
+    }
+
     function techassistantfirst($params = [])
     {
 
@@ -649,9 +676,10 @@ class farmerController extends Controller
     //============================
     //============================
 
-    function agrologist()
+    function agrologist($params = [])
     {
         $props = [];
+        $id = $this->currentUser->getUid();
 
         $myagrologists = $this->farmerModel->getAcceptedAgrologistByFarmer($this->currentUser->getUId());
         if ($myagrologists['status']) {
@@ -668,6 +696,24 @@ class farmerController extends Controller
             $props['declinedAgrologists'] = $declinedAgrologists['data'];
         }
 
+        if(isset($params[0]) && !empty($params[0])){
+
+            $agrologistId = $params[0];
+            $id = $this->currentUser->getUid();
+        
+        $dataone = [
+            'agrologistId' => $agrologistId,
+            'farmerId' => $id
+        ];
+
+        $this->farmerModel->getPayAgrologistsUpdate($dataone);
+        }
+
+        // $agrodata = $this->farmerModel->getAcceptedAndPay($id);
+
+        // if($agrodata['status']){
+        //     $props['PAID'] = $agrodata['data'];
+        // }
         $this->set($props);
         $this->render('agrologist');
     }
@@ -735,30 +781,66 @@ class farmerController extends Controller
 // ==================================
 // ==================================
 
-    // function agrologist($params = [])
-    // {
-    //     $props = [];
-    //     $agrologistId = $params[0];
-    //     $id = $this->currentUser->getUid();
-    //     $agroReq=///////////////////////////////////////////////////////////////////////////////
+    function agrologistPay($params = [])
+    {
+        $props = [];
+        $agrologistId = $params[0];
+        $id = $this->currentUser->getUid();
+
+        $data = [
+            'agrologistId' => $agrologistId,
+            'farmerId' => $id
+        ];
+        $agroReqTwo=$this->farmerModel->getPayAgrologistsTwo($data);
+        
+        if($agroReqTwo['status']){
+            $props['offer_agrologist'] = $agroReqTwo['data'];
+        }
+
+
+        $agroReqOne=$this->farmerModel->getPayAgrologistsone($agrologistId);
+        
+        if($agroReqOne['status']){
+            $props['agrologist'] = $agroReqOne['data'];
+        }
      
-    //     $data = [
-    //         'paymentId' => new UID(),
-    //         'agrologistId' => $agrologistId,
-    //         'farmerId' => $id,
-    //         'Payment' => $agroReq['offer']
-    //     ];
-    //     $agrologists = $this->farmerModel->agropayment([
-
-    //     ]);
+        $this->set($props);
+        $this->render('agrologistPay');
+    }
 
 
+    function agrologisAftertPay($params = [])
+    {
+        
+        $props = [];
+        $agrologistId = $params[0];
+        $id = $this->currentUser->getUid();
+
+        $dataone = [
+            'agrologistId' => $agrologistId,
+            'farmerId' => $id
+        ];
+        $agroReqTwo=$this->farmerModel->getPayAgrologistsTwo($dataone);
 
 
+        $data = [
+            'paymentId' => new UID(PREFIX::PAYMENT),
+            'agrologistId' => $agrologistId,
+            'farmerId' => $id,
+            'Payment' =>  $agroReqTwo['offer']
+        ];
 
-    //     $this->set($props);
-    //     $this->render('agrologistPay');
-    // }
+        $this->farmerModel->afterPayAgrologists($data);
+        // $this->farmerModel->afterPayAgrologistsUpdate($dataone);
+        // if($agroReqTwo['status']){
+        //     $props['payed'] = $agroReqTwo['data'];
+        // }
+        
+
+
+        // $this->set($props);
+        $this->render('agrologist');
+    }
 
 
 

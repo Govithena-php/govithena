@@ -15,6 +15,101 @@ class Farmer extends Model
         }
     }
 
+    public function getPayAgrologistsone($id)
+    {
+        try {
+            $sql = "SELECT * FROM user WHERE uid = :uid";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['uid' => $id]);
+            $req = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['status' => true, 'data' => $req];
+        } catch (Exception $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function getPayTechassistantsone($id)
+    {
+        try {
+            $sql = "SELECT * FROM user WHERE uid = :uid";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['uid' => $id]);
+            $req = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['status' => true, 'data' => $req];
+        } catch (Exception $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+
+    public function getPayAgrologiststwo($data)
+    {
+        try {
+            $sql = "SELECT * FROM agrologist_request WHERE agrologistId = :agrologistId AND  farmerId = :farmerId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'agrologistId' => $data['agrologistId'],
+                'farmerId' => $data['farmerId']]);
+            $req = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['status' => true, 'data' => $req];
+        } catch (Exception $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function getPayTechassistantstwo($data)
+    {
+        try {
+            $sql = "SELECT * FROM techassistant_request WHERE technicalAssistantId = :technicalAssistantId AND  farmerId = :farmerId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'technicalAssistantId' => $data['technicalAssistantId'],
+                'farmerId' => $data['farmerId']]);
+            $req = $stmt->fetch(PDO::FETCH_ASSOC);
+            return ['status' => true, 'data' => $req];
+        } catch (Exception $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function afterPayAgrologists($data)
+    {
+        try {
+            $sql = "INSERT INTO agrologist_payment (paymentId, agrologistId, farmerId, payment) VALUES (:paymentId, :agrologistId, :farmerId, :payment)";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'paymentId' => $data['paymentId'],
+                'farmerId' => $data['farmerId'],
+                'agrologistId' => $data['agrologistId'],
+                'payment' => $data['Payment']
+            ]);
+
+            if ($stmt->rowCount() > 0) {
+                return ['status' => true, 'data' => true];
+            } else {
+                return ['status' => true, 'data' => false];
+            }
+        } catch (Exception $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+
+    // public function getPayAgrologistsUpdate($data)
+    // {
+    //     try {
+    //         $sql = "UPDATE agrologist_request SET status = 'PAID' WHERE agrologistId = :agrologistId AND  farmerId = :farmerId";
+    //         $stmt = Database::getBdd()->prepare($sql);
+    //         $stmt->execute([
+    //             'agrologistId' => $data['agrologistId'],
+    //             'farmerId' => $data['farmerId']]);
+    //         $req = $stmt->fetch(PDO::FETCH_ASSOC);
+    //         return ['status' => true];
+    //     } catch (Exception $e) {
+    //         return ['status' => false, 'data' => $e->getMessage()];
+    //     }
+    // }
+
     public function sendAgrologistRequest($data)
     {
         try {
@@ -55,7 +150,7 @@ class Farmer extends Model
     public function getAcceptedAgrologistByFarmer($id)
     {
         try {
-            $sql = "SELECT ar.agrologistId, u.firstName, u.lastName, u.city, u.image from agrologist_request ar INNER JOIN user u ON ar.agrologistId = u.uid WHERE ar.farmerId = :farmerId AND ar.status = 'accepted' ORDER BY ar.statusChangeDate DESC";
+            $sql = "SELECT ar.agrologistId, u.firstName, u.lastName, ar.status, u.city, u.image from agrologist_request ar INNER JOIN user u ON ar.agrologistId = u.uid WHERE ar.farmerId = :farmerId AND ar.status = 'accepted' OR ar.status = 'PAID' ORDER BY ar.statusChangeDate DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['farmerId' => $id]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
