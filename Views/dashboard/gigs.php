@@ -62,13 +62,14 @@
                 <p>The payment process will be initiated only when both parties have confirmed the completion. This ensures fairness and transparency in the transaction.</p>
             </div>
 
-            <form action="<?php echo URLROOT ?>/farmer/complete_gig" method="POST" class="[ content ]">
+            <form action="<?php echo URLROOT ?>/dashboard/gig_mark_as_not_deposited" method="POST" class="[ content ]">
                 <div class="check">
                     <div class=""><input type="checkbox" name="confirm" id="confirm" required></div>
                     <label for="confirm">I confirm that the gig has been completed.</label>
                 </div>
+                <br>
                 <div class="[ buttons ]">
-                    <button type="button" class="[ button__danger ]" onclick="closeCompleteModal()" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="[ button__danger ]" onclick="closeConfirmModal()" data-dismiss="modal">Cancel</button>
                     <button type="submit" id="confirmGigCompletionBtn" name="gigId" class="[ button__primary ]">Complete</button>
                 </div>
             </form>

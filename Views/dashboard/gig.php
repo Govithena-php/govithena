@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/gridTable.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/filters.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/alertModal.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/formModal.css">
 
     <link rel="stylesheet" href="<?php echo CSS ?>/investor/gig.css">
 
@@ -22,6 +23,7 @@
 </head>
 
 <body>
+    <!-- 
     <dialog id="confirmModal" class="[ alertModal ]">
         <div class="[ container ]">
             <i class="bi bi-x-circle"></i>
@@ -34,7 +36,35 @@
                 <button id="" name="gigId" value="<?php echo $gigId ?>" type="submit" class="[ button__danger ]">Yes, Confirm</button>
             </form>
         </div>
+    </dialog> -->
+
+
+    <dialog id="confirmModal" class="[ modal ]">
+        <div class="[ container ]">
+            <div class="[ caption ]">
+                <h3>Mark As Complete</h3>
+                <p>Please confirm if you really want to mark this gig as completed.</p>
+            </div>
+
+            <div class="[ body ]">
+                <p>Before proceeding, please ensure that the gig has been satisfactorily completed according to the agreed terms and deliverables. Once you mark the gig as completed, famer will be notified.</p>
+                <p>The payment process will be initiated only when both parties have confirmed the completion. This ensures fairness and transparency in the transaction.</p>
+            </div>
+
+            <form action="<?php echo URLROOT ?>/dashboard/gig_mark_as_not_deposited" method="POST" class="[ content ]">
+                <div class="check">
+                    <div class=""><input type="checkbox" name="confirm" id="confirm" required></div>
+                    <label for="confirm">I confirm that the gig has been completed.</label>
+                </div>
+                <br>
+                <div class="[ buttons ]">
+                    <button type="button" class="[ button__danger ]" onclick="closeConfirmModal()" data-dismiss="modal">Cancel</button>
+                    <button type="submit" id="confirmGigCompletionBtn" name="gigId" value="<?php echo $gigId ?>" class="[ button__primary ]">Complete</button>
+                </div>
+            </form>
     </dialog>
+
+
     <?php
     $active = "gigs";
     $title = "Gig";
