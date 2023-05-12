@@ -15,19 +15,11 @@ class agrologistController extends Controller
         if (!Session::isLoggedIn()) {
             $this->redirect('/auth/signin');
         }
-        // $this->lastmonthFarmerCount =0;
         if (!$this->currentUser->hasAccess(ACTOR::AGROLOGIST)) {
             $this->redirect('/error/dontHaveAccess');
         }
 
     }
-
-    // public function setlastmonthFarmerCount($lastmonthFarmerCount) { 
-    //     $this->lastmonthFarmerCount = $lastmonthFarmerCount; 
-    // }
-    // public function getlastmonthFarmerCount() { 
-    //     return $this->lastmonthFarmerCount; 
-    // }
 
     public function index()
     {
@@ -55,17 +47,9 @@ class agrologistController extends Controller
         $incomeLimit = $agrologist->getIncomeLimit();
         $withdrawalsLimit = $agrologist->getWithdrawalsLimit();
 
-
-        // echo json_encode($notifications);
-        //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>". $notifications . "</h1>";
-
-        //assign farmer count if month changes
-        // date('m') != date('m', strtotime("-1 days")
         if (date('m') != 2) {
             $this->lastmonthFarmerCount = $farmerCount[0]['farmerCount'];
         }
-        // echo json_encode($this->lastmonthFarmerCount);
-        // $lastmonthFarmerCount = 
 
         $this->set([
             'notifications' => $notifications,
@@ -113,9 +97,6 @@ class agrologistController extends Controller
                         $date = new Input(POST, 'date');
                         $description = new Input(POST, 'description');
 
-
-
-                        // if ($update) {
                         try {
                             $images = $this->imageHandler->upload('images');
 
@@ -154,13 +135,11 @@ class agrologistController extends Controller
                             echo $e->getMessage();
                             die();
                         }
-                        // }
 
                     }
                 }
 
                 $this->farmerdetails($agrologist, $params[0], $params[1]);
-                //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $Session::get('uid') . "</h1>";
             }
 
 
@@ -170,7 +149,6 @@ class agrologistController extends Controller
             $agr = new Agrologist();
 
             $farmers = $agr->getFarmers();
-            // $farmerReviews = $agr->getFarmerReviews();
             if (isset($farmers)) {
                 $this->set(['ar' => $farmers]);
             } else {
@@ -178,19 +156,21 @@ class agrologistController extends Controller
             }
 
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
                 if (isset($_POST['complete_btn'])) {
+
                     $complete = $agr->completeRequest($_POST['complete_btn']);
-                    // echo json_encode($complete);
+
                     if ($complete) {
                         $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully Completed.');
 
                     } else {
                         $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong.');
                     }
+
                     Session::set(['complete_farmer_alert' => $alert]);
                 }
-                // echo json_encode($complete);
-                
+
 
 
             }
@@ -198,39 +178,20 @@ class agrologistController extends Controller
         }
     }
 
-    // public function reviews()
-    // {
-    //     $this->render('reviews');
-    // }
-
-
+    
     public function reviews($params)
     {
-        // $props = [];
-        // if (!isset($params[0]) || empty($params[0])) {
-        //     $this->redirect('/error/dontHaveAccess/1');
-        // }
-        // $gigId = $params[0];
-        // Session::set(['gigId' => $gigId]);
-
-        // $props['gig'] = $gig = $this->gigModal->fetchBy($gigId);
-        // if (!$props['gig']) {
-        //     $this->redirect('/error/dontHaveAccess/2');
-        // }
-
-        // $props['farmer'] = $this->userModal->fetchBy($gig['farmerId']);
-        // if (!$props['farmer']) {
-        //     $this->redirect('/error/dontHaveAccess/3');
-        // }
-
-
+        
         require(ROOT . 'Models/agrologist.php');
+
         $agr = new Agrologist();
 
         $farmerName = $agr->getFarmerName($params[0]);
-        // echo json_encode($params[0]);
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
             if (isset($_POST['submit_review'])) {
+                
                 $data = [
                     'reviewId' => new UID(PREFIX::REVIEW),
                     'agrologistId' => $this->currentUser->getUid(),
@@ -245,7 +206,6 @@ class agrologistController extends Controller
                     'q8' => new Input(POST, 'q8'),
                     'q9' => new Input(POST, 'q9'),
                 ];
-                // var_dump($data);die;
 
                 $review = $agr->save($data);
 
@@ -257,17 +217,13 @@ class agrologistController extends Controller
                 }
                 Session::set(['review_agrologist_alert' => $alert]);
 
-                echo json_encode($farmerName);
 
-                //$response = $reviewByInvestor->save($data);
-                //if($response['success']){}
             }
         }
 
 
 
         $this->set(['farmerName' => $farmerName]);
-        // echo json_encode($farmerName);
         $this->render('reviews');
     }
 
@@ -282,7 +238,6 @@ class agrologistController extends Controller
             $agr = new Agrologist();
 
             $requests = $agr->farmerRequest();
-            // var_dump($requests);die();
             if (isset($requests)) {
                 $this->set(['ar' => $requests]);
             } else {
@@ -327,7 +282,7 @@ class agrologistController extends Controller
                         $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong.');
                     }
 
-                    
+
 
                 } else {
                     echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>nope</h1>";
@@ -352,8 +307,7 @@ class agrologistController extends Controller
         $d['agrologist'] = $agrologist->getAgrologistDetails();
         $d['account'] = $agrologist->getAccountDetails();
         $d['qualifications'] = $agrologist->getQualificationDetails();
-        //var_dump($d['agrologist']);
-        // die();
+       
 
         if (isset($_POST['edit_details_btn'])) {
 
@@ -369,7 +323,6 @@ class agrologistController extends Controller
 
 
             if (move_uploaded_file($_FILES['profile_img']['tmp_name'], "Uploads/" . basename($_FILES['profile_img']['name']))) {
-                //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'> file uploaded  </h1>";
                 Session::get('user')->setImage(basename($_FILES['profile_img']['name']));
 
                 $edit_user = $agrologist->edit_user_details([
@@ -385,7 +338,6 @@ class agrologistController extends Controller
                     'postalCode' => $postalCode->get(),
                     'profileImage' => basename($_FILES['profile_img']['name'])
                 ]);
-                // echo "file uploaded";
             } else {
                 $edit_user = $agrologist->edit_user_without_image([
                     'uid' => $uid,
@@ -399,9 +351,7 @@ class agrologistController extends Controller
                     'district' => $district->get(),
                     'postalCode' => $postalCode->get()
                 ]);
-                //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'> file not uploaded  </h1>";
-
-                //echo "file not uploaded";
+               
             }
 
             if ($edit_user) {
@@ -522,9 +472,7 @@ class agrologistController extends Controller
 
         $request = $agrologist->farmerRequestDetails($id);
         $gig = $agrologist->getFarmerGigsRequest($id);
-        // echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $d['message'] . "</h1>";
-
-        // $this->set($d);
+       
         $this->set([
             'requestDetails' => $request,
             'gigDetails' => $gig
@@ -532,7 +480,7 @@ class agrologistController extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (isset($_POST['accept'])) {
                 var_dump($_POST['accept']);
-                //echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>" . $_POST['accept'] . "</h1>";
+
                 $agr->acceptRequest($_POST['accept']);
 
                 $data = [
@@ -551,17 +499,13 @@ class agrologistController extends Controller
                 ];
 
                 $agr->save($data);
-                //$this->redirect("/agrologist/farmers");
             } elseif (isset($_POST['decline'])) {
-                //var_dump($_POST['accept']);
-                //echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>" . $_POST['accept'] . "</h1>";
+
                 $agr->declineRequest($_POST['decline']);
                 $farmerId = $agr->getFarmerId($_POST['decline']);
-                // echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $farmerId[0] . "</h1>";
-                echo json_encode($farmerId[0]['farmerId']);
+                // echo json_encode($farmerId[0]['farmerId']);
 
                 $agr->declineNotificationFarmer($farmerId[0]['farmerId']);
-                //$this->redirect("/agrologist/farmers");
             } else {
                 echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>nope</h1>";
 
@@ -574,6 +518,7 @@ class agrologistController extends Controller
 
     public function farmerdetails($agrologist, $fid, $gid)
     {
+        
         // require(ROOT . 'Models/agrologist.php');
         // $agrologist = new Agrologist();
         $uid = Session::get('user')->getUid();
@@ -594,8 +539,7 @@ class agrologistController extends Controller
 
     public function farmergigs($agrologist, $id)
     {
-        // require(ROOT . 'Models/agrologist.php');
-        // $agrologist = new Agrologist();
+        
         $d['gigDetails'] = $agrologist->getFarmerGigs(['farmerId' => $id]);
 
         $this->set($d);
@@ -604,13 +548,12 @@ class agrologistController extends Controller
 
     public function chat($userId)
     {
-        // echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $userId[0] . "</h1>";
-        // echo json_encode($userId);
+        
         require(ROOT . 'Models/agrologist.php');
         $agrologist = new Agrologist();
 
         $d['messages'] = $agrologist->getmessages($userId[0]);
-        // echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $d['message'] . "</h1>";
+
         if (isset($_POST['update_details_btn'])) {
             $incomingMsgId = new Input(POST, 'incomingMsgId');
             $outgoingMsgId = new Input(POST, 'outgoingMsgId');
@@ -624,14 +567,13 @@ class agrologistController extends Controller
         }
 
         $this->set($d);
-        //echo json_encode($d['messages'] );
+
         return $this->render('chat');
     }
 
     public function payments($agrologist, $fid)
     {
-        // require(ROOT . 'Models/agrologist.php');
-        // $agrologist = new Agrologist();
+      
 
         $d['timePeriod'] = $agrologist->getRequestTimePeriod($fid);
         $d['paymentDetails'] = $agrologist->getPaymentDetails($fid);
@@ -650,24 +592,26 @@ class agrologistController extends Controller
         $d['account'] = $agrologist->getAccountDetails();
         $d['income_list'] = $agrologist->getIncome();
         $d['withdrawal_list'] = $agrologist->getWithdrawals();
-        // $d['paymentDetails'] = $agrologist->getPaymentDetails($fid);
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // if ($_GET['withdraw'] == 'confirm') {
-            //     $withdrawal = new INPUT(POST, 'withdraw_amount');
-            
-
-            // }
+           
             if (isset($_POST['transfer_confirm_btn'])) {
-                $withdraw = $agrologist->insertWithdrawals([
-                    'withdrawalId' => new UID(PREFIX::WITHDRAWAL),
-                    'withdrawal' => new INPUT(POST, 'withdraw_amount'),
-                ]);
-
-                if ($withdraw) {
-                    $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully Submitted!');
+                $withdrawal = new INPUT(POST, 'withdraw_amount');
+                
+                $withdraw_amount = (int)$withdrawal->get();
+                if ($withdraw_amount <= 0) {
+                    $alert = new Alert($type = 'error', $icon = "", $message = 'Only positive amounts can be transfered!');
                 } else {
-                    $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong!');
+                    $withdraw = $agrologist->insertWithdrawals([
+                        'withdrawalId' => new UID(PREFIX::WITHDRAWAL),
+                        'withdrawal' => $withdrawal->get(),
+                    ]);
+
+                    if ($withdraw) {
+                        $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully Submitted!');
+                    } else {
+                        $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong!');
+                    }
                 }
                 Session::set(['agrologist_withdraw_alert' => $alert]);
             }
