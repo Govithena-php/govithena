@@ -23,7 +23,7 @@
 
 <body>
 
-<dialog id="completeModal" class="[ modal ]">
+    <dialog id="completeModal" class="[ modal ]">
         <div class="[ container ]">
             <div class="[ caption ]">
                 <h3>Mark As Complete</h3>
@@ -48,7 +48,7 @@
     </dialog>
 
 
-<dialog id="depositeModal" class="[ modal ]">
+    <dialog id="depositeModal" class="[ modal ]">
         <div class="[ container ]">
             <div class="[ caption ]">
                 <h3>Depost</h3>
@@ -93,112 +93,109 @@
         <div class="btn_wrapper">
             <h2>My Gigs</h2>
             <a class="btn btn-primary" href="<?php echo URLROOT ?>/farmer/createGig">Add New</a>
-        </div>        
-        <div class="grid__table"
-                        style="
+        </div>
+        <div class="grid__table" style="
                                 --xl-cols: 0.7fr 1.3fr 0.9fr 1.2fr 0.7fr 0.5fr 1.9fr 1.3fr;
                                 --lg-cols: 1.5fr 1fr 1fr 1fr 0.3fr;
                                 --md-cols: 2fr 1fr 0.3fr;
                                 --sm-cols: 3fr 0.3fr;
-                            "
-                        >
-                        <div class="head">
-                            <div class="row">
-                            <div class="data">
-                                    <p></p>
-                                </div>
-                                <div class="data remove-border">
-                                    <p>Title</p>
-                                </div>
-                                <div class="data">
-                                    <p>Initial Investment</p>
-                                </div>
-                                <div class="data">
-                                    <p>Location</p>
-                                </div>
-                                <div class="data">
-                                    <p>Status</p>
-                                </div>
-                                <div class="data">
-                                    <p>Land Area</p>
-                                </div>
-                                <div class="data">
-                                    <p>Description</p>
-                                </div>
+                            ">
+            <div class="head">
+                <div class="row">
+                    <div class="data">
+                        <p></p>
+                    </div>
+                    <div class="data remove-border">
+                        <p>Title</p>
+                    </div>
+                    <div class="data">
+                        <p>Initial Investment</p>
+                    </div>
+                    <div class="data">
+                        <p>Location</p>
+                    </div>
+                    <div class="data">
+                        <p>Status</p>
+                    </div>
+                    <div class="data">
+                        <p>Land Area</p>
+                    </div>
+                    <div class="data">
+                        <p>Description</p>
+                    </div>
+                </div>
+            </div>
+            <div class="body">
+                <?php
+                foreach ($products as $p) {
+                ?>
+                    <div class="row">
+
+                        <div class="data farmer__">
+                            <div class="farmerimg">
+                                <a class="underlinetext" href="<?php echo URLROOT ?>/farmer/gigView/<?php echo $p['gigId'] ?>">
+                                    <!-- <img src="<?php echo UPLOADS . '/profilePictures/' . $p['thumbnail'] ?>" alt="Picture"> -->
+                                    <img src="<?php echo UPLOADS . '/' . $p['thumbnail'] ?>" alt="Picture">
+                                </a>
                             </div>
                         </div>
-                        <div class="body">
-                            <?php
-                            foreach($products as $p){
-                                ?>
-                            <div class="row">
-                                
-                                <div class="data farmer__">
-                                    <div class="farmerimg">
-                                    <a class="underlinetext" href="<?php echo URLROOT ?>/farmer/gigView/<?php echo $p['gigId']?>">
-                                        <!-- <img src="<?php echo UPLOADS . '/profilePictures/' . $p['thumbnail']?>" alt="Picture"> -->
-                                        <img src="<?php echo UPLOADS .'/' .$p['thumbnail']?>" alt="Picture">
-                                    </a>
-                                    </div>
-                                </div>
-                                <div class="data ">
-                                    <div class="namecol">
-                                    <a class="underlinetext" href="<?php echo URLROOT ?>/farmer/gigView/<?php echo $p['gigId']?>">
-                                        <h1><p><?php echo $p['title'] ?></p></h1>
-                                        <p><?php echo $p['category']?></p>
-                                    </a>
-                                    </div>
-                                </div>
-                                <div class="data">
-                                    <p class="LKR"><?php echo number_format($p['capital'], 2, '.', ',')?></p>
-                                </div>
-                                <div class="data">
-                                    <p><?php echo $p['city']?></p>
-                                </div>
-                                <div class="data">
-                                    <p><?php echo $p['status']?></p>
-                                </div>
-                                <div class="data">
-                                    <p><?php echo $p['landArea']?></p>
-                                </div>
-                                <div class="data">
-                                    <p><?php echo $p['description']?></p>
-                                </div>
-                                <div class="data flex-right">
-                                    <div class="actions">
-
-                                        <?php   
-                                        
-                                        if($p['status'] == 'ACTIVE'){
-                                            ?>
-                                            <a href="<?php echo URLROOT . "/farmer/editGig/" . $p['gigId'] ?>" class="btn btn-primary">Edit</a>
-                                            <button onclick="openDeleteAlert('<?php echo $p['gigId']?>')" class="button__danger">Delete</button> 
-                                            <?php
-                                        }
-                                        else if($p['status'] == 'RESERVED'){
-                                            ?>
-                                            <button onclick="openCompleteModal('<?php echo $p['gigId']?>')" class="button__danger">Mark as complete</button>                                             
-                                            <?php
-                                        }
-                                        else if($p['status'] == 'UNDER_COMPLETION'){
-                                            ?>
-                                            <button onclick="openDepositeModal('<?php echo $p['gigId']?>')" class="button__danger button__disabled" disabled>deposite</button>                                             
-                                            <?php
-                                        }
-                                        else if($p['status'] == 'NOT_DEPOSITED'){
-                                            ?>
-                                            <button onclick="openDepositeModal('<?php echo $p['gigId']?>')" class="button__danger">deposite</button>                                             
-                                            <?php
-                                        }
-                                        ?>
-                                    </div>
-                                </div>
+                        <div class="data ">
+                            <div class="namecol">
+                                <a class="underlinetext" href="<?php echo URLROOT ?>/farmer/gigView/<?php echo $p['gigId'] ?>">
+                                    <h1>
+                                        <p class="limit-text-2"><?php echo $p['title'] ?></p>
+                                    </h1>
+                                    <p><?php echo $p['category'] ?></p>
+                                </a>
                             </div>
-                            <?php
-                            }
-                            ?>
+                        </div>
+                        <div class="data">
+                            <p class="LKR"><?php echo number_format($p['capital'], 2, '.', ',') ?></p>
+                        </div>
+                        <div class="data">
+                            <p><?php echo $p['city'] ?></p>
+                        </div>
+                        <div class="data">
+                            <p><?php echo $p['status'] ?></p>
+                        </div>
+                        <div class="data">
+                            <p><?php echo $p['landArea'] ?></p>
+                        </div>
+                        <div class="data">
+                            <p class="limit-text-3"><?php echo $p['description'] ?></p>
+                        </div>
+                        <div class="data flex-right">
+                            <div class="actions">
+
+                                <?php
+
+                                if ($p['status'] == 'ACTIVE') {
+                                ?>
+                                    <a href="<?php echo URLROOT . "/farmer/editGig/" . $p['gigId'] ?>" class="btn btn-primary">Edit</a>
+                                    <button onclick="openDeleteAlert('<?php echo $p['gigId'] ?>')" class="button__danger">Delete</button>
+                                <?php
+                                } else if ($p['status'] == 'RESERVED') {
+                                ?>
+                                    <button onclick="openCompleteModal('<?php echo $p['gigId'] ?>')" class="button__danger">Mark as complete</button>
+                                <?php
+                                } else if ($p['status'] == 'UNDER_COMPLETION') {
+                                ?>
+                                    <button onclick="openDepositeModal('<?php echo $p['gigId'] ?>')" class="button__danger button__disabled" disabled>deposite</button>
+                                <?php
+                                } else if ($p['status'] == 'NOT_DEPOSITED') {
+                                ?>
+                                    <button onclick="openDepositeModal('<?php echo $p['gigId'] ?>')" class="button__danger">deposite</button>
+                                <?php
+                                }
+                                ?>
+                            </div>
                         </div>
                     </div>
+                <?php
+                }
+                ?>
+            </div>
+        </div>
     </div>
     <?php
     require_once("footer.php");
@@ -216,6 +213,7 @@
             location.reload()
             document.getElementById('completeModal').close()
         }
+
         function openDepositeModal(id) {
             document.getElementById('depositeModal').showModal()
             document.getElementById('depositeConfirmBtn').value = id
@@ -237,9 +235,8 @@
             const deleteModal = document.getElementById('deleteModal')
             deleteModal.close()
         }
-
     </script>
-    
+
 </body>
 
 </html>
