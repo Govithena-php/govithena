@@ -36,7 +36,7 @@
 
                 <div class="withdrawals__card">
                     <div class="withdrawals__card__header">
-                        <h3>This Month Withdrawals</h3>
+                        <h3>Withdrawals</h3>
                     </div>
                     <div class="withdrawals__card__body">
                         <h1 class="[ LKR ]">
@@ -49,15 +49,8 @@
 
                             ?>
                         </h1>
-                        <!-- <?php
-                                if (isset($precentage)) {
-                                    if ($precentage > 0)
-                                        echo "<p class='clr__primary'>" . $precentage . " % <i class='fa fa-arrow-up'></i> </p>";
-                                    else
-                                        echo "<p class='clr__danger'>" . $precentage . " % <i class='fa fa-arrow-down'></i></p>";
-                                }
-                                ?> -->
-                        <p class='clr__primary'>0.00 % <i class='fa fa-arrow-up'></i> </p>
+                       
+                        <p class='clr__primary'>This months withdrawals </p>
                     </div>
                 </div>
 
@@ -87,15 +80,8 @@
 
                             ?>
                         </h1>
-                        <!-- <?php
-                                if (isset($precentage)) {
-                                    if ($precentage > 0)
-                                        echo "<p class='clr__primary'>" . $precentage . " % <i class='fa fa-arrow-up'></i> </p>";
-                                    else
-                                        echo "<p class='clr__danger'>" . $precentage . " % <i class='fa fa-arrow-down'></i></p>";
-                                }
-                                ?> -->
-                        <p class='clr__primary'>0.00 % <i class='fa fa-arrow-up'></i> </p>
+                       
+                        <p class='clr__primary'>Remaining balance in the platform </p>
                     </div>
                 </div>
 
@@ -132,6 +118,7 @@
                                 <?php echo $account[0]['branchCode'] ?>
                             </div>
                         </div>
+                        <a href="<?php echo URLROOT . '/agrologist/myaccount' ?>" class="text-secondary change_account">Want to change account details?</a>
                         <div class="pt-2">
                             <label for="withdraw_amount" class="pb-1">Amount <span class="LKR"></span></label>
                             <input type="text" name="withdraw_amount" placeholder="Withdraw Amount" value="<?php echo $balance ?>">

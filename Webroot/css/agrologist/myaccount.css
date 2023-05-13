@@ -85,7 +85,7 @@ body {
 }
 
 .form select {
-  width: 100%;
+  width: 103%;
   padding: 0.5rem 1rem;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -135,6 +135,8 @@ body {
   border-radius: 0.5rem;
   height: 150px;
   padding: 50px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
+
 }
 
 .profile_img {
@@ -146,6 +148,7 @@ body {
   margin-left: 50px;
   margin: auto;
   display: block;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
 }
 
 .profile_img>img {
@@ -211,5 +214,13 @@ body {
   flex-direction: column;
   gap: 0.5rem;
   margin-bottom: 0.5rem;
+}
+
+.caption {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #d1d1d1;
+  margin-bottom: 0rem;
+  margin-top: 0rem;
 }
 

@@ -202,5 +202,17 @@
     align-items: center;
   }
 
+  .change_account {
+    float:right;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .change_account:hover {
+    color: #1FAA68;
+    cursor: pointer;
+  }
+
 
   
