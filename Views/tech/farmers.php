@@ -42,7 +42,6 @@
             ?>
                 <div class="[ requests__wrapper ]">
                     <?php
-
                     foreach ($farmers as $request) {
                     ?>
 
@@ -53,7 +52,7 @@
                                 </div>
                                 <div class="name">
                                     <h1> <?php echo ucwords($request['firstName'] . " " . $request['lastName']) ?></h1>
-                                    <h5><?php echo ucwords($request['city']) ?></h5>
+                                    <h5 style="color:rgba(26, 155, 11, 1);"><?php echo ucwords($request['city']) ?></h5>
                                 </div>
                             </div>
                             <div class="right">

@@ -340,7 +340,8 @@ hr {
     background-color: var(--clr-primary);
     color: var(--clr-light);
     padding: 0.5rem 1.5rem;
-    border-radius: 0.25rem;
+    margin-right:50px;
+    border-radius: 0.5rem;
     font-size: 0.9rem;
     font-weight: 400;
     cursor: pointer;

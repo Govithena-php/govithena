@@ -14,10 +14,8 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/tabs.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/gridTable.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/alertModal.css">
-
     <link rel="stylesheet" href="<?php echo CSS ?>/agrologist/requests.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/tech/myrequests.css">
-
     <title>Dashboard | Tech Assistant</title>
 </head>
 
@@ -30,12 +28,12 @@
 
     ?>
 
-<dialog id="acceptModal" class="[ alertModal ]">
+    <dialog id="acceptModal" class="[ alertModal ]">
         <div class="[ container ]">
             <i class="fa fa-circle-xmark" aria-hidden="true"></i>
             <div class="[ content ]">
                 <h2>Are you sure?</h2>
-                <p>Do you really want to accept the request.</p>
+                <p>Do you really want to accept the request?</p>
             </div>
             <form id="acceptForm" action="<?php echo URLROOT ?>/tech/accept_farmer_request" method="POST" class="[ buttons ]">
                 <button type="button" class="[ button__danger ]" onclick="closeAcceptModal()" data-dismiss="modal">Cancel</button>
@@ -44,7 +42,7 @@
         </div>
     </dialog>
 
-<dialog id="rejectModal" class="[ alertModal ]">
+    <dialog id="rejectModal" class="[ alertModal ]">
         <div class="[ container ]">
             <i class="fa fa-circle-xmark" aria-hidden="true"></i>
             <div class="[ content ]">
@@ -60,8 +58,8 @@
     <div class="[ container ][ requests ]" container-type="dashboard-section">
         
         <div class="[ caption ]">
-            <h3>Track all your investment requests in one place!</h3>
-            <p>Keep an eye on the status of your investments with our investor dashboard. Quickly see which requests are accepted, rejected, or still pending, and stay in the know about the progress of your investments.</p>
+            <h3>Get to know by whom you have been accessed</h3>
+            <p>Check and connect with the farmers at your interest</p>
         </div>
 
         <div class="tabs" tab="2">
@@ -79,7 +77,7 @@
                 if(!isset($farmerRequests) || empty($farmerRequests)){;
                     require(COMPONENTS . "dashboard/noDataFound.php");
                 }else {
-                    ?>
+                ?>
                     <div class="grid__table"
                         style="
                                 --xl-cols: 1fr 0.7fr 0.7fr 2fr 1fr;

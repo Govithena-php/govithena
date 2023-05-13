@@ -90,7 +90,7 @@
                 <!-- <?php echo "<div>" . ucwords($techassistant[0]['city']) . "</div>"; ?> -->
 
 
-                <div id="edit_detials_modal" class="modal">
+                <div id="edit_details_modal" class="modal">
 
                     <div class="modal-content">
                         <span class="close close_modal1">&times;</span>

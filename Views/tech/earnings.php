@@ -30,7 +30,7 @@
     <div class="[ container ][ investments ]" container-type="dashboard-section">
         <div class="[ caption ]">
             <h3>View all your earnings activity in one place.</h3>
-            <p>Easily track your investments and see how your portfolio has grown over time.</p>
+            <p>Easily track your earnings and see how you have performed.</p>
         </div>
         <div class="inv__cards">
             <div class="inv__card">

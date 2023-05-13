@@ -1,11 +1,10 @@
 <?php
 
+
 class techController extends Controller
 {
     private $currentUser;
-
     private $progressImageHandler;
-
     private $techModel;
     private $progressModel;
     private $gigModel;
@@ -16,18 +15,14 @@ class techController extends Controller
     public function __construct()
     {
         $this->currentUser = Session::get('user');
-
         if (!Session::isLoggedIn()) {
             $this->redirect('/auth/signin');
         }
-
         if (!$this->currentUser->hasAccess(ACTOR::TECH)) {
             $this->redirect('/error/dontHaveAccess');
         }
 
         $this->progressImageHandler = new ImageHandler($folder = 'Uploads/progress');
-
-
         $this->techModel = $this->model('techAssistant');
         $this->progressModel = $this->model('progress');
         $this->gigModel = $this->model('gig');
@@ -37,7 +32,7 @@ class techController extends Controller
 
     public function index()
     {
-        $this->render('index');
+        $this->farmers();
     }
 
     public function farmers()
@@ -68,11 +63,7 @@ class techController extends Controller
         $this->render('requests');
     }
 
-    public function farmerdetails()
-    {
-        $this->render('farmerdetails');
-    }
-
+    
     public function myaccount()
     {
         $this->render('myaccount');
@@ -130,6 +121,11 @@ class techController extends Controller
         $this->render('assignedGigs');
     }
 
+    public function updateProgress()
+    {
+        $this->render('updateProgress');
+    }
+
     public function assignedGig()
     {
         $props = [];
@@ -176,13 +172,12 @@ class techController extends Controller
                     if ($images['success']) {
                         $a = [];
                         foreach ($images['data'] as $i) {
-                            $a[] = $i['imageName'];
+                            $a[] = $i['image'];
                         }
 
                         $imagesArray[$t['progressId']] = $a;
                     }
                 }
-
                 $props['gigId'] = $gigId;
                 $props['progress'] = $temp;
                 $props['images'] = $imagesArray;
@@ -238,34 +233,41 @@ class techController extends Controller
                 $subject = new Input(POST, 'subject');
                 $description = new Input(POST, 'description');
 
-                $response = $this->progressModel->create([
+                $data = [
                     'progressId' => $progressId,
                     'gigId' => $gigId,
                     'userId' => $this->currentUser->getUid(),
+                    'userType' => 'TECHASSISTANT',
                     'subject' => $subject,
                     'description' => $description
-                ]);
+                ];
 
+                // var_dump($data);
+
+                $response = $this->progressModel->createNewProgress($data);
+                // var_dump($response);die();
                 if ($response['success']) {
                     $images = $this->progressImageHandler->upload('images');
                     if (!empty($images)) {
                         foreach ($images as $image) {
                             $res = $this->progressModel->saveProgressImage([
                                 'progressId' => $progressId,
-                                'imageName' => $image
+                                'image' => $image
                             ]);
 
                             if ($res['success']) {
                                 $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully added progress.');
                             } else {
-                                $alert = new Alert($type = 'success', $icon = "", $message = 'Failed to add progress.');
+                                var_dump($res);die();
+
+                                $alert = new Alert($type = 'error', $icon = "", $message = 'Failed to add progress. 1');
                             }
                         }
                     } else {
                         $alert = new Alert($type = 'success', $icon = "", $message = 'Failed to add progress.');
                     }
                 } else {
-                    $alert = new Alert($type = 'success', $icon = "", $message = 'Failed to add progress.');
+                    $alert = new Alert($type = 'error', $icon = "", $message = 'Failed to add progress. 2');
                 }
                 Session::set(['progress_add_alert' => $alert]);
                 $this->redirect('/tech/progress/' . $gigId);
