@@ -443,7 +443,7 @@ class farmerController extends Controller
 
         $investorlist = $this->farmerModel->investorlist([
             'farmerId' => $this->currentUser->getUid(),
-            'state' => STATUS::PAID
+            'status' => STATUS::PAID
         ]);
         if ($investorlist['status']) {
             $props['investorlists'] = $investorlist['data'];

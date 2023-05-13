@@ -395,7 +395,7 @@ class Farmer extends Model
     public function investors($data)
     {
         try {
-            $sql = "SELECT fr.requestId, fr.requestedDate, fr.offer, fr.message, user.firstName, user.lastName,  gig.title, gig.thumbnail, gig.city from gig_request fr INNER JOIN gig ON gig.gigId = fr.gigId INNER JOIN user ON user.uid = fr.investorId WHERE fr.farmerId = :farmerId AND fr.status = :state";
+            $sql = "SELECT fr.requestId, fr.requestedDate, fr.offer, fr.message, user.image, user.firstName, user.lastName,  gig.title, gig.thumbnail, gig.city from gig_request fr INNER JOIN gig ON gig.gigId = fr.gigId INNER JOIN user ON user.uid = fr.investorId WHERE fr.farmerId = :farmerId AND fr.status = :state";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -408,7 +408,7 @@ class Farmer extends Model
     public function reqinvestors($data)
     {
         try {
-            $sql = "SELECT fr.requestId, DATE(fr.requestedDate) as reqdate, fr.offer, fr.message, user.firstName, user.lastName,  gig.title, gig.thumbnail, gig.city from gig_request fr INNER JOIN gig ON gig.gigId = fr.gigId INNER JOIN user ON user.uid = fr.investorId WHERE fr.farmerId = :farmerId AND fr.status = :state";
+            $sql = "SELECT fr.requestId, DATE(fr.requestedDate) as reqdate, fr.offer, fr.message, user.image, user.firstName, user.lastName,  gig.title, gig.thumbnail, gig.city from gig_request fr INNER JOIN gig ON gig.gigId = fr.gigId INNER JOIN user ON user.uid = fr.investorId WHERE fr.farmerId = :farmerId AND fr.status = :state";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -421,9 +421,12 @@ class Farmer extends Model
     public function investorlist($data)
     {
         try {
-            $sql = "SELECT fr.requestId, fr.requestedDate, fr.offer, fr.message, user.firstName, user.lastName,  gig.title, gig.thumbnail, gig.city from gig_request fr INNER JOIN gig ON gig.gigId = fr.gigId INNER JOIN user ON user.uid = fr.investorId WHERE fr.farmerId = :farmerId AND fr.status = :state";
+            $sql = "SELECT fr.requestId, user.image, fr.requestedDate, fr.offer, fr.message, user.firstName, user.lastName,  gig.title, gig.thumbnail, gig.city from gig_request fr INNER JOIN gig ON gig.gigId = fr.gigId INNER JOIN user ON user.uid = fr.investorId WHERE fr.farmerId = :farmerId AND fr.status = :status";
             $stmt = Database::getBdd()->prepare($sql);
-            $stmt->execute($data);
+            $stmt->execute([
+                'farmerId' => $data['farmerId'],
+                'status' => $data['status']
+            ]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return ['status' => true, 'data' => $req];
         } catch (Exception $e) {

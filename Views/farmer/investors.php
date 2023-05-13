@@ -111,8 +111,8 @@
                                 <div class="row">
                                     <div class="data farmer__">
                                         <div class="investorimgin">
-                                        <img src="<?php echo UPLOADS . "/" . $investorlist['thumbnail']; ?>" alt="">
-                                            <!-- <img src="<?php echo UPLOADS . '/profilePictures/' . $investorlist['thumbnail']?>" alt="Picture"> -->
+                                        <img src="<?php echo UPLOADS . "/profilePictures/" . $investorlist['image']; ?>" alt="">
+                                            <!-- <img src="<?php echo UPLOADS . '/profilePictures/' . $investorlist['image']?>" alt="Picture"> -->
                                         </div>
                                     </div>
                                     <div class="data">
@@ -235,8 +235,8 @@
                                 <div class="row">
                                     <div class="data farmer__">
                                         <div class="investorimg">
-                                        <img src="<?php echo UPLOADS . "/" . $investor['thumbnail']; ?>" alt="">
-                                            <!-- <img src="<?php echo UPLOADS . '/profilePictures/' . $investor['thumbnail']?>" alt="Picture"> -->
+                                        <img src="<?php echo UPLOADS . "/profilePictures/" . $investor['image']; ?>" alt="">
+                                            <!-- <img src="<?php echo UPLOADS . '/profilePictures/' . $investor['image']?>" alt="Picture"> -->
                                         </div>
                                     </div>
                                     <div class="data">
@@ -328,7 +328,7 @@
                                         <div class="row">
                                             <div class="data farmer__">
                                                 <div class="investorimg">
-                                                    <img src="<?php echo UPLOADS . "/" . $reqinvestor['thumbnail']; ?>" alt="">
+                                                    <img src="<?php echo UPLOADS . "/profilePictures/" . $reqinvestor['image']; ?>" alt="">
                                                     <!-- <img src="<?php echo UPLOADS . '/profilePictures/' . $reqinvestor['thumbnail'] ?>" alt="Picture"> -->
                                                 </div>
                                             </div>
