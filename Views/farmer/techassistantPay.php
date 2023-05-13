@@ -20,8 +20,8 @@
 <body class="bg-gray h-screen">
 
     <?php
-    $active = "agrologist";
-    $title = "Agrologist";
+    $active = "techassistant";
+    $title = "Techassistants";
     require_once("navigator.php");
     ?>
 
@@ -30,14 +30,14 @@
 
     <div class="card namecol">
         <div class="agropic">
-            <img src="<?php echo UPLOADS . '/profilePictures/' . $agrologist['image'] ?>" alt="">
+            <img src="<?php echo UPLOADS . '/profilePictures/' . $techassistant['image'] ?>" alt="">
         </div>
-            <h2>Name : <?php echo $agrologist['firstName'] . " " . $agrologist['lastName'] ?></h2>
-            <h3>Location : <?php echo $agrologist['city'] ?></h3>
-            <h3>Offer : <?php echo $offer_agrologist['offer'] ?></h3>
+            <h2>Name : <?php echo $techassistant['firstName'] . " " . $techassistant['lastName'] ?></h2>
+            <h3>Location : <?php echo $techassistant['city'] ?></h3>
+            <h3>Offer : <?php echo $offer_techassistant['offer'] ?></h3>
             <br>
     <div class="actions">
-        <a btn href="<?php echo URLROOT . "/farmer/agrologisAftertPay/" . $agrologist['uid'] ?>" class="button__primary">Pay</a>
+        <a btn href="<?php echo URLROOT . "/farmer/techassistantAftertPay" . $techassistant['uid'] ?>" class="button__primary">Pay</a>
     </div>
     </div>
 

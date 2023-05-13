@@ -1,0 +1,33 @@
+.card_center{
+    align-items: center;
+  }
+  .card  {
+      padding: 20px;
+      border: 1px solid black;
+      min-height: 400px;
+      background-color: white;
+      width: 400px;
+    }
+  
+  
+  .agropic{
+      width:200px;
+      height: 200px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 5px 0px 5px 0px;
+  }
+  
+  .agropic>img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  
+  .namecol{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+  }
+  

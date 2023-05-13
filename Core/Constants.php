@@ -15,6 +15,7 @@ class PREFIX
     const INVESTOR_GIG = 'ING';
     const WITHDRAWAL = 'WTH';
     const QUESTION = 'QST';
+    const PAYMENT = 'PMT';
 }
 
 class PRODUCT
