@@ -119,7 +119,7 @@ function highlight($active, $link)
                         </small>
                     </div>
                     <ul>
-                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/">
+                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/farmer/">
                                 <i class="bi bi-columns-gap"></i>Dashboard
                             </a></li>
                         <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/account">

@@ -47,6 +47,17 @@ class gigController extends Controller
             }
 
 
+            $checkGigRequest = $this->requestModel->checkGigRequest($gigId, $this->currentUser->getUid());
+            if ($checkGigRequest['success']) {
+                if ($checkGigRequest['data']) {
+                    $props['gigRequest'] = 'disabled';
+                } else {
+                    $props['gigRequest'] = '';
+                }
+            } else {
+                $props['gigRequest'] = '';
+            }
+
 
             Session::set(['farmerId' => $farmerId, 'gigId' => $gigId]);
 

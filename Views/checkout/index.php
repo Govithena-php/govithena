@@ -45,7 +45,7 @@
                     <div class="[ content ]">
                         <h2><?php echo $res['title'] ?></h2>
                         <!-- <h4>by<?php echo $res['firstName'] . ' ' . $res['lastName'] ?></h4> -->
-                        <p><?php echo $res['description'] ?></p>
+                        <p class="limit-text-3"><?php echo $res['description'] ?></p>
                         <div class="[ grid ]" md="3">
                             <p><small>Offer:</small><br>LKR <?php echo $res['offer'] ?></p>
                             <p><small>Time period:</small><br><?php echo $res['cropCycle'] ?> Days</p>
@@ -99,7 +99,7 @@
                 <hr>
                 <div class="[ flex-row-space-between ]">
                     <p>Total</p>
-                    <p>LKR <?php echo $res['capital'] ?></p>
+                    <p>LKR <?php echo $res['capital'] + 1000 ?></p>
                 </div>
 
                 <div class="[ flex-row-center ]">

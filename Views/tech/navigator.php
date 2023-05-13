@@ -72,7 +72,7 @@ function highlight($active, $link)
                         <small><?php echo $currentUser->getType() ?></small>
                     </div>
                     <ul>
-                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/">
+                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/tech/">
                                 <i class="bi bi-columns-gap"></i>
                                 Dashboard
                             </a></li>

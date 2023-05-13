@@ -111,4 +111,21 @@ class gigRequest extends Model
             return ['success' => false, 'error' => $e->getMessage()];
         }
     }
+
+    public function checkGigRequest($gigid, $investorId)
+    {
+        try {
+            $sql = "SELECT * FROM gig_request WHERE gigId = :gigid AND investorId = :investorId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigid' => $gigid, 'investorId' => $investorId]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($row) {
+                return ['success' => true, 'data' => $row];
+            } else {
+                return ['success' => false, 'data' => false];
+            }
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
 }

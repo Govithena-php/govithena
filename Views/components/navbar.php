@@ -61,9 +61,34 @@ $currentUser = Session::get('user');
                         <small><?php echo $currentUser->getType() ?></small>
                     </div>
                     <ul>
-                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/">
-                                <i class="bi bi-columns-gap"></i>Dashboard
-                            </a></li>
+                        <?php
+                        if ($currentUser->getType() == 'INVESTOR') {
+                        ?>
+                            <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/">
+                                    <i class="bi bi-columns-gap"></i>Dashboard
+                                </a></li>
+                        <?php
+                        } else if ($currentUser->getType() == 'FARMER') {
+                        ?>
+                            <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/farmer/">
+                                    <i class="bi bi-columns-gap"></i>Dashboard
+                                </a></li>
+                        <?php
+                        } else if ($currentUser->getType() == 'TECHASSISTANT') {
+                        ?>
+                            <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/tech/">
+                                    <i class="bi bi-columns-gap"></i>Dashboard
+                                </a></li>
+                        <?php
+                        } else if ($currentUser->getType() == 'AdMIN') {
+                        ?>
+                            <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/admin/">
+                                    <i class="bi bi-columns-gap"></i>Dashboard
+                                </a></li>
+                        <?php
+                        }
+
+                        ?>
                         <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/account">
                                 <i class="bi bi-person"></i>My Account</a></li>
                         <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/settings">
