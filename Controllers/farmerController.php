@@ -474,20 +474,20 @@ class farmerController extends Controller
             $props['declinedTech'] = $declinedTech['data'];
         }
 
-        foreach($myTech['data'] as $myTechone){
+        foreach ($myTech['data'] as $myTechone) {
 
-    
+
             $response = $this->farmerModel->monthpayTechassistant([
                 'userId' => $myTechone['technicalAssistantId'],
                 'farmerId' => $myTechone['farmerId']
             ]);
 
-            if($response['status']){
+            if ($response['status']) {
                 $props['dateDiff'] = $response['data']['dateDiff'];
-            }else {
+            } else {
                 $props['dateDiff'] = 30;
             }
-        }  
+        }
 
         $this->set($props);
         $this->render('techassistant');
@@ -631,11 +631,12 @@ class farmerController extends Controller
                 'gigId' => $gigId,
                 'subject' => new Input(POST, 'subject'),
                 'description' => new Input(POST, 'description'),
-                'userId' => $this->currentUser->getUid()
+                'userId' => $this->currentUser->getUid(),
+                'userType' => 'FARMER'
             ];
 
 
-            $response = $this->progressModel->create($data);
+            $response = $this->progressModel->createNewProgress($data);
 
             if ($response['success']) {
 
