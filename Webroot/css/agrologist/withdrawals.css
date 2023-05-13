@@ -136,10 +136,10 @@
 } */
 
 .withdraw__card button {
-    width: 30%;
+    width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    margin-left: 250px;
+    /* margin-left: 250px; */
     margin-top: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -147,6 +147,11 @@
     color: #fff;
     font-weight: bold;
     cursor: pointer;
+}
+
+.withdraw__card button:hover {
+    background-color: #105f3a;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
 .modal {
@@ -189,6 +194,12 @@
     color: #000;
     text-decoration: none;
     cursor: pointer;
+  }
+
+  .no_data_found{
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
 

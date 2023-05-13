@@ -103,7 +103,9 @@
             <div class="withdraw__card">
                 <?php
                 if (!isset($account) || empty($account)) {
+                    echo "<h3>Bank Account Details</h3><hr>";
                     require(COMPONENTS . "dashboard/noDataFound.php");
+
                 } else {
                     ?>
                     <form action="<?php echo URLROOT . '/agrologist/withdrawals' ?>" method='POST'>
@@ -116,7 +118,7 @@
                         <div class="pt-1 flex flex-row flex-sb-c">
                             <div> <i class="fa fa-building-columns"></i> Bank</div>
                             <div style="color: grey;" class='fw-6'>
-                                <?php echo $account[0]['bank'] ?>
+                                <?php echo BANK[$account[0]['bank']] ?>
                             </div>
                         </div>
                         <div class="pt-1 flex flex-row flex-sb-c">
@@ -135,15 +137,15 @@
                             <label for="withdraw_amount" class="pb-1">Amount <span class="LKR"></span></label>
                             <input type="text" name="withdraw_amount" placeholder="Withdraw Amount"
                                 value="<?php echo $balance ?>">
-                            <a href="?withdraw=confirm" name="transfer_btn" id="transfer_btn"
-                                class="btn btn-primary uppercase mt-2">Transfer</a>
+                            <button type="submit" name="transfer_confirm_btn"
+                                class="btn btn-primary uppercase mt-2">Transfer</button>
                         </div>
                     </form>
                     <?php
                 }
                 ?>
 
-                <div id="edit_detials_modal" class="modal">
+                <!-- <div id="edit_detials_modal" class="modal">
 
                     <div class="modal-content">
                         <span class="close close_modal1">&times;</span>
@@ -156,7 +158,7 @@
                         </form>
                     </div>
 
-                </div>
+                </div> -->
             </div>
         </div>
 
@@ -313,7 +315,7 @@
             })
         })
     </script>
-    <script>
+    <!-- <script>
         var edit_detials_modal = document.getElementById("edit_detials_modal");
 
         var edit_details_btn = document.getElementById("transfer_btn");
@@ -334,7 +336,7 @@
             }
         }
 
-    </script>
+    </script> -->
 
 
 </body>

@@ -151,7 +151,7 @@
                     culpa qui officia deserunt mollit anim id est laborum.
                 </p> -->
     </div>
-    <div class="p-2">
+    <!-- <div class="p-2">
         <div class="fs-6">Reviews</div>
         <hr>
         <p style="color: grey">
@@ -161,7 +161,7 @@
             cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
             culpa qui officia deserunt mollit anim id est laborum.
         </p>
-    </div>
+    </div> -->
 
 
     </div>

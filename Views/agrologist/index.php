@@ -154,7 +154,14 @@
                 <div class="[ amount ]">
                     <span class="[ LKRBadge ]"></span>
                     <h1>
-                        <?php echo number_format($agrologistTotalIncome[0]['total_income']) ?>
+                        <?php if($agrologistTotalIncome == null){
+                            echo "0";
+                        }
+                        else{
+                            echo number_format($agrologistTotalIncome[0]['total_income']);
+
+                        }
+                        ?>
                     </h1>
                     <!-- <h4>12% <i class="fa-solid fa-arrow-up"></i></h4> -->
                 </div>

@@ -84,6 +84,17 @@ body {
 
 }
 
+.form select {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form select:focus {
+  outline: 1px solid var(--clr-primary);
+}
+
 .form > .input_wrapper {
   width: 100%;
 }
