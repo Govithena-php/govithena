@@ -342,7 +342,7 @@
             .then(response => response.json())
             .then(result => {
                 const lineChart = new Chart(document.getElementById('lineChart'), {
-                    type: 'line',
+                    type: 'bar',
                     data: result,
                     options: {
                         plugins: {
