@@ -18,7 +18,6 @@ class agrologistController extends Controller
         if (!$this->currentUser->hasAccess(ACTOR::AGROLOGIST)) {
             $this->redirect('/error/dontHaveAccess');
         }
-
     }
 
     public function index()
@@ -120,7 +119,6 @@ class agrologistController extends Controller
                                         ]);
                                     }
                                 }
-
                             }
 
                             if ($update) {
@@ -130,19 +128,15 @@ class agrologistController extends Controller
                             }
 
                             Session::set(['update_field_visit_alert' => $alert]);
-
                         } catch (Exception $e) {
                             echo $e->getMessage();
                             die();
                         }
-
                     }
                 }
 
                 $this->farmerdetails($agrologist, $params[0], $params[1]);
             }
-
-
         } else {
 
             require(ROOT . 'Models/agrologist.php');
@@ -163,25 +157,21 @@ class agrologistController extends Controller
 
                     if ($complete) {
                         $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully Completed.');
-
                     } else {
                         $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong.');
                     }
 
                     Session::set(['complete_farmer_alert' => $alert]);
                 }
-
-
-
             }
             $this->render('farmers');
         }
     }
 
-    
+
     public function reviews($params)
     {
-        
+
         require(ROOT . 'Models/agrologist.php');
 
         $agr = new Agrologist();
@@ -190,8 +180,8 @@ class agrologistController extends Controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+
             if (isset($_POST['submit_review'])) {
-                
                 $data = [
                     'reviewId' => new UID(PREFIX::REVIEW),
                     'agrologistId' => $this->currentUser->getUid(),
@@ -211,19 +201,20 @@ class agrologistController extends Controller
 
                 if ($review) {
                     $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully updated!.');
-
                 } else {
                     $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong.');
                 }
                 Session::set(['review_agrologist_alert' => $alert]);
-
-
+                $this->redirect('/agrologist/farmers');
             }
         }
 
 
 
-        $this->set(['farmerName' => $farmerName]);
+        $this->set([
+            'farmerName' => $farmerName,
+            'farmerId' => $params[0]
+        ]);
         $this->render('reviews');
     }
 
@@ -250,7 +241,6 @@ class agrologistController extends Controller
 
                     if ($accept) {
                         $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully Accepted Request!');
-
                     } else {
                         $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong.');
                     }
@@ -277,24 +267,17 @@ class agrologistController extends Controller
 
                     if ($decline) {
                         $alert = new Alert($type = 'success', $icon = "", $message = 'Declined Request.');
-
                     } else {
                         $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong.');
                     }
-
-
-
                 } else {
                     echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>nope</h1>";
-
                 }
                 Session::set(['farmer_request_alert' => $alert]);
             }
 
             $this->render('requests');
         }
-
-
     }
 
     public function myaccount()
@@ -307,7 +290,7 @@ class agrologistController extends Controller
         $d['agrologist'] = $agrologist->getAgrologistDetails();
         $d['account'] = $agrologist->getAccountDetails();
         $d['qualifications'] = $agrologist->getQualificationDetails();
-       
+
 
         if (isset($_POST['edit_details_btn'])) {
 
@@ -351,7 +334,6 @@ class agrologistController extends Controller
                     'district' => $district->get(),
                     'postalCode' => $postalCode->get()
                 ]);
-               
             }
 
             if ($edit_user) {
@@ -361,7 +343,6 @@ class agrologistController extends Controller
             }
 
             Session::set(['edit_user_details_alert' => $alert]);
-
         }
 
         if (isset($_POST['add_account_details_btn'])) {
@@ -428,8 +409,6 @@ class agrologistController extends Controller
 
                 Session::set(['add_qualification_details_alert' => $alert]);
             }
-
-
         }
 
         if (isset($_POST['edit_qualification_details_btn'])) {
@@ -443,7 +422,6 @@ class agrologistController extends Controller
                     'gnCertificate' => basename($_FILES['gn_certificate']['name']),
                     'description' => $description->get()
                 ]);
-
             } else {
                 $edit_qualifications = $agrologist->updateQualificationDescription([
                     'description' => $description->get()
@@ -455,7 +433,6 @@ class agrologistController extends Controller
                 $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong!');
             }
             Session::set(['edit_qualification_details_alert' => $alert]);
-
         }
 
 
@@ -472,7 +449,7 @@ class agrologistController extends Controller
 
         $request = $agrologist->farmerRequestDetails($id);
         $gig = $agrologist->getFarmerGigsRequest($id);
-       
+
         $this->set([
             'requestDetails' => $request,
             'gigDetails' => $gig
@@ -508,7 +485,6 @@ class agrologistController extends Controller
                 $agr->declineNotificationFarmer($farmerId[0]['farmerId']);
             } else {
                 echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>nope</h1>";
-
             }
         }
 
@@ -518,20 +494,12 @@ class agrologistController extends Controller
 
     public function farmerdetails($agrologist, $fid, $gid)
     {
-        
-        // require(ROOT . 'Models/agrologist.php');
-        // $agrologist = new Agrologist();
+
         $uid = Session::get('user')->getUid();
-        //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $uid . "</h1>";
 
         $d['fieldVisit'] = $agrologist->getFieldVisitDetails($fid, $gid);
         $d['fid'] = $fid;
         $d['gid'] = $gid;
-
-
-
-
-
 
         $this->set($d);
         return $this->render('farmerdetails');
@@ -539,7 +507,7 @@ class agrologistController extends Controller
 
     public function farmergigs($agrologist, $id)
     {
-        
+
         $d['gigDetails'] = $agrologist->getFarmerGigs(['farmerId' => $id]);
 
         $this->set($d);
@@ -548,7 +516,7 @@ class agrologistController extends Controller
 
     public function chat($userId)
     {
-        
+
         require(ROOT . 'Models/agrologist.php');
         $agrologist = new Agrologist();
 
@@ -573,7 +541,7 @@ class agrologistController extends Controller
 
     public function payments($agrologist, $fid)
     {
-      
+
 
         $d['timePeriod'] = $agrologist->getRequestTimePeriod($fid);
         $d['paymentDetails'] = $agrologist->getPaymentDetails($fid);
@@ -594,10 +562,10 @@ class agrologistController extends Controller
         $d['withdrawal_list'] = $agrologist->getWithdrawals();
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-           
+
             if (isset($_POST['transfer_confirm_btn'])) {
                 $withdrawal = new INPUT(POST, 'withdraw_amount');
-                
+
                 $withdraw_amount = (int)$withdrawal->get();
                 if ($withdraw_amount <= 0) {
                     $alert = new Alert($type = 'error', $icon = "", $message = 'Only positive amounts can be transfered!');
@@ -615,7 +583,6 @@ class agrologistController extends Controller
                 }
                 Session::set(['agrologist_withdraw_alert' => $alert]);
             }
-
         }
 
 
@@ -625,6 +592,4 @@ class agrologistController extends Controller
         $this->set($d);
         return $this->render('withdrawals');
     }
-
-
 }

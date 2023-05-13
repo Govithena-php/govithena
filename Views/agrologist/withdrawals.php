@@ -50,13 +50,13 @@
                             ?>
                         </h1>
                         <!-- <?php
-                        if (isset($precentage)) {
-                            if ($precentage > 0)
-                                echo "<p class='clr__primary'>" . $precentage . " % <i class='fa fa-arrow-up'></i> </p>";
-                            else
-                                echo "<p class='clr__danger'>" . $precentage . " % <i class='fa fa-arrow-down'></i></p>";
-                        }
-                        ?> -->
+                                if (isset($precentage)) {
+                                    if ($precentage > 0)
+                                        echo "<p class='clr__primary'>" . $precentage . " % <i class='fa fa-arrow-up'></i> </p>";
+                                    else
+                                        echo "<p class='clr__danger'>" . $precentage . " % <i class='fa fa-arrow-down'></i></p>";
+                                }
+                                ?> -->
                         <p class='clr__primary'>0.00 % <i class='fa fa-arrow-up'></i> </p>
                     </div>
                 </div>
@@ -88,13 +88,13 @@
                             ?>
                         </h1>
                         <!-- <?php
-                        if (isset($precentage)) {
-                            if ($precentage > 0)
-                                echo "<p class='clr__primary'>" . $precentage . " % <i class='fa fa-arrow-up'></i> </p>";
-                            else
-                                echo "<p class='clr__danger'>" . $precentage . " % <i class='fa fa-arrow-down'></i></p>";
-                        }
-                        ?> -->
+                                if (isset($precentage)) {
+                                    if ($precentage > 0)
+                                        echo "<p class='clr__primary'>" . $precentage . " % <i class='fa fa-arrow-up'></i> </p>";
+                                    else
+                                        echo "<p class='clr__danger'>" . $precentage . " % <i class='fa fa-arrow-down'></i></p>";
+                                }
+                                ?> -->
                         <p class='clr__primary'>0.00 % <i class='fa fa-arrow-up'></i> </p>
                     </div>
                 </div>
@@ -105,9 +105,8 @@
                 if (!isset($account) || empty($account)) {
                     echo "<h3>Bank Account Details</h3><hr>";
                     require(COMPONENTS . "dashboard/noDataFound.php");
-
                 } else {
-                    ?>
+                ?>
                     <form action="<?php echo URLROOT . '/agrologist/withdrawals' ?>" method='POST'>
                         <div class="pt-1 flex flex-row flex-sb-c">
                             <div> <i class=" fa fa-building-columns"></i> Account Number</div>
@@ -135,13 +134,11 @@
                         </div>
                         <div class="pt-2">
                             <label for="withdraw_amount" class="pb-1">Amount <span class="LKR"></span></label>
-                            <input type="text" name="withdraw_amount" placeholder="Withdraw Amount"
-                                value="<?php echo $balance ?>">
-                            <button type="submit" name="transfer_confirm_btn"
-                                class="btn btn-primary uppercase mt-2">Transfer</button>
+                            <input type="text" name="withdraw_amount" placeholder="Withdraw Amount" value="<?php echo $balance ?>">
+                            <button type="submit" name="transfer_confirm_btn" class="btn btn-primary uppercase mt-2">Transfer</button>
                         </div>
                     </form>
-                    <?php
+                <?php
                 }
                 ?>
 
@@ -164,13 +161,12 @@
 
         <div class="tabs" tab="3">
             <div class="controls">
-                <button class="control" for="1">Income</button>
+                <button class="control" for="1" active>Income</button>
                 <button class="control" for="2">Withrawals</button>
             </div>
             <div class="wrapper">
                 <div class="tab" id="1" active="true">
-                    <div class="[ requests__continer ]"
-                        style="background-color: white; margin-bottom: 100px; padding: 30px">
+                    <div class="[ requests__continer ]" style="background-color: white; margin-bottom: 100px; padding: 30px">
 
                         <div>
                             <h2>Income</h2>
@@ -179,7 +175,7 @@
                         <?php if ($withdrawal_list == null) {
                             require(COMPONENTS . "dashboard/noDataFound.php");
                         } else {
-                            ?>
+                        ?>
                             <div class="withdrawals_container ">
                                 <div class="withdrawals_heading">
                                     <!-- <h3>Title</h3> -->
@@ -191,7 +187,7 @@
                                 <?php
                                 foreach ($income_list as $income_one) {
 
-                                    ?>
+                                ?>
                                     <div class="withdrawals">
                                         <!-- <h3>title</h3> -->
                                         <p>
@@ -207,19 +203,18 @@
                                     </div>
 
 
-                                    <?php
+                                <?php
                                 }
                                 ?>
                             </div>
-                            <?php
+                        <?php
                         }
                         ?>
                     </div>
                 </div>
 
                 <div class="tab" id="2">
-                    <div class="[ requests__continer ]"
-                        style="background-color: white; margin-bottom: 100px; padding: 30px">
+                    <div class="[ requests__continer ]" style="background-color: white; margin-bottom: 100px; padding: 30px">
 
                         <div>
                             <h2>Withdrawals</h2>
@@ -228,7 +223,7 @@
                         <?php if ($withdrawal_list == null) {
                             require(COMPONENTS . "dashboard/noDataFound.php");
                         } else {
-                            ?>
+                        ?>
                             <div class="withdrawals_container ">
                                 <div class="withdrawals_heading">
                                     <!-- <h3>Title</h3> -->
@@ -240,7 +235,7 @@
                                 <?php
                                 foreach ($withdrawal_list as $withdraw_one) {
 
-                                    ?>
+                                ?>
                                     <div class="withdrawals">
                                         <!-- <h3>title</h3> -->
                                         <p>
@@ -253,11 +248,11 @@
                                     </div>
 
 
-                                    <?php
+                                <?php
                                 }
                                 ?>
                             </div>
-                            <?php
+                        <?php
                         }
                         ?>
                     </div>
@@ -270,23 +265,25 @@
 
     <?php require "footer.php"; ?>
     <script src="<?php echo JS ?>/app.js"></script>
-    <script>
-        const controls = document.querySelectorAll(".controls>button");
-        const tabs = document.querySelectorAll(".tab");
+    <script src="<?php echo JS ?>/tabs.js"></script>
 
-        Array.from(controls).forEach(control => {
-            control.addEventListener("click", () => {
-                let For = control.getAttribute("for")
-                Array.from(tabs).forEach(tab => {
-                    if (tab.id == For) {
-                        tab.setAttribute("active", true)
-                        control.toggleAttribute("active")
-                    } else {
-                        tab.setAttribute("active", false)
-                    }
-                })
-            })
-        })
+    <script>
+        // const controls = document.querySelectorAll(".controls>button");
+        // const tabs = document.querySelectorAll(".tab");
+
+        // Array.from(controls).forEach(control => {
+        //     control.addEventListener("click", () => {
+        //         let For = control.getAttribute("for")
+        //         Array.from(tabs).forEach(tab => {
+        //             if (tab.id == For) {
+        //                 tab.setAttribute("active", true)
+        //                 control.toggleAttribute("active")
+        //             } else {
+        //                 tab.setAttribute("active", false)
+        //             }
+        //         })
+        //     })
+        // })
 
 
         const expandBtns = document.querySelectorAll(".actions>button")

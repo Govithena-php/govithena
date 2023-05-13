@@ -143,7 +143,7 @@ class Agrologist extends Model
             'postalCode' => $data['postalCode'],
             'profileImage' => $data['profileImage']
         ]);
-        return $req->fetch();
+        return true;
     }
 
     public function edit_user_without_image($data)
@@ -169,7 +169,6 @@ class Agrologist extends Model
             echo $e->getMessage();
             die();
             return null;
-
         }
     }
 
@@ -397,7 +396,6 @@ class Agrologist extends Model
             echo $e->getMessage();
             die();
             return null;
-
         }
     }
 
@@ -416,7 +414,6 @@ class Agrologist extends Model
             echo $e->getMessage();
             die();
             return null;
-
         }
     }
 
@@ -435,7 +432,6 @@ class Agrologist extends Model
             echo $e->getMessage();
             die();
             return null;
-
         }
     }
 
@@ -454,7 +450,6 @@ class Agrologist extends Model
             echo $e->getMessage();
             die();
             return null;
-
         }
     }
 
@@ -473,7 +468,6 @@ class Agrologist extends Model
             echo $e->getMessage();
             die();
             return null;
-
         }
     }
 
@@ -492,14 +486,13 @@ class Agrologist extends Model
             echo $e->getMessage();
             die();
             return null;
-
         }
     }
 
     public function getGigCount()
     {
         try {
-            $sql = "SELECT COUNT(g.gigId) AS gigCount FROM agrologist_request a LEFT JOIN gig g  ON a.farmerId=g.farmerId  WHERE a.agrologistId=:agrologistId AND a.status='Accepted' AND g.status='ACTIVE'";
+            $sql = "SELECT COUNT(g.gigId) AS gigCount FROM agrologist_request a LEFT JOIN gig g  ON a.farmerId=g.farmerId  WHERE a.agrologistId=:agrologistId AND a.status='Accepted' AND g.status='RESERVED'";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
                 'agrologistId' => Session::get('user')->getUid()
@@ -510,7 +503,6 @@ class Agrologist extends Model
             echo $e->getMessage();
             die();
             return null;
-
         }
     }
 
@@ -519,7 +511,7 @@ class Agrologist extends Model
         try {
             $sql = "SELECT COUNT(g.gigId) AS gigCount FROM agrologist_request a LEFT JOIN gig g  ON a.farmerId=g.farmerId  
             WHERE a.agrologistId=:agrologistId AND (a.status='Accepted' OR a.status='Completed') AND 
-            (g.status='ACTIVE' OR g.status='COMPLETED') AND YEAR(g.statusChangeDate) = YEAR(CURRENT_DATE - INTERVAL 1 MONTH)
+            (g.status='RESERVED' OR g.status='COMPLETED' OR g.status='UNDER_COMPLETION' OR g.status='NOT_DEPOSITED' OR g.status='UNDER_REVIEW') AND YEAR(g.statusChangeDate) = YEAR(CURRENT_DATE - INTERVAL 1 MONTH)
             AND MONTH(g.statusChangeDate) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
@@ -531,7 +523,6 @@ class Agrologist extends Model
             echo $e->getMessage();
             die();
             return null;
-
         }
     }
 
@@ -540,7 +531,7 @@ class Agrologist extends Model
         try {
             $sql = "SELECT COUNT(g.gigId) AS gigCount FROM agrologist_request a LEFT JOIN gig g ON a.farmerId=g.farmerId  
             WHERE a.agrologistId=:agrologistId AND (a.status='Accepted' OR a.status='Completed') AND 
-            (g.status='ACTIVE' OR g.status='COMPLETED') AND YEAR(g.statusChangeDate) = YEAR(CURRENT_DATE - INTERVAL 2 MONTH)
+            (g.status='RESERVED' OR g.status='COMPLETED' OR g.status='UNDER_COMPLETION' OR g.status='NOT_DEPOSITED' OR g.status='UNDER_REVIEW') AND YEAR(g.statusChangeDate) = YEAR(CURRENT_DATE - INTERVAL 2 MONTH)
             AND MONTH(g.statusChangeDate) = MONTH(CURRENT_DATE - INTERVAL 2 MONTH)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
@@ -552,7 +543,6 @@ class Agrologist extends Model
             echo $e->getMessage();
             die();
             return null;
-
         }
     }
 
@@ -561,7 +551,7 @@ class Agrologist extends Model
         try {
             $sql = "SELECT COUNT(g.gigId) AS gigCount FROM agrologist_request a LEFT JOIN gig g ON a.farmerId=g.farmerId  
             WHERE a.agrologistId=:agrologistId AND (a.status='Accepted' OR a.status='Completed') AND 
-            (g.status='ACTIVE' OR g.status='COMPLETED') AND YEAR(g.statusChangeDate) = YEAR(CURRENT_DATE - INTERVAL 3 MONTH)
+            (g.status='RESERVED' OR g.status='COMPLETED' OR g.status='UNDER_COMPLETION' OR g.status='NOT_DEPOSITED' OR g.status='UNDER_REVIEW') AND YEAR(g.statusChangeDate) = YEAR(CURRENT_DATE - INTERVAL 3 MONTH)
             AND MONTH(g.statusChangeDate) = MONTH(CURRENT_DATE - INTERVAL 3 MONTH)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
@@ -573,7 +563,6 @@ class Agrologist extends Model
             echo $e->getMessage();
             die();
             return null;
-            
         }
     }
 
@@ -582,7 +571,7 @@ class Agrologist extends Model
         try {
             $sql = "SELECT COUNT(g.gigId) AS gigCount FROM agrologist_request a LEFT JOIN gig g ON a.farmerId=g.farmerId  
             WHERE a.agrologistId=:agrologistId AND (a.status='Accepted' OR a.status='Completed') AND 
-            (g.status='ACTIVE' OR g.status='COMPLETED') AND YEAR(g.statusChangeDate) = YEAR(CURRENT_DATE - INTERVAL 4 MONTH)
+            (g.status='RESERVED' OR g.status='COMPLETED' OR g.status='UNDER_COMPLETION' OR g.status='NOT_DEPOSITED' OR g.status='UNDER_REVIEW') AND YEAR(g.statusChangeDate) = YEAR(CURRENT_DATE - INTERVAL 4 MONTH)
             AND MONTH(g.statusChangeDate) = MONTH(CURRENT_DATE - INTERVAL 4 MONTH)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
@@ -594,7 +583,6 @@ class Agrologist extends Model
             echo $e->getMessage();
             die();
             return null;
-            
         }
     }
 
@@ -603,7 +591,7 @@ class Agrologist extends Model
         try {
             $sql = "SELECT COUNT(g.gigId) AS gigCount FROM agrologist_request a LEFT JOIN gig g ON a.farmerId=g.farmerId  
             WHERE a.agrologistId=:agrologistId AND (a.status='Accepted' OR a.status='Completed') AND 
-            (g.status='ACTIVE' OR g.status='COMPLETED') AND YEAR(g.statusChangeDate) = YEAR(CURRENT_DATE - INTERVAL 5 MONTH)
+            (g.status='RESERVED' OR g.status='COMPLETED' OR g.status='UNDER_COMPLETION' OR g.status='NOT_DEPOSITED' OR g.status='UNDER_REVIEW') AND YEAR(g.statusChangeDate) = YEAR(CURRENT_DATE - INTERVAL 5 MONTH)
             AND MONTH(g.statusChangeDate) = MONTH(CURRENT_DATE - INTERVAL 5 MONTH)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
@@ -615,7 +603,6 @@ class Agrologist extends Model
             echo $e->getMessage();
             die();
             return null;
-            
         }
     }
 
@@ -633,7 +620,6 @@ class Agrologist extends Model
             echo $e->getMessage();
             die();
             return null;
-
         }
     }
 
@@ -651,7 +637,6 @@ class Agrologist extends Model
             echo $e->getMessage();
             die();
             return null;
-
         }
     }
 
@@ -669,7 +654,6 @@ class Agrologist extends Model
             echo $e->getMessage();
             die();
             return null;
-
         }
     }
 
@@ -688,7 +672,6 @@ class Agrologist extends Model
             echo $e->getMessage();
             die();
             return null;
-
         }
     }
 
@@ -709,7 +692,6 @@ class Agrologist extends Model
             echo $e->getMessage();
             die();
             return null;
-
         }
     }
 
@@ -728,7 +710,6 @@ class Agrologist extends Model
             echo $e->getMessage();
             die();
             return null;
-
         }
     }
 
@@ -746,7 +727,6 @@ class Agrologist extends Model
             echo $e->getMessage();
             die();
             return null;
-
         }
     }
 
@@ -804,7 +784,6 @@ class Agrologist extends Model
             echo $e->getMessage();
             die();
             return null;
-
         }
     }
 
@@ -875,7 +854,6 @@ class Agrologist extends Model
             echo $e->getMessage();
             die();
             return null;
-
         }
     }
 
@@ -893,7 +871,6 @@ class Agrologist extends Model
             echo $e->getMessage();
             die();
             return null;
-
         }
     }
 
@@ -929,7 +906,6 @@ class Agrologist extends Model
             echo $e->getMessage();
             die();
             return null;
-
         }
     }
 
@@ -947,7 +923,6 @@ class Agrologist extends Model
             echo $e->getMessage();
             die();
             return null;
-
         }
     }
 
@@ -966,7 +941,6 @@ class Agrologist extends Model
             echo $e->getMessage();
             die();
             return null;
-
         }
     }
 
@@ -984,7 +958,6 @@ class Agrologist extends Model
             echo $e->getMessage();
             die();
             return null;
-
         }
     }
 
@@ -1002,7 +975,6 @@ class Agrologist extends Model
             echo $e->getMessage();
             die();
             return null;
-
         }
     }
 }

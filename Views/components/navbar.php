@@ -50,7 +50,7 @@ $currentUser = Session::get('user');
                         <div class="[ image ]">
                             <?php
                             ?>
-                            <img src="<?php echo UPLOADS . 'profilePictures/' . Session::get('user')->getImage(); ?>" alt="profile">
+                            <img src="<?php echo UPLOADS . 'profilePictures/' . Session::get('user')->getImage(); ?>" alt="profile" <?php echo DEFAULT_PROFILE_PICTURE ?>>
                         </div>
                     </button>
                 </div>
@@ -86,8 +86,13 @@ $currentUser = Session::get('user');
                                     <i class="bi bi-columns-gap"></i>Dashboard
                                 </a></li>
                         <?php
+                        } else if ($currentUser->getType() == 'AGROLOGIST') {
+                        ?>
+                            <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/agrologist/">
+                                    <i class="bi bi-columns-gap"></i>Dashboard
+                                </a></li>
+                        <?php
                         }
-
                         ?>
                         <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/account">
                                 <i class="bi bi-person"></i>My Account</a></li>

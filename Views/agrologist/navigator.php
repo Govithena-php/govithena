@@ -39,7 +39,7 @@ function highlight($active, $link)
                 <p>Govithena</p>
             </a>
         </div>
-       <!-- <?php echo "<h1 style='color: white'>$name</h1>"; ?> -->
+        <!-- <?php echo "<h1 style='color: white'>$name</h1>"; ?> -->
         <div class="[ open__btn ]">
             <button onclick="toggleSidebar()">
                 <i class="fa-solid fa-bars"></i>
@@ -48,38 +48,38 @@ function highlight($active, $link)
 
         <?php
         if (isset($title)) {
-            ?>
+        ?>
             <p class="[ page__title ]">
                 <?php echo $title; ?>
             </p>
-            <?php
+        <?php
         }
         ?>
 
         <div class="[ profile ]">
             <?php if (isset($currentUser)) { ?>
                 <div class="[ buttons ]">
-                    <div class="[ notification ]">
+                    <!-- <div class="[ notification ]">
                         <button onclick="toggleNotificationMenu()">
                             <i class="[ fa-solid fa-bell ]"></i>
                             <?php
                             $notificationCount = 4;
                             if (isset($notificationCount)) {
-                                ?>
+                            ?>
                                 <span>
                                     <?php echo $notificationCount ?>
                                 </span>
                                 <?php
                             }
-                            ?>
+                                ?>
                         </button>
-                    </div>
+                    </div> -->
 
                     <span></span>
 
                     <button onclick="toggleProfileMenu()">
                         <div class="[ image ]">
-                            <img src="<?php echo UPLOADS . '/' . Session::get('user')->getImage(); ?>" alt="profile">
+                            <img src="<?php echo UPLOADS . '/' . Session::get('user')->getImage(); ?>" alt="profile" <?php echo DEFAULT_PROFILE_PICTURE ?>>
                         </div>
                     </button>
                 </div>
@@ -87,14 +87,14 @@ function highlight($active, $link)
 
                 <div id="notification_menu" open="false" class="menu notification_menu ">
                     <div class="[ notification_message ]">
-                        <?php 
+                        <?php
                         foreach ($notifications as $notification) {
-                            ?>
-                        <a>
-                            <?php echo $notification['message']; ?>
-                            
-                        </a>
-                        <hr>
+                        ?>
+                            <a>
+                                <?php echo $notification['message']; ?>
+
+                            </a>
+                            <hr>
                         <?php
                         }
                         ?>
@@ -130,10 +130,10 @@ function highlight($active, $link)
                         </small>
                     </div>
                     <ul>
-                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/dashboard/">
+                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/agrologist/">
                                 <i class="[ fa-solid fa-gauge ]"></i>Dashboard
                             </a></li>
-                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/profile">
+                        <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/agrologist/myaccount">
                                 <i class="[ fa-solid fa-user-tie ]"></i>Profile</a></li>
                         <li><a onclick="toggleProfileMenu()" href="<?php echo URLROOT ?>/signout">
                                 <i class="[ fa-solid fa-gear ]"></i>Settings</a>
@@ -180,8 +180,7 @@ function highlight($active, $link)
                 </a>
             </li>
             <li>
-                <a href="<?php echo URLROOT . "/agrologist/requests" ?>"
-                    class="<?php highlight($active, "requests") ?>">
+                <a href="<?php echo URLROOT . "/agrologist/requests" ?>" class="<?php highlight($active, "requests") ?>">
                     <i class="[ fa-solid fa-tractor ]"></i>
                     <p>Requests</p>
                 </a>
@@ -196,8 +195,7 @@ function highlight($active, $link)
         <div class="[ grow ]"></div>
         <ul>
             <li>
-                <a href="<?php echo URLROOT . "/agrologist/myaccount" ?>"
-                    class="<?php highlight($active, "myaccount") ?>">
+                <a href="<?php echo URLROOT . "/agrologist/myaccount" ?>" class="<?php highlight($active, "myaccount") ?>">
                     <i class="[ fa-solid fa-user-tie ]"></i>
                     <p>Account</p>
                 </a>

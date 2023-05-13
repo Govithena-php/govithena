@@ -25,7 +25,7 @@
         $alert = Session::pop('review_agrologist_alert');
         $alert->show_default_alert();
     }
-    
+
     ?>
     <div class="[ container ] " container-type="dashboard-section">
         <?php $farmerName = $farmerName[0]['fullName'] ?>
@@ -44,7 +44,7 @@
         <!-- <div class="[ review__heading ]">
                 <h3>Give your answer for fallowing question.</h3>
             </div> -->
-        <form action="<?php echo URLROOT . '/agrologist/farmers' ?>" method="POST">
+        <form action="<?php echo URLROOT . '/agrologist/reviews/' . $farmerId ?>" method="POST">
             <div class="[ question__wrapper ]">
                 <div class="[ counter ]"></div>
                 <div class="[ question ]">
@@ -63,7 +63,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="[ question__wrapper rating__question ]">
                 <div class="[ counter ]"></div>
                 <div class="[ question ]">
