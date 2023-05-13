@@ -25,7 +25,7 @@
 
     <div class="[ container ][ ]" container-type="dashboard-section">
 
-    <div class="[ caption ]">
+        <div class="[ caption ]">
             <h3>Farmers</h3>
             <p>Keep an eye on the status of your investments with our investor dashboard. Quickly see which requests are accepted, rejected, or still pending, and stay in the know about the progress of your investments.</p>
         </div>
@@ -49,16 +49,15 @@
                         <div class="[ request__card ]">
                             <div class="left">
                                 <div class="[ request__img ]">
-                                    <img src="<?php echo UPLOADS ?>/profilePictures/<?php echo $request['image']?>" alt="">
+                                    <img src="<?php echo UPLOADS ?>/profilePictures/<?php echo $request['image'] ?>" alt="">
                                 </div>
                                 <div class="name">
-                                    <h1> <?php echo ucwords($request['firstName'] ." ". $request['lastName'] ) ?></h1>
+                                    <h1> <?php echo ucwords($request['firstName'] . " " . $request['lastName']) ?></h1>
                                     <h5><?php echo ucwords($request['city']) ?></h5>
                                 </div>
                             </div>
                             <div class="right">
-                                <a class = "button__primary" href=" <?php echo URLROOT?>/tech/assignedGigs">Assigned Gigs</a>
-                                <a class = "button__primary" href=" <?php echo URLROOT?>/tech/otherTasks">Other Tasks</a>
+                                <a class="button__primary" href=" <?php echo URLROOT ?>/tech/assignedGigs">Assigned Gigs</a>
                             </div>
                         </div>
                     <?php

@@ -276,7 +276,7 @@
                                             <img src="<?php echo UPLOADS . $activeGig['thumbnail'] ?>" />
                                             <div class="active__gig_farmer">
                                                 <div class="img">
-                                                    <img src="<?php echo UPLOADS . $activeGig['image'] ?>" <?php echo DEFAULT_PROFILE_PICTURE ?> />
+                                                    <img src="<?php echo UPLOADS . '/profilePictures/' . $activeGig['image'] ?>" <?php echo DEFAULT_PROFILE_PICTURE ?> />
                                                 </div>
                                                 <div class="details">
                                                     <a href="<?php echo URLROOT . "/profile/" . $activeGig['farmerId'] ?>"><?php echo $activeGig['firstName'] . " " . $activeGig['lastName'] ?></a>
@@ -316,7 +316,11 @@
                                                 <div class="grid active__gig_progress_bars" lg="2" gap="1">
                                                     <div class="progress__bar">
                                                         <div class="progress__details">
-                                                            <p><?php echo $daysSinceStarted[$activeGig['gigId']] ?> Days out of <?php echo $activeGig['cropCycle'] ?> Days</p>
+                                                            <p><?php
+                                                                if ($daysSinceStarted[$activeGig['gigId']] > $activeGig['cropCycle']) echo $activeGig['cropCycle'];
+                                                                else echo $daysSinceStarted[$activeGig['gigId']];
+
+                                                                ?> Days out of <?php echo $activeGig['cropCycle'] ?> Days</p>
                                                         </div>
                                                         <div class="bar">
                                                             <div class="fill" style="--value: <?php echo ceil(($daysSinceStarted[$activeGig['gigId']] / $activeGig['cropCycle']) * 100) ?>%;"></div>

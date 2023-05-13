@@ -167,7 +167,7 @@
                             <p><?php echo $p['landArea'] ?></p>
                         </div>
                         <div class="data">
-                            <p><?php echo $p['description'] ?></p>
+                            <p class="limit-text-3"><?php echo $p['description'] ?></p>
                         </div>
                         <div class="data flex-right">
                             <div class="actions">

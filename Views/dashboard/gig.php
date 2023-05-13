@@ -143,8 +143,12 @@
                             </div>
                             <div class="[ details ]">
                                 <h2><?php
-                                    if (isset($numberOfDaysLeft)) echo $numberOfDaysLeft;
-                                    else echo 0
+                                    if (isset($numberOfDaysLeft)) {
+                                        if ($numberOfDaysLeft > $gig['cropCycle']) echo $gig['cropCycle'];
+                                        else echo $numberOfDaysLeft;
+                                    } else {
+                                        echo 0;
+                                    }
                                     ?> Days</h2>
                                 <p>out of <?php echo $gig['cropCycle'] ?> Days</p>
                             </div>
@@ -441,7 +445,7 @@
 
                             <div class="[ ]">
                                 <div class="[ grid__table ]" style="
-                                        --xl-cols: 2fr 1.5fr 1fr 1fr 2.5fr 0.3fr;
+                                        --xl-cols: 2fr 1.5fr 1fr  3fr 0.3fr;
                                         --lg-cols: 2fr 1fr 1fr 0.5fr;
                                         --md-cols: 3fr 1fr 0.5fr;
                                         --sm-cols: 1fr 0.2fr;
@@ -457,9 +461,6 @@
                                             </div>
                                             <div class="[ data ]" hideIn="md">
                                                 <p>Visit Date</p>
-                                            </div>
-                                            <div class="[ data ]" hideIn="lg">
-                                                <p>Visit Time</p>
                                             </div>
                                             <div class="[ data ]" hideIn="lg">
                                                 <p>Visit Details</p>
@@ -493,9 +494,6 @@
                                                 </div>
                                                 <div class="[ data ]" hideIn="md">
                                                     <p><?php echo $fieldVisit['visitDate'] ?></p>
-                                                </div>
-                                                <div class="[ data ]" hideIn="md">
-                                                    <p><?php echo $fieldVisit['visitTime'] ?></p>
                                                 </div>
                                                 <div class="[ data ]" hideIn="md">
                                                     <p class="limit-text-1"><?php echo $fieldVisit['fieldVisitDetails'] ?></p>

@@ -113,21 +113,15 @@ function highlight($active, $link)
     <div class="[ links ]">
         <ul>
             <li>
-                <a href="<?php echo URLROOT ?>/tech/dashboard" class="<?php highlight($active, "dashboard") ?>">
-                    <i class="bi bi-columns-gap"></i>
-                    <p>Dashboard</p>
+                <a href="<?php echo URLROOT ?>/tech/farmers" class="<?php highlight($active, "farmers") ?>">
+                    <i class="bi bi-tree"></i>
+                    <p>Farmers</p>
                 </a>
             </li>
             <li>
                 <a href="<?php echo URLROOT ?>/tech/requests" class="<?php highlight($active, "requests") ?>">
                     <i class="bi bi-card-heading"></i>
                     <p>Requests</p>
-                </a>
-            </li>
-            <li>
-                <a href="<?php echo URLROOT ?>/tech/farmers" class="<?php highlight($active, "farmers") ?>">
-                    <i class="bi bi-tree"></i>
-                    <p>Farmers</p>
                 </a>
             </li>
             <li>

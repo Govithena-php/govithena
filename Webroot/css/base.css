@@ -578,11 +578,12 @@ hr {
 
 
 .disabled {
+    position:relative !important;
     filter: grayscale(0.7) !important;
-    pointer-events: none !important;
+    /* pointer-events: none !important; */
 }
 
-.disabled::after {
+.disabled:hover::after {
     content: "You have already done this action.";
     position: absolute;
     top: -3.5rem;
