@@ -519,6 +519,21 @@ class farmerController extends Controller
             $props['declinedTech'] = $declinedTech['data'];
         }
 
+        foreach($myTech['data'] as $myTechone){
+
+    
+            $response = $this->farmerModel->monthpayTechassistant([
+                'userId' => $myTechone['technicalAssistantId'],
+                'farmerId' => $myTechone['farmerId']
+            ]);
+
+            if($response['status']){
+                $props['dateDiff'] = $response['data']['dateDiff'];
+            }else {
+                $props['dateDiff'] = 30;
+            }
+        }  
+
         $this->set($props);
         $this->render('techassistant');
     }
@@ -570,7 +585,7 @@ class farmerController extends Controller
             'incomeId' => new UID(PREFIX::PAYMENT),
             'userId' => $technicalAssistantId,
             'farmerId' => $id,
-            'amount' =>  $techReqTwo['offer']
+            'amount' =>  $techReqTwo['data']['offer']
         ];
 
         $this->farmerModel->afterPaytechassistant($data);
@@ -582,7 +597,7 @@ class farmerController extends Controller
 
 
         // $this->set($props);
-        $this->render('techassistant');
+        $this->redirect('/farmer/techassistant');
     }
 
 

@@ -126,13 +126,15 @@
                                         <a href="<?php echo URLROOT . "/profile/" . $myt['technicalAssistantId'] ?>" class="button__primary">View Profile</a>
                                         <!-- <a href="<?php echo URLROOT . "/profile/" . $myt['technicalAssistantId'] ?>" class="button__primary">Pay</a> -->
 
-                                        <?php
-                                    if($myt['status'] != 'PAID'){ 
+                                    <?php
+                                        if($dateDiff >= 30){
                                         ?>
                                         <a href="<?php echo URLROOT . "/farmer/techassistantPay/" . $myt['technicalAssistantId'] ?>" class="button__primary">Pay</a>
-                                   <?php
-                                    }
+                                        <?php
+                                        }
+                                    
                                     ?>
+  
 
                                     </div>
 

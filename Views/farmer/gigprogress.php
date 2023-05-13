@@ -142,7 +142,7 @@
                             <div class="row">
                                 <div class="data farmer__">
                                     <div class="farmerimg">
-                                        <img src="<?php echo UPLOADS . '/profilePictures/' . $p['thumbnail']?>" alt="Picture">
+                                        <img src="<?php echo UPLOADS . '/' . $p['thumbnail']?>" alt="Picture">
                                     </div>
                                 </div>
                                 <div class="data ">
