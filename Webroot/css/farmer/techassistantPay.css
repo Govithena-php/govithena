@@ -1,24 +1,26 @@
 .card_center{
+    display: flex;
     align-items: center;
+    justify-content: center;
   }
   .card  {
       padding: 20px;
       border: 1px solid black;
-      min-height: 400px;
+      min-height: 500px;
       background-color: white;
-      width: 400px;
+      width: 500px;
     }
   
   
   .agropic{
-      width:200px;
-      height: 200px;
+      width:250px;
+      height: 250px;
       border-radius: 50%;
       overflow: hidden;
       margin: 5px 0px 5px 0px;
   }
   
-  .agropic>img {
+  .agropic img {
     height: 100%;
     width: 100%;
     object-fit: cover;

@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
     
-    <link rel="stylesheet" href="<?php echo CSS ?>/farmer/agrologistPay.css">
+    <link rel="stylesheet" href="<?php echo CSS ?>/farmer/techassistantPay.css">
 
     <title>Dashboard | Technical Assistant</title>
 </head>
@@ -32,6 +32,7 @@
         <div class="agropic">
             <img src="<?php echo UPLOADS . '/profilePictures/' . $techassistant['image'] ?>" alt="">
         </div>
+        <br>
             <h2>Name : <?php echo $techassistant['firstName'] . " " . $techassistant['lastName'] ?></h2>
             <h3>Location : <?php echo $techassistant['city'] ?></h3>
             <h3>Offer : <?php echo $offer_techassistant['offer'] ?></h3>

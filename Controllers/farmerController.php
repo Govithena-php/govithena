@@ -589,13 +589,6 @@ class farmerController extends Controller
         ];
 
         $this->farmerModel->afterPaytechassistant($data);
-        // $this->farmerModel->afterPayAgrologistsUpdate($dataone);
-        // if($agroReqTwo['status']){
-        //     $props['payed'] = $agroReqTwo['data'];
-        // }
-        
-
-
         // $this->set($props);
         $this->redirect('/farmer/techassistant');
     }
