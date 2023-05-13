@@ -273,6 +273,7 @@ class agrologistController extends Controller
                 } else {
                     echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>nope</h1>";
                 }
+                header("Refresh:0.5");
                 Session::set(['farmer_request_alert' => $alert]);
             }
 
@@ -341,7 +342,7 @@ class agrologistController extends Controller
             } else {
                 $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong!');
             }
-
+            header("Refresh:0.5");
             Session::set(['edit_user_details_alert' => $alert]);
         }
 
@@ -363,7 +364,7 @@ class agrologistController extends Controller
             } else {
                 $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong!');
             }
-
+            header("Refresh:0.5");
             Session::set(['add_account_details_alert' => $alert]);
         }
 
@@ -385,7 +386,7 @@ class agrologistController extends Controller
             } else {
                 $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong!');
             }
-
+            header("Refresh:0.5");
             Session::set(['edit_account_details_alert' => $alert]);
         }
 
@@ -406,6 +407,7 @@ class agrologistController extends Controller
                 } else {
                     $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong!');
                 }
+                header("Refresh:0.5");
 
                 Session::set(['add_qualification_details_alert' => $alert]);
             }
@@ -432,6 +434,8 @@ class agrologistController extends Controller
             } else {
                 $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong!');
             }
+            header("Refresh:0.5");
+
             Session::set(['edit_qualification_details_alert' => $alert]);
         }
 
@@ -603,7 +607,10 @@ class agrologistController extends Controller
                         $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong!');
                     }
                 }
+                header("Refresh:0.5");
                 Session::set(['agrologist_withdraw_alert' => $alert]);
+                
+                
             }
         }
 

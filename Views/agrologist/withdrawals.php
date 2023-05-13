@@ -18,7 +18,6 @@
 
 <body class="bg-gray h-screen">
     <?php
-    // $datadata = $notifications;
     $active = "withdrawals";
     $sum = 0;
     require_once("navigator.php");
@@ -27,7 +26,7 @@
         $alert = Session::pop('agrologist_withdraw_alert');
         $alert->show_default_alert();
     }
-
+   
     ?>
     <div class="[ container ][ dashboard ]" container-type="dashboard-section">
         <h1>Withdrawals</h1>
@@ -49,7 +48,7 @@
 
                             ?>
                         </h1>
-                       
+
                         <p class='clr__primary'>This months withdrawals </p>
                     </div>
                 </div>
@@ -80,7 +79,7 @@
 
                             ?>
                         </h1>
-                       
+
                         <p class='clr__primary'>Remaining balance in the platform </p>
                     </div>
                 </div>
@@ -92,7 +91,7 @@
                     echo "<h3>Bank Account Details</h3><hr>";
                     require(COMPONENTS . "dashboard/noDataFound.php");
                 } else {
-                ?>
+                    ?>
                     <form action="<?php echo URLROOT . '/agrologist/withdrawals' ?>" method='POST'>
                         <div class="pt-1 flex flex-row flex-sb-c">
                             <div> <i class=" fa fa-building-columns"></i> Account Number</div>
@@ -118,14 +117,17 @@
                                 <?php echo $account[0]['branchCode'] ?>
                             </div>
                         </div>
-                        <a href="<?php echo URLROOT . '/agrologist/myaccount' ?>" class="text-secondary change_account">Want to change account details?</a>
+                        <a href="<?php echo URLROOT . '/agrologist/myaccount' ?>" class="text-secondary change_account">Want
+                            to change account details?</a>
                         <div class="pt-2">
                             <label for="withdraw_amount" class="pb-1">Amount <span class="LKR"></span></label>
-                            <input type="text" name="withdraw_amount" placeholder="Withdraw Amount" value="<?php echo $balance ?>">
-                            <button type="submit" name="transfer_confirm_btn" class="btn btn-primary uppercase mt-2">Transfer</button>
+                            <input type="text" name="withdraw_amount" placeholder="Withdraw Amount"
+                                value="<?php echo $balance ?>">
+                            <button type="submit" name="transfer_confirm_btn"
+                                class="btn btn-primary uppercase mt-2">Transfer</button>
                         </div>
                     </form>
-                <?php
+                    <?php
                 }
                 ?>
 
@@ -153,7 +155,8 @@
             </div>
             <div class="wrapper">
                 <div class="tab" id="1" active="true">
-                    <div class="[ requests__continer ]" style="background-color: white; margin-bottom: 100px; padding: 30px">
+                    <div class="[ requests__continer ]"
+                        style="background-color: white; margin-bottom: 100px; padding: 30px">
 
                         <div>
                             <h2>Income</h2>
@@ -162,7 +165,7 @@
                         <?php if ($withdrawal_list == null) {
                             require(COMPONENTS . "dashboard/noDataFound.php");
                         } else {
-                        ?>
+                            ?>
                             <div class="withdrawals_container ">
                                 <div class="withdrawals_heading">
                                     <!-- <h3>Title</h3> -->
@@ -174,7 +177,7 @@
                                 <?php
                                 foreach ($income_list as $income_one) {
 
-                                ?>
+                                    ?>
                                     <div class="withdrawals">
                                         <!-- <h3>title</h3> -->
                                         <p>
@@ -190,18 +193,19 @@
                                     </div>
 
 
-                                <?php
+                                    <?php
                                 }
                                 ?>
                             </div>
-                        <?php
+                            <?php
                         }
                         ?>
                     </div>
                 </div>
 
                 <div class="tab" id="2">
-                    <div class="[ requests__continer ]" style="background-color: white; margin-bottom: 100px; padding: 30px">
+                    <div class="[ requests__continer ]"
+                        style="background-color: white; margin-bottom: 100px; padding: 30px">
 
                         <div>
                             <h2>Withdrawals</h2>
@@ -210,7 +214,7 @@
                         <?php if ($withdrawal_list == null) {
                             require(COMPONENTS . "dashboard/noDataFound.php");
                         } else {
-                        ?>
+                            ?>
                             <div class="withdrawals_container ">
                                 <div class="withdrawals_heading">
                                     <!-- <h3>Title</h3> -->
@@ -222,7 +226,7 @@
                                 <?php
                                 foreach ($withdrawal_list as $withdraw_one) {
 
-                                ?>
+                                    ?>
                                     <div class="withdrawals">
                                         <!-- <h3>title</h3> -->
                                         <p>
@@ -235,11 +239,11 @@
                                     </div>
 
 
-                                <?php
+                                    <?php
                                 }
                                 ?>
                             </div>
-                        <?php
+                            <?php
                         }
                         ?>
                     </div>
