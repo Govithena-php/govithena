@@ -222,8 +222,6 @@ class farmerController extends Controller
 
             // $res = $gig->create($data);
             $res = $this->gigModel->updateDetails($data);
-            var_dump($res);
-            die();
 
 
             if (!$res) {
@@ -745,11 +743,38 @@ class farmerController extends Controller
         $this->farmerModel->getPayAgrologistsUpdate($dataone);
         }
 
-        // $agrodata = $this->farmerModel->getAcceptedAndPay($id);
 
-        // if($agrodata['status']){
-        //     $props['PAID'] = $agrodata['data'];
+        // var_dump($myagrologists);
+
+        foreach($myagrologists['data'] as $myagrologist){
+
+            $response = $this->farmerModel->monthpayAgrologist([
+                'agrologistId' => $myagrologist['agrologistId'],
+                'farmerId' => $myagrologist['farmerId']
+            ]);
+
+            if($response['status']){
+                $props['dateDiff'] = $response['data']['dateDiff'];
+            }else {
+                $props['dateDiff'] = 30;
+            }
+        }           
+        //     $agrologistId = $myagrologist['agrologistId'];
+        //     $id = $this->currentUser->getUid();
+        
+        // $datatwo = [
+        //     'agrologistId' => $agrologistId,
+        //     'farmerId' => $id
+        // ];
+        // meka array ekakat gnna.... $this->farmerModel->monthpayAgrologist($datatwo);
+
+        
+
+
         // }
+
+
+
         $this->set($props);
         $this->render('agrologist');
     }
@@ -863,10 +888,14 @@ class farmerController extends Controller
             'paymentId' => new UID(PREFIX::PAYMENT),
             'agrologistId' => $agrologistId,
             'farmerId' => $id,
-            'Payment' =>  $agroReqTwo['offer']
+            'Payment' =>  $agroReqTwo['data']['offer']
         ];
 
-        $this->farmerModel->afterPayAgrologists($data);
+
+
+        $res = $this->farmerModel->afterPayAgrologists($data);
+        // var_dump($res);
+        // die();
         // $this->farmerModel->afterPayAgrologistsUpdate($dataone);
         // if($agroReqTwo['status']){
         //     $props['payed'] = $agroReqTwo['data'];
@@ -875,7 +904,7 @@ class farmerController extends Controller
 
 
         // $this->set($props);
-        $this->render('agrologist');
+        $this->redirect('/farmer/agrologist');
     }
 
 

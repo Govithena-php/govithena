@@ -116,6 +116,25 @@ class Farmer extends Model
         }
     }
 
+        public function monthpayAgrologist($data)
+    {
+        try {
+            $sql = "SELECT agrologistId, DATEDIFF(NOW(), paidDate) as dateDiff, paidDate FROM agrologist_payment WHERE agrologistId = :agrologistId AND  farmerId = :farmerId ORDER BY paidDate DESC LIMIT 1";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'agrologistId' => $data['agrologistId'],
+                'farmerId' => $data['farmerId']]);
+            $req = $stmt->fetch(PDO::FETCH_ASSOC);
+            if($req){
+                return ['status' => true, 'data' => $req];
+            }else {
+                return ['status' => false, 'data' => false];
+            }
+        } catch (Exception $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+
 
     // public function getPayAgrologistsUpdate($data)
     // {
@@ -155,6 +174,8 @@ class Farmer extends Model
         }
     }
 
+
+
     public function sendAgrologistRequestRating($data)
     {
         try {
@@ -172,7 +193,7 @@ class Farmer extends Model
     public function getAcceptedAgrologistByFarmer($id)
     {
         try {
-            $sql = "SELECT ar.agrologistId, u.firstName, u.lastName, ar.status, u.city, u.image from agrologist_request ar INNER JOIN user u ON ar.agrologistId = u.uid WHERE ar.farmerId = :farmerId AND ar.status = 'accepted' OR ar.status = 'PAID' ORDER BY ar.statusChangeDate DESC";
+            $sql = "SELECT ar.agrologistId, ar.farmerId, u.firstName, u.lastName, ar.status, u.city, u.image from agrologist_request ar INNER JOIN user u ON ar.agrologistId = u.uid WHERE ar.farmerId = :farmerId AND ar.status = 'accepted' OR ar.status = 'PAID' ORDER BY ar.statusChangeDate DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['farmerId' => $id]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -299,6 +320,7 @@ class Farmer extends Model
             return ['status' => false, 'data' => $e->getMessage()];
         }
     }
+
 
 
     public function getAcceptedTechByFarmer($id)

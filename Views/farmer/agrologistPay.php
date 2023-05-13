@@ -37,7 +37,7 @@
             <h3>Offer : <?php echo $offer_agrologist['offer'] ?></h3>
             <br>
     <div class="actions">
-        <a btn href="<?php echo URLROOT . "/farmer/agrologisAftertPay" . $agrologist['uid'] ?>" class="button__primary">Pay</a>
+        <a btn href="<?php echo URLROOT . "/farmer/agrologisAftertPay/" . $agrologist['uid'] ?>" class="button__primary">Pay</a>
     </div>
     </div>
 

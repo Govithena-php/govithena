@@ -126,11 +126,12 @@
                                         <a href="<?php echo URLROOT . "/profile/" . $myagrologist['agrologistId'] ?>" class="button__primary">View Profile</a>
                                         
                                     <?php
-                                    if($myagrologist['status'] != 'PAID'){ 
+                                        if($dateDiff >= 30){
                                         ?>
                                         <a href="<?php echo URLROOT . "/farmer/agrologistPay/" . $myagrologist['agrologistId'] ?>" class="button__primary">Pay</a>
-                                   <?php
-                                    }
+                                        <?php
+                                        }
+                                    
                                     ?>
                                         </div>
 

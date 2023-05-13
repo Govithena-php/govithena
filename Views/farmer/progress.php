@@ -29,7 +29,7 @@
     <div class="container" container-type="dashboard-section">
 
         <div class="[ caption ]">
-            <h3>aaaaaaaaaaaaaaaaaaaaaaaaaaaTrack all of your ongoing gigs with investors.</h3>
+            <h3>Track all of your ongoing gigs with investors.</h3>
             <p>Stay on top of your gigs and provide excellent service to your investors by regularly checking this page.</p>
         </div>
 
