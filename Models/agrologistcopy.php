@@ -247,7 +247,7 @@ class Agrologist extends Model
     public function getFieldVisitDetails($fid, $gid)
     {
         try {
-            $sql = "SELECT f.visitId, f.week, f.visitDate, f.fieldVisitDetails, f.thumbnail FROM field_visit f WHERE f.agrologistId = :agrologistId AND f.farmerId= :farmerId AND f.gigId = :gigId ORDER BY f.visitDate DESC";
+            $sql = "SELECT f.week, f.visitDate, f.fieldVisitDetails, f.thumbnail, i.image FROM field_visit f LEFT JOIN field_visit_image i ON f.visitId=i.visitId WHERE f.agrologistId = :agrologistId AND f.farmerId= :farmerId AND f.gigId = :gigId ORDER BY f.visitDate DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
                 'agrologistId' => Session::get('user')->getUid(),
@@ -262,25 +262,6 @@ class Agrologist extends Model
             return null;
         }
     }
-
-    public function getFieldVisitImages($visitId)
-    {
-        try {
-            $sql = "SELECT i.visitId, i.image FROM field_visit_image i WHERE i.visitId=:visitId";
-            $stmt = Database::getBdd()->prepare($sql);
-            $stmt->execute([
-                'visitId' => $visitId
-            ]);
-            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            return $req;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            die();
-            return null;
-        }
-    }
-    
-
 
     public function getFarmerGigs($data)
     {
