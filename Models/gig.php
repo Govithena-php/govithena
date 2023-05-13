@@ -122,8 +122,7 @@ class Gig extends Model
 
     public function updateDetails($data)
     {
-        // var_dump($data);
-        // die();
+
         try {
             // $sql = "UPDATE gig SET status = 'RESERVED', investorId = :investorId, reservedDate = CURRENT_TIMESTAMP WHERE gigId = :id";
             $sql = "UPDATE gig SET title = :title, description = :description, category = :category, capital = :capital, profitMargin = :profitMargin, cropCycle = :cropCycle, city = :city, landArea = :landArea WHERE gigId = :id";

@@ -135,6 +135,25 @@ class Farmer extends Model
         }
     }
 
+    public function monthpayTechassistant($data)
+    {
+        try {
+            $sql = "SELECT userId, DATEDIFF(NOW(), timestamp) as dateDiff, timestamp FROM tech_income WHERE userId = :userId AND  farmerId = :farmerId ORDER BY timestamp DESC LIMIT 1";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'userId' => $data['userId'],
+                'farmerId' => $data['farmerId']]);
+            $req = $stmt->fetch(PDO::FETCH_ASSOC);
+            if($req){
+                return ['status' => true, 'data' => $req];
+            }else {
+                return ['status' => false, 'data' => false];
+            }
+        } catch (Exception $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+
 
     // public function getPayAgrologistsUpdate($data)
     // {
@@ -326,7 +345,7 @@ class Farmer extends Model
     public function getAcceptedTechByFarmer($id)
     {
         try {
-            $sql = "SELECT tr.technicalAssistantId, tr.status, u.firstName, u.lastName, u.city, u.image from techassistant_request tr INNER JOIN user u ON tr.technicalAssistantId = u.uid WHERE tr.farmerId = :farmerId AND tr.status = 'Accepted' OR tr.status = 'PAID' ORDER BY tr.requestedDate DESC";
+            $sql = "SELECT tr.technicalAssistantId, tr.farmerId, tr.status, u.firstName, u.lastName, u.city, u.image from techassistant_request tr INNER JOIN user u ON tr.technicalAssistantId = u.uid WHERE tr.farmerId = :farmerId AND tr.status = 'Accepted' OR tr.status = 'PAID' ORDER BY tr.requestedDate DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['farmerId' => $id]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
