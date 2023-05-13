@@ -140,60 +140,47 @@
                     <div class="row">
                         <div class="data farmer__">
                             <div class="farmerimg">
-                                <img src="<?php echo UPLOADS  . $p['thumbnail'] ?>" alt="Picture">
+                                <img src="<?php echo UPLOADS . '/' . $p['thumbnail'] ?>" alt="Picture">
                             </div>
                         </div>
-                        <div class="body">
-                            <?php
-                            foreach ($products as $p) {
-                            ?>
-                                <div class="row">
-                                    <div class="data farmer__">
-                                        <div class="farmerimg">
-                                            <img src="<?php echo UPLOADS . '/' . $p['thumbnail'] ?>" alt="Picture">
-                                        </div>
-                                    </div>
-                                    <div class="data ">
-                                        <div class="namecol">
-                                            <h1>
-                                                <p><?php echo $p['title'] ?></p>
-                                            </h1>
-                                            <p><?php echo $p['category'] ?></p>
-                                        </div>
-                                    </div>
-                                    <div class="data">
-                                        <p><?php echo $p['fName'] . " " . $p['lName'] ?></p>
-                                    </div>
-                                    <div class="data">
-                                        <p class="LKR"><?php echo number_format($p['capital'], 2, '.', ',') ?></p>
-                                    </div>
-                                    <div class="data">
-                                        <p><?php echo $p['city'] ?></p>
-                                    </div>
-                                    <!-- <div class="data">
+                        <div class="data ">
+                            <div class="namecol">
+                                <h1>
+                                    <p><?php echo $p['title'] ?></p>
+                                </h1>
+                                <p><?php echo $p['category'] ?></p>
+                            </div>
+                        </div>
+                        <div class="data">
+                            <p><?php echo $p['fName'] . " " . $p['lName'] ?></p>
+                        </div>
+                        <div class="data">
+                            <p class="LKR"><?php echo number_format($p['capital'], 2, '.', ',') ?></p>
+                        </div>
+                        <div class="data">
+                            <p><?php echo $p['city'] ?></p>
+                        </div>
+                        <!-- <div class="data">
                                     <p><?php echo $p['status'] ?></p>
                                 </div> -->
-                                    <div class="data">
-                                        <p><?php echo $p['landArea'] ?></p>
-                                    </div>
-                                    <div class="data">
-                                        <p><?php echo $p['description'] ?></p>
-                                    </div>
-                                    <div class="data flex-right">
-                                        <div class="actions">
-                                            <a class="btn btn-primary" href="<?php echo URLROOT ?>/farmer/progressUpdate/<?php echo $p['gigId'] ?>">View</a>
-                                            <!-- <button onclick="openAcceptModal('<?php echo $p['gigId'] ?>')" class="button__primary">Accept</button> -->
-                                            <!-- <button onclick="openRejectModal('<?php echo $p['gigId'] ?>')" class="button__danger">Reject</button> -->
-                                            <!-- <a href="<?php echo URLROOT . "/farmer/deleteGig/" . $p['gigId'] ?>" class="btn btn-danger">Delete</a> -->
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="data">
+                            <p><?php echo $p['landArea'] ?></p>
+                        </div>
+                        <div class="data">
+                            <p class="limit-text-3"><?php echo $p['description'] ?></p>
+                        </div>
+                        <div class="data flex-right">
+                            <div class="actions">
+                                <a class="btn btn-primary" href="<?php echo URLROOT ?>/farmer/progressUpdate/<?php echo $p['gigId'] ?>">View</a>
+                                <!-- <button onclick="openAcceptModal('<?php echo $p['gigId'] ?>')" class="button__primary">Accept</button> -->
+                                <!-- <button onclick="openRejectModal('<?php echo $p['gigId'] ?>')" class="button__danger">Reject</button> -->
+                                <!-- <a href="<?php echo URLROOT . "/farmer/deleteGig/" . $p['gigId'] ?>" class="btn btn-danger">Delete</a> -->
+                            </div>
                         </div>
                     </div>
-            <?php
-                            }
-                        }
-            ?>
+                <?php
+                }
+                ?>
             </div>
         </div>
     </div>
