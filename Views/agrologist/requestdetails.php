@@ -31,7 +31,7 @@
                 <hr>
                 <div class="flex flex-row">
                     <div class="requestdetails_img mt-3">
-                        <img class="request_image" src="<?php echo UPLOADS . '/' . $requestDetails[0]['image'] ?>"
+                        <img class="request_image" src="<?php echo UPLOADS . '/profilePictures/' . $requestDetails[0]['image'] ?>"
                             alt="">
                     </div>
                     <!-- <div><?php echo json_encode($requestDetails) ?></div> -->
@@ -54,7 +54,7 @@
                                 style="--percent: calc(<?php echo $requestDetails[0]['total'] / ($requestDetails[0]['num'] * 3) ?>/5*100%)">4.3
                                 out of 5</meter>
 
-                            <div style="color: grey" class="pt-1">Offer(per month)</div>
+                            <div style="color: grey" class="pt-1">Offer(per 30 days)</div>
                             <div>LKR
                                 <?php echo $requestDetails[0]['offer'] ?>
                             </div>

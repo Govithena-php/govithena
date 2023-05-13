@@ -57,75 +57,64 @@
                             <div class="farmer_img">
                                 <img src="<?php echo UPLOADS . '/profilePictures/' . $request['image'] ?>" alt="">
                             </div>
-                            <form action="" method="POST">
-                                <div class="farmer_inner_card">
-                                    <div class="farmer_card_content">
+                            <div>
+                                <form method="POST">
+                                    <div class="farmer_inner_card">
+                                        <div class="farmer_card_content">
 
-                                        <h1>
-                                            <a class="text-dec-none  text-dark "
-                                                href="<?php echo URLROOT . "/agrologist/farmers/" . $request['farmerId'] ?>">
-                                                <?php echo ucwords($request['fullName']) ?>
-                                            </a>
-                                        </h1>
-                                        <h4>
-                                            <?php echo ucwords($request['city']) ?>
-                                        </h4>
+                                            <h1>
+                                                <a class="text-dec-none  text-dark "
+                                                    href="<?php echo URLROOT . "/agrologist/farmers/" . $request['farmerId'] ?>">
+                                                    <?php echo ucwords($request['fullName']) ?>
+                                                </a>
+                                            </h1>
+                                            <h4>
+                                                <?php echo ucwords($request['city']) ?>
+                                            </h4>
 
-                                        <h4 class="fw-6 LKR">
-                                            <?php echo number_format(ucwords($request['offer'])) ?>
-                                        </h4>
+                                            <h4 class="fw-6 LKR">
+                                                <?php echo number_format(ucwords($request['offer'])) ?>
+                                            </h4>
 
-                                        <!-- <?php echo $request['total'] / ($request['num'] * 3) ?>
-                                        <?php echo $request['num'] ?> -->
+                                           
 
-                                        <meter class="average-rating" min="0" max="5" value="5" title="4.3 out of 5 stars"
-                                            style="--percent: calc(<?php echo $request['total'] / ($request['num'] * 3) ?>/5*100%)">4.3
-                                            out of 5</meter>
+                                            <meter class="average-rating" min="0" max="5" value="5" title="4.3 out of 5 stars"
+                                                style="--percent: calc(<?php echo $request['total'] / ($request['num'] * 3) ?>/5*100%)">4.3
+                                                out of 5</meter>
 
-                                        <!-- <p class="flex flex-row">
-                                            <span class="fa fa-star rating_checked"></span>
-                                            <span class="fa fa-star rating_checked"></span>
-                                            <span class="fa fa-star rating_checked"></span>
-                                            <span class="fa fa-star rating_checked"></span>
-                                            <span class="fa fa-star"></span>
-                                        </p> -->
+                                            
 
-                                    </div>
-                                    <div class="flex flex-row flex-sa-c">
-                                        <!-- <i>class="message-icon fab fa-telegram-plane flex"></i> -->
-                                        <!-- <a href="<?php echo URLROOT . '/agrologist/chat/' . $request['farmerId'] ?>"
+                                        </div>
+                                        <div class="flex flex-row flex-sa-c">
+                                            <!-- <a href="<?php echo URLROOT . '/agrologist/chat/' . $request['farmerId'] ?>"
                                             class="btn btn-primary mt-3 ml-2">Message</a> -->
-                                        <div>
-                                            <a href="tel:720523034" class="btn btn-primary ">Call</a>
-                                        </div>
-                                        <div>
-                                            <a href="<?php echo URLROOT . '/agrologist/reviews/' . $request['farmerId'] ?>"
-                                                class="btn btn-primary ">Review</a>
-                                        </div>
-                                        <div>
-                                            <?php
-                                            $date = date('Y-m-d', strtotime($request['requestedDate']));
-                                            // echo $date;
-                                            $f = " + " . $request['timePeriod'] . " days";
-                                            // echo $f;
-                                            $d = date('Y-m-d', strtotime($date . $f));
-                                            // date_add($date,date_interval_create_from_date_string("40 days"))
-                                            // echo $d;
-                                            // echo date('Y-m-d', strtotime($d));
-                                            // echo date('Y-m-d', time());
-                                            if ($d <= date('Y-m-d', time())) {
-                                                ?>
-                                                <a href="#" class="btn btn-danger " id="edit_details">Complete</a>
+                                            <div>
+                                                <a href="tel:720523034" class="btn btn-primary ">Call</a>
+                                            </div>
+                                            <div>
+                                                <a href="<?php echo URLROOT . '/agrologist/reviews/' . $request['farmerId'] ?>"
+                                                    class="btn btn-primary ">Review</a>
+                                            </div>
+                                            <div>
                                                 <?php
-                                            }
-                                            ?>
+                                                $date = date('Y-m-d', strtotime($request['requestedDate']));
+                                                $f = " + " . $request['timePeriod'] . " days";
+                                                $d = date('Y-m-d', strtotime($date . $f));
+                                              
+                                                if ($d <= date('Y-m-d', time())) {
+                                                    ?>
+                                                    <a href="#" class="btn btn-danger " id="edit_details">Complete</a>
+                                                    <?php
+                                                }
+                                                ?>
 
 
+                                            </div>
                                         </div>
-                                    </div>
 
-                                </div>
-                            </form>
+                                    </div>
+                                </form>
+                            </div>
                             <div id="edit_detials_modal" class="modal">
 
                                 <div class="modal-content">

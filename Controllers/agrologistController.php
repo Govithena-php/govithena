@@ -89,7 +89,7 @@ class agrologistController extends Controller
                 $uid = Session::get('user')->getUid();
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     if (isset($_POST['update_details_btn'])) {
-
+                        // echo("hi");die();
                         $fieldVisitId = new UID(PREFIX::FEILDVISIT);
 
                         $week = new Input(POST, 'week');
@@ -273,6 +273,7 @@ class agrologistController extends Controller
                 } else {
                     echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>nope</h1>";
                 }
+                header("Refresh:0.5");
                 Session::set(['farmer_request_alert' => $alert]);
             }
 
@@ -341,7 +342,7 @@ class agrologistController extends Controller
             } else {
                 $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong!');
             }
-
+            header("Refresh:0.5");
             Session::set(['edit_user_details_alert' => $alert]);
         }
 
@@ -363,7 +364,7 @@ class agrologistController extends Controller
             } else {
                 $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong!');
             }
-
+            header("Refresh:0.5");
             Session::set(['add_account_details_alert' => $alert]);
         }
 
@@ -385,7 +386,7 @@ class agrologistController extends Controller
             } else {
                 $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong!');
             }
-
+            header("Refresh:0.5");
             Session::set(['edit_account_details_alert' => $alert]);
         }
 
@@ -406,6 +407,7 @@ class agrologistController extends Controller
                 } else {
                     $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong!');
                 }
+                header("Refresh:0.5");
 
                 Session::set(['add_qualification_details_alert' => $alert]);
             }
@@ -432,6 +434,8 @@ class agrologistController extends Controller
             } else {
                 $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong!');
             }
+            header("Refresh:0.5");
+
             Session::set(['edit_qualification_details_alert' => $alert]);
         }
 
@@ -496,12 +500,34 @@ class agrologistController extends Controller
     {
 
         $uid = Session::get('user')->getUid();
+        $props = [];
+        $fieldVisitUpdate = $agrologist->getFieldVisitDetails($fid, $gid);
+        // var_dump($fieldVisitUpdate);die();
+        $props['fid'] = $fid;
+        $props['gid'] = $gid;
+        // var_dump($fieldVisitUpdate);die();
 
-        $d['fieldVisit'] = $agrologist->getFieldVisitDetails($fid, $gid);
-        $d['fid'] = $fid;
-        $d['gid'] = $gid;
+        $props['fieldVisitUpdate'] = [];
+        // var_dump($fieldVisitUpdate);die();
+        if($fieldVisitUpdate){
+            // var_dump($fieldVisitUpdate);die();
+            foreach($fieldVisitUpdate as $fvt){
+                $fieldVisitImages = [];
+                $temp = $agrologist->getFieldVisitImages($fvt['visitId']);
+                // var_dump($temp);die();
+                foreach($temp as $key => $value){
+                    $fieldVisitImages[$key] = $value['image'];
+                }
+                $fvt['images'] = $fieldVisitImages;
+                $props['fieldVisitUpdate'][] = $fvt;
+            }
+        }
+        // var_dump($props);die();
 
-        $this->set($d);
+
+
+
+        $this->set($props);
         return $this->render('farmerdetails');
     }
 
@@ -581,7 +607,10 @@ class agrologistController extends Controller
                         $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong!');
                     }
                 }
+                header("Refresh:0.5");
                 Session::set(['agrologist_withdraw_alert' => $alert]);
+                
+                
             }
         }
 

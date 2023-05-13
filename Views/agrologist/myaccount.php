@@ -64,17 +64,19 @@
 
                             <?php echo "<h1>" . $agrologist[0]['firstName'] . " " . $agrologist[0]['lastName'] . "</h1>"; ?>
 
-                            <?php echo "<h4>" . ucwords($agrologist[0]['userType']) . "</h4>"; ?>
-
-
-
-                            <p class="flex flex-row">
+                            <?php echo "<h4 class='fw-6'>" . ucwords($agrologist[0]['userType']) . "</h4>"; ?>
+                            <div>
+                                <p class="caption">Here you can change your personal information as account details.</p>
+                                <p class="caption">Completing your qualification details will be of help in recognizing
+                                    your profile.</p>
+                            </div>
+                            <!-- <p class="flex flex-row">
                                 <span class="fa fa-star rating_checked"></span>
                                 <span class="fa fa-star rating_checked"></span>
                                 <span class="fa fa-star rating_checked"></span>
                                 <span class="fa fa-star rating_checked"></span>
                                 <span class="fa fa-star"></span>
-                            </p>
+                            </p> -->
 
                         </div>
                         <!-- <div class="flex flex-row flex-c-c" style="width: 200px;margin-top: 110px">
@@ -105,7 +107,8 @@
             <!-- <hr> -->
             <div class="wrapper">
                 <div class="tab" id="1" active="true">
-                    <div class="[ requests__continer ]" style="background-color: white; margin-bottom: 100px; padding: 30px">
+                    <div class="[ requests__continer ]"
+                        style="background-color: white; margin-bottom: 100px; padding: 30px">
                         <form action="" method="POST">
                             <div class="flex flex-row flex-sb-c ">
                                 <div>
@@ -166,36 +169,46 @@
                             <div class="modal-content">
                                 <span class="close close_modal1">&times;</span>
                                 <h3>Edit Details</h3>
-                                <form class="form pt-1" action="<?php echo URLROOT ?>/agrologist/myaccount" method="post" enctype="multipart/form-data">
+                                <form class="form pt-1" action="<?php echo URLROOT ?>/agrologist/myaccount"
+                                    method="post" enctype="multipart/form-data">
                                     <div class="[ grid ]" sm="1" lg="2" gap="2">
 
                                         <!-- <div class="flex flex-row" style="justify-content: space-between"> -->
                                         <div class="wrapper">
-                                            <input type="text" name="firstName" class="" placeholder="First Name" value="<?php echo $agrologist[0]['firstName'] ?>">
+                                            <input type="text" name="firstName" class="" placeholder="First Name"
+                                                value="<?php echo $agrologist[0]['firstName'] ?>">
                                         </div>
                                         <div class="wrapper">
 
-                                            <input type="text" name="lastName" class="" placeholder="Last Name" value="<?php echo $agrologist[0]['lastName'] ?>">
+                                            <input type="text" name="lastName" class="" placeholder="Last Name"
+                                                value="<?php echo $agrologist[0]['lastName'] ?>">
                                         </div>
                                         <!-- <div class="flex flex-row flex-sb-c"> -->
                                         <div class="wrapper">
 
-                                            <input type="text" name="phoneNumber" class="" placeholder="Mobile" value="<?php echo $agrologist[0]['phoneNumber'] ?>">
+                                            <input type="text" name="phoneNumber" class="" placeholder="Mobile"
+                                                value="<?php echo $agrologist[0]['phoneNumber'] ?>">
                                         </div>
                                         <div class="wrapper">
 
-                                            <input type="text" name="NIC" class="" placeholder="NIC" value="<?php echo $agrologist[0]['NIC'] ?>">
+                                            <input type="text" name="NIC" class="" placeholder="NIC"
+                                                value="<?php echo $agrologist[0]['NIC'] ?>">
                                         </div>
                                         <!-- <div class="flex flex-row flex-sb-c"> -->
-                                        <input type="text" name="addressLine1" class="" placeholder="Address Line1" value="<?php echo $agrologist[0]['addressLine1'] ?>">
-                                        <input type="text" name="addressLine2" class="" placeholder="Address Line2" value="<?php echo $agrologist[0]['addressLine2'] ?>">
+                                        <input type="text" name="addressLine1" class="" placeholder="Address Line1"
+                                            value="<?php echo $agrologist[0]['addressLine1'] ?>">
+                                        <input type="text" name="addressLine2" class="" placeholder="Address Line2"
+                                            value="<?php echo $agrologist[0]['addressLine2'] ?>">
                                         <!-- </div> -->
                                         <!-- <div class="flex flex-row flex-sb-c"> -->
-                                        <input type="text" name="city" placeholder="City" value="<?php echo $agrologist[0]['city'] ?>">
-                                        <input type="text" name="district" placeholder="District" value="<?php echo $agrologist[0]['district'] ?>">
+                                        <input type="text" name="city" placeholder="City"
+                                            value="<?php echo $agrologist[0]['city'] ?>">
+                                        <input type="text" name="district" placeholder="District"
+                                            value="<?php echo $agrologist[0]['district'] ?>">
                                         <!-- </div> -->
                                         <!-- <div class="flex flex-row flex-sb-c"> -->
-                                        <input type="text" name="postalCode" placeholder="Postal Code" value="<?php echo $agrologist[0]['postalCode'] ?>">
+                                        <input type="text" name="postalCode" placeholder="Postal Code"
+                                            value="<?php echo $agrologist[0]['postalCode'] ?>">
                                         <input type='file' name="profile_img" accept="image/*">
                                     </div>
                                     <button type="submit" name="edit_details_btn" class="btn uppercase">Edit
@@ -209,8 +222,10 @@
 
                 </div>
                 <div class="tab" id="2">
-                    <div class="[ requests__continer ]" style="background-color: white; margin-bottom: 100px; padding: 30px">
-                        <form action="<?php echo URLROOT . '/agrologist/requests/' . $request['requestId'] . '/' ?>" method="POST">
+                    <div class="[ requests__continer ]"
+                        style="background-color: white; margin-bottom: 100px; padding: 30px">
+                        <form action="<?php echo URLROOT . '/agrologist/requests/' . $request['requestId'] . '/' ?>"
+                            method="POST">
                             <div class="flex flex-row flex-sb-c ">
                                 <div>
                                     <h2>Qualification Details</h2>
@@ -218,20 +233,22 @@
                                 </div>
                                 <?php
                                 if (!empty($qualifications)) {
-                                ?>
+                                    ?>
                                     <div>
-                                        <a href="#" class="btn uppercase fs-4 btn-primary " id="edit_qualification_details">Edit
+                                        <a href="#" class="btn uppercase fs-4 btn-primary "
+                                            id="edit_qualification_details">Edit
                                             Qualification Details</a>
                                     </div>
-                                <?php
+                                    <?php
                                 } else {
-                                ?>
+                                    ?>
                                     <div>
-                                        <a href="#" class="btn uppercase fs-4 btn-primary " id="add_qualification_details">Add
+                                        <a href="#" class="btn uppercase fs-4 btn-primary "
+                                            id="add_qualification_details">Add
                                             Qualification Details</a>
                                     </div>
 
-                                <?php
+                                    <?php
                                 }
                                 ?>
                             </div>
@@ -242,14 +259,15 @@
                         if (!isset($qualifications) || empty($qualifications)) {
                             require(COMPONENTS . "dashboard/noDataFound.php");
                         } else {
-                        ?>
+                            ?>
 
                             <div style="color: grey" class="pt-1">Grama Niladhari Certificate</div>
-                            <a href="<?php echo UPLOADS; ?><?php echo $qualifications[0]['gnCertificate'] ?>" target="_blank">Click to View the Certificate</a>
+                            <a href="<?php echo UPLOADS; ?><?php echo $qualifications[0]['gnCertificate'] ?>"
+                                target="_blank">Click to View the Certificate</a>
                             <div style="color: grey" class="pt-1">Qualification Description</div>
                             <?php echo "<div>" . $qualifications[0]['description'] . "</div>"; ?>
 
-                        <?php
+                            <?php
                         }
                         ?>
 
@@ -258,12 +276,12 @@
                             <div class="modal-content">
                                 <span class="close close_modal_add_qualifications">&times;</span>
                                 <h3>Add Qualifications Details</h3>
-                                <form class="form pt-1" action="<?php echo URLROOT ?>/agrologist/myaccount" method="post" enctype="multipart/form-data">
-                                    <div class="[ grid ]" sm="1" lg="1" gap="1">
-                                        <input type="file" name="gn_certificate" class="" required>
-                                        <input type="text" name="description" class="" placeholder="Description">
-                                    </div>
-                                    <button type="submit" name="add_qualification_details_btn" class="btn uppercase">Submit</button>
+                                <form class="form pt-1" action="<?php echo URLROOT ?>/agrologist/myaccount"
+                                    method="post" enctype="multipart/form-data">
+                                    <input type="file" name="gn_certificate" class="" required><br>
+                                    <input type="text" name="description" class="" placeholder="Description"><br>
+                                    <button type="submit" name="add_qualification_details_btn"
+                                        class="btn uppercase">Submit</button>
                                 </form>
                             </div>
                         </div>
@@ -273,10 +291,14 @@
                             <div class="modal-content">
                                 <span class="close close_modal_edit_qualifications">&times;</span>
                                 <h3>Edit Qualifications Details</h3>
-                                <form class="form pt-1" action="<?php echo URLROOT ?>/agrologist/myaccount" method="post" enctype="multipart/form-data">
-                                    <input type="file" name="gn_certificate" class="" value="<?php echo $qualifications[0]['gnCertificate'] ?>"><br>
-                                    <input type="text" name="description" placeholder="Description" value="<?php echo $qualifications[0]['description'] ?>"><br>
-                                    <button type="submit" name="edit_qualification_details_btn" class="btn uppercase">Submit</button>
+                                <form class="form pt-1" action="<?php echo URLROOT ?>/agrologist/myaccount"
+                                    method="post" enctype="multipart/form-data">
+                                    <input type="file" name="gn_certificate" class=""
+                                        value="<?php echo $qualifications[0]['gnCertificate'] ?>"><br>
+                                    <input type="text" name="description" placeholder="Description"
+                                        value="<?php echo $qualifications[0]['description'] ?>"><br>
+                                    <button type="submit" name="edit_qualification_details_btn"
+                                        class="btn uppercase">Submit</button>
                                 </form>
                             </div>
                         </div>
@@ -284,8 +306,10 @@
                     </div>
                 </div>
                 <div class="tab" id="3">
-                    <div class="[ requests__continer ]" style="background-color: white; margin-bottom: 100px; padding: 30px">
-                        <form action="<?php echo URLROOT . '/agrologist/requests/' . $request['requestId'] . '/' ?>" method="POST">
+                    <div class="[ requests__continer ]"
+                        style="background-color: white; margin-bottom: 100px; padding: 30px">
+                        <form action="<?php echo URLROOT . '/agrologist/requests/' . $request['requestId'] . '/' ?>"
+                            method="POST">
                             <div class="flex flex-row flex-sb-c ">
                                 <div>
                                     <h2>Account Details</h2>
@@ -293,20 +317,20 @@
                                 </div>
                                 <?php
                                 if (!empty($account)) {
-                                ?>
+                                    ?>
                                     <div>
                                         <a href="#" class="btn uppercase fs-4 btn-primary " id="edit_account_details">Edit
                                             Account Details</a>
                                     </div>
-                                <?php
+                                    <?php
                                 } else {
-                                ?>
+                                    ?>
                                     <div>
                                         <a href="#" class="btn uppercase fs-4 btn-primary " id="add_account_details">Add
                                             Account Details</a>
                                     </div>
 
-                                <?php
+                                    <?php
                                 }
                                 ?>
                             </div>
@@ -316,7 +340,7 @@
                         if (!isset($account) || empty($account)) {
                             require(COMPONENTS . "dashboard/noDataFound.php");
                         } else {
-                        ?>
+                            ?>
                             <div style="color: grey" class="pt-1">Bank</div>
                             <?php echo "<div>" . BANK[$account[0]['bank']] . "</div>"; ?>
                             <div style="color: grey" class="pt-1">Account Number</div>
@@ -325,7 +349,7 @@
                             <?php echo "<div>" . ucwords($account[0]['branch']) . "</div>"; ?>
                             <div style="color: grey" class="pt-1">Branch Code</div>
                             <?php echo "<div>" . $account[0]['branchCode'] . "</div>"; ?>
-                        <?php
+                            <?php
                         }
                         ?>
 
@@ -336,17 +360,21 @@
                             <div class="modal-content">
                                 <span class="close close_modal_add_account">&times;</span>
                                 <h3>Add Account Details</h3>
-                                <form class="form pt-1" action="<?php echo URLROOT ?>/agrologist/myaccount" method="post" enctype="multipart/form-data">
+                                <form class="form pt-1" action="<?php echo URLROOT ?>/agrologist/myaccount"
+                                    method="post" enctype="multipart/form-data">
                                     <select id="bank_name" name="bank_name" required>
                                         <?php foreach (BANK as $key => $value)
                                             echo "<option value='$key'>$value</option>";
                                         ?>
                                     </select><br>
                                     <!-- <input type="text" name="bank_name" class="" placeholder="Bank Name"><br> -->
-                                    <input type="text" name="account_number" class="" placeholder="Account Number" required><br>
+                                    <input type="text" name="account_number" class="" placeholder="Account Number"
+                                        required><br>
                                     <input type="text" name="branch" class="" placeholder="Branch" required><br>
-                                    <input type="text" name="branch_code" class="" placeholder="Branch Code" required><br>
-                                    <button type="submit" name="add_account_details_btn" class="btn uppercase">Submit</button>
+                                    <input type="text" name="branch_code" class="" placeholder="Branch Code"
+                                        required><br>
+                                    <button type="submit" name="add_account_details_btn"
+                                        class="btn uppercase">Submit</button>
                                 </form>
                             </div>
                         </div>
@@ -356,19 +384,22 @@
                             <div class="modal-content">
                                 <span class="close close_modal_edit_account">&times;</span>
                                 <h3>Edit Account Details</h3>
-                                <form class="form pt-1" action="<?php echo URLROOT ?>/agrologist/myaccount" method="post" enctype="multipart/form-data">
-                                    <!-- <input type="text" name="bank_name" class="" placeholder="Bank Name"
-                                        value="<?php echo $account[0]['bank'] ?>"><br> -->
+                                <form class="form pt-1" action="<?php echo URLROOT ?>/agrologist/myaccount"
+                                    method="post" enctype="multipart/form-data">
                                     <select id="bank_name" name="bank_name" required>
                                         <?php foreach (BANK as $key => $value)
                                             echo "<option value='$key'>$value</option>";
                                         ?>
                                     </select><br>
-                                    <input type="text" name="account_number" class="" placeholder="Account Number" value="<?php echo $account[0]['accountNumber'] ?>" required><br>
-                                    <input type="text" name="branch" class="" placeholder="Branch" value="<?php echo $account[0]['branch'] ?>" required><br>
-                                    <input type="text" name="branch_code" class="" placeholder="Branch Code" value="<?php echo $account[0]['branchCode'] ?>" requierd><br>
+                                    <input type="text" name="account_number" class="" placeholder="Account Number"
+                                        value="<?php echo $account[0]['accountNumber'] ?>" required><br>
+                                    <input type="text" name="branch" class="" placeholder="Branch"
+                                        value="<?php echo $account[0]['branch'] ?>" required><br>
+                                    <input type="text" name="branch_code" class="" placeholder="Branch Code"
+                                        value="<?php echo $account[0]['branchCode'] ?>" requierd><br>
 
-                                    <button type="submit" name="edit_account_details_btn" class="btn uppercase">Submit</button>
+                                    <button type="submit" name="edit_account_details_btn"
+                                        class="btn uppercase">Submit</button>
                                 </form>
                             </div>
                         </div>
@@ -382,23 +413,6 @@
     <script src="<?php echo JS ?>/app.js"></script>
     <script src="<?php echo JS ?>/tabs.js"></script>
     <script>
-        // const controls = document.querySelectorAll(".controls>button");
-        // const tabs = document.querySelectorAll(".tab");
-
-        // Array.from(controls).forEach(control => {
-        //     control.addEventListener("click", () => {
-        //         let For = control.getAttribute("for")
-        //         Array.from(tabs).forEach(tab => {
-        //             if (tab.id == For) {
-        //                 tab.setAttribute("active", true)
-        //                 control.toggleAttribute("active")
-        //             } else {
-        //                 tab.setAttribute("active", false)
-        //             }
-        //         })
-        //     })
-        // })
-
 
         const expandBtns = document.querySelectorAll(".actions>button")
         const expands = document.querySelectorAll(".expand")
@@ -447,55 +461,55 @@
         var span4 = document.getElementsByClassName("close_modal_add_qualifications")[0];
         var span5 = document.getElementsByClassName("close_modal_edit_qualifications")[0];
 
-        edit_details_btn.onclick = function() {
+        edit_details_btn.onclick = function () {
             edit_detials_modal.style.display = "block";
         }
 
         if (add_account_details_btn != null) {
-            add_account_details_btn.onclick = function() {
+            add_account_details_btn.onclick = function () {
                 add_account_detials_modal.style.display = "block";
             }
         }
 
         if (edit_account_details_btn != null) {
-            edit_account_details_btn.onclick = function() {
+            edit_account_details_btn.onclick = function () {
                 edit_account_detials_modal.style.display = "block";
             }
         }
 
         if (add_qualification_details_btn != null) {
-            add_qualification_details_btn.onclick = function() {
+            add_qualification_details_btn.onclick = function () {
                 add_qualification_detials_modal.style.display = "block";
             }
         }
         if (edit_qualification_details_btn != null) {
 
-            edit_qualification_details_btn.onclick = function() {
+            edit_qualification_details_btn.onclick = function () {
                 edit_qualification_detials_modal.style.display = "block";
             }
         }
 
-        span1.onclick = function() {
+        span1.onclick = function () {
             edit_detials_modal.style.display = "none";
         }
 
-        span2.onclick = function() {
+        span2.onclick = function () {
             add_account_detials_modal.style.display = "none";
         }
 
-        span3.onclick = function() {
+        span3.onclick = function () {
             edit_account_detials_modal.style.display = "none";
         }
 
-        span4.onclick = function() {
+        span4.onclick = function () {
             add_qualification_detials_modal.style.display = "none";
         }
 
-        span5.onclick = function() {
+        span5.onclick = function () {
             edit_qualification_detials_modal.style.display = "none";
         }
 
-        window.onclick = function(event) {
+        window.onclick = function (event) {
             if (event.target == modal) {
                 edit_detials_modal.style.display = "none";
                 add_account_detials_modal.display = "none";

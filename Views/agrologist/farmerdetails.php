@@ -40,7 +40,7 @@
         <hr>
 
         <?php
-        foreach ($fieldVisit as $week) {
+        foreach ($fieldVisitUpdate as $week) {
             ?>
             <div class="content ff-poppins ">
                 <div class="accordian p-2">
@@ -57,20 +57,20 @@
 
 
                         <div style="color: grey" class="pt-1">Images</div>
-                        <!-- <div>
-                            <?php echo json_encode($week['image']) ?>
-                            <?php echo json_encode($week['thumbnail']) ?>
-                        </div> -->
-                        <div class="details_img">
-                            <ul>
-                                <?php if ($week['image'] != null) { ?>
-                                    <li><img src="<?php echo UPLOADS . $week['image']; ?>" alt="image" /></li>
-                                    <?php
+
+                        <div class="imgrow">
+                                <?php if ($week['images'] != null) {
+                                    foreach ($week['images'] as $img) { ?>
+                                        <div class="proimgframe">
+                                            <img src="<?php echo UPLOADS . $img; ?>" alt="image" />
+                                        </div>
+                                        <?php
+                                    }
                                 }
                                 ?>
-                                <!-- <img src="<?php echo UPLOADS . $week['image']; ?>" alt="image" /> -->
-                                <li><img src="<?php echo UPLOADS . $week['thumbnail']; ?>" alt="thumbnail" /></li>
-                            </ul>
+                                <div class="proimgframe">
+                                    <img src="<?php echo UPLOADS . $week['thumbnail']; ?>" alt="thumbnail" />
+                            </div>
                         </div>
                     </div>
 
@@ -88,18 +88,20 @@
 
             <div class="modal-content">
                 <span class="close close_modal1">&times;</span>
-                <h3>Edit Details</h3>
+                <h3>Update Fied Fisit Details</h3>
                 <form class="pt-1" action="<?php echo URLROOT . '/agrologist/farmers/' . $fid . '/' . $gid ?>"
                     method="post" enctype="multipart/form-data">
+                    <!-- <?php echo $fid . $gid ?> -->
                     <div class="[ grid ]" sm="1" lg="2" gap="1">
                         <div class="[ input__control ]">
 
-                            <label for="week" class="fw-5">Title</label>
-                            <input type='text' name="week" placeholder='Week 01'>
+                            <label for="title" class="fw-5">Title</label>
+                            <input type='text' id="titile" name="week" placeholder='Week 01'>
                         </div>
                         <div class="[ input__control ]">
-                            <label for="week" class="fw-5">Date</label>
-                            <input type="date" name="date" max="<?php echo date('Y-m-d', time()) ?>" id="date">
+                            <label for="visitdate" class="fw-5">Date</label>
+                            <input type="date" id="visitdate" name="date" max="<?php echo date('Y-m-d', time()) ?>"
+                                id="date">
                         </div>
                         <!-- </div> -->
                         <!-- </div> -->
@@ -122,12 +124,14 @@
                         </div>
                         <div class="[ input__control ]">
                             <label for="description" class="fw-5">Desciption</label>
-                            <textarea name="description" value='Description' placeholder='Description'></textarea>
+                            <textarea name="description" id="description" value='Description'
+                                placeholder='Description'></textarea>
                         </div>
 
 
                     </div>
-                    <button type="submit" name="update_details_btn" class="btn uppercase btn-primary add_details_btn">Add
+                    <button type="submit" name="update_details_btn"
+                        class="btn uppercase btn-primary add_details_btn">Add
                         details</button>
                 </form>
             </div>

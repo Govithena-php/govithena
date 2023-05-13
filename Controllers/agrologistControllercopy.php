@@ -4,27 +4,21 @@ class agrologistController extends Controller
 {
     private $currentUser;
     private $lastmonthFarmerCount = 0;
+    private $imageHandler;
 
     public function __construct()
     {
         $this->currentUser = Session::get('user');
 
+        $this->imageHandler = new ImageHandler($folder = 'Uploads');
+
         if (!Session::isLoggedIn()) {
             $this->redirect('/auth/signin');
         }
-        // $this->lastmonthFarmerCount =0;
         if (!$this->currentUser->hasAccess(ACTOR::AGROLOGIST)) {
             $this->redirect('/error/dontHaveAccess');
         }
-
     }
-
-    // public function setlastmonthFarmerCount($lastmonthFarmerCount) { 
-    //     $this->lastmonthFarmerCount = $lastmonthFarmerCount; 
-    // }
-    // public function getlastmonthFarmerCount() { 
-    //     return $this->lastmonthFarmerCount; 
-    // }
 
     public function index()
     {
@@ -34,93 +28,121 @@ class agrologistController extends Controller
         $notifications = $agrologist->getnotifications();
         $farmerCount = $agrologist->getFarmerCount();
         $farmerCountLastMonh = $agrologist->getFarmerCountLastMonh();
+        $farmerCountTwoMonthsBefore = $agrologist->getFarmerCountTwoMonthsBefore();
+        $farmerCountThreeMonthsBefore = $agrologist->getFarmerCountThreeMonthsBefore();
+        $farmerCountFourMonthsBefore = $agrologist->getFarmerCountFourMonthsBefore();
+        $farmerCountFiveMonthsBefore = $agrologist->getFarmerCountFiveMonthsBefore();
         $AgrologistTotalIncome = $agrologist->getAgrologistTotalIncome();
         $AgrologistMonthlyIncome = $agrologist->getAgrologistMonthlyIncome();
         $AgrologistFieldVisits = $agrologist->getAgrologistFieldVisits();
         $AgrologistFieldVisitsLastMonth = $agrologist->getAgrologistFieldVisitsLastMonth();
         $GigCount = $agrologist->getGigCount();
         $GigCountLastMonth = $agrologist->getGigCountLastMonth();
-        // echo json_encode($notifications);
-        //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>". $notifications . "</h1>";
+        $GigCountTwoMonthsBefore = $agrologist->getGigCountTwoMonthsBefore();
+        $GigCountThreeMonthsBefore = $agrologist->getGigCountThreeMonthsBefore();
+        $GigCountFourMonthsBefore = $agrologist->getGigCountFourMonthsBefore();
+        $GigCountFiveMonthsBefore = $agrologist->getGigCountFiveMonthsBefore();
+        $GigCountPerCategory = $agrologist->getGigsPerCategory();
+        $incomeLimit = $agrologist->getIncomeLimit();
+        $withdrawalsLimit = $agrologist->getWithdrawalsLimit();
 
-        //assign farmer count if month changes
-        // date('m') != date('m', strtotime("-1 days")
         if (date('m') != 2) {
             $this->lastmonthFarmerCount = $farmerCount[0]['farmerCount'];
         }
-        // echo json_encode($this->lastmonthFarmerCount);
-        // $lastmonthFarmerCount = 
 
         $this->set([
             'notifications' => $notifications,
             'farmerCount' => $farmerCount,
             'farmerCountLastMonh' => $farmerCountLastMonh,
+            'farmerCountTwoMonthsBefore' => $farmerCountTwoMonthsBefore,
+            'farmerCountThreeMonthsBefore' => $farmerCountThreeMonthsBefore,
+            'farmerCountFourMonthsBefore' => $farmerCountFourMonthsBefore,
+            'farmerCountFiveMonthsBefore' => $farmerCountFiveMonthsBefore,
             'agrologistTotalIncome' => $AgrologistTotalIncome,
             'agrologistMonthlyIncome' => $AgrologistMonthlyIncome,
             'agrologistFieldVisits' => $AgrologistFieldVisits,
             'agrologistFieldVisitsLastMonth' => $AgrologistFieldVisitsLastMonth,
             'gigCount' => $GigCount,
-            'gigCountLastMonth' => $GigCountLastMonth
+            'gigCountLastMonth' => $GigCountLastMonth,
+            'gigCountTwoMonthsBefore' => $GigCountTwoMonthsBefore,
+            'gigCountThreeMonthsBefore' => $GigCountThreeMonthsBefore,
+            'gigCountFourMonthsBefore' => $GigCountFourMonthsBefore,
+            'gigCountFiveMonthsBefore' => $GigCountFiveMonthsBefore,
+            'gigCountPerCategory' => $GigCountPerCategory,
+            'incomeLimit' => $incomeLimit,
+            'withdrawalsLimit' => $withdrawalsLimit,
         ]);
         $this->render('index');
     }
 
     public function farmers($params)
     {
-
-        
         if (!empty($params)) {
-            // echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>". count($params) . "</h1>";
             require(ROOT . 'Models/agrologist.php');
             $agrologist = new Agrologist();
 
             if (count($params) == 1) {
                 $this->farmergigs($agrologist, $params[0]);
-            } 
-            else {
-                // require(ROOT . 'Models/agrologist.php');
-                // $agrologist = new Agrologist();
+            } else if ($params[1] == "payments") {
+                $this->payments($agrologist, $params[0]);
+            } else {
                 $uid = Session::get('user')->getUid();
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    if (isset($_POST['update_details_btn'])) {
 
-                if (isset($_POST['update_details_btn'])) {
-                    $week = new Input(POST, 'week');
-                    $date = new Input(POST, 'date');
-                    // $update_file = new Input(POST, 'update_file');
-                    $description = new Input(POST, 'description');
+                        $fieldVisitId = new UID(PREFIX::FEILDVISIT);
 
-                    if (move_uploaded_file($_FILES['update_img']['tmp_name'], "Uploads/" . basename($_FILES['update_img']['name']))) {
-                        //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'> file uploaded  </h1>";
-                        $agrologist->insertFieldVisit([
-                            'week' => $week->get(),
-                            'gigId' => $params[1],
-                            'agrologistId' => $uid,
-                            'farmerId' => $params[0],
-                            'fieldVisitDetails' => $description->get(),
-                            'fieldVisitImage' => basename($_FILES['update_img']['name']),
-                            'visitDate' => $date->get(),
-                        ]);
-                        // echo "file uploaded";
-                    } else {
-                        //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'> file not uploaded  </h1>";
+                        $week = new Input(POST, 'week');
+                        $date = new Input(POST, 'date');
+                        $description = new Input(POST, 'description');
 
-                        //echo "file not uploaded";
+                        try {
+                            $images = $this->imageHandler->upload('images');
+
+                            if (!empty($images)) {
+                                $update = $agrologist->insertFieldVisit([
+                                    'visitId' => $fieldVisitId,
+                                    'week' => $week->get(),
+                                    'gigId' => $params[1],
+                                    'agrologistId' => $uid,
+                                    'farmerId' => $params[0],
+                                    'fieldVisitDetails' => $description->get(),
+                                    'fieldVisitImage' => $images[0],
+                                    'visitDate' => $date->get(),
+                                ]);
+                                $images = array_slice($images, 1);
+                                if (!empty($images)) {
+                                    foreach ($images as $image) {
+                                        $updateimages = $agrologist->insertFieldVisitImage([
+                                            'visitId' => $fieldVisitId,
+                                            'image' => $image,
+                                        ]);
+                                    }
+                                }
+                            }
+
+                            if ($update) {
+                                $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully Updated!');
+                            } else {
+                                $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong.');
+                            }
+
+                            Session::set(['update_field_visit_alert' => $alert]);
+                        } catch (Exception $e) {
+                            echo $e->getMessage();
+                            die();
+                        }
                     }
-
-                    //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $Session::get('uid') . "</h1>";
                 }
 
                 $this->farmerdetails($agrologist, $params[0], $params[1]);
-                //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $Session::get('uid') . "</h1>";
             }
-
-
         } else {
 
             require(ROOT . 'Models/agrologist.php');
             $agr = new Agrologist();
 
             $farmers = $agr->getFarmers();
-            // $farmerReviews = $agr->getFarmerReviews();
             if (isset($farmers)) {
                 $this->set(['ar' => $farmers]);
             } else {
@@ -128,58 +150,37 @@ class agrologistController extends Controller
             }
 
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
                 if (isset($_POST['complete_btn'])) {
+
                     $complete = $agr->completeRequest($_POST['complete_btn']);
-                    // echo json_encode($complete);
+
                     if ($complete) {
                         $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully Completed.');
-
-                    }
-                    else{
+                    } else {
                         $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong.');
                     }
-                }
-                // echo json_encode($complete);
-                Session::set(['complete_farmer_alert' => $alert]);
 
-                
+                    Session::set(['complete_farmer_alert' => $alert]);
+                }
             }
             $this->render('farmers');
         }
     }
 
-    // public function reviews()
-    // {
-    //     $this->render('reviews');
-    // }
-
 
     public function reviews($params)
     {
-        // $props = [];
-        // if (!isset($params[0]) || empty($params[0])) {
-        //     $this->redirect('/error/dontHaveAccess/1');
-        // }
-        // $gigId = $params[0];
-        // Session::set(['gigId' => $gigId]);
-
-        // $props['gig'] = $gig = $this->gigModal->fetchBy($gigId);
-        // if (!$props['gig']) {
-        //     $this->redirect('/error/dontHaveAccess/2');
-        // }
-
-        // $props['farmer'] = $this->userModal->fetchBy($gig['farmerId']);
-        // if (!$props['farmer']) {
-        //     $this->redirect('/error/dontHaveAccess/3');
-        // }
-
 
         require(ROOT . 'Models/agrologist.php');
+
         $agr = new Agrologist();
 
         $farmerName = $agr->getFarmerName($params[0]);
-        // echo json_encode($params[0]);
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+
             if (isset($_POST['submit_review'])) {
                 $data = [
                     'reviewId' => new UID(PREFIX::REVIEW),
@@ -196,19 +197,24 @@ class agrologistController extends Controller
                     'q9' => new Input(POST, 'q9'),
                 ];
 
-                $agr->save($data);
+                $review = $agr->save($data);
 
-                echo json_encode($farmerName);
-
-                //$response = $reviewByInvestor->save($data);
-                //if($response['success']){}
+                if ($review) {
+                    $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully updated!.');
+                } else {
+                    $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong.');
+                }
+                Session::set(['review_agrologist_alert' => $alert]);
+                $this->redirect('/agrologist/farmers');
             }
         }
 
 
 
-        $this->set(['farmerName' => $farmerName]);
-        // echo json_encode($farmerName);
+        $this->set([
+            'farmerName' => $farmerName,
+            'farmerId' => $params[0]
+        ]);
         $this->render('reviews');
     }
 
@@ -217,14 +223,12 @@ class agrologistController extends Controller
     public function requests($params)
     {
         if (!empty($params)) {
-            //echo "<h1 style='color: black; margin-top: 1500px; margin-left: 1000px'>". $params[0]. "</h1>";
             $this->requestdetails($params[0]);
         } else {
             require(ROOT . 'Models/agrologist.php');
             $agr = new Agrologist();
 
             $requests = $agr->farmerRequest();
-
             if (isset($requests)) {
                 $this->set(['ar' => $requests]);
             } else {
@@ -233,9 +237,13 @@ class agrologistController extends Controller
 
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if (isset($_POST['accept'])) {
-                    //var_dump($_POST['accept']);
-                    //echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>" . $_POST['accept'] . "</h1>";
-                    $agr->acceptRequest($_POST['accept']);
+                    $accept = $agr->acceptRequest($_POST['accept']);
+
+                    if ($accept) {
+                        $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully Accepted Request!');
+                    } else {
+                        $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong.');
+                    }
 
                     $data = [
                         'reviewId' => new UID(PREFIX::REVIEW),
@@ -253,27 +261,23 @@ class agrologistController extends Controller
                     ];
 
                     $agr->save($data);
-                    //$this->redirect("/agrologist/farmers");
                 } elseif (isset($_POST['decline'])) {
-                    //var_dump($_POST['accept']);
-                    //echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>" . $_POST['accept'] . "</h1>";
-                    $agr->declineRequest($_POST['decline']);
+                    $decline = $agr->declineRequest($_POST['decline']);
                     $farmerId = $agr->getFarmerId($_POST['decline']);
-                    // echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $farmerId[0] . "</h1>";
-                    echo json_encode($farmerId[0]['farmerId']);
 
-                    $agr->declineNotificationFarmer($farmerId[0]['farmerId']);
-                    //$this->redirect("/agrologist/farmers");
+                    if ($decline) {
+                        $alert = new Alert($type = 'success', $icon = "", $message = 'Declined Request.');
+                    } else {
+                        $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong.');
+                    }
                 } else {
                     echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>nope</h1>";
-
                 }
+                Session::set(['farmer_request_alert' => $alert]);
             }
 
             $this->render('requests');
         }
-
-
     }
 
     public function myaccount()
@@ -284,8 +288,9 @@ class agrologistController extends Controller
         $uid = Session::get('user')->getUid();
 
         $d['agrologist'] = $agrologist->getAgrologistDetails();
-        //var_dump($d['agrologist']);
-        // die();
+        $d['account'] = $agrologist->getAccountDetails();
+        $d['qualifications'] = $agrologist->getQualificationDetails();
+
 
         if (isset($_POST['edit_details_btn'])) {
 
@@ -301,10 +306,9 @@ class agrologistController extends Controller
 
 
             if (move_uploaded_file($_FILES['profile_img']['tmp_name'], "Uploads/" . basename($_FILES['profile_img']['name']))) {
-                //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'> file uploaded  </h1>";
                 Session::get('user')->setImage(basename($_FILES['profile_img']['name']));
 
-                $agrologist->edit_user_details([
+                $edit_user = $agrologist->edit_user_details([
                     'uid' => $uid,
                     'firstName' => $firstName->get(),
                     'lastName' => $lastName->get(),
@@ -317,9 +321,8 @@ class agrologistController extends Controller
                     'postalCode' => $postalCode->get(),
                     'profileImage' => basename($_FILES['profile_img']['name'])
                 ]);
-                // echo "file uploaded";
             } else {
-                $agrologist->edit_user_details([
+                $edit_user = $agrologist->edit_user_without_image([
                     'uid' => $uid,
                     'firstName' => $firstName->get(),
                     'lastName' => $lastName->get(),
@@ -329,15 +332,110 @@ class agrologistController extends Controller
                     'addressLine1' => $addressLine1->get(),
                     'addressLine2' => $addressLine2->get(),
                     'district' => $district->get(),
-                    'postalCode' => $postalCode->get(),
-                    'profileImage' => "null"
+                    'postalCode' => $postalCode->get()
                 ]);
-                //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'> file not uploaded  </h1>";
-
-                //echo "file not uploaded";
             }
 
+            if ($edit_user) {
+                $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully Submitted!');
+            } else {
+                $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong!');
+            }
+
+            Session::set(['edit_user_details_alert' => $alert]);
         }
+
+        if (isset($_POST['add_account_details_btn'])) {
+            $accountNumber = new Input(POST, 'account_number');
+            $bankName = new Input(POST, 'bank_name');
+            $branch = new Input(POST, 'branch');
+            $branchCode = new Input(POST, 'branch_code');
+
+            $insert_account = $agrologist->insertAccountDetails([
+                'accountNumber' => $accountNumber->get(),
+                'bank' => $bankName->get(),
+                'branch' => $branch->get(),
+                'branchCode' => $branchCode->get()
+            ]);
+
+            if ($insert_account) {
+                $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully Submitted!');
+            } else {
+                $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong!');
+            }
+
+            Session::set(['add_account_details_alert' => $alert]);
+        }
+
+        if (isset($_POST['edit_account_details_btn'])) {
+            $accountNumber = new Input(POST, 'account_number');
+            $bankName = new Input(POST, 'bank_name');
+            $branch = new Input(POST, 'branch');
+            $branchCode = new Input(POST, 'branch_code');
+
+            $edit_account = $agrologist->updateAccountDetails([
+                'accountNumber' => $accountNumber->get(),
+                'bank' => $bankName->get(),
+                'branch' => $branch->get(),
+                'branchCode' => $branchCode->get()
+            ]);
+
+            if ($edit_account) {
+                $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully Updated!');
+            } else {
+                $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong!');
+            }
+
+            Session::set(['edit_account_details_alert' => $alert]);
+        }
+
+        if (isset($_POST['add_qualification_details_btn'])) {
+            $gnCertificate = new Input(POST, 'gn_certificate');
+            $description = new Input(POST, 'description');
+
+
+            if (move_uploaded_file($_FILES['gn_certificate']['tmp_name'], "Uploads/" . basename($_FILES['gn_certificate']['name']))) {
+                Session::get('user')->setImage(basename($_FILES['gn_certificate']['name']));
+                $insert_qualifications = $agrologist->insertQualificationDetails([
+                    'gnCertificate' => basename($_FILES['gn_certificate']['name']),
+                    'description' => $description->get()
+                ]);
+
+                if ($insert_qualifications) {
+                    $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully Submitted!');
+                } else {
+                    $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong!');
+                }
+
+                Session::set(['add_qualification_details_alert' => $alert]);
+            }
+        }
+
+        if (isset($_POST['edit_qualification_details_btn'])) {
+            $gnCertificate = new Input(POST, 'gn_certificate');
+            $description = new Input(POST, 'description');
+
+
+            if (move_uploaded_file($_FILES['gn_certificate']['tmp_name'], "Uploads/" . basename($_FILES['gn_certificate']['name']))) {
+                Session::get('user')->setImage(basename($_FILES['gn_certificate']['name']));
+                $edit_qualifications = $agrologist->updateQualificationDetails([
+                    'gnCertificate' => basename($_FILES['gn_certificate']['name']),
+                    'description' => $description->get()
+                ]);
+            } else {
+                $edit_qualifications = $agrologist->updateQualificationDescription([
+                    'description' => $description->get()
+                ]);
+            }
+            if ($edit_qualifications) {
+                $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully Submitted!');
+            } else {
+                $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong!');
+            }
+            Session::set(['edit_qualification_details_alert' => $alert]);
+        }
+
+
 
         $this->set($d);
         $this->render('myaccount');
@@ -351,9 +449,7 @@ class agrologistController extends Controller
 
         $request = $agrologist->farmerRequestDetails($id);
         $gig = $agrologist->getFarmerGigsRequest($id);
-        // echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $d['message'] . "</h1>";
 
-        // $this->set($d);
         $this->set([
             'requestDetails' => $request,
             'gigDetails' => $gig
@@ -361,7 +457,7 @@ class agrologistController extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (isset($_POST['accept'])) {
                 var_dump($_POST['accept']);
-                //echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>" . $_POST['accept'] . "</h1>";
+
                 $agr->acceptRequest($_POST['accept']);
 
                 $data = [
@@ -380,20 +476,15 @@ class agrologistController extends Controller
                 ];
 
                 $agr->save($data);
-                //$this->redirect("/agrologist/farmers");
             } elseif (isset($_POST['decline'])) {
-                //var_dump($_POST['accept']);
-                //echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>" . $_POST['accept'] . "</h1>";
+
                 $agr->declineRequest($_POST['decline']);
                 $farmerId = $agr->getFarmerId($_POST['decline']);
-                // echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $farmerId[0] . "</h1>";
-                echo json_encode($farmerId[0]['farmerId']);
+                // echo json_encode($farmerId[0]['farmerId']);
 
                 $agr->declineNotificationFarmer($farmerId[0]['farmerId']);
-                //$this->redirect("/agrologist/farmers");
             } else {
                 echo "<h1 style='color: white; margin-top: 500px; margin-left: 1000px'>nope</h1>";
-
             }
         }
 
@@ -403,42 +494,12 @@ class agrologistController extends Controller
 
     public function farmerdetails($agrologist, $fid, $gid)
     {
-        // require(ROOT . 'Models/agrologist.php');
-        // $agrologist = new Agrologist();
+
         $uid = Session::get('user')->getUid();
-        //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $uid . "</h1>";
 
         $d['fieldVisit'] = $agrologist->getFieldVisitDetails($fid, $gid);
         $d['fid'] = $fid;
         $d['gid'] = $gid;
-        //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $uid . "</h1>";
-
-        if (isset($_POST['update_details_btn'])) {
-            $week = new Input(POST, 'week');
-            $date = new Input(POST, 'date');
-            // $update_file = new Input(POST, 'update_file');
-            $description = new Input(POST, 'description');
-
-            if (move_uploaded_file($_FILES['update_img']['tmp_name'], "Uploads/" . basename($_FILES['update_img']['name']))) {
-                //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'> file uploaded  </h1>";
-                $agrologist->insertFieldVisit([
-                    'week' => $week->get(),
-                    'gigId' => $gid,
-                    'agrologistId' => $uid,
-                    'farmerId' => $fid,
-                    'fieldVisitDetails' => $description->get(),
-                    'fieldVisitImage' => basename($_FILES['update_img']['name']),
-                    'visitDate' => $date->get(),
-                ]);
-                // echo "file uploaded";
-            } else {
-                //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'> file not uploaded  </h1>";
-
-                //echo "file not uploaded";
-            }
-
-            //echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $Session::get('uid') . "</h1>";
-        }
 
         $this->set($d);
         return $this->render('farmerdetails');
@@ -446,8 +507,7 @@ class agrologistController extends Controller
 
     public function farmergigs($agrologist, $id)
     {
-        // require(ROOT . 'Models/agrologist.php');
-        // $agrologist = new Agrologist();
+
         $d['gigDetails'] = $agrologist->getFarmerGigs(['farmerId' => $id]);
 
         $this->set($d);
@@ -456,13 +516,12 @@ class agrologistController extends Controller
 
     public function chat($userId)
     {
-        // echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $userId[0] . "</h1>";
-        // echo json_encode($userId);
+
         require(ROOT . 'Models/agrologist.php');
         $agrologist = new Agrologist();
 
         $d['messages'] = $agrologist->getmessages($userId[0]);
-        // echo "<h1 style='color: black; margin-top: 500px; margin-left: 1000px'>" . $d['message'] . "</h1>";
+
         if (isset($_POST['update_details_btn'])) {
             $incomingMsgId = new Input(POST, 'incomingMsgId');
             $outgoingMsgId = new Input(POST, 'outgoingMsgId');
@@ -476,17 +535,61 @@ class agrologistController extends Controller
         }
 
         $this->set($d);
-        //echo json_encode($d['messages'] );
+
         return $this->render('chat');
     }
 
-    public function payments()
+    public function payments($agrologist, $fid)
     {
-        // require(ROOT . 'Models/agrologist.php');
-        // $agrologist = new Agrologist();
 
+
+        $d['timePeriod'] = $agrologist->getRequestTimePeriod($fid);
+        $d['paymentDetails'] = $agrologist->getPaymentDetails($fid);
+        $this->set($d);
         return $this->render('payments');
     }
 
+    public function withdrawals()
+    {
+        require(ROOT . 'Models/agrologist.php');
+        $agrologist = new Agrologist();
 
+        $d['withdrawal'] = $agrologist->getAgrologistTotalWithrawal();
+        $d['income'] = $agrologist->getAgrologistTotalIncome();
+        $d['monthly_withdrawal'] = $agrologist->getAgrologistMonthlyWithrawal();
+        $d['account'] = $agrologist->getAccountDetails();
+        $d['income_list'] = $agrologist->getIncome();
+        $d['withdrawal_list'] = $agrologist->getWithdrawals();
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            if (isset($_POST['transfer_confirm_btn'])) {
+                $withdrawal = new INPUT(POST, 'withdraw_amount');
+
+                $withdraw_amount = (int)$withdrawal->get();
+                if ($withdraw_amount <= 0) {
+                    $alert = new Alert($type = 'error', $icon = "", $message = 'Only positive amounts can be transfered!');
+                } else {
+                    $withdraw = $agrologist->insertWithdrawals([
+                        'withdrawalId' => new UID(PREFIX::WITHDRAWAL),
+                        'withdrawal' => $withdrawal->get(),
+                    ]);
+
+                    if ($withdraw) {
+                        $alert = new Alert($type = 'success', $icon = "", $message = 'Successfully Submitted!');
+                    } else {
+                        $alert = new Alert($type = 'error', $icon = "", $message = 'Something went wrong!');
+                    }
+                }
+                Session::set(['agrologist_withdraw_alert' => $alert]);
+            }
+        }
+
+
+
+
+
+        $this->set($d);
+        return $this->render('withdrawals');
+    }
 }

@@ -30,6 +30,30 @@
   display: block;
 }
 
+.proimgframe {
+   
+  width: 180px;
+  height: 180px;
+  border-radius: 15px;
+  overflow: hidden;
+  /* margin-left: 50px; */
+  /* margin: auto; */
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin: 25px 20px 20px 20px;
+
+}
+.proimgframe>img {
+height: 100%;
+width: 100%;
+object-fit: cover;
+}
+
+.imgrow{
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+gap: 1rem;
+}
+
 /* .form input[type="file"] {
     display: none;
 } */
@@ -75,11 +99,11 @@
 
 .accordian .accordian-details {
   position: relative;
-  background: white;
+  /* background: white; */
   height: 0;
   font-size: 14px;
   text-align: justify;
-  width: 780px;
+  width: 100%;
   overflow: hidden;
   transition: 0.5s;
 }
