@@ -155,20 +155,9 @@ class Farmer extends Model
     }
 
 
-    // public function getPayAgrologistsUpdate($data)
-    // {
-    //     try {
-    //         $sql = "UPDATE agrologist_request SET status = 'PAID' WHERE agrologistId = :agrologistId AND  farmerId = :farmerId";
-    //         $stmt = Database::getBdd()->prepare($sql);
-    //         $stmt->execute([
-    //             'agrologistId' => $data['agrologistId'],
-    //             'farmerId' => $data['farmerId']]);
-    //         $req = $stmt->fetch(PDO::FETCH_ASSOC);
-    //         return ['status' => true];
-    //     } catch (Exception $e) {
-    //         return ['status' => false, 'data' => $e->getMessage()];
-    //     }
-    // }
+
+
+
 
     public function sendAgrologistRequest($data)
     {
@@ -212,7 +201,7 @@ class Farmer extends Model
     public function getAcceptedAgrologistByFarmer($id)
     {
         try {
-            $sql = "SELECT ar.agrologistId, ar.farmerId, u.firstName, u.lastName, ar.status, u.city, u.image from agrologist_request ar INNER JOIN user u ON ar.agrologistId = u.uid WHERE ar.farmerId = :farmerId AND ar.status = 'accepted' OR ar.status = 'PAID' ORDER BY ar.statusChangeDate DESC";
+            $sql = "SELECT ar.agrologistId, ar.farmerId, u.firstName, u.lastName, ar.status, u.city, u.image from agrologist_request ar INNER JOIN user u ON ar.agrologistId = u.uid WHERE ar.farmerId = :farmerId AND ar.status = 'accepted' ORDER BY ar.statusChangeDate DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['farmerId' => $id]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -345,7 +334,7 @@ class Farmer extends Model
     public function getAcceptedTechByFarmer($id)
     {
         try {
-            $sql = "SELECT tr.technicalAssistantId, tr.farmerId, tr.status, u.firstName, u.lastName, u.city, u.image from techassistant_request tr INNER JOIN user u ON tr.technicalAssistantId = u.uid WHERE tr.farmerId = :farmerId AND tr.status = 'Accepted' OR tr.status = 'PAID' ORDER BY tr.requestedDate DESC";
+            $sql = "SELECT tr.technicalAssistantId, tr.farmerId, tr.status, u.firstName, u.lastName, u.city, u.image from techassistant_request tr INNER JOIN user u ON tr.technicalAssistantId = u.uid WHERE tr.farmerId = :farmerId AND tr.status = 'Accepted' ORDER BY tr.requestedDate DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['farmerId' => $id]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -406,7 +395,7 @@ class Farmer extends Model
     public function investors($data)
     {
         try {
-            $sql = "SELECT fr.requestId, fr.requestedDate, fr.offer, fr.message, user.firstName, user.lastName,  gig.title, gig.thumbnail, gig.city from gig_request fr INNER JOIN gig ON gig.gigId = fr.gigId INNER JOIN user ON user.uid = fr.investorId WHERE fr.farmerId = :farmerId AND fr.status = :state";
+            $sql = "SELECT fr.requestId, fr.requestedDate, fr.offer, fr.message, user.image, user.firstName, user.lastName,  gig.title, gig.thumbnail, gig.city from gig_request fr INNER JOIN gig ON gig.gigId = fr.gigId INNER JOIN user ON user.uid = fr.investorId WHERE fr.farmerId = :farmerId AND fr.status = :state";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -419,7 +408,7 @@ class Farmer extends Model
     public function reqinvestors($data)
     {
         try {
-            $sql = "SELECT fr.requestId, DATE(fr.requestedDate) as reqdate, fr.offer, fr.message, user.firstName, user.lastName,  gig.title, gig.thumbnail, gig.city from gig_request fr INNER JOIN gig ON gig.gigId = fr.gigId INNER JOIN user ON user.uid = fr.investorId WHERE fr.farmerId = :farmerId AND fr.status = :state";
+            $sql = "SELECT fr.requestId, DATE(fr.requestedDate) as reqdate, fr.offer, fr.message, user.image, user.firstName, user.lastName,  gig.title, gig.thumbnail, gig.city from gig_request fr INNER JOIN gig ON gig.gigId = fr.gigId INNER JOIN user ON user.uid = fr.investorId WHERE fr.farmerId = :farmerId AND fr.status = :state";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -432,9 +421,12 @@ class Farmer extends Model
     public function investorlist($data)
     {
         try {
-            $sql = "SELECT fr.requestId, fr.requestedDate, fr.offer, fr.message, user.firstName, user.lastName,  gig.title, gig.thumbnail, gig.city from gig_request fr INNER JOIN gig ON gig.gigId = fr.gigId INNER JOIN user ON user.uid = fr.investorId WHERE fr.farmerId = :farmerId AND fr.status = :state";
+            $sql = "SELECT fr.requestId, user.image, fr.requestedDate, fr.offer, fr.message, user.firstName, user.lastName,  gig.title, gig.thumbnail, gig.city from gig_request fr INNER JOIN gig ON gig.gigId = fr.gigId INNER JOIN user ON user.uid = fr.investorId WHERE fr.farmerId = :farmerId AND fr.status = :status";
             $stmt = Database::getBdd()->prepare($sql);
-            $stmt->execute($data);
+            $stmt->execute([
+                'farmerId' => $data['farmerId'],
+                'status' => $data['status']
+            ]);
             $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return ['status' => true, 'data' => $req];
         } catch (Exception $e) {
