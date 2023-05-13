@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <div class="right">
-                        <div class="buttons">
+                        <div class="buttons" stlye="">
                             <a href="<?php echo URLROOT ?>/tech/editGig/<?php echo $gig['gigId'] ?>" class="button__primary">Edit gig</a>
                             <a href="<?php echo URLROOT ?>/tech/progress/<?php echo $gig['gigId'] ?>" class="button__primary">progress</a>
                         </div>

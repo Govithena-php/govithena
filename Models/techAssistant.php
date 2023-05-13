@@ -129,7 +129,7 @@ class TechAssistant extends Model
     public function checkGig($id)
     {
         try {
-            $sql = "SELECT gigId FROM tech_gig WHERE gigId = :id";
+            $sql = "SELECT gigId FROM tech_farmer INNER JOIN gig ON gig.farmerId = tech_farmer.farmerId WHERE gigId = :id";
             $stmt =  Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $req = $stmt->fetch(PDO::FETCH_ASSOC);

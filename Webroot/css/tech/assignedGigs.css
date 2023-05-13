@@ -83,3 +83,9 @@
     object-fit: cover;
 }
 
+
+.buttons{
+    display: flex;
+    gap: 2rem;
+
+}
