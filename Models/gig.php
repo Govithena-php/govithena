@@ -544,7 +544,7 @@ class Gig extends Model
     public function getCategoryVsGigsByInvestor($id)
     {
         try {
-            $sql = "SELECT count(roi.roiId) as count, g.category FROM return_of_investment roi INNER JOIN gig g ON roi.gigId = g.gigId WHERE roi.investorId = :investorId AND (roi.status = 'APPROVED' OR roi.status = 'CLEARING') GROUP BY g.category";
+            $sql = "SELECT count(gigId) as count, category FROM gig WHERE investorId = :investorId AND status = 'RESERVED' GROUP BY category";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['investorId' => $id]);
             $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
