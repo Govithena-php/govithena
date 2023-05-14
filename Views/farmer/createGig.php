@@ -38,24 +38,24 @@ x
                         </div>
                         <div class="form__control">
                             <label>Land Area (Hectare) : </label>
-                            <input type="text" name="landArea" placeholder="Land Area">
+                            <input type="number" name="landArea" placeholder="Land Area">
                         </div>
                     </div>
 
                     <div class="row1">
                         <div class="form__control">
                             <label>Amount (LKR): </label>
-                            <input type="text" name="capital" placeholder="Amount">
+                            <input type="number" name="capital" placeholder="Amount">
                         </div>
                         <div class="form__control">
                             <label>Time Period (Days) : </label>
-                            <input type="text" name="timePeriod" placeholder="Time Period">
+                            <input type="number" name="timePeriod" placeholder="Time Period">
                         </div>
                     </div>
                     <div class="row1">
                         <div class="form__control">
-                            <label>Location : </label>
-                            <input type="text" name="location" placeholder="Location">
+                            <label>Profit Margin: </label>
+                            <input type="number" name="profitMargin" placeholder="Profit Margin">
                         </div>
                         <div class="form__control">
                             <label>category : </label>
@@ -68,10 +68,24 @@ x
                             </select>
                         </div>
                     </div>
-                    <div class="row2">
+                    <div class="row1">
                         <div class="form__control">
-                            <label>Profit Margin: </label>
-                            <input type="text" name="profitMargin" placeholder="Profit Margin">
+                            <label>Address 1 : </label>
+                            <input type="text" name="addressLine1" placeholder="Address 1">
+                        </div>
+                        <div class="form__control">
+                            <label>Address 2 : </label>
+                            <input type="text" name="addressLine2" placeholder="Address 2">
+                        </div>
+                    </div>
+                    <div class="row1">
+                        <div class="form__control">
+                            <label>City : </label>
+                            <input type="text" name="city" placeholder="City">
+                        </div>
+                        <div class="form__control">
+                            <label>District : </label>
+                            <input type="text" name="district" placeholder="District">
                         </div>
                     </div>
                     <div>

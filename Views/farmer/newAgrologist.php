@@ -155,7 +155,6 @@
                         </div>
                         <div class=" flex-c-c">
                             <button onclick="openRequestModal('<?php echo $agrologist['uid'] ?>')" class="requestbtn">Send Request</button>
-                            <!-- <a class="requestbtn" href="<?php echo URLROOT . "/farmer/send/" . $agrologist['uid'] ?>">Send Request</a> -->
 
                         </div>
 

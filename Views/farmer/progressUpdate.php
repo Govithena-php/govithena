@@ -42,9 +42,6 @@
 
         <div class="grid__table" style="
                                 --xl-cols: 0.7fr 1.5fr 0.9fr 0.7fr 0.5fr 0.5fr;
-                                --lg-cols: 1.5fr 1fr 1fr 1fr 0.3fr;
-                                --md-cols: 2fr 1fr 0.3fr;
-                                --sm-cols: 3fr 0.3fr;
                             ">
             <div class="head">
                 <div class="row">
@@ -75,7 +72,7 @@
                 <div class="row">
                     <div class="data farmer__">
                         <div class="farmerimg">
-                            <img src="<?php echo UPLOADS . $gig['thumbnail'] ?>" alt="Picture">
+                            <img src="<?php echo UPLOADS . '/' . $gig['thumbnail'] ?>" alt="Picture">
                         </div>
                     </div>
                     <div class="data ">

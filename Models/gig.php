@@ -94,7 +94,7 @@ class Gig extends Model
     public function create($data)
     {
         try {
-            $sql = "INSERT INTO `gig` (`gigId`, `title`, `description`, `category`, `thumbnail`, `capital`, `profitMargin`, `cropCycle`, `city`, `landArea`, `farmerId`) VALUES (:gigId, :title, :description, :category, :thumbnail, :capital, :profitMargin, :cropCycle, :city, :landArea, :farmerId)";
+            $sql = "INSERT INTO `gig` (`gigId`, `title`, `description`, `category`, `thumbnail`, `capital`, `profitMargin`, `cropCycle`, `addressLine1`, `addressLine2`, `city`, `district`, `landArea`, `farmerId`) VALUES (:gigId, :title, :description, :category, :thumbnail, :capital, :profitMargin, :cropCycle, :addressLine1, :addressLine2, :city, :district, :landArea, :farmerId)";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
             return ['success' => true, 'data' => true];
@@ -125,7 +125,7 @@ class Gig extends Model
 
         try {
             // $sql = "UPDATE gig SET status = 'RESERVED', investorId = :investorId, reservedDate = CURRENT_TIMESTAMP WHERE gigId = :id";
-            $sql = "UPDATE gig SET title = :title, description = :description, category = :category, capital = :capital, profitMargin = :profitMargin, cropCycle = :cropCycle, city = :city, landArea = :landArea WHERE gigId = :id";
+            $sql = "UPDATE gig SET title = :title, description = :description, category = :category, capital = :capital, profitMargin = :profitMargin, cropCycle = :cropCycle, city = :city, landArea = :landArea, addressLine1 = :addressLine1, addressLine2 = :addressLine2, city = :city, district = :district WHERE gigId = :id";
 
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
@@ -262,7 +262,7 @@ class Gig extends Model
     public function updateGigDetails($data)
     {
         try {
-            $sql = "UPDATE gig SET title = :title, category = :category, capital = :initialInvestment, cropCycle = :cropCycle, landArea = :landArea, profitMargin =:profitMargin WHERE gigId = :gigId";
+            $sql = "UPDATE gig SET title = :title, category = :category, capital = :initialInvestment, cropCycle = :cropCycle, landArea = :landArea, profitMargin = :profitMargin WHERE gigId = :gigId";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
             return ['success' => true];

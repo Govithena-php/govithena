@@ -208,14 +208,14 @@ textarea {
     padding: 12px 10px;
 }
 
-input[type="text"] {
+input {
     padding: 12px 5px;
     /* margin: 8px 0; */
     width: 100%;
     border: 1px solid #ccc;
 }
 
-input[type="text"]:focus {
+input:focus {
     border: 1px solid #555;
 }
 
