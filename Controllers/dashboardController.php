@@ -502,7 +502,7 @@ class dashboardController extends Controller
         }
 
 
-        $investmentGigs = $this->gigModel->fetchOnlyReservedGigByInvestor($this->currentUser->getUid());
+        $investmentGigs = $this->gigModel->fetchReservedGigByInvestor($this->currentUser->getUid());
         if ($investmentGigs['success']) {
             $props['investmentGigs'] = $investmentGigs['data'];
         } else {
