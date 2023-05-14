@@ -130,9 +130,9 @@
             earningsHidden.value = e.target.value;
             total = document.getElementById('totalInvestment').getAttribute('--data-value')
 
-            if (e.target.value == '') {
-                e.target.value = 0;
-            }
+            // if (e.target.value == '') {
+            //     e.target.value = 0;
+            // }
 
             if (parseFloat(e.target.value) < parseFloat(total)) {
                 profitMargin = -5

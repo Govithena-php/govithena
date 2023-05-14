@@ -675,6 +675,35 @@ progress::-webkit-progress-value {
     justify-content: space-between;
     align-items: center;
 }
+.no__reviews {
+    margin-top: 0.5rem;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    border: 1px solid #ccc;
+    padding: 2rem;
+    border-radius: 0.5rem;
+}
+
+.no__reviews h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.no__reviews p {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--clr-text-gray, #000000);
+    text-transform: capitalize;
+}
+
+.no__reviews img {
+    height: 100px;
+}
 
 
 .modal .input__control textarea {
