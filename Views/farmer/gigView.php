@@ -99,16 +99,19 @@
                 
                 <div class ="gigpic">
                     <img src="<?php echo UPLOADS .'/' .$gig['thumbnail']?>" alt="Picture">
+                </div>
+                    
                     <?php
                         foreach ($gigimgs as $gigimg) {
                     ?>
                     
+                    <div class ="gigpic">
                     <img src="<?php echo UPLOADS .'/' .$gigimg?>" alt="Picture">
-                    <!-- <img src="<?php echo UPLOADS . '/progress/' . $img ?>"> -->
+                    </div>
                     <?php
                     }
                     ?>
-                </div>
+                    
 
                 </div>
                 <div class="namecol">

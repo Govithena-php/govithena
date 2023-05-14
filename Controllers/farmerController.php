@@ -52,7 +52,10 @@ class farmerController extends Controller
             $capital = new Input(POST, 'capital');
             $profitMargin = new Input(POST, 'profitMargin');
             $timePeriod = new Input(POST, 'timePeriod');
-            $location = new Input(POST, 'location');
+            $addressLine1 = new Input(POST, 'addressLine1');
+            $addressLine2 = new Input(POST, 'addressLine2');
+            $location = new Input(POST, 'city');
+            $district = new Input(POST, 'district');
             $category = new Input(POST, 'category');
             $description = $_POST['description'];
             $farmerId = Session::get('user')->getUid();
@@ -72,6 +75,9 @@ class farmerController extends Controller
                     'capital' => $capital,
                     'profitMargin' => $profitMargin,
                     'cropCycle' => $timePeriod,
+                    'addressLine1' => $addressLine1,
+                    'addressLine2' => $addressLine2,
+                    'district' => $district,
                     'city' => $location,
                     'landArea' => $landArea,
                     'farmerId' => $farmerId
@@ -114,6 +120,7 @@ class farmerController extends Controller
                 
             $progressImages = [];
             $temp = $this->gigModel->gigimg($gigId);
+       
             // die();
             foreach ($temp['data'] as $key => $value) {
                 $progressImages[$key] = $value['image'];
@@ -170,7 +177,10 @@ class farmerController extends Controller
             $capital = new Input(POST, 'capital');
             $profitMargin = new Input(POST, 'profitMargin');
             $timePeriod = new Input(POST, 'timePeriod');
-            $location = new Input(POST, 'location');
+            $addressLine1 = new Input(POST, 'addressLine1');
+            $addressLine2 = new Input(POST, 'addressLine2');
+            $location = new Input(POST, 'city');
+            $district = new Input(POST, 'district');
             $category = new Input(POST, 'category');
 
 
@@ -210,7 +220,10 @@ class farmerController extends Controller
                 'capital' => $capital,
                 'profitMargin' => $profitMargin,
                 'cropCycle' => $timePeriod,
+                'addressLine1' => $addressLine1,
+                'addressLine2' => $addressLine2,
                 'city' => $location,
+                'district' => $district,
                 'landArea' => $landArea,
                 // 'farmerId' => $farmerId
             ];

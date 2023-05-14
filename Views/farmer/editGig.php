@@ -36,30 +36,27 @@
                             <input type="text" name="title" placeholder="Title" value="<?php echo $gig['title']?>">
 
 
-
-
-
                         </div>
                         <div class="form__control">
                             <label>Land Area (Hectare) : </label>
-                            <input type="text" name="landArea" placeholder="Land Area" value="<?php echo $gig['landArea']?>">
+                            <input type="number" name="landArea" placeholder="Land Area" value="<?php echo $gig['landArea']?>">
                         </div>
                     </div>
 
                     <div class="row1">
                         <div class="form__control">
                             <label>Amount (LKR): </label>
-                            <input type="text" name="capital" placeholder="Amount" value="<?php echo $gig['capital']?>">
+                            <input type="number" name="capital" placeholder="Amount" value="<?php echo $gig['capital']?>">
                         </div>
                         <div class="form__control">
                             <label>Time Period (Months) : </label>
-                            <input type="text" name="timePeriod" placeholder="Time Period" value="<?php echo $gig['cropCycle']?>">
+                            <input type="number" name="timePeriod" placeholder="Time Period" value="<?php echo $gig['cropCycle']?>">
                         </div>
                     </div>
                     <div class="row1">
                         <div class="form__control">
-                            <label>Location : </label>
-                            <input type="text" name="location" placeholder="Location" value="<?php echo $gig['city']?>">
+                            <label>Profit Margin: </label>
+                            <input type="number" name="profitMargin" placeholder="Profit Margin" value="<?php  echo $gig['profitMargin']?>">
                         </div>
                         <div class="form__control">
                             <label>category : </label>
@@ -72,10 +69,24 @@
                             </select>
                         </div>
                     </div>
-                    <div class="row2">
+                    <div class="row1">
                         <div class="form__control">
-                            <label>Profit Margin: </label>
-                            <input type="text" name="profitMargin" placeholder="Profit Margin" value="<?php  echo $gig['profitMargin']?>">
+                            <label>Address 1 : </label>
+                            <input type="text" name="addressLine1" placeholder="Address 1" value="<?php  echo $gig['addressLine1']?>">
+                        </div>
+                        <div class="form__control">
+                            <label>Address 2 : </label>
+                            <input type="text" name="addressLine2" placeholder="Address 2" value="<?php  echo $gig['addressLine2']?>">
+                        </div>
+                    </div>
+                    <div class="row1">
+                        <div class="form__control">
+                            <label>City : </label>
+                            <input type="text" name="city" placeholder="City" value="<?php  echo $gig['city']?>">
+                        </div>
+                        <div class="form__control">
+                            <label>District : </label>
+                            <input type="text" name="district" placeholder="District" value="<?php  echo $gig['district']?>">
                         </div>
                     </div>
                     <div>
