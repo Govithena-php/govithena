@@ -1,6 +1,7 @@
 .withdrawals_container {
     margin-top: 2rem;
-
+    overflow-y: scroll;
+    height: 50vh;
 }
 
 .withdrawals_heading {
@@ -12,6 +13,8 @@
     border-bottom: 1px solid #ccc;
     background-color: var(--clr-primary);
     color: var(--clr-light);
+    position: sticky;
+    top:0;
 }
 
 .withdrawals{
@@ -42,6 +45,7 @@
     gap: 5rem;
     margin: 1rem 0;
     padding-bottom: 1rem;
+    
    
 }
 
@@ -213,6 +217,16 @@
     color: #1FAA68;
     cursor: pointer;
   }
+
+  ::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(219, 218, 218, 0.5);
+    -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.719);
+}
 
 
   
