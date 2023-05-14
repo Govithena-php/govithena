@@ -13,16 +13,14 @@ class farmerController extends Controller
     private $investmentModel;
     private $roiModel;
 
-    // model ekat PRIVATE  variable ekak define kra
-    private $abcModel;
+   
 
     public function __construct()
     {
         $this->currentUser = Session::get('user');
 
 
-        // <input type="file" name="name eke"
-        //image ekk upload kranna imsgeHandler->upload('name eka')
+     
 
         $this->progressImageHandler = new ImageHandler($folder = 'Uploads/progress');
         $this->gigImageHandler = new ImageHandler($folder = "Uploads");
@@ -34,7 +32,6 @@ class farmerController extends Controller
         $this->progressModel = $this->model('progress');
         $this->roiModel = $this->model('returnOfInvestment');
 
-        $this->abcModel = $this->model('abc'); //model eka import krann ('abc' file eke name)
 
 
         if (!Session::isLoggedIn()) {
@@ -283,11 +280,7 @@ class farmerController extends Controller
             $gig = $this->gigModel->fetchBy($gigId);
             $props['gig'] = $gig['data'];
 
-
-
-
             $progress = $this->progressModel->fetchAllByGigId($gigId);
-            // var_dump($progress); die();
 
             $props['progress'] = [];
             if ($progress['success']) {
@@ -314,61 +307,7 @@ class farmerController extends Controller
     }
 
 
-    // view eke abc.php page eka
-    function abc($params = [])
-    {
-
-        // url eke controller/action eken passe / ghala den values tika okkom $params kiyn array eke tyenne.
-        // var_dump($params[0]);
-
-        //select==============================
-        $id = Session::get('user')->getUid(); //session eken data ganne mehema
-        $gigslist = $this->abcModel->getAllGigs($id); // model eke thiyana adala funciton eka call krla output eka
-        $props['gigs'] = $gigslist; //view ekata yawann one data tika props kiyal hri d kiyala hri passkrann one
-        $props['aaaa'] = 1233;
-
-        //insert=======================
-
-        // forms adunragann vidiya
-
-        // if ($_SERVER['REQUEST_METHOD'] == 'POST'){ // submit button ekak click krlad kiyla --> POST method
-        // <input type="submit" name="form1">
-
-        //     if(isset($_POST['form1'])){ // mona sumbit button eked click kale ---> mona form ekada
-        //         echo "form 1";
-        //     }
-
-        // <button type="submit" name="form2">click</button>
-
-        //     if(isset($_POST['form2'])){
-        //         echo "form 2";
-        //     }
-        // }
-        //=====================
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (isset($_POST['form1'])) {
-
-                $name = new Input(POST, 'uname'); // uname kiyla thiyana input filed eken value eka varibale ekata gannwa
-                $p = new Input(POST, 'pass'); // pass kiyl thiyana input field eken value eka variable ekata gannawa.
-
-                // model ekata insert karann one values pass kranna data object eka hadagann one.
-                $data = [
-                    'x' => $name,
-                    'pass' => $p
-                ];
-
-                $this->abcModel->insertToTable($data);
-            }
-        }
-
-
-
-
-
-        $this->set($props); // view ekata set kranne
-        $this->render('abc'); // file eke nama denn one () athule
-    }
+    
 
 
     function investors($params = [])
