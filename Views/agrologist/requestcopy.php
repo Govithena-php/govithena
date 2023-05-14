@@ -82,37 +82,7 @@
                                 </div>
                             </form>
 
-                            <!-- <div id="edit_detials_modal" class="modal">
-
-                                <div class="modal-content">
-                                    <span class="close close_modal1">&times;</span>
-                                    <h3 class="fw-6">Decline Request</h3>
-                                    <p class="pt-1">Are you sure you want to decline?</p>
-                                    <p><?php echo $request['requestId'] ?></p>
-                                    <form class="form pt-1" action="<?php echo URLROOT . '/agrologist/requests' ?>" method="post"
-                                        enctype="multipart/form-data">
-                                        <button type="submit" name="decline" style="width:30%; margin-left: 250px;" class="btn uppercase"
-                                        value="<?php echo $request['requestId'] ?> ">Decline</button>
-                                    </form>
-                                </div>
-
-                            </div>
-
-                            <div id="accept_modal" class="modal">
-
-                                <div class="modal-content">
-                                    <span class="close close_accept_modal">&times;</span>
-                                    <h3 class="fw-6">Accept Request</h3>
-                                    <p class="pt-1">Are you sure you want to accept?</p>
-                                    <form class="form pt-1" action="<?php echo URLROOT . '/agrologist/requests' ?>" method="post"
-                                        enctype="multipart/form-data">
-                                        <button type="submit" name="accept" style="width:30%; margin-left: 250px;" class="btn uppercase"
-                                        >Accept</button>
-                                    </form>
-                                </div>
-
-                            </div> -->
-
+                           
                         </div>
                         <?php
                     }
@@ -129,12 +99,10 @@
     <?php require "footer.php"; ?>
     <script src="<?php echo JS ?>/agrologist.js"></script>
     <script>
-            // var modal = document.getElementById("myModal");
             var edit_detials_modal = document.getElementById("edit_detials_modal");
             var accept_modal = document.getElementById("accept_modal");
 
             var accept_btn = document.getElementById("accept_btn_<?php echo $request['requestId']?>");
-            // var accept_btn_1 = document.getElementsByName("accept_btn");
             console.log(accept_btn);
 
             function accept_model(){
@@ -154,11 +122,6 @@
                 edit_detials_modal.style.display = "block";
                 decline.setAttribute("value", edit_details_btn.getAttribute("value"));
             }
-
-            // accept_btn.onclick = function () {
-            //     accept_modal.style.display = "block";
-            //     accept.setAttribute("value", accept_btn.getAttribute("value"));
-            // }
 
 
             accept_btn_1.onclick = function () {

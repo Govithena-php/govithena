@@ -11,7 +11,6 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/imageUploader.css">
-    <!-- <link rel="stylesheet" href="<?php echo CSS ?>/agrologist/myaccount.css"> -->
     <link rel="stylesheet" href="<?php echo CSS ?>/agrologist/farmerdetails.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
@@ -75,7 +74,6 @@
                     </div>
 
                 </div>
-                <!-- </div> -->
             </div>
 
             <?php
@@ -103,15 +101,12 @@
                             <input type="date" id="visitdate" name="date" max="<?php echo date('Y-m-d', time()) ?>"
                                 id="date">
                         </div>
-                        <!-- </div> -->
-                        <!-- </div> -->
+                       
                         <div class="[ input__control ]">
                             <label for="images[]" class="fw-5">Upload Images <span>*</span></label>
 
                             <div class="[ form__control image__uploader ]">
-                                <!-- <div class="[ title ]"> -->
-                                <!-- </div> -->
-
+                               
                                 <div class="[ text__box ]">
                                     <div class="[ text__box_preview ]"></div>
                                     <img class="[ upload__svg ]" src="<?php echo IMAGES ?>svg/upload.svg" />
@@ -138,7 +133,6 @@
 
         </div>
         <script>
-            //var modal = document.getElementById("myModal");
             var field_visit = document.getElementById("field_visit");
 
             var edit_details = document.getElementById("edit_details");

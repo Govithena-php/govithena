@@ -41,9 +41,7 @@
                 <h3>Answer the following questions about your experience</h3>
                 <p>Please take a moment to answer the following questions about your experience with the farmer.</p>
         </div>
-        <!-- <div class="[ review__heading ]">
-                <h3>Give your answer for fallowing question.</h3>
-            </div> -->
+       
         <form action="<?php echo URLROOT . '/agrologist/reviews/' . $farmerId ?>" method="POST">
             <div class="[ question__wrapper ]">
                 <div class="[ counter ]"></div>
@@ -176,9 +174,7 @@
                         the farmer to improve their services.
                     </p>
                 </div>
-                <!-- <div class="[ feedbacks__heading ]">
-                        <h3>Give your answer for fallowing question.</h3>
-                    </div> -->
+                
                 <div class="[ feedback ]">
                     <label for="q8">What is your overall experience working with the farmer?</label>
                     <textarea id="q8" name="q8"></textarea>

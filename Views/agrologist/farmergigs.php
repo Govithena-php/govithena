@@ -54,14 +54,11 @@
 
             <div class="[ my-2 ] [ grid ]" gap="1" md="2" lg="4">
                 <?php
-                // echo json_encode($gigDetails);
                 if (isset($gigDetails)) {
-                    // print_r($searchResult);
                     foreach ($gigDetails as $gigDetail) {
                         $imageURL = UPLOADS . $gigDetail["thumbnail"];
 
-                        // echo $imageURL;
-                        // die();
+                        
             
                         ?>
                         <div class="result__card">
@@ -69,7 +66,6 @@
 
                                 <img src="<?php echo $imageURL ?>" alt="test" />
 
-                                <!-- <img src="<?php echo IMAGES ?>/temp/17.jpg" alt="test"> -->
                                 <div class="location_name">
 
                                     <p class="ml-1">

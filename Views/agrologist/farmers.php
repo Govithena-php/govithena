@@ -10,9 +10,6 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/ui.css">
-    <!-- <link rel="stylesheet" href="<?php echo CSS ?>/agrologist/myaccount.css"> -->
-
-    <!-- <link rel="stylesheet" href="<?php echo CSS ?>/agrologist/requests.css"> -->
     <link rel="stylesheet" href="<?php echo CSS ?>/agrologist/farmers.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
@@ -86,8 +83,6 @@
 
                                         </div>
                                         <div class="flex flex-row flex-sa-c">
-                                            <!-- <a href="<?php echo URLROOT . '/agrologist/chat/' . $request['farmerId'] ?>"
-                                            class="btn btn-primary mt-3 ml-2">Message</a> -->
                                             <div>
                                                 <a href="tel:720523034" class="btn btn-primary ">Call</a>
                                             </div>
@@ -123,10 +118,6 @@
                                     <form class="form pt-1" action="<?php echo URLROOT . '/agrologist/farmers' ?>" method="post"
                                         enctype="multipart/form-data">
 
-                                        <!-- <input type="text" name="firstName" class="" placeholder="First Name"
-                                                    value=""><br>
-                                                <input type="text" name="lastName" class="" placeholder="Last Name"
-                                                    value=""><br> -->
                                         <button type="submit" name="complete_btn" class="btn uppercase"
                                             value="<?php echo $request['requestId'] ?> ">Complete</button>
                                     </form>
@@ -163,7 +154,6 @@
             }
         }
 
-        // var modal = document.getElementById("myModal");
         var edit_detials_modal = document.getElementById("edit_detials_modal");
 
         var edit_details_btn = document.getElementById("edit_details");
