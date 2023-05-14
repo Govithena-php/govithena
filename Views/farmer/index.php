@@ -134,7 +134,6 @@
                                 <div class="data farmer__">
                                     <div class="farmerimg">
                                     <a class="underlinetext" href="<?php echo URLROOT ?>/farmer/gigView/<?php echo $p['gigId']?>">
-                                        <!-- <img src="<?php echo UPLOADS . '/profilePictures/' . $p['thumbnail']?>" alt="Picture"> -->
                                         <img src="<?php echo UPLOADS .'/' .$p['thumbnail']?>" alt="Picture">
                                     </a>
                                     </div>

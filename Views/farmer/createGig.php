@@ -47,7 +47,7 @@
                             <input type="text" name="capital" placeholder="Amount">
                         </div>
                         <div class="form__control">
-                            <label>Time Period (Months) : </label>
+                            <label>Time Period (Days) : </label>
                             <input type="text" name="timePeriod" placeholder="Time Period">
                         </div>
                     </div>
