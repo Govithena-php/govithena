@@ -178,7 +178,7 @@
                                 <?php
                                 } else if ($p['status'] == 'UNDER_COMPLETION') {
                                 ?>
-                                    <button onclick="openDepositeModal('<?php echo $p['gigId'] ?>')" class="button__danger button__disabled" disabled>deposite</button>
+                                    <button onclick="openDepositeModal('<?php echo $p['gigId'] ?>')" class="button__danger button__disabled" disabled>Repay</button>
                                 <?php
                                 } else if ($p['status'] == 'NOT_DEPOSITED') {
                                 ?>
