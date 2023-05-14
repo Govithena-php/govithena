@@ -283,17 +283,7 @@ class farmerController extends Controller
             $gig = $this->gigModel->fetchBy($gigId);
             $props['gig'] = $gig['data'];
 
-            // $progs = $this->gigModel->viewPro($gigId);
 
-            // foreach($progs as $pro){
-
-            //      $progimgs = $this->gigModel->viewProimg($pro['progressId']);
-            //      $props['progimgs'] = $progimgs;
-            // }
-
-            // if (!empty($progs)){
-            //     $props['progs'] = $progs;
-            // }
 
 
             $progress = $this->progressModel->fetchAllByGigId($gigId);
@@ -313,14 +303,8 @@ class farmerController extends Controller
             }
         }
 
-        // $id = $this->currentUser->getUid(); //session eken user id eka gannawa activeUser.php file eke tiyenne
-        // $products = $this->gigModel->fetchBy($id);
-        // $props['products'] = $products;
-
-
-        // $farmer = new Farmer();
+ 
         $notifications = $this->farmerModel->getnotifications();
-        //echo json_encode($notifications);
 
         $props['notifications'] = $notifications;
 
@@ -335,7 +319,7 @@ class farmerController extends Controller
     {
 
         // url eke controller/action eken passe / ghala den values tika okkom $params kiyn array eke tyenne.
-        var_dump($params[0]);
+        // var_dump($params[0]);
 
         //select==============================
         $id = Session::get('user')->getUid(); //session eken data ganne mehema

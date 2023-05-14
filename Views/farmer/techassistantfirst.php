@@ -136,13 +136,7 @@
                                 <a class="namebox" href="<?php echo URLROOT . "/profile/" . $techAssistant['uid'] ?>">
                                     <?php echo $techAssistant['firstName'] . " " . $techAssistant['lastName']; ?>
                                 </a>
-                                <!-- <p class="flex flex-row">
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                </p> -->
+           
                             </div>
                         </div>
                         <div class=" flex-c-c">
@@ -178,9 +172,9 @@
     <script src="<?php echo JS ?>/dashboard/dashboard.js"></script>
 
     <script>
-        setTimeout(() => {
-            document.querySelector(".alert").style.display = "none";
-        }, 5000);
+        // setTimeout(() => {
+        //     document.querySelector(".alert").style.display = "none";
+        // }, 5000);
     </script>
 
     <script>
