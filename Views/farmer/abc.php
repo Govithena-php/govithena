@@ -24,6 +24,31 @@
 
 </head>
 <body>
+<dialog id="requestModal" class="[ modal ]">
+        <div class="[ container ]">
+            <div class="[ head ]">
+                <h3>Send A Request</h3>
+            </div>
+            <form action="<?php echo URLROOT ?>/farmer/agrologist_request" method="POST" class="[ content ]">
+                <div class="[ input__control ]">
+                    <label for="offer">Offer (LKR)</label>
+                    <input type="number" name="offer" id="offer" required></input>
+                </div>
+                <div class="[ input__control ]">
+                    <label for="timePeriod">Time Period (Days)</label>
+                    <input type="number" name="timePeriod" id="timePeriod" required></input>
+                </div>
+                <div class="[ input__control ]">
+                    <label for="message">Description</label>
+                    <textarea name="message" id="message" required></textarea>
+                </div>
+                <div class="[ buttons ]">
+                    <button type="button" class="[ button__danger ]" onclick="closeRequestModal()" data-dismiss="modal">Cancel</button>
+                    <button type="submit" id="sendBtn" name="agrologistId" class="[ button__primary ]">Send</button>
+                </div>
+            </form>
+        </div>
+</dialog>
 <div class="card_wrapper">
     <?php  
 

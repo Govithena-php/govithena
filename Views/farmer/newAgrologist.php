@@ -105,7 +105,7 @@
                     <button type="submit" id="sendBtn" name="agrologistId" class="[ button__primary ]">Send</button>
                 </div>
             </form>
-            <
+        </div>
     </dialog>
 
     <div class="container" container-type="dashboard-section">
