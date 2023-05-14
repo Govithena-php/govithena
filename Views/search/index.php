@@ -51,7 +51,7 @@
         </div>
 
         <form class="[ fs-3 ][ search__form ]" action="<?php echo URLROOT . "/search/" ?>" method="get">
-            <input class="" type="text" name="terms" placeholder="search by: name / category / location">
+            <input class="" type="text" name="terms" placeholder="search by: name or category">
             <button class="[ btn btn-primary ] [ search_button ]" type="submit">search</button>
         </form>
 

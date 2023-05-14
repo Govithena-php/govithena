@@ -9,6 +9,7 @@ nav {
 
 .container[container-type="section"] {
     margin-top: 4rem;
+    min-height: calc(100vh - 12em);
 }
 
 /* ============================================================================================ */

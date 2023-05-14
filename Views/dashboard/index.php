@@ -153,29 +153,35 @@
                             <p>No data to display.</p>
                         </div>
                     </div>
-                    <?php
+                <?php
                 } else {
-                    foreach ($reservedGigs as $reservedGig) {
-                    ?>
-                        <div class="[ card ]">
-                            <div class="[ image ]">
-                                <img src="<?php echo UPLOADS . $reservedGig['thumbnail'] ?>" alt="">
-                            </div>
-                            <div class="[ details ]">
-                                <div class="[ flex-column-space-between ]">
-                                    <div class="">
-                                        <h1 class="limit-text-2"><?php echo $reservedGig['title'] ?></h1>
-                                        <h5><?php echo $reservedGig['firstName'] . " " . $reservedGig['lastName'] ?></h5>
+                ?>
+                    <div class="progress__wrapper">
+                        <?php
+                        foreach ($reservedGigs as $reservedGig) {
+                        ?>
+                            <div class="[ card ]">
+                                <div class="[ image ]">
+                                    <img src="<?php echo UPLOADS . $reservedGig['thumbnail'] ?>" alt="">
+                                </div>
+                                <div class="[ details ]">
+                                    <div class="[ flex-column-space-between ]">
+                                        <div class="">
+                                            <h1 class="limit-text-2"><?php echo $reservedGig['title'] ?></h1>
+                                            <h5><?php echo $reservedGig['firstName'] . " " . $reservedGig['lastName'] ?></h5>
+                                        </div>
+                                    </div>
+                                    <div class="[ flex-row-space-between align-items-end ]">
+                                        <h3 class="tag"><?php echo str_replace("_", " ", $reservedGig['status']) ?></h3>
+                                        <a href="<?php echo URLROOT ?>/dashboard/gig/<?php echo $reservedGig['gigId'] ?>" class="[ button__primary ]">View</a>
                                     </div>
                                 </div>
-                                <div class="[ flex-row-space-between align-items-end ]">
-                                    <h3 class="tag"><?php echo str_replace("_", " ", $reservedGig['status']) ?></h3>
-                                    <a href="<?php echo URLROOT ?>/dashboard/gig/<?php echo $reservedGig['gigId'] ?>" class="[ button__primary ]">View</a>
-                                </div>
                             </div>
-                        </div>
+                        <?php
+                        }
+                        ?>
+                    </div>
                 <?php
-                    }
                 }
                 ?>
             </div>
@@ -383,7 +389,7 @@
                             label: 'Category vs Gig',
                             data: $result.data,
                             borderWidth: 1,
-                            backgroundColor: ['#1d9a5f', '#3464d3', 'rgb(255, 140, 0)', 'rgb(0, 77, 255)', 'rgb(117, 7, 135)', 'rgb(0, 128, 38)'],
+                            // backgroundColor: ['#1d9a5f', '#3464d3', 'rgb(255, 140, 0)', 'rgb(0, 77, 255)', 'rgb(117, 7, 135)', 'rgb(0, 128, 38)'],
                         }]
                     },
                     options: {
@@ -410,7 +416,7 @@
                             label: 'Category vs Investments (LKR)',
                             data: $result.data,
                             borderWidth: 1,
-                            backgroundColor: ['#1d9a5f', '#3464d3', 'rgb(255, 140, 0)', 'rgb(0, 77, 255)', 'rgb(117, 7, 135)', 'rgb(0, 128, 38)'],
+                            // backgroundColor: ['#1d9a5f', '#3464d3', 'rgb(255, 140, 0)', 'rgb(0, 77, 255)', 'rgb(117, 7, 135)', 'rgb(0, 128, 38)'],
                         }]
                     },
 
@@ -438,7 +444,7 @@
                             label: 'Category vs Eearnings (LKR)',
                             data: $result.data,
                             borderWidth: 1,
-                            backgroundColor: ['#1d9a5f', '#3464d3', 'rgb(255, 140, 0)', 'rgb(0, 77, 255)', 'rgb(117, 7, 135)', 'rgb(0, 128, 38)'],
+                            // backgroundColor: ['#1d9a5f', '#3464d3', 'rgb(255, 140, 0)', 'rgb(0, 77, 255)', 'rgb(117, 7, 135)', 'rgb(0, 128, 38)'],
                         }]
                     },
 

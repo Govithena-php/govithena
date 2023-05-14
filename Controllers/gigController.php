@@ -67,7 +67,35 @@ class gigController extends Controller
                 $props['farmer'] = $farmer['data'];
             }
 
-            $reviews = $this->reviewByInvestorModel->fetchAllByGig($gigId);
+
+            $reviewCount = $this->reviewByInvestorModel->getReviewCountByFarmer($farmerId);
+            $qCounts = $this->reviewByInvestorModel->getQuestionsCountsByFarmer($farmerId);
+            if ($reviewCount['success']) {
+                $totalReviews = $reviewCount['data']['totalReviewCount'];
+                if ($totalReviews > 0) {
+                    if ($qCounts['success']) {
+                        foreach ($qCounts['data'] as $qKey => $qCount) {
+                            $props['qPrecentages'][$qKey] = ($qCount / $totalReviews) * 100;
+                        }
+                    } else {
+                        foreach ($qCounts['data'] as $qKey => $qCount) {
+                            $props['qPrecentages'][$qKey] = 0;
+                        }
+                    }
+                } else {
+                    foreach ($qCounts['data'] as $qKey => $qCount) {
+                        $props['qPrecentages'][$qKey] = 0;
+                    }
+                }
+            } else {
+                $props['reviewCount'] = 0;
+                foreach ($qCounts['data'] as $qKey => $qCount) {
+                    $props['qPrecentages'][$qKey] = 0;
+                }
+            }
+
+            $reviews = $this->reviewByInvestorModel->fetchAllByFarmer($farmerId);
+
             if ($reviews['success']) {
                 $props['noOfReviews'] = count($reviews['data']);
                 $props['reviews'] = $reviews['data'];
@@ -79,13 +107,13 @@ class gigController extends Controller
                     '4' => 0,
                     '5' => 0
                 ];
-                $gigTotalStars = 0;
+                $farmerAvgStars = 0;
                 $count = 0;
 
                 foreach ($reviews['data'] as $review) {
-                    $gigTotalStars += $review['q1'];
+                    $farmerAvgStars += $review['q2'];
                     $count++;
-                    $stars[$review['q1']]++;
+                    $stars[$review['q2']]++;
                 }
 
                 foreach ($stars as $key => $value) {
@@ -94,8 +122,49 @@ class gigController extends Controller
 
                 $props['stars'] = $stars;
 
-                $props['gigAvgStars'] = floatval($gigTotalStars / $count);
+                $props['farmerAvgStars'] = $farmerAvgStars / $count;
+            } else {
+                $props['noOfReviews'] = 0;
+                $props['reviews'] = [];
+                $props['stars'] = [
+                    '1' => 0,
+                    '2' => 0,
+                    '3' => 0,
+                    '4' => 0,
+                    '5' => 0
+                ];
+                $props['farmerAvgStars'] = 0;
             }
+
+            // $reviews = $this->reviewByInvestorModel->fetchAllByGig($gigId);
+            // if ($reviews['success']) {
+            //     $props['noOfReviews'] = count($reviews['data']);
+            //     $props['reviews'] = $reviews['data'];
+
+            //     $stars = [
+            //         '1' => 0,
+            //         '2' => 0,
+            //         '3' => 0,
+            //         '4' => 0,
+            //         '5' => 0
+            //     ];
+            //     $gigTotalStars = 0;
+            //     $count = 0;
+
+            //     foreach ($reviews['data'] as $review) {
+            //         $gigTotalStars += $review['q2'];
+            //         $count++;
+            //         $stars[$review['q2']]++;
+            //     }
+
+            //     foreach ($stars as $key => $value) {
+            //         $stars[$key] = ($value / $count) * 100;
+            //     }
+
+            //     $props['stars'] = $stars;
+
+            //     $props['gigAvgStars'] = floatval($gigTotalStars / $count);
+            // }
         } else {
             $this->redirect('/error/pageNotFound');
         }

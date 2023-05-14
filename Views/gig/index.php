@@ -95,14 +95,20 @@ function render_stars($stars, $outof)
                 </div>
 
                 <div class="[ gig__description ]">
-                    <h3>About Gig</h3>
+                    <div class="[ caption ]">
+                        <h2>About Gig</h2>
+                        <!-- <p>Explore investor feedback on our farmers' performance and success in sustainable farming investments.</p> -->
+                    </div>
                     <p class="mb-1"><?php echo $gig['description'] ?>.</p>
                 </div>
 
                 <iframe width="100%" height="400px" src="https://maps.google.com/maps?q=<?php echo $gig['addressLine1'] . ', ' . $gig['addressLine2'] . ', ' . $gig['city'] . ', ' . $gig['district'] ?>&output=embed&fullscreen=true&zoom=20" frameborder="0"></iframe>
 
                 <div class="[ about__farmer ]">
-                    <h3>About The Farmer</h3>
+                    <div class="[ caption ]">
+                        <h2>About Farmer</h2>
+                        <p>About farmer, performance and feedback recived.</p>
+                    </div>
                     <div class="[ farmer__image_name ]">
                         <div class="[ farmer__image ]">
                             <img src="<?php echo UPLOADS . '/profilePictures/' . $farmer['image']; ?>" />
@@ -143,7 +149,130 @@ function render_stars($stars, $outof)
                 </div>
 
 
-                <div class="[ ratings ]">
+                <div class="progress">
+                    <div class="[ caption ]">
+                        <h2>Farmer Profile Evaluation</h2>
+                        <p>Explore the comprehensive evaluation of our farmers' performance, including their communication skills, quality of work, overall performance, and more.</p>
+                    </div>
+                    <div class="[ grid ]" sm="1" md="2" gap="1">
+                        <div class="progress__bar">
+                            <div class="progress__details">
+                                <p>Reccomandations</p>
+                                <p><?php echo $qPrecentages['q7Count'] ?>%</p>
+                            </div>
+                            <div class="bar">
+                                <div class="fill" style="--value: <?php echo $qPrecentages['q7Count'] ?>%;"></div>
+                            </div>
+                        </div>
+                        <div class="progress__bar">
+                            <div class="progress__details">
+                                <p>Quality of Work</p>
+                                <p><?php echo $qPrecentages['q3Count'] ?>%</p>
+                            </div>
+                            <div class="bar">
+                                <div class="fill" style="--value: <?php echo $qPrecentages['q3Count'] ?>%;"></div>
+                            </div>
+                        </div>
+                        <div class="progress__bar">
+                            <div class="progress__details">
+                                <p>Overall performance</p>
+                                <p><?php echo $qPrecentages['q4Count'] ?>%</p>
+                            </div>
+                            <div class="bar">
+                                <div class="fill" style="--value: <?php echo $qPrecentages['q4Count'] ?>%;"></div>
+                            </div>
+                        </div>
+                        <div class="progress__bar">
+                            <div class="progress__details">
+                                <p>Communication</p>
+                                <p><?php echo $qPrecentages['q5Count'] ?>%</p>
+                            </div>
+                            <div class="bar">
+                                <div class="fill" style="--value: <?php echo $qPrecentages['q5Count'] ?>%;"></div>
+                            </div>
+                        </div>
+                        <div class="progress__bar">
+                            <div class="progress__details">
+                                <p>Experties</p>
+                                <p><?php echo $qPrecentages['q6Count'] ?>%</p>
+                            </div>
+                            <div class="bar">
+                                <div class="fill" style="--value: <?php echo $qPrecentages['q6Count'] ?>%;"></div>
+                            </div>
+                        </div>
+                        <div class="progress__bar">
+                            <div class="progress__details">
+                                <p>Professionalism</p>
+                                <p><?php echo $qPrecentages['q7Count'] ?>%</p>
+                            </div>
+                            <div class="bar">
+                                <div class="fill" style="--value: <?php echo $qPrecentages['q7Count'] ?>%;"></div>
+                            </div>
+                        </div>
+                        <div class="progress__bar">
+                            <div class="progress__details">
+                                <p>Ease of Collaboration</p>
+                                <p><?php echo $qPrecentages['q7Count'] ?>%</p>
+                            </div>
+                            <div class="bar">
+                                <div class="fill" style="--value: <?php echo $qPrecentages['q6Count'] ?>%;"></div>
+                            </div>
+                        </div>
+                        <div class="progress__bar">
+                            <div class="progress__details">
+                                <p>Financial Management.</p>
+                                <p><?php echo $qPrecentages['q6Count'] ?>%</p>
+                            </div>
+                            <div class="bar">
+                                <div class="fill" style="--value: <?php echo $qPrecentages['q6Count'] ?>%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reviews">
+                    <div class="[ caption ]">
+                        <h2>Investor Feedback and Experiences</h2>
+                        <p>Explore investor feedback on our farmers' performance and success in sustainable farming investments.</p>
+                    </div>
+                    <div class="reviews__wrapper">
+                        <?php
+                        if (!isset($reviews) || empty($reviews)) {
+                        ?>
+                            <div class="no__reviews">
+                                <img src="<?php echo IMAGES ?>/svg/no_data.svg" alt="no reviews">
+                                <h3>No Reviews Yet</h3>
+                                <p>There are no reviews yet. Be the first to review.</p>
+                            </div>
+
+                            <?php
+                        } else {
+                            foreach ($reviews as $review) {
+                            ?>
+                                <div class="review">
+                                    <div class="review__header">
+                                        <div class="reviewer_image">
+                                            <img src="<?php echo UPLOADS . 'profilePictures/' . $review['image'] ?>" alt="profile">
+                                        </div>
+                                        <h3><?php echo $review['firstName'] . " " . $review['lastName'] ?></h3>
+                                    </div>
+                                    <p><?php echo $review['q9'] ?></p>
+                                    <div class="[ review__footer ]">
+                                        <p><?php echo $review['timestamp'] ?></p>
+                                        <!-- <div class="[ stars ]">
+                                    <?php render_stars($review['q1'], 5); ?>
+                                </div> -->
+                                    </div>
+                                </div>
+                        <?php
+                            }
+                        }
+                        ?>
+                    </div>
+                </div>
+
+
+                <!-- <div class="[ ratings ]">
                     <div class="[ rating__title ]">
                         <h3>Ratings</h3>
                         <?php
@@ -209,9 +338,9 @@ function render_stars($stars, $outof)
                     }
                     ?>
                     <p class="[ catch__phrase ]">See what others think - ratings range from 1 to 5 stars, with 5 stars being the best.</p>
-                </div>
+                </div> -->
 
-                <div class="[ reviews ]">
+                <!-- <div class="[ reviews ]">
                     <h3>Reviews</h3>
                     <div class="[ reviews__wrapper ]">
                         <?php
@@ -241,7 +370,7 @@ function render_stars($stars, $outof)
                         }
                         ?>
                     </div>
-                </div>
+                </div> -->
 
             </div>
 

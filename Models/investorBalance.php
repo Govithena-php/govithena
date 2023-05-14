@@ -18,4 +18,25 @@ class investorBalance
             return ['success' => false, 'error' => $e->getMessage()];
         }
     }
+
+    public function checkBalanceToWithdraw($uid, $amount)
+    {
+        try {
+            $sql = "SELECT balance FROM investor_balance WHERE investorId = :id";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['id' => $uid]);
+            $res = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($res) {
+                if ($res['balance'] >= $amount) {
+                    return ['success' => true, 'data' => true];
+                } else {
+                    return ['success' => true, 'data' => false];
+                }
+            } else {
+                return ['success' => false, 'data' => false];
+            }
+        } catch (PDOException $e) {
+            return ['success' => false, 'error' => $e->getMessage()];
+        }
+    }
 }

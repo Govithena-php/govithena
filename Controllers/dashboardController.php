@@ -581,18 +581,30 @@ class dashboardController extends Controller
             $amount = new Input(POST, 'amount');
             $account = new Input(POST, 'account');
 
-            $response = $this->investorWidthdrawModel->newWithdrawal([
-                'id' => new UID(PREFIX::WITHDRAWAL),
-                'investorId' => $this->currentUser->getUid(),
-                'amount' => $amount,
-                'bankAccount' => $account
-            ]);
-            if ($response['success']) {
+            $check = $this->investorBalanceModel->checkBalanceToWithdraw($this->currentUser->getUid(), $amount);
+            // var_dump($check);
+            // die();
+            if ($check['success']) {
+                if ($check['data']) {
+                    $response = $this->investorWidthdrawModel->newWithdrawal([
+                        'id' => new UID(PREFIX::WITHDRAWAL),
+                        'investorId' => $this->currentUser->getUid(),
+                        'amount' => $amount,
+                        'bankAccount' => $account
+                    ]);
+                    if ($response['success']) {
+                        $alert = new Alert($type = "success", $icon = "", $message = "Withdrawal ongoing. Please wait for approval.");
+                        Session::set(['withdrawal_request_alert' => $alert]);
+                    } else {
+                        $this->redirect('/error/somethingWentWrong/1');
+                    }
+                } else {
+                    $alert = new Alert($type = "error", $icon = "", $message = "You don't have enough balance to withdraw.");
+                    Session::set(['withdrawal_request_alert' => $alert]);
+                }
                 $this->redirect('/dashboard/withdrawals');
-                $alert = new Alert($type = "success", $icon = "", $message = "Withdrawal ongoing. Please wait for approval.");
-                Session::set(['withdrawal_request_alert' => $alert]);
             } else {
-                $this->redirect('/error/somethingWentWrong');
+                $this->redirect('/error/somethingWentWrong/2');
             }
         }
     }

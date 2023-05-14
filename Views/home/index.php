@@ -41,7 +41,7 @@
             if (isset($currentUser)) {
             ?>
                 <form class="[ search ]" id="searchForm" action="<?php echo URLROOT . "/search/" ?>" method="get">
-                    <input type="text" name="terms" id="terms" class="" placeholder="search by: name / category / location" />
+                    <input type="text" name="terms" id="terms" class="" placeholder="search by: name or category" />
                     <button type="submit" class="">search</button>
                 </form>
             <?php
