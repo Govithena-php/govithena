@@ -20,6 +20,60 @@
 }
 
 
+.form__wrapper {
+    width: 100%;
+    /* background: red; */
+}
+
+form {
+    /* width: 60%; */
+    /* margin: 0 auto; */
+    /* margin-left: 2rem; */
+    display: flex;
+    flex-direction: column;
+}
+
+.form__control {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.form__control label {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.form__control input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.form__control input:focus {
+    outline: none;
+    border: 1px solid var(--clr-primary, #ff6b00);
+}
+
+.form__control textarea {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 400;
+    resize: none;
+    height: 200px;
+}
+
+.form__control textarea:focus {
+    outline: none;
+    border: 1px solid var(--clr-primary, #ff6b00);
+}
+
+
 .invoice {
     border: 1px solid #ccc;
     padding: 1rem;
@@ -63,4 +117,19 @@
 
 .pay__button {
     margin-top: 1rem;
+}
+
+.submit__button {
+    display: flex;
+    align-items: flex-start;
+}
+
+.submit__button button {
+    border: none;
+    margin: 0;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    background-color: var(--clr-primary);
+    color: var(--clr-light);
+    cursor: pointer;
 }

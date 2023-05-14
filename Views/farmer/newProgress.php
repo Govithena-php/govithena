@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/base.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/grid.css">
     <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/gridTable.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS; ?>/imageUploader.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/farmer/newProgress.css">
 
     <title>Dashboard | Farmer</title>
