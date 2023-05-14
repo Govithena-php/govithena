@@ -39,7 +39,7 @@
                         </div>
                         <div class="form__control">
                             <label>Land Area (Hectare) : </label>
-                            <input type="number" name="landArea" placeholder="Land Area" value="<?php echo $gig['landArea'] ?>">
+                            <input type="text" name="landArea" placeholder="Land Area" value="<?php echo $gig['landArea'] ?>">
                         </div>
                     </div>
 

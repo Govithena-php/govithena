@@ -38,7 +38,7 @@ x
                         </div>
                         <div class="form__control">
                             <label>Land Area (Hectare) : </label>
-                            <input type="number" name="landArea" placeholder="Land Area">
+                            <input type="text" name="landArea" placeholder="Land Area">
                         </div>
                     </div>
 
