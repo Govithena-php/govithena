@@ -13,16 +13,14 @@ class farmerController extends Controller
     private $investmentModel;
     private $roiModel;
 
-    // model ekat PRIVATE  variable ekak define kra
-    private $abcModel;
+   
 
     public function __construct()
     {
         $this->currentUser = Session::get('user');
 
 
-        // <input type="file" name="name eke"
-        //image ekk upload kranna imsgeHandler->upload('name eka')
+     
 
         $this->progressImageHandler = new ImageHandler($folder = 'Uploads/progress');
         $this->gigImageHandler = new ImageHandler($folder = "Uploads");
@@ -34,7 +32,6 @@ class farmerController extends Controller
         $this->progressModel = $this->model('progress');
         $this->roiModel = $this->model('returnOfInvestment');
 
-        $this->abcModel = $this->model('abc'); //model eka import krann ('abc' file eke name)
 
 
         if (!Session::isLoggedIn()) {
@@ -283,21 +280,7 @@ class farmerController extends Controller
             $gig = $this->gigModel->fetchBy($gigId);
             $props['gig'] = $gig['data'];
 
-            // $progs = $this->gigModel->viewPro($gigId);
-
-            // foreach($progs as $pro){
-
-            //      $progimgs = $this->gigModel->viewProimg($pro['progressId']);
-            //      $props['progimgs'] = $progimgs;
-            // }
-
-            // if (!empty($progs)){
-            //     $props['progs'] = $progs;
-            // }
-
-
             $progress = $this->progressModel->fetchAllByGigId($gigId);
-            // var_dump($progress); die();
 
             $props['progress'] = [];
             if ($progress['success']) {
@@ -313,14 +296,8 @@ class farmerController extends Controller
             }
         }
 
-        // $id = $this->currentUser->getUid(); //session eken user id eka gannawa activeUser.php file eke tiyenne
-        // $products = $this->gigModel->fetchBy($id);
-        // $props['products'] = $products;
-
-
-        // $farmer = new Farmer();
+ 
         $notifications = $this->farmerModel->getnotifications();
-        //echo json_encode($notifications);
 
         $props['notifications'] = $notifications;
 
@@ -330,61 +307,7 @@ class farmerController extends Controller
     }
 
 
-    // view eke abc.php page eka
-    function abc($params = [])
-    {
-
-        // url eke controller/action eken passe / ghala den values tika okkom $params kiyn array eke tyenne.
-        var_dump($params[0]);
-
-        //select==============================
-        $id = Session::get('user')->getUid(); //session eken data ganne mehema
-        $gigslist = $this->abcModel->getAllGigs($id); // model eke thiyana adala funciton eka call krla output eka
-        $props['gigs'] = $gigslist; //view ekata yawann one data tika props kiyal hri d kiyala hri passkrann one
-        $props['aaaa'] = 1233;
-
-        //insert=======================
-
-        // forms adunragann vidiya
-
-        // if ($_SERVER['REQUEST_METHOD'] == 'POST'){ // submit button ekak click krlad kiyla --> POST method
-        // <input type="submit" name="form1">
-
-        //     if(isset($_POST['form1'])){ // mona sumbit button eked click kale ---> mona form ekada
-        //         echo "form 1";
-        //     }
-
-        // <button type="submit" name="form2">click</button>
-
-        //     if(isset($_POST['form2'])){
-        //         echo "form 2";
-        //     }
-        // }
-        //=====================
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (isset($_POST['form1'])) {
-
-                $name = new Input(POST, 'uname'); // uname kiyla thiyana input filed eken value eka varibale ekata gannwa
-                $p = new Input(POST, 'pass'); // pass kiyl thiyana input field eken value eka variable ekata gannawa.
-
-                // model ekata insert karann one values pass kranna data object eka hadagann one.
-                $data = [
-                    'x' => $name,
-                    'pass' => $p
-                ];
-
-                $this->abcModel->insertToTable($data);
-            }
-        }
-
-
-
-
-
-        $this->set($props); // view ekata set kranne
-        $this->render('abc'); // file eke nama denn one () athule
-    }
+    
 
 
     function investors($params = [])
@@ -419,6 +342,15 @@ class farmerController extends Controller
         if ($investorlist['status']) {
             $props['investorlists'] = $investorlist['data'];
         }
+        
+        $investorlistAll = $this->farmerModel->investorlistonebyone([
+            'farmerId' => $this->currentUser->getUid(),
+            'status' => STATUS::PAID
+        ]);
+        if ($investorlistAll['status']) {
+            $props['investorlistAll'] = $investorlistAll['data'];
+        }
+
 
         // var_dump($reqinvestors); die();
 
@@ -434,6 +366,31 @@ class farmerController extends Controller
 
         $this->set($props);
         $this->render('investors');
+    }
+
+
+
+    function gigList($params = [])
+    {
+        $props = [];
+        if (!empty($params)) {
+            $props['message'] = $params[0];
+        }
+
+        $investorlist = $this->farmerModel->investorlist([
+            'farmerId' => $this->currentUser->getUid(),
+            'status' => STATUS::PAID
+        ]);
+        if ($investorlist['status']) {
+            $props['investorlists'] = $investorlist['data'];
+        }
+
+
+
+
+
+        $this->set($props);
+        $this->render('gigList');
     }
 
     public function acceptInvestor($params = [])

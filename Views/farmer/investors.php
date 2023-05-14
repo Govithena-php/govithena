@@ -48,37 +48,9 @@
                     } else { ?>
                         <div class="investors">
 
-                            <!-- <div class="investor__card">
-                            <div class="card__img">
-                                <img src="<?php echo $imgURL ?>" alt="">
-                            </div>
-                            <div class="card__content">
-                                <div class="card__heading">
-                                    <h3><?php echo $investor['title'] ?></h3>
-                                    <div>
-                                        <small>Offer :</small>
-                                        <h3>LKR <?php echo $investor['offer'] ?></h3>
-                                    </div>
-                                </div>
-                                <div>
-                                    <small>Location :</small>
-                                    <p class="farmer"><?php echo $investor['city'] ?></p>
-                                    <small>Farmer :</small>
-                                    <p class="card__farmer_name"><?php echo $investor['firstName'] . " " . $investor['lastName'] ?></p>
-                                </div>
-                                <div>
-                                    <small>Message :</small>
-                                    <p><?php echo $investor['message'] ?></p>
-                                </div>
-                                <div class="card__action">
-                                    <a href="<?php echo URLROOT . "/farmer/acceptInvestor/" . $investor['requestId'] ?>" class="accept">Accept</a>
-                                    <a href="<?php echo URLROOT . "/farmer/declineInvestor/" . $investor['requestId'] ?>" class="decline">Decline</a>
-                                </div>
-                            </div>
-
-                        </div> -->
+   
                             <div class="grid__table" style="
-                                    --xl-cols: 1.2fr 1.8fr 1.5fr 1.5fr;
+                                    --xl-cols: 1.2fr 1.8fr 1fr;
                                 ">
                                 <div class="head">
                                     <div class="row">
@@ -88,69 +60,34 @@
                                         <div class="data remove-border">
                                             <p>Investor Name</p>
                                         </div>
+                 
                                         <div class="data">
-                                            <p>Title</p>
+                                            <p></p>
                                         </div>
-                                        <!-- <div class="data">
-                                        <p>Offer</p>
-                                    </div> -->
-                                        <div class="data">
-                                            <p>Location</p>
-                                        </div>
-                                        <!-- <div class="data">
-                                        <p>Message</p>
-                                    </div> -->
+      
                                     </div>
                                 </div>
                                 <div class="body">
-                                    <?php
-                                    foreach ($investorlists as $investorlist) {
-                                        // print_r($investor);
+                                <?php
+                                    foreach ($investorlistAll as $investorlist) {
                                     ?>
                                         <div class="row">
                                             <div class="data farmer__">
                                                 <div class="investorimgin">
                                                     <img src="<?php echo UPLOADS . "/profilePictures/" . $investorlist['image']; ?>" alt="">
-                                                    <!-- <img src="<?php echo UPLOADS . '/profilePictures/' . $investorlist['image'] ?>" alt="Picture"> -->
                                                 </div>
                                             </div>
                                             <div class="data">
-                                                <div class="namecol">
-                                                    <h1>
-                                                        <p><?php echo $investorlist['firstName'] ?></p>
-                                                    </h1>
-                                                    <h3>
-                                                        <p><?php echo $investorlist['lastName'] ?></p>
-                                                    </h3>
-                                                </div>
+                                                    <h2>
+                                                        <p><?php echo $investorlist['firstName']. ' ' .$investorlist['lastName'] ?> </p>
+                                                    </h2>
+                                             
                                             </div>
-                                            <!-- <div class="data">
-                                        <p> LKR <?php echo $investorlist['offer'] ?></p>
-                                        <p class="LKR"><?php echo number_format($investorlist['capital'], 2, '.', ',') ?></p>
-                                    </div> -->
                                             <div class="data">
-                                                <p><?php echo $investorlist['title'] ?></p>
-                                            </div>
-                                            <!-- <div class="data">
-                                        <p> LKR <?php echo $investorlist['offer'] ?></p>
-                                    </div> -->
-                                            <div class="data">
-                                                <p><?php echo $investorlist['city'] ?></p>
-                                            </div>
-                                            <!-- <div class="data">
-                                        <p><?php echo $investorlist['message'] ?></p>
-                                    </div> -->
-                                            <div class="data">
-                                                <!-- <a href="#" class="btn btn-primary">Edit</a> -->
-                                                <!-- <form class="table_button_flex" action="<?php echo URLROOT . '/farmer/investors' ?>" method="POST">
-                                                <button type="submit" name="form1" class="button__primary">Accept</button>
-                                                <button class="button__danger">Reject</button>
-                                            </form> -->
-                                                <div class="table_button_flex">
-                                                    <!-- <a href="<?php echo URLROOT . "/farmer/acceptInvestor/" . $investorlist['requestId'] ?>" class="btn btn-primary" >Accept</a> -->
-                                                    <!-- <a href="<?php echo URLROOT . "/farmer/reject_investor/" . $investor['requestId'] ?>" class="btn btn-danger">Reject</a> -->
-                                                </div>
-                                            </div>
+                                                 <a class="btn btn-primary" href="<?php echo URLROOT ?>/farmer/gigList/">View Gigs</a>
+       
+                                            </div>     
+
                                         </div>
                                     <?php
                                     }
@@ -168,42 +105,13 @@
 
 
                 <div class="tab" id="2">
-                    <!-- <h2 class="title">Pending Investment Requests</h2> -->
                     <?php
                     if (empty($investors)) {
                         require(COMPONENTS . "dashboard/noDataFound.php");
                     } else { ?>
                         <div class="investors">
 
-                            <!-- <div class="investor__card">
-                            <div class="card__img">
-                                <img src="<?php echo $imgURL ?>" alt="">
-                            </div>
-                            <div class="card__content">
-                                <div class="card__heading">
-                                    <h3><?php echo $investor['title'] ?></h3>
-                                    <div>
-                                        <small>Offer :</small>
-                                        <h3>LKR <?php echo $investor['offer'] ?></h3>
-                                    </div>
-                                </div>
-                                <div>
-                                    <small>Location :</small>
-                                    <p class="farmer"><?php echo $investor['city'] ?></p>
-                                    <small>Farmer :</small>
-                                    <p class="card__farmer_name"><?php echo $investor['firstName'] . " " . $investor['lastName'] ?></p>
-                                </div>
-                                <div>
-                                    <small>Message :</small>
-                                    <p><?php echo $investor['message'] ?></p>
-                                </div>
-                                <div class="card__action">
-                                    <a href="<?php echo URLROOT . "/farmer/acceptInvestor/" . $investor['requestId'] ?>" class="accept">Accept</a>
-                                    <a href="<?php echo URLROOT . "/farmer/declineInvestor/" . $investor['requestId'] ?>" class="decline">Decline</a>
-                                </div>
-                            </div>
-
-                        </div> -->
+                           
                             <div class="grid__table" style="
                                     --xl-cols: 0.8fr 1.2fr 0.8fr 0.7fr 1.2fr 1.7fr 1.4fr;
                                 ">
@@ -424,3 +332,6 @@
 </body>
 
 </html>
+
+
+
