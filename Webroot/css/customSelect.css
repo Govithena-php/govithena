@@ -43,6 +43,8 @@
     top: 100%;
     left: 0;
     right: 0;
+    max-height: 200px;
+    overflow-y: auto;
     background-color: #fff;
     border: 1px solid #9b9b9b;
     border-top: none;

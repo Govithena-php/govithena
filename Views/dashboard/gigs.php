@@ -283,7 +283,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="">
+                                        <div class="flex-col-space-between">
                                             <?php
                                             if ($activeGig['status'] == "UNDER_COMPLETION") {
                                             ?>
@@ -308,7 +308,7 @@
                                             <?php
                                             }
                                             ?>
-                                            <div class="active__gig_content">
+                                            <div class="active__gig_content grow">
                                                 <div class="active__gig_title">
                                                     <h3 class=""><?php echo $activeGig['title'] ?></h3>
                                                     <p><?php echo $activeGig['city'] ?></p>

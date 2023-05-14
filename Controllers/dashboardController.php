@@ -146,7 +146,7 @@ class dashboardController extends Controller
             $props['withdrawableBalance'] = ['balance' => 0];
         }
 
-        $activeGigs = $this->gigModel->fetchAllReservedGigByInvestor($this->currentUser->getUid());
+        $activeGigs = $this->gigModel->fetchAllGigByInvestor($this->currentUser->getUid());
         if ($activeGigs['success']) {
             $props['activeGigs'] = $activeGigs['data'];
 
@@ -371,7 +371,7 @@ class dashboardController extends Controller
 
                         $response = $this->reviewByInvestorModel->save($data);
                         if ($response['success']) {
-                            $res = $this->gigModel->markAsCompleted($gigId);
+                            $res = $this->gigModel->markAsClosed($gigId);
                             if ($res['success']) {
                                 $alert = new Alert($type = 'success', $icon = '', $message = 'Review submitted successfully!');
                                 Session::set(['farmer_review_by_investor_alert' => $alert]);
@@ -502,7 +502,7 @@ class dashboardController extends Controller
         }
 
 
-        $investmentGigs = $this->gigModel->fetchAllReservedGigByInvestor($this->currentUser->getUid());
+        $investmentGigs = $this->gigModel->fetchOnlyReservedGigByInvestor($this->currentUser->getUid());
         if ($investmentGigs['success']) {
             $props['investmentGigs'] = $investmentGigs['data'];
         } else {

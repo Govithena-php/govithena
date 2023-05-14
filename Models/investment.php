@@ -220,4 +220,21 @@ class Investment extends Model
             return ['success' => false, 'data' => $e->getMessage()];
         }
     }
+
+    public function getInvestmentByGigId($gigId)
+    {
+        try {
+            $sql = "SELECT id, investorId, farmerId, amount, description, DATE(timestamp) as investedDate, TIME(timestamp) as investedTime FROM investment WHERE gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId]);
+            $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if ($row) {
+                return ['success' => true, 'data' => $row];
+            } else {
+                return ['success' => false, 'data' => false];
+            }
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
 }

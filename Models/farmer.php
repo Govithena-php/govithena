@@ -49,7 +49,8 @@ class Farmer extends Model
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
                 'agrologistId' => $data['agrologistId'],
-                'farmerId' => $data['farmerId']]);
+                'farmerId' => $data['farmerId']
+            ]);
             $req = $stmt->fetch(PDO::FETCH_ASSOC);
             return ['status' => true, 'data' => $req];
         } catch (Exception $e) {
@@ -64,7 +65,8 @@ class Farmer extends Model
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
                 'technicalAssistantId' => $data['technicalAssistantId'],
-                'farmerId' => $data['farmerId']]);
+                'farmerId' => $data['farmerId']
+            ]);
             $req = $stmt->fetch(PDO::FETCH_ASSOC);
             return ['status' => true, 'data' => $req];
         } catch (Exception $e) {
@@ -116,18 +118,19 @@ class Farmer extends Model
         }
     }
 
-        public function monthpayAgrologist($data)
+    public function monthpayAgrologist($data)
     {
         try {
             $sql = "SELECT agrologistId, DATEDIFF(NOW(), paidDate) as dateDiff, paidDate FROM agrologist_payment WHERE agrologistId = :agrologistId AND  farmerId = :farmerId ORDER BY paidDate DESC LIMIT 1";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
                 'agrologistId' => $data['agrologistId'],
-                'farmerId' => $data['farmerId']]);
+                'farmerId' => $data['farmerId']
+            ]);
             $req = $stmt->fetch(PDO::FETCH_ASSOC);
-            if($req){
+            if ($req) {
                 return ['status' => true, 'data' => $req];
-            }else {
+            } else {
                 return ['status' => false, 'data' => false];
             }
         } catch (Exception $e) {
@@ -142,11 +145,12 @@ class Farmer extends Model
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute([
                 'userId' => $data['userId'],
-                'farmerId' => $data['farmerId']]);
+                'farmerId' => $data['farmerId']
+            ]);
             $req = $stmt->fetch(PDO::FETCH_ASSOC);
-            if($req){
+            if ($req) {
                 return ['status' => true, 'data' => $req];
-            }else {
+            } else {
                 return ['status' => false, 'data' => false];
             }
         } catch (Exception $e) {
@@ -455,7 +459,7 @@ class Farmer extends Model
     public function declineInvestor($data)
     {
         try {
-            $sql = "UPDATE gig_request SET state = :state WHERE gig_request.requestId = :requestId";
+            $sql = "UPDATE gig_request SET status = :state WHERE gig_request.requestId = :requestId";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute($data);
             if ($stmt->rowCount() > 0) {

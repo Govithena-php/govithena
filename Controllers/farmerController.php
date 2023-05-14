@@ -10,6 +10,8 @@ class farmerController extends Controller
     private $farmerModel;
     private $gigModel;
     private $progressModel;
+    private $investmentModel;
+    private $roiModel;
 
     // model ekat PRIVATE  variable ekak define kra
     private $abcModel;
@@ -28,8 +30,9 @@ class farmerController extends Controller
         $this->farmerModel = $this->model('farmer');
         $this->gigModel = $this->model('gig');
         $this->progressModel = $this->model('progress');
-
+        $this->investmentModel = $this->model('investment');
         $this->progressModel = $this->model('progress');
+        $this->roiModel = $this->model('returnOfInvestment');
 
         $this->abcModel = $this->model('abc'); //model eka import krann ('abc' file eke name)
 
@@ -984,14 +987,75 @@ class farmerController extends Controller
     public function deposite_gig()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $gigId = new Input(POST, 'gigId');
 
-            $res = $this->gigModel->markedAsDeposited($gigId);
-            if ($res['success']) {
-                $this->redirect('/farmer/');
+            var_dump($_POST);
+            // die();
+
+            $gigId = new Input(POST, 'gigId');
+            $data = [
+                'gigId' => $gigId,
+                'amount' => new Input(POST, 'subTotal'),
+                'investorId' => new Input(POST, 'investorId'),
+                'farmerId' => $this->currentUser->getUid(),
+                'description' => "Initial Repayment",
+            ];
+
+            echo $data['amount'];
+            // die();
+
+            $response = $this->roiModel->deposit_gig($data);
+
+            if ($response['success']) {
+                $res = $this->gigModel->markedAsDeposited($gigId);
+                var_dump($res);
+
+                if ($res['success']) {
+                    echo "success";
+                    // die();
+                    $this->redirect('/farmer/');
+                } else {
+                    echo "1";
+                    die();
+                    $this->redirect('/farmer/');
+                }
             } else {
+                echo "2";
+                die();
                 $this->redirect('/farmer/');
             }
         }
+    }
+
+
+    public function repay($params = [])
+    {
+
+        $props = [];
+
+        if (!isset($params[0]) || empty($params[0])) {
+            $this->redirect('/error/pageNotFound');
+        }
+        $gigId = $params[0];
+        $props['gigId'] = $gigId;
+
+        $response = $this->investmentModel->getInvestmentByGigId($gigId);
+        if ($response['success']) {
+            $props['investments'] = $response['data'];
+
+            $response = $this->gigModel->getProfitMargin($gigId);
+
+            if ($response['success']) {
+                $props['profitMargin'] = $response['data']['profitMargin'];
+            } else {
+                $this->redirect('/error/somethingWentWrong');
+            }
+        } else {
+            $this->redirect('/error/somethingWentWrong');
+        }
+
+
+
+        $this->set($props);
+        $this->render('repay');
     }
 }

@@ -194,6 +194,8 @@ define(
 
 
 
+define('CONVENSION_FEES', 1000);
+
 
 
 

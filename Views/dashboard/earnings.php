@@ -145,9 +145,9 @@
                     </div>
                 </div>
             </form>
-            <div class="inv__new">
+            <!-- <div class="inv__new">
                 <a href="<?php echo URLROOT ?>/dashboard/newInvestment" class="[ button__primary ]">Invest More</a>
-            </div>
+            </div> -->
             <hr>
             <br>
 

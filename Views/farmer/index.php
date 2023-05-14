@@ -184,7 +184,8 @@
                                 <?php
                                 } else if ($p['status'] == 'NOT_DEPOSITED') {
                                 ?>
-                                    <button onclick="openDepositeModal('<?php echo $p['gigId'] ?>')" class="button__danger">deposite</button>
+                                    <!-- <button onclick="openDepositeModal('<?php echo $p['gigId'] ?>')" class="button__danger">deposite</button> -->
+                                    <a href="<?php echo URLROOT . "/farmer/repay/" . $p['gigId'] ?>" class="button__danger">Repay</a>
                                 <?php
                                 }
                                 ?>

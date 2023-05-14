@@ -329,10 +329,24 @@ class Gig extends Model
         }
     }
 
-    public function fetchAllReservedGigByInvestor($id)
+    public function fetchAllGigByInvestor($id)
     {
         try {
-            $sql = "SELECT g.gigId, g.farmerId, g.title, g.city, g.cropCycle, g.thumbnail, u.firstName, u.lastName, u.image, u.city as FCity, DATE(g.reservedDate) as reservedDate, g.status FROM gig g INNER JOIN user u ON g.farmerId = u.uid WHERE g.investorId = :id AND g.status = 'RESERVED' OR g.status = 'UNDER_COMPLETION'  OR g.status = 'UNDER_REVIEW' OR g.status = 'NOT_DEPOSITED' ORDER BY g.statusChangeDate OR g.reservedDate DESC";
+            $sql = "SELECT g.gigId, g.farmerId, g.title, g.city, g.cropCycle, g.thumbnail, u.firstName, u.lastName, u.image, u.city as FCity, DATE(g.reservedDate) as reservedDate, g.status FROM gig g INNER JOIN user u ON g.farmerId = u.uid WHERE g.investorId = :id AND g.status = 'RESERVED' OR g.status = 'UNDER_COMPLETION'  OR g.status = 'UNDER_REVIEW' OR g.status = 'NOT_DEPOSITED' ORDER BY g.reservedDate DESC";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['id' => $id]);
+            $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return ['success' => true, 'data' => $row];
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            die();
+            return ['success' => true, 'data' => $e->getMessage()];
+        }
+    }
+    public function fetchOnlyReservedGigByInvestor($id)
+    {
+        try {
+            $sql = "SELECT g.gigId, g.farmerId, g.title, g.city, g.cropCycle, g.thumbnail, u.firstName, u.lastName, u.image, u.city as FCity, DATE(g.reservedDate) as reservedDate, g.status FROM gig g INNER JOIN user u ON g.farmerId = u.uid WHERE g.investorId = :id AND g.status = 'RESERVED' OR g.status = 'UNDER_COMPLETION' ORDER BY g.statusChangeDate OR g.reservedDate DESC";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['id' => $id]);
             $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -434,6 +448,18 @@ class Gig extends Model
     {
         try {
             $sql = "UPDATE gig SET status = 'UNDER_COMPLETION' WHERE gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId]);
+            return ['success' => true];
+        } catch (PDOException $e) {
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function markAsClosed($gigId)
+    {
+        try {
+            $sql = "UPDATE gig SET status = 'COMPLETED' WHERE gigId = :gigId";
             $stmt = Database::getBdd()->prepare($sql);
             $stmt->execute(['gigId' => $gigId]);
             return ['success' => true];
@@ -563,6 +589,23 @@ class Gig extends Model
             return ['success' => true, 'data' => $row];
         } catch (PDOException $e) {
             echo $e->getMessage();
+            return ['success' => false, 'data' => $e->getMessage()];
+        }
+    }
+
+    public function getProfitMargin($gigId)
+    {
+        try {
+            $sql = "SELECT profitMargin FROM gig WHERE gigId = :gigId";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute(['gigId' => $gigId]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($row) {
+                return ['success' => true, 'data' => $row];
+            } else {
+                return ['success' => false, 'data' => false];
+            }
+        } catch (PDOException $e) {
             return ['success' => false, 'data' => $e->getMessage()];
         }
     }

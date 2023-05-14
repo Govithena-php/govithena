@@ -1,3 +1,4 @@
+x
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,7 +48,7 @@
                             <input type="text" name="capital" placeholder="Amount">
                         </div>
                         <div class="form__control">
-                            <label>Time Period (Months) : </label>
+                            <label>Time Period (Days) : </label>
                             <input type="text" name="timePeriod" placeholder="Time Period">
                         </div>
                     </div>
@@ -60,7 +61,7 @@
                             <label>category : </label>
                             <select id="select-list" name="category" class="itemlst">
                                 <option value=''>What are you growing?</option>
-                                <option value='vegetable'>Vegetable</option>
+                                <option value='vegetable'>Vegetables</option>
                                 <option value='fruit'>Fruits</option>
                                 <option value='grains'>Grains</option>
                                 <option value='spices'>Spices</option>
