@@ -585,10 +585,24 @@ class agrologistController extends Controller
             if (isset($_POST['transfer_confirm_btn'])) {
                 $withdrawal = new INPUT(POST, 'withdraw_amount');
 
+
+                if ($income == null) {
+                    $balance = 0;
+                    echo "0.00";
+                } else if ($withdrawal == null) {
+                    $balance = $income[0]['total_income'];
+                } else {
+                    $balance = $income[0]['total_income'] - $withdrawal[0]['total_withdrawal'];
+                }
+
                 $withdraw_amount = (int)$withdrawal->get();
                 if ($withdraw_amount <= 0) {
                     $alert = new Alert($type = 'error', $icon = "", $message = 'Only positive amounts can be transfered!');
-                } else {
+                } 
+                else if($balance < $withdraw_amount){
+                    $alert = new Alert($type = 'error', $icon = "", $message = 'Insufficient balance!');
+                }
+                else {
                     $withdraw = $agrologist->insertWithdrawals([
                         'withdrawalId' => new UID(PREFIX::WITHDRAWAL),
                         'withdrawal' => $withdrawal->get(),
