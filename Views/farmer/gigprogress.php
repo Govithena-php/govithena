@@ -102,9 +102,7 @@
         <div class="grid__table"
                         style="
                                 --xl-cols: 0.7fr 1.6fr 1fr 0.9fr 0.9fr 0.5fr 2.1fr 0.7fr;
-                                --lg-cols: 1.5fr 1fr 1fr 1fr 0.3fr;
-                                --md-cols: 2fr 1fr 0.3fr;
-                                --sm-cols: 3fr 0.3fr;
+          
                             "
                         >
                         <div class="head">

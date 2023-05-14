@@ -142,7 +142,6 @@
                     <div class="requestcardn">
                         <div class=" requestimg1 ">
                             <img class="img" src="<?php echo UPLOADS . $agrologist['image'] ?>" alt=" profile">
-                            <!-- <img class="img" src="<?php echo IMAGES ?>/21.jpg" alt=" profile"> -->
 
                         </div>
                         <div class="flex flex-row ">
@@ -155,7 +154,6 @@
                         </div>
                         <div class=" flex-c-c">
                             <button onclick="openRequestModal('<?php echo $agrologist['uid'] ?>')" class="requestbtn">Send Request</button>
-                            <!-- <a class="requestbtn" href="<?php echo URLROOT . "/farmer/send/" . $agrologist['uid'] ?>">Send Request</a> -->
 
                         </div>
 
