@@ -61,11 +61,10 @@
                         <div class="form__control">
                             <label>category : </label>
                             <select id="select-list" name="category" class="itemlst" value="<?php echo $gig['category'] ?>">
-                                <option value=''>What are you growing?</option>
-                                <option value='vegetable'>Vegetable</option>
-                                <option value='fruit'>Fruits</option>
-                                <option value='grains'>Grains</option>
-                                <option value='spices'>Spices</option>
+                                <option value='vegetable' <?php if($gig['category'] == 'vegetable') echo 'selected' ?> >Vegetable</option>
+                                <option value='fruit' <?php if($gig['category'] == 'fruit') echo 'selected' ?> >Fruits</option>
+                                <option value='grains' <?php if($gig['category'] == 'grains') echo 'selected' ?> >Grains</option>
+                                <option value='spices' <?php if($gig['category'] == 'spices') echo 'selected' ?> >Spices</option>
                             </select>
                         </div>
                     </div>

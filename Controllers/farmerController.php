@@ -419,6 +419,15 @@ class farmerController extends Controller
         if ($investorlist['status']) {
             $props['investorlists'] = $investorlist['data'];
         }
+        
+        $investorlistAll = $this->farmerModel->investorlistonebyone([
+            'farmerId' => $this->currentUser->getUid(),
+            'status' => STATUS::PAID
+        ]);
+        if ($investorlistAll['status']) {
+            $props['investorlistAll'] = $investorlistAll['data'];
+        }
+
 
         // var_dump($reqinvestors); die();
 
@@ -434,6 +443,31 @@ class farmerController extends Controller
 
         $this->set($props);
         $this->render('investors');
+    }
+
+
+
+    function gigList($params = [])
+    {
+        $props = [];
+        if (!empty($params)) {
+            $props['message'] = $params[0];
+        }
+
+        $investorlist = $this->farmerModel->investorlist([
+            'farmerId' => $this->currentUser->getUid(),
+            'status' => STATUS::PAID
+        ]);
+        if ($investorlist['status']) {
+            $props['investorlists'] = $investorlist['data'];
+        }
+
+
+
+
+
+        $this->set($props);
+        $this->render('gigList');
     }
 
     public function acceptInvestor($params = [])

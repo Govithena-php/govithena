@@ -438,6 +438,23 @@ class Farmer extends Model
         }
     }
 
+    public function investorlistonebyone($data)
+    {
+        try {
+            $sql = "SELECT DISTINCT (fr.investorId), user.image, user.firstName, user.lastName from gig_request fr INNER JOIN user ON user.uid = fr.investorId WHERE fr.farmerId = :farmerId AND fr.status = :status";
+            $stmt = Database::getBdd()->prepare($sql);
+            $stmt->execute([
+                'farmerId' => $data['farmerId'],
+                'status' => $data['status']
+            ]);
+            $req = $stmt->fetchAll(PDO::FETCH_ASSOC);
+ 
+            return ['status' => true, 'data' => $req];
+        } catch (Exception $e) {
+            return ['status' => false, 'data' => $e->getMessage()];
+        }
+    }
+
 
 
     public function acceptInvestor($data)
