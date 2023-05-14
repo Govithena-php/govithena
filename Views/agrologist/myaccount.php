@@ -17,7 +17,6 @@
 
 <body class="bg-gray h-screen">
     <?php
-    // $datadata = $notifications;
     $active = "myaccount";
     require_once("navigator.php");
 
@@ -56,8 +55,6 @@
                     <div class="[ profile_img ]">
                         <img src="<?php echo UPLOADS . '/' . $agrologist[0]['image'] ?>" alt="" <?php echo DEFAULT_PROFILE_PICTURE ?>>
                     </div>
-                    <!-- <form action=""
-                        method="POST"> -->
                     <div class="flex flex-row ">
                         <div class="[ profile_content ]">
 
@@ -70,23 +67,11 @@
                                 <p class="caption">Completing your qualification details will be of help in recognizing
                                     your profile.</p>
                             </div>
-                            <!-- <p class="flex flex-row">
-                                <span class="fa fa-star rating_checked"></span>
-                                <span class="fa fa-star rating_checked"></span>
-                                <span class="fa fa-star rating_checked"></span>
-                                <span class="fa fa-star rating_checked"></span>
-                                <span class="fa fa-star"></span>
-                            </p> -->
+                            
 
                         </div>
-                        <!-- <div class="flex flex-row flex-c-c" style="width: 200px;margin-top: 110px">
-                                <a href="#" class="btn uppercase fs-4 btn-primary " id="edit_details">Edit Profile</a>
-                            </div> -->
-                        <!-- <div class="flex flex-row flex-c-c">
-                                <button class="btn btn-primary mr-2" name="accept">Accept</button>
-                            </div> -->
+                        
                     </div>
-                    <!-- </form> -->
                 </div>
 
             </div>
@@ -101,10 +86,7 @@
             </div>
 
 
-            <!-- <div class="content ff-poppins" style="background-color: white; margin-bottom: 100px">
-            <div class="p-2">
-                <div class="fs-6">Personal Details</div> -->
-            <!-- <hr> -->
+           
             <div class="wrapper">
                 <div class="tab" id="1" active="true">
                     <div class="[ requests__continer ]"
@@ -173,7 +155,6 @@
                                     method="post" enctype="multipart/form-data">
                                     <div class="[ grid ]" sm="1" lg="2" gap="2">
 
-                                        <!-- <div class="flex flex-row" style="justify-content: space-between"> -->
                                         <div class="wrapper">
                                             <input type="text" name="firstName" class="" placeholder="First Name"
                                                 value="<?php echo $agrologist[0]['firstName'] ?>">
@@ -183,7 +164,6 @@
                                             <input type="text" name="lastName" class="" placeholder="Last Name"
                                                 value="<?php echo $agrologist[0]['lastName'] ?>">
                                         </div>
-                                        <!-- <div class="flex flex-row flex-sb-c"> -->
                                         <div class="wrapper">
 
                                             <input type="text" name="phoneNumber" class="" placeholder="Mobile"
@@ -194,19 +174,16 @@
                                             <input type="text" name="NIC" class="" placeholder="NIC"
                                                 value="<?php echo $agrologist[0]['NIC'] ?>">
                                         </div>
-                                        <!-- <div class="flex flex-row flex-sb-c"> -->
                                         <input type="text" name="addressLine1" class="" placeholder="Address Line1"
                                             value="<?php echo $agrologist[0]['addressLine1'] ?>">
                                         <input type="text" name="addressLine2" class="" placeholder="Address Line2"
                                             value="<?php echo $agrologist[0]['addressLine2'] ?>">
-                                        <!-- </div> -->
-                                        <!-- <div class="flex flex-row flex-sb-c"> -->
+                                       
                                         <input type="text" name="city" placeholder="City"
                                             value="<?php echo $agrologist[0]['city'] ?>">
                                         <input type="text" name="district" placeholder="District"
                                             value="<?php echo $agrologist[0]['district'] ?>">
-                                        <!-- </div> -->
-                                        <!-- <div class="flex flex-row flex-sb-c"> -->
+                                       
                                         <input type="text" name="postalCode" placeholder="Postal Code"
                                             value="<?php echo $agrologist[0]['postalCode'] ?>">
                                         <input type='file' name="profile_img" accept="image/*">
@@ -441,7 +418,6 @@
         })
     </script>
     <script>
-        // var modal = document.getElementById("myModal");
         var edit_detials_modal = document.getElementById("edit_detials_modal");
         var add_account_detials_modal = document.getElementById("add_account_detials_modal");
         var edit_account_detials_modal = document.getElementById("edit_account_detials_modal");

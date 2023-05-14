@@ -131,20 +131,7 @@
                 }
                 ?>
 
-                <!-- <div id="edit_detials_modal" class="modal">
-
-                    <div class="modal-content">
-                        <span class="close close_modal1">&times;</span>
-                        <h3 class="fw-6">Transfer</h3>
-                        <p class="pt-1">Are you sure you want to transfer?</p>
-                        <form class="form pt-1"
-                            action="<?php echo URLROOT . '/agrologist/withdrawals?withdraw=confirm' ?>" method="post"
-                            enctype="multipart/form-data">
-                            <button type="submit" name="transfer_confirm_btn" class="btn uppercase">Transfer</button>
-                        </form>
-                    </div>
-
-                </div> -->
+                
             </div>
         </div>
 
@@ -168,18 +155,15 @@
                             ?>
                             <div class="withdrawals_container ">
                                 <div class="withdrawals_heading">
-                                    <!-- <h3>Title</h3> -->
                                     <h3>Date</h3>
                                     <h3>Farmer</h3>
                                     <h3>Amount ( <span class="LKR"> )</span></h3>
-                                    <!-- <h3>Category</h3> -->
                                 </div>
                                 <?php
                                 foreach ($income_list as $income_one) {
 
                                     ?>
                                     <div class="withdrawals">
-                                        <!-- <h3>title</h3> -->
                                         <p>
                                             <?php echo date('Y-m-d', strtotime($income_one['paidDate'])) ?>
                                         </p>
@@ -189,7 +173,6 @@
                                         <p>
                                             <?php echo number_format($income_one['payment']) ?>
                                         </p>
-                                        <!-- <p>category</p> -->
                                     </div>
 
 
@@ -217,10 +200,8 @@
                             ?>
                             <div class="withdrawals_container ">
                                 <div class="withdrawals_heading">
-                                    <!-- <h3>Title</h3> -->
                                     <h3>Date</h3>
                                     <h3>Amount ( <span class="LKR"> )</span></h3>
-                                    <!-- <h3>Category</h3> -->
                                 </div>
 
                                 <?php
@@ -228,14 +209,12 @@
 
                                     ?>
                                     <div class="withdrawals">
-                                        <!-- <h3>title</h3> -->
                                         <p>
                                             <?php echo date('Y-m-d', strtotime($withdraw_one['withdrawalDate'])) ?>
                                         </p>
                                         <p>
                                             <?php echo number_format($withdraw_one['withdrawal']) ?>
                                         </p>
-                                        <!-- <p>category</p> -->
                                     </div>
 
 
@@ -259,23 +238,7 @@
     <script src="<?php echo JS ?>/tabs.js"></script>
 
     <script>
-        // const controls = document.querySelectorAll(".controls>button");
-        // const tabs = document.querySelectorAll(".tab");
-
-        // Array.from(controls).forEach(control => {
-        //     control.addEventListener("click", () => {
-        //         let For = control.getAttribute("for")
-        //         Array.from(tabs).forEach(tab => {
-        //             if (tab.id == For) {
-        //                 tab.setAttribute("active", true)
-        //                 control.toggleAttribute("active")
-        //             } else {
-        //                 tab.setAttribute("active", false)
-        //             }
-        //         })
-        //     })
-        // })
-
+        
 
         const expandBtns = document.querySelectorAll(".actions>button")
         const expands = document.querySelectorAll(".expand")
@@ -303,28 +266,7 @@
             })
         })
     </script>
-    <!-- <script>
-        var edit_detials_modal = document.getElementById("edit_detials_modal");
-
-        var edit_details_btn = document.getElementById("transfer_btn");
-
-        var span1 = document.getElementsByClassName("close_modal1")[0];
-
-        edit_details_btn.onclick = function () {
-            edit_detials_modal.style.display = "block";
-        }
-
-        span1.onclick = function () {
-            edit_detials_modal.style.display = "none";
-        }
-
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                edit_detials_modal.style.display = "none";
-            }
-        }
-
-    </script> -->
+   
 
 
 </body>

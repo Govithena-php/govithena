@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="<?php echo CSS ?>/agrologist/requestdetails.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/agrologist/requests.css">
     <link rel="stylesheet" href="<?php echo CSS ?>/agrologist/requestdetails.css">
-    <!-- <link rel="stylesheet" href="<?php echo CSS ?>/search.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 
@@ -34,7 +33,6 @@
                         <img class="request_image" src="<?php echo UPLOADS . '/profilePictures/' . $requestDetails[0]['image'] ?>"
                             alt="">
                     </div>
-                    <!-- <div><?php echo json_encode($requestDetails) ?></div> -->
                     <form action="<?php echo URLROOT . '/agrologist/requests' ?>" method="POST">
 
                         <div class="ml-2">
@@ -42,13 +40,6 @@
                                 <?php echo $requestDetails[0]['fullName'] ?>
                             </h1>
 
-                            <!-- <p class="flex flex-row mt-1">
-                            <span class="fa fa-star rating_checked"></span>
-                            <span class="fa fa-star rating_checked"></span>
-                            <span class="fa fa-star rating_checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                        </p> -->
 
                             <meter class="average-rating" min="0" max="5" value="5" title="4.3 out of 5 stars"
                                 style="--percent: calc(<?php echo $requestDetails[0]['total'] / ($requestDetails[0]['num'] * 3) ?>/5*100%)">4.3
@@ -96,14 +87,10 @@
 
                 <div class="[ my-2 ] [ grid ]" gap="1" md="2" lg="4">
                     <?php
-                    // echo json_encode($gigDetails);
                     if (isset($gigDetails)) {
-                        // print_r($searchResult);
                         foreach ($gigDetails as $gigDetail) {
                             $imageURL = UPLOADS . $gigDetail["thumbnail"];
 
-                            // echo $imageURL;
-                            // die();
                     
                             ?>
                             <div class="result__card">
@@ -111,7 +98,6 @@
 
                                     <img src="<?php echo $imageURL ?>" alt="test" />
 
-                                    <!-- <img src="<?php echo IMAGES ?>/temp/17.jpg" alt="test"> -->
                                     <div class="location_name">
 
                                         <p class="ml-1">
@@ -143,25 +129,9 @@
           
 
 
-    <!-- <p style="color: grey">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.
-                </p> -->
+   
     </div>
-    <!-- <div class="p-2">
-        <div class="fs-6">Reviews</div>
-        <hr>
-        <p style="color: grey">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-    </div> -->
+    
 
 
     </div>

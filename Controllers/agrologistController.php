@@ -484,7 +484,6 @@ class agrologistController extends Controller
 
                 $agr->declineRequest($_POST['decline']);
                 $farmerId = $agr->getFarmerId($_POST['decline']);
-                // echo json_encode($farmerId[0]['farmerId']);
 
                 $agr->declineNotificationFarmer($farmerId[0]['farmerId']);
             } else {
@@ -502,19 +501,14 @@ class agrologistController extends Controller
         $uid = Session::get('user')->getUid();
         $props = [];
         $fieldVisitUpdate = $agrologist->getFieldVisitDetails($fid, $gid);
-        // var_dump($fieldVisitUpdate);die();
         $props['fid'] = $fid;
         $props['gid'] = $gid;
-        // var_dump($fieldVisitUpdate);die();
 
         $props['fieldVisitUpdate'] = [];
-        // var_dump($fieldVisitUpdate);die();
         if($fieldVisitUpdate){
-            // var_dump($fieldVisitUpdate);die();
             foreach($fieldVisitUpdate as $fvt){
                 $fieldVisitImages = [];
                 $temp = $agrologist->getFieldVisitImages($fvt['visitId']);
-                // var_dump($temp);die();
                 foreach($temp as $key => $value){
                     $fieldVisitImages[$key] = $value['image'];
                 }
@@ -522,7 +516,6 @@ class agrologistController extends Controller
                 $props['fieldVisitUpdate'][] = $fvt;
             }
         }
-        // var_dump($props);die();
 
 
 

@@ -55,16 +55,13 @@
 
                 <div class="fw-5 pt-1">No. of feild visits: <span style="color: gray"> <?php echo $timePeriod[0]['numvisits'] ?></span></div>
                 <div class="fw-5 pt-1">Monthly payment: <span style="color: gray" class="LKR"><?php  echo number_format($timePeriod[0]['offer']) ?></span></div>
-                <!-- <div class="fw-5 pt-1">Total withdrawn: <span style="color: gray"> LKR 50000</span></div> -->
 
                 <h2 class="pt-2">Payment Summary</h2>
                 <hr>
                 <div class="payment_container ">
                     <div class="payment_heading">
-                        <!-- <h3>Title</h3> -->
                         <h3>Date</h3>
                         <h3>Amount ( <span class="LKR"> )</span></h3>
-                        <!-- <h3>Category</h3> -->
                     </div>
 
                     
@@ -75,10 +72,8 @@
                         $sum = $sum + (int)$paymentDetail['payment'];
                         ?>
                         <div class="payment">
-                        <!-- <h3>title</h3> -->
                         <p><?php echo date('Y-m-d', strtotime($paymentDetail['paidDate'])) ?></p>
                         <p><?php echo number_format($paymentDetail['payment']) ?></p>
-                        <!-- <p>category</p> -->
                     </div>
 
 
@@ -86,10 +81,8 @@
                     }
                 ?>
                 <div class="payment">
-                        <!-- <h3>title</h3> -->
                         <p></p>
                         <p><?php echo number_format($sum) ?></p>
-                        <!-- <p>category</p> -->
                     </div>
                 </div>
 
