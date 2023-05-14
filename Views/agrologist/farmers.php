@@ -100,7 +100,6 @@
                                                 $date = date('Y-m-d', strtotime($request['requestedDate']));
                                                 $f = " + " . $request['timePeriod'] . " days";
                                                 $d = date('Y-m-d', strtotime($date . $f));
-                                              
                                                 if ($d <= date('Y-m-d', time())) {
                                                     ?>
                                                     <a href="#" class="btn btn-danger " id="edit_details">Complete</a>
